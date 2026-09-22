@@ -1,0 +1,1 @@
+import{r as e}from"./LiveDataContext-CzJ1gd8i.js";function t(t){return e()}export{t};
