@@ -1,33 +1,65 @@
 @import "tailwindcss";
 
-@theme {
-  --color-war-bg: #07080D;
-  --color-war-surface: rgba(20, 22, 31, 0.72);
-  --color-war-surface-2: #14161f;
-  --color-war-surface-3: #1f2230;
-  --color-war-border: rgba(255, 255, 255, 0.08);
-  --color-war-border-light: rgba(255, 255, 255, 0.14);
-  --color-war-text: #f5f5f7;
-  --color-war-text-dim: #a1a1a6;
-  --color-war-text-muted: #6e6e73;
-  --color-war-accent: #0A84FF;
-  --color-war-accent-hover: #409CFF;
-  --color-war-critical: #FF453A;
-  --color-war-critical-hover: #FF6961;
-  --color-war-warning: #FF9F0A;
-  --color-war-warning-hover: #FFB340;
-  --color-war-recovered: #30D158;
-  --color-war-cyan: #64D2FF;
-  --color-war-purple: #BF5AF2;
+/* ============================================================
+   DIGISYNQ DESIGN SYSTEM — v2.0
+   
+   Visual Language: Cinema frames + Network systems
+   Typography: Denton (display) + Inter (body) + JetBrains Mono (data)
+   
+   Cinema visual cues: frames, timelines, aspect ratios, cuts, layers
+   Systems visual cues: nodes, graphs, signals, flows, maps
+   ============================================================ */
 
-  --color-synq-neon: #00F5FF;
-  --color-synq-violet: #8B5CF6;
-  --color-synq-gold: #F59E0B;
+/* ── DIGISYNQ Brand Tokens ───────────────────────────────── */
+@theme {
+  /* Background Layers */
+  --color-synq-void:      #03040A;
+  --color-synq-bg:        #05060D;
+  --color-synq-surface:   #090B14;
+  --color-synq-surface-2: #0E1120;
+  --color-synq-surface-3: #141828;
+
+  /* Borders */
+  --color-synq-border:       rgba(255,255,255,0.06);
+  --color-synq-border-light: rgba(255,255,255,0.12);
+  --color-synq-border-active: rgba(92,225,230,0.35);
+
+  /* Text */
+  --color-synq-text:       #ECEEF5;
+  --color-synq-text-dim:   #9299A8;
+  --color-synq-text-muted: #5A6170;
+
+  /* Brand Colors */
+  --color-synq-cyan:   #5CE1E6;
+  --color-synq-gold:   #E8B84B;
+  --color-synq-white:  #F5F6FA;
+
+  /* Semantic Colors */
+  --color-synq-success: #22C55E;
+  --color-synq-warning: #F59E0B;
+  --color-synq-error:   #EF4444;
+
+  /* Legacy war-room tokens (preserve for cinema matrix) */
+  --color-war-bg:         #07080D;
+  --color-war-surface:    rgba(20, 22, 31, 0.72);
+  --color-war-surface-2:  #14161f;
+  --color-war-surface-3:  #1f2230;
+  --color-war-border:     rgba(255, 255, 255, 0.08);
+  --color-war-border-light: rgba(255, 255, 255, 0.14);
+  --color-war-text:       #f5f5f7;
+  --color-war-text-dim:   #a1a1a6;
+  --color-war-text-muted: #6e6e73;
+  --color-war-accent:     #0A84FF;
+  --color-war-critical:   #FF453A;
+  --color-war-warning:    #FF9F0A;
+  --color-war-recovered:  #30D158;
+  --color-war-cyan:       #64D2FF;
+  --color-war-purple:     #BF5AF2;
+  --color-synq-neon:      #00F5FF;
+  --color-synq-violet:    #8B5CF6;
 }
 
-/* ==========================================================================
-   OFFICIAL CRED DENTON TYPEFACE
-   ========================================================================== */
+/* ── Denton Display Typeface ────────────────────────────── */
 @font-face {
   font-family: 'denton';
   font-style: normal;
@@ -64,38 +96,365 @@
   --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
 }
 
+/* ── Base Styles ────────────────────────────────────────── */
 body {
   font-family: var(--font-sans);
-  background-color: #07080D;
-  color: #F1F5F9;
+  background-color: #05060D;
+  color: #ECEEF5;
   min-height: 100vh;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom Scrollbars */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: rgba(7, 8, 13, 0.8);
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 9999px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
+/* ── Typography Utilities ───────────────────────────────── */
+.font-denton { font-family: var(--font-denton); }
+.font-mono-ui { font-family: var(--font-mono); }
+
+/* Display headlines */
+.headline-display {
+  font-family: var(--font-denton);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
 }
 
-/* Glassmorphism Classes */
+/* Mono labels */
+.label-mono {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ── Cinema Frame Aesthetic ─────────────────────────────── */
+/* Cinematic aspect ratio container */
+.cinema-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+/* Cinematic corner markers (like a viewfinder) */
+.frame-mark {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+}
+.frame-mark-tl { top: 0; left: 0; border-top: 1.5px solid rgba(92,225,230,0.4); border-left: 1.5px solid rgba(92,225,230,0.4); }
+.frame-mark-tr { top: 0; right: 0; border-top: 1.5px solid rgba(92,225,230,0.4); border-right: 1.5px solid rgba(92,225,230,0.4); }
+.frame-mark-bl { bottom: 0; left: 0; border-bottom: 1.5px solid rgba(92,225,230,0.4); border-left: 1.5px solid rgba(92,225,230,0.4); }
+.frame-mark-br { bottom: 0; right: 0; border-bottom: 1.5px solid rgba(92,225,230,0.4); border-right: 1.5px solid rgba(92,225,230,0.4); }
+
+/* ── Network / System Aesthetic ─────────────────────────── */
+/* Node pulse animation */
+@keyframes node-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+.animate-node-pulse {
+  animation: node-pulse 3s ease-in-out infinite;
+}
+
+/* Connection line draw animation */
+@keyframes line-draw {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+.animate-line-draw {
+  animation: line-draw 1.5s ease-out forwards;
+  stroke-dasharray: 1000;
+}
+
+/* Signal dot traveling along a path */
+@keyframes signal-travel {
+  0% { transform: translateX(0%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateX(100%); opacity: 0; }
+}
+.animate-signal {
+  animation: signal-travel 2.5s linear infinite;
+}
+
+/* ── Surface & Card Components ──────────────────────────── */
+.synq-surface {
+  background: #090B14;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+}
+
+.synq-card {
+  background: rgba(14, 17, 32, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.synq-card:hover {
+  border-color: rgba(92,225,230,0.2);
+  transform: translateY(-2px);
+}
+
+.synq-card-active {
+  background: rgba(92,225,230,0.06);
+  border-color: rgba(92,225,230,0.3);
+}
+
+/* ── Button Components ──────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #5CE1E6, #3BBFC4);
+  color: #03040A;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 20px rgba(92,225,230,0.2);
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, #7AE9ED, #5CE1E6);
+  box-shadow: 0 0 32px rgba(92,225,230,0.35);
+  transform: translateY(-1px);
+}
+.btn-primary:active { transform: translateY(0); }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 27px;
+  background: transparent;
+  color: #ECEEF5;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.15);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-secondary:hover {
+  border-color: rgba(92,225,230,0.4);
+  color: #5CE1E6;
+  background: rgba(92,225,230,0.06);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: transparent;
+  color: rgba(236,238,245,0.6);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.08);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.btn-ghost:hover {
+  color: #ECEEF5;
+  border-color: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.04);
+}
+
+/* ── Status Tags ────────────────────────────────────────── */
+.tag-live       { background: rgba(34,197,94,0.12);  color: #22C55E; border: 1px solid rgba(34,197,94,0.3);  }
+.tag-pilot      { background: rgba(92,225,230,0.1);  color: #5CE1E6; border: 1px solid rgba(92,225,230,0.3); }
+.tag-planned    { background: rgba(245,158,11,0.1);  color: #F59E0B; border: 1px solid rgba(245,158,11,0.3); }
+.tag-experimental { background: rgba(139,92,246,0.1); color: #8B5CF6; border: 1px solid rgba(139,92,246,0.3); }
+.tag { padding: 2px 10px; border-radius: 100px; font-family: var(--font-mono); font-size: 0.625rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+
+/* ── Section Layout ─────────────────────────────────────── */
+.section-padding {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #5CE1E6;
+  margin-bottom: 1rem;
+}
+
+/* ── SYNQ Flow Step ─────────────────────────────────────── */
+.synq-step {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+  background: rgba(14,17,32,0.8);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.synq-step:hover, .synq-step.active {
+  background: rgba(92,225,230,0.06);
+  border-color: rgba(92,225,230,0.3);
+}
+.synq-step-number {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #5CE1E6;
+}
+.synq-step-title {
+  font-family: var(--font-denton);
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: #ECEEF5;
+  letter-spacing: -0.01em;
+}
+
+/* ── Problem Engine ─────────────────────────────────────── */
+.problem-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 16px 12px;
+  background: rgba(14,17,32,0.8);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+.problem-chip:hover {
+  border-color: rgba(92,225,230,0.25);
+  background: rgba(92,225,230,0.04);
+}
+.problem-chip.selected {
+  border-color: rgba(92,225,230,0.5);
+  background: rgba(92,225,230,0.08);
+  box-shadow: 0 0 16px rgba(92,225,230,0.1);
+}
+
+/* ── Ecosystem Map ──────────────────────────────────────── */
+.ecosystem-node {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.ecosystem-node:hover circle,
+.ecosystem-node.active circle {
+  filter: drop-shadow(0 0 12px currentColor);
+}
+
+/* ── Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: rgba(5, 6, 13, 0.8); }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(92,225,230,0.3); }
+
+/* ── Focus / Accessibility ──────────────────────────────── */
+:focus-visible {
+  outline: 2px solid rgba(92,225,230,0.7);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Reduced Motion ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Gradient Utilities ─────────────────────────────────── */
+.gradient-synq {
+  background: linear-gradient(135deg, #5CE1E6 0%, #3B82F6 50%, #8B5CF6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-gold {
+  background: linear-gradient(135deg, #E8B84B, #F5D78C);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Ambient Glow Backgrounds ───────────────────────────── */
+.glow-cyan {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(92,225,230,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Animation Keyframes ─────────────────────────────────── */
+@keyframes synq-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+.animate-synq-pulse {
+  animation: synq-pulse 4s infinite ease-in-out;
+}
+
+@keyframes float-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-float-up {
+  animation: float-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-fade-in {
+  animation: fade-in 0.5s ease forwards;
+}
+
+/* Ticker for horizontal scroll */
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-ticker {
+  animation: ticker-scroll 30s linear infinite;
+}
+
+/* Legacy glass classes (preserve for cinema matrix) */
 .glass-panel {
   background: rgba(18, 20, 29, 0.65);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.07);
 }
-
 .glass-card {
   background: rgba(24, 27, 40, 0.5);
   backdrop-filter: blur(12px);
@@ -103,19 +462,8 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.08);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
 .glass-card:hover {
   background: rgba(28, 32, 48, 0.65);
   border-color: rgba(255, 255, 255, 0.16);
   transform: translateY(-2px);
-}
-
-/* Pulse Glow Keyframes */
-@keyframes synq-pulse {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.05); }
-}
-
-.animate-synq-pulse {
-  animation: synq-pulse 4s infinite ease-in-out;
 }
