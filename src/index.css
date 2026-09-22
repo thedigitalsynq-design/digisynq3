@@ -4,7 +4,7 @@
    DIGISYNQ DESIGN SYSTEM — v2.0
    
    Visual Language: Cinema frames + Network systems
-   Typography: Denton (display) + Inter (body) + JetBrains Mono (data)
+   Typography: Google Sans Flex (Extra Bold 800, Bold 700, SemiBold 600, Regular 400)
    
    Cinema visual cues: frames, timelines, aspect ratios, cuts, layers
    Systems visual cues: nodes, graphs, signals, flows, maps
@@ -58,50 +58,87 @@
   --color-synq-neon:      #00F5FF;
   --color-synq-violet:    #8B5CF6;
 
-  /* Font Families */
+  /* Apple canonical palette (used by Bento tones + charts) */
+  --color-apple-blue:   #2997ff;
+  --color-apple-cyan:   #64d2ff;
+  --color-apple-green:  #30d158;
+  --color-apple-purple: #bf5af2;
+  --color-apple-red:    #ff453a;
+  --color-apple-gray:   #f5f5f7;
+  --color-apple-muted:  #86868b;
+
+  /* Apple motion language — single source of truth */
+  --ease-apple: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-instant: 150ms;
+  --dur-fast: 200ms;
+  --dur-medium: 350ms;
+  --dur-slow: 600ms;
+
+  /* Font Families — Google Sans Flex everywhere */
   --font-sans: 'Google Sans Flex', sans-serif;
-  --font-mono: 'Google Sans Flex', monospace;
+  --font-mono: 'Google Sans Flex', sans-serif;
   --font-denton: 'Google Sans Flex', sans-serif;
 }
 
-/* ── Typeface: Google Sans Flex ───────────────────────────── */
+/* ── Typeface: Google Sans Flex ─────────────────────────── */
 :root {
   color-scheme: dark;
-  --font-denton: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-sans: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'Google Sans Flex', monospace;
+  --font-denton: 'Google Sans Flex', sans-serif;
+  --font-sans: 'Google Sans Flex', sans-serif;
+  --font-mono: 'Google Sans Flex', sans-serif;
+  scroll-behavior: smooth;
 }
 
 /* ── Base Styles ────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
 body {
-  font-family: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Google Sans Flex', sans-serif;
   background-color: #05060D;
   color: #ECEEF5;
   min-height: 100vh;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-weight: 400;
 }
 
 /* ── Typography Utilities ───────────────────────────────── */
-.font-denton { font-family: var(--font-denton); }
-.font-mono-ui { font-family: var(--font-mono); }
+.font-denton { font-family: 'Google Sans Flex', sans-serif; }
+.font-mono-ui { font-family: 'Google Sans Flex', sans-serif; }
 
-/* Display headlines */
+/* Display headlines — Extra Bold (800) */
 .headline-display {
-  font-family: var(--font-denton);
+  font-family: 'Google Sans Flex', sans-serif;
   font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 0.95;
+  letter-spacing: -0.025em;
+  line-height: 0.96;
 }
 
-/* Mono labels (Sentence case) */
+/* Section headings — Bold (700) */
+.headline-section {
+  font-family: 'Google Sans Flex', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+/* Labels / eyebrows — Semi-bold (600) */
 .label-mono {
-  font-family: var(--font-mono);
+  font-family: 'Google Sans Flex', sans-serif;
   font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.025em;
   text-transform: none;
+}
+
+/* Body copy — Regular (400) */
+.body-copy {
+  font-family: 'Google Sans Flex', sans-serif;
+  font-weight: 400;
+  line-height: 1.65;
 }
 
 /* Enforce sentence case: neutralize uppercase utility */
@@ -167,22 +204,29 @@ body {
 }
 
 .synq-card {
-  background: rgba(14, 17, 32, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 16px;
-  transition: border-color 0.2s ease, transform 0.2s ease;
+  background: rgba(16, 18, 28, 0.72);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  transition: transform var(--dur-fast) var(--ease-apple), border-color var(--dur-fast) var(--ease-apple), box-shadow var(--dur-medium) var(--ease-apple), background-color var(--dur-fast) var(--ease-apple);
+  will-change: transform;
 }
 .synq-card:hover {
-  border-color: rgba(92,225,230,0.2);
+  border-color: rgba(92, 225, 230, 0.3);
   transform: translateY(-2px);
+  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .synq-card-active {
-  background: rgba(92,225,230,0.06);
-  border-color: rgba(92,225,230,0.3);
+  background: rgba(92, 225, 230, 0.06);
+  border-color: rgba(92, 225, 230, 0.35);
+  box-shadow: 0 0 30px rgba(92, 225, 230, 0.1);
 }
+
+/* ── Apple Bento Grid System ────────────────────────────── */
+/* Canonical definitions live in the "Apple Bento Grid Design Tokens"
+   section at the bottom of this file — do not duplicate here. */
 
 /* ── Button Components ──────────────────────────────────── */
 .btn-primary {
@@ -192,15 +236,15 @@ body {
   padding: 14px 28px;
   background: linear-gradient(135deg, #5CE1E6, #3BBFC4);
   color: #03040A;
-  font-family: var(--font-sans);
+  font-family: 'Google Sans Flex', sans-serif;
   font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  font-weight: 700;
+  letter-spacing: 0.01em;
   text-transform: none;
-  border-radius: 8px;
+  border-radius: 9999px;
   border: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform var(--dur-fast) var(--ease-apple), box-shadow var(--dur-fast) var(--ease-apple), background-color var(--dur-fast) var(--ease-apple);
   box-shadow: 0 0 20px rgba(92,225,230,0.2);
 }
 .btn-primary:hover {
@@ -217,15 +261,15 @@ body {
   padding: 13px 27px;
   background: transparent;
   color: #ECEEF5;
-  font-family: var(--font-sans);
+  font-family: 'Google Sans Flex', sans-serif;
   font-size: 0.8125rem;
   font-weight: 600;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   text-transform: none;
-  border-radius: 8px;
+  border-radius: 9999px;
   border: 1px solid rgba(255,255,255,0.15);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform var(--dur-fast) var(--ease-apple), border-color var(--dur-fast) var(--ease-apple), background-color var(--dur-fast) var(--ease-apple), color var(--dur-fast) var(--ease-apple);
 }
 .btn-secondary:hover {
   border-color: rgba(92,225,230,0.4);
@@ -240,10 +284,10 @@ body {
   padding: 8px 16px;
   background: transparent;
   color: rgba(236,238,245,0.6);
-  font-family: var(--font-sans);
+  font-family: 'Google Sans Flex', sans-serif;
   font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   text-transform: none;
   border-radius: 6px;
   border: 1px solid rgba(255,255,255,0.08);
@@ -261,7 +305,7 @@ body {
 .tag-pilot      { background: rgba(92,225,230,0.1);  color: #5CE1E6; border: 1px solid rgba(92,225,230,0.3); }
 .tag-planned    { background: rgba(245,158,11,0.1);  color: #F59E0B; border: 1px solid rgba(245,158,11,0.3); }
 .tag-experimental { background: rgba(139,92,246,0.1); color: #8B5CF6; border: 1px solid rgba(139,92,246,0.3); }
-.tag { padding: 2px 10px; border-radius: 100px; font-family: var(--font-sans); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.02em; text-transform: none; }
+.tag { padding: 2px 10px; border-radius: 100px; font-family: 'Google Sans Flex', sans-serif; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.01em; text-transform: none; }
 
 /* ── Section Layout ─────────────────────────────────────── */
 .section-padding {
@@ -276,9 +320,9 @@ body {
 }
 
 .section-label {
-  font-family: var(--font-sans);
+  font-family: 'Google Sans Flex', sans-serif;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: none;
   color: #5CE1E6;
@@ -302,18 +346,18 @@ body {
   border-color: rgba(92,225,230,0.3);
 }
 .synq-step-number {
-  font-family: var(--font-mono);
+  font-family: 'Google Sans Flex', sans-serif;
   font-size: 0.625rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   color: #5CE1E6;
 }
 .synq-step-title {
-  font-family: var(--font-denton);
+  font-family: 'Google Sans Flex', sans-serif;
   font-size: 1.125rem;
   font-weight: 800;
   color: #ECEEF5;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
 }
 
 /* ── Problem Engine ─────────────────────────────────────── */
@@ -441,10 +485,426 @@ body {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform var(--dur-fast) var(--ease-apple), border-color var(--dur-fast) var(--ease-apple), background-color var(--dur-fast) var(--ease-apple);
 }
 .glass-card:hover {
   background: rgba(28, 32, 48, 0.65);
   border-color: rgba(255, 255, 255, 0.16);
   transform: translateY(-2px);
+}
+
+/* ── Apple Bento Grid Design Tokens (canonical — single source) ── */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 14px;
+  align-items: stretch;
+}
+
+/* Column presets used by <BentoGrid columns={n}> — collapse gracefully */
+.bento-grid-2 > * { grid-column: span 6; }
+.bento-grid-3 > * { grid-column: span 4; }
+.bento-grid-4 > * { grid-column: span 3; }
+@media (max-width: 1023px) {
+  .bento-grid-3 > *,
+  .bento-grid-4 > * { grid-column: span 6; }
+}
+@media (max-width: 639px) {
+  .bento-grid-2 > *,
+  .bento-grid-3 > *,
+  .bento-grid-4 > * { grid-column: span 12; }
+}
+
+/* Explicit span helpers for editorial layouts */
+.bento-span-3 { grid-column: span 3; }
+.bento-span-4 { grid-column: span 4; }
+.bento-span-5 { grid-column: span 5; }
+.bento-span-6 { grid-column: span 6; }
+.bento-span-7 { grid-column: span 7; }
+.bento-span-8 { grid-column: span 8; }
+.bento-span-12 { grid-column: span 12; }
+@media (max-width: 1023px) {
+  .bento-span-3, .bento-span-4, .bento-span-5,
+  .bento-span-7, .bento-span-8 { grid-column: span 6; }
+}
+@media (max-width: 639px) {
+  .bento-span-3, .bento-span-4, .bento-span-5, .bento-span-6,
+  .bento-span-7, .bento-span-8 { grid-column: span 12; }
+}
+
+.bento-card {
+  position: relative;
+  background: rgba(14, 16, 26, 0.72);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 100%;
+  overflow: hidden;
+  box-shadow:
+    0 10px 30px -10px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  /* Scoped transitions only — never `all` (backdrop-filter is expensive) */
+  transition: transform var(--dur-medium) var(--ease-apple), border-color var(--dur-fast) var(--ease-apple), box-shadow var(--dur-medium) var(--ease-apple), background-color var(--dur-fast) var(--ease-apple);
+  will-change: transform;
+}
+
+.bento-card:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  transform: translateY(-2px);
+  box-shadow:
+    0 20px 40px -15px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+/* Tones used by <BentoCard tone=...> / <BentoStat> */
+.bento-card-neutral {
+  background: rgba(14, 16, 26, 0.72);
+}
+.bento-card-blue {
+  background:
+    radial-gradient(circle at top right, rgba(41, 151, 255, 0.14), transparent 70%),
+    rgba(14, 16, 26, 0.72);
+  border-color: rgba(41, 151, 255, 0.22);
+}
+.bento-card-green {
+  background:
+    radial-gradient(circle at top right, rgba(48, 209, 88, 0.12), transparent 70%),
+    rgba(14, 16, 26, 0.72);
+  border-color: rgba(48, 209, 88, 0.22);
+}
+.bento-card-purple {
+  background:
+    radial-gradient(circle at top right, rgba(191, 90, 242, 0.14), transparent 70%),
+    rgba(14, 16, 26, 0.72);
+  border-color: rgba(191, 90, 242, 0.22);
+}
+
+/* Soft outer glows — applied alongside tones */
+.bento-glow-blue:hover {
+  border-color: rgba(41, 151, 255, 0.45);
+  box-shadow: 0 20px 44px -15px rgba(41, 151, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+.bento-glow-green:hover {
+  border-color: rgba(48, 209, 88, 0.45);
+  box-shadow: 0 20px 44px -15px rgba(48, 209, 88, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+.bento-glow-purple:hover {
+  border-color: rgba(191, 90, 242, 0.45);
+  box-shadow: 0 20px 44px -15px rgba(191, 90, 242, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+/* Von Restorff primary emphasis — exactly one per ledger */
+.bento-card-primary {
+  border-color: rgba(92, 225, 230, 0.35);
+  box-shadow:
+    0 20px 40px -15px rgba(0, 0, 0, 0.7),
+    0 0 24px rgba(92, 225, 230, 0.12),
+    inset 0 1px 0 rgba(92, 225, 230, 0.25);
+}
+
+.bento-card-subtle {
+  background: rgba(10, 12, 20, 0.55);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.bento-card-active {
+  border-color: rgba(92, 225, 230, 0.35);
+  box-shadow:
+    0 20px 40px -15px rgba(0, 0, 0, 0.7),
+    0 0 20px rgba(92, 225, 230, 0.12),
+    inset 0 1px 0 rgba(92, 225, 230, 0.25);
+}
+
+/* Clickable cards render as <a> — keep link styling invisible */
+a.bento-card {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+a.bento-card:focus-visible {
+  outline: 2px solid rgba(92, 225, 230, 0.7);
+  outline-offset: 3px;
+}
+
+/* Legacy accent aliases (cyan/gold/emerald/coral) — map onto tone system */
+.bento-cyan {
+  background:
+    radial-gradient(circle at top right, rgba(92, 225, 230, 0.12), transparent 70%),
+    rgba(14, 16, 26, 0.72);
+  border-color: rgba(92, 225, 230, 0.18);
+}
+.bento-cyan:hover { border-color: rgba(92, 225, 230, 0.4); }
+.bento-gold {
+  background:
+    radial-gradient(circle at top right, rgba(232, 184, 75, 0.12), transparent 70%),
+    rgba(14, 16, 26, 0.72);
+  border-color: rgba(232, 184, 75, 0.18);
+}
+.bento-gold:hover { border-color: rgba(232, 184, 75, 0.4); }
+.bento-emerald {
+  background:
+    radial-gradient(circle at top right, rgba(52, 199, 89, 0.12), transparent 70%),
+    rgba(14, 16, 26, 0.72);
+  border-color: rgba(52, 199, 89, 0.18);
+}
+.bento-emerald:hover { border-color: rgba(52, 199, 89, 0.4); }
+.bento-coral {
+  background:
+    radial-gradient(circle at top right, rgba(255, 69, 58, 0.12), transparent 70%),
+    rgba(14, 16, 26, 0.72);
+  border-color: rgba(255, 69, 58, 0.18);
+}
+.bento-coral:hover { border-color: rgba(255, 69, 58, 0.4); }
+
+/* Bento typography — Google Sans Flex weight system */
+.bento-label {
+  font-family: 'Google Sans Flex', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #86868b;
+  margin-bottom: 8px;
+}
+.bento-sub {
+  font-family: 'Google Sans Flex', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #86868b;
+}
+.bento-num {
+  font-family: 'Google Sans Flex', sans-serif;
+  font-size: clamp(2.25rem, 3.5vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Bento badges */
+.bento-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+.bento-badge-green { background: rgba(48, 209, 88, 0.1); color: #30d158; border-color: rgba(48, 209, 88, 0.3); }
+.bento-badge-blue { background: rgba(41, 151, 255, 0.1); color: #2997ff; border-color: rgba(41, 151, 255, 0.3); }
+.bento-badge-purple { background: rgba(191, 90, 242, 0.1); color: #bf5af2; border-color: rgba(191, 90, 242, 0.3); }
+.bento-badge-cyan { background: rgba(100, 210, 255, 0.1); color: #64d2ff; border-color: rgba(100, 210, 255, 0.3); }
+
+/* Bento category + pills — Google Sans Flex */
+.bento-category-name {
+  font-family: 'Google Sans Flex', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+.bento-category-focus {
+  font-family: 'Google Sans Flex', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #f5f5f7;
+  margin-bottom: 12px;
+}
+.bento-pills-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.bento-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: 'Google Sans Flex', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(245, 245, 247, 0.85);
+}
+
+/* Bento bar chart */
+.bento-bar-track {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+  min-height: 120px;
+}
+.bento-bar-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.bento-bar-val {
+  font-size: 11px;
+  font-weight: 700;
+  color: #f5f5f7;
+  font-variant-numeric: tabular-nums;
+}
+.bento-bar {
+  width: 100%;
+  max-width: 44px;
+  border-radius: 6px 6px 3px 3px;
+  background: linear-gradient(180deg, #5CE1E6, rgba(92, 225, 230, 0.35));
+  transform-origin: bottom;
+  animation: bento-bar-grow var(--dur-slow) var(--ease-apple) both;
+}
+.bento-bar-lbl {
+  font-size: 10px;
+  color: #86868b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+@keyframes bento-bar-grow {
+  from { transform: scaleY(0.15); opacity: 0.4; }
+  to { transform: scaleY(1); opacity: 1; }
+}
+
+/* Bento quote + highlight */
+.bento-quote {
+  justify-content: center;
+  text-align: center;
+  border-left: 2px solid rgba(92, 225, 230, 0.4);
+}
+.bento-quote-text {
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.4;
+  color: #f5f5f7;
+  text-wrap: balance;
+}
+.bento-highlight {
+  justify-content: center;
+  align-items: flex-start;
+  color: #fff;
+  border: none;
+}
+
+/* Stagger helper for ledgers rendered via Bento components */
+.bento-stagger > * {
+  animation: bento-rise var(--dur-medium) var(--ease-apple) both;
+}
+.bento-stagger > *:nth-child(2) { animation-delay: 60ms; }
+.bento-stagger > *:nth-child(3) { animation-delay: 120ms; }
+.bento-stagger > *:nth-child(4) { animation-delay: 180ms; }
+.bento-stagger > *:nth-child(5) { animation-delay: 240ms; }
+.bento-stagger > *:nth-child(6) { animation-delay: 300ms; }
+@keyframes bento-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.apple-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Google Sans Flex', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  color: #86868b;
+}
+
+.apple-headline {
+  font-family: 'Google Sans Flex', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: #f5f5f7;
+}
+
+.apple-headline-muted {
+  color: #86868b;
+}
+
+.apple-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: 'Google Sans Flex', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #f5f5f7;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: background-color var(--dur-fast) var(--ease-apple), border-color var(--dur-fast) var(--ease-apple), color var(--dur-fast) var(--ease-apple), transform var(--dur-fast) var(--ease-apple);
+}
+
+.apple-pill:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.apple-nav-pill {
+  background: rgba(14, 16, 26, 0.75);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: box-shadow var(--dur-medium) var(--ease-apple), background-color var(--dur-fast) var(--ease-apple), border-color var(--dur-fast) var(--ease-apple);
+}
+
+/* ── Shared Apple motion utilities ──────────────────────── */
+/* Gentle scroll cue — replaces harsh animate-bounce */
+@keyframes apple-drift {
+  0%, 100% { opacity: 0.35; transform: translate(-50%, 0); }
+  50% { opacity: 0.9; transform: translate(-50%, 6px); }
+}
+.animate-apple-drift {
+  animation: apple-drift 2.4s var(--ease-apple) infinite;
+}
+
+/* Page-level fade used on route change */
+@keyframes page-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-page-fade {
+  animation: page-fade-in var(--dur-medium) var(--ease-apple) both;
+}
+
+/* Mobile drawer enter — pure CSS, no plugin dependency */
+@keyframes drawer-in {
+  from { opacity: 0; transform: translateY(-6px) scale(0.99); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-drawer-in {
+  animation: drawer-in var(--dur-fast) var(--ease-apple) both;
+  transform-origin: top center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bento-bar,
+  .bento-stagger > *,
+  .animate-apple-drift,
+  .animate-page-fade,
+  .animate-drawer-in {
+    animation: none !important;
+  }
 }
