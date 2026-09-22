@@ -1,0 +1,42 @@
+{
+  "type": "movie",
+  "slug": "80psc-four-rooms",
+  "url": "https://streamimdb.ru/movie/80psc-four-rooms/",
+  "lastmod": "2025-10-03",
+  "fetched_at": "2026-09-05T11:23:00.932Z",
+  "title": "Four Rooms",
+  "year": "1995",
+  "release_date": "1995",
+  "genres": [
+    "Comedy"
+  ],
+  "plot": "On his first night at a quirky hotel, Ted the Bellhop finds himself caught in a whirlwind of hilarity and chaos. As the hours pass, he encounters four unique rooms, each home to eccentric guests whose outrageous behaviors turn his shift into a series of unforgettable escapades. Fr",
+  "poster": "https://image.tmdb.org/t/p/w500/75aHn1NOYXh4M7L5shoeQ6NGykP.jpg",
+  "runtime_min": 98,
+  "countries": [
+    "United States of America"
+  ],
+  "cast": [
+    "Tim Roth",
+    "Jennifer Beals",
+    "David Proval",
+    "Ione Skye",
+    "Madonna",
+    "Antonio Banderas",
+    "Quentin Tarantino",
+    "Paul Calderon",
+    "Bruce Willis",
+    "Lana McKissack"
+  ],
+  "directors": [],
+  "seasons": null,
+  "episodes": null,
+  "rating": {
+    "value": 5.9,
+    "count": 2831
+  },
+  "tmdb_media_type": "movie",
+  "tmdb_id": 5,
+  "embed_url": "https://streamimdb.ru/embed/movie/5",
+  "backdrop": "https://image.tmdb.org/t/p/w1280/f2t4JbUvQIjUF5FstG1zZFAp02N.jpg"
+}

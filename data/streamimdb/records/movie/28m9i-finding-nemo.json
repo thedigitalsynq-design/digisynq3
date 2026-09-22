@@ -1,0 +1,43 @@
+{
+  "type": "movie",
+  "slug": "28m9i-finding-nemo",
+  "url": "https://streamimdb.ru/movie/28m9i-finding-nemo/",
+  "lastmod": "2025-10-03",
+  "fetched_at": "2026-09-05T11:23:01.499Z",
+  "title": "Finding Nemo",
+  "year": "2003",
+  "release_date": "2003",
+  "genres": [
+    "Animation",
+    "Family"
+  ],
+  "plot": "In the vibrant depths of the Great Barrier Reef, a spirited young clownfish named Nemo embarks on an unexpected journey when he is captured and whisked away to a dentist's aquarium far from home. Determined to rescue his son, Marlin, a cautious and overprotective father, teams up with Dory, a lovabl",
+  "poster": "https://image.tmdb.org/t/p/w500/eHuGQ10FUzK1mdOY69wF5pGgEf5.jpg",
+  "runtime_min": 100,
+  "countries": [
+    "United States of America"
+  ],
+  "cast": [
+    "Albert Brooks",
+    "Ellen DeGeneres",
+    "Alexander Gould",
+    "Willem Dafoe",
+    "Geoffrey Rush",
+    "Brad Garrett",
+    "Allison Janney",
+    "Austin Pendleton",
+    "Stephen Root",
+    "Vicki Lewis"
+  ],
+  "directors": [],
+  "seasons": null,
+  "episodes": null,
+  "rating": {
+    "value": 7.8,
+    "count": 20500
+  },
+  "tmdb_media_type": "movie",
+  "tmdb_id": 12,
+  "embed_url": "https://streamimdb.ru/embed/movie/12",
+  "backdrop": "https://image.tmdb.org/t/p/w1280/eCynaAOgYYiw5yN5lBwz3IxqvaW.jpg"
+}

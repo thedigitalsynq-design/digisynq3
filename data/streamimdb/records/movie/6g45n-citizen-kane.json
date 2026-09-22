@@ -1,0 +1,43 @@
+{
+  "type": "movie",
+  "slug": "6g45n-citizen-kane",
+  "url": "https://streamimdb.ru/movie/6g45n-citizen-kane/",
+  "lastmod": "2025-10-03",
+  "fetched_at": "2026-09-05T11:23:01.780Z",
+  "title": "Citizen Kane",
+  "year": "1941",
+  "release_date": "1941",
+  "genres": [
+    "Mystery",
+    "Drama"
+  ],
+  "plot": "In the iconic film \"Citizen Kane,\" we explore the complex life of Charles Foster Kane, a formidable newspaper tycoon whose ascent is marred by a painful childhood. Separated from his mother and raised by a wealthy guardian, Kane's desperate search for love and acceptance drives his tumultuous path.",
+  "poster": "https://image.tmdb.org/t/p/w500/sav0jxhqiH0bPr2vZFU0Kjt2nZL.jpg",
+  "runtime_min": 119,
+  "countries": [
+    "United States of America"
+  ],
+  "cast": [
+    "Orson Welles",
+    "Joseph Cotten",
+    "Dorothy Comingore",
+    "Ray Collins",
+    "George Coulouris",
+    "Agnes Moorehead",
+    "Paul Stewart",
+    "Ruth Warrick",
+    "Erskine Sanford",
+    "William Alland"
+  ],
+  "directors": [],
+  "seasons": null,
+  "episodes": null,
+  "rating": {
+    "value": 8,
+    "count": 6031
+  },
+  "tmdb_media_type": "movie",
+  "tmdb_id": 15,
+  "embed_url": "https://streamimdb.ru/embed/movie/15",
+  "backdrop": "https://image.tmdb.org/t/p/w1280/ruF3Lmd4A8MHbnEBE6lxPMbsHGL.jpg"
+}

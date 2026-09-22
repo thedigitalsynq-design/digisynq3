@@ -1,0 +1,8 @@
+{
+  "name": "Cinema War Room",
+  "description": "Cinema Damage Control command center: real-time crisis detection, live sentiment telemetry, narrative intelligence, and theatrical release risk mitigation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

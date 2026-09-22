@@ -1,0 +1,39 @@
+{
+  "type": "tv",
+  "slug": "9y2ym-the-amazing-mrs-pritchard",
+  "url": "https://streamimdb.ru/tv/9y2ym-the-amazing-mrs-pritchard/",
+  "lastmod": "2025-10-03",
+  "fetched_at": "2026-09-05T11:23:02.138Z",
+  "title": "The Amazing Mrs Pritchard",
+  "year": "2006",
+  "release_date": "2006",
+  "genres": [
+    "Drama"
+  ],
+  "plot": "Ros Pritchard, a supermarket manager, embarks on an unexpected political journey when she throws her hat in the ring for election. As her grassroots campaign gains traction, Ros begins to entertain the ambitious dream of ascending to the role of Prime Minister. Balancing her everyday life with the c",
+  "poster": "https://image.tmdb.org/t/p/w500/r2iyYZ98eN70C7kkUIYbW3QaJwn.jpg",
+  "runtime_min": null,
+  "countries": [
+    "GB"
+  ],
+  "cast": [
+    "Jane Horrocks",
+    "Steven Mackintosh",
+    "Jodhi May",
+    "Jemma McKenzie-Brown",
+    "Janet McTeer",
+    "Carey Mulligan",
+    "Jonathan Aris",
+    "Geraldine James",
+    "Selina Cadell",
+    "Sally Phillips"
+  ],
+  "directors": [],
+  "seasons": 1,
+  "episodes": 6,
+  "rating": {
+    "value": 6.2,
+    "count": 5
+  },
+  "backdrop": "https://image.tmdb.org/t/p/w1280/oJdDWkRNkdWrYhOTNyooJDJEFoX.jpg"
+}

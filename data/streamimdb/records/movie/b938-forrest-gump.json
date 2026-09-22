@@ -1,0 +1,44 @@
+{
+  "type": "movie",
+  "slug": "b938-forrest-gump",
+  "url": "https://streamimdb.ru/movie/b938-forrest-gump/",
+  "lastmod": "2025-10-03",
+  "fetched_at": "2026-09-05T11:23:01.534Z",
+  "title": "Forrest Gump",
+  "year": "1994",
+  "release_date": "1994",
+  "genres": [
+    "Comedy",
+    "Drama",
+    "Romance"
+  ],
+  "plot": "In the touching story of \"Forrest Gump,\" we experience the remarkable journey of a man who, despite having a low IQ, faces life's challenges with an unwavering spirit. Forrest unwittingly influences significant historical events as he travels through time, from the jungles of Vietnam to the heights",
+  "poster": "https://image.tmdb.org/t/p/w500/9wlYJy01XgvIhdf651FgyJkau07.jpg",
+  "runtime_min": 142,
+  "countries": [
+    "United States of America"
+  ],
+  "cast": [
+    "Tom Hanks",
+    "Robin Wright",
+    "Gary Sinise",
+    "Sally Field",
+    "Mykelti Williamson",
+    "Michael Conner Humphreys",
+    "Hanna Hall",
+    "Haley Joel Osment",
+    "Siobhan Fallon Hogan",
+    "Rebecca Williams"
+  ],
+  "directors": [],
+  "seasons": null,
+  "episodes": null,
+  "rating": {
+    "value": 8.5,
+    "count": 29672
+  },
+  "tmdb_media_type": "movie",
+  "tmdb_id": 13,
+  "embed_url": "https://streamimdb.ru/embed/movie/13",
+  "backdrop": "https://image.tmdb.org/t/p/w1280/67HggiWaP9ZLv5sPYmyRV37yAJM.jpg"
+}

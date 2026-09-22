@@ -1,0 +1,44 @@
+{
+  "type": "movie",
+  "slug": "2ldt3-the-dark-2005",
+  "url": "https://streamimdb.ru/movie/2ldt3-the-dark-2005/",
+  "lastmod": "2025-10-03",
+  "fetched_at": "2026-09-05T13:11:35.332Z",
+  "title": "The Dark (2005)",
+  "year": "2005",
+  "release_date": "2005",
+  "genres": [
+    "Horror",
+    "Thriller",
+    "Mystery"
+  ],
+  "plot": "In a desperate quest to reconnect with her estranged family, Adèlle takes her young daughter, Sarah, on a journey to the rugged shores of Wales to visit her estranged father. However, their reunion is shattered when Sarah mysteriously disappears into the haunting depths of the ocean on the very firs",
+  "poster": "https://image.tmdb.org/t/p/w500/h6gCVAzjFLhzkffv2VZO1RgVCBt.jpg",
+  "runtime_min": 87,
+  "countries": [
+    "Germany, United Kingdom"
+  ],
+  "cast": [
+    "Maria Bello",
+    "Sean Bean",
+    "Abigail Stone",
+    "Richard Elfyn",
+    "Maurice Roëves",
+    "Sophie Stuckey",
+    "Casper Harvey",
+    "Eluned Jones",
+    "Gwenyth Petty",
+    "Robin Griffith"
+  ],
+  "directors": [],
+  "seasons": null,
+  "episodes": null,
+  "rating": {
+    "value": 5.7,
+    "count": 294
+  },
+  "tmdb_media_type": "movie",
+  "tmdb_id": 17,
+  "embed_url": "https://streamimdb.ru/embed/movie/17",
+  "backdrop": "https://image.tmdb.org/t/p/w1280/dhr0q4eiRr8ltqPig32TwhPRdaD.jpg"
+}

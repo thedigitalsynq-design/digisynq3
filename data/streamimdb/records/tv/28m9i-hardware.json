@@ -1,0 +1,35 @@
+{
+  "type": "tv",
+  "slug": "28m9i-hardware",
+  "url": "https://streamimdb.ru/tv/28m9i-hardware/",
+  "lastmod": "2025-10-03",
+  "fetched_at": "2026-09-05T11:23:02.834Z",
+  "title": "Hardware",
+  "year": "2003",
+  "release_date": "2003",
+  "genres": [
+    "Comedy"
+  ],
+  "plot": "Hardware, a British sitcom that graced ITV screens from 2003 to 2004, features Martin Freeman in a comedic exploration of the quirky world of a hardware store. Crafted by Simon Nye, known for his work on Men Behaving Badly, the show blends humor with everyday absurdities. It sets the tone with the c",
+  "poster": "https://image.tmdb.org/t/p/w500/2byWyytcBRkEZiD34BhYhBOCOEl.jpg",
+  "runtime_min": null,
+  "countries": [
+    "GB"
+  ],
+  "cast": [
+    "Ryan Cartwright",
+    "Ken Morley",
+    "Peter Serafinowicz",
+    "Martin Freeman",
+    "Ella Kenion",
+    "Susan Earl"
+  ],
+  "directors": [],
+  "seasons": 2,
+  "episodes": 12,
+  "rating": {
+    "value": 4.2,
+    "count": 5
+  },
+  "backdrop": "https://image.tmdb.org/t/p/w1280/ljyV17eD72kPtKWhZCOB1QkcXfq.jpg"
+}

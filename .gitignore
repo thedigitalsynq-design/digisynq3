@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Builds
+dist/
+build/
+
+# Environment & secrets
+.env
+.env.local
+.env.*.local
+.tmdb-key
+
+# Caches & OS artifacts
+.cache/
+*.log
+.DS_Store
+Thumbs.db
+
+# Heavy offline scraping dump (index)
+data/streamimdb/index/
+
+# SQLite WAL and temporary files (preserves cinema.db seed)
+*.db-shm
+*.db-wal
+*.sqlite-shm
+*.sqlite-wal

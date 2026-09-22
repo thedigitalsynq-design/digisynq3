@@ -1,0 +1,42 @@
+{
+  "type": "tv",
+  "slug": "45zfs-dragon-tales",
+  "url": "https://streamimdb.ru/tv/45zfs-dragon-tales/",
+  "lastmod": "2025-10-03",
+  "fetched_at": "2026-09-05T11:23:02.800Z",
+  "title": "Dragon Tales",
+  "year": "1999",
+  "release_date": "1999",
+  "genres": [
+    "Kids",
+    "Animation",
+    "Sci-Fi & Fantasy",
+    "Comedy",
+    "Family",
+    "Drama"
+  ],
+  "plot": "Max and Emmy, two adventurous siblings, discover a magical dragon scale that whisks them away to a vibrant realm filled with charming, anthropomorphic dragons. By reciting a special rhyme, they embark on fantastical journeys where they meet and befriend four playful dragons: Cassie, Ord, Zak, Wheezi",
+  "poster": "https://image.tmdb.org/t/p/w500/pwAe79bXMfzjD4l4s2k1ZFXq8T2.jpg",
+  "runtime_min": null,
+  "countries": [
+    "US, CA"
+  ],
+  "cast": [
+    "Chantal Strand",
+    "Kathleen Barr",
+    "Andrea Libman",
+    "Danny McKinnon",
+    "Jason Michas",
+    "Eli Gabay",
+    "Aida Ortega",
+    "Ty Olsson"
+  ],
+  "directors": [],
+  "seasons": 2,
+  "episodes": 67,
+  "rating": {
+    "value": 7.4,
+    "count": 55
+  },
+  "backdrop": "https://image.tmdb.org/t/p/w1280/szj45NQNl4wnrjzxKmvjQLvH32d.jpg"
+}

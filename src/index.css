@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+@theme {
+  --color-war-bg: #07080D;
+  --color-war-surface: rgba(20, 22, 31, 0.72);
+  --color-war-surface-2: #14161f;
+  --color-war-surface-3: #1f2230;
+  --color-war-border: rgba(255, 255, 255, 0.08);
+  --color-war-border-light: rgba(255, 255, 255, 0.14);
+  --color-war-text: #f5f5f7;
+  --color-war-text-dim: #a1a1a6;
+  --color-war-text-muted: #6e6e73;
+  --color-war-accent: #0A84FF;
+  --color-war-accent-hover: #409CFF;
+  --color-war-critical: #FF453A;
+  --color-war-critical-hover: #FF6961;
+  --color-war-warning: #FF9F0A;
+  --color-war-warning-hover: #FFB340;
+  --color-war-recovered: #30D158;
+  --color-war-cyan: #64D2FF;
+  --color-war-purple: #BF5AF2;
+
+  --color-synq-neon: #00F5FF;
+  --color-synq-violet: #8B5CF6;
+  --color-synq-gold: #F59E0B;
+}
+
+/* ==========================================================================
+   OFFICIAL CRED DENTON TYPEFACE
+   ========================================================================== */
+@font-face {
+  font-family: 'denton';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/fonts/Denton-Light.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'denton';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/Denton-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'denton';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/Denton-Bold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'denton';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('/fonts/Denton-ExtraBold.woff2') format('woff2');
+}
+
+:root {
+  color-scheme: dark;
+  --font-denton: 'denton', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #07080D;
+  color: #F1F5F9;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(7, 8, 13, 0.8);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: rgba(18, 20, 29, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.glass-card {
+  background: rgba(24, 27, 40, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  background: rgba(28, 32, 48, 0.65);
+  border-color: rgba(255, 255, 255, 0.16);
+  transform: translateY(-2px);
+}
+
+/* Pulse Glow Keyframes */
+@keyframes synq-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+.animate-synq-pulse {
+  animation: synq-pulse 4s infinite ease-in-out;
+}

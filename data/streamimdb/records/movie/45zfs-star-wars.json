@@ -1,0 +1,44 @@
+{
+  "type": "movie",
+  "slug": "45zfs-star-wars",
+  "url": "https://streamimdb.ru/movie/45zfs-star-wars/",
+  "lastmod": "2025-10-03",
+  "fetched_at": "2026-09-05T11:23:01.167Z",
+  "title": "Star Wars",
+  "year": "1977",
+  "release_date": "1977",
+  "genres": [
+    "Adventure",
+    "Action",
+    "Science Fiction"
+  ],
+  "plot": "In a galaxy on the verge of oppression, the courageous Princess Leia is captured by the nefarious Imperial forces intent on dominating the universe. Enter the unlikely heroes: young farm boy Luke Skywalker, who is destined for a greater purpose, and the witty, rogue pilot Han Solo, famed for his leg",
+  "poster": "https://image.tmdb.org/t/p/w500/6FfCtAuVAW8XJjZ7eWeLibRLWTw.jpg",
+  "runtime_min": 121,
+  "countries": [
+    "United States of America"
+  ],
+  "cast": [
+    "Mark Hamill",
+    "Harrison Ford",
+    "Carrie Fisher",
+    "Peter Cushing",
+    "Alec Guinness",
+    "Anthony Daniels",
+    "Kenny Baker",
+    "Peter Mayhew",
+    "David Prowse",
+    "James Earl Jones"
+  ],
+  "directors": [],
+  "seasons": null,
+  "episodes": null,
+  "rating": {
+    "value": 8.2,
+    "count": 22269
+  },
+  "tmdb_media_type": "movie",
+  "tmdb_id": 11,
+  "embed_url": "https://streamimdb.ru/embed/movie/11",
+  "backdrop": "https://image.tmdb.org/t/p/w1280/2w4xG178RpB4MDAIfTkqAuSJzec.jpg"
+}

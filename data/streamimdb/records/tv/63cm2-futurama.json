@@ -1,0 +1,39 @@
+{
+  "type": "tv",
+  "slug": "63cm2-futurama",
+  "url": "https://streamimdb.ru/tv/63cm2-futurama/",
+  "lastmod": "2025-10-03",
+  "fetched_at": "2026-09-05T11:23:02.596Z",
+  "title": "Futurama",
+  "year": "1999",
+  "release_date": "1999",
+  "genres": [
+    "Animation",
+    "Comedy",
+    "Sci-Fi & Fantasy"
+  ],
+  "plot": "Philip J. Fry, a pizza delivery guy from late 20th-century New York, gets accidentally cryogenically frozen and wakes up a millennium later in the quirky 31st century. Now navigating a bizarre and colorful future, he takes a job at Planet Express, an intergalactic delivery service. Alongside a motle",
+  "poster": "https://image.tmdb.org/t/p/w500/6ZS8SOno6kTmWz4eQ8lX8EBXOMv.jpg",
+  "runtime_min": null,
+  "countries": [
+    "US"
+  ],
+  "cast": [
+    "Billy West",
+    "Katey Sagal",
+    "John DiMaggio",
+    "Tress MacNeille",
+    "Maurice LaMarche",
+    "Lauren Tom",
+    "Phil LaMarr",
+    "David Herman"
+  ],
+  "directors": [],
+  "seasons": 10,
+  "episodes": 154,
+  "rating": {
+    "value": 8.4,
+    "count": 3633
+  },
+  "backdrop": "https://image.tmdb.org/t/p/w1280/4xKG4S1IyLIglHbCYGJDsptgQNh.jpg"
+}

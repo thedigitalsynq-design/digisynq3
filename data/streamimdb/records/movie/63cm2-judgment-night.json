@@ -1,0 +1,44 @@
+{
+  "type": "movie",
+  "slug": "63cm2-judgment-night",
+  "url": "https://streamimdb.ru/movie/63cm2-judgment-night/",
+  "lastmod": "2025-10-03",
+  "fetched_at": "2026-09-05T11:23:01.144Z",
+  "title": "Judgment Night",
+  "year": "1993",
+  "release_date": "1993",
+  "genres": [
+    "Action",
+    "Crime",
+    "Thriller"
+  ],
+  "plot": "In \"Judgment Night,\" a casual outing for four friends takes a terrifying twist when they opt for a shortcut to a much-anticipated boxing match. What starts as an innocent adventure quickly descends into horror as they inadvertently witness a brutal murder in a deserted area. Suddenly, they find them",
+  "poster": "https://image.tmdb.org/t/p/w500/3rvvpS9YPM5HB2f4HYiNiJVtdam.jpg",
+  "runtime_min": 109,
+  "countries": [
+    "United States of America"
+  ],
+  "cast": [
+    "Emilio Estevez",
+    "Cuba Gooding Jr.",
+    "Denis Leary",
+    "Stephen Dorff",
+    "Jeremy Piven",
+    "Peter Greene",
+    "Michael DeLorenzo",
+    "Everlast",
+    "Michael Wiseman",
+    "Relioues Webb"
+  ],
+  "directors": [],
+  "seasons": null,
+  "episodes": null,
+  "rating": {
+    "value": 6.5,
+    "count": 372
+  },
+  "tmdb_media_type": "movie",
+  "tmdb_id": 6,
+  "embed_url": "https://streamimdb.ru/embed/movie/6",
+  "backdrop": "https://image.tmdb.org/t/p/w1280/sS6dFQTQmgNwZiVY26V32vY4fOO.jpg"
+}

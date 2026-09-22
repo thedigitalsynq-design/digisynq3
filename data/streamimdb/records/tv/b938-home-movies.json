@@ -1,0 +1,36 @@
+{
+  "type": "tv",
+  "slug": "b938-home-movies",
+  "url": "https://streamimdb.ru/tv/b938-home-movies/",
+  "lastmod": "2025-10-03",
+  "fetched_at": "2026-09-05T11:23:03.066Z",
+  "title": "Home Movies",
+  "year": "1999",
+  "release_date": "1999",
+  "genres": [
+    "Animation",
+    "Comedy"
+  ],
+  "plot": "Brendon Small, an imaginative eight-year-old, navigates life through his passion for filmmaking, enlisting friends Jason and Melissa to star in his countless homemade movies. Although his parents are divorced, Brendon finds comfort in the fact that many of his peers share similar family dynamics. In",
+  "poster": "https://image.tmdb.org/t/p/w500/m3yC4oIdb6vMxgoghXGPbGQNxu7.jpg",
+  "runtime_min": null,
+  "countries": [
+    "US"
+  ],
+  "cast": [
+    "Brendon Small",
+    "H. Jon Benjamin",
+    "Melissa Bardin Galsky",
+    "Janine Ditullio",
+    "Loren Bouchard",
+    "Ron Lynch"
+  ],
+  "directors": [],
+  "seasons": 4,
+  "episodes": 94,
+  "rating": {
+    "value": 7.5,
+    "count": 107
+  },
+  "backdrop": "https://image.tmdb.org/t/p/w1280/8AxQ9gYFVjj74gP6vG6UQNinIss.jpg"
+}
