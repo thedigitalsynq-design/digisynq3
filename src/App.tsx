@@ -19,6 +19,7 @@ import { ThemeProvider } from './components/ThemeContext';
 import { AuthProvider } from './components/AuthContext';
 import { LiveDataProvider } from './context/LiveDataContext';
 import { setAudioEnabled as setSquareAudio } from './utils/audio';
+import { safeFetchJson } from './utils/apiClient';
 
 function UnifiedAppContent() {
   const [currentLens, setCurrentLens] = useState<OperatingLens>('overview');
@@ -61,12 +62,9 @@ function UnifiedAppContent() {
 
   // Fetch SQLite movie count
   useEffect(() => {
-    fetch('/api/stats')
-      .then(res => res.json())
-      .then(data => {
-        if (data.movies) setMoviesCount(data.movies);
-      })
-      .catch(() => {});
+    safeFetchJson('/api/stats').then(data => {
+      if (data && data.movies) setMoviesCount(data.movies);
+    });
   }, []);
 
   const handleToggleAudio = () => {
@@ -143,7 +141,8 @@ function UnifiedAppContent() {
 }
 
 export default function App() {
-  const basename = import.meta.env.BASE_URL.replace(/\/+$/, '') || '/';
+  const isGhPages = typeof window !== 'undefined' && window.location.pathname.includes('/digisynq3');
+  const basename = isGhPages ? '/digisynq3' : '';
 
   return (
     <BrowserRouter basename={basename}>

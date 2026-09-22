@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Activity, ShieldAlert, Film, Radio, Globe, TrendingUp, IndianRupee } from 'lucide-react';
+import { Radio, Film, Activity, DollarSign, TrendingUp, IndianRupee } from 'lucide-react';
+import { safeFetchJson } from '../utils/apiClient';
 
 interface TickerNewsItem {
   title: string;
   source?: string;
-  time?: string;
 }
 
 interface CurrencyData {
+  base: string;
   rates: {
     USD?: number;
     AED?: number;
@@ -22,32 +23,25 @@ export function GlobalTelemetryTicker() {
   const [currencies, setCurrencies] = useState<CurrencyData | null>(null);
 
   useEffect(() => {
-    // 1. Fetch live news from Google News RSS
-    fetch('/api/news')
-      .then(res => res.json())
-      .then(data => {
-        if (data.news && Array.isArray(data.news)) {
-          setNews(data.news.slice(0, 10).map((n: any) => ({
-            title: typeof n === 'string' ? n : (n.title || n.text || ''),
-            source: n.source || 'Verified Feed'
-          })));
-        }
-      })
-      .catch(() => {});
+    // 1. Fetch live news
+    safeFetchJson('/api/news').then(data => {
+      if (data && data.news && Array.isArray(data.news)) {
+        setNews(data.news.slice(0, 10).map((n: any) => ({
+          title: typeof n === 'string' ? n : (n.title || n.text || ''),
+          source: n.source || 'Verified Feed'
+        })));
+      }
+    });
 
-    // 2. Fetch live SQLite stats
-    fetch('/api/stats')
-      .then(res => res.json())
-      .then(data => setStats(data))
-      .catch(() => {});
+    // 2. Fetch live stats
+    safeFetchJson('/api/stats').then(data => {
+      if (data) setStats(data);
+    });
 
     // 3. Fetch live Forex rates
-    fetch('/api/currency')
-      .then(res => res.json())
-      .then(data => {
-        if (data.rates) setCurrencies(data);
-      })
-      .catch(() => {});
+    safeFetchJson('/api/currency').then(data => {
+      if (data && data.rates) setCurrencies(data);
+    });
   }, []);
 
   // Compute inverted rates for easy Indian theatrical viewing: 1 USD = ~86.8 INR

@@ -5,6 +5,7 @@ import {
   ShieldAlert, Bot, TrendingUp, Sparkles, CheckCircle2, IndianRupee
 } from 'lucide-react';
 import { calculateRoiMultiplier } from '../utils/realTelemetry';
+import { safeFetchJson } from '../utils/apiClient';
 
 interface Movie {
   id: number;
@@ -58,7 +59,7 @@ export function CinemaGarageHub({ onOpenCopilotForFilm }: TheatricalSlateVaultPr
   const [newDiscussionBody, setNewDiscussionBody] = useState('');
   const [submittingDiscussion, setSubmittingDiscussion] = useState(false);
 
-  // Fetch real movies from SQLite database
+  // Fetch real movies from SQLite database or static snapshot fallback
   const fetchMovies = async () => {
     try {
       setLoading(true);
@@ -67,11 +68,10 @@ export function CinemaGarageHub({ onOpenCopilotForFilm }: TheatricalSlateVaultPr
       if (selectedGenre) params.append('genre', selectedGenre);
       params.append('limit', '100');
 
-      const res = await fetch(`/api/movies?${params.toString()}`);
-      if (res.ok) {
-        const data = await res.json();
+      const data = await safeFetchJson<{ movies: Movie[] }>(`/api/movies?${params.toString()}`);
+      if (data && data.movies) {
         // Sort to feature verified box office records first
-        const sorted = (data.movies || []).sort((a: Movie, b: Movie) => {
+        const sorted = data.movies.sort((a: Movie, b: Movie) => {
           const aHas = a.box_office ? 1 : 0;
           const bHas = b.box_office ? 1 : 0;
           return bHas - aHas;
@@ -79,7 +79,7 @@ export function CinemaGarageHub({ onOpenCopilotForFilm }: TheatricalSlateVaultPr
         setMovies(sorted);
       }
     } catch (err) {
-      console.error('Error fetching movies from SQLite:', err);
+      console.error('Error fetching movies:', err);
     } finally {
       setLoading(false);
     }
@@ -87,9 +87,8 @@ export function CinemaGarageHub({ onOpenCopilotForFilm }: TheatricalSlateVaultPr
 
   const fetchStats = async () => {
     try {
-      const res = await fetch('/api/stats');
-      if (res.ok) {
-        const data = await res.json();
+      const data = await safeFetchJson<{ movies: number; reviews: number; discussions: number }>('/api/stats');
+      if (data) {
         setStats(data);
       }
     } catch (err) {

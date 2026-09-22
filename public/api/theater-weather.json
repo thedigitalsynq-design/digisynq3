@@ -1,0 +1,77 @@
+{
+  "success": true,
+  "cached": true,
+  "hubs": [
+    {
+      "city": "Mumbai",
+      "region": "Bollywood / West",
+      "lat": 19.076,
+      "lon": 72.877,
+      "temperature": "26.7°C",
+      "condition": "Light to Moderate Rain",
+      "impactRisk": "MODERATE",
+      "windspeed": "1.6 km/h"
+    },
+    {
+      "city": "Hyderabad",
+      "region": "Tollywood / South",
+      "lat": 17.385,
+      "lon": 78.486,
+      "temperature": "23.9°C",
+      "condition": "Clear Sky / Good Footfall",
+      "impactRisk": "LOW",
+      "windspeed": "11 km/h"
+    },
+    {
+      "city": "Chennai",
+      "region": "Kollywood / Tamil",
+      "lat": 13.082,
+      "lon": 80.27,
+      "temperature": "27.8°C",
+      "condition": "Clear Sky / Good Footfall",
+      "impactRisk": "LOW",
+      "windspeed": "10.3 km/h"
+    },
+    {
+      "city": "Bengaluru",
+      "region": "Sandalwood / Kannada",
+      "lat": 12.971,
+      "lon": 77.594,
+      "temperature": "20.3°C",
+      "condition": "Clear Sky / Good Footfall",
+      "impactRisk": "LOW",
+      "windspeed": "13.2 km/h"
+    },
+    {
+      "city": "Kochi",
+      "region": "Mollywood / Kerala",
+      "lat": 9.931,
+      "lon": 76.267,
+      "temperature": "26.3°C",
+      "condition": "Light to Moderate Rain",
+      "impactRisk": "MODERATE",
+      "windspeed": "4.3 km/h"
+    },
+    {
+      "city": "Delhi NCR",
+      "region": "North Market",
+      "lat": 28.613,
+      "lon": 77.209,
+      "temperature": "28.8°C",
+      "condition": "Clear Sky / Good Footfall",
+      "impactRisk": "LOW",
+      "windspeed": "0 km/h"
+    },
+    {
+      "city": "Kolkata",
+      "region": "Tollywood East / Bengali",
+      "lat": 22.572,
+      "lon": 88.363,
+      "temperature": "26.4°C",
+      "condition": "Clear Sky / Good Footfall",
+      "impactRisk": "LOW",
+      "windspeed": "14.6 km/h"
+    }
+  ],
+  "lastUpdated": "2026-09-22T20:56:06.933Z"
+}

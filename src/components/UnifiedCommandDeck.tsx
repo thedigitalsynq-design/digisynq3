@@ -14,6 +14,7 @@ import {
   type WeatherHubData,
   type LiveNewsData
 } from '../utils/realTelemetry';
+import { safeFetchJson } from '../utils/apiClient';
 
 interface UnifiedCommandDeckProps {
   onNavigateLens: (lens: 'slate' | 'risk' | 'velocity' | 'ecosystem') => void;
@@ -33,53 +34,41 @@ export function UnifiedCommandDeck({
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // 1. Fetch SQLite Platform Stats
-    fetch('/api/stats')
-      .then(res => res.json())
-      .then(d => setStats(d))
-      .catch(() => {});
+    // 1. Fetch Platform Stats
+    safeFetchJson('/api/stats').then(d => {
+      if (d) setStats(d);
+    });
 
-    // 2. Fetch Real Movies from SQLite database
-    fetch('/api/movies?limit=20')
-      .then(res => res.json())
-      .then(d => {
-        if (d.movies) {
-          // Sort to prioritize films with real box office & budget figures
-          const sorted = [...d.movies].sort((a, b) => {
-            const hasA = a.box_office ? 1 : 0;
-            const hasB = b.box_office ? 1 : 0;
-            return hasB - hasA;
-          });
-          setMovies(sorted.slice(0, 4));
-        }
-      })
-      .catch(() => {});
+    // 2. Fetch Real Movies
+    safeFetchJson('/api/movies?limit=20').then(d => {
+      if (d && d.movies) {
+        const sorted = [...d.movies].sort((a, b) => {
+          const hasA = a.box_office ? 1 : 0;
+          const hasB = b.box_office ? 1 : 0;
+          return hasB - hasA;
+        });
+        setMovies(sorted.slice(0, 4));
+      }
+    });
 
-    // 3. Fetch Real Live News from RSS
-    fetch('/api/news')
-      .then(res => res.json())
-      .then(d => {
-        if (d.news && Array.isArray(d.news)) {
-          const items: LiveNewsData[] = d.news.map((item: any) => ({
-            title: typeof item === 'string' ? item : (item.title || item.text || ''),
-            link: item.link || '',
-            source: item.source || 'Verified Feed'
-          }));
-          setNews(items.slice(0, 5));
-        }
-      })
-      .catch(() => {});
+    // 3. Fetch Real Live News
+    safeFetchJson('/api/news').then(d => {
+      if (d && d.news && Array.isArray(d.news)) {
+        const items: LiveNewsData[] = d.news.map((item: any) => ({
+          title: typeof item === 'string' ? item : (item.title || item.text || ''),
+          link: item.link || '',
+          source: item.source || 'Verified Feed'
+        }));
+        setNews(items.slice(0, 5));
+      }
+    });
 
-    // 4. Fetch Real Open-Meteo Weather across Indian Theatrical Hubs
-    fetch('/api/theater-weather')
-      .then(res => res.json())
-      .then(d => {
-        if (d.hubs && Array.isArray(d.hubs)) {
-          setWeatherHubs(d.hubs);
-        }
-      })
-      .catch(() => {})
-      .finally(() => setLoading(false));
+    // 4. Fetch Real Open-Meteo Weather
+    safeFetchJson('/api/theater-weather').then(d => {
+      if (d && d.hubs && Array.isArray(d.hubs)) {
+        setWeatherHubs(d.hubs);
+      }
+    }).finally(() => setLoading(false));
   }, []);
 
   // Compute real dynamic telemetry metrics
