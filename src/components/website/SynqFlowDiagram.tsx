@@ -5,7 +5,7 @@ const SYNQ_STAGES = [
   {
     id: 'problem',
     number: '01',
-    label: 'PROBLEM',
+    label: 'Problem',
     headline: 'Start with a real problem.',
     description: 'Every SYNQ begins with a specific, identifiable problem. Not a vague brief. Not a general need. A concrete gap in the filmmaking ecosystem — a technician that cannot be found, a studio that sits empty, content that has no distribution pathway, a crew that lacks a skill.',
     note: 'The problem is the entry point. Everything else follows from it.',
@@ -14,7 +14,7 @@ const SYNQ_STAGES = [
   {
     id: 'map',
     number: '02',
-    label: 'MAP',
+    label: 'Map',
     headline: 'Map the ecosystem around it.',
     description: 'Before attempting to solve the problem, we map what already exists. What resources are available? What skills are present? What dependencies does this problem have? What is connected and what is missing? Mapping prevents solutions that ignore context.',
     note: 'An unmapped problem is usually misunderstood.',
@@ -23,7 +23,7 @@ const SYNQ_STAGES = [
   {
     id: 'gap',
     number: '03',
-    label: 'FIND THE GAP',
+    label: 'Find the gap',
     headline: 'Identify precisely where value is lost.',
     description: 'The gap is specific. It is the exact place where a connection does not exist, where a resource is underutilized, where information is missing, or where coordination is absent. Finding the gap means understanding what is actually missing, not what seems to be missing.',
     note: 'The gap is where DigiSynq operates.',
@@ -32,7 +32,7 @@ const SYNQ_STAGES = [
   {
     id: 'synq',
     number: '04',
-    label: 'SYNQ',
+    label: 'Synq',
     headline: 'Connect the right elements.',
     description: 'With the gap identified, the SYNQ is the act of connecting the right participants, resources, and information to address it. This may mean connecting a producer with a verified technician. A project with available equipment. A creator with a distribution pathway. The connection is intentional and specific.',
     note: 'DigiSynq does not own the resources. It connects them.',
@@ -41,7 +41,7 @@ const SYNQ_STAGES = [
   {
     id: 'coordinate',
     number: '05',
-    label: 'COORDINATE',
+    label: 'Coordinate',
     headline: 'Keep the system working together.',
     description: 'Connecting is not enough. Coordination ensures that the connected participants work together effectively — timing, communication, accountability, and follow-through. This is often where fragmentation re-emerges if not actively managed.',
     note: 'Coordination is an ongoing process, not a single moment.',
@@ -50,7 +50,7 @@ const SYNQ_STAGES = [
   {
     id: 'execute',
     number: '06',
-    label: 'EXECUTE',
+    label: 'Execute',
     headline: 'The work gets done.',
     description: 'The participants do their work. The DigiSynq coordination layer supports execution without replacing the people doing it. The goal is not to become the executor of everything. The goal is to make execution less difficult.',
     note: 'DigiSynq supports the team. It does not replace the team.',
@@ -59,7 +59,7 @@ const SYNQ_STAGES = [
   {
     id: 'measure',
     number: '07',
-    label: 'MEASURE',
+    label: 'Measure',
     headline: 'Understand what happened.',
     description: 'After execution, measure the outcome against the original problem. Did the gap get addressed? What worked? What did not? What took longer than expected? What cost more? What created unexpected value? Measurement creates the data that improves future coordination.',
     note: 'Without measurement, learning does not happen systematically.',
@@ -68,7 +68,7 @@ const SYNQ_STAGES = [
   {
     id: 'learn',
     number: '08',
-    label: 'LEARN',
+    label: 'Learn',
     headline: 'Build better coordination over time.',
     description: 'Every problem solved, every gap found, every SYNQ completed adds to a growing body of knowledge. Over time, this creates pattern recognition — the ability to identify gaps faster, connect the right participants more accurately, and coordinate with less friction.',
     note: 'The long-term asset is knowledge and process.',
@@ -77,10 +77,10 @@ const SYNQ_STAGES = [
   {
     id: 'resilient',
     number: '09',
-    label: 'RE-SYNQ',
+    label: 'Re-synq',
     headline: 'The ecosystem keeps changing. The loop continues.',
     description: 'Cinema is not static. Projects end and new ones begin. Participants grow, change, and move. Markets shift. Technology evolves. The loop continues — new problems arise, new gaps appear, and the coordination process begins again, informed by everything learned before.',
-    note: 'This is the DIGISYNQ operating loop.',
+    note: 'This is the DigiSynq operating loop.',
     icon: '↺',
   },
 ];

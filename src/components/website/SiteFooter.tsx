@@ -6,18 +6,18 @@ import { OPERATING_PRINCIPLES } from '../../data/website/core_data';
 const FOOTER_LINKS = {
   'Navigate': [
     { href: '/', label: 'Home' },
-    { href: '/the-synq', label: 'The SYNQ' },
-    { href: '/how-it-works', label: 'How It Works' },
+    { href: '/the-synq', label: 'The synq' },
+    { href: '/how-it-works', label: 'How it works' },
     { href: '/ecosystem', label: 'Ecosystem' },
   ],
   'Explore': [
     { href: '/capabilities', label: 'Capabilities' },
-    { href: '/use-cases', label: 'Use Cases' },
+    { href: '/use-cases', label: 'Use cases' },
     { href: '/workshops', label: 'Workshops' },
     { href: '/about', label: 'About' },
   ],
   'Connect': [
-    { href: '/start', label: 'Start a SYNQ' },
+    { href: '/start', label: 'Start a synq' },
     { href: '/insights', label: 'Insights' },
   ],
 };
@@ -43,8 +43,8 @@ export function SiteFooter() {
                 <span className="text-[#5CE1E6] font-mono font-black text-sm absolute">D</span>
               </div>
               <div>
-                <div className="font-mono text-sm font-black tracking-[0.14em] text-white">DIGISYNQ</div>
-                <div className="font-mono text-[9px] tracking-[0.14em] text-white/30 uppercase">Cinema Synchronization</div>
+                <div className="text-sm font-bold text-white tracking-tight">DigiSynq</div>
+                <div className="text-[10px] text-white/40">Cinema synchronization</div>
               </div>
             </Link>
 
@@ -53,23 +53,23 @@ export function SiteFooter() {
             </p>
 
             {/* Brand statement */}
-            <div className="font-mono text-xs text-white/25 tracking-[0.1em] uppercase leading-relaxed border-l-2 border-[#5CE1E6]/20 pl-4">
-              FIND THE GAP.<br />
-              SYNQ THE SYSTEM.<br />
-              CREATE VALUE.
+            <div className="text-xs text-white/40 leading-relaxed border-l-2 border-[#5CE1E6]/30 pl-4 italic">
+              Find the gap.<br />
+              Synq the system.<br />
+              Create value.
             </div>
           </div>
 
           {/* Navigation columns */}
           {Object.entries(FOOTER_LINKS).map(([group, links]) => (
             <div key={group}>
-              <div className="label-mono text-white/30 mb-4">{group}</div>
+              <div className="text-xs font-semibold text-white/40 mb-4">{group}</div>
               <nav className="flex flex-col gap-2.5">
                 {links.map((link) => (
                   <Link
                     key={link.href}
                     to={link.href}
-                    className="text-sm text-white/50 hover:text-[#5CE1E6] transition-colors"
+                    className="text-sm text-white/60 hover:text-[#5CE1E6] transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -84,7 +84,7 @@ export function SiteFooter() {
           <div className="flex items-center gap-3 flex-wrap">
             {OPERATING_PRINCIPLES.map((p, i) => (
               <React.Fragment key={p.id}>
-                <span className="label-mono text-white/20 text-[10px]">{p.label}</span>
+                <span className="text-white/30 text-xs">{p.label}</span>
                 {i < OPERATING_PRINCIPLES.length - 1 && (
                   <span className="text-white/10">·</span>
                 )}
@@ -95,25 +95,15 @@ export function SiteFooter() {
 
         {/* Bottom bar */}
         <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <p className="text-[11px] text-white/25 font-mono">
-            © {new Date().getFullYear()} DIGISYNQ. All rights reserved.
+          <p className="text-xs text-white/30">
+            © {new Date().getFullYear()} DigiSynq. All rights reserved.
           </p>
-          <p className="text-[11px] text-white/20 font-mono">
-            Asset-light. Cinema-native. Problem-first.
-          </p>
-        </div>
-      </div>
 
-      {/* CTA bar */}
-      <div className="bg-[#090B14] border-t border-white/[0.05] py-5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-white/60 font-mono tracking-wide">
-            Ready to find the gap and synq the system?
-          </p>
-          <Link to="/start" className="btn-primary text-[11px] px-5 py-2.5" id="footer-start-synq-cta">
-            START A SYNQ
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </Link>
+          <div className="flex items-center gap-6">
+            <span className="text-xs text-white/30">
+              Not an agency. Not a production house. A synchronization layer.
+            </span>
+          </div>
         </div>
       </div>
     </footer>

@@ -28,7 +28,7 @@ export interface SynqPath {
 export const PROBLEM_CATEGORIES: ProblemCategory[] = [
   {
     id: 'production',
-    label: 'PRODUCTION',
+    label: 'Production',
     icon: '🎬',
     description: 'Coordinating a film or content project — crew, schedules, resources, workflows.',
     sub_questions: [
@@ -55,15 +55,15 @@ export const PROBLEM_CATEGORIES: ProblemCategory[] = [
       {
         label: 'Production Coordination SYNQ',
         description: 'Map your project requirements, identify gaps, and connect with the right resources.',
-        steps: ['MAP project scope', 'IDENTIFY resource gaps', 'CONNECT verified participants', 'COORDINATE execution', 'MEASURE outcomes'],
+        steps: ['Map project scope', 'Identify resource gaps', 'Connect verified participants', 'Coordinate execution', 'Measure outcomes'],
         relevant_capabilities: ['Production Coordination', 'Resource Mapping', 'Talent Matching'],
-        cta: 'Start Production SYNQ',
+        cta: 'Start production synq',
       },
     ],
   },
   {
     id: 'people',
-    label: 'PEOPLE',
+    label: 'People',
     icon: '👤',
     description: 'Finding or being found — crew, technicians, specialists, collaborators.',
     sub_questions: [
@@ -90,15 +90,15 @@ export const PROBLEM_CATEGORIES: ProblemCategory[] = [
       {
         label: 'Talent Connection SYNQ',
         description: 'Profile your need, discover the right people, and coordinate engagement.',
-        steps: ['PROFILE requirement', 'DISCOVER candidates', 'ASSESS fit', 'CONNECT directly', 'COORDINATE engagement'],
+        steps: ['Profile requirement', 'Discover candidates', 'Assess fit', 'Connect directly', 'Coordinate engagement'],
         relevant_capabilities: ['Talent Matching', 'Skill Profiling', 'Opportunity Coordination'],
-        cta: 'Start People SYNQ',
+        cta: 'Start people synq',
       },
     ],
   },
   {
     id: 'skills',
-    label: 'SKILLS',
+    label: 'Skills',
     icon: '🧠',
     description: 'Developing, finding, or cross-leveraging specific capabilities.',
     sub_questions: [
@@ -119,15 +119,15 @@ export const PROBLEM_CATEGORIES: ProblemCategory[] = [
       {
         label: 'Skills Development SYNQ',
         description: 'Assess current skills, identify gaps, and build a development pathway.',
-        steps: ['ASSESS current capability', 'IDENTIFY gaps', 'DESIGN development path', 'CONNECT to workshops & resources', 'APPLY & iterate'],
+        steps: ['Assess current capability', 'Identify gaps', 'Design development path', 'Connect to workshops & resources', 'Apply & iterate'],
         relevant_capabilities: ['Skill Assessment', 'Workshops', 'Talent Development'],
-        cta: 'Start Skills SYNQ',
+        cta: 'Start skills synq',
       },
     ],
   },
   {
     id: 'marketing',
-    label: 'MARKETING',
+    label: 'Marketing',
     icon: '📣',
     description: 'Connecting a project with audiences through marketing and media.',
     sub_questions: [
@@ -148,15 +148,15 @@ export const PROBLEM_CATEGORIES: ProblemCategory[] = [
       {
         label: 'Marketing Coordination SYNQ',
         description: 'Map your audience, find the right partners, and coordinate a connected promotional approach.',
-        steps: ['MAP audience', 'IDENTIFY partners', 'COORDINATE channels', 'ACTIVATE campaign', 'MEASURE performance'],
+        steps: ['Map audience', 'Identify partners', 'Coordinate channels', 'Activate campaign', 'Measure performance'],
         relevant_capabilities: ['Marketing Coordination', 'Media Partnership', 'Creator Matching', 'Analytics'],
-        cta: 'Start Marketing SYNQ',
+        cta: 'Start marketing synq',
       },
     ],
   },
   {
     id: 'technology',
-    label: 'TECHNOLOGY',
+    label: 'Technology',
     icon: '⚙️',
     description: 'Finding, integrating, or leveraging technology for filmmaking.',
     sub_questions: [
@@ -171,15 +171,15 @@ export const PROBLEM_CATEGORIES: ProblemCategory[] = [
       {
         label: 'Technology SYNQ',
         description: 'Map your technology requirements and connect with the right partners.',
-        steps: ['MAP need', 'EVALUATE options', 'CONNECT providers', 'PILOT integration', 'SCALE'],
+        steps: ['Map need', 'Evaluate options', 'Connect providers', 'Pilot integration', 'Scale'],
         relevant_capabilities: ['Technology Matching', 'Pilot Coordination'],
-        cta: 'Start Technology SYNQ',
+        cta: 'Start technology synq',
       },
     ],
   },
   {
     id: 'content',
-    label: 'CONTENT',
+    label: 'Content',
     icon: '🎞️',
     description: 'Creating, distributing, or monetizing content.',
     sub_questions: [
@@ -200,15 +200,15 @@ export const PROBLEM_CATEGORIES: ProblemCategory[] = [
       {
         label: 'Content SYNQ',
         description: 'Map your content needs from creation to audience.',
-        steps: ['DEFINE content', 'MAP distribution options', 'CONNECT partners', 'REACH audience', 'MONETIZE'],
+        steps: ['Define content', 'Map distribution options', 'Connect partners', 'Reach audience', 'Monetize'],
         relevant_capabilities: ['Content Strategy', 'Distribution Coordination', 'Rights Education'],
-        cta: 'Start Content SYNQ',
+        cta: 'Start content synq',
       },
     ],
   },
   {
     id: 'rights',
-    label: 'RIGHTS',
+    label: 'Rights',
     icon: '🔐',
     description: 'Understanding, structuring, or monetizing content rights.',
     sub_questions: [
@@ -223,15 +223,15 @@ export const PROBLEM_CATEGORIES: ProblemCategory[] = [
       {
         label: 'Rights Education SYNQ',
         description: 'Understand your rights landscape and connect with the right advisors.',
-        steps: ['MAP rights structure', 'EDUCATE on options', 'CONNECT advisors', 'DEFINE strategy', 'EXECUTE with qualified legal support'],
+        steps: ['Map rights structure', 'Educate on options', 'Connect advisors', 'Define strategy', 'Execute with qualified legal support'],
         relevant_capabilities: ['Rights Education', 'Legal Referral', 'Monetization Planning'],
-        cta: 'Start Rights SYNQ',
+        cta: 'Start rights synq',
       },
     ],
   },
   {
     id: 'distribution',
-    label: 'DISTRIBUTION',
+    label: 'Distribution',
     icon: '📡',
     description: 'Getting content to the right audiences and platforms.',
     sub_questions: [
@@ -246,15 +246,15 @@ export const PROBLEM_CATEGORIES: ProblemCategory[] = [
       {
         label: 'Distribution SYNQ',
         description: 'Map your distribution options and connect with the right partners.',
-        steps: ['MAP content & audience', 'IDENTIFY distribution options', 'CONNECT partners', 'COORDINATE rollout', 'MEASURE reach'],
+        steps: ['Map content & audience', 'Identify distribution options', 'Connect partners', 'Coordinate rollout', 'Measure reach'],
         relevant_capabilities: ['Distribution Coordination', 'Partner Matching', 'Rights Education'],
-        cta: 'Start Distribution SYNQ',
+        cta: 'Start distribution synq',
       },
     ],
   },
   {
     id: 'budget',
-    label: 'BUDGET',
+    label: 'Budget',
     icon: '💰',
     description: 'Understanding, optimizing, or finding resources for a project budget.',
     sub_questions: [
@@ -269,15 +269,15 @@ export const PROBLEM_CATEGORIES: ProblemCategory[] = [
       {
         label: 'Budget Coordination SYNQ',
         description: 'Map your budget structure and identify optimization and connection opportunities.',
-        steps: ['MAP current budget', 'IDENTIFY gaps & leakage', 'EXPLORE options', 'CONNECT resources', 'MEASURE impact'],
+        steps: ['Map current budget', 'Identify gaps & leakage', 'Explore options', 'Connect resources', 'Measure impact'],
         relevant_capabilities: ['Budget Mapping', 'Resource Optimization', 'Partnership Coordination'],
-        cta: 'Start Budget SYNQ',
+        cta: 'Start budget synq',
       },
     ],
   },
   {
     id: 'audience',
-    label: 'AUDIENCE',
+    label: 'Audience',
     icon: '👥',
     description: 'Understanding, reaching, and engaging the right audiences.',
     sub_questions: [
@@ -292,15 +292,15 @@ export const PROBLEM_CATEGORIES: ProblemCategory[] = [
       {
         label: 'Audience SYNQ',
         description: 'Map your target audience and build the right connections.',
-        steps: ['DEFINE audience', 'MAP channels', 'CONNECT creators & media', 'ENGAGE', 'MEASURE'],
+        steps: ['Define audience', 'Map channels', 'Connect creators & media', 'Engage', 'Measure'],
         relevant_capabilities: ['Audience Analytics', 'Creator Matching', 'Media Coordination'],
-        cta: 'Start Audience SYNQ',
+        cta: 'Start audience synq',
       },
     ],
   },
   {
     id: 'monetization',
-    label: 'MONETIZATION',
+    label: 'Monetization',
     icon: '📈',
     description: 'Identifying and creating revenue opportunities from content, rights, or audiences.',
     sub_questions: [
@@ -315,15 +315,15 @@ export const PROBLEM_CATEGORIES: ProblemCategory[] = [
       {
         label: 'Monetization SYNQ',
         description: 'Identify value opportunities and build pathways to revenue.',
-        steps: ['MAP revenue opportunities', 'ASSESS rights & assets', 'CONNECT partners', 'STRUCTURE agreements', 'EXECUTE & MEASURE'],
+        steps: ['Map revenue opportunities', 'Assess rights & assets', 'Connect partners', 'Structure agreements', 'Execute & measure'],
         relevant_capabilities: ['Rights Education', 'Partnership Coordination', 'Revenue Planning'],
-        cta: 'Start Monetization SYNQ',
+        cta: 'Start monetization synq',
       },
     ],
   },
   {
     id: 'media',
-    label: 'MEDIA',
+    label: 'Media',
     icon: '📰',
     description: 'Connecting projects with media partners, press, and editorial.',
     sub_questions: [
@@ -338,15 +338,15 @@ export const PROBLEM_CATEGORIES: ProblemCategory[] = [
       {
         label: 'Media SYNQ',
         description: 'Identify the right media connections for your project.',
-        steps: ['MAP project & story', 'IDENTIFY media partners', 'COORDINATE access', 'COLLABORATE', 'MEASURE coverage'],
+        steps: ['Map project & story', 'Identify media partners', 'Coordinate access', 'Collaborate', 'Measure coverage'],
         relevant_capabilities: ['Media Coordination', 'PR Coordination', 'Partnership Matching'],
-        cta: 'Start Media SYNQ',
+        cta: 'Start media synq',
       },
     ],
   },
   {
     id: 'other',
-    label: 'OTHER',
+    label: 'Other',
     icon: '🔍',
     description: 'Something else — describe your challenge and we will map it.',
     sub_questions: [
@@ -361,9 +361,9 @@ export const PROBLEM_CATEGORIES: ProblemCategory[] = [
       {
         label: 'Open SYNQ',
         description: 'Describe your challenge and we will work to understand and map it.',
-        steps: ['DESCRIBE the challenge', 'EXPLORE dependencies', 'MAP the system', 'IDENTIFY gaps', 'BUILD a SYNQ path together'],
+        steps: ['Describe the challenge', 'Explore dependencies', 'Map the system', 'Identify gaps', 'Build a synq path together'],
         relevant_capabilities: ['Problem Mapping', 'Ecosystem Analysis', 'Coordination Design'],
-        cta: 'Start a Conversation',
+        cta: 'Start a conversation',
       },
     ],
   },

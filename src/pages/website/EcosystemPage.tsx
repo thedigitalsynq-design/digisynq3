@@ -18,7 +18,7 @@ export function EcosystemPage() {
       <section className="section-padding bg-[#03040A]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="mb-4">
-            <div className="section-label">THE ECOSYSTEM</div>
+            <div className="section-label">The ecosystem</div>
           </motion.div>
           <motion.h1
             {...fadeUp}
@@ -49,7 +49,7 @@ export function EcosystemPage() {
       <section className="section-padding bg-[#03040A] border-t border-white/[0.04]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="text-center mb-12">
-            <div className="section-label">THE COORDINATION PRINCIPLE</div>
+            <div className="section-label">The coordination principle</div>
             <h2 className="text-2xl sm:text-3xl font-denton font-black text-white mb-4">
               DIGISYNQ sits across the ecosystem.
             </h2>
@@ -92,7 +92,7 @@ export function EcosystemPage() {
               Start a SYNQ from your perspective.
             </p>
             <Link to="/start" className="btn-primary inline-flex">
-              START A SYNQ <ArrowRight className="w-4 h-4" />
+              Start a synq <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
         </div>

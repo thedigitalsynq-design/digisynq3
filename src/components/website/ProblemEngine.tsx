@@ -76,7 +76,7 @@ export function ProblemEngine({ compact = false }: ProblemEngineProps) {
         <div className="space-y-6">
           {!compact && (
             <div className="text-center">
-              <div className="label-mono text-[#5CE1E6] mb-3">THE DIGISYNQ PROBLEM ENGINE</div>
+              <div className="label-mono text-[#5CE1E6] mb-3">The DigiSynq problem engine</div>
               <h2 className="text-2xl sm:text-3xl font-denton font-black text-white mb-2">
                 Start with your problem.
               </h2>
@@ -190,7 +190,7 @@ export function ProblemEngine({ compact = false }: ProblemEngineProps) {
                     selectedOptions.length === 0 ? 'opacity-40 cursor-not-allowed' : ''
                   }`}
                 >
-                  {currentQuestionIndex < selectedCategory.sub_questions.length - 1 ? 'Next' : 'Build SYNQ Path'}
+                  {currentQuestionIndex < selectedCategory.sub_questions.length - 1 ? 'Next' : 'Build synq path'}
                   <ChevronRight className="w-4 h-4" />
                 </button>
               </div>
@@ -205,7 +205,7 @@ export function ProblemEngine({ compact = false }: ProblemEngineProps) {
           {/* Header */}
           <div className="flex items-center justify-between">
             <div className="label-mono text-[#5CE1E6]">
-              {selectedCategory.icon} SYNQ PATH IDENTIFIED
+              {selectedCategory.icon} Synq path identified
             </div>
             <button onClick={reset} className="btn-ghost text-[10px] gap-1.5">
               <RotateCcw className="w-3 h-3" />
@@ -216,7 +216,7 @@ export function ProblemEngine({ compact = false }: ProblemEngineProps) {
           {/* SYNQ Path Card */}
           <div className="synq-card synq-card-active p-6 sm:p-8 space-y-6">
             <div>
-              <div className="label-mono text-white/40 mb-2">Recommended Approach</div>
+              <div className="label-mono text-white/40 mb-2">Recommended approach</div>
               <h3 className="text-xl sm:text-2xl font-denton font-black text-white mb-2">
                 {synqPath.label}
               </h3>
@@ -228,7 +228,7 @@ export function ProblemEngine({ compact = false }: ProblemEngineProps) {
             {/* Answers summary */}
             {answers.length > 0 && (
               <div className="bg-[#0E1120] rounded-xl p-4 space-y-2">
-                <div className="label-mono text-white/30 mb-3">Your Context</div>
+                <div className="label-mono text-white/30 mb-3">Your context</div>
                 {answers.map((a) => {
                   const q = selectedCategory.sub_questions.find(sq => sq.id === a.questionId);
                   return q ? (
@@ -243,7 +243,7 @@ export function ProblemEngine({ compact = false }: ProblemEngineProps) {
 
             {/* SYNQ Steps */}
             <div>
-              <div className="label-mono text-white/30 mb-3">The SYNQ Process</div>
+              <div className="label-mono text-white/30 mb-3">The synq process</div>
               <div className="flex flex-wrap items-center gap-2">
                 {synqPath.steps.map((s, i) => (
                   <React.Fragment key={s}>
@@ -260,7 +260,7 @@ export function ProblemEngine({ compact = false }: ProblemEngineProps) {
 
             {/* Relevant capabilities */}
             <div>
-              <div className="label-mono text-white/30 mb-3">Relevant Capabilities</div>
+              <div className="label-mono text-white/30 mb-3">Relevant capabilities</div>
               <div className="flex flex-wrap gap-2">
                 {synqPath.relevant_capabilities.map((cap) => (
                   <span
@@ -287,7 +287,7 @@ export function ProblemEngine({ compact = false }: ProblemEngineProps) {
                 to="/how-it-works"
                 className="btn-secondary justify-center"
               >
-                See How It Works
+                See how it works
               </Link>
             </div>
           </div>

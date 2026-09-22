@@ -16,7 +16,7 @@ export function InsightsPage() {
     <main className="bg-[#05060D] text-[#ECEEF5] pt-24">
       <section className="section-padding bg-[#03040A]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div {...fadeUp} className="mb-4"><div className="section-label">INSIGHTS</div></motion.div>
+          <motion.div {...fadeUp} className="mb-4"><div className="section-label">Insights</div></motion.div>
           <motion.h1 {...fadeUp} transition={{ duration: 0.7, delay: 0.05 }}
             className="text-4xl sm:text-5xl font-denton font-black text-white mb-6 leading-[0.95]">
             How we think<br /><span className="text-white/40">about the industry.</span>
@@ -46,7 +46,7 @@ export function InsightsPage() {
                 </div>
                 <h3 className="text-base font-denton font-black text-white leading-tight">{topic.title}</h3>
                 <div className="pt-3 border-t border-white/[0.04]">
-                  <span className="label-mono text-[9px] text-[#5CE1E6]/50">COMING SOON</span>
+                  <span className="label-mono text-[9px] text-[#5CE1E6]/50">Coming soon</span>
                 </div>
               </motion.div>
             ))}

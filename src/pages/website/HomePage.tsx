@@ -72,7 +72,7 @@ function FragmentVisual() {
           animate={{ opacity: 1, scale: 1 }}
           className="absolute inset-0 flex items-center justify-center pointer-events-none"
         >
-          <div className="font-mono text-xs text-[#5CE1E6]/50 tracking-[0.2em]">SYNCHRONIZED</div>
+          <div className="font-mono text-xs text-[#5CE1E6]/50 tracking-[0.2em]">Synchronized</div>
         </motion.div>
       )}
 
@@ -128,7 +128,7 @@ export function HomePage() {
           >
             <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-[#5CE1E6]/20 bg-[#5CE1E6]/05 backdrop-blur-sm">
               <span className="w-1.5 h-1.5 rounded-full bg-[#5CE1E6] animate-pulse" />
-              <span className="label-mono text-[10px] text-[#5CE1E6]">A NEW CATEGORY IN FILMMAKING</span>
+              <span className="label-mono text-[10px] text-[#5CE1E6]">A new category in filmmaking</span>
             </div>
           </motion.div>
 
@@ -170,7 +170,7 @@ export function HomePage() {
             className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-16"
           >
             <Link to="/start" className="btn-primary" id="hero-start-synq-cta">
-              START A SYNQ
+              Start a synq
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link to="/the-synq" className="btn-secondary">
@@ -213,7 +213,7 @@ export function HomePage() {
       <Section id="problem-engine" className="bg-[#03040A]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="text-center mb-12">
-            <div className="section-label">THE PROBLEM ENGINE</div>
+            <div className="section-label">The problem engine</div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-denton font-black text-white mb-4">
               Start with your problem.
             </h2>
@@ -238,7 +238,7 @@ export function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <motion.div {...fadeUp}>
-              <div className="section-label">BUILDING A NEW CATEGORY</div>
+              <div className="section-label">Building a new category</div>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-denton font-black text-white mb-6 leading-[0.95]">
                 Cinema<br />
                 <span className="text-white/40">Synchronization.</span>
@@ -291,7 +291,7 @@ export function HomePage() {
       <Section id="fragmentation" className="bg-[#03040A]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="text-center mb-16 max-w-3xl mx-auto">
-            <div className="section-label">THE CORE PROBLEM</div>
+            <div className="section-label">The core problem</div>
             <h2 className="text-3xl sm:text-5xl font-denton font-black text-white mb-6">
               Cinema has resources.<br />
               <span className="text-white/40">They remain fragmented.</span>
@@ -321,7 +321,7 @@ export function HomePage() {
               { gap: 'Content ↔ Rights', what: 'Films are made. Rights structures are unclear. Monetization is missed.' },
             ].map((item) => (
               <div key={item.gap} className="synq-card p-5 space-y-3">
-                <div className="label-mono text-[10px] text-[#5CE1E6]">GAP IDENTIFIED</div>
+                <div className="label-mono text-[10px] text-[#5CE1E6]">Gap identified</div>
                 <h3 className="text-sm font-denton font-black text-white">{item.gap}</h3>
                 <p className="text-xs text-white/50 leading-relaxed">{item.what}</p>
               </div>
@@ -344,7 +344,7 @@ export function HomePage() {
       <Section id="how-it-works-preview" className="bg-[#05060D]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="text-center mb-12">
-            <div className="section-label">THE SYNQ OPERATING LOOP</div>
+            <div className="section-label">The synq operating loop</div>
             <h2 className="text-3xl sm:text-4xl font-denton font-black text-white mb-4">
               How the system works.
             </h2>
@@ -373,7 +373,7 @@ export function HomePage() {
       <Section id="ecosystem-preview" className="bg-[#03040A]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="text-center mb-12">
-            <div className="section-label">THE ECOSYSTEM</div>
+            <div className="section-label">The ecosystem</div>
             <h2 className="text-3xl sm:text-4xl font-denton font-black text-white mb-4">
               Who DIGISYNQ connects.
             </h2>
@@ -470,7 +470,7 @@ export function HomePage() {
       <Section id="filmmaking-system" className="bg-[#03040A] overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="text-center mb-12">
-            <div className="section-label">CINEMA AS A SYSTEM</div>
+            <div className="section-label">Cinema as a system</div>
             <h2 className="text-3xl sm:text-4xl font-denton font-black text-white mb-4">
               DIGISYNQ syncs across every stage.
             </h2>
@@ -523,7 +523,7 @@ export function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div {...fadeUp}>
-              <div className="section-label">TECHNICIAN ECONOMY</div>
+              <div className="section-label">Technician economy</div>
               <h2 className="text-3xl sm:text-4xl font-denton font-black text-white mb-6 leading-tight">
                 One of the first<br />
                 <span className="text-[#E8B84B]">practical applications.</span>
@@ -566,7 +566,7 @@ export function HomePage() {
       <Section id="workshops-preview" className="bg-[#03040A]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="text-center mb-12">
-            <div className="section-label">WORKSHOPS</div>
+            <div className="section-label">Workshops</div>
             <h2 className="text-3xl sm:text-4xl font-denton font-black text-white mb-4">
               Learning connects to opportunity.
             </h2>
@@ -619,7 +619,7 @@ export function HomePage() {
       <Section id="business-model" className="bg-[#05060D]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="text-center mb-12">
-            <div className="section-label">BUSINESS MODEL</div>
+            <div className="section-label">Business model</div>
             <h2 className="text-3xl sm:text-4xl font-denton font-black text-white mb-4">
               Multiple revenue layers. Honest status.
             </h2>
@@ -658,7 +658,7 @@ export function HomePage() {
       <Section id="flywheel" className="bg-[#03040A]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div {...fadeUp} className="mb-12">
-            <div className="section-label">THE INTENDED FLYWHEEL</div>
+            <div className="section-label">The intended flywheel</div>
             <h2 className="text-3xl sm:text-4xl font-denton font-black text-white mb-4">
               The network gets more valuable<br />
               <span className="text-white/40">as the system learns.</span>
@@ -705,7 +705,7 @@ export function HomePage() {
       <Section id="principles" className="bg-[#05060D]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="text-center mb-12">
-            <div className="section-label">HOW WE OPERATE</div>
+            <div className="section-label">How we operate</div>
             <h2 className="text-3xl sm:text-4xl font-denton font-black text-white mb-4">
               Operating principles.
             </h2>
@@ -737,7 +737,7 @@ export function HomePage() {
       <Section id="cta" className="bg-[#03040A]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div {...fadeUp} className="space-y-6">
-            <div className="section-label">START HERE</div>
+            <div className="section-label">Start here</div>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-denton font-black text-white leading-[0.95]">
               Find the gap.<br />
               <span className="text-[#5CE1E6]">SYNQ the system.</span><br />
@@ -748,7 +748,7 @@ export function HomePage() {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
               <Link to="/start" className="btn-primary" id="homepage-final-cta">
-                START A SYNQ
+                Start a synq
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link to="/about" className="btn-secondary">

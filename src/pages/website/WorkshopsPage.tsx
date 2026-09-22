@@ -16,7 +16,7 @@ export function WorkshopsPage() {
     <main className="bg-[#05060D] text-[#ECEEF5] pt-24">
       <section className="section-padding bg-[#03040A]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div {...fadeUp} className="mb-4"><div className="section-label">WORKSHOPS</div></motion.div>
+          <motion.div {...fadeUp} className="mb-4"><div className="section-label">Workshops</div></motion.div>
           <motion.h1 {...fadeUp} transition={{ duration: 0.7, delay: 0.05 }}
             className="text-4xl sm:text-5xl font-denton font-black text-white mb-6 leading-[0.95]">
             Learning connects<br /><span className="text-white/40">to opportunity.</span>
@@ -32,7 +32,7 @@ export function WorkshopsPage() {
       <section className="section-padding bg-[#05060D] border-t border-white/[0.04]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="text-center mb-10">
-            <div className="section-label">THE WORKSHOP MODEL</div>
+            <div className="section-label">The workshop model</div>
             <h2 className="text-2xl sm:text-3xl font-denton font-black text-white mt-2">
               Every workshop follows a deployment model.
             </h2>
@@ -67,7 +67,7 @@ export function WorkshopsPage() {
       <section className="section-padding bg-[#03040A] border-t border-white/[0.04]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="mb-10">
-            <div className="section-label">WORKSHOP PROGRAMS</div>
+            <div className="section-label">Workshop programs</div>
             <h2 className="text-2xl font-denton font-black text-white mt-2">Current catalog.</h2>
           </motion.div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -87,7 +87,7 @@ export function WorkshopsPage() {
                 <h3 className="text-base font-denton font-black text-white">{w.title}</h3>
                 <p className="text-xs text-white/45 leading-relaxed">{w.description}</p>
                 <div className="pt-3 border-t border-white/[0.05]">
-                  <div className="label-mono text-[8px] text-white/25 mb-2">OUTCOME</div>
+                  <div className="label-mono text-[8px] text-white/25 mb-2">Outcome</div>
                   <p className="text-xs text-white/60 leading-relaxed">{w.outcome}</p>
                 </div>
                 <div className="flex gap-1.5 flex-wrap">
@@ -110,7 +110,7 @@ export function WorkshopsPage() {
             <h2 className="text-2xl font-denton font-black text-white">Interested in a workshop?</h2>
             <p className="text-sm text-white/45">Tell us what you're looking to develop and we'll find the right program.</p>
             <Link to="/start" className="btn-primary inline-flex">
-              START A SYNQ <ArrowRight className="w-4 h-4" />
+              Start a synq <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
         </div>

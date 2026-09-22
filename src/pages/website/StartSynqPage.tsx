@@ -80,7 +80,7 @@ export function StartSynqPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Build mailto with form data
-    const subject = encodeURIComponent(`START A SYNQ — ${form.who}: ${form.problem.slice(0, 60)}`);
+    const subject = encodeURIComponent(`Start a synq — ${form.who}: ${form.problem.slice(0, 60)}`);
     const body = encodeURIComponent(
       `WHO: ${form.who}\n\nPROJECT / CONTEXT: ${form.project}\n\nTHE PROBLEM: ${form.problem}\n\nRESOURCES AVAILABLE: ${form.resources}\n\nWHAT IS MISSING: ${form.missing}\n\nPROJECT STAGE: ${form.stage}\n\nSUPPORT NEEDED: ${form.support_type.join(', ')}\n\nADDITIONAL NOTES: ${form.notes}\n\n---\nName: ${form.name}\nEmail: ${form.email}`
     );
@@ -95,7 +95,7 @@ export function StartSynqPage() {
       <section className="section-padding bg-[#03040A]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div {...fadeUp} className="mb-4">
-            <div className="section-label">START A SYNQ</div>
+            <div className="section-label">Start a synq</div>
           </motion.div>
           <motion.h1
             {...fadeUp}
@@ -161,7 +161,7 @@ export function StartSynqPage() {
                 <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
                   <div>
                     <label className="label-mono text-[10px] text-white/40 block mb-4">
-                      STEP 01 — WHO ARE YOU?
+                      Step 01 — Who are you?
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                       {WHO_OPTIONS.map((opt) => (
@@ -184,7 +184,7 @@ export function StartSynqPage() {
 
                   <div>
                     <label className="label-mono text-[10px] text-white/40 block mb-2">
-                      PROJECT OR CONTEXT (optional)
+                      Project or context (optional)
                     </label>
                     <textarea
                       value={form.project}
@@ -212,7 +212,7 @@ export function StartSynqPage() {
                 <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
                   <div>
                     <label className="label-mono text-[10px] text-white/40 block mb-2">
-                      STEP 02 — WHAT IS THE PROBLEM? *
+                      Step 02 — What is the problem? *
                     </label>
                     <textarea
                       value={form.problem}
@@ -226,7 +226,7 @@ export function StartSynqPage() {
 
                   <div>
                     <label className="label-mono text-[10px] text-white/40 block mb-2">
-                      WHAT RESOURCES DO YOU ALREADY HAVE?
+                      What resources do you already have?
                     </label>
                     <textarea
                       value={form.resources}
@@ -239,7 +239,7 @@ export function StartSynqPage() {
 
                   <div>
                     <label className="label-mono text-[10px] text-white/40 block mb-2">
-                      WHAT IS CURRENTLY MISSING?
+                      What is currently missing?
                     </label>
                     <textarea
                       value={form.missing}
@@ -252,7 +252,7 @@ export function StartSynqPage() {
 
                   <div>
                     <label className="label-mono text-[10px] text-white/40 block mb-3">
-                      PROJECT STAGE
+                      Project stage
                     </label>
                     <div className="grid grid-cols-2 gap-2">
                       {STAGE_OPTIONS.map((opt) => (
@@ -275,7 +275,7 @@ export function StartSynqPage() {
 
                   <div>
                     <label className="label-mono text-[10px] text-white/40 block mb-3">
-                      WHAT TYPE OF SUPPORT ARE YOU LOOKING FOR? (select all that apply)
+                      What type of support are you looking for? (select all that apply)
                     </label>
                     <div className="flex flex-wrap gap-2">
                       {SUPPORT_OPTIONS.map((opt) => (
@@ -318,7 +318,7 @@ export function StartSynqPage() {
                 <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
                   <div>
                     <label className="label-mono text-[10px] text-white/40 block mb-2">
-                      STEP 03 — HOW DO WE REACH YOU?
+                      Step 03 — How do we reach you?
                     </label>
                     <p className="text-xs text-white/35 mb-4 font-mono">
                       We'll review your SYNQ request and come back to you to discuss.
@@ -353,21 +353,21 @@ export function StartSynqPage() {
 
                   {/* Summary */}
                   <div className="synq-card p-5 space-y-3">
-                    <div className="label-mono text-[9px] text-white/30">SYNQ SUMMARY</div>
+                    <div className="label-mono text-[9px] text-white/30">Synq summary</div>
                     <div className="space-y-1.5">
                       <div className="flex gap-2 text-xs">
-                        <span className="text-white/30 w-20 flex-shrink-0">WHO</span>
+                        <span className="text-white/30 w-20 flex-shrink-0">Who</span>
                         <span className="text-white/70">{form.who}</span>
                       </div>
                       {form.stage && (
                         <div className="flex gap-2 text-xs">
-                          <span className="text-white/30 w-20 flex-shrink-0">STAGE</span>
+                          <span className="text-white/30 w-20 flex-shrink-0">Stage</span>
                           <span className="text-white/70">{form.stage}</span>
                         </div>
                       )}
                       {form.support_type.length > 0 && (
                         <div className="flex gap-2 text-xs">
-                          <span className="text-white/30 w-20 flex-shrink-0">NEED</span>
+                          <span className="text-white/30 w-20 flex-shrink-0">Need</span>
                           <span className="text-white/70">{form.support_type.join(', ')}</span>
                         </div>
                       )}

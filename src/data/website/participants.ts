@@ -39,7 +39,7 @@ export const participants: Participant[] = [
       'Rights and distribution pathways',
     ],
     capabilities: ['Production Coordination', 'Talent Matching', 'Resource Mapping', 'Marketing Coordination'],
-    synq_path: 'IDENTIFY NEED → MAP RESOURCES → CONNECT PARTICIPANTS → COORDINATE EXECUTION → MEASURE',
+    synq_path: 'Identify need → Map resources → Connect participants → Coordinate execution → Measure',
   },
   {
     id: 'directors',
@@ -62,7 +62,7 @@ export const participants: Participant[] = [
       'Production communication workflows',
     ],
     capabilities: ['Talent Matching', 'Production Coordination', 'Skill Discovery'],
-    synq_path: 'IDENTIFY CREATIVE NEED → MATCH SKILLS → COORDINATE DEPARTMENTS → EXECUTE',
+    synq_path: 'Identify creative need → Match skills → Coordinate departments → Execute',
   },
   {
     id: 'technicians',
@@ -86,7 +86,7 @@ export const participants: Participant[] = [
       'Industry network access',
     ],
     capabilities: ['Skill Profiling', 'Opportunity Matching', 'Talent Development', 'Workshops'],
-    synq_path: 'PROFILE → ASSESS → DEVELOP → MATCH → DEPLOY → FEEDBACK → RECONNECT',
+    synq_path: 'Profile → Assess → Develop → Match → Deploy → Feedback → Reconnect',
   },
   {
     id: 'writers',
@@ -108,7 +108,7 @@ export const participants: Participant[] = [
       'Development ecosystem access',
     ],
     capabilities: ['Ecosystem Connections', 'Rights Education', 'Partnership Coordination'],
-    synq_path: 'DISCOVER → CONNECT → DEVELOP → PROTECT → PARTNER',
+    synq_path: 'Discover → Connect → Develop → Protect → Partner',
   },
   {
     id: 'studios',
@@ -131,7 +131,7 @@ export const participants: Participant[] = [
       'Production workflow coordination',
     ],
     capabilities: ['Resource Utilization', 'Production Coordination', 'Technology Matching'],
-    synq_path: 'MAP CAPACITY → FIND PROJECTS → COORDINATE RESOURCES → MEASURE UTILIZATION',
+    synq_path: 'Map capacity → Find projects → Coordinate resources → Measure utilization',
   },
   {
     id: 'brands',
@@ -154,7 +154,7 @@ export const participants: Participant[] = [
       'Media partnership opportunities',
     ],
     capabilities: ['Brand Partnerships', 'Creator Matching', 'Audience Analytics', 'Media Coordination'],
-    synq_path: 'DISCOVER → MATCH → ACTIVATE → COORDINATE → MEASURE',
+    synq_path: 'Discover → Match → Activate → Coordinate → Measure',
   },
   {
     id: 'creators',
@@ -177,7 +177,7 @@ export const participants: Participant[] = [
       'Monetization structures',
     ],
     capabilities: ['Creator Matching', 'Distribution Coordination', 'Monetization Education'],
-    synq_path: 'CONNECT → BUILD COLLABORATION → DISTRIBUTE → MONETIZE',
+    synq_path: 'Connect → Build collaboration → Distribute → Monetize',
   },
   {
     id: 'distributors',
@@ -200,7 +200,7 @@ export const participants: Participant[] = [
       'Rights and licensing clarity',
     ],
     capabilities: ['Content Matching', 'Marketing Coordination', 'Rights Education', 'Audience Analytics'],
-    synq_path: 'IDENTIFY CONTENT → COORDINATE MARKETING → DISTRIBUTE → MEASURE OUTCOMES',
+    synq_path: 'Identify content → Coordinate marketing → Distribute → Measure outcomes',
   },
   {
     id: 'media',
@@ -221,7 +221,7 @@ export const participants: Participant[] = [
       'Coordinated media engagement opportunities',
     ],
     capabilities: ['Media Coordination', 'Partnership Matching', 'Content Collaboration'],
-    synq_path: 'DISCOVER → COORDINATE ACCESS → COLLABORATE → MEASURE IMPACT',
+    synq_path: 'Discover → Coordinate access → Collaborate → Measure impact',
   },
   {
     id: 'technology',
@@ -242,7 +242,7 @@ export const participants: Participant[] = [
       'Ecosystem partnerships',
     ],
     capabilities: ['Technology Matching', 'Pilot Coordination', 'Ecosystem Integration'],
-    synq_path: 'MAP CAPABILITY → IDENTIFY NEED → CONNECT → PILOT → INTEGRATE',
+    synq_path: 'Map capability → Identify need → Connect → Pilot → Integrate',
   },
   {
     id: 'investors',
@@ -264,7 +264,7 @@ export const participants: Participant[] = [
       'Performance and outcome data',
     ],
     capabilities: ['Project Intelligence', 'Risk Mapping', 'Coordination Oversight'],
-    synq_path: 'DISCOVER → MAP RISK → COORDINATE → MONITOR → MEASURE',
+    synq_path: 'Discover → Map risk → Coordinate → Monitor → Measure',
   },
   {
     id: 'audiences',
@@ -285,7 +285,7 @@ export const participants: Participant[] = [
       'Distribution and access coordination',
     ],
     capabilities: ['Audience Connection', 'Content Distribution', 'Community Coordination'],
-    synq_path: 'DISCOVER CONTENT → ENGAGE → CONNECT TO COMMUNITY → SUSTAIN',
+    synq_path: 'Discover content → Engage → Connect to community → Sustain',
   },
 ];
 

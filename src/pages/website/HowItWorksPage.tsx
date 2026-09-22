@@ -19,7 +19,7 @@ export function HowItWorksPage() {
       <section className="section-padding bg-[#03040A]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="mb-4">
-            <div className="section-label">THE OPERATING MODEL</div>
+            <div className="section-label">The operating model</div>
           </motion.div>
           <motion.h1
             {...fadeUp}
@@ -43,7 +43,7 @@ export function HowItWorksPage() {
       <section className="section-padding bg-[#05060D] border-t border-white/[0.04]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="text-center mb-12">
-            <div className="section-label">THE BUSINESS EQUATION</div>
+            <div className="section-label">The business equation</div>
             <h2 className="text-2xl sm:text-3xl font-denton font-black text-white mb-4">
               Every SYNQ follows the same logic.
             </h2>
@@ -86,7 +86,7 @@ export function HowItWorksPage() {
       <section className="section-padding bg-[#03040A] border-t border-white/[0.04]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="text-center mb-12">
-            <div className="section-label">THE SYNQ LOOP</div>
+            <div className="section-label">The synq loop</div>
             <h2 className="text-2xl sm:text-3xl font-denton font-black text-white mb-4">
               The operating loop, stage by stage.
             </h2>
@@ -103,7 +103,7 @@ export function HowItWorksPage() {
       <section className="section-padding bg-[#05060D] border-t border-white/[0.04]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="text-center mb-12">
-            <div className="section-label">IMPORTANT CLARITY</div>
+            <div className="section-label">Important clarity</div>
             <h2 className="text-2xl sm:text-3xl font-denton font-black text-white mb-4">
               What DIGISYNQ does <span className="text-white/40">NOT</span> do.
             </h2>
@@ -144,7 +144,7 @@ export function HowItWorksPage() {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <Link to="/start" className="btn-primary">
-                START A SYNQ <ArrowRight className="w-4 h-4" />
+                Start a synq <ArrowRight className="w-4 h-4" />
               </Link>
               <Link to="/ecosystem" className="btn-secondary">
                 Explore the ecosystem

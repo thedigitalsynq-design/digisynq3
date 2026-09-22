@@ -148,9 +148,9 @@ export function EcosystemMap({ onSelectParticipant, size = 'full' }: EcosystemMa
               stroke="rgba(92,225,230,0.2)"
               strokeWidth="0.75"
             />
-            <text x={CENTER} y={CENTER - 6} textAnchor="middle" fill="#5CE1E6" fontSize="9" fontFamily="monospace" fontWeight="700" letterSpacing="1.5">DIGISYNQ</text>
-            <text x={CENTER} y={CENTER + 7} textAnchor="middle" fill="rgba(255,255,255,0.35)" fontSize="7" fontFamily="monospace" letterSpacing="0.5">COORDINATION</text>
-            <text x={CENTER} y={CENTER + 17} textAnchor="middle" fill="rgba(255,255,255,0.35)" fontSize="7" fontFamily="monospace" letterSpacing="0.5">LAYER</text>
+            <text x={CENTER} y={CENTER - 6} textAnchor="middle" fill="#5CE1E6" fontSize="10" fontFamily="Google Sans Flex, sans-serif" fontWeight="700" letterSpacing="0.5">DigiSynq</text>
+            <text x={CENTER} y={CENTER + 7} textAnchor="middle" fill="rgba(255,255,255,0.45)" fontSize="8" fontFamily="Google Sans Flex, sans-serif">Coordination</text>
+            <text x={CENTER} y={CENTER + 18} textAnchor="middle" fill="rgba(255,255,255,0.45)" fontSize="8" fontFamily="Google Sans Flex, sans-serif">Layer</text>
             {/* Pulse ring */}
             <circle cx={CENTER} cy={CENTER} r={CENTER_RADIUS + 16} fill="none" stroke="#5CE1E6" strokeWidth="0.5" opacity="0.3">
               <animate attributeName="r" values={`${CENTER_RADIUS + 8};${CENTER_RADIUS + 24};${CENTER_RADIUS + 8}`} dur="3s" repeatCount="indefinite" />
@@ -188,8 +188,8 @@ export function EcosystemMap({ onSelectParticipant, size = 'full' }: EcosystemMa
                   opacity={dimmed ? 0.3 : 1}
                 />
                 <text y={-6} textAnchor="middle" fill={dimmed ? 'rgba(255,255,255,0.2)' : 'white'} fontSize="14" className="transition-all">{p.icon}</text>
-                <text y={8} textAnchor="middle" fill={active ? p.color : dimmed ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.7)'} fontSize="6.5" fontFamily="monospace" fontWeight="700" letterSpacing="0.5" className="transition-all">
-                  {p.name.toUpperCase()}
+                <text y={8} textAnchor="middle" fill={active ? p.color : dimmed ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.7)'} fontSize="7.5" fontFamily="Google Sans Flex, sans-serif" fontWeight="600" className="transition-all">
+                  {p.name}
                 </text>
                 {(active || hovered) && (
                   <circle r={NODE_RADIUS + 6} fill="none" stroke={p.color} strokeWidth="0.5" opacity="0.5">
@@ -239,7 +239,7 @@ export function EcosystemMap({ onSelectParticipant, size = 'full' }: EcosystemMa
 
             {/* What they need */}
             <div>
-              <div className="label-mono text-white/30 mb-3">What They Need</div>
+              <div className="label-mono text-white/30 mb-3">What they need</div>
               <ul className="space-y-2">
                 {activeParticipant.what_they_need.map((item) => (
                   <li key={item} className="flex items-start gap-2 text-sm text-white/60">
@@ -252,7 +252,7 @@ export function EcosystemMap({ onSelectParticipant, size = 'full' }: EcosystemMa
 
             {/* What DigiSynq connects */}
             <div>
-              <div className="label-mono mb-3" style={{ color: activeParticipant.color }}>How DigiSynq Connects</div>
+              <div className="label-mono mb-3" style={{ color: activeParticipant.color }}>How DigiSynq connects</div>
               <ul className="space-y-2">
                 {activeParticipant.what_digisynq_connects.map((item) => (
                   <li key={item} className="flex items-start gap-2 text-sm text-white/80">
@@ -265,16 +265,16 @@ export function EcosystemMap({ onSelectParticipant, size = 'full' }: EcosystemMa
 
             {/* SYNQ path */}
             <div className="bg-[#0E1120] rounded-xl p-4">
-              <div className="label-mono text-white/30 mb-2">SYNQ Path</div>
+              <div className="label-mono text-white/30 mb-2">Synq path</div>
               <p className="text-xs font-mono text-white/50 leading-relaxed">{activeParticipant.synq_path}</p>
             </div>
 
             <Link
               to="/start"
-              className="btn-secondary w-full justify-center text-[11px]"
+              className="btn-secondary w-full justify-center text-[12px]"
               style={{ borderColor: `${activeParticipant.color}30`, color: activeParticipant.color }}
             >
-              Start a {activeParticipant.name} SYNQ
+              Start a {activeParticipant.name} synq
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>

@@ -57,48 +57,24 @@
   --color-war-purple:     #BF5AF2;
   --color-synq-neon:      #00F5FF;
   --color-synq-violet:    #8B5CF6;
+
+  /* Font Families */
+  --font-sans: 'Google Sans Flex', sans-serif;
+  --font-mono: 'Google Sans Flex', monospace;
+  --font-denton: 'Google Sans Flex', sans-serif;
 }
 
-/* ── Denton Display Typeface ────────────────────────────── */
-@font-face {
-  font-family: 'denton';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url('/fonts/Denton-Light.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'denton';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/fonts/Denton-Regular.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'denton';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url('/fonts/Denton-Bold.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'denton';
-  font-style: normal;
-  font-weight: 800;
-  font-display: swap;
-  src: url('/fonts/Denton-ExtraBold.woff2') format('woff2');
-}
-
+/* ── Typeface: Google Sans Flex ───────────────────────────── */
 :root {
   color-scheme: dark;
-  --font-denton: 'denton', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+  --font-denton: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Google Sans Flex', monospace;
 }
 
 /* ── Base Styles ────────────────────────────────────────── */
 body {
-  font-family: var(--font-sans);
+  font-family: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background-color: #05060D;
   color: #ECEEF5;
   min-height: 100vh;
@@ -119,13 +95,18 @@ body {
   line-height: 0.95;
 }
 
-/* Mono labels */
+/* Mono labels (Sentence case) */
 .label-mono {
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+/* Enforce sentence case: neutralize uppercase utility */
+.uppercase {
+  text-transform: none !important;
 }
 
 /* ── Cinema Frame Aesthetic ─────────────────────────────── */
@@ -211,11 +192,11 @@ body {
   padding: 14px 28px;
   background: linear-gradient(135deg, #5CE1E6, #3BBFC4);
   color: #03040A;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: none;
   border-radius: 8px;
   border: none;
   cursor: pointer;
@@ -236,11 +217,11 @@ body {
   padding: 13px 27px;
   background: transparent;
   color: #ECEEF5;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: none;
   border-radius: 8px;
   border: 1px solid rgba(255,255,255,0.15);
   cursor: pointer;
@@ -259,11 +240,11 @@ body {
   padding: 8px 16px;
   background: transparent;
   color: rgba(236,238,245,0.6);
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: none;
   border-radius: 6px;
   border: 1px solid rgba(255,255,255,0.08);
   cursor: pointer;
@@ -280,7 +261,7 @@ body {
 .tag-pilot      { background: rgba(92,225,230,0.1);  color: #5CE1E6; border: 1px solid rgba(92,225,230,0.3); }
 .tag-planned    { background: rgba(245,158,11,0.1);  color: #F59E0B; border: 1px solid rgba(245,158,11,0.3); }
 .tag-experimental { background: rgba(139,92,246,0.1); color: #8B5CF6; border: 1px solid rgba(139,92,246,0.3); }
-.tag { padding: 2px 10px; border-radius: 100px; font-family: var(--font-mono); font-size: 0.625rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.tag { padding: 2px 10px; border-radius: 100px; font-family: var(--font-sans); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.02em; text-transform: none; }
 
 /* ── Section Layout ─────────────────────────────────────── */
 .section-padding {
@@ -295,11 +276,11 @@ body {
 }
 
 .section-label {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: none;
   color: #5CE1E6;
   margin-bottom: 1rem;
 }

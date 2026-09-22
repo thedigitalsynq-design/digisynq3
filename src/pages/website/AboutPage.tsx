@@ -19,7 +19,7 @@ export function AboutPage() {
       <section className="section-padding bg-[#03040A]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="mb-4">
-            <div className="section-label">ABOUT DIGISYNQ</div>
+            <div className="section-label">About DigiSynq</div>
           </motion.div>
           <motion.h1
             {...fadeUp}
@@ -44,7 +44,7 @@ export function AboutPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp}>
             <div className="synq-card p-8 sm:p-12 border border-[#5CE1E6]/15">
-              <div className="label-mono text-[9px] text-[#5CE1E6] mb-6">WORKING DEFINITION</div>
+              <div className="label-mono text-[9px] text-[#5CE1E6] mb-6">Working definition</div>
               <blockquote className="text-xl sm:text-2xl font-denton font-black text-white leading-snug mb-6">
                 "An asset-light cinema problem-solving company building a synchronization layer across the filmmaking ecosystem."
               </blockquote>
@@ -68,7 +68,7 @@ export function AboutPage() {
       <section className="section-padding bg-[#03040A] border-t border-white/[0.04]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="mb-10">
-            <div className="section-label">WHY IT EXISTS</div>
+            <div className="section-label">Why it exists</div>
             <h2 className="text-2xl sm:text-3xl font-denton font-black text-white mt-2">
               Do not build to look large. Build to think differently.
             </h2>
@@ -174,7 +174,7 @@ export function AboutPage() {
       <section className="section-padding bg-[#05060D] border-t border-white/[0.04]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="mb-8">
-            <div className="section-label">INSIGHTS</div>
+            <div className="section-label">Insights</div>
             <h2 className="text-2xl font-denton font-black text-white mt-2">
               How we think about the industry.
             </h2>
@@ -216,7 +216,7 @@ export function AboutPage() {
               Tell us about your problem. We will map it, find the gap, and identify a relevant path.
             </p>
             <Link to="/start" className="btn-primary inline-flex">
-              START A SYNQ <ArrowRight className="w-4 h-4" />
+              Start a synq <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
         </div>

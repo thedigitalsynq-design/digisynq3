@@ -19,7 +19,7 @@ export function TheSynqPage() {
       <section className="section-padding bg-[#03040A]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="mb-4">
-            <div className="section-label">THE SYNQ IDEA</div>
+            <div className="section-label">The synq idea</div>
           </motion.div>
           <motion.h1
             {...fadeUp}
@@ -43,7 +43,7 @@ export function TheSynqPage() {
       <section className="section-padding bg-[#05060D] border-t border-white/[0.04]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           <motion.div {...fadeUp} className="text-center mb-8">
-            <div className="section-label">WHAT FRAGMENTATION LOOKS LIKE</div>
+            <div className="section-label">What fragmentation looks like</div>
           </motion.div>
 
           {[
@@ -87,15 +87,15 @@ export function TheSynqPage() {
               className="synq-card p-5 grid grid-cols-1 sm:grid-cols-3 gap-4"
             >
               <div>
-                <div className="label-mono text-[9px] text-white/25 mb-1.5">REALITY</div>
+                <div className="label-mono text-[9px] text-white/25 mb-1.5">Reality</div>
                 <p className="text-sm text-white/70">{item.opening}</p>
               </div>
               <div>
-                <div className="label-mono text-[9px] text-white/25 mb-1.5">BUT ALSO</div>
+                <div className="label-mono text-[9px] text-white/25 mb-1.5">But also</div>
                 <p className="text-sm text-white/70">{item.consequence}</p>
               </div>
               <div>
-                <div className="label-mono text-[9px] text-[#EF4444]/60 mb-1.5">THE GAP</div>
+                <div className="label-mono text-[9px] text-[#EF4444]/60 mb-1.5">The gap</div>
                 <p className="text-sm text-[#EF4444]/70 font-medium">{item.gap}</p>
               </div>
             </motion.div>
@@ -107,7 +107,7 @@ export function TheSynqPage() {
       <section className="section-padding bg-[#03040A] border-t border-white/[0.04]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="text-center mb-8">
-            <div className="section-label">THE CATEGORY</div>
+            <div className="section-label">The category</div>
           </motion.div>
           <motion.div
             {...fadeUp}
@@ -136,7 +136,7 @@ export function TheSynqPage() {
       <section className="section-padding bg-[#05060D] border-t border-white/[0.04]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="text-center mb-10">
-            <div className="section-label">START WITH YOUR PROBLEM</div>
+            <div className="section-label">Start with your problem</div>
             <h2 className="text-2xl sm:text-3xl font-denton font-black text-white mb-2">
               What gap are you facing?
             </h2>

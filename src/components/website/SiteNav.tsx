@@ -4,11 +4,11 @@ import { Menu, X, ArrowUpRight } from 'lucide-react';
 
 const NAV_LINKS = [
   { href: '/', label: 'Home' },
-  { href: '/the-synq', label: 'The SYNQ' },
-  { href: '/how-it-works', label: 'How It Works' },
+  { href: '/the-synq', label: 'The synq' },
+  { href: '/how-it-works', label: 'How it works' },
   { href: '/ecosystem', label: 'Ecosystem' },
   { href: '/capabilities', label: 'Capabilities' },
-  { href: '/use-cases', label: 'Use Cases' },
+  { href: '/use-cases', label: 'Use cases' },
   { href: '/workshops', label: 'Workshops' },
   { href: '/about', label: 'About' },
 ];
@@ -60,11 +60,11 @@ export function SiteNav() {
               <span className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-[#5CE1E6] rounded-full" />
             </div>
             <div>
-              <div className="font-mono text-[13px] font-black tracking-[0.12em] text-white group-hover:text-[#5CE1E6] transition-colors">
-                DIGISYNQ
+              <div className="text-[14px] font-bold tracking-tight text-white group-hover:text-[#5CE1E6] transition-colors">
+                DigiSynq
               </div>
-              <div className="font-mono text-[9px] tracking-[0.14em] text-white/35 uppercase">
-                Cinema Synchronization
+              <div className="text-[10px] tracking-normal text-white/40">
+                Cinema synchronization
               </div>
             </div>
           </Link>
@@ -75,10 +75,10 @@ export function SiteNav() {
               <Link
                 key={link.href}
                 to={link.href}
-                className={`px-3.5 py-2 rounded-lg text-[12px] font-medium transition-all duration-150 ${
+                className={`px-3.5 py-2 rounded-lg text-[13px] font-medium transition-all duration-150 ${
                   isActive(link.href)
                     ? 'text-[#5CE1E6] bg-[#5CE1E6]/08'
-                    : 'text-white/55 hover:text-white hover:bg-white/[0.04]'
+                    : 'text-white/60 hover:text-white hover:bg-white/[0.04]'
                 }`}
                 aria-current={isActive(link.href) ? 'page' : undefined}
               >
@@ -91,10 +91,10 @@ export function SiteNav() {
           <div className="flex items-center gap-3">
             <Link
               to="/start"
-              className="hidden sm:flex btn-primary text-[11px] px-5 py-2.5"
+              className="hidden sm:flex btn-primary text-[12px] px-5 py-2.5"
               id="nav-start-synq-cta"
             >
-              START A SYNQ
+              Start a synq
               <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
 
@@ -134,10 +134,10 @@ export function SiteNav() {
             ))}
             <Link
               to="/start"
-              className="mt-2 btn-primary justify-center"
+              className="mt-2 btn-primary justify-center text-sm"
               id="mobile-start-synq-cta"
             >
-              START A SYNQ
+              Start a synq
               <ArrowUpRight className="w-4 h-4" />
             </Link>
           </nav>
