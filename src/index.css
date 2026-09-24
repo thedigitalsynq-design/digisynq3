@@ -14,7 +14,7 @@
 @theme {
   /* Background Layers */
   --color-synq-void:      #03040A;
-  --color-synq-bg:        #05060D;
+  --color-synq-bg:        #06130E;
   --color-synq-surface:   #090B14;
   --color-synq-surface-2: #0E1120;
   --color-synq-surface-3: #141828;
@@ -22,24 +22,36 @@
   /* Borders */
   --color-synq-border:       rgba(255,255,255,0.06);
   --color-synq-border-light: rgba(255,255,255,0.12);
-  --color-synq-border-active: rgba(92,225,230,0.35);
+  --color-synq-border-active: rgba(35, 178, 114,0.35);
 
   /* Text */
   --color-synq-text:       #ECEEF5;
   --color-synq-text-dim:   #9299A8;
   --color-synq-text-muted: #5A6170;
 
-  /* Brand Colors */
-  --color-synq-cyan:   #5CE1E6;
-  --color-synq-gold:   #E8B84B;
-  --color-synq-white:  #F5F6FA;
+  /* ── Jade Horizon Signature Palette ─────────────────── */
+  --color-jade-mint:     #52E3A4;
+  --color-jade-primary:  #23B272;
+  --color-jade-pine:     #16543D;
+  --color-jade-depth:    #0D281E;
+  --color-jade-void:     #06130E;
+  --color-jade-lime:     #D4F838;
+
+  /* Brand Colors aligned with Jade Horizon */
+  --color-synq-cyan:     #23B272;
+  --color-synq-mint:     #52E3A4;
+  --color-synq-pine:     #16543D;
+  --color-synq-depth:    #0D281E;
+  --color-synq-lime:     #D4F838;
+  --color-synq-gold:     #D4F838;
+  --color-synq-white:    #F5F6FA;
 
   /* Semantic Colors */
-  --color-synq-success: #22C55E;
-  --color-synq-warning: #F59E0B;
-  --color-synq-error:   #EF4444;
+  --color-synq-success: #23B272;
+  --color-synq-warning: #D4F838;
+  --color-synq-error:   #71717A;
 
-  /* Legacy war-room tokens (preserve for cinema matrix) */
+  /* Legacy war-room tokens aligned with Green, Black & White */
   --color-war-bg:         #07080D;
   --color-war-surface:    rgba(20, 22, 31, 0.72);
   --color-war-surface-2:  #14161f;
@@ -49,21 +61,21 @@
   --color-war-text:       #f5f5f7;
   --color-war-text-dim:   #a1a1a6;
   --color-war-text-muted: #6e6e73;
-  --color-war-accent:     #0A84FF;
-  --color-war-critical:   #FF453A;
-  --color-war-warning:    #FF9F0A;
-  --color-war-recovered:  #30D158;
-  --color-war-cyan:       #64D2FF;
-  --color-war-purple:     #BF5AF2;
-  --color-synq-neon:      #00F5FF;
-  --color-synq-violet:    #8B5CF6;
+  --color-war-accent:     #23B272;
+  --color-war-critical:   #71717A;
+  --color-war-warning:    #D4F838;
+  --color-war-recovered:  #52E3A4;
+  --color-war-cyan:       #D4F838;
+  --color-war-purple:     #23B272;
+  --color-synq-neon:      #B6F02A;
+  --color-synq-violet:    #52E3A4;
 
-  /* Apple canonical palette (used by Bento tones + charts) */
-  --color-apple-blue:   #2997ff;
-  --color-apple-cyan:   #64d2ff;
-  --color-apple-green:  #30d158;
-  --color-apple-purple: #bf5af2;
-  --color-apple-red:    #ff453a;
+  /* Cinema monochrome + green palette */
+  --color-apple-blue:   #23B272;
+  --color-apple-cyan:   #D4F838;
+  --color-apple-green:  #23B272;
+  --color-apple-purple: #52E3A4;
+  --color-apple-red:    #71717A;
   --color-apple-gray:   #f5f5f7;
   --color-apple-muted:  #86868b;
 
@@ -74,19 +86,29 @@
   --dur-medium: 350ms;
   --dur-slow: 600ms;
 
-  /* Font Families — Google Sans Flex everywhere */
-  --font-sans: 'Google Sans Flex', sans-serif;
-  --font-mono: 'Google Sans Flex', sans-serif;
-  --font-denton: 'Google Sans Flex', sans-serif;
-}
+  /* Font Families — Google Sans Flex + JetBrains Mono + Space Grotesk */
+  --font-sans: 'Google Sans Flex', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-denton: 'Space Grotesk', 'Google Sans Flex', sans-serif;
 
-/* ── Typeface: Google Sans Flex ─────────────────────────── */
-:root {
-  color-scheme: dark;
-  --font-denton: 'Google Sans Flex', sans-serif;
-  --font-sans: 'Google Sans Flex', sans-serif;
-  --font-mono: 'Google Sans Flex', sans-serif;
-  scroll-behavior: smooth;
+  /* Apple motion language — EXPANDED */
+  --ease-apple:      cubic-bezier(0.16, 1, 0.3, 1);      /* snappy decelerate */
+  --ease-spring:     cubic-bezier(0.34, 1.56, 0.64, 1);  /* gentle overshoot */
+  --ease-decelerate: cubic-bezier(0, 0, 0.2, 1);         /* smooth entry */
+  --ease-accelerate: cubic-bezier(0.4, 0, 1, 1);         /* exit */
+  --dur-instant: 120ms;
+  --dur-fast:    200ms;
+  --dur-medium:  380ms;
+  --dur-slow:    600ms;
+  --dur-lazy:    900ms;
+
+  /* Squircle radii */
+  --radius-xs:   10px;
+  --radius-sm:   14px;
+  --radius-md:   20px;
+  --radius-lg:   28px;
+  --radius-xl:   36px;
+  --radius-pill: 9999px;
 }
 
 /* ── Base Styles ────────────────────────────────────────── */
@@ -95,7 +117,7 @@ html {
 }
 body {
   font-family: 'Google Sans Flex', sans-serif;
-  background-color: #05060D;
+  background-color: #06130E;
   color: #ECEEF5;
   min-height: 100vh;
   overflow-x: hidden;
@@ -105,43 +127,109 @@ body {
   font-weight: 400;
 }
 
-/* ── Typography Utilities ───────────────────────────────── */
-.font-denton { font-family: 'Google Sans Flex', sans-serif; }
+/* ── Typography — Modular Scale (Google Sans Flex) ──────── */
+/*
+   Scale ratio ≈ 1.25 · Base 17px (1.0625rem)
+   ┌──────────────┬─────────────────────────────┬────────┬──────────────────────┐
+   │ Class        │ Size                        │ Weight │ Usage                │
+   ├──────────────┼─────────────────────────────┼────────┼──────────────────────┤
+   │ .t-display   │ clamp(3rem, 7vw, 5.5rem)    │ 800    │ Hero headline h1     │
+   │ .t-headline  │ clamp(2rem, 3.5vw, 3rem)    │ 700    │ Section heading h2   │
+   │ .t-title     │ clamp(1.25rem, 2vw, 1.625rem│ 700    │ Card / sub h3        │
+   │ .t-lead      │ 1.1875rem (19px)            │ 400    │ Hero subtext         │
+   │ .t-body      │ 1.0625rem (17px)            │ 400    │ Body copy            │
+   │ .t-caption   │ 0.9375rem (15px)            │ 400    │ Supporting text      │
+   │ .t-label     │ 0.8125rem (13px)            │ 600    │ Labels / eyebrows    │
+   │ .t-micro     │ 0.75rem (12px)              │ 600    │ Tags / badges / pills│
+   └──────────────┴─────────────────────────────┴────────┴──────────────────────┘
+*/
+
+.font-denton  { font-family: 'Google Sans Flex', sans-serif; }
 .font-mono-ui { font-family: 'Google Sans Flex', sans-serif; }
 
-/* Display headlines — Extra Bold (800) */
+/* ── Display — Hero h1 (Extra Bold) */
+.t-display,
 .headline-display {
   font-family: 'Google Sans Flex', sans-serif;
+  font-size: clamp(3rem, 7vw, 5.5rem);
   font-weight: 800;
-  letter-spacing: -0.025em;
-  line-height: 0.96;
+  line-height: 0.97;
+  letter-spacing: -0.035em;
 }
 
-/* Section headings — Bold (700) */
+/* ── Section Headline — h2 (Bold) */
+.t-headline,
 .headline-section {
   font-family: 'Google Sans Flex', sans-serif;
+  font-size: clamp(2rem, 3.5vw, 3rem);
   font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
 }
 
-/* Labels / eyebrows — Semi-bold (600) */
-.label-mono {
+/* ── Card/Sub Title — h3 (Bold) */
+.t-title {
   font-family: 'Google Sans Flex', sans-serif;
-  font-size: 0.75rem;
+  font-size: clamp(1.25rem, 2vw, 1.625rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+/* ── Lead paragraph — large subtext */
+.t-lead {
+  font-family: 'Google Sans Flex', sans-serif;
+  font-size: 1.1875rem;
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: -0.005em;
+}
+
+/* ── Body — standard paragraph */
+.t-body,
+.body-copy {
+  font-family: 'Google Sans Flex', sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+/* ── Caption — supporting / secondary text */
+.t-caption {
+  font-family: 'Google Sans Flex', sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* ── Label — eyebrows, section markers, UI labels */
+.t-label,
+.label-mono,
+.section-label-text {
+  font-family: 'Google Sans Flex', sans-serif;
+  font-size: 0.8125rem;
   font-weight: 600;
+  line-height: 1.4;
   letter-spacing: 0.025em;
   text-transform: none;
 }
 
-/* Body copy — Regular (400) */
-.body-copy {
+/* ── Micro — tags, badges, pills, step numbers */
+.t-micro {
   font-family: 'Google Sans Flex', sans-serif;
-  font-weight: 400;
-  line-height: 1.65;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
 }
 
-/* Enforce sentence case: neutralize uppercase utility */
+/* Backward-compat alias for .label-mono (still used in JSX) */
+.label-mono {
+  font-size: 0.8125rem;
+  letter-spacing: 0.025em;
+}
+
+/* Enforce sentence case everywhere */
 .uppercase {
   text-transform: none !important;
 }
@@ -160,10 +248,10 @@ body {
   width: 20px;
   height: 20px;
 }
-.frame-mark-tl { top: 0; left: 0; border-top: 1.5px solid rgba(92,225,230,0.4); border-left: 1.5px solid rgba(92,225,230,0.4); }
-.frame-mark-tr { top: 0; right: 0; border-top: 1.5px solid rgba(92,225,230,0.4); border-right: 1.5px solid rgba(92,225,230,0.4); }
-.frame-mark-bl { bottom: 0; left: 0; border-bottom: 1.5px solid rgba(92,225,230,0.4); border-left: 1.5px solid rgba(92,225,230,0.4); }
-.frame-mark-br { bottom: 0; right: 0; border-bottom: 1.5px solid rgba(92,225,230,0.4); border-right: 1.5px solid rgba(92,225,230,0.4); }
+.frame-mark-tl { top: 0; left: 0; border-top: 1.5px solid rgba(35, 178, 114,0.4); border-left: 1.5px solid rgba(35, 178, 114,0.4); }
+.frame-mark-tr { top: 0; right: 0; border-top: 1.5px solid rgba(35, 178, 114,0.4); border-right: 1.5px solid rgba(35, 178, 114,0.4); }
+.frame-mark-bl { bottom: 0; left: 0; border-bottom: 1.5px solid rgba(35, 178, 114,0.4); border-left: 1.5px solid rgba(35, 178, 114,0.4); }
+.frame-mark-br { bottom: 0; right: 0; border-bottom: 1.5px solid rgba(35, 178, 114,0.4); border-right: 1.5px solid rgba(35, 178, 114,0.4); }
 
 /* ── Network / System Aesthetic ─────────────────────────── */
 /* Node pulse animation */
@@ -213,99 +301,127 @@ body {
   will-change: transform;
 }
 .synq-card:hover {
-  border-color: rgba(92, 225, 230, 0.3);
+  border-color: rgba(35, 178, 114, 0.3);
   transform: translateY(-2px);
   box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .synq-card-active {
-  background: rgba(92, 225, 230, 0.06);
-  border-color: rgba(92, 225, 230, 0.35);
-  box-shadow: 0 0 30px rgba(92, 225, 230, 0.1);
+  background: rgba(35, 178, 114, 0.06);
+  border-color: rgba(35, 178, 114, 0.35);
+  box-shadow: 0 0 30px rgba(35, 178, 114, 0.1);
 }
 
 /* ── Apple Bento Grid System ────────────────────────────── */
 /* Canonical definitions live in the "Apple Bento Grid Design Tokens"
    section at the bottom of this file — do not duplicate here. */
 
-/* ── Button Components ──────────────────────────────────── */
+/* ── Buttons — Apple-grade glow + spring hover ────────────── */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 14px 28px;
-  background: linear-gradient(135deg, #5CE1E6, #3BBFC4);
-  color: #03040A;
+  padding: 15px 32px;
+  background: linear-gradient(135deg, #52E3A4 0%, #23B272 50%, #16543D 100%);
+  color: #020509;
   font-family: 'Google Sans Flex', sans-serif;
-  font-size: 0.8125rem;
+  font-size: 0.9375rem;
   font-weight: 700;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
   text-transform: none;
-  border-radius: 9999px;
+  border-radius: var(--radius-pill);
   border: none;
   cursor: pointer;
-  transition: transform var(--dur-fast) var(--ease-apple), box-shadow var(--dur-fast) var(--ease-apple), background-color var(--dur-fast) var(--ease-apple);
-  box-shadow: 0 0 20px rgba(92,225,230,0.2);
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform var(--dur-fast) var(--ease-spring),
+    box-shadow var(--dur-medium) var(--ease-apple);
+  box-shadow:
+    0 0 0 1px rgba(35, 178, 114,0.4),
+    0 4px 20px rgba(35, 178, 114,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.35);
+  will-change: transform, box-shadow;
+}
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, transparent 60%);
+  border-radius: inherit;
+  pointer-events: none;
 }
 .btn-primary:hover {
-  background: linear-gradient(135deg, #7AE9ED, #5CE1E6);
-  box-shadow: 0 0 32px rgba(92,225,230,0.35);
-  transform: translateY(-1px);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow:
+    0 0 0 1px rgba(35, 178, 114,0.6),
+    0 8px 40px rgba(35, 178, 114,0.45),
+    0 0 80px rgba(35, 178, 114,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.4);
 }
-.btn-primary:active { transform: translateY(0); }
+.btn-primary:active { transform: translateY(0) scale(0.99); }
 
 .btn-secondary {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 13px 27px;
-  background: transparent;
-  color: #ECEEF5;
+  padding: 14px 30px;
+  background: rgba(255,255,255,0.055);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: rgba(236,238,245,0.9);
   font-family: 'Google Sans Flex', sans-serif;
-  font-size: 0.8125rem;
+  font-size: 0.9375rem;
   font-weight: 600;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
   text-transform: none;
-  border-radius: 9999px;
-  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255,255,255,0.13);
   cursor: pointer;
-  transition: transform var(--dur-fast) var(--ease-apple), border-color var(--dur-fast) var(--ease-apple), background-color var(--dur-fast) var(--ease-apple), color var(--dur-fast) var(--ease-apple);
+  transition:
+    transform var(--dur-fast) var(--ease-spring),
+    border-color var(--dur-fast) var(--ease-apple),
+    background-color var(--dur-fast) var(--ease-apple),
+    box-shadow var(--dur-medium) var(--ease-apple);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
 }
 .btn-secondary:hover {
-  border-color: rgba(92,225,230,0.4);
-  color: #5CE1E6;
-  background: rgba(92,225,230,0.06);
+  background: rgba(255,255,255,0.09);
+  border-color: rgba(35, 178, 114,0.35);
+  color: #23B272;
+  transform: translateY(-1px);
+  box-shadow: 0 0 24px rgba(35, 178, 114,0.12), inset 0 1px 0 rgba(255,255,255,0.14);
 }
 
 .btn-ghost {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 16px;
+  padding: 9px 18px;
   background: transparent;
-  color: rgba(236,238,245,0.6);
+  color: rgba(236,238,245,0.55);
   font-family: 'Google Sans Flex', sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 600;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.005em;
   text-transform: none;
-  border-radius: 6px;
-  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255,255,255,0.09);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all var(--dur-fast) var(--ease-apple);
 }
 .btn-ghost:hover {
   color: #ECEEF5;
-  border-color: rgba(255,255,255,0.2);
-  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.05);
 }
 
 /* ── Status Tags ────────────────────────────────────────── */
-.tag-live       { background: rgba(34,197,94,0.12);  color: #22C55E; border: 1px solid rgba(34,197,94,0.3);  }
-.tag-pilot      { background: rgba(92,225,230,0.1);  color: #5CE1E6; border: 1px solid rgba(92,225,230,0.3); }
-.tag-planned    { background: rgba(245,158,11,0.1);  color: #F59E0B; border: 1px solid rgba(245,158,11,0.3); }
-.tag-experimental { background: rgba(139,92,246,0.1); color: #8B5CF6; border: 1px solid rgba(139,92,246,0.3); }
-.tag { padding: 2px 10px; border-radius: 100px; font-family: 'Google Sans Flex', sans-serif; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.01em; text-transform: none; }
+.tag-live       { background: rgba(35, 178, 114, 0.12);  color: #23B272; border: 1px solid rgba(35, 178, 114, 0.3);  }
+.tag-pilot      { background: rgba(82, 227, 164, 0.1);  color: #52E3A4; border: 1px solid rgba(82, 227, 164, 0.3); }
+.tag-planned    { background: rgba(212, 248, 56, 0.1);  color: #D4F838; border: 1px solid rgba(212, 248, 56, 0.3); }
+.tag-experimental { background: rgba(255, 255, 255, 0.1); color: #F5F6FA; border: 1px solid rgba(255, 255, 255, 0.25); }
+.tag { padding: 3px 11px; border-radius: 100px; font-family: 'Google Sans Flex', sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.01em; text-transform: none; }
 
 /* ── Section Layout ─────────────────────────────────────── */
 .section-padding {
@@ -321,11 +437,11 @@ body {
 
 .section-label {
   font-family: 'Google Sans Flex', sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.8125rem;      /* t-label = 13px */
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.035em;
   text-transform: none;
-  color: #5CE1E6;
+  color: #23B272;
   margin-bottom: 1rem;
 }
 
@@ -342,15 +458,15 @@ body {
   transition: all 0.2s ease;
 }
 .synq-step:hover, .synq-step.active {
-  background: rgba(92,225,230,0.06);
-  border-color: rgba(92,225,230,0.3);
+  background: rgba(35, 178, 114,0.06);
+  border-color: rgba(35, 178, 114,0.3);
 }
 .synq-step-number {
   font-family: 'Google Sans Flex', sans-serif;
   font-size: 0.625rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #5CE1E6;
+  color: #23B272;
 }
 .synq-step-title {
   font-family: 'Google Sans Flex', sans-serif;
@@ -375,13 +491,13 @@ body {
   text-align: center;
 }
 .problem-chip:hover {
-  border-color: rgba(92,225,230,0.25);
-  background: rgba(92,225,230,0.04);
+  border-color: rgba(35, 178, 114,0.25);
+  background: rgba(35, 178, 114,0.04);
 }
 .problem-chip.selected {
-  border-color: rgba(92,225,230,0.5);
-  background: rgba(92,225,230,0.08);
-  box-shadow: 0 0 16px rgba(92,225,230,0.1);
+  border-color: rgba(35, 178, 114,0.5);
+  background: rgba(35, 178, 114,0.08);
+  box-shadow: 0 0 16px rgba(35, 178, 114,0.1);
 }
 
 /* ── Ecosystem Map ──────────────────────────────────────── */
@@ -398,11 +514,11 @@ body {
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: rgba(5, 6, 13, 0.8); }
 ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 9999px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(92,225,230,0.3); }
+::-webkit-scrollbar-thumb:hover { background: rgba(35, 178, 114,0.3); }
 
 /* ── Focus / Accessibility ──────────────────────────────── */
 :focus-visible {
-  outline: 2px solid rgba(92,225,230,0.7);
+  outline: 2px solid rgba(35, 178, 114,0.7);
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -418,7 +534,7 @@ body {
 
 /* ── Gradient Utilities ─────────────────────────────────── */
 .gradient-synq {
-  background: linear-gradient(135deg, #5CE1E6 0%, #3B82F6 50%, #8B5CF6 100%);
+  background: linear-gradient(135deg, #23B272 0%, #3B82F6 50%, #8B5CF6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -435,8 +551,48 @@ body {
 .glow-cyan {
   position: absolute;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(92,225,230,0.06) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(35, 178, 114, 0.08) 0%, rgba(27, 127, 220, 0.04) 45%, transparent 70%);
   pointer-events: none;
+}
+
+/* ── Jade Horizon Signature Atmosphere ───────────────────── */
+.jade-horizon-bg {
+  position: relative;
+  background-color: #06130E;
+  background-image: 
+    radial-gradient(ellipse 85% 55% at 50% -5%, rgba(35, 178, 114, 0.16) 0%, rgba(22, 84, 61, 0.10) 35%, rgba(13, 40, 30, 0.04) 65%, transparent 100%),
+    linear-gradient(rgba(35, 178, 114, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(35, 178, 114, 0.035) 1px, transparent 1px);
+  background-size: 100% 100%, 48px 48px, 48px 48px;
+  background-position: center top, center top, center top;
+}
+
+.jade-card {
+  background: rgba(13, 40, 30, 0.35);
+  border: 1px solid rgba(35, 178, 114, 0.2);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px 0 rgba(3, 10, 7, 0.45);
+  transition: all var(--dur-medium) var(--ease-apple);
+}
+
+.jade-card:hover {
+  border-color: rgba(35, 178, 114, 0.45);
+  box-shadow: 0 12px 40px 0 rgba(35, 178, 114, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.jade-title-gradient {
+  background: linear-gradient(180deg, #FFFFFF 0%, #D1FAE5 45%, #23B272 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Jade Horizon Electric Lime Tag (matching 04 badge in design) */
+.badge-lime {
+  background: rgba(212, 248, 56, 0.12);
+  color: #D4F838;
+  border: 1px solid rgba(212, 248, 56, 0.35);
+  box-shadow: 0 0 12px rgba(212, 248, 56, 0.15);
 }
 
 /* ── Animation Keyframes ─────────────────────────────────── */
@@ -562,110 +718,72 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
 
-/* Tones used by <BentoCard tone=...> / <BentoStat> */
-.bento-card-neutral {
-  background: rgba(14, 16, 26, 0.72);
-}
-.bento-card-blue {
-  background:
-    radial-gradient(circle at top right, rgba(41, 151, 255, 0.14), transparent 70%),
-    rgba(14, 16, 26, 0.72);
-  border-color: rgba(41, 151, 255, 0.22);
-}
-.bento-card-green {
-  background:
-    radial-gradient(circle at top right, rgba(48, 209, 88, 0.12), transparent 70%),
-    rgba(14, 16, 26, 0.72);
-  border-color: rgba(48, 209, 88, 0.22);
-}
-.bento-card-purple {
-  background:
-    radial-gradient(circle at top right, rgba(191, 90, 242, 0.14), transparent 70%),
-    rgba(14, 16, 26, 0.72);
-  border-color: rgba(191, 90, 242, 0.22);
-}
-
-/* Soft outer glows — applied alongside tones */
-.bento-glow-blue:hover {
-  border-color: rgba(41, 151, 255, 0.45);
-  box-shadow: 0 20px 44px -15px rgba(41, 151, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.14);
-}
-.bento-glow-green:hover {
-  border-color: rgba(48, 209, 88, 0.45);
-  box-shadow: 0 20px 44px -15px rgba(48, 209, 88, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.14);
-}
-.bento-glow-purple:hover {
-  border-color: rgba(191, 90, 242, 0.45);
-  box-shadow: 0 20px 44px -15px rgba(191, 90, 242, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.14);
-}
-
-/* Von Restorff primary emphasis — exactly one per ledger */
-.bento-card-primary {
-  border-color: rgba(92, 225, 230, 0.35);
+/* Bento card tones — stronger ambient gradients */
+.bento-card-neutral  { /* inherits base */ }
+.bento-card-subtle   { background: linear-gradient(145deg, rgba(10,12,20,0.7), rgba(8,10,16,0.55)); border-color: rgba(255,255,255,0.05); }
+.bento-card-primary  {
+  border-color: rgba(35, 178, 114, 0.38);
   box-shadow:
-    0 20px 40px -15px rgba(0, 0, 0, 0.7),
-    0 0 24px rgba(92, 225, 230, 0.12),
-    inset 0 1px 0 rgba(92, 225, 230, 0.25);
+    0 2px 4px rgba(0,0,0,0.4),
+    0 16px 40px -12px rgba(0,0,0,0.7),
+    0 0 0 1px rgba(35, 178, 114,0.15),
+    0 0 40px rgba(35, 178, 114,0.12),
+    inset 0 1px 0 rgba(35, 178, 114,0.3),
+    inset 0 -1px 0 rgba(0,0,0,0.2);
 }
-
-.bento-card-subtle {
-  background: rgba(10, 12, 20, 0.55);
-  border-color: rgba(255, 255, 255, 0.05);
-}
-
 .bento-card-active {
-  border-color: rgba(92, 225, 230, 0.35);
+  border-color: rgba(35, 178, 114, 0.38);
   box-shadow:
-    0 20px 40px -15px rgba(0, 0, 0, 0.7),
-    0 0 20px rgba(92, 225, 230, 0.12),
-    inset 0 1px 0 rgba(92, 225, 230, 0.25);
+    0 0 0 1px rgba(35, 178, 114,0.15),
+    0 0 24px rgba(35, 178, 114,0.14),
+    inset 0 1px 0 rgba(35, 178, 114,0.28);
 }
+.bento-card-blue   { background: radial-gradient(ellipse at 90% 0%, rgba(41,151,255,0.18) 0%, transparent 65%), linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025)); border-color: rgba(41,151,255,0.20); }
+.bento-card-green  { background: radial-gradient(ellipse at 90% 0%, rgba(48,209,88,0.15) 0%, transparent 65%), linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025)); border-color: rgba(48,209,88,0.20); }
+.bento-card-purple { background: radial-gradient(ellipse at 90% 0%, rgba(191,90,242,0.17) 0%, transparent 65%), linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025)); border-color: rgba(191,90,242,0.20); }
 
-/* Clickable cards render as <a> — keep link styling invisible */
-a.bento-card {
-  color: inherit;
-  text-decoration: none;
-  cursor: pointer;
-}
-a.bento-card:focus-visible {
-  outline: 2px solid rgba(92, 225, 230, 0.7);
-  outline-offset: 3px;
-}
-
-/* Legacy accent aliases (cyan/gold/emerald/coral) — map onto tone system */
+/* Accent aliases — stronger ambient orbs */
 .bento-cyan {
   background:
-    radial-gradient(circle at top right, rgba(92, 225, 230, 0.12), transparent 70%),
-    rgba(14, 16, 26, 0.72);
-  border-color: rgba(92, 225, 230, 0.18);
+    radial-gradient(ellipse at 85% 10%, rgba(35, 178, 114,0.22) 0%, transparent 60%),
+    linear-gradient(145deg, rgba(255,255,255,0.065), rgba(255,255,255,0.025));
+  border-color: rgba(35, 178, 114,0.22);
 }
-.bento-cyan:hover { border-color: rgba(92, 225, 230, 0.4); }
+.bento-cyan:hover { border-color: rgba(35, 178, 114,0.44); box-shadow: 0 28px 60px -16px rgba(0,0,0,0.75), 0 0 32px rgba(35, 178, 114,0.1), inset 0 1px 0 rgba(255,255,255,0.22); }
+
 .bento-gold {
   background:
-    radial-gradient(circle at top right, rgba(232, 184, 75, 0.12), transparent 70%),
-    rgba(14, 16, 26, 0.72);
-  border-color: rgba(232, 184, 75, 0.18);
+    radial-gradient(ellipse at 85% 10%, rgba(232,184,75,0.2) 0%, transparent 60%),
+    linear-gradient(145deg, rgba(255,255,255,0.065), rgba(255,255,255,0.025));
+  border-color: rgba(232,184,75,0.20);
 }
-.bento-gold:hover { border-color: rgba(232, 184, 75, 0.4); }
+.bento-gold:hover { border-color: rgba(232,184,75,0.44); box-shadow: 0 28px 60px -16px rgba(0,0,0,0.75), 0 0 32px rgba(232,184,75,0.1), inset 0 1px 0 rgba(255,255,255,0.22); }
+
 .bento-emerald {
   background:
-    radial-gradient(circle at top right, rgba(52, 199, 89, 0.12), transparent 70%),
-    rgba(14, 16, 26, 0.72);
-  border-color: rgba(52, 199, 89, 0.18);
+    radial-gradient(ellipse at 85% 10%, rgba(52,199,89,0.18) 0%, transparent 60%),
+    linear-gradient(145deg, rgba(255,255,255,0.065), rgba(255,255,255,0.025));
+  border-color: rgba(52,199,89,0.20);
 }
-.bento-emerald:hover { border-color: rgba(52, 199, 89, 0.4); }
+.bento-emerald:hover { border-color: rgba(52,199,89,0.44); box-shadow: 0 28px 60px -16px rgba(0,0,0,0.75), 0 0 32px rgba(52,199,89,0.1), inset 0 1px 0 rgba(255,255,255,0.22); }
+
 .bento-coral {
   background:
-    radial-gradient(circle at top right, rgba(255, 69, 58, 0.12), transparent 70%),
-    rgba(14, 16, 26, 0.72);
-  border-color: rgba(255, 69, 58, 0.18);
+    radial-gradient(ellipse at 85% 10%, rgba(255,69,58,0.18) 0%, transparent 60%),
+    linear-gradient(145deg, rgba(255,255,255,0.065), rgba(255,255,255,0.025));
+  border-color: rgba(255,69,58,0.20);
 }
-.bento-coral:hover { border-color: rgba(255, 69, 58, 0.4); }
+.bento-coral:hover { border-color: rgba(255,69,58,0.44); box-shadow: 0 28px 60px -16px rgba(0,0,0,0.75), 0 0 32px rgba(255,69,58,0.1), inset 0 1px 0 rgba(255,255,255,0.22); }
 
-/* Bento typography — Google Sans Flex weight system */
+/* Hover tone glows */
+.bento-glow-blue:hover   { border-color: rgba(41,151,255,0.45);  box-shadow: 0 20px 44px -15px rgba(41,151,255,0.25),  inset 0 1px 0 rgba(255,255,255,0.16); }
+.bento-glow-green:hover  { border-color: rgba(48,209,88,0.45);   box-shadow: 0 20px 44px -15px rgba(48,209,88,0.22),   inset 0 1px 0 rgba(255,255,255,0.16); }
+.bento-glow-purple:hover { border-color: rgba(191,90,242,0.45);  box-shadow: 0 20px 44px -15px rgba(191,90,242,0.25),  inset 0 1px 0 rgba(255,255,255,0.16); }
+
+/* Bento typography — modular scale */
 .bento-label {
   font-family: 'Google Sans Flex', sans-serif;
-  font-size: 12px;
+  font-size: 0.8125rem;      /* t-label = 13px */
   font-weight: 700;
   letter-spacing: 0.02em;
   color: #86868b;
@@ -673,14 +791,14 @@ a.bento-card:focus-visible {
 }
 .bento-sub {
   font-family: 'Google Sans Flex', sans-serif;
-  font-size: 12px;
+  font-size: 0.9375rem;      /* t-caption = 15px */
   font-weight: 400;
   line-height: 1.6;
   color: #86868b;
 }
 .bento-num {
   font-family: 'Google Sans Flex', sans-serif;
-  font-size: clamp(2.25rem, 3.5vw, 3.25rem);
+  font-size: clamp(2.5rem, 4vw, 3.5rem); /* generous stat number */
   font-weight: 800;
   line-height: 1;
   letter-spacing: -0.04em;
@@ -698,22 +816,22 @@ a.bento-card:focus-visible {
   font-weight: 600;
   border: 1px solid transparent;
 }
-.bento-badge-green { background: rgba(48, 209, 88, 0.1); color: #30d158; border-color: rgba(48, 209, 88, 0.3); }
-.bento-badge-blue { background: rgba(41, 151, 255, 0.1); color: #2997ff; border-color: rgba(41, 151, 255, 0.3); }
-.bento-badge-purple { background: rgba(191, 90, 242, 0.1); color: #bf5af2; border-color: rgba(191, 90, 242, 0.3); }
-.bento-badge-cyan { background: rgba(100, 210, 255, 0.1); color: #64d2ff; border-color: rgba(100, 210, 255, 0.3); }
+.bento-badge-green { background: rgba(35, 178, 114, 0.12); color: #23B272; border-color: rgba(35, 178, 114, 0.3); }
+.bento-badge-blue { background: rgba(212, 248, 56, 0.1); color: #D4F838; border-color: rgba(212, 248, 56, 0.3); }
+.bento-badge-purple { background: rgba(82, 227, 164, 0.1); color: #52E3A4; border-color: rgba(82, 227, 164, 0.3); }
+.bento-badge-cyan { background: rgba(255, 255, 255, 0.1); color: #FFFFFF; border-color: rgba(255, 255, 255, 0.25); }
 
 /* Bento category + pills — Google Sans Flex */
 .bento-category-name {
   font-family: 'Google Sans Flex', sans-serif;
-  font-size: 15px;
+  font-size: 1.0625rem;      /* t-body = 17px */
   font-weight: 800;
   letter-spacing: -0.02em;
   margin-bottom: 4px;
 }
 .bento-category-focus {
   font-family: 'Google Sans Flex', sans-serif;
-  font-size: 13px;
+  font-size: 0.9375rem;      /* t-caption = 15px */
   font-weight: 500;
   color: #f5f5f7;
   margin-bottom: 12px;
@@ -726,12 +844,12 @@ a.bento-card:focus-visible {
 .bento-pill {
   display: inline-flex;
   align-items: center;
-  padding: 3px 10px;
+  padding: 4px 12px;
   border-radius: 9999px;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.08);
   font-family: 'Google Sans Flex', sans-serif;
-  font-size: 11px;
+  font-size: 0.75rem;        /* t-micro = 12px */
   font-weight: 600;
   color: rgba(245, 245, 247, 0.85);
 }
@@ -762,7 +880,7 @@ a.bento-card:focus-visible {
   width: 100%;
   max-width: 44px;
   border-radius: 6px 6px 3px 3px;
-  background: linear-gradient(180deg, #5CE1E6, rgba(92, 225, 230, 0.35));
+  background: linear-gradient(180deg, #23B272, rgba(35, 178, 114, 0.35));
   transform-origin: bottom;
   animation: bento-bar-grow var(--dur-slow) var(--ease-apple) both;
 }
@@ -783,7 +901,7 @@ a.bento-card:focus-visible {
 .bento-quote {
   justify-content: center;
   text-align: center;
-  border-left: 2px solid rgba(92, 225, 230, 0.4);
+  border-left: 2px solid rgba(35, 178, 114, 0.4);
 }
 .bento-quote-text {
   font-size: clamp(1.1rem, 2vw, 1.5rem);
@@ -814,60 +932,91 @@ a.bento-card:focus-visible {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ── Apple eyebrow pill ───────────────────────────────── */
 .apple-eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
+  padding: 5px 14px 5px 10px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   font-family: 'Google Sans Flex', sans-serif;
-  font-size: 11px;
+  font-size: 0.8125rem;
   font-weight: 700;
-  letter-spacing: 0.025em;
+  letter-spacing: 0.015em;
   color: #86868b;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+}
+/* Colored dot indicator inside eyebrow */
+.apple-eyebrow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.85;
+  flex-shrink: 0;
 }
 
 .apple-headline {
   font-family: 'Google Sans Flex', sans-serif;
-  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-size: clamp(2.25rem, 4vw, 3.5rem);
   font-weight: 800;
   line-height: 1.04;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.032em;
   color: #f5f5f7;
+  text-wrap: balance;
 }
 
 .apple-headline-muted {
   color: #86868b;
 }
 
+/* Apple glass pill (inline elements) */
 .apple-pill {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 12px;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.065);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   font-family: 'Google Sans Flex', sans-serif;
-  font-size: 12px;
+  font-size: 0.8125rem;
   font-weight: 600;
-  color: #f5f5f7;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: background-color var(--dur-fast) var(--ease-apple), border-color var(--dur-fast) var(--ease-apple), color var(--dur-fast) var(--ease-apple), transform var(--dur-fast) var(--ease-apple);
+  color: rgba(245, 245, 247, 0.9);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.10);
+  transition:
+    background-color var(--dur-fast) var(--ease-apple),
+    border-color var(--dur-fast) var(--ease-apple),
+    color var(--dur-fast) var(--ease-apple),
+    transform var(--dur-fast) var(--ease-spring);
 }
-
 .apple-pill:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.11);
+  border-color: rgba(255, 255, 255, 0.18);
+  transform: translateY(-1px);
 }
 
+/* Apple frosted nav bar */
 .apple-nav-pill {
-  background: rgba(14, 16, 26, 0.75);
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 9999px;
-  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  transition: box-shadow var(--dur-medium) var(--ease-apple), background-color var(--dur-fast) var(--ease-apple), border-color var(--dur-fast) var(--ease-apple);
+  background: rgba(10, 12, 20, 0.80);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: var(--radius-pill);
+  box-shadow:
+    0 20px 40px -14px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  transition:
+    box-shadow var(--dur-medium) var(--ease-apple),
+    background-color var(--dur-fast) var(--ease-apple),
+    border-color var(--dur-fast) var(--ease-apple);
 }
 
 /* ── Shared Apple motion utilities ──────────────────────── */
@@ -899,12 +1048,95 @@ a.bento-card:focus-visible {
   transform-origin: top center;
 }
 
+
 @media (prefers-reduced-motion: reduce) {
   .bento-bar,
   .bento-stagger > *,
+  .ambient-orb,
+  .ambient-orb-reverse,
   .animate-apple-drift,
   .animate-page-fade,
-  .animate-drawer-in {
+  .animate-drawer-in,
+  .scroll-cue,
+  .text-shimmer {
     animation: none !important;
+    transition: none !important;
   }
 }
+
+/* ── Ambient Orb / Mesh Gradient Utilities ────────────────── */
+@keyframes orb-drift {
+  0%   { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(3%, 2%) scale(1.04); }
+  66%  { transform: translate(-2%, 4%) scale(0.97); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+@keyframes orb-drift-reverse {
+  0%   { transform: translate(0, 0) scale(1.02); }
+  50%  { transform: translate(-4%, -3%) scale(0.96); }
+  100% { transform: translate(0, 0) scale(1.02); }
+}
+.ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(80px);
+  animation: orb-drift 20s ease-in-out infinite;
+}
+.ambient-orb-reverse {
+  animation: orb-drift-reverse 26s ease-in-out infinite;
+}
+
+/* ── Gradient Section Divider ─────────────────────────────── */
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255,255,255,0.07) 25%,
+    rgba(255,255,255,0.12) 50%,
+    rgba(255,255,255,0.07) 75%,
+    transparent 100%
+  );
+  border: none;
+  margin: 0;
+}
+
+/* ── Pulse scroll cue (thin vertical line) ────────────────── */
+@keyframes scroll-pulse {
+  0%, 100% { opacity: 0.2; transform: translateX(-50%) scaleY(0.65); }
+  50%       { opacity: 0.9; transform: translateX(-50%) scaleY(1); }
+}
+.scroll-cue {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1.5px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(35, 178, 114,0.9), transparent);
+  border-radius: 1px;
+  animation: scroll-pulse 2.2s var(--ease-apple) infinite;
+  pointer-events: none;
+}
+
+/* ── Shimmer text sweep ───────────────────────────────────── */
+@keyframes shimmer {
+  from { background-position: -200% center; }
+  to   { background-position: 200% center; }
+}
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    #f5f5f7 20%,
+    rgba(35, 178, 114,0.85) 50%,
+    #f5f5f7 80%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3.5s linear infinite;
+}
+

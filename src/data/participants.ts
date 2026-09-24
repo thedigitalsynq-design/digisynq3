@@ -1,0 +1,297 @@
+// DIGISYNQ — Ecosystem Participant Data
+// No hardcoded fabricated metrics. All content is accurate and honest.
+
+export interface Participant {
+  id: string;
+  name: string;
+  icon: string;
+  role: string;
+  tagline: string;
+  angle: number; // degrees for SVG arc positioning
+  color: string;
+  what_they_need: string[];
+  what_digisynq_connects: string[];
+  capabilities: string[];
+  synq_path: string;
+}
+
+export const participants: Participant[] = [
+  {
+    id: 'producers',
+    name: 'Producers',
+    icon: '🎬',
+    role: 'Film & Content Producers',
+    tagline: 'Need the right crew, resources, and connections — at the right time.',
+    angle: 0,
+    color: '#23B272',
+    what_they_need: [
+      'Reliable technicians and crew',
+      'Budget visibility across departments',
+      'Faster casting and crew assembly',
+      'Marketing and distribution connections',
+      'Transparent project coordination',
+    ],
+    what_digisynq_connects: [
+      'Verified technician network',
+      'Resource and equipment mapping',
+      'Production coordination workflows',
+      'Marketing and media partners',
+      'Rights and distribution pathways',
+    ],
+    capabilities: ['Production Coordination', 'Talent Matching', 'Resource Mapping', 'Marketing Coordination'],
+    synq_path: 'Identify need → Map resources → Connect participants → Coordinate execution → Measure',
+  },
+  {
+    id: 'directors',
+    name: 'Directors',
+    icon: '🎥',
+    role: 'Film & Content Directors',
+    tagline: 'Need creative alignment and technical precision from the right team.',
+    angle: 30,
+    color: '#B6F02A',
+    what_they_need: [
+      'Crew aligned with creative vision',
+      'Technical department collaboration',
+      'Access to specialized skills',
+      'Clear production communication',
+    ],
+    what_digisynq_connects: [
+      'Skilled technicians by department',
+      'Cross-department coordination',
+      'Specialized crew discovery',
+      'Production communication workflows',
+    ],
+    capabilities: ['Talent Matching', 'Production Coordination', 'Skill Discovery'],
+    synq_path: 'Identify creative need → Match skills → Coordinate departments → Execute',
+  },
+  {
+    id: 'technicians',
+    name: 'Technicians',
+    icon: '🔧',
+    role: 'Technical Film Professionals',
+    tagline: 'Need consistent opportunities, skill recognition, and career continuity.',
+    angle: 60,
+    color: '#52E3A4',
+    what_they_need: [
+      'Consistent project opportunities',
+      'Skill visibility and recognition',
+      'Career development pathways',
+      'Cross-skill training',
+      'Fair engagement processes',
+    ],
+    what_digisynq_connects: [
+      'Projects matching their skillset',
+      'Development and training programs',
+      'Cross-skill opportunities',
+      'Industry network access',
+    ],
+    capabilities: ['Skill Profiling', 'Opportunity Matching', 'Talent Development', 'Workshops'],
+    synq_path: 'Profile → Assess → Develop → Match → Deploy → Feedback → Reconnect',
+  },
+  {
+    id: 'writers',
+    name: 'Writers',
+    icon: '✍️',
+    role: 'Screenwriters & Story Developers',
+    tagline: 'Need their stories to find the right production partners.',
+    angle: 90,
+    color: '#10B981',
+    what_they_need: [
+      'Production partnerships',
+      'IP protection understanding',
+      'Development support',
+      'Rights guidance',
+    ],
+    what_digisynq_connects: [
+      'Relevant producers and production companies',
+      'Rights education and resources',
+      'Development ecosystem access',
+    ],
+    capabilities: ['Ecosystem Connections', 'Rights Education', 'Partnership Coordination'],
+    synq_path: 'Discover → Connect → Develop → Protect → Partner',
+  },
+  {
+    id: 'studios',
+    name: 'Studios',
+    icon: '🏛️',
+    role: 'Studios & Production Infrastructure',
+    tagline: 'Need projects to fill capacity and optimize utilization.',
+    angle: 120,
+    color: '#FFFFFF',
+    what_they_need: [
+      'Project pipeline coordination',
+      'Efficient resource utilization',
+      'Technology partnerships',
+      'Crew coordination at scale',
+    ],
+    what_digisynq_connects: [
+      'Project matching to available capacity',
+      'Crew and resource network',
+      'Technology partners',
+      'Production workflow coordination',
+    ],
+    capabilities: ['Resource Utilization', 'Production Coordination', 'Technology Matching'],
+    synq_path: 'Map capacity → Find projects → Coordinate resources → Measure utilization',
+  },
+  {
+    id: 'brands',
+    name: 'Brands',
+    icon: '🏷️',
+    role: 'Brand Partners & Sponsors',
+    tagline: 'Need authentic entertainment partnerships that connect with audiences.',
+    angle: 150,
+    color: '#D4F838',
+    what_they_need: [
+      'Entertainment partnership opportunities',
+      'Creator and influencer connections',
+      'Audience access and measurement',
+      'Authentic collaboration pathways',
+    ],
+    what_digisynq_connects: [
+      'Relevant film projects and productions',
+      'Creator and influencer networks',
+      'Audience analytics and insights',
+      'Media partnership opportunities',
+    ],
+    capabilities: ['Brand Partnerships', 'Creator Matching', 'Audience Analytics', 'Media Coordination'],
+    synq_path: 'Discover → Match → Activate → Coordinate → Measure',
+  },
+  {
+    id: 'creators',
+    name: 'Creators',
+    icon: '📱',
+    role: 'Digital Creators & Influencers',
+    tagline: 'Need the right collaborations to grow audience and monetize work.',
+    angle: 180,
+    color: '#4ADE80',
+    what_they_need: [
+      'Collaboration opportunities',
+      'Brand and project partnerships',
+      'Distribution access',
+      'Monetization pathways',
+    ],
+    what_digisynq_connects: [
+      'Relevant film and brand projects',
+      'Cross-creator collaboration',
+      'Distribution platforms and partners',
+      'Monetization structures',
+    ],
+    capabilities: ['Creator Matching', 'Distribution Coordination', 'Monetization Education'],
+    synq_path: 'Connect → Build collaboration → Distribute → Monetize',
+  },
+  {
+    id: 'distributors',
+    name: 'Distributors',
+    icon: '📡',
+    role: 'Film Distribution & Exhibition',
+    tagline: 'Need the right content and coordination to build better distribution.',
+    angle: 210,
+    color: '#16543D',
+    what_they_need: [
+      'Quality content pipeline',
+      'Marketing coordination',
+      'Audience data',
+      'Rights clarity',
+    ],
+    what_digisynq_connects: [
+      'Content and production partnerships',
+      'Marketing coordination resources',
+      'Audience intelligence',
+      'Rights and licensing clarity',
+    ],
+    capabilities: ['Content Matching', 'Marketing Coordination', 'Rights Education', 'Audience Analytics'],
+    synq_path: 'Identify content → Coordinate marketing → Distribute → Measure outcomes',
+  },
+  {
+    id: 'media',
+    name: 'Media',
+    icon: '📰',
+    role: 'Media Partners & Press',
+    tagline: 'Need connected stories and coordinated access.',
+    angle: 240,
+    color: '#E2E8F0',
+    what_they_need: [
+      'Story access and relationships',
+      'Coordinated media partnerships',
+      'Content collaboration opportunities',
+    ],
+    what_digisynq_connects: [
+      'Relevant project access',
+      'Creator and production networks',
+      'Coordinated media engagement opportunities',
+    ],
+    capabilities: ['Media Coordination', 'Partnership Matching', 'Content Collaboration'],
+    synq_path: 'Discover → Coordinate access → Collaborate → Measure impact',
+  },
+  {
+    id: 'technology',
+    name: 'Technology',
+    icon: '⚙️',
+    role: 'Film Technology Providers',
+    tagline: 'Need to connect solutions with projects that need them.',
+    angle: 270,
+    color: '#A3E635',
+    what_they_need: [
+      'Production adoption opportunities',
+      'Integration partnerships',
+      'Pilot project access',
+    ],
+    what_digisynq_connects: [
+      'Projects that match technology needs',
+      'Integration pathway identification',
+      'Ecosystem partnerships',
+    ],
+    capabilities: ['Technology Matching', 'Pilot Coordination', 'Ecosystem Integration'],
+    synq_path: 'Map capability → Identify need → Connect → Pilot → Integrate',
+  },
+  {
+    id: 'investors',
+    name: 'Investors',
+    icon: '💼',
+    role: 'Film Finance & Investment',
+    tagline: 'Need better intelligence, coordination, and risk visibility.',
+    angle: 300,
+    color: '#22C55E',
+    what_they_need: [
+      'Project intelligence',
+      'Risk visibility',
+      'Reliable coordination',
+      'Performance data',
+    ],
+    what_digisynq_connects: [
+      'Project intelligence and mapping',
+      'Production coordination oversight',
+      'Performance and outcome data',
+    ],
+    capabilities: ['Project Intelligence', 'Risk Mapping', 'Coordination Oversight'],
+    synq_path: 'Discover → Map risk → Coordinate → Monitor → Measure',
+  },
+  {
+    id: 'audiences',
+    name: 'Audiences',
+    icon: '👥',
+    role: 'Film Audiences & Communities',
+    tagline: 'Need better connection to the content and people they love.',
+    angle: 330,
+    color: '#84CC16',
+    what_they_need: [
+      'Discovery of relevant content',
+      'Direct community connection',
+      'Authentic engagement',
+    ],
+    what_digisynq_connects: [
+      'Content discovery pathways',
+      'Creator and project communities',
+      'Distribution and access coordination',
+    ],
+    capabilities: ['Audience Connection', 'Content Distribution', 'Community Coordination'],
+    synq_path: 'Discover content → Engage → Connect to community → Sustain',
+  },
+];
+
+export const CENTRAL_NODE = {
+  id: 'digisynq',
+  name: 'DIGISYNQ',
+  tagline: 'The Coordination Layer',
+  description: 'Asset-light. Problem-first. Synchronization-driven.',
+};

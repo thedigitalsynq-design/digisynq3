@@ -65,3 +65,50 @@ export function playNodeBlip(nodeIndex: number) {
   const freq = baseFreqs[nodeIndex % baseFreqs.length] || 440;
   playPing(freq, 'triangle', 0.07, 0.025);
 }
+
+export function playClickSound() {
+  if (!isAudioEnabled) return;
+  playPing(600, 'sine', 0.04, 0.02);
+}
+
+export function playHoverSound() {
+  if (!isAudioEnabled) return;
+  playPing(950, 'sine', 0.025, 0.008);
+}
+
+export function playSuccessChime() {
+  if (!isAudioEnabled) return;
+  playPing(523.25, 'triangle', 0.09, 0.03); // C5
+  setTimeout(() => playPing(659.25, 'triangle', 0.09, 0.03), 70); // E5
+  setTimeout(() => playPing(783.99, 'triangle', 0.16, 0.035), 140); // G5
+}
+
+export function playAlertPulse() {
+  if (!isAudioEnabled) return;
+  playPing(220, 'sawtooth', 0.12, 0.04);
+  setTimeout(() => playPing(200, 'sawtooth', 0.15, 0.035), 100);
+}
+
+export function playClapperSnap() {
+  if (!isAudioEnabled) return;
+  // Wooden clapper sharp snap
+  playPing(1200, 'triangle', 0.02, 0.08);
+  setTimeout(() => playPing(180, 'sine', 0.05, 0.06), 15);
+}
+
+export function playLaserPulse() {
+  if (!isAudioEnabled) return;
+  playPing(880, 'sine', 0.06, 0.03);
+  setTimeout(() => playPing(1320, 'sine', 0.08, 0.025), 40);
+  setTimeout(() => playPing(1760, 'triangle', 0.12, 0.02), 80);
+}
+
+export function toggleAudio(): boolean {
+  const next = !isAudioEnabled;
+  setAudioEnabled(next);
+  if (next) {
+    playSuccessChime();
+  }
+  return next;
+}
+
