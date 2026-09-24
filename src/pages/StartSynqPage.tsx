@@ -1,19 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { 
-  ArrowRight, ArrowUpRight, Send, CheckCircle2, 
-  Terminal, ShieldCheck, Zap, Activity, Film, ChevronRight
-} from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
-import { TopographicBackground } from '../components/TopographicBackground';
-import { playClickSound, playHoverSound, playNodeBlip, playSuccessChime } from '../utils/audio';
+import React, { useState } from 'react';
+import { useLocation, Link } from 'react-router-dom';
+import { ArrowRight, Check, Send, ShieldCheck, ChevronRight } from 'lucide-react';
 
 interface FormState {
   who: string;
   project: string;
   problem: string;
   resources: string;
-  missing: string;
   stage: string;
   support_type: string[];
   name: string;
@@ -26,7 +19,6 @@ const EMPTY_FORM: FormState = {
   project: '',
   problem: '',
   resources: '',
-  missing: '',
   stage: '',
   support_type: [],
   name: '',
@@ -35,24 +27,38 @@ const EMPTY_FORM: FormState = {
 };
 
 const WHO_OPTIONS = [
-  'Independent Producer', 'Director / Showrunner', 'Cinematographer / Crew Guild',
-  'Soundstage / Volume Studio', 'Financier / Gap Fund', 'Theatrical Exhibitor / Circuit',
-  'IP Holder / Screenwriter', 'VFX / Post Facility', 'Other Stakeholder',
+  'Independent Producer',
+  'Director / Showrunner',
+  'Cinematographer / Craft Guild',
+  'Soundstage / Volume Facility',
+  'Financier / Gap Fund',
+  'Theatrical Exhibitor / Circuit',
+  'Post / VFX Facility',
+  'IP Holder / Writer',
 ];
 
 const STAGE_OPTIONS = [
-  'Packaging & Development', 'Pre-Production & Greenlight', 'Principal Photography',
-  'Post-Finishing & Sound Mix', 'Theatrical Distribution & Release', 'Catalogue Monetization',
+  'Packaging & Development',
+  'Pre-Production & Greenlight',
+  'Principal Photography',
+  'Post-Finishing & Sound Mix',
+  'Theatrical Distribution & Release',
+  'Catalogue Monetization',
 ];
 
 const SUPPORT_OPTIONS = [
-  'Fractional Soundstage Access', 'Technical Guild Crew Matching', 'Gap / Finishing Capital',
-  'Programmatic Screen Allocation', 'Asset-Light Production Model', 'Initial Exploration Brief',
+  'Fractional Soundstage Access',
+  'Technical Guild Crew Matching',
+  'Gap / Finishing Capital',
+  'Programmatic Screen Allocation',
+  'Asset-Light Production Model',
+  'Initial Feasibility Diagnostic',
 ];
 
 export function StartSynqPage() {
   const location = useLocation();
   const state = location.state as { problem?: string; category?: string } | null;
+
   const [form, setForm] = useState<FormState>(() => ({
     ...EMPTY_FORM,
     problem: state?.problem || '',
@@ -65,7 +71,6 @@ export function StartSynqPage() {
   };
 
   const toggleSupportType = (v: string) => {
-    playClickSound();
     setForm(prev => ({
       ...prev,
       support_type: prev.support_type.includes(v)
@@ -80,131 +85,114 @@ export function StartSynqPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    playSuccessChime();
     const subject = encodeURIComponent(`Start a Synq — ${form.who}: ${form.project || 'Project'}`);
     const body = encodeURIComponent(
-      `STAKEHOLDER: ${form.who}\nSTAGE: ${form.stage}\nPROJECT: ${form.project}\nPROBLEM: ${form.problem}\nSUPPORT NEEDED: ${form.support_type.join(', ')}\nRESOURCES AVAILABLE: ${form.resources}\nNAME: ${form.name}\nEMAIL: ${form.email}\nNOTES: ${form.notes}`
+      `STAKEHOLDER: ${form.who}\nSTAGE: ${form.stage}\nPROJECT: ${form.project}\nPROBLEM: ${form.problem}\nSUPPORT NEEDED: ${form.support_type.join(', ')}\nNAME: ${form.name}\nEMAIL: ${form.email}\nNOTES: ${form.notes}`
     );
     window.location.href = `mailto:hello@digisynq.com?subject=${subject}&body=${body}`;
     setSubmitted(true);
   };
 
   return (
-    <main className="bg-[#050608] text-[#ECEEF5] pt-24 pb-20 relative overflow-hidden selection:bg-[#B6F02A]/20 selection:text-[#B6F02A]">
-      
-      {/* Topographic Isoline Contour Layer */}
-      <TopographicBackground intensity="medium" />
+    <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white">
 
-      {/* ── 01. Intake Terminal Header (Elevate Labs High-Impact Style) ── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 relative z-10">
-        
-        {/* High-Impact Asymmetric Typography */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end mb-12">
-          <div className="lg:col-span-8">
-            {/* Eyebrow with Lime Accent Bar (Elevate Labs signature) */}
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold bg-[#23B272]/15 text-[#D4F838] border border-[#23B272]/30 tracking-widest shrink-0">
-                ACT 01
-              </span>
-              <span className="text-xs font-mono font-bold tracking-widest uppercase text-white">
-                Project Diagnostic // Intake Terminal
-              </span>
-            </div>
-
-            <h1 className="text-[clamp(2.75rem,6.5vw,5.5rem)] font-extrabold tracking-tight text-white leading-[0.92] [letter-spacing:-0.04em] uppercase">
-              BEYOND<br />
-              <span className="text-[#B6F02A]">CINEMA</span><br />
-              LIMITS.
-            </h1>
-          </div>
-
-          <div className="lg:col-span-4 lg:pl-6 border-l-2 border-[#B6F02A]">
-            <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
-              Tell us your structural friction point. We analyze idle soundstage floors, guild availability, and capital bottlenecks to engineer an asset-light resolution path.
-            </p>
-          </div>
+      {/* ── 01. Hero Section ── */}
+      <section className="pt-40 sm:pt-48 pb-16 sm:pb-20 px-6 sm:px-8 max-w-4xl mx-auto text-center">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-400 mb-8 tracking-wide">
+          <span>Project Intake Terminal</span>
         </div>
+
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-6">
+          Start a synq.
+        </h1>
+
+        <p className="text-lg sm:text-xl text-zinc-400 font-normal leading-relaxed max-w-2xl mx-auto">
+          Tell us your structural friction point. We audit idle soundstage floors, guild availability, and capital timing to engineer an asset-light resolution path.
+        </p>
       </section>
 
-      {/* ── 02. The Project Intake Terminal ────────────────── */}
-      <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="p-6 sm:p-10 rounded-3xl bg-[#08090C] border border-[#B6F02A]/25 shadow-[0_24px_80px_rgba(0,0,0,0.8),0_0_50px_rgba(182,240,42,0.08)] relative">
-          
+      {/* ── 02. Intake Console ── */}
+      <section className="pb-32 px-6 sm:px-8 max-w-3xl mx-auto">
+        <div className="rounded-3xl bg-[#090b10] border border-white/[0.08] p-8 sm:p-12 shadow-2xl">
+
           {submitted ? (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="text-center py-10 space-y-6"
-            >
-              <div className="w-16 h-16 rounded-2xl bg-[#0D281E] border border-[#B6F02A] flex items-center justify-center mx-auto text-[#B6F02A] shadow-[0_0_24px_rgba(182,240,42,0.3)]">
-                <CheckCircle2 size={32} />
+            <div className="text-center py-12 space-y-6">
+              <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mx-auto text-emerald-400">
+                <Check size={28} />
               </div>
+
               <div>
-                <h2 className="text-2xl font-bold text-white tracking-tight uppercase">
-                  Project Protocol Dispatched
+                <h2 className="text-2xl font-bold text-white mb-2">
+                  Project dossier pre-configured
                 </h2>
-                <p className="text-xs text-zinc-400 max-w-md mx-auto mt-2 leading-relaxed">
-                  Your project dossier has been pre-configured. If your mail client did not automatically launch, transmit directly to <strong className="text-[#B6F02A]">hello@digisynq.com</strong>.
+                <p className="text-sm text-zinc-400 max-w-md mx-auto leading-relaxed">
+                  Your mail client has been opened with your responses. If it did not launch automatically, transmit directly to{' '}
+                  <a href="mailto:hello@digisynq.com" className="text-white underline hover:text-emerald-400">
+                    hello@digisynq.com
+                  </a>.
                 </p>
               </div>
-              <button
-                type="button"
-                onClick={() => { setSubmitted(false); setForm(EMPTY_FORM); setStep(1); }}
-                className="btn-primary text-xs px-6 py-2.5 mx-auto"
-              >
-                Intake Another Project
-              </button>
-            </motion.div>
+
+              <div className="pt-4">
+                <button
+                  type="button"
+                  onClick={() => { setSubmitted(false); setForm(EMPTY_FORM); setStep(1); }}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-medium text-xs hover:bg-zinc-200 transition-all cursor-pointer"
+                >
+                  Intake another project
+                </button>
+              </div>
+            </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-8 font-mono">
-              
-              {/* Stepper Progress */}
-              <div className="flex items-center justify-between pb-6 border-b border-white/[0.08] text-xs">
+            <form onSubmit={handleSubmit} className="space-y-10">
+
+              {/* Progress Stepper */}
+              <div className="flex items-center justify-between pb-6 border-b border-white/[0.06] text-xs">
                 <div className="flex items-center gap-2">
-                  <span className={`px-2 py-0.5 rounded text-[9px] font-mono font-bold ${step === 1 ? 'bg-[#B6F02A] text-black shadow-[0_0_10px_rgba(182,240,42,0.4)]' : 'bg-white/10 text-white/40'}`}>
-                    STEP // 01
+                  <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-mono ${step === 1 ? 'bg-white text-black font-bold' : 'bg-white/[0.06] text-zinc-500'}`}>
+                    1
                   </span>
-                  <span className={step === 1 ? 'text-white font-bold' : 'text-zinc-500'}>
-                    ROLE & STAGE
+                  <span className={step === 1 ? 'text-white font-medium' : 'text-zinc-500'}>
+                    Role & Stage
                   </span>
                 </div>
-                <div className="h-px w-8 bg-white/10" />
+                <div className="h-px w-12 bg-white/[0.06]" />
                 <div className="flex items-center gap-2">
-                  <span className={`px-2 py-0.5 rounded text-[9px] font-mono font-bold ${step === 2 ? 'bg-[#B6F02A] text-black shadow-[0_0_10px_rgba(182,240,42,0.4)]' : 'bg-white/10 text-white/40'}`}>
-                    STEP // 02
+                  <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-mono ${step === 2 ? 'bg-white text-black font-bold' : 'bg-white/[0.06] text-zinc-500'}`}>
+                    2
                   </span>
-                  <span className={step === 2 ? 'text-white font-bold' : 'text-zinc-500'}>
-                    FRICTION POINT
+                  <span className={step === 2 ? 'text-white font-medium' : 'text-zinc-500'}>
+                    Bottleneck
                   </span>
                 </div>
-                <div className="h-px w-8 bg-white/10" />
+                <div className="h-px w-12 bg-white/[0.06]" />
                 <div className="flex items-center gap-2">
-                  <span className={`px-2 py-0.5 rounded text-[9px] font-mono font-bold ${step === 3 ? 'bg-[#B6F02A] text-black shadow-[0_0_10px_rgba(182,240,42,0.4)]' : 'bg-white/10 text-white/40'}`}>
-                    STEP // 03
+                  <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-mono ${step === 3 ? 'bg-white text-black font-bold' : 'bg-white/[0.06] text-zinc-500'}`}>
+                    3
                   </span>
-                  <span className={step === 3 ? 'text-white font-bold' : 'text-zinc-500'}>
-                    TRANSMIT
+                  <span className={step === 3 ? 'text-white font-medium' : 'text-zinc-500'}>
+                    Transmit
                   </span>
                 </div>
               </div>
 
-              {/* STEP 1: Identity & Stage */}
+              {/* STEP 1: Role & Stage */}
               {step === 1 && (
-                <div className="space-y-6 animate-in fade-in duration-200">
+                <div className="space-y-8 animate-in fade-in duration-200">
                   <div>
-                    <label className="text-xs font-bold text-[#B6F02A] block mb-2 uppercase tracking-wider">
-                      // What Is Your Role in the Cinema Network?
+                    <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-3">
+                      Your Role in the Cinema Network
                     </label>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                       {WHO_OPTIONS.map((opt) => (
                         <button
                           key={opt}
                           type="button"
-                          onClick={() => { updateField('who', opt); playClickSound(); }}
-                          className={`p-3 rounded-xl text-left border transition-all cursor-pointer ${
+                          onClick={() => updateField('who', opt)}
+                          className={`p-3.5 rounded-xl text-left border text-xs transition-all cursor-pointer ${
                             form.who === opt
-                              ? 'bg-[#0D281E] border-[#B6F02A] text-white shadow-[0_0_12px_rgba(182,240,42,0.2)] font-bold'
-                              : 'bg-black/50 border-white/10 text-zinc-400 hover:border-white/20'
+                              ? 'bg-white text-black font-medium border-white'
+                              : 'bg-white/[0.015] border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/20'
                           }`}
                         >
                           {opt}
@@ -214,19 +202,19 @@ export function StartSynqPage() {
                   </div>
 
                   <div>
-                    <label className="text-xs font-bold text-[#B6F02A] block mb-2 uppercase tracking-wider">
-                      // Current Production Stage
+                    <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-3">
+                      Current Production Stage
                     </label>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                       {STAGE_OPTIONS.map((stg) => (
                         <button
                           key={stg}
                           type="button"
-                          onClick={() => { updateField('stage', stg); playClickSound(); }}
-                          className={`p-3 rounded-xl text-left border transition-all cursor-pointer ${
+                          onClick={() => updateField('stage', stg)}
+                          className={`p-3.5 rounded-xl text-left border text-xs transition-all cursor-pointer ${
                             form.stage === stg
-                              ? 'bg-[#0D281E] border-[#B6F02A] text-white shadow-[0_0_12px_rgba(182,240,42,0.2)] font-bold'
-                              : 'bg-black/50 border-white/10 text-zinc-400 hover:border-white/20'
+                              ? 'bg-white text-black font-medium border-white'
+                              : 'bg-white/[0.015] border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/20'
                           }`}
                         >
                           {stg}
@@ -239,58 +227,61 @@ export function StartSynqPage() {
                     <button
                       type="button"
                       disabled={!canAdvance1}
-                      onClick={() => { setStep(2); playClickSound(); }}
-                      className={`btn-primary text-xs px-6 py-3 cursor-pointer ${!canAdvance1 ? 'opacity-30 pointer-events-none' : ''}`}
+                      onClick={() => setStep(2)}
+                      className={`inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white text-black font-medium text-xs hover:bg-zinc-200 transition-all cursor-pointer ${
+                        !canAdvance1 ? 'opacity-30 pointer-events-none' : ''
+                      }`}
                     >
-                      Next: Define Friction <ArrowRight size={14} />
+                      Continue
+                      <ArrowRight size={14} />
                     </button>
                   </div>
                 </div>
               )}
 
-              {/* STEP 2: Friction & Scope */}
+              {/* STEP 2: Project & Bottleneck */}
               {step === 2 && (
-                <div className="space-y-6 animate-in fade-in duration-200">
+                <div className="space-y-8 animate-in fade-in duration-200">
                   <div>
-                    <label className="text-xs font-bold text-[#B6F02A] block mb-2 uppercase tracking-wider">
-                      // Project Title or Working Identifier
+                    <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-2">
+                      Project Title or Working Code
                     </label>
                     <input
                       type="text"
-                      placeholder="e.g. Untitled Feature / Psychological Sci-Fi"
+                      placeholder="e.g. Untitled Psychological Thriller"
                       value={form.project}
                       onChange={(e) => updateField('project', e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-xs text-white placeholder-zinc-600 focus:border-[#B6F02A] outline-none"
+                      className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/[0.08] text-sm text-white placeholder-zinc-600 focus:border-white/40 outline-none transition-colors"
                     />
                   </div>
 
                   <div>
-                    <label className="text-xs font-bold text-[#B6F02A] block mb-2 uppercase tracking-wider">
-                      // Primary Bottleneck or Constraint (Required)
+                    <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-2">
+                      Primary Bottleneck or Gap (Required)
                     </label>
                     <textarea
-                      rows={3}
-                      placeholder="Describe the gap: e.g. Need 4 days of fractional LED volume access, missing sound supervisor, or release clash risk on current distribution window..."
+                      rows={4}
+                      placeholder="Describe what is stalled: e.g. need 5 days of fractional volume floor, missing key sound supervisor, or avoiding release window clash..."
                       value={form.problem}
                       onChange={(e) => updateField('problem', e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-xs text-white placeholder-zinc-600 focus:border-[#B6F02A] outline-none resize-none"
+                      className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/[0.08] text-sm text-white placeholder-zinc-600 focus:border-white/40 outline-none transition-colors resize-none"
                     />
                   </div>
 
                   <div>
-                    <label className="text-xs font-bold text-[#B6F02A] block mb-2 uppercase tracking-wider">
-                      // Support Architecture Required
+                    <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-3">
+                      Required Support Architecture
                     </label>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                       {SUPPORT_OPTIONS.map((opt) => (
                         <button
                           key={opt}
                           type="button"
                           onClick={() => toggleSupportType(opt)}
-                          className={`p-3 rounded-xl text-left border transition-all cursor-pointer ${
+                          className={`p-3.5 rounded-xl text-left border text-xs transition-all cursor-pointer ${
                             form.support_type.includes(opt)
-                              ? 'bg-[#0D281E] border-[#B6F02A] text-white font-bold'
-                              : 'bg-black/50 border-white/10 text-zinc-400 hover:border-white/20'
+                              ? 'bg-white text-black font-medium border-white'
+                              : 'bg-white/[0.015] border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/20'
                           }`}
                         >
                           {opt}
@@ -302,18 +293,21 @@ export function StartSynqPage() {
                   <div className="pt-4 flex items-center justify-between">
                     <button
                       type="button"
-                      onClick={() => { setStep(1); playClickSound(); }}
-                      className="text-xs text-zinc-400 hover:text-white"
+                      onClick={() => setStep(1)}
+                      className="text-xs text-zinc-400 hover:text-white transition cursor-pointer"
                     >
-                      ← Back to Stage
+                      ← Back
                     </button>
                     <button
                       type="button"
                       disabled={!canAdvance2}
-                      onClick={() => { setStep(3); playClickSound(); }}
-                      className={`btn-primary text-xs px-6 py-3 cursor-pointer ${!canAdvance2 ? 'opacity-30 pointer-events-none' : ''}`}
+                      onClick={() => setStep(3)}
+                      className={`inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white text-black font-medium text-xs hover:bg-zinc-200 transition-all cursor-pointer ${
+                        !canAdvance2 ? 'opacity-30 pointer-events-none' : ''
+                      }`}
                     >
-                      Next: Contact Dossier <ArrowRight size={14} />
+                      Continue
+                      <ArrowRight size={14} />
                     </button>
                   </div>
                 </div>
@@ -321,67 +315,69 @@ export function StartSynqPage() {
 
               {/* STEP 3: Contact & Transmit */}
               {step === 3 && (
-                <div className="space-y-6 animate-in fade-in duration-200">
+                <div className="space-y-8 animate-in fade-in duration-200">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-xs font-bold text-[#B6F02A] block mb-2 uppercase tracking-wider">
-                        // Your Name / Title
+                      <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-2">
+                        Your Name / Title
                       </label>
                       <input
                         type="text"
-                        placeholder="e.g. James Cameron / Producer"
+                        placeholder="e.g. Elena Rostova / Producer"
                         value={form.name}
                         onChange={(e) => updateField('name', e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-xs text-white placeholder-zinc-600 focus:border-[#B6F02A] outline-none"
+                        className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/[0.08] text-sm text-white placeholder-zinc-600 focus:border-white/40 outline-none transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="text-xs font-bold text-[#B6F02A] block mb-2 uppercase tracking-wider">
-                        // Secure Direct Email
+                      <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-2">
+                        Direct Email Address
                       </label>
                       <input
                         type="email"
-                        placeholder="producer@studio.com"
+                        placeholder="producer@domain.com"
                         value={form.email}
                         onChange={(e) => updateField('email', e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-xs text-white placeholder-zinc-600 focus:border-[#B6F02A] outline-none"
+                        className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/[0.08] text-sm text-white placeholder-zinc-600 focus:border-white/40 outline-none transition-colors"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="text-xs font-bold text-[#B6F02A] block mb-2 uppercase tracking-wider">
-                      // Confidential Production Notes
+                    <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-2">
+                      Confidential Production Notes
                     </label>
                     <textarea
-                      rows={2}
-                      placeholder="Any specific NDAs, timeline deadlines, or territorial restrictions..."
+                      rows={3}
+                      placeholder="Any specific NDAs, calendar deadlines, or territorial restrictions..."
                       value={form.notes}
                       onChange={(e) => updateField('notes', e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-xs text-white placeholder-zinc-600 focus:border-[#B6F02A] outline-none resize-none"
+                      className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/[0.08] text-sm text-white placeholder-zinc-600 focus:border-white/40 outline-none transition-colors resize-none"
                     />
                   </div>
 
-                  <div className="p-4 rounded-xl bg-[#0D281E]/60 border border-[#B6F02A]/20 text-[11px] text-zinc-300">
-                    <span className="text-[#B6F02A] font-bold block mb-1">CONFIDENTIALITY GUARANTEED:</span>
-                    DigiSynq operates on strict non-disclosure covenants. Transmitted project information is used exclusively to assess operational feasibility.
+                  <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] text-xs text-zinc-400 leading-relaxed">
+                    <span className="text-white font-medium block mb-1">Confidentiality Guarantee</span>
+                    DigiSynq operates under strict non-disclosure covenants. All project materials and disclosures are used solely to assess operational and coordination feasibility.
                   </div>
 
                   <div className="pt-4 flex items-center justify-between">
                     <button
                       type="button"
-                      onClick={() => { setStep(2); playClickSound(); }}
-                      className="text-xs text-zinc-400 hover:text-white"
+                      onClick={() => setStep(2)}
+                      className="text-xs text-zinc-400 hover:text-white transition cursor-pointer"
                     >
-                      ← Back to Friction
+                      ← Back
                     </button>
                     <button
                       type="submit"
                       disabled={!canSubmit}
-                      className={`btn-primary text-xs px-8 py-3.5 cursor-pointer flex items-center gap-2 ${!canSubmit ? 'opacity-30 pointer-events-none' : ''}`}
+                      className={`inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-white text-black font-medium text-xs hover:bg-zinc-200 transition-all cursor-pointer ${
+                        !canSubmit ? 'opacity-30 pointer-events-none' : ''
+                      }`}
                     >
-                      <Send size={14} />
-                      Transmit Project Synq
+                      <Send size={13} />
+                      Transmit project synq
                     </button>
                   </div>
                 </div>

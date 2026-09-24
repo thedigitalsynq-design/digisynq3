@@ -1,116 +1,131 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  ArrowRight, Users, Film, Radio, Shield, 
-  Sparkles, CheckCircle2, ChevronRight, Eye, Layers, Compass
-} from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Check, Users, Film, Radio, Shield, Sparkles } from 'lucide-react';
 import { EcosystemMap } from '../components/EcosystemMap';
-import { TopographicBackground } from '../components/TopographicBackground';
-import { participants, CENTRAL_NODE, type Participant } from '../data/participants';
-import { playClickSound, playHoverSound, playNodeBlip } from '../utils/audio';
+import { participants, type Participant } from '../data/participants';
+
+const STAKEHOLDER_GROUPS = [
+  {
+    id: 'creative',
+    role: 'Creators & Directors',
+    need: 'Access to top-tier technical heads and fractional studio slots without giving up creative control or equity.',
+    offer: 'Original visionary IP, package attachments, and directing talent ready for streamlined execution.',
+    synqAction: 'Pair directly with vetted craft guilds and open soundstage windows at fair market rates.',
+  },
+  {
+    id: 'technical',
+    role: 'Crew & Craft Guilds',
+    need: 'Continuous booked days, transparent compensation, and elimination of closed-circle hiring bottlenecks.',
+    offer: 'Master-level cinematography, production sound, gaffer, and colorist craftsmanship.',
+    synqAction: 'Roster availability indexing that connects technicians directly to funded productions in need.',
+  },
+  {
+    id: 'infrastructure',
+    role: 'Soundstages & Facilities',
+    need: 'Monetization of dark floor dates and high-cost LED volumes between major studio leases.',
+    offer: 'World-class physical soundstages, lighting packages, and virtual production infrastructure.',
+    synqAction: 'Fractional burst-occupancy booking for independent productions during facility turnaround lull periods.',
+  },
+  {
+    id: 'capital',
+    role: 'Financiers & Producers',
+    need: 'Milestone certainty, burn-rate transparency, and mitigation of predatory completion risk.',
+    offer: 'Finishing debt, gap equity, and completion guarantees.',
+    synqAction: 'Real-time telemetry and scene delivery escrow that unlocks capital tranches systematically.',
+  },
+  {
+    id: 'distribution',
+    role: 'Exhibitors & Theaters',
+    need: 'High seat-occupancy films with targeted regional demand rather than empty multiplex screens.',
+    offer: 'DCI-compliant cinema screens, premium large formats, and localized audience footprint.',
+    synqAction: 'Programmatic release windowing and pre-demand density matching across regional circuits.',
+  },
+  {
+    id: 'post',
+    role: 'Post & VFX Houses',
+    need: 'Standardized camera-to-cloud dailies turnovers, scope clarity, and milestone-backed payment locks.',
+    offer: 'Editorial suites, color finishing, Dolby Atmos mixing, and visual effects pipelines.',
+    synqAction: 'Automated ingest telemetry and milestone-tied finishing covenants to ensure zero uncompensated stalls.',
+  },
+];
+
+const ROLES = [
+  { id: 'all', label: 'All Stakeholders' },
+  { id: 'creative', label: 'Creators & Directors' },
+  { id: 'technical', label: 'Crew & Guilds' },
+  { id: 'infrastructure', label: 'Stages & Studios' },
+  { id: 'capital', label: 'Capital & Producers' },
+  { id: 'distribution', label: 'Exhibitors & Screens' },
+];
 
 export function EcosystemPage() {
   const [selectedRole, setSelectedRole] = useState<string>('all');
-  const [activeParticipant, setActiveParticipant] = useState<Participant>(participants[0]);
 
-  const roles = [
-    { id: 'all', label: 'ALL STAKEHOLDERS' },
-    { id: 'creative', label: 'CREATORS & DIRECTORS' },
-    { id: 'technical', label: 'CREW & CRAFT GUILDS' },
-    { id: 'infrastructure', label: 'STUDIOS & STAGES' },
-    { id: 'capital', label: 'PRODUCERS & CAPITAL' },
-    { id: 'distribution', label: 'EXHIBITORS & SCREENS' },
-  ];
-
-  const filteredParticipants = selectedRole === 'all' 
-    ? participants 
-    : participants.filter(p => {
-        const text = `${p.name} ${p.role}`.toLowerCase();
-        if (selectedRole === 'creative') return text.includes('director') || text.includes('writer') || text.includes('creator');
-        if (selectedRole === 'technical') return text.includes('technician') || text.includes('crew') || text.includes('post');
-        if (selectedRole === 'infrastructure') return text.includes('studio') || text.includes('equipment') || text.includes('vfx') || text.includes('stage');
-        if (selectedRole === 'capital') return text.includes('producer') || text.includes('investor') || text.includes('finan');
-        if (selectedRole === 'distribution') return text.includes('distributor') || text.includes('theatre') || text.includes('audience') || text.includes('screen');
-        return true;
-      });
+  const filteredGroups = selectedRole === 'all'
+    ? STAKEHOLDER_GROUPS
+    : STAKEHOLDER_GROUPS.filter(g => g.id === selectedRole || (selectedRole === 'technical' && g.id === 'post'));
 
   return (
-    <main className="bg-[#050608] text-[#ECEEF5] pt-24 pb-20 relative overflow-hidden selection:bg-[#B6F02A]/20 selection:text-[#B6F02A]">
-      
-      {/* Topographic Isoline Contour Layer */}
-      <TopographicBackground intensity="medium" />
+    <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white">
 
-      {/* ── 01. Ecosystem Dossier Header (Elevate Labs Poster Style) ── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16 relative z-10">
-        
-        {/* Eyebrow: Horizontal Lime Accent Bar */}
-        <div className="flex items-center gap-3.5 mb-5">
-          <span className="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold bg-[#23B272]/15 text-[#D4F838] border border-[#23B272]/30 tracking-widest shrink-0">
-            ACT 01
-          </span>
-          <span className="text-xs sm:text-sm font-bold font-mono tracking-widest uppercase text-white/90">
-            Node Constellation // 360° Operational Mesh
-          </span>
-        </div>
+      {/* ── 01. Hero Section ── */}
+      <section className="pt-40 sm:pt-48 pb-20 sm:pb-28 px-6 sm:px-8 max-w-6xl mx-auto">
+        <div className="max-w-4xl">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-400 mb-8 tracking-wide">
+            <span>Cinema Ecosystem Network</span>
+          </div>
 
-        {/* High-Impact Headline & Editorial Block (No Overlap) */}
-        <div className="max-w-5xl mb-12">
-          <h1 className="text-[clamp(2.75rem,6.5vw,5.25rem)] font-black tracking-tight leading-[0.92] uppercase select-none text-white [letter-spacing:-0.03em] mb-6">
-            THE COMPLETE<br />
-            <span className="text-[#B6F02A] drop-shadow-[0_0_35px_rgba(182,240,42,0.25)]">CINEMA</span><br />
-            CONSTELLATION.
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
+            The complete cinema constellation.
           </h1>
 
-          <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 pt-2">
-            {/* Vertical Lime Bar Quote */}
-            <div className="border-l-3 sm:border-l-4 border-[#B6F02A] pl-5 sm:pl-6 py-1 max-w-2xl">
-              <p className="text-sm sm:text-base text-white/90 font-medium leading-relaxed">
-                DigiSynq does not replace any industry participant. We provide the neutral, asset-light coordination layer that allows creators, crews, facilities, and screens to interface with zero friction.
-              </p>
-            </div>
+          <p className="text-lg sm:text-xl text-zinc-400 font-normal leading-relaxed max-w-3xl mb-12">
+            DigiSynq does not replace any industry participant. We provide the neutral, asset-light coordination layer that allows creators, craft guilds, production facilities, capital, and screens to interface without friction.
+          </p>
 
-            <div className="flex items-center gap-3 shrink-0">
-              <a href="#interactive-mesh" className="btn-primary text-xs px-5 py-3 shadow-[0_0_20px_rgba(182,240,42,0.35)]">
-                Explore The Constellation <ArrowRight size={14} />
-              </a>
-              <Link to="/start" className="btn-secondary text-xs px-4 py-3">
-                Register Node
-              </Link>
-            </div>
+          <div className="flex flex-wrap items-center gap-4">
+            <Link
+              to="/start"
+              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-white text-black font-medium text-sm hover:bg-zinc-200 transition-all shadow-lg hover:scale-[1.02] active:scale-[0.98]"
+            >
+              Plug in your node
+              <ArrowRight size={15} />
+            </Link>
+            <a
+              href="#constellation"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-sm text-zinc-300 transition-all hover:scale-[1.02] active:scale-[0.98]"
+            >
+              Explore constellation
+            </a>
           </div>
         </div>
       </section>
 
-      {/* ── 02. The Interactive 360° Mesh ─────────────────── */}
-      <section id="interactive-mesh" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 scroll-mt-24 relative z-10">
-        <div className="p-6 sm:p-10 rounded-3xl bg-[#090B10] border border-[#23B272]/20 shadow-2xl relative overflow-hidden">
+      {/* ── 02. Interactive Topography Map ── */}
+      <section id="constellation" className="py-24 sm:py-32 border-t border-white/[0.06]">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8">
           
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 mb-8 border-b border-white/[0.08] gap-4">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div>
-              <div className="flex items-center gap-2 mb-2">
-                <span className="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold bg-[#23B272]/15 text-[#D4F838] border border-[#23B272]/30 tracking-widest shrink-0">
-                  ACT 02
-                </span>
-                <span className="text-xs font-mono text-[#52E3A4] uppercase tracking-wider font-bold">
-                  Topological Graph // 12 Nodes
-                </span>
-              </div>
-              <h2 className="text-xl sm:text-3xl font-black text-white tracking-tight uppercase">
-                Interactive Participant Network
+              <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
+                Network Topology
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+                Interactive participant network
               </h2>
             </div>
 
             {/* Filter Pills */}
-            <div className="flex items-center flex-wrap gap-1.5 p-1 rounded-xl bg-black/60 border border-white/10 text-[10px] font-mono">
-              {roles.map((r) => (
+            <div className="flex items-center flex-wrap gap-2">
+              {ROLES.map((r) => (
                 <button
                   key={r.id}
                   type="button"
-                  onClick={() => { setSelectedRole(r.id); playClickSound(); }}
-                  className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+                  onClick={() => setSelectedRole(r.id)}
+                  className={`px-3.5 py-1.5 rounded-full text-xs transition-all cursor-pointer ${
                     selectedRole === r.id
-                      ? 'bg-[#B6F02A] text-[#050608] font-bold shadow-[0_0_12px_rgba(182,240,42,0.35)]'
-                      : 'text-zinc-400 hover:text-white'
+                      ? 'bg-white text-black font-medium'
+                      : 'bg-white/[0.03] border border-white/[0.08] text-zinc-400 hover:text-white'
                   }`}
                 >
                   {r.label}
@@ -119,46 +134,132 @@ export function EcosystemPage() {
             </div>
           </div>
 
-          {/* Full Interactive Canvas */}
-          <div className="w-full">
+          {/* Interactive Visualizer Canvas */}
+          <div className="rounded-3xl bg-[#090b10] border border-white/[0.06] p-8 sm:p-12 mb-16">
             <EcosystemMap size="full" />
           </div>
 
-          {/* Bottom Live Inspector */}
-          <div className="mt-8 pt-6 border-t border-white/[0.08] grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-5 rounded-2xl bg-[#0D281E]/60 border border-[#23B272]/30">
-              <span className="text-[10px] font-mono text-[#B6F02A] uppercase font-bold block mb-1">
-                COORDINATION PRINCIPLE
-              </span>
-              <div className="text-xs text-zinc-300 leading-relaxed">
-                DigiSynq holds zero balance-sheet risk. When two nodes connect through our protocol, value is generated from eliminated friction rather than inflated broker markups.
-              </div>
-            </div>
+          {/* Stakeholder Directory Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {filteredGroups.map((group) => (
+              <div
+                key={group.id}
+                className="p-8 rounded-2xl bg-white/[0.015] border border-white/[0.06] hover:border-white/15 transition-all flex flex-col justify-between space-y-6"
+              >
+                <div>
+                  <h3 className="text-lg font-bold text-white mb-4">
+                    {group.role}
+                  </h3>
 
-            <div className="p-5 rounded-2xl bg-[#0D281E]/60 border border-[#23B272]/30">
-              <span className="text-[10px] font-mono text-[#52E3A4] uppercase font-bold block mb-1">
-                FRACTIONAL LIQUIDITY
-              </span>
-              <div className="text-xs text-zinc-300 leading-relaxed">
-                Independent films access studio-tier technicians and stages on demand, while major facilities monetize floor time that would otherwise sit dark.
-              </div>
-            </div>
+                  <div className="space-y-4 text-xs">
+                    <div>
+                      <span className="text-zinc-500 uppercase tracking-wider font-mono block mb-1">
+                        Core Challenge
+                      </span>
+                      <p className="text-zinc-400 leading-relaxed">
+                        {group.need}
+                      </p>
+                    </div>
 
-            <div className="p-5 rounded-2xl bg-[#0D281E]/60 border border-[#23B272]/30 flex flex-col justify-between">
-              <div>
-                <span className="text-[10px] font-mono text-white/40 uppercase block mb-1">
-                  JOIN THE LIVING NETWORK
-                </span>
-                <div className="text-xs text-zinc-300">
-                  Connect your craft guild, soundstage, capital tranche, or exhibitor circuit.
+                    <div>
+                      <span className="text-zinc-500 uppercase tracking-wider font-mono block mb-1">
+                        Provided Value
+                      </span>
+                      <p className="text-zinc-400 leading-relaxed">
+                        {group.offer}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-white/[0.06]">
+                  <span className="text-emerald-400 text-xs font-mono uppercase tracking-wider block mb-1">
+                    DigiSynq Bridge
+                  </span>
+                  <p className="text-xs text-zinc-300 leading-relaxed">
+                    {group.synqAction}
+                  </p>
                 </div>
               </div>
-              <Link to="/start" className="btn-primary text-xs py-2.5 mt-3 justify-center shadow-[0_0_15px_rgba(182,240,42,0.3)]">
-                Plug In Your Node <ArrowRight size={12} />
-              </Link>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ── 03. Three Pillars of Neutrality ── */}
+      <section className="py-24 sm:py-32 border-t border-white/[0.06]">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8">
+          
+          <div className="max-w-2xl mb-14">
+            <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
+              Operating Principles
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
+              Why neutral coordination works
+            </h2>
+            <p className="text-base text-zinc-400 leading-relaxed">
+              Traditional intermediaries extract rents by monopolizing access. DigiSynq generates value solely by removing frictional waste.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-8 rounded-2xl bg-[#090b10] border border-white/[0.06]">
+              <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider block mb-2">
+                01 // Balance-Sheet Neutral
+              </span>
+              <h3 className="text-lg font-bold text-white mb-3">
+                Zero asset carrying debt
+              </h3>
+              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                DigiSynq does not take out loans to purchase physical camera packages or soundstages. Because we have no idle overhead, we never force bad packages onto creators.
+              </p>
+            </div>
+
+            <div className="p-8 rounded-2xl bg-[#090b10] border border-white/[0.06]">
+              <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider block mb-2">
+                02 // Fractional Liquidity
+              </span>
+              <h3 className="text-lg font-bold text-white mb-3">
+                Unlocking dark capacity
+              </h3>
+              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                Independent productions gain access to tier-one studios and technicians during lull periods at fractional rates, turning dead time into active gross revenue for facilities.
+              </p>
+            </div>
+
+            <div className="p-8 rounded-2xl bg-[#090b10] border border-white/[0.06]">
+              <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider block mb-2">
+                03 // Fair Value Attribution
+              </span>
+              <h3 className="text-lg font-bold text-white mb-3">
+                Aligned economic incentives
+              </h3>
+              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                Every technician, facility operator, and investor receives transparent terms and milestone verification, ensuring fair compensation and predictable theatrical returns.
+              </p>
             </div>
           </div>
 
+        </div>
+      </section>
+
+      {/* ── 04. Call to Action ── */}
+      <section className="py-24 sm:py-32 border-t border-white/[0.06]">
+        <div className="max-w-4xl mx-auto px-6 sm:px-8 text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-6">
+            Connect your node to DigiSynq
+          </h2>
+          <p className="text-base text-zinc-400 leading-relaxed max-w-xl mx-auto mb-10">
+            Whether you operate a soundstage, represent a craft guild, manage private capital, or direct indie features, register your interest to join the synchronized network.
+          </p>
+          <Link
+            to="/start"
+            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-white text-black font-medium text-sm hover:bg-zinc-200 transition-all shadow-xl hover:scale-[1.02] active:scale-[0.98]"
+          >
+            Register your node
+            <ArrowRight size={16} />
+          </Link>
         </div>
       </section>
 

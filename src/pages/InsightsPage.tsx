@@ -1,210 +1,275 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
-import { TopographicBackground } from '../components/TopographicBackground';
-import { playClickSound, playSuccessChime } from '../utils/audio';
+import { ArrowRight, ArrowUpRight, X, Clock, Calendar } from 'lucide-react';
 
 const DETAILED_BRIEFS = [
   {
     id: 'box-office-clashes',
     category: 'Theatrical Yield',
-    code: 'BRIEF // 01',
-    title: 'The Weekend Eviction Dynamic: Why Mid-Budget Cinema Clashes Die in 72 Hours',
+    code: 'Brief 01',
+    title: 'The weekend eviction dynamic: Why mid-budget cinema clashes die in 72 hours',
     readTime: '6 min read',
-    date: 'OCT 2024',
+    date: 'Oct 2024',
     summary: 'An empirical analysis of multiplex screen allocation across top 10 metropolitan circuits. How release calendar clustering costs independent producers up to 68% of their gross domestic return, and how algorithmic demand sync creates defensible release windows.',
+    takeaways: [
+      'Multiplex exhibitors operate on rigid 3-day holdover thresholds; missing opening weekend attendance by 12% triggers an 80% screen cut by Monday.',
+      'Clustering three similar genre titles within a 14-day window reduces average per-screen yield across all three titles by 42%.',
+      'Pre-demand territorial windowing allows independent titles to achieve 2.4x higher seat density by avoiding direct clashes with major studio tentpoles.',
+    ],
   },
   {
     id: 'stage-dark-time',
     category: 'Spatial Economics',
-    code: 'BRIEF // 02',
-    title: 'Dark Floors & Sunk Capital: The 41% Soundstage Utilization Problem',
+    code: 'Brief 02',
+    title: 'Dark floors and sunk capital: The 41% soundstage utilization problem',
     readTime: '8 min read',
-    date: 'NOV 2024',
+    date: 'Nov 2024',
     summary: 'Evaluating traditional multi-month soundstage and LED volume leases against fractional burst-occupancy models. How asset-light production scheduling unlocks $4.2M in annual floor liquidity without construction debt.',
+    takeaways: [
+      'Studio facilities average 41% dark floor time during pre-rigging and strike lulls between marquee long-term leases.',
+      'Rigid lease mandates lock independent productions into expensive external warehouse adaptations that lack soundproofing and power grids.',
+      'Fractional burst-occupancy allows independent films to utilize world-class volume floors during turnaround gaps at 40% below rack rates.',
+    ],
   },
   {
     id: 'guild-parity',
     category: 'Craft Labor',
-    code: 'BRIEF // 03',
-    title: 'The Hidden Network Penalty: De-risking Below-the-Line Crew Assembly',
+    code: 'Brief 03',
+    title: 'The hidden network penalty: De-risking below-the-line crew assembly',
     readTime: '5 min read',
-    date: 'DEC 2024',
-    summary: 'Why closed-circle WhatsApp and agency hiring models inflate line-item labor costs while stranding top-tier technical craftspeople in unbooked lulls. The case for dynamic talent meshes.',
+    date: 'Dec 2024',
+    summary: 'Why closed-circle phone trees and agency hiring models inflate line-item labor costs while stranding top-tier technical craftspeople in unbooked lulls. The case for dynamic talent meshes.',
+    takeaways: [
+      'Producers lose an average of 3.2 weeks during pre-production simply attempting to verify crew availability across informal WhatsApp circles.',
+      'Top-tier cinematographers, gaffers, and sound mixers experience 60-day unbooked lulls between features despite active industry demand.',
+      'Direct verified guild matching eliminates agency placement surcharges while guaranteeing rate parity and milestone payment security.',
+    ],
   },
   {
     id: 'asset-light-financing',
     category: 'Capital Flow',
-    code: 'BRIEF // 04',
-    title: 'Zero Heavy Assets: The Balance Sheet Revolution in Modern Film Studios',
+    code: 'Brief 04',
+    title: 'Zero heavy assets: The balance sheet revolution in modern cinema',
     readTime: '10 min read',
-    date: 'JAN 2025',
+    date: 'Jan 2025',
     summary: 'Why the era of legacy studios owning fleets of cameras, real-estate complexes, and exclusive talent rosters is coming to an end. How coordination protocols outperform asset-heavy holding companies.',
+    takeaways: [
+      'Holding physical equipment depreciation on corporate balance sheets drains working capital needed for packaging and marketing.',
+      'Asset-light cinema entities achieve higher ROIC by focusing purely on orchestration, risk mitigation, and distribution yield.',
+      'Milestone-locked capital covenants eliminate predatory equity surrenders during sound mixing and color finishing.',
+    ],
   },
 ];
 
-const CATEGORIES = ['all', 'Theatrical Yield', 'Spatial Economics', 'Craft Labor', 'Capital Flow'] as const;
+const CATEGORIES = ['All Dispatches', 'Theatrical Yield', 'Spatial Economics', 'Craft Labor', 'Capital Flow'] as const;
 
 export function InsightsPage() {
-  const [activeCategory, setActiveCategory] = useState<string>('all');
+  const [activeCategory, setActiveCategory] = useState<string>('All Dispatches');
   const [readingBrief, setReadingBrief] = useState<typeof DETAILED_BRIEFS[0] | null>(null);
 
-  const filtered = activeCategory === 'all' 
-    ? DETAILED_BRIEFS 
+  // Close modal on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setReadingBrief(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  const filtered = activeCategory === 'All Dispatches'
+    ? DETAILED_BRIEFS
     : DETAILED_BRIEFS.filter(b => b.category === activeCategory);
 
   return (
-    <main className="bg-[#050608] text-[#ECEEF5] pt-28 pb-24 relative overflow-hidden selection:bg-[#B6F02A]/20 selection:text-[#B6F02A]">
-      
-      {/* Topographic Isoline Contour Layer */}
-      <TopographicBackground intensity="subtle" />
+    <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white">
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-
-        {/* ── Minimal Editorial Header ── */}
-        <header className="mb-14">
-          <div className="flex items-center gap-2.5 mb-4">
-            <span className="px-2 py-0.5 rounded text-[9px] font-mono font-bold bg-[#23B272]/15 text-[#D4F838] border border-[#23B272]/30 tracking-widest">
-              ACT 01
-            </span>
-            <span className="text-xs font-mono text-zinc-500 tracking-widest uppercase">
-              Field Telemetry & Observations
-            </span>
+      {/* ── 01. Hero Section ── */}
+      <section className="pt-40 sm:pt-48 pb-20 sm:pb-28 px-6 sm:px-8 max-w-6xl mx-auto">
+        <div className="max-w-4xl">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-400 mb-8 tracking-wide">
+            <span>Theatrical Telemetry & Dispatches</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-4">
-            Theatrical Telemetry.
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
+            Empirical research on cinema fragmentation.
           </h1>
-          <p className="text-sm sm:text-base text-zinc-400 max-w-2xl leading-relaxed">
-            Data-backed investigations into cinema fragmentation, soundstage floor utilization, release window economics, and asset-light coordination.
+
+          <p className="text-lg sm:text-xl text-zinc-400 font-normal leading-relaxed max-w-3xl mb-12">
+            Field investigations into release window cannibalization, dark soundstage floor utilization, guild assembly economics, and asset-light production models.
           </p>
-        </header>
 
-        {/* ── Minimal Category Navigation ── */}
-        <nav aria-label="Filter dispatches by topic" className="flex items-center gap-6 border-b border-white/[0.08] mb-12 pb-3 overflow-x-auto text-xs font-mono scrollbar-none">
-          {CATEGORIES.map((cat) => {
-            const isActive = activeCategory === cat;
-            return (
-              <button
-                key={cat}
-                type="button"
-                onClick={() => { setActiveCategory(cat); playClickSound(); }}
-                className={`pb-2 -mb-3 transition-colors cursor-pointer whitespace-nowrap ${
-                  isActive
-                    ? 'text-[#D4F838] border-b-2 border-[#D4F838] font-bold'
-                    : 'text-zinc-500 hover:text-white'
-                }`}
+          <div className="flex flex-wrap items-center gap-4">
+            <Link
+              to="/start"
+              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-white text-black font-medium text-sm hover:bg-zinc-200 transition-all shadow-lg hover:scale-[1.02] active:scale-[0.98]"
+            >
+              Request project telemetry
+              <ArrowRight size={15} />
+            </Link>
+            <a
+              href="#dispatches"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-sm text-zinc-300 transition-all hover:scale-[1.02] active:scale-[0.98]"
+            >
+              Read field dispatches
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 02. Dispatches Section ── */}
+      <section id="dispatches" className="py-24 sm:py-32 border-t border-white/[0.06]">
+        <div className="max-w-5xl mx-auto px-6 sm:px-8">
+
+          {/* Category Tabs */}
+          <div className="flex items-center gap-2 pb-6 mb-12 border-b border-white/[0.06] overflow-x-auto scrollbar-none">
+            {CATEGORIES.map((cat) => {
+              const isActive = activeCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-4 py-2 rounded-full text-xs transition-all cursor-pointer whitespace-nowrap ${
+                    isActive
+                      ? 'bg-white text-black font-medium'
+                      : 'bg-white/[0.03] border border-white/[0.08] text-zinc-400 hover:text-white'
+                  }`}
+                >
+                  {cat}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Editorial Articles List */}
+          <div className="divide-y divide-white/[0.06]">
+            {filtered.map((brief) => (
+              <article
+                key={brief.id}
+                onClick={() => setReadingBrief(brief)}
+                className="group py-10 sm:py-12 flex flex-col md:flex-row md:items-start justify-between gap-8 cursor-pointer hover:bg-white/[0.015] -mx-4 px-4 sm:-mx-6 sm:px-6 rounded-2xl transition-all"
               >
-                {cat === 'all' ? 'All Dispatches' : cat}
-              </button>
-            );
-          })}
-        </nav>
+                <div className="flex-1 max-w-3xl space-y-3">
+                  <div className="flex items-center gap-3 text-xs font-mono text-zinc-500">
+                    <span className="text-emerald-400 font-medium">{brief.code}</span>
+                    <span>•</span>
+                    <span>{brief.category}</span>
+                    <span>•</span>
+                    <span>{brief.date}</span>
+                  </div>
 
-        {/* ── Minimal Editorial List ── */}
-        <section aria-label="Field reports" className="divide-y divide-white/[0.06] border-y border-white/[0.06]">
-          {filtered.map((brief) => (
-            <article
-              key={brief.id}
-              onClick={() => { setReadingBrief(brief); playSuccessChime(); }}
-              className="group py-8 sm:py-9 flex flex-col md:flex-row md:items-start justify-between gap-6 cursor-pointer hover:bg-white/[0.015] -mx-4 px-4 sm:-mx-6 sm:px-6 rounded-2xl transition-colors"
-            >
-              <div className="flex-1 max-w-3xl space-y-2.5">
-                <div className="flex items-center gap-3 text-[11px] font-mono">
-                  <span className="text-[#D4F838] font-bold">{brief.code}</span>
-                  <span className="text-zinc-700">•</span>
-                  <span className="text-zinc-400">{brief.category}</span>
-                  <span className="text-zinc-700">•</span>
-                  <span className="text-zinc-500">{brief.date}</span>
+                  <h2 className="text-xl sm:text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors leading-snug">
+                    {brief.title}
+                  </h2>
+
+                  <p className="text-sm text-zinc-400 leading-relaxed line-clamp-2">
+                    {brief.summary}
+                  </p>
                 </div>
 
-                <h2 className="text-lg sm:text-xl font-bold text-white group-hover:text-[#D4F838] transition-colors leading-snug">
-                  {brief.title}
-                </h2>
+                <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-500 group-hover:text-white transition-colors shrink-0 pt-2">
+                  <span>{brief.readTime}</span>
+                  <ArrowUpRight size={15} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </div>
+              </article>
+            ))}
+          </div>
 
-                <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed line-clamp-2">
-                  {brief.summary}
-                </p>
-              </div>
+        </div>
+      </section>
 
-              <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-500 group-hover:text-[#D4F838] transition-colors shrink-0 pt-1">
-                <span>{brief.readTime}</span>
-                <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </div>
-            </article>
-          ))}
-        </section>
-
-        {/* ── Minimal Dossier Reading Modal ── */}
-        {readingBrief && (
-          <div 
-            className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
-            onClick={() => setReadingBrief(null)}
+      {/* ── 03. Reading Modal ── */}
+      {readingBrief && (
+        <div
+          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6"
+          onClick={() => setReadingBrief(null)}
+        >
+          <div
+            className="max-w-2xl w-full p-8 sm:p-10 rounded-3xl bg-[#090b10] border border-white/10 shadow-2xl relative space-y-8 max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
           >
-            <div 
-              className="max-w-2xl w-full p-6 sm:p-9 rounded-2xl bg-[#08090C] border border-white/10 shadow-2xl relative space-y-6 max-h-[85vh] overflow-y-auto"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="flex items-center justify-between pb-4 border-b border-white/[0.08] text-xs font-mono">
-                <div className="flex items-center gap-2">
-                  <span className="text-[#D4F838] font-bold">{readingBrief.code}</span>
-                  <span className="text-zinc-700">•</span>
-                  <span className="text-zinc-400">{readingBrief.category}</span>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setReadingBrief(null)}
-                  className="text-zinc-500 hover:text-white transition cursor-pointer"
-                >
-                  [ESC / CLOSE]
-                </button>
+            <div className="flex items-center justify-between pb-6 border-b border-white/[0.06] text-xs font-mono">
+              <div className="flex items-center gap-2 text-zinc-400">
+                <span className="text-emerald-400 font-medium">{readingBrief.code}</span>
+                <span>•</span>
+                <span>{readingBrief.category}</span>
               </div>
+              <button
+                type="button"
+                onClick={() => setReadingBrief(null)}
+                className="w-8 h-8 rounded-full bg-white/[0.05] border border-white/10 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-white/10 transition cursor-pointer"
+                aria-label="Close modal"
+              >
+                <X size={14} />
+              </button>
+            </div>
 
-              <div>
-                <h2 className="text-xl sm:text-2xl font-bold text-white leading-snug">
-                  {readingBrief.title}
-                </h2>
-                <div className="text-xs font-mono text-zinc-500 mt-2">
-                  {readingBrief.date} • {readingBrief.readTime}
-                </div>
-              </div>
-
-              <div className="text-sm text-zinc-300 leading-relaxed border-l-2 border-[#D4F838] pl-4 py-0.5">
-                {readingBrief.summary}
-              </div>
-
-              <div className="space-y-3 pt-4 border-t border-white/[0.08]">
-                <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-[#D4F838]">
-                  // Operational Recommendations
-                </h3>
-                <ul className="space-y-2.5 text-xs sm:text-sm text-zinc-400 leading-relaxed list-disc list-inside">
-                  <li>Eliminate rigid multi-month soundstage bookings in favor of synchronized burst-occupancy windows.</li>
-                  <li>Route independent theatrical releases using localized pre-demand velocity rather than simultaneous multi-territory blind saturation.</li>
-                  <li>Implement milestone-backed finishing capital covenants to prevent predatory equity surrender during sound mix and final grading.</li>
-                </ul>
-              </div>
-
-              <div className="pt-6 border-t border-white/[0.08] flex items-center justify-between">
-                <Link
-                  to="/start"
-                  onClick={() => setReadingBrief(null)}
-                  className="btn-primary text-xs px-4 py-2"
-                >
-                  Apply to Project <ArrowRight size={14} />
-                </Link>
-                <button
-                  type="button"
-                  onClick={() => setReadingBrief(null)}
-                  className="text-xs font-mono text-zinc-500 hover:text-white transition"
-                >
-                  Close
-                </button>
+            <div className="space-y-3">
+              <h2 className="text-2xl sm:text-3xl font-bold text-white leading-tight">
+                {readingBrief.title}
+              </h2>
+              <div className="flex items-center gap-4 text-xs font-mono text-zinc-500">
+                <span className="flex items-center gap-1.5"><Calendar size={13} /> {readingBrief.date}</span>
+                <span>•</span>
+                <span className="flex items-center gap-1.5"><Clock size={13} /> {readingBrief.readTime}</span>
               </div>
             </div>
-          </div>
-        )}
 
-      </div>
+            <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
+              {readingBrief.summary}
+            </p>
+
+            <div className="space-y-4 pt-6 border-t border-white/[0.06]">
+              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 block font-medium">
+                Key Empirical Observations
+              </span>
+              <ul className="space-y-3 text-xs sm:text-sm text-zinc-400 leading-relaxed list-disc list-inside">
+                {readingBrief.takeaways.map((item, idx) => (
+                  <li key={idx} className="leading-relaxed">{item}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="pt-6 border-t border-white/[0.06] flex items-center justify-between">
+              <Link
+                to="/start"
+                onClick={() => setReadingBrief(null)}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-medium text-xs hover:bg-zinc-200 transition-all shadow-md"
+              >
+                Apply findings to project
+                <ArrowRight size={13} />
+              </Link>
+              <button
+                type="button"
+                onClick={() => setReadingBrief(null)}
+                className="text-xs text-zinc-500 hover:text-white transition cursor-pointer"
+              >
+                Close dispatch
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── 04. Call to Action ── */}
+      <section className="py-24 sm:py-32 border-t border-white/[0.06]">
+        <div className="max-w-4xl mx-auto px-6 sm:px-8 text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-6">
+            Need custom telemetry for an upcoming film?
+          </h2>
+          <p className="text-base text-zinc-400 leading-relaxed max-w-xl mx-auto mb-10">
+            We run pre-production friction audits and theatrical release window simulations for select independent features and slates.
+          </p>
+          <Link
+            to="/start"
+            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-white text-black font-medium text-sm hover:bg-zinc-200 transition-all shadow-xl hover:scale-[1.02] active:scale-[0.98]"
+          >
+            Commission telemetry audit
+            <ArrowRight size={16} />
+          </Link>
+        </div>
+      </section>
+
     </main>
   );
 }
