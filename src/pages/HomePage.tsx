@@ -97,18 +97,18 @@ export function HomePage() {
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             <span className="font-mono text-emerald-400 font-medium">FIRST OF ITS KIND</span>
             <span className="text-zinc-600">//</span>
-            <span className="text-white font-medium">Asset-Light Entertainment Orchestration &amp; Labs</span>
+            <span className="text-white font-medium">The Asset-Light Entertainment Pipeline &amp; Labs</span>
           </div>
 
           {/* Master Headline */}
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            A first-of-its-kind network.<br />
-            <span className="text-zinc-400 font-light">We don’t build studios. We synchronize them.</span>
+            The pipeline for modern entertainment.<br />
+            <span className="text-zinc-400 font-light">We don’t build studios. We are the pipeline that synchronizes them.</span>
           </h1>
 
           {/* 10-Second Thesis */}
           <p className="text-lg sm:text-xl text-zinc-300 leading-relaxed max-w-3xl font-normal mb-10">
-            DigiSynq is the world’s first asset-light coordination network and experimental laboratory for entertainment. We route production demand to unbooked soundstages, top-tier guild talent, and post pipelines across the global ecosystem — while actively pioneering next-generation workflows through <span className="text-white font-medium">Synq Labs</span>: <em>We are labs. We experiment.</em>
+            Entertainment projects don’t stall from a lack of creative vision. They stall when the pipeline breaks between script, soundstages, crew, post-finishing, capital, and audience distribution. DigiSynq is the world’s first asset-light entertainment pipeline and experimental laboratory — coordinating every stage into an agile, continuous flow with zero fixed asset debt: <em>We are orchestrators. We are labs. We experiment.</em>
           </p>
 
           {/* Clean Restrained CTAs */}

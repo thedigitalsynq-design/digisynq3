@@ -73,18 +73,18 @@ export function TheSynqPage() {
         <div className="max-w-4xl">
           <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-300 mb-8 tracking-wide">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            <span className="font-mono text-zinc-400">THE SYNQ</span>
+            <span className="font-mono text-emerald-400 font-medium">THE SYNQ PIPELINE</span>
             <span className="text-zinc-600">//</span>
             <span className="text-white font-medium">Architecture &amp; Orchestration Codex</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            The operating system<br />
+            The end-to-end pipeline<br />
             <span className="text-zinc-400 font-light">for entertainment capacity.</span>
           </h1>
 
           <p className="text-lg sm:text-xl text-zinc-300 leading-relaxed max-w-3xl font-normal mb-10">
-            Entertainment possesses immense creative genius, cutting-edge facilities, and active capital. DigiSynq is the asset-light coordination layer that aligns existing industry capacity with entertainment demand — without requiring DigiSynq to hold balance-sheet real estate or camera equipment debt.
+            Entertainment possesses immense creative genius, cutting-edge facilities, and active capital. DigiSynq is the asset-light pipeline that unifies fragmented industry capacity into an uninterrupted flow — connecting development, partner soundstages, cloud dailies, post finishing, and audience release with zero balance-sheet equipment debt.
           </p>
 
           <div className="flex flex-wrap items-center gap-4">
