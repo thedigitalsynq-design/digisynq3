@@ -7,6 +7,7 @@ const NAV_LINKS = [
   { href: '/the-synq', label: 'The Synq' },
   { href: '/how-it-works', label: 'How It Works' },
   { href: '/ecosystem', label: 'Ecosystem' },
+  { href: '/runbook', label: 'Runbook' },
   { href: '/workshops', label: 'Workshops' },
   { href: '/insights', label: 'Insights' },
   { href: '/about', label: 'About' },

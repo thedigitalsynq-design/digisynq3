@@ -12,6 +12,7 @@ import { StartSynqPage } from './pages/StartSynqPage';
 import { AboutPage } from './pages/AboutPage';
 import { WorkshopsPage } from './pages/WorkshopsPage';
 import { InsightsPage } from './pages/InsightsPage';
+import { RunbookPage } from './pages/RunbookPage';
 
 // ── Public website layout wrapper ────────────────────────
 function WebsiteLayout({ children }: { children: React.ReactNode }) {
@@ -48,6 +49,7 @@ function AppRoutes() {
         <Route path="/workshops" element={<WorkshopsPage />} />
         <Route path="/insights" element={<InsightsPage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/runbook" element={<RunbookPage />} />
         <Route path="/start" element={<StartSynqPage />} />
         {/* Legacy & /matrix routes redirect home */}
         <Route path="*" element={<Navigate to="/" replace />} />

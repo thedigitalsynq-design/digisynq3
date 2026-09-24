@@ -11,6 +11,7 @@ const FOOTER_COLUMNS = [
       { href: '/the-synq', label: 'The Synq' },
       { href: '/how-it-works', label: 'How It Works' },
       { href: '/ecosystem', label: 'Ecosystem' },
+      { href: '/runbook', label: 'Business Runbook' },
       { href: '/the-synq#problem-engine', label: 'Problem Engine' },
     ],
   },
