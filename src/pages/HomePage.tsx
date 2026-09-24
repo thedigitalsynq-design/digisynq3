@@ -102,8 +102,8 @@ export function HomePage() {
 
           {/* Master Headline */}
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            The pipeline for modern entertainment.<br />
-            <span className="text-zinc-400 font-light">We don’t build studios. We are the pipeline that synchronizes them.</span>
+            The Living Pipeline.<br />
+            <span className="text-zinc-400 font-light">Entertainment in flow.</span>
           </h1>
 
           {/* 10-Second Thesis */}
@@ -167,7 +167,8 @@ export function HomePage() {
             Category Genesis
           </span>
           <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white [letter-spacing:-0.025em] mb-4">
-            Why DigiSynq is the first of its kind.
+            The Third Epoch.<br />
+            <span className="text-zinc-400 font-light">From concrete to current.</span>
           </h2>
           <p className="text-zinc-400 text-sm leading-relaxed">
             Entertainment historically oscillated between two broken paradigms. DigiSynq pioneers the third: an asset-light coordination layer combined with empirical laboratory experimentation.
@@ -233,7 +234,8 @@ export function HomePage() {
             The Business Mechanism
           </span>
           <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white [letter-spacing:-0.025em] mb-4">
-            How DigiSynq works in four moves.
+            Four Pulses.<br />
+            <span className="text-zinc-400 font-light">One unbroken stream.</span>
           </h2>
           <p className="text-zinc-400 text-sm leading-relaxed">
             Eliminating billions in idle production friction by synchronizing existing infrastructure with active demand.
@@ -289,7 +291,8 @@ export function HomePage() {
             <span>LIFECYCLE AGILITY // ZERO FRICTION</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white [letter-spacing:-0.03em] mb-4">
-            Any stakeholder. Enter at any stage.
+            Zero Threshold.<br />
+            <span className="text-zinc-400 font-light">Enter the stream anywhere.</span>
           </h2>
           <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
             You don’t have to start with DigiSynq on Day Zero. Whether you're an asset owner with dark soundstage days next month, an independent producer facing a mid-shoot post stall, or a director needing virtual production pre-vis — any stakeholder can plug into the DigiSynq pipeline at the exact moment of need.
@@ -449,7 +452,8 @@ export function HomePage() {
             Commercial Architecture
           </span>
           <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white [letter-spacing:-0.025em] mb-4">
-            Economic alignment across the ecosystem.
+            Symbiotic Current.<br />
+            <span className="text-zinc-400 font-light">Velocity over rent-seeking.</span>
           </h2>
           <p className="text-zinc-400 text-sm leading-relaxed">
             DigiSynq generates value through coordination efficiency, not by extracting landlord rents on physical equipment.
@@ -506,7 +510,8 @@ export function HomePage() {
           Initiate Orchestration
         </span>
         <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white [letter-spacing:-0.03em] mb-6">
-          Bring us your production constraint.
+          Ignite the Flow.<br />
+          <span className="text-zinc-400 font-light">Tell us what needs to move.</span>
         </h2>
         <p className="text-base sm:text-lg text-zinc-400 max-w-xl mx-auto leading-relaxed mb-10 font-normal">
           Whether you need soundstage turnaround access, guild department heads, or virtual production sandbox validation — we synchronize what entertainment needs.

@@ -79,8 +79,8 @@ export function TheSynqPage() {
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            The end-to-end pipeline<br />
-            <span className="text-zinc-400 font-light">for entertainment capacity.</span>
+            The Living Codex.<br />
+            <span className="text-zinc-400 font-light">The architecture of capacity.</span>
           </h1>
 
           <p className="text-lg sm:text-xl text-zinc-300 leading-relaxed max-w-3xl font-normal mb-10">
@@ -112,7 +112,8 @@ export function TheSynqPage() {
             Comparative Architecture
           </span>
           <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white [letter-spacing:-0.025em] mb-4">
-            Two distinct operating models.
+            Two Destinies.<br />
+            <span className="text-zinc-400 font-light">Silos versus synchronization.</span>
           </h2>
           <p className="text-zinc-400 text-sm leading-relaxed">
             The conventional model relies on fragmented phone trees and unilateral risk. DigiSynq provides an asset-light orchestration layer routing demand to verified capacity.
@@ -198,7 +199,8 @@ export function TheSynqPage() {
             Systemic Gaps &amp; Use Cases
           </span>
           <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white [letter-spacing:-0.025em] mb-4">
-            Where entertainment leaks capacity.
+            The Fractures.<br />
+            <span className="text-zinc-400 font-light">Where velocity leaks.</span>
           </h2>
           <p className="text-zinc-400 text-sm leading-relaxed">
             The resources to produce extraordinary entertainment exist today across the ecosystem. What has been missing is the coordination layer.
@@ -248,7 +250,8 @@ export function TheSynqPage() {
             System Topology
           </span>
           <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white [letter-spacing:-0.025em] mb-4">
-            The three operational layers.
+            Three Strata.<br />
+            <span className="text-zinc-400 font-light">Discovery, mesh, covenant.</span>
           </h2>
           <p className="text-zinc-400 text-sm leading-relaxed">
             How DigiSynq translates distributed entertainment capacity into predictable, scalable production velocity.
@@ -281,7 +284,8 @@ export function TheSynqPage() {
       {/* ── 05. Final Invitation ── */}
       <section className="py-28 sm:py-36 px-6 sm:px-8 max-w-4xl mx-auto text-center border-t border-white/[0.06]">
         <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-6">
-          Ready to eliminate coordination friction?
+          Sync the Current.<br />
+          <span className="text-zinc-400 font-light">Unify your production pipeline.</span>
         </h2>
         <p className="text-base text-zinc-400 max-w-lg mx-auto leading-relaxed mb-10">
           Have an entertainment project, resource requirement, or capacity opportunity? Start a Synq and tell us what needs to be connected.
