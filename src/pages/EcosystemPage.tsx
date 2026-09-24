@@ -3,67 +3,179 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, Check, Users, Film, Radio, Shield, Sparkles } from 'lucide-react';
 import { EcosystemMap } from '../components/EcosystemMap';
 
-const STAKEHOLDER_GROUPS = [
+interface Stakeholder {
+  id: string;
+  category: 'creators' | 'talent' | 'facilities' | 'services' | 'capital' | 'distribution';
+  role: string;
+  scope: string;
+  need: string;
+  offer: string;
+  synqAction: string;
+}
+
+const ALL_STAKEHOLDERS: Stakeholder[] = [
   {
-    id: 'creative',
-    role: 'Creators & Producers',
-    need: 'Access to verified talent, connected studio capacity, and packaging support without surrendering creative autonomy or excessive equity.',
-    offer: 'Original visionary IP, package attachments, and directing talent ready for streamlined production.',
-    synqAction: 'Route project demand to verified talent, partner facilities, and specialized services tailored to project requirements.',
+    id: 'producers',
+    category: 'creators',
+    role: 'Independent Producers & Banners',
+    scope: 'Features, Series & Documentaries',
+    need: 'Rapid crew assembly, connected stage capacity, transparent budget pacing, and viable distribution pathways.',
+    offer: 'Packaged entertainment IP, talent attachments, production management, and active industry demand.',
+    synqAction: 'Match verified crew availability, route to partner facilities during turnaround windows, and coordinate milestone tranches.',
   },
   {
-    id: 'technical',
-    role: 'Talent & Technical Crews',
-    need: 'Continuous booked days, transparent compensation, and elimination of closed-circle hiring bottlenecks.',
-    offer: 'Master-level creative craft, technical heads, camera operators, sound supervisors, and production crew expertise.',
-    synqAction: 'Roster availability indexing connecting craftspeople and technicians directly to funded entertainment productions.',
+    id: 'directors',
+    category: 'creators',
+    role: 'Directors & Showrunners',
+    scope: 'Narrative & Episodic Leadership',
+    need: 'Creative alignment with technical department heads, reliable volume/stage technology, and uninterrupted production flow.',
+    offer: 'Visual storytelling vision, directing craft, script execution, and cross-department creative leadership.',
+    synqAction: 'Discover specialized department heads, align pre-vis assets with virtual stages, and eliminate coordination drag.',
   },
   {
-    id: 'infrastructure',
-    role: 'Studios, Stages & Venues',
-    need: 'Better floor utilization and monetization of dark dates across soundstages, LED volumes, and specialized venues.',
-    offer: 'World-class physical soundstages, lighting packages, virtual production volumes, and shooting locations.',
-    synqAction: 'Route production demand into available turnaround windows, optimizing facility floor utilization without asset debt.',
+    id: 'writers',
+    category: 'creators',
+    role: 'Screenwriters & IP Holders',
+    scope: 'Original Scripts, Books & Formats',
+    need: 'Packaging partners, transparent rights monetization, and realistic technical feasibility modeling.',
+    offer: 'High-value narrative IP, worldbuilding concepts, adaptations, and franchise character universes.',
+    synqAction: 'Connect scripts to active production demand and pre-vetted packaging capacity without predatory terms.',
   },
   {
-    id: 'post',
-    role: 'Production Services, Post & VFX',
-    need: 'Standardized turnovers, clear scope alignment, and milestone-backed payment security.',
-    offer: 'Editorial suites, color finishing, Dolby Atmos mixing, animation, and visual effects pipelines.',
-    synqAction: 'Turnaround telemetry and milestone-tied covenants to ensure continuous, unhalted post-production workflows.',
+    id: 'performers',
+    category: 'talent',
+    role: 'Actors, Performers & Voice Talent',
+    scope: 'Cast & Voice Characterization',
+    need: 'Clear scheduling visibility, verified production covenants, and prompt milestone compensation.',
+    offer: 'On-screen charisma, performance craft, character voiceover, and audience engagement power.',
+    synqAction: 'Coordinate booking schedules with production timetables and ensure milestone-backed compensation security.',
   },
   {
-    id: 'capital',
-    role: 'Capital & Commercial Partners',
-    need: 'Milestone certainty, budget transparency, and mitigation of completion risk.',
-    offer: 'Production financing, finishing debt, gap equity, completion guarantees, and brand sponsorships.',
-    synqAction: 'Milestone governance and scene turnover verification that systematically unlock capital tranches.',
+    id: 'cinematography',
+    category: 'talent',
+    role: 'Cinematographers & Camera Units',
+    scope: 'DPs, Camera Operators & DITs',
+    need: 'Verified project calendars, rate parity, and access to premium optics and camera packages without delay.',
+    offer: 'Master lighting, framing, lens selection, color science, and camera department execution.',
+    synqAction: 'Index availability across guild rosters, connecting DPs directly to funded productions without agency commission tolls.',
   },
   {
-    id: 'distribution',
-    role: 'Distribution & Audience Platforms',
-    need: 'Compelling content with targeted pre-demand rather than empty screens or underperforming streaming launches.',
-    offer: 'Theatrical circuits, OTT/streaming platforms, television networks, digital channels, and event distribution.',
-    synqAction: 'Programmatic release windowing and pre-demand density matching across theatrical and digital channels.',
+    id: 'lighting-grip',
+    category: 'talent',
+    role: 'Grip, Electric & Lighting Units',
+    scope: 'Gaffers, Key Grips & Rigging',
+    need: 'Continuous booked shoot dates, verified safety standards, and transparent crew packaging.',
+    offer: 'Complex on-set rigging, power management, lighting control, and technical safety on set.',
+    synqAction: 'Coordinate certified lighting and rigging units to active production schedules, reducing pre-rigging idle days.',
+  },
+  {
+    id: 'art-department',
+    category: 'talent',
+    role: 'Production Design & Art Direction',
+    scope: 'Set Design, Props & Construction',
+    need: 'Early access to stage floor dimensions, clear build timelines, and integrated pre-visualization.',
+    offer: 'Worldbuilding, practical set construction, prop curation, and visual aesthetic continuity.',
+    synqAction: 'Harmonize practical set building with available partner stage slots and digital volume assets.',
+  },
+  {
+    id: 'soundstages',
+    category: 'facilities',
+    role: 'Soundstages & Studio Lots',
+    scope: 'Acoustic Stages & Backlot Facilities',
+    need: 'Floor monetization during dark turnaround dates between marquee tenant leases.',
+    offer: 'World-class acoustic shooting stages, lighting grids, power plants, and production offices.',
+    synqAction: 'Route production demand to available partner floor dates, creating high-occupancy liquidity.',
+  },
+  {
+    id: 'virtual-volumes',
+    category: 'facilities',
+    role: 'Virtual Production & LED Volumes',
+    scope: 'In-Camera VFX Stages & Venues',
+    need: 'High volume utilization between major film cycles and standardized pre-shoot asset testing.',
+    offer: 'State-of-the-art LED volumes, camera tracking systems, real-time render nodes, and volume technicians.',
+    synqAction: 'Connect independent productions to fractional LED volume windows with pre-calibrated virtual asset suites.',
+  },
+  {
+    id: 'equipment-houses',
+    category: 'facilities',
+    role: 'Equipment Houses & Rentals',
+    scope: 'Camera Packages, Grip & Mobile Power',
+    need: 'High utilization rates for specialized hardware inventory between major studio bookings.',
+    offer: 'State-of-the-art digital cinema cameras, anamorphic lenses, cranes, dollies, and LED lighting fixtures.',
+    synqAction: 'Match available equipment inventory to production schedules on fractional, flexible terms.',
+  },
+  {
+    id: 'post-editorial',
+    category: 'services',
+    role: 'Post-Production & Editorial Labs',
+    scope: 'Offline Edit, Conforming & DI Color',
+    need: 'Standardized camera-to-cloud dailies turnovers, scope clarity, and milestone-backed payment escrow.',
+    offer: 'Master editorial suites, color finishing, calibrated HDR grading theaters, and master delivery pipelines.',
+    synqAction: 'Streamline ingest telemetry from set to post and tie milestone releases to approved turnovers.',
+  },
+  {
+    id: 'vfx-animation',
+    category: 'services',
+    role: 'VFX & Animation Studios',
+    scope: '3D CG, Compositing & Pre-Vis',
+    need: 'Locked plates, clear turnover deadlines, and protection against uncompensated scope shifts.',
+    offer: 'Photoreal CG environments, digital doubles, creature animation, and complex multi-pass compositing.',
+    synqAction: 'Enforce structured turnover covenants and milestone escrow to keep VFX delivery strictly on schedule.',
+  },
+  {
+    id: 'music-audio',
+    category: 'services',
+    role: 'Composers, Sound & Audio Suites',
+    scope: 'Original Score, Foley & Dolby Atmos',
+    need: 'Synchronized picture locks, prompt cue turnovers, and Dolby Atmos mixing theater access.',
+    offer: 'Original orchestral scoring, spatial audio mixing, sound design, Foley, and music licensing.',
+    synqAction: 'Coordinate audio post schedules directly with picture editorial, eliminating late-stage delivery scrambles.',
+  },
+  {
+    id: 'financiers',
+    category: 'capital',
+    role: 'Financiers & Gap Capital',
+    scope: 'Mezzanine Debt, Equity & Bonds',
+    need: 'Burn-rate transparency, verified deliverable verification, and mitigation of completion risk.',
+    offer: 'Production cash flow, finishing debt, bridge financing, tax credit financing, and completion insurance.',
+    synqAction: 'Real-time milestone telemetry that unlocks capital tranches systematically upon verified scene and shot delivery.',
+  },
+  {
+    id: 'brands-sponsors',
+    category: 'capital',
+    role: 'Brands & Commercial Sponsors',
+    scope: 'Product Integration & Co-Marketing',
+    need: 'Brand-safe narrative environments, seamless product integration, and measurable audience reach.',
+    offer: 'Non-dilutive production capital, co-marketing budgets, and promotional distribution reach.',
+    synqAction: 'Match brand partners with verified productions in pre-production, aligning storylines before cameras roll.',
+  },
+  {
+    id: 'exhibitors-platforms',
+    category: 'distribution',
+    role: 'Exhibitors, Streamers & Broadcasters',
+    scope: 'Theatrical Circuits, OTT & FAST Channels',
+    need: 'High-quality verified content with targeted pre-demand rather than empty screens or underperforming releases.',
+    offer: 'DCI-compliant cinema screens, premium formats, global OTT subscriber reach, and broadcast syndication.',
+    synqAction: 'Programmatic release windowing and territorial demand density matching to maximize audience return.',
   },
 ];
 
-const ROLES = [
-  { id: 'all', label: 'All Stakeholders' },
-  { id: 'creative', label: 'Creators & Producers' },
-  { id: 'technical', label: 'Talent & Crew' },
-  { id: 'infrastructure', label: 'Studios & Venues' },
-  { id: 'post', label: 'Services & Post' },
+const FILTER_ROLES = [
+  { id: 'all', label: 'All Stakeholders (16)' },
+  { id: 'creators', label: 'Creators & Producers' },
+  { id: 'talent', label: 'Talent & Crew Guilds' },
+  { id: 'facilities', label: 'Studios, Stages & Venues' },
+  { id: 'services', label: 'Post, VFX & Audio' },
   { id: 'capital', label: 'Capital & Commercial' },
-  { id: 'distribution', label: 'Distribution & Audience' },
+  { id: 'distribution', label: 'Exhibition & Platforms' },
 ];
 
 export function EcosystemPage() {
   const [selectedRole, setSelectedRole] = useState<string>('all');
 
   const filteredGroups = selectedRole === 'all'
-    ? STAKEHOLDER_GROUPS
-    : STAKEHOLDER_GROUPS.filter(g => g.id === selectedRole);
+    ? ALL_STAKEHOLDERS
+    : ALL_STAKEHOLDERS.filter(g => g.category === selectedRole);
 
   return (
     <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white">
@@ -200,7 +312,7 @@ export function EcosystemPage() {
 
             {/* Filter Pills */}
             <div className="flex items-center flex-wrap gap-2">
-              {ROLES.map((r) => (
+              {FILTER_ROLES.map((r) => (
                 <button
                   key={r.id}
                   type="button"
@@ -223,13 +335,22 @@ export function EcosystemPage() {
           </div>
 
           {/* Stakeholder Directory Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {filteredGroups.map((group) => (
               <div
                 key={group.id}
                 className="p-8 rounded-2xl bg-white/[0.015] border border-white/[0.06] hover:border-white/15 transition-all flex flex-col justify-between space-y-6"
               >
                 <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400">
+                      {group.category}
+                    </span>
+                    <span className="text-[10px] font-mono text-zinc-500">
+                      {group.scope}
+                    </span>
+                  </div>
+
                   <h3 className="text-lg font-bold text-white mb-4">
                     {group.role}
                   </h3>

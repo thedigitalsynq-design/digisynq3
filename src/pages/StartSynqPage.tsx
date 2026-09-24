@@ -27,14 +27,25 @@ const EMPTY_FORM: FormState = {
 };
 
 const WHO_OPTIONS = [
-  'Creator / Director / Writer',
-  'Producer / Production Company',
-  'Crew & Technical Department Head',
-  'Studio, Stage & Venue Operator',
-  'Post-Production & VFX Facility',
-  'Financier / Capital Partner',
-  'Distributor / Platform / Exhibitor',
-  'Brand / Commercial Sponsor',
+  'Independent Producer / Production Banner',
+  'Director / Showrunner',
+  'Screenwriter / Story Developer / IP Holder',
+  'Actor / Performer / Voice Artist',
+  'Cinematographer / Camera Unit Head',
+  'Gaffer / Grip / Lighting Unit',
+  'Production Designer / Art Director',
+  'Soundstage / Studio Lot Operator',
+  'Virtual Production / LED Volume Facility',
+  'Equipment Rental House',
+  'Editorial / Color Finishing Suite',
+  'VFX / Animation Studio',
+  'Composer / Music Supervisor / Audio Mixer',
+  'Financier / Gap Debt / Completion Bonder',
+  'Theatrical Exhibitor / Cinema Circuit',
+  'OTT Platform / Broadcaster / Distributor',
+  'Brand Partner / Commercial Sponsor',
+  'Live Event / Festival Organizer',
+  'Other Entertainment Stakeholder',
 ];
 
 const STAGE_OPTIONS = [
