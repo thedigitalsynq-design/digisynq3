@@ -1,603 +1,365 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, Check, RefreshCw } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { ArrowRight, ArrowUpRight, Sparkles, Terminal, Activity, Layers, CheckCircle2, ShieldCheck, Zap } from 'lucide-react';
 
-// ── Interactive Coordination Canvas Data ───────────────────
-interface EcosystemNode {
-  id: string;
-  name: string;
-  role: string;
-  frictionState: string;
-  synqState: string;
-  frictionMetric: string;
-  synqMetric: string;
-}
-
-const ECOSYSTEM_NODES: EcosystemNode[] = [
-  {
-    id: 'talent',
-    name: 'Creative Talent & Crews',
-    role: 'Creative & Technical',
-    frictionState: 'Unverified availability and reliance on closed personal networks',
-    synqState: 'Direct verified roster matching and transparent rate parity',
-    frictionMetric: 'Lengthy assembly delays',
-    synqMetric: 'Direct verified locking',
-  },
-  {
-    id: 'stages',
-    name: 'Studios, Stages & Venues',
-    role: 'Physical Infrastructure',
-    frictionState: 'Unused stage days, dark floors, and rigid multi-month lease mandates',
-    synqState: 'Dynamic access to available partner facilities and turnaround slots',
-    frictionMetric: 'Unbooked dark time',
-    synqMetric: 'Optimized facility utilization',
-  },
-  {
-    id: 'capital',
-    name: 'Production & Finishing Capital',
-    role: 'Financial Flow',
-    frictionState: 'Opaque tranches and high-risk bridge financing terms',
-    synqState: 'Milestone-tied capital routing released on verified deliverables',
-    frictionMetric: 'Financing uncertainty',
-    synqMetric: 'Milestone-backed security',
-  },
-  {
-    id: 'post',
-    name: 'Post, VFX & Sound',
-    role: 'Technical Finishing',
-    frictionState: 'Handoff delays, scope misalignment, and stalled turnovers',
-    synqState: 'Synchronized pipeline telemetry and clear milestone covenants',
-    frictionMetric: 'Turnaround bottlenecks',
-    synqMetric: 'On-schedule delivery',
-  },
-  {
-    id: 'rights',
-    name: 'Formats, Stories & IP',
-    role: 'Intellectual Property',
-    frictionState: 'High-value properties trapped in prolonged packaging limbo',
-    synqState: 'Pre-vetted attachments and turnkey technical feasibility modeling',
-    frictionMetric: 'Prolonged stagnation',
-    synqMetric: 'Streamlined packaging',
-  },
-  {
-    id: 'exhibition',
-    name: 'Audience Channels & Distribution',
-    role: 'Audience Reach',
-    frictionState: 'Content clashing blindly across identical theatrical and OTT windows',
-    synqState: 'Targeted windowing and audience pre-demand density matching',
-    frictionMetric: 'Compressed exposure',
-    synqMetric: 'Defensible release density',
-  },
-];
-
-// ── Interactive Problem Diagnostic Data ─────────────────────
-interface ProblemScenario {
-  id: string;
+interface ExperimentTrack {
+  code: string;
   title: string;
-  category: string;
-  symptom: string;
-  rootCause: string;
-  synqPathway: string;
-  outcome: string;
+  status: 'ACTIVE TRIAL' | 'BENCHMARKING' | 'DEPLOYED';
+  domain: string;
+  metric: string;
 }
 
-const PROBLEM_SCENARIOS: ProblemScenario[] = [
+const EXPERIMENTS: ExperimentTrack[] = [
   {
-    id: 'crew',
-    title: 'Missing Technical Department Heads',
-    category: 'Talent & Crew',
-    symptom: 'Lead cinematographer, sound supervisor, or gaffer unavailable weeks prior to shoot.',
-    rootCause: 'Opaque availability calendars and reliance on closed personal phone trees.',
-    synqPathway: 'Direct matching against verified network availability with turnkey terms.',
-    outcome: 'Locked key crew within days without agency middleman markups.',
+    code: 'EXP-01',
+    title: 'Virtual Production & Unreal LED Volume Latency Sync',
+    status: 'ACTIVE TRIAL',
+    domain: 'Real-Time Graphics',
+    metric: '< 4.2ms camera tracking delta',
   },
   {
-    id: 'stages',
-    title: 'Studio & Stage Booking Bottleneck',
-    category: 'Infrastructure',
-    symptom: 'Production cannot secure continuous stage or volume space in the target market.',
-    rootCause: 'Major studio facilities locked into rigid multi-month tenant leases.',
-    synqPathway: 'Route demand to available partner facilities during verified turnaround windows.',
-    outcome: 'Secured shooting dates with optimized floor scheduling and zero facility debt.',
+    code: 'EXP-02',
+    title: 'Camera-to-Cloud (C2C) Turnaround Telemetry',
+    status: 'ACTIVE TRIAL',
+    domain: 'Post Pipeline',
+    metric: '92% reduction in dailies cycle time',
   },
   {
-    id: 'capital',
-    title: 'Finishing & Post Cash Deficit',
-    category: 'Financial Flow',
-    symptom: 'Post-production halts on final composite shots weeks before delivery lock.',
-    rootCause: 'Milestone financing triggers disconnected from real post turnover stages.',
-    synqPathway: 'Deploy milestone-tied capital release based on verified turnover approvals.',
-    outcome: 'Delivered final master on time with transparent covenant governance.',
+    code: 'EXP-03',
+    title: 'Fractional Soundstage Burst-Occupancy Mesh',
+    status: 'BENCHMARKING',
+    domain: 'Infrastructure',
+    metric: '41% recovery of idle dark-floor days',
   },
   {
-    id: 'screens',
-    title: 'Release Window Clashes',
-    category: 'Distribution',
-    symptom: 'Independent release slated blindly against major studio tentpoles.',
-    rootCause: 'Lack of pre-release demand telemetry and rigid traditional distribution windows.',
-    synqPathway: 'Targeted screening clusters and synchronized regional event windows.',
-    outcome: 'Protected opening footprint through defensible regional audience density.',
-  },
-  {
-    id: 'rights',
-    title: 'Trapped Intellectual Property',
-    category: 'IP & Packaging',
-    symptom: 'Acclaimed property unable to attach director or finance for extended periods.',
-    rootCause: 'Unrealistic budget assumptions and lack of packaged technical feasibility.',
-    synqPathway: 'Asset-light packaging sprint aligning director vision with verified network capacity.',
-    outcome: 'Project greenlit with fully bonded production architecture.',
-  },
-  {
-    id: 'workflow',
-    title: 'Virtual Production Cost Bleed',
-    category: 'Technology',
-    symptom: 'LED volume hours ballooning due to on-set real-time asset adjustments.',
-    rootCause: 'Unsynchronized virtual asset pre-visualization between director and stage operators.',
-    synqPathway: 'Pre-flight virtual asset standardization sprint before stage load-in.',
-    outcome: 'Eliminated on-set asset adjustments and held volume shoot strictly to budget.',
+    code: 'EXP-04',
+    title: 'Pre-Demand Audience Density Clustering',
+    status: 'DEPLOYED',
+    domain: 'Distribution',
+    metric: '3.4x localized opening footprint efficiency',
   },
 ];
 
 export function HomePage() {
-  const [isSynchronized, setIsSynchronized] = useState(true);
-  const [selectedNodeIndex, setSelectedNodeIndex] = useState(0);
-  const [selectedProblemId, setSelectedProblemId] = useState('crew');
+  const [activeMechanismStep, setActiveMechanismStep] = useState(0);
 
-  const selectedNode = ECOSYSTEM_NODES[selectedNodeIndex];
-  const selectedProblem = PROBLEM_SCENARIOS.find(p => p.id === selectedProblemId) || PROBLEM_SCENARIOS[0];
+  const MECHANISM_STEPS = [
+    {
+      step: '01',
+      phase: 'DEMAND INGESTION',
+      headline: 'A production specifies its critical constraints.',
+      desc: 'Whether an independent feature, episodic series, or immersive live experience — productions submit their timeline, director attachments, volume needs, and capital milestones.',
+      metricLabel: 'Intake Velocity',
+      metricVal: '< 24 Hours',
+      icon: Terminal,
+    },
+    {
+      step: '02',
+      phase: 'ASSET-LIGHT ROUTING',
+      headline: 'We synchronize with existing partner capacity.',
+      desc: 'DigiSynq owns zero physical stages or camera trucks. Instead, our coordination mesh instantly routes demand to dark days at premier studio lots, locked guild rosters, and certified VFX facilities.',
+      metricLabel: 'Balance-Sheet Debt',
+      metricVal: '$0.00 Fixed Assets',
+      icon: Layers,
+    },
+    {
+      step: '03',
+      phase: 'SYNQ LABS DE-RISKING',
+      headline: 'We are labs. We test and prove workflows before shoot day.',
+      desc: 'In Synq Labs, creative and technical department heads run sandbox trials on LED volumes, camera-to-cloud dailies, and spatial pre-vis. We eliminate costly on-set improvisation.',
+      metricLabel: 'Workflow Fidelity',
+      metricVal: 'Zero On-Set Guesswork',
+      icon: Activity,
+    },
+    {
+      step: '04',
+      phase: 'VALUE CAPTURE',
+      headline: 'Capital clears on verified milestone covenants.',
+      desc: 'Financiers disburse tranches only upon verified technical turnovers. Facilities monetize idle floor downtime. DigiSynq captures a milestone orchestration fee and performance upside.',
+      metricLabel: 'Cost Compression',
+      metricVal: '20–35% Lead-Time Saved',
+      icon: ShieldCheck,
+    },
+  ];
 
   return (
-    <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white">
+    <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white min-h-screen">
 
       {/* ══════════════════════════════════════════════════════
-          01 — HERO (Broad Entertainment Positioning: Clear, Spacious, Confident)
+          01 — HERO: CINEMATIC LAB & ORCHESTRATION NETWORK
          ══════════════════════════════════════════════════════ */}
-      <section className="relative pt-40 sm:pt-48 pb-24 sm:pb-32 px-6 sm:px-8 max-w-6xl mx-auto">
+      <section className="relative pt-40 sm:pt-48 pb-20 sm:pb-28 px-6 sm:px-8 max-w-6xl mx-auto">
         <div className="max-w-4xl">
           
-          {/* Quiet Category Eyebrow */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-400 mb-8 tracking-wide">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            <span>Asset-Light Entertainment Coordination & Innovation Labs</span>
+          {/* Eyebrow */}
+          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-300 mb-8 tracking-wide">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="font-mono text-zinc-400">DIGISYNQ</span>
+            <span className="text-zinc-600">//</span>
+            <span className="text-white font-medium">Entertainment Lab &amp; Orchestration Network</span>
           </div>
 
-          {/* Large, Confident Headline */}
+          {/* Master Headline */}
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            The coordination layer<br />
-            for entertainment.
+            We don’t build studios.<br />
+            <span className="text-zinc-400 font-normal">We synchronize them.</span>
           </h1>
 
-          {/* Spacious Editorial Lead: What it is, Who it serves, How it works, Why it matters */}
-          <p className="text-lg sm:text-xl text-zinc-400 leading-relaxed max-w-3xl font-normal mb-10">
-            Entertainment has immense distributed capacity. DigiSynq is an asset-light coordination network and experimental laboratory that aligns production demand with existing industry capacity — synchronizing verified talent, partner soundstages, post pipelines, and audience channels without requiring balance-sheet asset ownership.
+          {/* 10-Second Thesis */}
+          <p className="text-lg sm:text-xl text-zinc-300 leading-relaxed max-w-3xl font-normal mb-10">
+            DigiSynq is an asset-light coordination layer and experimental laboratory for entertainment. We route production demand to unbooked soundstages, top-tier guild talent, and post pipelines across the ecosystem — paired with active R&amp;D through <span className="text-white font-medium">Synq Labs</span>: <em>We are labs. We experiment.</em>
           </p>
 
-          {/* Clean, Restrained CTAs */}
+          {/* Clean Restrained CTAs */}
           <div className="flex flex-wrap items-center gap-4">
             <Link
               to="/start"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-[#06080d] hover:bg-white/90 font-medium text-sm tracking-wide transition-all duration-200 active:scale-95 shadow-sm"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white text-[#06080d] hover:bg-zinc-200 font-medium text-sm tracking-wide transition-all duration-200 active:scale-95 shadow-sm"
               id="hero-start-synq-cta"
             >
-              <span>Start a synq</span>
+              <span>Initiate a Synq</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
-              to="/how-it-works"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 hover:border-white/20 bg-white/[0.02] hover:bg-white/[0.05] text-zinc-300 font-medium text-sm transition-all duration-200"
-            >
-              <span>How it works</span>
-            </Link>
-            <Link
               to="/workshops"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-emerald-500/20 hover:border-emerald-500/40 bg-emerald-500/[0.03] hover:bg-emerald-500/[0.08] text-emerald-300 font-medium text-sm transition-all duration-200"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-emerald-500/25 hover:border-emerald-500/40 bg-emerald-500/[0.03] hover:bg-emerald-500/[0.08] text-emerald-300 font-medium text-sm transition-all duration-200"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Synq Labs</span>
+              <Activity className="w-4 h-4 text-emerald-400" />
+              <span>Enter Synq Labs</span>
             </Link>
-          </div>
-        </div>
-
-        {/* Quiet Metric Horizon */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 mt-24 sm:mt-32 pt-12 border-t border-white/[0.06]">
-          <div>
-            <div className="text-3xl sm:text-4xl font-semibold text-white tracking-tight mb-1">Asset-Light</div>
-            <div className="text-xs text-zinc-400 leading-relaxed">Zero physical infrastructure debt</div>
-          </div>
-          <div>
-            <div className="text-3xl sm:text-4xl font-semibold text-white tracking-tight mb-1">Orchestration</div>
-            <div className="text-xs text-zinc-400 leading-relaxed">Routing distributed industry capacity</div>
-          </div>
-          <div>
-            <div className="text-3xl sm:text-4xl font-semibold text-white tracking-tight mb-1">Synq Labs</div>
-            <div className="text-xs text-zinc-400 leading-relaxed">Empirical R&amp;D and workflow trials</div>
-          </div>
-          <div>
-            <div className="text-3xl sm:text-4xl font-semibold text-white tracking-tight mb-1">End-to-End</div>
-            <div className="text-xs text-zinc-400 leading-relaxed">From IP packaging to audience release</div>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════════
-          02 — INTERACTIVE COORDINATION DEMONSTRATION
-         ══════════════════════════════════════════════════════ */}
-      <section className="py-24 sm:py-32 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06]">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-          <div>
-            <span className="text-xs font-semibold text-zinc-400 tracking-wider uppercase mb-2 block">
-              Capacity Orchestration
-            </span>
-            <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white [letter-spacing:-0.025em]">
-              The synchronization effect.
-            </h2>
-          </div>
-
-          {/* State Switcher */}
-          <div className="flex items-center gap-2 p-1 rounded-full border border-white/10 bg-white/[0.02] w-fit">
-            <button
-              onClick={() => setIsSynchronized(false)}
-              className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all ${
-                !isSynchronized 
-                  ? 'bg-white/15 text-white shadow-sm' 
-                  : 'text-zinc-400 hover:text-white'
-              }`}
-            >
-              Fragmented Silos
-            </button>
-            <button
-              onClick={() => setIsSynchronized(true)}
-              className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all ${
-                isSynchronized 
-                  ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shadow-sm' 
-                  : 'text-zinc-400 hover:text-white'
-              }`}
-            >
-              Synchronized System
-            </button>
-          </div>
-        </div>
-
-        {/* Coordination Canvas Card */}
-        <div className="p-8 sm:p-12 rounded-3xl border border-white/[0.08] bg-[#090b10] relative overflow-hidden">
-          
-          {/* Header Status */}
-          <div className="flex items-center justify-between pb-8 mb-8 border-b border-white/[0.06] text-xs">
-            <div className="flex items-center gap-2">
-              <span className={`w-2 h-2 rounded-full ${isSynchronized ? 'bg-emerald-400' : 'bg-zinc-500'}`} />
-              <span className="text-zinc-400">System State:</span>
-              <span className={isSynchronized ? 'text-emerald-400 font-medium' : 'text-zinc-300 font-medium'}>
-                {isSynchronized ? 'Connected & Coordinated' : 'Isolated Resource Silos'}
-              </span>
-            </div>
-            <div className="text-zinc-500">
-              {isSynchronized ? 'Routing active entertainment capacity' : 'Unused facility days & scheduling drag'}
-            </div>
-          </div>
-
-          {/* Node Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {ECOSYSTEM_NODES.map((node, i) => {
-              const isSelected = i === selectedNodeIndex;
-              return (
-                <div
-                  key={node.id}
-                  onClick={() => setSelectedNodeIndex(i)}
-                  className={`p-6 rounded-2xl border transition-all duration-200 cursor-pointer ${
-                    isSelected
-                      ? 'border-white/20 bg-white/[0.04]'
-                      : 'border-white/[0.06] bg-white/[0.015] hover:border-white/10 hover:bg-white/[0.03]'
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-3 text-xs text-zinc-500">
-                    <span>{node.role}</span>
-                    <span className={`inline-flex items-center gap-1.5 font-medium ${isSynchronized ? 'text-emerald-400' : 'text-zinc-500'}`}>
-                      <span className={`w-1.5 h-1.5 rounded-full ${isSynchronized ? 'bg-emerald-400' : 'bg-zinc-600'}`} />
-                      <span>{isSynchronized ? 'Synchronized' : 'Fragmented'}</span>
-                    </span>
-                  </div>
-
-                  <h3 className="text-base font-semibold text-white mb-2">{node.name}</h3>
-
-                  <p className="text-xs text-zinc-400 leading-relaxed mb-4 min-h-[36px]">
-                    {isSynchronized ? node.synqState : node.frictionState}
-                  </p>
-
-                  <div className="pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs">
-                    <span className="text-zinc-500 text-[11px] font-mono uppercase tracking-wider">{isSynchronized ? 'Impact' : 'Constraint'}</span>
-                    <span className={isSynchronized ? 'text-emerald-400 font-medium' : 'text-zinc-400'}>
-                      {isSynchronized ? node.synqMetric : node.frictionMetric}
-                    </span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Bottom Deep Dive Bar */}
-          <div className="mt-8 pt-6 border-t border-white/[0.06] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-zinc-400">
-            <div>
-              <span className="text-white font-medium">{selectedNode.name}: </span>
-              <span>{isSynchronized ? selectedNode.synqState : selectedNode.frictionState}</span>
-            </div>
             <Link
-              to="/the-synq"
-              className="text-white hover:text-emerald-400 transition-colors inline-flex items-center gap-1 shrink-0"
+              to="/runbook"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/10 hover:border-white/20 bg-white/[0.02] text-zinc-300 font-medium text-sm transition-all duration-200"
             >
-              <span>Explore full codex</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <span>Business Runbook</span>
             </Link>
           </div>
         </div>
-      </section>
 
-      {/* ══════════════════════════════════════════════════════
-          03 — POSITIVE BUSINESS MODEL: "USE THE CAPACITY THAT ALREADY EXISTS"
-         ══════════════════════════════════════════════════════ */}
-      <section className="py-24 sm:py-32 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06]">
-        <div className="max-w-3xl mb-16">
-          <span className="text-xs font-semibold text-zinc-400 tracking-wider uppercase mb-2 block">
-            The Positive Business Model
-          </span>
-          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight [letter-spacing:-0.025em] mb-4">
-            Use the capacity that already exists.
-          </h2>
-          <p className="text-zinc-400 text-base leading-relaxed font-normal">
-            Entertainment already has vast distributed infrastructure, talent, and resources. DigiSynq creates value by coordinating, connecting, routing, and orchestrating that existing capacity across the ecosystem.
-          </p>
-        </div>
-
-        {/* 2x2 Spacious Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10">
-          <div className="p-8 sm:p-10 rounded-3xl border border-white/[0.06] bg-[#090b10] flex flex-col justify-between">
-            <div>
-              <div className="text-xs font-mono text-zinc-500 mb-6">01 // ASSET-LIGHT ARCHITECTURE</div>
-              <h3 className="text-xl font-semibold text-white mb-3 tracking-tight">
-                Capacity Routing Over Asset Ownership
-              </h3>
-              <p className="text-sm text-zinc-400 leading-relaxed">
-                Owning heavy physical infrastructure creates commercial pressure to force productions into specific facilities regardless of creative fit. DigiSynq operates without heavy fixed physical assets, allowing us to route projects to the ideal existing capacity across the entire ecosystem.
-              </p>
-            </div>
-            <div className="mt-8 pt-4 border-t border-white/[0.06] text-xs text-zinc-500">
-              Lower capital intensity • Higher flexibility
-            </div>
+        {/* Core Metric Horizon */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 mt-20 sm:mt-28 pt-10 border-t border-white/[0.06]">
+          <div>
+            <div className="text-3xl sm:text-4xl font-semibold text-white tracking-tight mb-1 font-mono">$0.00</div>
+            <div className="text-xs text-zinc-400 leading-relaxed">Physical Asset Debt</div>
           </div>
-
-          <div className="p-8 sm:p-10 rounded-3xl border border-white/[0.06] bg-[#090b10] flex flex-col justify-between">
-            <div>
-              <div className="text-xs font-mono text-zinc-500 mb-6">02 // ECOSYSTEM UTILIZATION</div>
-              <h3 className="text-xl font-semibold text-white mb-3 tracking-tight">
-                Synchronization Over Silos
-              </h3>
-              <p className="text-sm text-zinc-400 leading-relaxed">
-                Creators, technical crews, studio spaces, post houses, and audience platforms often operate in isolated silos. When one node encounters delays, the entire timeline risks stalling. We provide the neutral coordination layer that keeps dependencies synchronized.
-              </p>
-            </div>
-            <div className="mt-8 pt-4 border-t border-white/[0.06] text-xs text-zinc-500">
-              Eliminating coordination friction
-            </div>
+          <div>
+            <div className="text-3xl sm:text-4xl font-semibold text-white tracking-tight mb-1 font-mono">100%</div>
+            <div className="text-xs text-zinc-400 leading-relaxed">Existing Industry Capacity</div>
           </div>
-
-          <div className="p-8 sm:p-10 rounded-3xl border border-white/[0.06] bg-[#090b10] flex flex-col justify-between">
-            <div>
-              <div className="text-xs font-mono text-zinc-500 mb-6">03 // ENGAGEMENT</div>
-              <h3 className="text-xl font-semibold text-white mb-3 tracking-tight">
-                Constraint-First Diagnostic
-              </h3>
-              <p className="text-sm text-zinc-400 leading-relaxed">
-                We do not sell generic consulting packages. Every engagement begins with a concrete operational requirement — finding unbooked stage windows, matching specialized guild craft heads, or structuring milestone-tied finishing capital.
-              </p>
-            </div>
-            <div className="mt-8 pt-4 border-t border-white/[0.06] text-xs text-zinc-500">
-              Surgical resource matching
-            </div>
+          <div>
+            <div className="text-3xl sm:text-4xl font-semibold text-white tracking-tight mb-1 font-mono">EXP-06</div>
+            <div className="text-xs text-zinc-400 leading-relaxed">Active Lab Trials</div>
           </div>
-
-          <div className="p-8 sm:p-10 rounded-3xl border border-white/[0.06] bg-[#090b10] flex flex-col justify-between">
-            <div>
-              <div className="text-xs font-mono text-zinc-500 mb-6">04 // ECONOMICS</div>
-              <h3 className="text-xl font-semibold text-white mb-3 tracking-tight">
-                Orchestration-Driven Value
-              </h3>
-              <p className="text-sm text-zinc-400 leading-relaxed">
-                DigiSynq generates economic value from coordination and workflow orchestration rather than by extracting landlord rents on physical assets. We succeed when entertainment projects run smoothly, budgets hold, and productions deliver on schedule.
-              </p>
-            </div>
-            <div className="mt-8 pt-4 border-t border-white/[0.06] text-xs text-zinc-500">
-              Value creation over activity
-            </div>
+          <div>
+            <div className="text-3xl sm:text-4xl font-semibold text-white tracking-tight mb-1 font-mono">&lt; 48h</div>
+            <div className="text-xs text-zinc-400 leading-relaxed">Turnaround Telemetry</div>
           </div>
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          03B — SYNQ LABS: WE ARE LABS. WE EXPERIMENT.
+          02 — THE 10-SECOND MECHANISM (Crystal-Clear Commercial Architecture)
          ══════════════════════════════════════════════════════ */}
-      <section className="py-12 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06]">
-        <div className="p-8 sm:p-10 rounded-3xl bg-[#090b10] border border-white/[0.08] hover:border-emerald-500/30 transition-all flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-          <div className="max-w-2xl space-y-2.5">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] text-xs text-zinc-300 font-mono tracking-wide">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              <span>Synq Labs // Applied Trials & R&D</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
-              We are labs. We experiment.
-            </h2>
-            <p className="text-sm text-zinc-400 leading-relaxed">
-              Entertainment transformation happens on the floor. In Synq Labs, directors, craft department heads, facility operators, and engineers prototype and benchmark virtual volumes, camera-to-cloud telemetry, spatial audio, and asset-light coordination models before deploying them into active production.
-            </p>
-          </div>
-          <Link
-            to="/workshops"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-medium text-xs hover:bg-zinc-200 transition-all shrink-0 shadow-md"
-          >
-            <span>Explore active lab trials</span>
-            <ArrowRight size={14} />
-          </Link>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════════
-          04 — CLEAN PROBLEM DIAGNOSTIC (Spacious & Direct)
-         ══════════════════════════════════════════════════════ */}
-      <section className="py-24 sm:py-32 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06]">
+      <section className="py-20 sm:py-28 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06]">
         <div className="max-w-2xl mb-12">
-          <span className="text-xs font-semibold text-zinc-400 tracking-wider uppercase mb-2 block">
-            Diagnostic Matrix
+          <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-2 block">
+            The Business Mechanism
           </span>
           <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white [letter-spacing:-0.025em] mb-4">
-            Where is your production facing friction?
+            How DigiSynq works in four moves.
           </h2>
-          <p className="text-sm text-zinc-400 leading-relaxed">
-            Select a common production challenge to inspect the root cause and how DigiSynq coordinates an asset-light resolution.
+          <p className="text-zinc-400 text-sm leading-relaxed">
+            Eliminating billions in idle production friction by synchronizing existing infrastructure with active demand.
           </p>
         </div>
 
-        {/* Category Pills */}
-        <div className="flex flex-wrap gap-2 mb-8">
-          {PROBLEM_SCENARIOS.map((p) => {
-            const isSelected = p.id === selectedProblemId;
+        {/* Mechanism Timeline Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          {MECHANISM_STEPS.map((m, idx) => {
+            const Icon = m.icon;
+            const isCurrent = idx === activeMechanismStep;
             return (
-              <button
-                key={p.id}
-                onClick={() => setSelectedProblemId(p.id)}
-                className={`px-4 py-2 rounded-full text-xs font-medium transition-all cursor-pointer ${
-                  isSelected
-                    ? 'bg-white text-[#06080d] shadow-sm font-semibold'
-                    : 'bg-white/[0.03] text-zinc-400 hover:text-white hover:bg-white/[0.06] border border-white/[0.06]'
+              <div
+                key={m.step}
+                onMouseEnter={() => setActiveMechanismStep(idx)}
+                className={`p-6 sm:p-7 rounded-2xl border transition-all duration-200 cursor-pointer flex flex-col justify-between ${
+                  isCurrent
+                    ? 'border-emerald-500/40 bg-white/[0.03] shadow-lg'
+                    : 'border-white/[0.06] bg-[#090b10] hover:border-white/15'
                 }`}
               >
-                {p.title}
-              </button>
+                <div>
+                  <div className="flex items-center justify-between text-xs text-zinc-400 mb-4 font-mono">
+                    <span className="text-white font-bold">{m.step}</span>
+                    <span className="text-[11px] uppercase tracking-wider text-emerald-400">{m.phase}</span>
+                  </div>
+                  <Icon className="w-5 h-5 text-emerald-400 mb-4" />
+                  <h3 className="text-base font-semibold text-white mb-2 leading-snug">
+                    {m.headline}
+                  </h3>
+                  <p className="text-xs text-zinc-400 leading-relaxed mb-6">
+                    {m.desc}
+                  </p>
+                </div>
+
+                <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between text-xs">
+                  <span className="text-zinc-400 text-[11px] font-mono">{m.metricLabel}</span>
+                  <span className="text-white font-mono font-medium">{m.metricVal}</span>
+                </div>
+              </div>
             );
           })}
         </div>
+      </section>
 
-        {/* Selected Problem Insight Card */}
-        <div className="p-8 sm:p-12 rounded-3xl border border-white/[0.08] bg-[#090b10] grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-          <div className="md:col-span-8 space-y-6">
+      {/* ══════════════════════════════════════════════════════
+          03 — SYNQ LABS: "WE ARE LABS. WE EXPERIMENT."
+         ══════════════════════════════════════════════════════ */}
+      <section className="py-20 sm:py-28 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06]">
+        <div className="p-8 sm:p-12 rounded-3xl bg-[#080a0f] border border-white/[0.08] relative overflow-hidden">
+          
+          {/* Subtle Ambient Glow */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/[0.04] rounded-full blur-3xl pointer-events-none" />
+
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div>
-              <span className="text-xs font-mono text-zinc-500 uppercase">{selectedProblem.category}</span>
-              <h3 className="text-2xl font-bold text-white tracking-tight mt-1">{selectedProblem.title}</h3>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300 font-mono mb-4">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span>R&amp;D DIVISION // SYNQ LABS</span>
+              </div>
+              <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white [letter-spacing:-0.03em] mb-4">
+                We are labs. We experiment.
+              </h2>
+              <p className="text-sm sm:text-base text-zinc-400 max-w-2xl leading-relaxed">
+                We don't theorize about entertainment technology. We trial real-time virtual production, camera-to-cloud dailies, and fractional stage usage in empirical sandboxes before deploying them across active productions.
+              </p>
             </div>
 
-            <div className="space-y-4 text-xs sm:text-sm">
-              <div>
-                <span className="text-zinc-500 block mb-1">Visible Symptom:</span>
-                <p className="text-zinc-300 leading-relaxed">{selectedProblem.symptom}</p>
-              </div>
-
-              <div>
-                <span className="text-zinc-500 block mb-1">Underlying Root Cause:</span>
-                <p className="text-zinc-400 leading-relaxed">{selectedProblem.rootCause}</p>
-              </div>
-
-              <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                <span className="text-emerald-400 font-medium block mb-1">DigiSynq Coordinated Solution:</span>
-                <p className="text-zinc-200 leading-relaxed">{selectedProblem.synqPathway}</p>
-              </div>
-            </div>
-
-            <div className="text-xs text-zinc-400">
-              <span className="text-white font-medium">Outcome: </span>
-              <span>{selectedProblem.outcome}</span>
-            </div>
-          </div>
-
-          <div className="md:col-span-4 flex flex-col items-start md:items-end justify-center pt-4 md:pt-0 md:border-l md:border-white/[0.06] md:pl-8">
             <Link
-              to="/start"
-              state={{ problem: `${selectedProblem.title}: ${selectedProblem.symptom}` }}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-[#06080d] hover:bg-white/90 font-medium text-xs tracking-wide transition-all duration-200 active:scale-95 shadow-sm"
+              to="/workshops"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-medium text-xs hover:bg-zinc-200 transition-all shrink-0 shadow-md"
             >
-              <span>Engage on this problem</span>
+              <span>View All 6 Lab Tracks</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
-            <span className="text-[11px] text-zinc-500 mt-3 text-right">
-              Confidential intake • &lt; 48h turnaround
-            </span>
+          </div>
+
+          {/* Live Experiment Status Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {EXPERIMENTS.map((exp) => (
+              <div
+                key={exp.code}
+                className="p-5 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-emerald-500/30 transition-all flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between text-xs mb-3">
+                    <span className="font-mono text-emerald-400 font-medium">{exp.code}</span>
+                    <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-[10px] font-mono text-zinc-300">
+                      <span className="w-1 h-1 rounded-full bg-emerald-400" />
+                      {exp.status}
+                    </span>
+                  </div>
+                  <h3 className="text-sm sm:text-base font-semibold text-white mb-1.5 leading-snug">
+                    {exp.title}
+                  </h3>
+                  <span className="text-xs text-zinc-400 font-mono block mb-4">{exp.domain}</span>
+                </div>
+
+                <div className="pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs">
+                  <span className="text-zinc-400 text-[11px] font-mono">Empirical Benchmark</span>
+                  <span className="text-emerald-300 font-mono font-medium">{exp.metric}</span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          05 — THE 4-STAGE OPERATIONAL LOOP (Clean Timeline)
+          04 — THE VALUE EXCHANGE (How Every Stakeholder Wins)
          ══════════════════════════════════════════════════════ */}
-      <section className="py-24 sm:py-32 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06]">
-        <div className="max-w-2xl mb-16">
-          <span className="text-xs font-semibold text-zinc-400 tracking-wider uppercase mb-2 block">
-            The Engagement Cycle
+      <section className="py-20 sm:py-28 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06]">
+        <div className="max-w-2xl mb-14">
+          <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-2 block">
+            Commercial Architecture
           </span>
           <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white [letter-spacing:-0.025em] mb-4">
-            Four stages. One accountable loop.
+            Economic alignment across the ecosystem.
           </h2>
-          <p className="text-sm text-zinc-400 leading-relaxed">
-            DigiSynq coordinates capacity rather than requiring ownership of capacity — guiding entertainment productions through a structured progression from diagnosis to realization.
+          <p className="text-zinc-400 text-sm leading-relaxed">
+            DigiSynq generates value through coordination efficiency, not by extracting landlord rents on physical equipment.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            {
-              step: '01',
-              name: 'Diagnose',
-              desc: 'Understand the project requirements, creative vision, department dependencies, and operational constraints.',
-            },
-            {
-              step: '02',
-              name: 'Connect',
-              desc: 'Identify relevant talent, partner facilities, infrastructure, services, capacity, or financing across the network.',
-            },
-            {
-              step: '03',
-              name: 'Orchestrate',
-              desc: 'Coordinate multiple stakeholders, workflows, and milestones through structured covenants and neutral oversight.',
-            },
-            {
-              step: '04',
-              name: 'Realize',
-              desc: 'Turn distributed resources into on-schedule production output, final delivery masters, and audience reach.',
-            },
-          ].map((phase) => (
-            <div
-              key={phase.step}
-              className="p-8 rounded-3xl border border-white/[0.06] bg-[#090b10] flex flex-col justify-between"
-            >
-              <div>
-                <span className="text-xs font-mono text-zinc-500 mb-6 block">{phase.step}</span>
-                <h3 className="text-lg font-semibold text-white mb-2">{phase.name}</h3>
-                <p className="text-xs text-zinc-400 leading-relaxed">{phase.desc}</p>
-              </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="p-8 rounded-3xl bg-[#090b10] border border-white/[0.06] flex flex-col justify-between">
+            <div>
+              <span className="text-xs font-mono text-zinc-400 uppercase block mb-3">01 // FOR PRODUCTIONS</span>
+              <h3 className="text-lg font-semibold text-white mb-2">Turnkey Agility</h3>
+              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-6">
+                Lock verified department heads, unbooked LED stages, and bonded finishing pipelines in days instead of months of broker negotiations.
+              </p>
             </div>
-          ))}
+            <div className="pt-4 border-t border-white/[0.06] text-xs font-mono text-emerald-400">
+              20–35% compressed schedule
+            </div>
+          </div>
+
+          <div className="p-8 rounded-3xl bg-[#090b10] border border-white/[0.06] flex flex-col justify-between">
+            <div>
+              <span className="text-xs font-mono text-zinc-400 uppercase block mb-3">02 // FOR STUDIOS &amp; FACILITIES</span>
+              <h3 className="text-lg font-semibold text-white mb-2">100% Incremental Yield</h3>
+              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-6">
+                Monetize dark floors, turnaround gaps, and unbooked camera packages with pre-vetted, bonded productions without sales overhead.
+              </p>
+            </div>
+            <div className="pt-4 border-t border-white/[0.06] text-xs font-mono text-emerald-400">
+              Recovered dark-day revenue
+            </div>
+          </div>
+
+          <div className="p-8 rounded-3xl bg-[#090b10] border border-white/[0.06] flex flex-col justify-between">
+            <div>
+              <span className="text-xs font-mono text-zinc-400 uppercase block mb-3">03 // FOR CAPITAL &amp; DISTRIBUTORS</span>
+              <h3 className="text-lg font-semibold text-white mb-2">Milestone Covenants</h3>
+              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-6">
+                Disburse tranches against verified technical turnovers and cloud dailies telemetry, shielding investments from speculative budget overruns.
+              </p>
+            </div>
+            <div className="pt-4 border-t border-white/[0.06] text-xs font-mono text-emerald-400">
+              Zero speculative leakage
+            </div>
+          </div>
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          06 — CLOSING INVITATION (Spacious, Calm, Direct)
+          05 — CALL TO ACTION (Minimal, Confident, Direct)
          ══════════════════════════════════════════════════════ */}
-      <section className="py-32 sm:py-44 px-6 sm:px-8 max-w-4xl mx-auto text-center border-t border-white/[0.06]">
+      <section className="py-28 sm:py-36 px-6 sm:px-8 max-w-4xl mx-auto text-center border-t border-white/[0.06]">
+        <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-4 block">
+          Initiate Orchestration
+        </span>
         <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white [letter-spacing:-0.03em] mb-6">
           Bring us your production constraint.
         </h2>
-        <p className="text-base sm:text-lg text-zinc-400 max-w-xl mx-auto leading-relaxed mb-10">
-          Have an entertainment project, resource requirement, or capacity opportunity? Start a Synq and tell us what needs to be connected.
+        <p className="text-base sm:text-lg text-zinc-400 max-w-xl mx-auto leading-relaxed mb-10 font-normal">
+          Whether you need soundstage turnaround access, guild department heads, or virtual production sandbox validation — we synchronize what entertainment needs.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4">
           <Link
             to="/start"
-            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white text-[#06080d] hover:bg-white/90 font-medium text-sm tracking-wide transition-all duration-200 active:scale-95 shadow-sm"
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white text-[#06080d] hover:bg-zinc-200 font-medium text-sm tracking-wide transition-all duration-200 active:scale-95 shadow-sm"
           >
-            <span>Start a synq</span>
+            <span>Start a Synq</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
           <Link
-            to="/the-synq"
-            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/10 hover:border-white/20 bg-white/[0.02] text-zinc-300 font-medium text-sm transition-all duration-200"
+            to="/runbook"
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-white/10 hover:border-white/20 bg-white/[0.02] text-zinc-300 font-medium text-sm transition-all duration-200"
           >
-            <span>Read the codex</span>
+            <span>Read Business Runbook</span>
           </Link>
         </div>
       </section>

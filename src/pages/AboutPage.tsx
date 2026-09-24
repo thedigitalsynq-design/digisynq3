@@ -56,16 +56,20 @@ export function AboutPage() {
       {/* ── 01. Hero Section ── */}
       <section className="pt-40 sm:pt-48 pb-20 sm:pb-28 px-6 sm:px-8 max-w-6xl mx-auto">
         <div className="max-w-4xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-400 mb-8 tracking-wide">
-            <span>Philosophy & Operating Thesis</span>
+          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-300 mb-8 tracking-wide">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+            <span className="font-mono text-zinc-400">MANIFESTO</span>
+            <span className="text-zinc-600">//</span>
+            <span className="text-white font-medium">Entertainment Intelligence &amp; Labs</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            The entertainment coordination thesis.
+            We don’t own the studio.<br />
+            <span className="text-zinc-400 font-light">We orchestrate the ecosystem.</span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-zinc-400 font-normal leading-relaxed max-w-3xl mb-12">
-            DigiSynq is building an asset-light coordination layer across the entertainment ecosystem. We don’t need to own every node. We need to connect the nodes. Value is created by coordinating, routing, and orchestrating existing capacity rather than accumulating heavy physical infrastructure.
+          <p className="text-lg sm:text-xl text-zinc-300 font-normal leading-relaxed max-w-3xl mb-12">
+            Entertainment already has vast distributed infrastructure, elite artists, and active capital. DigiSynq connects them into an agile, synchronized operating network — coupled with <span className="text-white font-medium">Synq Labs</span>, an empirical laboratory trialing emergent production workflows. <em>We are orchestrators. We are labs. We experiment.</em>
           </p>
 
           <div className="flex flex-wrap items-center gap-4">
@@ -75,6 +79,12 @@ export function AboutPage() {
             >
               Start a synq
               <ArrowRight size={15} />
+            </Link>
+            <Link
+              to="/workshops"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-emerald-500/25 hover:border-emerald-500/40 bg-emerald-500/[0.03] hover:bg-emerald-500/[0.08] text-emerald-300 font-medium text-sm transition-all duration-200"
+            >
+              <span>Explore Synq Labs</span>
             </Link>
             <Link
               to="/the-synq"
