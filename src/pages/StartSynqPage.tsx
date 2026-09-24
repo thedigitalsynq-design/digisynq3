@@ -141,8 +141,8 @@ export function StartSynqPage() {
         </div>
 
         <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-6">
-          Initiate a Synq.<br />
-          <span className="text-zinc-400 font-light">Tell us what needs to be connected.</span>
+          Initiate Flow.<br />
+          <span className="text-zinc-400 font-light">Transmit what needs to move.</span>
         </h1>
 
         <p className="text-lg sm:text-xl text-zinc-300 font-normal leading-relaxed max-w-2xl mx-auto">
@@ -162,7 +162,8 @@ export function StartSynqPage() {
 
               <div>
                 <h2 className="text-2xl font-bold text-white mb-2">
-                  Project dossier generated
+                  Dossier Formatted.<br />
+                  <span className="text-zinc-400 font-light">Transmission ready.</span>
                 </h2>
                 <p className="text-sm text-zinc-400 max-w-md mx-auto leading-relaxed">
                   Your project dossier has been formatted for our coordination team. If your default email client did not automatically launch, transmit directly to{' '}

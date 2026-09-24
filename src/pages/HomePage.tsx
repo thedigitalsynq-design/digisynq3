@@ -1,95 +1,113 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, Sparkles, Terminal, Activity, Layers, CheckCircle2, ShieldCheck, Zap } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Terminal, Activity, Layers, ShieldCheck, FlaskConical } from 'lucide-react';
 
 interface ExperimentTrack {
   code: string;
   title: string;
-  status: 'ACTIVE TRIAL' | 'BENCHMARKING' | 'DEPLOYED';
   domain: string;
   metric: string;
+  status: string;
 }
 
-const EXPERIMENTS: ExperimentTrack[] = [
+const FEATURED_EXPERIMENTS: ExperimentTrack[] = [
   {
     code: 'EXP-01',
-    title: 'Virtual Production & Unreal LED Volume Latency Sync',
+    title: 'Virtual Production & Unreal LED Volume Sync',
+    domain: 'Real-Time Volume Rigs',
+    metric: '< 4.2ms tracking delta',
     status: 'ACTIVE TRIAL',
-    domain: 'Real-Time Graphics',
-    metric: '< 4.2ms camera tracking delta',
   },
   {
     code: 'EXP-02',
-    title: 'Camera-to-Cloud (C2C) Turnaround Telemetry',
-    status: 'ACTIVE TRIAL',
-    domain: 'Post Pipeline',
-    metric: '92% reduction in dailies cycle time',
+    title: 'Camera-to-Cloud (C2C) Real-Time Ingest',
+    domain: 'Editorial & Dailies',
+    metric: '92% cycle time reduction',
+    status: 'BENCHMARKING',
   },
   {
     code: 'EXP-03',
-    title: 'Fractional Soundstage Burst-Occupancy Mesh',
-    status: 'BENCHMARKING',
-    domain: 'Infrastructure',
-    metric: '41% recovery of idle dark-floor days',
+    title: 'Fractional Soundstage Burst-Occupancy',
+    domain: 'Facility Economics',
+    metric: '41% dark-floor recovery',
+    status: 'PILOT STAGE',
+  },
+];
+
+const FOUR_PULSES = [
+  {
+    step: '01',
+    name: 'Demand Ingestion',
+    desc: 'Productions define critical constraints: schedules, volume requirements, craft attachments, and milestones.',
+    icon: Terminal,
   },
   {
-    code: 'EXP-04',
-    title: 'Pre-Demand Audience Density Clustering',
-    status: 'DEPLOYED',
-    domain: 'Distribution',
-    metric: '3.4x localized opening footprint efficiency',
+    step: '02',
+    name: 'Asset-Light Routing',
+    desc: 'Demand routes to dark dates on partner soundstages, certified guild crews, and finishing suites.',
+    icon: Layers,
+  },
+  {
+    step: '03',
+    name: 'Synq Labs Trials',
+    desc: 'We are labs. We stress-test workflows, camera rigs, and virtual assets before cameras roll.',
+    icon: Activity,
+  },
+  {
+    step: '04',
+    name: 'Milestone Settlement',
+    desc: 'Capital and escrow clear systematically upon verified scene turnovers and delivery specs.',
+    icon: ShieldCheck,
+  },
+];
+
+const ENTRY_STRATA = [
+  {
+    code: '01',
+    name: 'Packaging & Feasibility',
+    forWhom: 'Writers & IP Holders',
+    link: '/how-it-works#protocol',
+  },
+  {
+    code: '02',
+    name: 'Pre-Production & Stages',
+    forWhom: 'Directors & Producers',
+    link: '/how-it-works#protocol',
+  },
+  {
+    code: '03',
+    name: 'Mid-Shoot Triage',
+    forWhom: 'Line Producers & DPs',
+    link: '/how-it-works#protocol',
+  },
+  {
+    code: '04',
+    name: 'Post-Finishing & VFX',
+    forWhom: 'Post Heads & Editors',
+    link: '/how-it-works#protocol',
+  },
+  {
+    code: '05',
+    name: 'Pre-Demand Distribution',
+    forWhom: 'Exhibitors & Streamers',
+    link: '/how-it-works#protocol',
+  },
+  {
+    code: '06',
+    name: 'Idle Stage Monetization',
+    forWhom: 'Studios & Rental Houses',
+    link: '/how-it-works#protocol',
   },
 ];
 
 export function HomePage() {
-  const [activeMechanismStep, setActiveMechanismStep] = useState(0);
-
-  const MECHANISM_STEPS = [
-    {
-      step: '01',
-      phase: 'DEMAND INGESTION',
-      headline: 'A production specifies its critical constraints.',
-      desc: 'Whether an independent feature, episodic series, or immersive live experience — productions submit their timeline, director attachments, volume needs, and capital milestones.',
-      metricLabel: 'Intake Velocity',
-      metricVal: '< 24 Hours',
-      icon: Terminal,
-    },
-    {
-      step: '02',
-      phase: 'ASSET-LIGHT ROUTING',
-      headline: 'We synchronize with existing partner capacity.',
-      desc: 'DigiSynq owns zero physical stages or camera trucks. Instead, our coordination mesh instantly routes demand to dark days at premier studio lots, locked guild rosters, and certified VFX facilities.',
-      metricLabel: 'Balance-Sheet Debt',
-      metricVal: '$0.00 Fixed Assets',
-      icon: Layers,
-    },
-    {
-      step: '03',
-      phase: 'SYNQ LABS DE-RISKING',
-      headline: 'We are labs. We test and prove workflows before shoot day.',
-      desc: 'In Synq Labs, creative and technical department heads run sandbox trials on LED volumes, camera-to-cloud dailies, and spatial pre-vis. We eliminate costly on-set improvisation.',
-      metricLabel: 'Workflow Fidelity',
-      metricVal: 'Zero On-Set Guesswork',
-      icon: Activity,
-    },
-    {
-      step: '04',
-      phase: 'VALUE CAPTURE',
-      headline: 'Capital clears on verified milestone covenants.',
-      desc: 'Financiers disburse tranches only upon verified technical turnovers. Facilities monetize idle floor downtime. DigiSynq captures a milestone orchestration fee and performance upside.',
-      metricLabel: 'Cost Compression',
-      metricVal: '20–35% Lead-Time Saved',
-      icon: ShieldCheck,
-    },
-  ];
-
   return (
     <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white min-h-screen">
 
       {/* ══════════════════════════════════════════════════════
-          01 — HERO: CINEMATIC LAB & ORCHESTRATION NETWORK
+          01 — HERO: MINIMAL, METAMORPHIC, HIGH-SIGNAL
          ══════════════════════════════════════════════════════ */}
-      <section className="relative pt-40 sm:pt-48 pb-20 sm:pb-28 px-6 sm:px-8 max-w-6xl mx-auto">
+      <section className="relative pt-40 sm:pt-48 pb-20 sm:pb-24 px-6 sm:px-8 max-w-6xl mx-auto">
         <div className="max-w-4xl">
           
           {/* Eyebrow */}
@@ -106,12 +124,12 @@ export function HomePage() {
             <span className="text-zinc-400 font-light">Entertainment in flow.</span>
           </h1>
 
-          {/* 10-Second Thesis */}
-          <p className="text-lg sm:text-xl text-zinc-300 leading-relaxed max-w-3xl font-normal mb-10">
-            Entertainment projects don’t stall from a lack of creative vision. They stall when the pipeline breaks between script, soundstages, crew, post-finishing, capital, and audience distribution. DigiSynq is the world’s first asset-light entertainment pipeline and experimental laboratory — coordinating every stage into an agile, continuous flow with zero fixed asset debt: <em>We are orchestrators. We are labs. We experiment.</em>
+          {/* Crisp, Focused Value Statement */}
+          <p className="text-lg sm:text-xl text-zinc-300 leading-relaxed max-w-2xl font-normal mb-10">
+            Entertainment projects don’t stall from a lack of vision — they stall when pipelines fracture between soundstages, crew, post, and capital. DigiSynq coordinates existing industry capacity into an unbroken, asset-light stream: <em>We are orchestrators. We are labs. We experiment.</em>
           </p>
 
-          {/* Clean Restrained CTAs */}
+          {/* High-Intent CTAs */}
           <div className="flex flex-wrap items-center gap-4">
             <Link
               to="/start"
@@ -129,151 +147,80 @@ export function HomePage() {
               <span>Enter Synq Labs</span>
             </Link>
             <Link
-              to="/runbook"
+              to="/the-synq"
               className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/10 hover:border-white/20 bg-white/[0.02] text-zinc-300 font-medium text-sm transition-all duration-200"
             >
-              <span>Business Runbook</span>
+              <span>The Codex</span>
             </Link>
           </div>
         </div>
 
-        {/* Core Metric Horizon */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 mt-20 sm:mt-28 pt-10 border-t border-white/[0.06]">
+        {/* Minimal Telemetry Ribbon */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mt-20 sm:mt-24 pt-8 border-t border-white/[0.06]">
           <div>
-            <div className="text-3xl sm:text-4xl font-semibold text-white tracking-tight mb-1 font-mono">$0.00</div>
-            <div className="text-xs text-zinc-400 leading-relaxed">Physical Asset Debt</div>
+            <div className="text-2xl sm:text-3xl font-semibold text-white tracking-tight mb-1 font-mono">$0.00</div>
+            <div className="text-xs text-zinc-400">Fixed Balance-Sheet Debt</div>
           </div>
           <div>
-            <div className="text-3xl sm:text-4xl font-semibold text-white tracking-tight mb-1 font-mono">100%</div>
-            <div className="text-xs text-zinc-400 leading-relaxed">Existing Industry Capacity</div>
+            <div className="text-2xl sm:text-3xl font-semibold text-white tracking-tight mb-1 font-mono">100%</div>
+            <div className="text-xs text-zinc-400">Partner Facility Capacity</div>
           </div>
           <div>
-            <div className="text-3xl sm:text-4xl font-semibold text-white tracking-tight mb-1 font-mono">EXP-06</div>
-            <div className="text-xs text-zinc-400 leading-relaxed">Active Lab Trials</div>
+            <div className="text-2xl sm:text-3xl font-semibold text-white tracking-tight mb-1 font-mono">EXP-06</div>
+            <div className="text-xs text-zinc-400">Active R&amp;D Trials</div>
           </div>
           <div>
-            <div className="text-3xl sm:text-4xl font-semibold text-white tracking-tight mb-1 font-mono">&lt; 48h</div>
-            <div className="text-xs text-zinc-400 leading-relaxed">Turnaround Telemetry</div>
+            <div className="text-2xl sm:text-3xl font-semibold text-white tracking-tight mb-1 font-mono">&lt; 48h</div>
+            <div className="text-xs text-zinc-400">Turnaround Telemetry</div>
           </div>
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          01B — CATEGORY GENESIS: THE FIRST OF ITS KIND
+          02 — THE 4 PULSES: ONE UNBROKEN STREAM
          ══════════════════════════════════════════════════════ */}
-      <section className="py-20 sm:py-28 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06]">
-        <div className="max-w-2xl mb-14">
-          <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-2 block">
-            Category Genesis
-          </span>
-          <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white [letter-spacing:-0.025em] mb-4">
-            The Third Epoch.<br />
-            <span className="text-zinc-400 font-light">From concrete to current.</span>
-          </h2>
-          <p className="text-zinc-400 text-sm leading-relaxed">
-            Entertainment historically oscillated between two broken paradigms. DigiSynq pioneers the third: an asset-light coordination layer combined with empirical laboratory experimentation.
-          </p>
+      <section className="py-20 sm:py-24 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div>
+            <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-2 block">
+              The Living Mechanism
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white [letter-spacing:-0.025em]">
+              Four Pulses.<br />
+              <span className="text-zinc-400 font-light">One unbroken stream.</span>
+            </h2>
+          </div>
+          <Link
+            to="/how-it-works"
+            className="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-400 hover:text-white transition-colors"
+          >
+            <span>Explore Full 4-Phase Protocol</span>
+            <ArrowUpRight size={14} className="text-emerald-400" />
+          </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Era 1 */}
-          <div className="p-8 rounded-3xl bg-[#090b10] border border-white/[0.06] flex flex-col justify-between">
-            <div>
-              <span className="text-xs font-mono text-zinc-500 uppercase block mb-3">ERA 01 // LEGACY</span>
-              <h3 className="text-lg font-semibold text-white mb-2">The Heavy Studio Lot</h3>
-              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-6">
-                Billions spent acquiring concrete soundstages and camera fleets. Forces projects into owned facilities regardless of creative fit. Suffers from high debt and unbooked dark floors.
-              </p>
-            </div>
-            <div className="pt-4 border-t border-white/[0.06] text-xs font-mono text-zinc-500">
-              Heavy debt • Rigid multi-month leases
-            </div>
-          </div>
-
-          {/* Era 2 */}
-          <div className="p-8 rounded-3xl bg-[#090b10] border border-white/[0.06] flex flex-col justify-between">
-            <div>
-              <span className="text-xs font-mono text-zinc-500 uppercase block mb-3">ERA 02 // TRANSACTIONAL</span>
-              <h3 className="text-lg font-semibold text-white mb-2">Passive Directories &amp; Agencies</h3>
-              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-6">
-                Online job boards and commission-based agency middlemen (15–20% tolls). No on-set verification, no physical stage access, and zero workflow experimentation.
-              </p>
-            </div>
-            <div className="pt-4 border-t border-white/[0.06] text-xs font-mono text-zinc-500">
-              Agency tolls • Zero floor presence
-            </div>
-          </div>
-
-          {/* Era 3: DigiSynq */}
-          <div className="p-8 rounded-3xl bg-[#090b10] border border-emerald-500/30 shadow-lg relative flex flex-col justify-between">
-            <div className="absolute top-6 right-6">
-              <span className="px-2.5 py-1 rounded-full text-[10px] font-mono text-emerald-300 bg-emerald-500/10 border border-emerald-500/30">
-                First of its Kind
-              </span>
-            </div>
-            <div>
-              <span className="text-xs font-mono text-emerald-400 uppercase block mb-3">ERA 03 // THE NEW PARADIGM</span>
-              <h3 className="text-lg font-semibold text-white mb-2">DigiSynq Orchestration &amp; Labs</h3>
-              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-6">
-                The world’s first asset-light entertainment operating system. Routes demand dynamically to partner stages, pre-flights technology in Synq Labs, and releases capital on milestone covenants.
-              </p>
-            </div>
-            <div className="pt-4 border-t border-white/[0.06] text-xs font-mono text-emerald-400 font-medium">
-              $0 Fixed Asset Debt • Active R&amp;D Trials
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════════
-          02 — THE 10-SECOND MECHANISM (Crystal-Clear Commercial Architecture)
-         ══════════════════════════════════════════════════════ */}
-      <section className="py-20 sm:py-28 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06]">
-        <div className="max-w-2xl mb-12">
-          <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-2 block">
-            The Business Mechanism
-          </span>
-          <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white [letter-spacing:-0.025em] mb-4">
-            Four Pulses.<br />
-            <span className="text-zinc-400 font-light">One unbroken stream.</span>
-          </h2>
-          <p className="text-zinc-400 text-sm leading-relaxed">
-            Eliminating billions in idle production friction by synchronizing existing infrastructure with active demand.
-          </p>
-        </div>
-
-        {/* Mechanism Timeline Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          {MECHANISM_STEPS.map((m, idx) => {
-            const Icon = m.icon;
-            const isCurrent = idx === activeMechanismStep;
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {FOUR_PULSES.map((pulse) => {
+            const Icon = pulse.icon;
             return (
               <div
-                key={m.step}
-                onMouseEnter={() => setActiveMechanismStep(idx)}
-                className={`p-6 sm:p-7 rounded-2xl border transition-all duration-200 cursor-pointer flex flex-col justify-between ${
-                  isCurrent
-                    ? 'border-emerald-500/40 bg-white/[0.03] shadow-lg'
-                    : 'border-white/[0.06] bg-[#090b10] hover:border-white/15'
-                }`}
+                key={pulse.step}
+                className="p-6 rounded-2xl bg-[#090b10] border border-white/[0.06] hover:border-white/15 transition-all flex flex-col justify-between h-56"
               >
                 <div>
-                  <div className="flex items-center justify-between text-xs text-zinc-400 mb-4 font-mono">
-                    <span className="text-white font-bold">{m.step}</span>
-                    <span className="text-[11px] uppercase tracking-wider text-emerald-400">{m.phase}</span>
+                  <div className="flex items-center justify-between text-xs font-mono mb-4 text-zinc-500">
+                    <span className="text-emerald-400 font-bold">{pulse.step}</span>
+                    <Icon className="w-4 h-4 text-zinc-400" />
                   </div>
-                  <Icon className="w-5 h-5 text-emerald-400 mb-4" />
-                  <h3 className="text-base font-semibold text-white mb-2 leading-snug">
-                    {m.headline}
+                  <h3 className="text-base font-semibold text-white mb-2">
+                    {pulse.name}
                   </h3>
-                  <p className="text-xs text-zinc-400 leading-relaxed mb-6">
-                    {m.desc}
+                  <p className="text-xs text-zinc-400 leading-relaxed">
+                    {pulse.desc}
                   </p>
                 </div>
-
-                <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between text-xs">
-                  <span className="text-zinc-400 text-[11px] font-mono">{m.metricLabel}</span>
-                  <span className="text-white font-mono font-medium">{m.metricVal}</span>
+                <div className="text-[11px] font-mono text-zinc-600">
+                  Continuous Flow
                 </div>
               </div>
             );
@@ -282,159 +229,99 @@ export function HomePage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          02B — OPEN-ENTRY PIPELINE: ENTER AT ANY STAGE
+          03 — OPEN ENTRY: ZERO THRESHOLD
          ══════════════════════════════════════════════════════ */}
-      <section className="py-20 sm:py-28 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06]">
-        <div className="max-w-3xl mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] text-xs text-zinc-300 font-mono mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            <span>LIFECYCLE AGILITY // ZERO FRICTION</span>
+      <section className="py-20 sm:py-24 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] text-xs text-zinc-400 font-mono mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              <span>OPEN-ENTRY ARCHITECTURE</span>
+            </div>
+            <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white [letter-spacing:-0.025em]">
+              Zero Threshold.<br />
+              <span className="text-zinc-400 font-light">Enter the stream anywhere.</span>
+            </h2>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white [letter-spacing:-0.03em] mb-4">
-            Zero Threshold.<br />
-            <span className="text-zinc-400 font-light">Enter the stream anywhere.</span>
-          </h2>
-          <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
-            You don’t have to start with DigiSynq on Day Zero. Whether you're an asset owner with dark soundstage days next month, an independent producer facing a mid-shoot post stall, or a director needing virtual production pre-vis — any stakeholder can plug into the DigiSynq pipeline at the exact moment of need.
+          <p className="text-xs sm:text-sm text-zinc-400 max-w-md leading-relaxed">
+            No day-zero lock-in. Any stakeholder or facility can tap the pipeline at their specific moment of friction.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[
-            {
-              stage: '01',
-              title: 'Packaging & Feasibility',
-              stakeholder: 'Writers, Producers & IP Holders',
-              scenario: 'Trapped screenplay or IP requiring realistic budget modeling, department attachments, and studio packaging.',
-              action: 'Deploy asset-light packaging sprint with verified rate cards and feasibility models.',
-            },
-            {
-              stage: '02',
-              title: 'Pre-Production & Stage Booking',
-              stakeholder: 'Directors & Production Banners',
-              scenario: 'Production greenlit but facing soundstage availability locks or missing key craft department heads.',
-              action: 'Direct routing to dark days on partner acoustic floors and verified guild roster matching.',
-            },
-            {
-              stage: '03',
-              title: 'Mid-Shoot & On-Set Triage',
-              stakeholder: 'Producers & Line Producers',
-              scenario: 'Active production facing stage extension issues, weather delays, or volume rig tracking failures.',
-              action: 'Dynamic burst-occupancy floor reallocation and Synq Labs on-set telemetry intervention.',
-            },
-            {
-              stage: '04',
-              title: 'Post-Finishing & VFX Turnover',
-              stakeholder: 'Post Supervisors & Financiers',
-              scenario: 'Editorial bottlenecks, VFX composite turnover drift, or completion bond cash disbursements stalled.',
-              action: 'Deploy camera-to-cloud dailies pipeline and milestone-tied escrow release upon approved turnover.',
-            },
-            {
-              stage: '05',
-              title: 'Pre-Demand Distribution',
-              stakeholder: 'Independent Titles & Distributors',
-              scenario: 'Completed feature facing premature theatrical eviction or clashing directly against studio tentpoles.',
-              action: 'Targeted multiplex screening clusters synchronized with regional audience density telemetry.',
-            },
-            {
-              stage: '06',
-              title: 'Idle Capacity Monetization',
-              stakeholder: 'Studio Lots, Venues & Rental Houses',
-              scenario: 'Soundstage floors, LED volumes, or specialized camera packages sitting dark between marquee client bookings.',
-              action: 'List unbooked turnaround windows into the DigiSynq mesh to capture 100% incremental revenue.',
-            },
-          ].map((entry) => (
-            <div
-              key={entry.stage}
-              className="p-7 rounded-3xl bg-[#090b10] border border-white/[0.06] hover:border-emerald-500/30 transition-all flex flex-col justify-between space-y-6"
+        {/* Minimalist 6-Stage Entry Matrix */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+          {ENTRY_STRATA.map((stratum) => (
+            <Link
+              key={stratum.code}
+              to="/start"
+              state={{ role: stratum.forWhom, problem: `Entering at Stage ${stratum.code}: ${stratum.name}` }}
+              className="p-4 rounded-2xl bg-white/[0.015] border border-white/[0.06] hover:border-emerald-500/40 hover:bg-white/[0.03] transition-all group flex flex-col justify-between h-36"
             >
               <div>
-                <div className="flex items-center justify-between text-xs font-mono text-zinc-400 mb-3">
-                  <span className="text-emerald-400 font-bold">ENTRY {entry.stage}</span>
-                  <span className="text-[11px] truncate max-w-[160px] text-zinc-400">{entry.stakeholder}</span>
-                </div>
-                <h3 className="text-lg font-semibold text-white mb-2 leading-snug">
-                  {entry.title}
+                <span className="text-[10px] font-mono text-emerald-400 block mb-2">STAGE {stratum.code}</span>
+                <h3 className="text-xs font-semibold text-white group-hover:text-emerald-300 transition-colors leading-snug">
+                  {stratum.name}
                 </h3>
-                <p className="text-xs text-zinc-400 leading-relaxed mb-4">
-                  {entry.scenario}
-                </p>
-                <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] text-xs text-zinc-200 leading-relaxed">
-                  <span className="text-emerald-400 font-medium block mb-1">Pipeline Action:</span>
-                  {entry.action}
-                </div>
               </div>
-
-              <div className="pt-4 border-t border-white/[0.06]">
-                <Link
-                  to="/start"
-                  state={{ problem: `${entry.title}: ${entry.scenario}`, role: entry.stakeholder }}
-                  className="w-full inline-flex items-center justify-between text-xs text-zinc-300 hover:text-white group"
-                >
-                  <span className="font-medium">Enter pipeline here</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-emerald-400 transition-transform group-hover:translate-x-1" />
-                </Link>
+              <div className="pt-2 border-t border-white/[0.04] text-[10px] text-zinc-400 flex items-center justify-between">
+                <span className="truncate">{stratum.forWhom}</span>
+                <ArrowRight size={10} className="text-emerald-400 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          03 — SYNQ LABS: "WE ARE LABS. WE EXPERIMENT."
+          04 — SYNQ LABS: "WE ARE LABS. WE EXPERIMENT."
          ══════════════════════════════════════════════════════ */}
-      <section className="py-20 sm:py-28 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06]">
+      <section className="py-20 sm:py-24 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06]">
         <div className="p-8 sm:p-12 rounded-3xl bg-[#080a0f] border border-white/[0.08] relative overflow-hidden">
           
-          {/* Subtle Ambient Glow */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/[0.04] rounded-full blur-3xl pointer-events-none" />
-
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300 font-mono mb-4">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                <span>R&amp;D DIVISION // SYNQ LABS</span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300 font-mono mb-3">
+                <FlaskConical size={12} />
+                <span>APPLIED R&amp;D // SYNQ LABS</span>
               </div>
-              <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white [letter-spacing:-0.03em] mb-4">
-                We are labs. We experiment.
+              <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white [letter-spacing:-0.03em] mb-3">
+                We are labs.<br />
+                <span className="text-zinc-400 font-light">We experiment.</span>
               </h2>
-              <p className="text-sm sm:text-base text-zinc-400 max-w-2xl leading-relaxed">
-                We don't theorize about entertainment technology. We trial real-time virtual production, camera-to-cloud dailies, and fractional stage usage in empirical sandboxes before deploying them across active productions.
+              <p className="text-xs sm:text-sm text-zinc-400 max-w-xl leading-relaxed">
+                We don't theorize about entertainment technology. We stress-test virtual volumes, camera-to-cloud dailies, and stage utilization in safe-to-fail sandboxes before live production.
               </p>
             </div>
 
             <Link
               to="/workshops"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-medium text-xs hover:bg-zinc-200 transition-all shrink-0 shadow-md"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black font-medium text-xs hover:bg-zinc-200 transition-all shrink-0 shadow-md"
             >
-              <span>View All 6 Lab Tracks</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <span>Explore All 6 Trials</span>
+              <ArrowRight size={13} />
             </Link>
           </div>
 
-          {/* Live Experiment Status Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {EXPERIMENTS.map((exp) => (
+          {/* 3 Streamlined Benchmark Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {FEATURED_EXPERIMENTS.map((exp) => (
               <div
                 key={exp.code}
-                className="p-5 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-emerald-500/30 transition-all flex flex-col justify-between"
+                className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-emerald-500/30 transition-all flex flex-col justify-between"
               >
                 <div>
-                  <div className="flex items-center justify-between text-xs mb-3">
-                    <span className="font-mono text-emerald-400 font-medium">{exp.code}</span>
-                    <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-[10px] font-mono text-zinc-300">
-                      <span className="w-1 h-1 rounded-full bg-emerald-400" />
-                      {exp.status}
-                    </span>
+                  <div className="flex items-center justify-between text-xs mb-2">
+                    <span className="font-mono text-emerald-400 font-bold">{exp.code}</span>
+                    <span className="text-[10px] font-mono text-zinc-400">{exp.status}</span>
                   </div>
-                  <h3 className="text-sm sm:text-base font-semibold text-white mb-1.5 leading-snug">
+                  <h3 className="text-sm font-semibold text-white mb-1 leading-snug">
                     {exp.title}
                   </h3>
-                  <span className="text-xs text-zinc-400 font-mono block mb-4">{exp.domain}</span>
+                  <span className="text-xs text-zinc-400 font-mono block mb-3">{exp.domain}</span>
                 </div>
 
                 <div className="pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs">
-                  <span className="text-zinc-400 text-[11px] font-mono">Empirical Benchmark</span>
+                  <span className="text-zinc-400 text-[11px]">Benchmark</span>
                   <span className="text-emerald-300 font-mono font-medium">{exp.metric}</span>
                 </div>
               </div>
@@ -444,77 +331,15 @@ export function HomePage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          04 — THE VALUE EXCHANGE (How Every Stakeholder Wins)
+          05 — CLOSING CTA: METAMORPHIC, DIRECT
          ══════════════════════════════════════════════════════ */}
-      <section className="py-20 sm:py-28 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06]">
-        <div className="max-w-2xl mb-14">
-          <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-2 block">
-            Commercial Architecture
-          </span>
-          <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white [letter-spacing:-0.025em] mb-4">
-            Symbiotic Current.<br />
-            <span className="text-zinc-400 font-light">Velocity over rent-seeking.</span>
-          </h2>
-          <p className="text-zinc-400 text-sm leading-relaxed">
-            DigiSynq generates value through coordination efficiency, not by extracting landlord rents on physical equipment.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="p-8 rounded-3xl bg-[#090b10] border border-white/[0.06] flex flex-col justify-between">
-            <div>
-              <span className="text-xs font-mono text-zinc-400 uppercase block mb-3">01 // FOR PRODUCTIONS</span>
-              <h3 className="text-lg font-semibold text-white mb-2">Turnkey Agility</h3>
-              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-6">
-                Lock verified department heads, unbooked LED stages, and bonded finishing pipelines in days instead of months of broker negotiations.
-              </p>
-            </div>
-            <div className="pt-4 border-t border-white/[0.06] text-xs font-mono text-emerald-400">
-              20–35% compressed schedule
-            </div>
-          </div>
-
-          <div className="p-8 rounded-3xl bg-[#090b10] border border-white/[0.06] flex flex-col justify-between">
-            <div>
-              <span className="text-xs font-mono text-zinc-400 uppercase block mb-3">02 // FOR STUDIOS &amp; FACILITIES</span>
-              <h3 className="text-lg font-semibold text-white mb-2">100% Incremental Yield</h3>
-              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-6">
-                Monetize dark floors, turnaround gaps, and unbooked camera packages with pre-vetted, bonded productions without sales overhead.
-              </p>
-            </div>
-            <div className="pt-4 border-t border-white/[0.06] text-xs font-mono text-emerald-400">
-              Recovered dark-day revenue
-            </div>
-          </div>
-
-          <div className="p-8 rounded-3xl bg-[#090b10] border border-white/[0.06] flex flex-col justify-between">
-            <div>
-              <span className="text-xs font-mono text-zinc-400 uppercase block mb-3">03 // FOR CAPITAL &amp; DISTRIBUTORS</span>
-              <h3 className="text-lg font-semibold text-white mb-2">Milestone Covenants</h3>
-              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-6">
-                Disburse tranches against verified technical turnovers and cloud dailies telemetry, shielding investments from speculative budget overruns.
-              </p>
-            </div>
-            <div className="pt-4 border-t border-white/[0.06] text-xs font-mono text-emerald-400">
-              Zero speculative leakage
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════════
-          05 — CALL TO ACTION (Minimal, Confident, Direct)
-         ══════════════════════════════════════════════════════ */}
-      <section className="py-28 sm:py-36 px-6 sm:px-8 max-w-4xl mx-auto text-center border-t border-white/[0.06]">
-        <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-4 block">
-          Initiate Orchestration
-        </span>
-        <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white [letter-spacing:-0.03em] mb-6">
+      <section className="py-24 sm:py-32 px-6 sm:px-8 max-w-4xl mx-auto text-center border-t border-white/[0.06]">
+        <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white [letter-spacing:-0.03em] mb-4">
           Ignite the Flow.<br />
           <span className="text-zinc-400 font-light">Tell us what needs to move.</span>
         </h2>
-        <p className="text-base sm:text-lg text-zinc-400 max-w-xl mx-auto leading-relaxed mb-10 font-normal">
-          Whether you need soundstage turnaround access, guild department heads, or virtual production sandbox validation — we synchronize what entertainment needs.
+        <p className="text-sm sm:text-base text-zinc-400 max-w-md mx-auto leading-relaxed mb-8">
+          Whether you need soundstage turnaround access, guild department heads, or virtual production validation — we synchronize what entertainment needs.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4">
           <Link
@@ -528,7 +353,7 @@ export function HomePage() {
             to="/runbook"
             className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-white/10 hover:border-white/20 bg-white/[0.02] text-zinc-300 font-medium text-sm transition-all duration-200"
           >
-            <span>Read Business Runbook</span>
+            <span>Business Runbook</span>
           </Link>
         </div>
       </section>

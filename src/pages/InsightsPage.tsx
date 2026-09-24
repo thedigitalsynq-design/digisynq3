@@ -106,8 +106,8 @@ export function InsightsPage() {
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            Empirical dispatches<br />
-            <span className="text-zinc-400 font-light">from the entertainment frontier.</span>
+            Field Telemetry.<br />
+            <span className="text-zinc-400 font-light">Dispatches from the frontier.</span>
           </h1>
 
           <p className="text-lg sm:text-xl text-zinc-300 font-normal leading-relaxed max-w-3xl mb-12">
@@ -141,6 +141,19 @@ export function InsightsPage() {
       {/* ── 02. Dispatches Section ── */}
       <section id="dispatches" className="py-24 sm:py-32 border-t border-white/[0.06]">
         <div className="max-w-5xl mx-auto px-6 sm:px-8">
+
+          <div className="max-w-2xl mb-12">
+            <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
+              Intelligence Ledger
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
+              The Telemetry Ledger.<br />
+              <span className="text-zinc-400 font-light">Empirical audits &amp; field findings.</span>
+            </h2>
+            <p className="text-base text-zinc-400 leading-relaxed">
+              Real-world telemetry gathered from active soundstages, virtual volumes, and territorial distribution circuits.
+            </p>
+          </div>
 
           {/* Category Tabs */}
           <div className="flex items-center gap-2 pb-6 mb-12 border-b border-white/[0.06] overflow-x-auto scrollbar-none">
@@ -180,9 +193,9 @@ export function InsightsPage() {
                     <span>{brief.date}</span>
                   </div>
 
-                  <h2 className="text-xl sm:text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors leading-snug">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors leading-snug">
                     {brief.title}
-                  </h2>
+                  </h3>
 
                   <p className="text-sm text-zinc-400 leading-relaxed line-clamp-2">
                     {brief.summary}
@@ -227,9 +240,9 @@ export function InsightsPage() {
             </div>
 
             <div className="space-y-3">
-              <h2 className="text-2xl sm:text-3xl font-bold text-white leading-tight">
+              <h3 className="text-2xl sm:text-3xl font-bold text-white leading-tight">
                 {readingBrief.title}
-              </h2>
+              </h3>
               <div className="flex items-center gap-4 text-xs font-mono text-zinc-500">
                 <span className="flex items-center gap-1.5"><Calendar size={13} /> {readingBrief.date}</span>
                 <span>•</span>
@@ -277,7 +290,8 @@ export function InsightsPage() {
       <section className="py-24 sm:py-32 border-t border-white/[0.06]">
         <div className="max-w-4xl mx-auto px-6 sm:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-6">
-            Need tailored telemetry for an upcoming production?
+            Audit the Friction.<br />
+            <span className="text-zinc-400 font-light">Commission tailored telemetry for your slate.</span>
           </h2>
           <p className="text-base text-zinc-400 leading-relaxed max-w-xl mx-auto mb-10">
             We run pre-production constraint audits and theatrical release window evaluations for independent projects and partner slates.

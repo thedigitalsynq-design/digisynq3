@@ -138,7 +138,8 @@ export function WorkshopsPage() {
               Methodology
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-              How Synq Labs conducts experiments
+              The Scientific Loop.<br />
+              <span className="text-zinc-400 font-light">From hypothesis to field proof.</span>
             </h2>
             <p className="text-base text-zinc-400 leading-relaxed">
               Every workflow and technical standard we deploy is proven through structured, safe-to-fail experimentation.
@@ -179,7 +180,8 @@ export function WorkshopsPage() {
               Active Lab Trials
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-              Current industry experiments
+              Active Sandboxes.<br />
+              <span className="text-zinc-400 font-light">Six empirical industry trials.</span>
             </h2>
             <p className="text-base text-zinc-400 leading-relaxed">
               Live technical, operational, and commercial prototypes currently running across our partner soundstages, digital suites, and distribution circuits.
@@ -301,7 +303,8 @@ export function WorkshopsPage() {
               Capability Sprints
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-              Applied workshops & guild labs
+              Capability Sprints.<br />
+              <span className="text-zinc-400 font-light">Packaging breakthroughs into craft.</span>
             </h2>
             <p className="text-base text-zinc-400 leading-relaxed">
               When an experiment produces a verified breakthrough, we package it into intensive hands-on labs for directors, cinematographers, sound mixers, and technicians.
@@ -425,7 +428,8 @@ export function WorkshopsPage() {
             <FlaskConical size={22} />
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-6">
-            Have a hypothesis to test in entertainment?
+            Formulate a Hypothesis.<br />
+            <span className="text-zinc-400 font-light">Stress-test your pipeline with Synq Labs.</span>
           </h2>
           <p className="text-base text-zinc-400 leading-relaxed max-w-xl mx-auto mb-10">
             Whether you operate a facility, build real-time media software, develop entertainment IP, or engineer camera packages, collaborate with Synq Labs.

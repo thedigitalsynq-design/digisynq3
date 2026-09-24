@@ -191,8 +191,8 @@ export function EcosystemPage() {
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            The entertainment constellation.<br />
-            <span className="text-zinc-400 font-light">Every node. Synchronized.</span>
+            The Living Constellation.<br />
+            <span className="text-zinc-400 font-light">Every node. In resonance.</span>
           </h1>
 
           <p className="text-lg sm:text-xl text-zinc-300 font-normal leading-relaxed max-w-3xl mb-12">
@@ -226,7 +226,8 @@ export function EcosystemPage() {
               Network Roles
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-3">
-              How the asset-light model divides responsibility
+              The Division of Labor.<br />
+              <span className="text-zinc-400 font-light">Assets, craft, orchestration.</span>
             </h2>
             <p className="text-sm text-zinc-400 leading-relaxed">
               DigiSynq creates value by coordinating, discovering, and matching existing capacity rather than competing with asset owners or talent.
@@ -310,7 +311,8 @@ export function EcosystemPage() {
                 Network Topology
               </span>
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-                Interactive participant network
+                The Living Mesh.<br />
+                <span className="text-zinc-400 font-light">Sixteen disciplines in lockstep.</span>
               </h2>
             </div>
 
@@ -414,7 +416,8 @@ export function EcosystemPage() {
               Asset-Light Advantages
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-              Why neutral coordination works
+              The Frictionless Plane.<br />
+              <span className="text-zinc-400 font-light">Velocity through uncompromised neutrality.</span>
             </h2>
             <p className="text-base text-zinc-400 leading-relaxed">
               Traditional intermediaries extract rents by monopolizing physical infrastructure. DigiSynq generates value by routing and orchestrating capacity that already exists across the entertainment ecosystem.
@@ -466,7 +469,8 @@ export function EcosystemPage() {
       <section className="py-24 sm:py-32 border-t border-white/[0.06]">
         <div className="max-w-4xl mx-auto px-6 sm:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-6">
-            Connect your node to DigiSynq
+            Plug In Your Node.<br />
+            <span className="text-zinc-400 font-light">Enter the asset-light entertainment stream.</span>
           </h2>
           <p className="text-base text-zinc-400 leading-relaxed max-w-xl mx-auto mb-10">
             Whether you operate a studio facility, represent creative talent, manage entertainment capital, or lead production, register your interest to join the synchronized network.

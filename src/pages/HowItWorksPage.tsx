@@ -107,8 +107,8 @@ export function HowItWorksPage() {
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            How DigiSynq orchestrates<br />
-            <span className="text-zinc-400 font-light">entertainment production.</span>
+            The Orchestration Loop.<br />
+            <span className="text-zinc-400 font-light">From first diagnostic to final delivery.</span>
           </h1>
 
           <p className="text-lg sm:text-xl text-zinc-300 font-normal leading-relaxed max-w-3xl mb-12">
@@ -147,8 +147,9 @@ export function HowItWorksPage() {
             <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
               Execution Architecture
             </span>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-              The four coordination phases
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
+              Four Horizons.<br />
+              <span className="text-zinc-400 font-light">Diagnose, connect, orchestrate, realize.</span>
             </h2>
           </div>
 
@@ -265,6 +266,105 @@ export function HowItWorksPage() {
         </div>
       </section>
 
+      {/* ── 02B. Open-Entry Pipeline: 6 Lifecycle Injection Points ── */}
+      <section className="py-24 sm:py-32 border-t border-white/[0.06] bg-[#050608]">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8">
+          <div className="max-w-3xl mb-14">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] text-xs text-zinc-300 font-mono mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              <span>LIFECYCLE AGILITY // ZERO THRESHOLD</span>
+            </div>
+            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white [letter-spacing:-0.03em] mb-4">
+              Zero Threshold.<br />
+              <span className="text-zinc-400 font-light">Enter the stream anywhere.</span>
+            </h2>
+            <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
+              You don’t have to start with DigiSynq on Day Zero. Whether you're an asset owner with dark soundstage days next month, an independent producer facing a mid-shoot post stall, or a director needing virtual production pre-vis — any stakeholder can plug into the DigiSynq pipeline at the exact moment of need.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                stage: '01',
+                title: 'Packaging & Feasibility',
+                stakeholder: 'Writers, Producers & IP Holders',
+                scenario: 'Trapped screenplay or IP requiring realistic budget modeling, department attachments, and studio packaging.',
+                action: 'Deploy asset-light packaging sprint with verified rate cards and feasibility models.',
+              },
+              {
+                stage: '02',
+                title: 'Pre-Production & Stage Booking',
+                stakeholder: 'Directors & Production Banners',
+                scenario: 'Production greenlit but facing soundstage availability locks or missing key craft department heads.',
+                action: 'Direct routing to dark days on partner acoustic floors and verified guild roster matching.',
+              },
+              {
+                stage: '03',
+                title: 'Mid-Shoot & On-Set Triage',
+                stakeholder: 'Producers & Line Producers',
+                scenario: 'Active production facing stage extension issues, weather delays, or volume rig tracking failures.',
+                action: 'Dynamic burst-occupancy floor reallocation and Synq Labs on-set telemetry intervention.',
+              },
+              {
+                stage: '04',
+                title: 'Post-Finishing & VFX Turnover',
+                stakeholder: 'Post Supervisors & Financiers',
+                scenario: 'Editorial bottlenecks, VFX composite turnover drift, or completion bond cash disbursements stalled.',
+                action: 'Deploy camera-to-cloud dailies pipeline and milestone-tied escrow release upon approved turnover.',
+              },
+              {
+                stage: '05',
+                title: 'Pre-Demand Distribution',
+                stakeholder: 'Independent Titles & Distributors',
+                scenario: 'Completed feature facing premature theatrical eviction or clashing directly against studio tentpoles.',
+                action: 'Targeted multiplex screening clusters synchronized with regional audience density telemetry.',
+              },
+              {
+                stage: '06',
+                title: 'Idle Capacity Monetization',
+                stakeholder: 'Studio Lots, Venues & Rental Houses',
+                scenario: 'Soundstage floors, LED volumes, or specialized camera packages sitting dark between marquee client bookings.',
+                action: 'List unbooked turnaround windows into the DigiSynq mesh to capture 100% incremental revenue.',
+              },
+            ].map((entry) => (
+              <div
+                key={entry.stage}
+                className="p-7 rounded-3xl bg-[#090b10] border border-white/[0.06] hover:border-emerald-500/30 transition-all flex flex-col justify-between space-y-6"
+              >
+                <div>
+                  <div className="flex items-center justify-between text-xs font-mono text-zinc-400 mb-3">
+                    <span className="text-emerald-400 font-bold">ENTRY {entry.stage}</span>
+                    <span className="text-[11px] truncate max-w-[160px] text-zinc-400">{entry.stakeholder}</span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-white mb-2 leading-snug">
+                    {entry.title}
+                  </h3>
+                  <p className="text-xs text-zinc-400 leading-relaxed mb-4">
+                    {entry.scenario}
+                  </p>
+                  <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] text-xs text-zinc-200 leading-relaxed">
+                    <span className="text-emerald-400 font-medium block mb-1">Pipeline Action:</span>
+                    {entry.action}
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-white/[0.06]">
+                  <Link
+                    to="/start"
+                    state={{ problem: `${entry.title}: ${entry.scenario}`, role: entry.stakeholder }}
+                    className="w-full inline-flex items-center justify-between text-xs text-zinc-300 hover:text-white group"
+                  >
+                    <span className="font-medium">Enter pipeline here</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-emerald-400 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── 03. Benefits of the Asset-Light Model ── */}
       <section className="py-24 sm:py-32 border-t border-white/[0.06]">
         <div className="max-w-6xl mx-auto px-6 sm:px-8">
@@ -274,7 +374,8 @@ export function HowItWorksPage() {
               Model Benefits
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-              Why coordinate existing capacity?
+              Light Beats Heavy.<br />
+              <span className="text-zinc-400 font-light">The structural leverage of fluid capacity.</span>
             </h2>
             <p className="text-base text-zinc-400 leading-relaxed">
               An asset-light coordination layer offers distinct structural advantages over heavy physical ownership.
@@ -311,7 +412,8 @@ export function HowItWorksPage() {
                 Standardized Governance
               </span>
               <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white">
-                Detailed execution protocols & commercial playbooks
+                The Institutional Playbook.<br />
+                <span className="text-zinc-400 font-light">Rigorous covenants and economic playbooks.</span>
               </h2>
               <p className="text-sm sm:text-base text-zinc-400 leading-relaxed">
                 For producers, studio operators, and financiers requiring complete operational specifications, inspect our institutional runbook covering 6 commercial revenue models, multi-party covenants, and phase-by-phase delivery milestones.
@@ -340,7 +442,8 @@ export function HowItWorksPage() {
       <section className="py-24 sm:py-32 border-t border-white/[0.06]">
         <div className="max-w-4xl mx-auto px-6 sm:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-6">
-            Ready to synchronize your next project?
+            Activate the Circuit.<br />
+            <span className="text-zinc-400 font-light">Synchronize your upcoming production.</span>
           </h2>
           <p className="text-base text-zinc-400 leading-relaxed max-w-xl mx-auto mb-10">
             Have an entertainment project, resource requirement, or capacity opportunity? Start a Synq and tell us what needs to be connected.

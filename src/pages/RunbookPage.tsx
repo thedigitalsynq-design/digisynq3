@@ -215,8 +215,8 @@ export function RunbookPage() {
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            The business architecture<br />
-            <span className="text-zinc-400 font-light">of DigiSynq.</span>
+            The Operating Bible.<br />
+            <span className="text-zinc-400 font-light">The institutional codex.</span>
           </h1>
 
           <p className="text-lg sm:text-xl text-zinc-300 leading-relaxed max-w-3xl font-normal mb-10">
@@ -245,7 +245,8 @@ export function RunbookPage() {
             01. Core Business Logic
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-            How the asset-light model creates value
+            The Operating Engine.<br />
+            <span className="text-zinc-400 font-light">Capacity routing over capital lockup.</span>
           </h2>
           <p className="text-base text-zinc-400 leading-relaxed">
             Entertainment already possesses immense physical capacity, creative brilliance, and capital. What it lacks is coordination. DigiSynq operates as the neutral connective layer that routes demand to existing resources.
@@ -313,7 +314,8 @@ export function RunbookPage() {
             02. Commercial Architecture
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-            Commercial architecture & revenue streams
+            The Six Currents.<br />
+            <span className="text-zinc-400 font-light">Commercial flows of orchestration.</span>
           </h2>
           <p className="text-base text-zinc-400 leading-relaxed">
             DigiSynq generates economic value through coordination, capacity matching, and workflow orchestration rather than by extracting landlord rents on physical assets.
@@ -354,7 +356,8 @@ export function RunbookPage() {
             03. Operational Lifecycle
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-            The 6-stage project execution protocol
+            The Execution Ring.<br />
+            <span className="text-zinc-400 font-light">From first triage to final realization.</span>
           </h2>
           <p className="text-base text-zinc-400 leading-relaxed">
             Every engagement follows a structured progression from initial constraint diagnosis to final release realization.
@@ -407,7 +410,8 @@ export function RunbookPage() {
             04 // Integration Guides
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-            Stakeholder operating manuals
+            The Five Playbooks.<br />
+            <span className="text-zinc-400 font-light">Discipline protocols across the stream.</span>
           </h2>
           <p className="text-base text-zinc-400 leading-relaxed">
             How each participant category interfaces with the DigiSynq network to coordinate capacity and extract value.
@@ -484,7 +488,8 @@ export function RunbookPage() {
             05. Risk Architecture
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-            Institutional risk covenants
+            The Risk Moat.<br />
+            <span className="text-zinc-400 font-light">Non-custodial covenants and escrow.</span>
           </h2>
           <p className="text-base text-zinc-400 leading-relaxed">
             Coordination across independent entertainment stakeholders requires institutional trust. DigiSynq operates under four non-negotiable governance principles.
@@ -541,7 +546,8 @@ export function RunbookPage() {
             06. Strategic Differentiation
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-            Why coordination is not a marketplace
+            The Structural Moat.<br />
+            <span className="text-zinc-400 font-light">Synchronization versus passive tollbooths.</span>
           </h2>
           <p className="text-base text-zinc-400 leading-relaxed">
             Understanding the distinction between DigiSynq and other traditional industry models.
@@ -593,7 +599,8 @@ export function RunbookPage() {
       {/* ── 08. Closing CTA ── */}
       <section className="py-32 sm:py-44 px-6 sm:px-8 max-w-4xl mx-auto text-center border-t border-white/[0.06]">
         <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-6">
-          Initialize a project runbook
+          Engage the Runbook.<br />
+          <span className="text-zinc-400 font-light">Synchronize your upcoming production.</span>
         </h2>
         <p className="text-base text-zinc-400 max-w-xl mx-auto leading-relaxed mb-10">
           Have an entertainment project, resource requirement, or capacity opportunity? Start a Synq and tell us what needs to be connected.

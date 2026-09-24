@@ -64,8 +64,8 @@ export function AboutPage() {
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            We don’t own the studio.<br />
-            <span className="text-zinc-400 font-light">We orchestrate the ecosystem.</span>
+            The Invisible Architecture.<br />
+            <span className="text-zinc-400 font-light">We don’t own the studio. We orchestrate the ecosystem.</span>
           </h1>
 
           <p className="text-lg sm:text-xl text-zinc-300 font-normal leading-relaxed max-w-3xl mb-12">
@@ -167,7 +167,8 @@ export function AboutPage() {
               Stakeholder Framework
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-              Who DigiSynq connects
+              The Constellation.<br />
+              <span className="text-zinc-400 font-light">Every discipline in resonance.</span>
             </h2>
             <p className="text-base text-zinc-400 leading-relaxed">
               We coordinate relationships and capacity across the full entertainment lifecycle.
@@ -200,7 +201,8 @@ export function AboutPage() {
               Clear Boundaries
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-              What DigiSynq is deliberately not
+              The Perimeter.<br />
+              <span className="text-zinc-400 font-light">Discipline through absolute refusal.</span>
             </h2>
             <p className="text-base text-zinc-400 leading-relaxed">
               Discipline requires saying no. We maintain focus by refusing to replicate existing legacy business models.
@@ -241,7 +243,8 @@ export function AboutPage() {
               Governance Axioms
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-              The eight operating principles
+              The Eight Axioms.<br />
+              <span className="text-zinc-400 font-light">First principles of entertainment flow.</span>
             </h2>
             <p className="text-base text-zinc-400 leading-relaxed">
               Every decision we make — from protocol architecture to engagement structure — is governed by these foundational axioms.
@@ -280,7 +283,8 @@ export function AboutPage() {
               Institutional Governance
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-              Operational disclosures & covenants
+              The Covenant.<br />
+              <span className="text-zinc-400 font-light">Institutional trust without compromise.</span>
             </h2>
             <p className="text-base text-zinc-400 leading-relaxed">
               DigiSynq operates with institutional discipline. We provide clear operational parameters for studio banners, completion guarantors, and enterprise partners.
@@ -333,7 +337,8 @@ export function AboutPage() {
       <section className="py-24 sm:py-32 border-t border-white/[0.06]">
         <div className="max-w-4xl mx-auto px-6 sm:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-6">
-            Build with the synchronization layer
+            Enter the Stream.<br />
+            <span className="text-zinc-400 font-light">Connect your node to the current.</span>
           </h2>
           <p className="text-base text-zinc-400 leading-relaxed max-w-xl mx-auto mb-10">
             Have an entertainment project, resource requirement, or capacity opportunity? Start a Synq and tell us what needs to be connected.
