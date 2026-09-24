@@ -178,36 +178,40 @@ export function EcosystemPage() {
     : ALL_STAKEHOLDERS.filter(g => g.category === selectedRole);
 
   return (
-    <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white">
+    <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white min-h-screen">
 
       {/* ── 01. Hero Section ── */}
       <section className="pt-40 sm:pt-48 pb-20 sm:pb-28 px-6 sm:px-8 max-w-6xl mx-auto">
         <div className="max-w-4xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-400 mb-8 tracking-wide">
-            <span>Entertainment Ecosystem Network</span>
+          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-300 mb-8 tracking-wide">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+            <span className="font-mono text-zinc-400">ECOSYSTEM</span>
+            <span className="text-zinc-600">//</span>
+            <span className="text-white font-medium">Multi-Stakeholder Network</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            The complete entertainment constellation.
+            The entertainment constellation.<br />
+            <span className="text-zinc-400 font-light">Every node. Synchronized.</span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-zinc-400 font-normal leading-relaxed max-w-3xl mb-12">
-            Entertainment already has immense distributed capacity. DigiSynq does not replace existing industry participants. We provide the neutral, asset-light coordination layer that allows creators, creative talent, partner facilities, production services, commercial partners, and audience distribution channels to interface without friction.
+          <p className="text-lg sm:text-xl text-zinc-300 font-normal leading-relaxed max-w-3xl mb-12">
+            Entertainment thrives on distributed genius: premier studio lots, guild craft leaders, independent producers, and global exhibition platforms. DigiSynq connects them into an asset-light operating fabric — generating incremental yield for facility operators and turnkey agility for creators.
           </p>
 
           <div className="flex flex-wrap items-center gap-4">
             <Link
               to="/start"
-              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-white text-black font-medium text-sm hover:bg-zinc-200 transition-all shadow-lg hover:scale-[1.02] active:scale-[0.98]"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white text-[#06080d] hover:bg-zinc-200 font-medium text-sm tracking-wide transition-all duration-200 active:scale-95 shadow-sm"
             >
-              Plug in your node
-              <ArrowRight size={15} />
+              <span>Connect Your Node</span>
+              <ArrowRight className="w-4 h-4" />
             </Link>
             <a
               href="#constellation"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-sm text-zinc-300 transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/10 hover:border-white/20 bg-white/[0.02] text-zinc-300 font-medium text-sm transition-all duration-200"
             >
-              Explore constellation
+              <span>Explore Constellation</span>
             </a>
           </div>
         </div>

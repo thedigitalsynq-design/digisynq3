@@ -129,20 +129,24 @@ export function StartSynqPage() {
   };
 
   return (
-    <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white">
+    <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white min-h-screen">
 
       {/* ── 01. Hero Section ── */}
       <section className="pt-40 sm:pt-48 pb-16 sm:pb-20 px-6 sm:px-8 max-w-4xl mx-auto text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-400 mb-8 tracking-wide">
-          <span>Project Intake Terminal</span>
+        <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-300 mb-8 tracking-wide">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+          <span className="font-mono text-zinc-400">INTAKE</span>
+          <span className="text-zinc-600">//</span>
+          <span className="text-white font-medium">Production &amp; Lab Terminal</span>
         </div>
 
         <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-6">
-          Start a synq.
+          Initiate a Synq.<br />
+          <span className="text-zinc-400 font-light">Tell us what needs to be connected.</span>
         </h1>
 
-        <p className="text-lg sm:text-xl text-zinc-400 font-normal leading-relaxed max-w-2xl mx-auto">
-          Have an entertainment project, resource requirement, or capacity opportunity? Start a Synq and tell us what needs to be connected across talent, facilities, financing, and audience channels.
+        <p className="text-lg sm:text-xl text-zinc-300 font-normal leading-relaxed max-w-2xl mx-auto">
+          Whether you need soundstage turnaround access, guild craft department heads, virtual production sandbox trials, or milestone-backed capital — submit your project constraints for confidential intake (&lt; 48h turnaround).
         </p>
       </section>
 

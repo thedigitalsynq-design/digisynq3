@@ -202,23 +202,25 @@ export function RunbookPage() {
   const activePlaybook = STAKEHOLDER_PLAYBOOKS.find(p => p.id === activePlaybookId) || STAKEHOLDER_PLAYBOOKS[0];
 
   return (
-    <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white">
+    <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white min-h-screen">
 
       {/* ── 01. Hero Section ── */}
       <section className="pt-40 sm:pt-48 pb-20 sm:pb-28 px-6 sm:px-8 max-w-6xl mx-auto">
         <div className="max-w-4xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-400 mb-8 tracking-wide">
+          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-300 mb-8 tracking-wide">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            <span>DigiSynq Operational Codex & Runbook</span>
+            <span className="font-mono text-zinc-400">RUNBOOK</span>
+            <span className="text-zinc-600">//</span>
+            <span className="text-white font-medium">Institutional Specification &amp; Codex</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
             The business architecture<br />
-            of DigiSynq.
+            <span className="text-zinc-400 font-light">of DigiSynq.</span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-zinc-400 leading-relaxed max-w-3xl font-normal mb-10">
-            An exhaustive operational runbook detailing how DigiSynq functions as an asset-light coordination and orchestration network across the entertainment ecosystem — our business mechanics, commercial models, governance covenants, and value generation.
+          <p className="text-lg sm:text-xl text-zinc-300 leading-relaxed max-w-3xl font-normal mb-10">
+            An institutional operational runbook detailing how DigiSynq coordinates the entertainment ecosystem as an asset-light network — commercial models, covenant structures, risk mitigation, and economic realization.
           </p>
 
           {/* Quick Anchor Pills */}

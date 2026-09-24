@@ -89,53 +89,52 @@ const ASSET_LIGHT_BENEFITS = [
   },
 ];
 
-const OPERATIONAL_LOOP = [
-  { step: '01', name: 'Problem', desc: 'Identify the exact structural bottleneck or capacity gap holding the entertainment project back.' },
-  { step: '02', name: 'Map', desc: 'Survey existing available capacity across partner stages, venues, creative talent, and screens.' },
-  { step: '03', name: 'Gap', desc: 'Pinpoint precisely where capital, time, or floor space is being underutilized.' },
-  { step: '04', name: 'Synq', desc: 'Connect the missing nodes with verified covenants and transparent terms.' },
-  { step: '05', name: 'Coordinate', desc: 'Maintain live alignment across all departments through pre-production, filming, and post.' },
-  { step: '06', name: 'Execute', desc: 'Support on-schedule production delivery without micromanaging creative craftspeople.' },
-  { step: '07', name: 'Measure', desc: 'Audit actual delivery timelines, budget parameters, and audience engagement.' },
-  { step: '08', name: 'Learn', desc: 'Feed performance observations back into future stage, venue, and talent routing.' },
-];
-
 export function HowItWorksPage() {
   const [activePhaseIndex, setActivePhaseIndex] = useState(0);
   const activePhase = PHASES[activePhaseIndex];
 
   return (
-    <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white">
+    <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white min-h-screen">
 
       {/* ── 01. Hero Section ── */}
       <section className="pt-40 sm:pt-48 pb-20 sm:pb-28 px-6 sm:px-8 max-w-6xl mx-auto">
         <div className="max-w-4xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-400 mb-8 tracking-wide">
-            <span>Operational Protocol</span>
+          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-300 mb-8 tracking-wide">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+            <span className="font-mono text-zinc-400">PROTOCOL</span>
+            <span className="text-zinc-600">//</span>
+            <span className="text-white font-medium">Four-Phase Coordination Engine</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            How DigiSynq coordinates entertainment.
+            How DigiSynq orchestrates<br />
+            <span className="text-zinc-400 font-light">entertainment production.</span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-zinc-400 font-normal leading-relaxed max-w-3xl mb-12">
-            DigiSynq coordinates capacity rather than requiring ownership of capacity. We execute a disciplined four-phase protocol engineered to understand project requirements, match relevant existing capacity across the network, and coordinate execution through to realization across film, series, streaming, live entertainment, and media projects.
+          <p className="text-lg sm:text-xl text-zinc-300 font-normal leading-relaxed max-w-3xl mb-12">
+            DigiSynq routes demand to existing industry capacity rather than requiring fixed physical asset ownership. We execute a disciplined four-stage protocol engineered to ingest project constraints, match pre-verified partner stages and guild talent, and synchronize milestones through to final audience release.
           </p>
 
           <div className="flex flex-wrap items-center gap-4">
             <Link
               to="/start"
-              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-white text-black font-medium text-sm hover:bg-zinc-200 transition-all shadow-lg hover:scale-[1.02] active:scale-[0.98]"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white text-[#06080d] hover:bg-zinc-200 font-medium text-sm tracking-wide transition-all duration-200 active:scale-95 shadow-sm"
             >
-              Start a synq
-              <ArrowRight size={15} />
+              <span>Initiate a Synq</span>
+              <ArrowRight className="w-4 h-4" />
             </Link>
             <a
               href="#protocol"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-sm text-zinc-300 transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/10 hover:border-white/20 bg-white/[0.02] text-zinc-300 font-medium text-sm transition-all duration-200"
             >
-              Explore the 4 phases
+              <span>Inspect 4 Phases</span>
             </a>
+            <Link
+              to="/runbook"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-emerald-500/25 hover:border-emerald-500/40 bg-emerald-500/[0.03] text-emerald-300 font-medium text-sm transition-all duration-200"
+            >
+              <span>Business Runbook</span>
+            </Link>
           </div>
         </div>
       </section>

@@ -1,35 +1,39 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Compass, Cpu, Zap, Check } from 'lucide-react';
+import { ArrowRight, Compass, Cpu, Zap, Activity, Layers, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
 const GAPS = [
   {
     id: 'human',
     title: 'Creative Talent & Crew Assembly',
-    traditional: 'Productions traditionally hire through closed personal phone trees. Qualified creative heads, technical craftspeople, and specialized crews experience unbooked lulls, while projects struggle to identify available talent on short timelines.',
-    synqSolution: 'DigiSynq indexes verified availability, specialized skillsets, and open schedules across guilds and independent professionals, matching productions to existing talent without agency middleman markups.',
-    metric: 'Direct roster locking from verified network availability',
+    category: 'Human Layer',
+    traditional: 'Productions assemble key department heads through closed personal phone trees. Qualified cinematographers, sound designers, and virtual production leads sit on unbooked lulls, while projects experience multi-week assembly delays.',
+    synqSolution: 'DigiSynq indexes verified availability calendars and craft specializations across guilds, matching projects directly to available talent with standardized rate parity and turnkey contracts.',
+    metric: '< 48h direct roster locking',
   },
   {
     id: 'spatial',
-    title: 'Studios, Stages & Production Venues',
-    traditional: 'Soundstages, virtual production LED volumes, and specialized venues often sit dark between long-term tenant bookings, while productions struggle to secure floor time due to rigid multi-month lease mandates.',
-    synqSolution: 'DigiSynq routes production demand to available partner facilities during turnaround windows, creating floor utilization for facility operators and accessible rates for productions.',
-    metric: 'Dynamic access to available studio and venue capacity',
+    title: 'Studios, Stages & LED Volumes',
+    category: 'Physical Infrastructure',
+    traditional: 'Soundstages, LED virtual production volumes, and scoring stages sit dark between multi-month tenant leases, while incoming productions face rigid long-term booking mandates.',
+    synqSolution: 'DigiSynq routes active productions into dark days and turnaround slots at partner facilities, unlocking incremental revenue for stage operators and dynamic access for productions.',
+    metric: '100% incremental floor yield',
   },
   {
     id: 'financial',
     title: 'Finishing & Milestone Capital',
-    traditional: 'Entertainment projects frequently encounter financing bottlenecks during post-production and final delivery when traditional credit facilities are disconnected from real milestone handoffs.',
-    synqSolution: 'DigiSynq aligns finishing capital tranches with verified delivery milestones — unlocking funding systematically as editorial, VFX, sound mix, and master turnovers are completed.',
-    metric: 'Capital tranches unlocked upon verified delivery milestones',
+    category: 'Capital Flow',
+    traditional: 'Post-production stalls during VFX, final color grading, and Dolby Atmos mixing because traditional credit tranches are decoupled from technical deliverables.',
+    synqSolution: 'DigiSynq structures finishing capital disbursements strictly against verified delivery milestones and cloud dailies telemetry, protecting investors from speculative budget drift.',
+    metric: 'Milestone-anchored security',
   },
   {
     id: 'theatrical',
-    title: 'Distribution Channels & Release Windowing',
-    traditional: 'Independent titles and new formats frequently clash on identical release weekends against studio franchise tentpoles, resulting in rapid audience loss and compressed exposure across both screens and streaming.',
-    synqSolution: 'DigiSynq coordinates release windowing and exhibition across theatrical circuits and digital platforms using pre-demand signals, securing defensible programming slots and audience density.',
-    metric: 'Targeted windowing aligned with audience pre-demand',
+    title: 'Release Windows & Audience Density',
+    category: 'Audience Reach',
+    traditional: 'Independent titles and new formats clash blindly against studio tentpoles on identical weekends, leading to compressed screen counts and rapid exhibition decay.',
+    synqSolution: 'DigiSynq coordinates targeted screening clusters and regional event windows using pre-demand density telemetry to guarantee defensible audience exposure.',
+    metric: '3.4x localized opening efficiency',
   },
 ];
 
@@ -38,22 +42,22 @@ const ARCHITECTURE_LAYERS = [
     num: '01',
     name: 'The Discovery Engine',
     subtitle: 'Indexing Distributed Capacity',
-    desc: 'We continuously map available capacity across the entertainment network — unbooked partner stages and venues, verified crew availability, post-production bandwidth, and targeted distribution windows.',
+    desc: 'Continuously monitors verified availability across the global entertainment network: unbooked partner soundstages, certified guild department heads, and certified post-production facilities.',
     icon: Compass,
   },
   {
     num: '02',
     name: 'The Routing Mesh',
     subtitle: 'Asset-Light Synchronization',
-    desc: 'DigiSynq does not buy camera trucks or build physical studios. We serve as the operational coordination layer connecting existing industry resources at the precise instant of demand.',
+    desc: 'Owns zero physical stages or camera trucks. Routes active entertainment demand directly into existing, pre-verified partner capacity at the precise instant of scheduling need.',
     icon: Cpu,
   },
   {
     num: '03',
-    name: 'Value Capture Protocol',
-    subtitle: 'Orchestration-Driven Return',
-    desc: 'Our economic model is tied to coordination and orchestration value. We generate return by resolving friction and keeping entertainment projects on schedule, not by accumulating heavy physical assets.',
-    icon: Zap,
+    name: 'The Governance Protocol',
+    subtitle: 'Milestone-Tied Covenants',
+    desc: 'Standardizes turnaround covenants, cloud telemetry, and milestone-backed capital release. Eliminates opaque broker markups and keeps complex multi-stakeholder productions on schedule.',
+    icon: ShieldCheck,
   },
 ];
 
@@ -62,93 +66,95 @@ export function TheSynqPage() {
   const activeGap = GAPS[activeGapIndex];
 
   return (
-    <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white">
+    <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white min-h-screen">
 
       {/* ── 01. Header Hero ── */}
       <section className="pt-40 sm:pt-48 pb-20 sm:pb-28 px-6 sm:px-8 max-w-6xl mx-auto">
         <div className="max-w-4xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-400 mb-8 tracking-wide">
-            <span>The Synq Architecture</span>
+          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-300 mb-8 tracking-wide">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+            <span className="font-mono text-zinc-400">THE SYNQ</span>
+            <span className="text-zinc-600">//</span>
+            <span className="text-white font-medium">Architecture &amp; Orchestration Codex</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            The codex of entertainment<br />
-            synchronization.
+            The operating system<br />
+            <span className="text-zinc-400 font-light">for entertainment capacity.</span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-zinc-400 leading-relaxed max-w-3xl font-normal mb-10">
-            The Synq connects fragmented entertainment capacity into a coordinated network. Entertainment possesses immense creative talent, cutting-edge facilities, and active capital. DigiSynq is an asset-light coordination layer that aligns existing industry capacity with entertainment demand — without requiring DigiSynq to own physical infrastructure.
+          <p className="text-lg sm:text-xl text-zinc-300 leading-relaxed max-w-3xl font-normal mb-10">
+            Entertainment possesses immense creative genius, cutting-edge facilities, and active capital. DigiSynq is the asset-light coordination layer that aligns existing industry capacity with entertainment demand — without requiring DigiSynq to hold balance-sheet real estate or camera equipment debt.
           </p>
 
           <div className="flex flex-wrap items-center gap-4">
             <Link
               to="/start"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-[#06080d] hover:bg-white/90 font-medium text-sm tracking-wide transition-all duration-200 active:scale-95 shadow-sm"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white text-[#06080d] hover:bg-zinc-200 font-medium text-sm tracking-wide transition-all duration-200 active:scale-95 shadow-sm"
             >
-              <span>Start a synq</span>
+              <span>Initiate a Synq</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
             <a
               href="#workflow-comparison"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 hover:border-white/20 bg-white/[0.02] text-zinc-300 font-medium text-sm transition-all duration-200"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/10 hover:border-white/20 bg-white/[0.02] text-zinc-300 font-medium text-sm transition-all duration-200"
             >
-              <span>Compare operating models</span>
+              <span>Compare Operating Models</span>
             </a>
           </div>
         </div>
       </section>
 
       {/* ── 02. Traditional vs. Asset-Light Model Comparison ── */}
-      <section id="workflow-comparison" className="py-24 sm:py-32 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06]">
-        <div className="max-w-3xl mb-16">
-          <span className="text-xs font-semibold text-zinc-400 tracking-wider uppercase mb-2 block">
-            Structural Difference
+      <section id="workflow-comparison" className="py-20 sm:py-28 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06]">
+        <div className="max-w-2xl mb-14">
+          <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-2 block">
+            Comparative Architecture
           </span>
           <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white [letter-spacing:-0.025em] mb-4">
-            Two distinct operating approaches.
+            Two distinct operating models.
           </h2>
-          <p className="text-base text-zinc-400 leading-relaxed">
-            The conventional model relies on fragmented individual sourcing. DigiSynq introduces an asset-light orchestration layer that routes entertainment demand to existing capacity.
+          <p className="text-zinc-400 text-sm leading-relaxed">
+            The conventional model relies on fragmented phone trees and unilateral risk. DigiSynq provides an asset-light orchestration layer routing demand to verified capacity.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           {/* Traditional Workflow Card */}
           <div className="p-8 sm:p-10 rounded-3xl border border-white/[0.06] bg-[#090b10] flex flex-col justify-between space-y-6">
             <div>
               <span className="text-xs font-mono text-zinc-500 uppercase block mb-2">Conventional Model</span>
               <h3 className="text-xl font-semibold text-white mb-4">Fragmented Individual Sourcing</h3>
-              <p className="text-sm text-zinc-400 leading-relaxed mb-6">
-                Producers assemble each element through manual phone trees and siloed negotiations. Delays in one department cascade across soundstages and post facilities.
+              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-6">
+                Producers assemble each element through closed phone trees and isolated negotiations. Unbooked stage dark time and department delays cascade across the schedule.
               </p>
               
-              {/* Flow Sequence */}
               <div className="space-y-3 pt-2">
                 <div className="flex items-center gap-3 text-xs text-zinc-400">
                   <span className="w-5 h-5 rounded-full bg-white/[0.04] border border-white/10 flex items-center justify-center font-mono text-[10px] text-zinc-500 shrink-0">1</span>
-                  <span>Entertainment demand originates</span>
+                  <span>Demand originates in isolation</span>
                 </div>
                 <div className="flex items-center gap-3 text-xs text-zinc-400">
                   <span className="w-5 h-5 rounded-full bg-white/[0.04] border border-white/10 flex items-center justify-center font-mono text-[10px] text-zinc-500 shrink-0">2</span>
-                  <span>Siloed sourcing through closed personal networks</span>
+                  <span>Siloed sourcing through agency middlemen</span>
                 </div>
                 <div className="flex items-center gap-3 text-xs text-zinc-400">
                   <span className="w-5 h-5 rounded-full bg-white/[0.04] border border-white/10 flex items-center justify-center font-mono text-[10px] text-zinc-500 shrink-0">3</span>
-                  <span>Unbooked stage dark time & department handoff drag</span>
+                  <span>Dark stage days and turnover schedule drift</span>
                 </div>
-                <div className="flex items-center gap-3 text-xs text-zinc-200 font-medium">
+                <div className="flex items-center gap-3 text-xs text-zinc-300 font-medium">
                   <span className="w-5 h-5 rounded-full bg-white/10 border border-white/20 flex items-center justify-center font-mono text-[10px] text-zinc-300 shrink-0">4</span>
-                  <span>Higher holding costs & prolonged release packaging</span>
+                  <span>Budget overruns &amp; predatory bridge debt</span>
                 </div>
               </div>
             </div>
-            <div className="pt-4 border-t border-white/[0.06] text-xs text-zinc-500">
-              High coordination friction • Slower turnaround
+            <div className="pt-4 border-t border-white/[0.06] text-xs font-mono text-zinc-500">
+              High friction • Capital leakage
             </div>
           </div>
 
           {/* DigiSynq Model Card */}
-          <div className="p-8 sm:p-10 rounded-3xl border border-emerald-500/20 bg-[#090b10] flex flex-col justify-between space-y-6 relative">
+          <div className="p-8 sm:p-10 rounded-3xl border border-emerald-500/25 bg-[#090b10] flex flex-col justify-between space-y-6 relative">
             <div className="absolute top-6 right-6">
               <span className="px-2.5 py-1 rounded-full text-[10px] font-mono text-emerald-300 bg-emerald-500/10 border border-emerald-500/30">
                 Asset-Light
@@ -157,45 +163,44 @@ export function TheSynqPage() {
             <div>
               <span className="text-xs font-mono text-emerald-400 uppercase block mb-2">DigiSynq Model</span>
               <h3 className="text-xl font-semibold text-white mb-4">Orchestrated Capacity Routing</h3>
-              <p className="text-sm text-zinc-400 leading-relaxed mb-6">
-                DigiSynq acts as a neutral coordination layer, discovering and matching existing industry capacity with verified project requirements.
+              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-6">
+                DigiSynq dynamically matches production parameters to verified partner infrastructure, guild craft leaders, and milestone covenants.
               </p>
               
-              {/* Flow Sequence */}
               <div className="space-y-3 pt-2">
                 <div className="flex items-center gap-3 text-xs text-zinc-300">
                   <span className="w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center font-mono text-[10px] text-emerald-400 shrink-0">1</span>
-                  <span>Entertainment demand parameterized</span>
+                  <span>Demand parameters &amp; constraints ingested</span>
                 </div>
                 <div className="flex items-center gap-3 text-xs text-zinc-300">
                   <span className="w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center font-mono text-[10px] text-emerald-400 shrink-0">2</span>
-                  <span>Direct matching against verified ecosystem capacity</span>
+                  <span>Dynamic routing to unbooked partner capacity</span>
                 </div>
                 <div className="flex items-center gap-3 text-xs text-zinc-300">
                   <span className="w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center font-mono text-[10px] text-emerald-400 shrink-0">3</span>
-                  <span>Milestone-tied covenants & telemetry governance</span>
+                  <span>Synq Labs sandbox pre-flight &amp; covenant governance</span>
                 </div>
-                <div className="flex items-center gap-3 text-xs text-white font-medium">
+                <div className="flex items-center gap-3 text-xs text-emerald-300 font-medium">
                   <span className="w-5 h-5 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center font-mono text-[10px] text-emerald-300 shrink-0">4</span>
-                  <span>On-schedule delivery & optimized release density</span>
+                  <span>On-schedule delivery &amp; milestone capital release</span>
                 </div>
               </div>
             </div>
-            <div className="pt-4 border-t border-white/[0.06] text-xs text-emerald-400 font-medium">
-              Zero heavy asset ownership • Network flexibility
+            <div className="pt-4 border-t border-white/[0.06] text-xs font-mono text-emerald-400 font-medium">
+              Zero fixed asset debt • Turnkey agility
             </div>
           </div>
         </div>
 
-        {/* ── 03. The 4 Structural Capacity Gaps (Use Cases) ── */}
-        <div id="use-cases" className="max-w-2xl mb-12 scroll-mt-24">
-          <span className="text-xs font-semibold text-zinc-400 tracking-wider uppercase mb-2 block">
-            Systemic Gaps & Use Cases
+        {/* ── 03. The 4 Structural Capacity Gaps ── */}
+        <div id="use-cases" className="max-w-2xl mb-10 scroll-mt-24">
+          <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-2 block">
+            Systemic Gaps &amp; Use Cases
           </span>
           <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white [letter-spacing:-0.025em] mb-4">
             Where entertainment leaks capacity.
           </h2>
-          <p className="text-sm text-zinc-400 leading-relaxed">
+          <p className="text-zinc-400 text-sm leading-relaxed">
             The resources to produce extraordinary entertainment exist today across the ecosystem. What has been missing is the coordination layer.
           </p>
         </div>
@@ -218,48 +223,48 @@ export function TheSynqPage() {
         </div>
 
         {/* Gap Deep-Dive Card */}
-        <div className="p-8 sm:p-12 rounded-3xl border border-white/[0.08] bg-[#090b10] grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="p-8 sm:p-10 rounded-3xl border border-white/[0.08] bg-[#090b10] grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="space-y-4">
-            <span className="text-xs font-mono text-zinc-500 uppercase">Conventional Approach</span>
+            <span className="text-xs font-mono text-zinc-500 uppercase">{activeGap.category} // Conventional</span>
             <h3 className="text-xl font-bold text-white tracking-tight">{activeGap.title}</h3>
-            <p className="text-sm text-zinc-400 leading-relaxed">{activeGap.traditional}</p>
+            <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">{activeGap.traditional}</p>
           </div>
 
-          <div className="space-y-4 md:border-l md:border-white/[0.06] md:pl-10">
-            <span className="text-xs font-mono text-emerald-400 uppercase">DigiSynq Coordinated Solution</span>
-            <p className="text-sm text-zinc-200 leading-relaxed">{activeGap.synqSolution}</p>
+          <div className="space-y-4 md:border-l md:border-white/[0.06] md:pl-8">
+            <span className="text-xs font-mono text-emerald-400 uppercase">DigiSynq Resolution</span>
+            <p className="text-xs sm:text-sm text-zinc-200 leading-relaxed">{activeGap.synqSolution}</p>
             <div className="pt-4 border-t border-white/[0.06] text-xs text-zinc-400 flex items-center justify-between">
-              <span className="text-zinc-500">Structural Outcome:</span>
-              <span className="text-emerald-400 font-medium">{activeGap.metric}</span>
+              <span className="text-zinc-500 font-mono text-[11px]">Validated Metric:</span>
+              <span className="text-emerald-400 font-mono font-medium">{activeGap.metric}</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── 04. Architecture Layers (Capabilities) ── */}
-      <section id="capabilities" className="py-24 sm:py-32 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06] scroll-mt-24">
-        <div className="max-w-2xl mb-16">
-          <span className="text-xs font-semibold text-zinc-400 tracking-wider uppercase mb-2 block">
-            System Topology & Capabilities
+      {/* ── 04. Architecture Layers ── */}
+      <section id="capabilities" className="py-20 sm:py-28 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06] scroll-mt-24">
+        <div className="max-w-2xl mb-14">
+          <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-2 block">
+            System Topology
           </span>
           <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white [letter-spacing:-0.025em] mb-4">
             The three operational layers.
           </h2>
-          <p className="text-sm text-zinc-400 leading-relaxed">
+          <p className="text-zinc-400 text-sm leading-relaxed">
             How DigiSynq translates distributed entertainment capacity into predictable, scalable production velocity.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {ARCHITECTURE_LAYERS.map((layer) => {
             const Icon = layer.icon;
             return (
               <div
                 key={layer.num}
-                className="p-8 sm:p-10 rounded-3xl border border-white/[0.06] bg-[#090b10] flex flex-col justify-between"
+                className="p-8 rounded-3xl border border-white/[0.06] bg-[#090b10] flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-10 h-10 rounded-2xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-zinc-300 mb-8">
+                  <div className="w-10 h-10 rounded-2xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-zinc-300 mb-6">
                     <Icon size={18} />
                   </div>
                   <span className="text-xs font-mono text-zinc-500 mb-2 block">{layer.num} // LAYER</span>
@@ -274,7 +279,7 @@ export function TheSynqPage() {
       </section>
 
       {/* ── 05. Final Invitation ── */}
-      <section className="py-32 sm:py-40 px-6 sm:px-8 max-w-4xl mx-auto text-center border-t border-white/[0.06]">
+      <section className="py-28 sm:py-36 px-6 sm:px-8 max-w-4xl mx-auto text-center border-t border-white/[0.06]">
         <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-6">
           Ready to eliminate coordination friction?
         </h2>
@@ -283,9 +288,9 @@ export function TheSynqPage() {
         </p>
         <Link
           to="/start"
-          className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white text-[#06080d] hover:bg-white/90 font-medium text-sm tracking-wide transition-all duration-200 active:scale-95 shadow-sm"
+          className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white text-[#06080d] hover:bg-zinc-200 font-medium text-sm tracking-wide transition-all duration-200 active:scale-95 shadow-sm"
         >
-          <span>Start a synq</span>
+          <span>Initiate a Synq</span>
           <ArrowRight className="w-4 h-4" />
         </Link>
       </section>
