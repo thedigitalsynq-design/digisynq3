@@ -303,44 +303,37 @@ export function HowItWorksPage() {
         </div>
       </section>
 
-      {/* ── 04. The Operational Feedback Loop ── */}
-      <section className="py-24 sm:py-32 border-t border-white/[0.06]">
+      {/* ── 04. Execution Covenants & Runbook Reference ── */}
+      <section className="py-24 sm:py-32 border-t border-white/[0.06] bg-[#050608]">
         <div className="max-w-6xl mx-auto px-6 sm:px-8">
-          
-          <div className="max-w-2xl mb-14">
-            <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
-              Continuous Governance
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-              The continuous coordination loop
-            </h2>
-            <p className="text-base text-zinc-400 leading-relaxed">
-              Entertainment production is not a rigid waterfall. It is an evolving network where problems repeat if context is lost. DigiSynq operates in a continuous learning cycle.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {OPERATIONAL_LOOP.map((loop) => (
-              <div
-                key={loop.step}
-                className="p-6 rounded-2xl bg-white/[0.015] border border-white/[0.06] hover:border-white/15 transition-all flex flex-col justify-between h-44"
+          <div className="p-8 sm:p-14 rounded-3xl bg-[#090b10] border border-white/[0.08] flex flex-col lg:flex-row lg:items-center justify-between gap-10">
+            <div className="max-w-2xl space-y-4">
+              <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 block">
+                Standardized Governance
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white">
+                Detailed execution protocols & commercial playbooks
+              </h2>
+              <p className="text-sm sm:text-base text-zinc-400 leading-relaxed">
+                For producers, studio operators, and financiers requiring complete operational specifications, inspect our institutional runbook covering 6 commercial revenue models, multi-party covenants, and phase-by-phase delivery milestones.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 shrink-0">
+              <Link
+                to="/runbook"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-white text-black font-medium text-xs hover:bg-zinc-200 transition-all shadow-lg"
               >
-                <div className="flex items-center justify-between text-xs font-mono text-zinc-500">
-                  <span>Step {loop.step}</span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-white/20" />
-                </div>
-                <div>
-                  <h4 className="text-base font-medium text-white mb-1.5">
-                    {loop.name}
-                  </h4>
-                  <p className="text-xs text-zinc-400 leading-relaxed">
-                    {loop.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
+                <span>Read the business runbook</span>
+                <ArrowRight size={14} />
+              </Link>
+              <Link
+                to="/start"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-white/10 hover:border-white/20 bg-white/[0.02] text-zinc-300 font-medium text-xs transition-all"
+              >
+                <span>Start project intake</span>
+              </Link>
+            </div>
           </div>
-
         </div>
       </section>
 

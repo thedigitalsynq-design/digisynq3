@@ -123,12 +123,23 @@ export function TheSynqPage() {
               </p>
               
               {/* Flow Sequence */}
-              <div className="space-y-2 text-xs font-mono text-zinc-400 border-l border-white/10 pl-4 py-1">
-                <div>Entertainment Demand</div>
-                <div className="text-zinc-600">↓ Individually sourced resources</div>
-                <div>Fragmented Department Coordination</div>
-                <div className="text-zinc-600">↓ Delays & unbooked stage days</div>
-                <div className="text-zinc-300">Stalled Delivery & Higher Holding Costs</div>
+              <div className="space-y-3 pt-2">
+                <div className="flex items-center gap-3 text-xs text-zinc-400">
+                  <span className="w-5 h-5 rounded-full bg-white/[0.04] border border-white/10 flex items-center justify-center font-mono text-[10px] text-zinc-500 shrink-0">1</span>
+                  <span>Entertainment demand originates</span>
+                </div>
+                <div className="flex items-center gap-3 text-xs text-zinc-400">
+                  <span className="w-5 h-5 rounded-full bg-white/[0.04] border border-white/10 flex items-center justify-center font-mono text-[10px] text-zinc-500 shrink-0">2</span>
+                  <span>Siloed sourcing through closed personal networks</span>
+                </div>
+                <div className="flex items-center gap-3 text-xs text-zinc-400">
+                  <span className="w-5 h-5 rounded-full bg-white/[0.04] border border-white/10 flex items-center justify-center font-mono text-[10px] text-zinc-500 shrink-0">3</span>
+                  <span>Unbooked stage dark time & department handoff drag</span>
+                </div>
+                <div className="flex items-center gap-3 text-xs text-zinc-200 font-medium">
+                  <span className="w-5 h-5 rounded-full bg-white/10 border border-white/20 flex items-center justify-center font-mono text-[10px] text-zinc-300 shrink-0">4</span>
+                  <span>Higher holding costs & prolonged release packaging</span>
+                </div>
               </div>
             </div>
             <div className="pt-4 border-t border-white/[0.06] text-xs text-zinc-500">
@@ -151,12 +162,23 @@ export function TheSynqPage() {
               </p>
               
               {/* Flow Sequence */}
-              <div className="space-y-2 text-xs font-mono text-zinc-300 border-l border-emerald-500/30 pl-4 py-1">
-                <div>Entertainment Demand</div>
-                <div className="text-emerald-400">↓ DigiSynq coordination layer</div>
-                <div>Existing Ecosystem Capacity (Stages, Talent, Post)</div>
-                <div className="text-emerald-400">↓ Structured milestone covenants</div>
-                <div className="text-white font-medium">Coordinated Execution & On-Schedule Delivery</div>
+              <div className="space-y-3 pt-2">
+                <div className="flex items-center gap-3 text-xs text-zinc-300">
+                  <span className="w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center font-mono text-[10px] text-emerald-400 shrink-0">1</span>
+                  <span>Entertainment demand parameterized</span>
+                </div>
+                <div className="flex items-center gap-3 text-xs text-zinc-300">
+                  <span className="w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center font-mono text-[10px] text-emerald-400 shrink-0">2</span>
+                  <span>Direct matching against verified ecosystem capacity</span>
+                </div>
+                <div className="flex items-center gap-3 text-xs text-zinc-300">
+                  <span className="w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center font-mono text-[10px] text-emerald-400 shrink-0">3</span>
+                  <span>Milestone-tied covenants & telemetry governance</span>
+                </div>
+                <div className="flex items-center gap-3 text-xs text-white font-medium">
+                  <span className="w-5 h-5 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center font-mono text-[10px] text-emerald-300 shrink-0">4</span>
+                  <span>On-schedule delivery & optimized release density</span>
+                </div>
               </div>
             </div>
             <div className="pt-4 border-t border-white/[0.06] text-xs text-emerald-400 font-medium">

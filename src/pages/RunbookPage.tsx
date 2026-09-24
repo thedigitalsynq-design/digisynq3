@@ -6,12 +6,12 @@ import {
 } from 'lucide-react';
 
 const RUNBOOK_SECTIONS = [
-  { id: 'model', label: '01 // Operating Model' },
-  { id: 'commercials', label: '02 // Commercial Model' },
-  { id: 'execution', label: '03 // Execution Protocol' },
-  { id: 'playbooks', label: '04 // Stakeholder Playbooks' },
-  { id: 'governance', label: '05 // Risk & Governance' },
-  { id: 'differentiation', label: '06 // Differentiation' },
+  { id: 'model', label: '01. Operating Model' },
+  { id: 'commercials', label: '02. Commercial Model' },
+  { id: 'execution', label: '03. Execution Protocol' },
+  { id: 'playbooks', label: '04. Stakeholder Playbooks' },
+  { id: 'governance', label: '05. Risk & Governance' },
+  { id: 'differentiation', label: '06. Differentiation' },
 ];
 
 const COMMERCIAL_STREAMS = [
@@ -240,7 +240,7 @@ export function RunbookPage() {
       <section id="model" className="py-24 sm:py-32 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06] scroll-mt-20">
         <div className="max-w-3xl mb-14">
           <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
-            01 // Core Business Logic
+            01. Core Business Logic
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
             How the asset-light model creates value
@@ -279,7 +279,7 @@ export function RunbookPage() {
         {/* Operating Flow Canvas */}
         <div className="p-8 sm:p-12 rounded-3xl bg-[#090b10] border border-white/[0.08] text-xs font-mono">
           <span className="text-emerald-400 uppercase tracking-wider block mb-4 font-bold">
-            // End-to-End Orchestration Mechanism
+            End-to-End Orchestration Architecture
           </span>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-white/[0.06]">
             <div>
@@ -308,7 +308,7 @@ export function RunbookPage() {
       <section id="commercials" className="py-24 sm:py-32 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06] scroll-mt-20">
         <div className="max-w-3xl mb-14">
           <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
-            02 // Business Mechanics
+            02. Commercial Architecture
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
             Commercial architecture & revenue streams
@@ -349,7 +349,7 @@ export function RunbookPage() {
       <section id="execution" className="py-24 sm:py-32 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06] scroll-mt-20">
         <div className="max-w-3xl mb-14">
           <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
-            03 // Operational Lifecycle
+            03. Operational Lifecycle
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
             The 6-stage project execution protocol
@@ -479,7 +479,7 @@ export function RunbookPage() {
       <section id="governance" className="py-24 sm:py-32 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06] scroll-mt-20">
         <div className="max-w-3xl mb-14">
           <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
-            05 // Risk Architecture
+            05. Risk Architecture
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
             Institutional risk covenants
@@ -494,7 +494,7 @@ export function RunbookPage() {
             <div className="w-10 h-10 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-emerald-400">
               <ShieldCheck size={20} />
             </div>
-            <h3 className="text-lg font-bold text-white">01 // Non-Disclosure & IP Security</h3>
+            <h3 className="text-lg font-bold text-white">01. Non-Disclosure & IP Security</h3>
             <p className="text-xs text-zinc-400 leading-relaxed">
               DigiSynq does not claim copyright, title, or intellectual property rights over connected projects. All creative scripts, treatments, and footage are protected by strict legal covenants.
             </p>
@@ -504,7 +504,7 @@ export function RunbookPage() {
             <div className="w-10 h-10 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-emerald-400">
               <Zap size={20} />
             </div>
-            <h3 className="text-lg font-bold text-white">02 // Anti-Rent-Seeking Neutrality</h3>
+            <h3 className="text-lg font-bold text-white">02. Anti-Rent-Seeking Neutrality</h3>
             <p className="text-xs text-zinc-400 leading-relaxed">
               We never inflate facility rates, take undisclosed kickbacks from vendors, or lock creative talent into exclusive agency tolls. Our compensation is transparently defined in coordination agreements.
             </p>
@@ -514,7 +514,7 @@ export function RunbookPage() {
             <div className="w-10 h-10 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-emerald-400">
               <Activity size={20} />
             </div>
-            <h3 className="text-lg font-bold text-white">03 // Clean-Room Milestone Escrow</h3>
+            <h3 className="text-lg font-bold text-white">03. Clean-Room Milestone Escrow</h3>
             <p className="text-xs text-zinc-400 leading-relaxed">
               Capital disbursements are tied directly to verified scene wraps, picture locks, or color turnovers. This prevents premature cash depletion and protects vendors from unpaid work.
             </p>
@@ -524,7 +524,7 @@ export function RunbookPage() {
             <div className="w-10 h-10 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-emerald-400">
               <Compass size={20} />
             </div>
-            <h3 className="text-lg font-bold text-white">04 // Zero Balance-Sheet Conflict</h3>
+            <h3 className="text-lg font-bold text-white">04. Zero Balance-Sheet Conflict</h3>
             <p className="text-xs text-zinc-400 leading-relaxed">
               Because DigiSynq does not own camera fleets or studio real estate, we have no incentive to steer productions into suboptimal packages. We match projects purely based on creative fit and schedule.
             </p>
@@ -536,7 +536,7 @@ export function RunbookPage() {
       <section id="differentiation" className="py-24 sm:py-32 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06] scroll-mt-20">
         <div className="max-w-3xl mb-14">
           <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
-            06 // Industry Positioning
+            06. Strategic Differentiation
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
             Why coordination is not a marketplace

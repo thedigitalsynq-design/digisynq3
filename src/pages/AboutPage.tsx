@@ -89,18 +89,46 @@ export function AboutPage() {
       {/* ── 02. Canonical Definition & Central Idea ── */}
       <section className="py-24 sm:py-32 border-t border-white/[0.06]">
         <div className="max-w-5xl mx-auto px-6 sm:px-8">
-          <div className="rounded-3xl bg-[#090b10] border border-white/[0.06] p-8 sm:p-14 space-y-8">
-            <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 block">
-              Core Definition
-            </span>
+          <div className="rounded-3xl bg-[#090b10] border border-white/[0.06] p-8 sm:p-14 space-y-10">
+            <div>
+              <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 block mb-3">
+                The DigiSynq Definition
+              </span>
+              <blockquote className="text-2xl sm:text-4xl font-bold text-white leading-snug tracking-tight">
+                “An asset-light coordination and intelligence network synchronizing capacity, talent, and workflows across the global entertainment ecosystem.”
+              </blockquote>
+            </div>
 
-            <blockquote className="text-2xl sm:text-4xl font-bold text-white leading-snug tracking-tight">
-              “An asset-light coordination and problem-solving company building a synchronization layer across the entertainment ecosystem.”
-            </blockquote>
-
-            <p className="text-base text-zinc-300 leading-relaxed max-w-3xl">
-              Entertainment already has vast distributed infrastructure, talent, and resources. We identify friction points between creative ideas, talent, partner stages, venues, post facilities, and audience channels — then assemble and synchronize the optimal elements to generate value without heavy balance-sheet debt.
+            <p className="text-base text-zinc-300 leading-relaxed max-w-3xl font-normal">
+              Entertainment does not suffer from a lack of physical studios, cameras, or creative imagination. It suffers from systemic friction: unbooked stages, trapped IP, fragmented talent discovery, and isolated post pipelines. DigiSynq resolves this by orchestrating existing industry capacity into a liquid operating system while driving active R&amp;D through Synq Labs.
             </p>
+
+            {/* Three Definitive Pillars */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+              <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
+                <div className="text-xs font-mono text-zinc-400 mb-2">01. ORCHESTRATION</div>
+                <div className="text-sm font-semibold text-white mb-1.5">Asset-Light Coordination</div>
+                <div className="text-xs text-zinc-400 leading-relaxed">
+                  Connecting production demand with pre-verified partner stages, equipment, and crew without balance-sheet debt.
+                </div>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
+                <div className="text-xs font-mono text-emerald-400 mb-2">02. SYNQ LABS</div>
+                <div className="text-sm font-semibold text-white mb-1.5">We Are Labs. We Experiment.</div>
+                <div className="text-xs text-zinc-400 leading-relaxed">
+                  Empirical sandbox R&amp;D conducting active trials on virtual production, cloud telemetry, and fractional floor models.
+                </div>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
+                <div className="text-xs font-mono text-zinc-400 mb-2">03. PROTOCOL</div>
+                <div className="text-sm font-semibold text-white mb-1.5">Covenant Governance</div>
+                <div className="text-xs text-zinc-400 leading-relaxed">
+                  Milestone-tied capital release and standardized turnaround covenants replacing closed phone trees and agency markups.
+                </div>
+              </div>
+            </div>
 
             <div className="pt-6 border-t border-white/[0.06] flex flex-wrap items-center gap-6 text-xs text-zinc-400">
               <div className="flex items-center gap-2">
@@ -110,6 +138,10 @@ export function AboutPage() {
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                 <span>Use the capacity that already exists.</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                <span className="text-white font-medium">We are labs. We experiment.</span>
               </div>
             </div>
           </div>
@@ -180,8 +212,8 @@ export function AboutPage() {
                     {item.desc}
                   </p>
                 </div>
-                <span className="text-[11px] font-mono text-zinc-600 uppercase tracking-wider pt-3 border-t border-white/[0.04]">
-                  Non-goal
+                <span className="text-[11px] font-mono text-zinc-500 uppercase tracking-wider pt-3 border-t border-white/[0.04]">
+                  Operational Boundary
                 </span>
               </div>
             ))}

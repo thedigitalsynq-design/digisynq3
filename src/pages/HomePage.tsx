@@ -159,7 +159,7 @@ export function HomePage() {
           {/* Quiet Category Eyebrow */}
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-400 mb-8 tracking-wide">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            <span>Asset-Light Entertainment Coordination</span>
+            <span>Asset-Light Entertainment Coordination & Innovation Labs</span>
           </div>
 
           {/* Large, Confident Headline */}
@@ -170,7 +170,7 @@ export function HomePage() {
 
           {/* Spacious Editorial Lead: What it is, Who it serves, How it works, Why it matters */}
           <p className="text-lg sm:text-xl text-zinc-400 leading-relaxed max-w-3xl font-normal mb-10">
-            Entertainment already has enormous distributed capacity. DigiSynq is an asset-light coordination network that connects entertainment demand with existing industry capacity — helping productions, creators, and studios access verified talent, partner facilities, post-production, and distribution pathways without requiring DigiSynq to own the underlying physical infrastructure.
+            Entertainment has immense distributed capacity. DigiSynq is an asset-light coordination network and experimental laboratory that aligns production demand with existing industry capacity — synchronizing verified talent, partner soundstages, post pipelines, and audience channels without requiring balance-sheet asset ownership.
           </p>
 
           {/* Clean, Restrained CTAs */}
@@ -189,6 +189,13 @@ export function HomePage() {
             >
               <span>How it works</span>
             </Link>
+            <Link
+              to="/workshops"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-emerald-500/20 hover:border-emerald-500/40 bg-emerald-500/[0.03] hover:bg-emerald-500/[0.08] text-emerald-300 font-medium text-sm transition-all duration-200"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Synq Labs</span>
+            </Link>
           </div>
         </div>
 
@@ -199,16 +206,16 @@ export function HomePage() {
             <div className="text-xs text-zinc-400 leading-relaxed">Zero physical infrastructure debt</div>
           </div>
           <div>
-            <div className="text-3xl sm:text-4xl font-semibold text-white tracking-tight mb-1">Ecosystem</div>
-            <div className="text-xs text-zinc-400 leading-relaxed">Coordinating distributed entertainment capacity</div>
+            <div className="text-3xl sm:text-4xl font-semibold text-white tracking-tight mb-1">Orchestration</div>
+            <div className="text-xs text-zinc-400 leading-relaxed">Routing distributed industry capacity</div>
           </div>
           <div>
-            <div className="text-3xl sm:text-4xl font-semibold text-white tracking-tight mb-1">&lt; 48h</div>
-            <div className="text-xs text-zinc-400 leading-relaxed">Turnaround on constraint mapping</div>
+            <div className="text-3xl sm:text-4xl font-semibold text-white tracking-tight mb-1">Synq Labs</div>
+            <div className="text-xs text-zinc-400 leading-relaxed">Empirical R&amp;D and workflow trials</div>
           </div>
           <div>
-            <div className="text-3xl sm:text-4xl font-semibold text-white tracking-tight mb-1">Lifecycle</div>
-            <div className="text-xs text-zinc-400 leading-relaxed">Development through audience distribution</div>
+            <div className="text-3xl sm:text-4xl font-semibold text-white tracking-tight mb-1">End-to-End</div>
+            <div className="text-xs text-zinc-400 leading-relaxed">From IP packaging to audience release</div>
           </div>
         </div>
       </section>
@@ -285,8 +292,9 @@ export function HomePage() {
                 >
                   <div className="flex items-center justify-between mb-3 text-xs text-zinc-500">
                     <span>{node.role}</span>
-                    <span className={`font-medium ${isSynchronized ? 'text-emerald-400' : 'text-zinc-400'}`}>
-                      {isSynchronized ? '✓ Synced' : '⚠ Siloed'}
+                    <span className={`inline-flex items-center gap-1.5 font-medium ${isSynchronized ? 'text-emerald-400' : 'text-zinc-500'}`}>
+                      <span className={`w-1.5 h-1.5 rounded-full ${isSynchronized ? 'bg-emerald-400' : 'bg-zinc-600'}`} />
+                      <span>{isSynchronized ? 'Synchronized' : 'Fragmented'}</span>
                     </span>
                   </div>
 
@@ -297,8 +305,8 @@ export function HomePage() {
                   </p>
 
                   <div className="pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs">
-                    <span className="text-zinc-500">{isSynchronized ? 'Gain:' : 'Friction:'}</span>
-                    <span className={isSynchronized ? 'text-emerald-400 font-medium' : 'text-zinc-300 font-medium'}>
+                    <span className="text-zinc-500 text-[11px] font-mono uppercase tracking-wider">{isSynchronized ? 'Impact' : 'Constraint'}</span>
+                    <span className={isSynchronized ? 'text-emerald-400 font-medium' : 'text-zinc-400'}>
                       {isSynchronized ? node.synqMetric : node.frictionMetric}
                     </span>
                   </div>
