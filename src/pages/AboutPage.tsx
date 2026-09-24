@@ -6,11 +6,11 @@ import { OPERATING_PRINCIPLES } from '../data/core_data';
 const WHAT_WE_ARE_NOT = [
   {
     title: 'Not a Talent Agency',
-    desc: 'We do not lock technicians or artists into exclusive representation or extract 20% commission tolls. We provide transparent access to open market opportunities.',
+    desc: 'We do not lock technicians or artists into exclusive representation or extract commission tolls. We provide transparent access to open market opportunities across verified guild craftspeople.',
   },
   {
     title: 'Not an Asset-Heavy Studio',
-    desc: 'We do not borrow millions to purchase camera fleets, lighting trucks, or real estate complexes that sit dark between production cycles. We coordinate existing capacity.',
+    desc: 'We do not accumulate physical camera fleets, lighting trucks, or real estate complexes that sit dark between production cycles. We coordinate existing capacity across partner facilities.',
   },
   {
     title: 'Not a Generic Consultancy',
@@ -18,7 +18,7 @@ const WHAT_WE_ARE_NOT = [
   },
   {
     title: 'Not a Predatory Financier',
-    desc: 'We do not demand oppressive backend equity surrenders or high-interest bridge loans. We tie milestone funding tranches directly to verified scene delivery.',
+    desc: 'We do not demand oppressive backend equity surrenders or high-interest bridge debt. We tie milestone funding tranches directly to verified scene delivery.',
   },
 ];
 
@@ -38,7 +38,7 @@ export function AboutPage() {
           </h1>
 
           <p className="text-lg sm:text-xl text-zinc-400 font-normal leading-relaxed max-w-3xl mb-12">
-            The film industry does not suffer from a shortage of stories, craft talent, or private capital. It suffers from systemic entropy. DigiSynq is engineered as the connective nervous tissue that aligns fragmented forces into unified momentum.
+            DigiSynq is designed around an asset-light model: value is created by coordinating existing filmmaking capacity rather than accumulating heavy physical infrastructure. We align fragmented forces across talent, partner facilities, and capital into unified momentum.
           </p>
 
           <div className="flex flex-wrap items-center gap-4">
@@ -72,17 +72,17 @@ export function AboutPage() {
             </blockquote>
 
             <p className="text-base text-zinc-300 leading-relaxed max-w-3xl">
-              We identify friction points between craft skills, soundstages, technology, IP rights, distribution windows, and audience momentum — then assemble and synchronize the optimal elements to generate value without balance-sheet debt.
+              We identify friction points between craft skills, partner soundstages, technology, IP rights, distribution windows, and audience momentum — then assemble and synchronize the optimal elements to generate value without heavy balance-sheet debt.
             </p>
 
             <div className="pt-6 border-t border-white/[0.06] flex flex-wrap items-center gap-6 text-xs text-zinc-400">
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                <span>We do not claim to own the ecosystem.</span>
+                <span>Use the capacity that already exists.</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                <span>We synchronize the ecosystem.</span>
+                <span>Value created through coordination & orchestration.</span>
               </div>
             </div>
           </div>
@@ -142,7 +142,7 @@ export function AboutPage() {
               The eight operating principles
             </h2>
             <p className="text-base text-zinc-400 leading-relaxed">
-              Every decision we make — from protocol architecture to fee structure — is governed by these foundational axioms.
+              Every decision we make — from protocol architecture to engagement structure — is governed by these foundational axioms.
             </p>
           </div>
 
@@ -177,7 +177,7 @@ export function AboutPage() {
             Build with the synchronization layer
           </h2>
           <p className="text-base text-zinc-400 leading-relaxed max-w-xl mx-auto mb-10">
-            Join the forward-looking producers, directors, facility owners, and technicians redefining how cinema is produced and released.
+            Join the forward-looking producers, directors, facility owners, and technicians discovering a smarter, asset-light way to coordinate cinema.
           </p>
           <Link
             to="/start"

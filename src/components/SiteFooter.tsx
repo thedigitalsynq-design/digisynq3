@@ -49,10 +49,10 @@ export function SiteFooter() {
               />
             </Link>
             <p className="text-sm text-zinc-400 leading-relaxed max-w-sm">
-              The coordination layer for cinema. An asset-light problem-solving network connecting fragmented talent, facilities, capital, and screens into verified production pathways.
+              An asset-light coordination layer for filmmaking. Connecting production demand with existing industry capacity across talent, facilities, financing, and distribution.
             </p>
             <div className="text-xs text-zinc-500">
-              Zero physical overhead • Pure operational execution
+              Asset-light model • Coordinating existing industry capacity
             </div>
           </div>
 

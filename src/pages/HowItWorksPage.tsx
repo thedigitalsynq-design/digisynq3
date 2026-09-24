@@ -7,78 +7,97 @@ const PHASES = [
   {
     step: '01',
     name: 'Diagnose',
-    tag: 'Friction Telemetry',
-    title: 'Auditing the structural bottleneck',
-    lead: 'Before moving a single asset, DigiSynq scans for the hidden inefficiencies and dark-time holding the production back.',
-    deliverable: 'Friction Diagnostic & Feasibility Dossier',
-    timeframe: 'Days 01 – 05',
+    tag: 'Constraint Identification',
+    title: 'Identifying production requirements and constraints',
+    lead: 'Before moving a single asset, DigiSynq audits the technical requirements, department dependencies, and operational constraints holding the project back.',
+    deliverable: 'Constraint Diagnostic & Feasibility Dossier',
+    timeframe: 'Initial Assessment',
     actions: [
-      'Audit production budget against actual technical execution gaps',
-      'Detect idle regional soundstages and LED volume dark dates',
-      'Identify unattached key craft guilds (Sound, Cinematography, Color)',
-      'Calculate theatrical release clustering and screen cannibalization risks',
+      'Audit production timeline and technical department dependencies',
+      'Identify schedule gaps across available soundstages and specialized equipment',
+      'Survey availability of required key craft guild department heads',
+      'Assess release windowing against current theatrical calendar slates',
     ],
-    metric: '100% Blindspot visibility',
+    metric: 'Complete visibility into operational constraints',
   },
   {
     step: '02',
     name: 'Connect',
-    tag: 'Node Assembly',
-    title: 'Fractional matching without broker markups',
-    lead: 'We coordinate the missing pieces without taking on permanent overhead, physical equipment debt, or middleman fees.',
-    deliverable: 'Operational Synq Architecture & Multi-Party Covenant',
-    timeframe: 'Days 06 – 14',
+    tag: 'Capacity Matching',
+    title: 'Finding relevant existing capacity across the network',
+    lead: 'We identify and match available resources across partner facilities, vetted craft guilds, and capital sources without broker markups or equipment ownership debt.',
+    deliverable: 'Multi-Party Coordination Covenant',
+    timeframe: 'Assembly Phase',
     actions: [
-      'Bridge independent productions to fractional studio floor slots at 40% below rate card',
-      'Pair vetted guild craft heads with clear milestone-based compensation',
-      'Structure completion debt and territorial presale guarantees',
-      'Coordinate DCI digital cinema packages with regional exhibitor circuits',
+      'Match productions to available stage slots across partner studio facilities',
+      'Connect verified craft guild department heads with transparent milestone terms',
+      'Coordinate finishing capital and completion guarantee frameworks',
+      'Align technical packaging requirements with regional exhibitor circuits',
     ],
-    metric: '3.4x Faster assembly',
+    metric: 'Rapid assembly from verified network capacity',
   },
   {
     step: '03',
     name: 'Orchestrate',
-    tag: 'Milestone Governance',
-    title: 'Real-time pipeline synchronization',
-    lead: 'DigiSynq acts as a neutral coordination layer during principal photography and post-finishing.',
-    deliverable: 'Continuous Production Telemetry & Dailies Pipeline',
+    tag: 'Workflow Governance',
+    title: 'Coordinating people, facilities, workflows, and milestones',
+    lead: 'DigiSynq provides neutral oversight during principal photography and post-finishing, keeping dependencies synchronized and teams accountable.',
+    deliverable: 'Milestone Telemetry & Dailies Protocol',
     timeframe: 'Principal Photography → Final Mix',
     actions: [
-      'Camera-to-cloud dailies telemetry monitoring and automated ingest',
-      'Milestone-locked capital tranche releases upon verified scene wrap',
-      'Dynamic rescheduling when weather, location, or talent shifts occur',
-      'Continuous pre-demand audience tracking to adjust marketing velocity',
+      'Standardize camera-to-cloud dailies turnovers and ingest telemetry',
+      'Coordinate milestone-tied funding releases upon verified scene delivery',
+      'Manage dynamic rescheduling when location, weather, or schedule shifts occur',
+      'Maintain live alignment across producers, facilities, and post teams',
     ],
-    metric: 'Zero production stoppage',
+    metric: 'Neutral milestone oversight and workflow alignment',
   },
   {
     step: '04',
     name: 'Realize',
-    tag: 'Value Capture',
-    title: 'Theatrical yield and asset-light release',
-    lead: 'Turning synchronized coordination into verifiable box office return and long-tail library value.',
-    deliverable: 'Theatrical Yield Audit & Royalty Distribution Ledger',
-    timeframe: 'Theatrical Window → Streaming Syndication',
+    tag: 'Output & Delivery',
+    title: 'Converting fragmented capacity into production output',
+    lead: 'Turning synchronized capacity into on-schedule delivery masters, targeted theatrical release windows, and long-tail library value.',
+    deliverable: 'Delivery Master Audit & Release Ledger',
+    timeframe: 'Theatrical Delivery → Syndication',
     actions: [
-      'Programmatic cinema screen allocation across high-occupancy theaters',
-      'Rapid monetization of international territorial rights and ancillary IP',
-      'Direct revenue attribution to all coordinated participants',
-      'Catalog legacy preservation and asset re-licensing protocols',
+      'Programmatic release window coordination with regional theatrical circuits',
+      'Structured territorial delivery across international and ancillary windows',
+      'Transparent revenue attribution to participating network partners',
+      'Long-term asset archiving and catalog licensing coordination',
     ],
-    metric: '2.4x Box office yield',
+    metric: 'On-schedule delivery and defensible theatrical reach',
+  },
+];
+
+const ASSET_LIGHT_BENEFITS = [
+  {
+    title: 'Lower Fixed Requirements',
+    desc: 'No heavy real estate or equipment depreciation on our books, keeping capital intensity low.',
+  },
+  {
+    title: 'Greater Flexibility',
+    desc: 'Access the ideal stage, camera package, or crew for each project rather than whatever sits in an owned warehouse.',
+  },
+  {
+    title: 'Distributed Capacity',
+    desc: 'Leverage available floor time and talent across a broad regional network of facilities and guilds.',
+  },
+  {
+    title: 'Better Resource Utilization',
+    desc: 'Activate unused stage days and unbooked technician windows, turning idle time into productive output.',
   },
 ];
 
 const OPERATIONAL_LOOP = [
-  { step: '01', name: 'Problem', desc: 'Identify the exact structural bottleneck holding the project back.' },
-  { step: '02', name: 'Map', desc: 'Survey existing available capacity across stages, craft guilds, and screens.' },
-  { step: '03', name: 'Gap', desc: 'Pinpoint precisely where capital, time, or floor space is being lost.' },
+  { step: '01', name: 'Problem', desc: 'Identify the exact structural bottleneck or capacity gap holding the project back.' },
+  { step: '02', name: 'Map', desc: 'Survey existing available capacity across partner stages, craft guilds, and screens.' },
+  { step: '03', name: 'Gap', desc: 'Pinpoint precisely where capital, time, or floor space is being underutilized.' },
   { step: '04', name: 'Synq', desc: 'Connect the missing nodes with verified covenants and transparent terms.' },
-  { step: '05', name: 'Coordinate', desc: 'Maintain live alignment across all departments through pre-prod and shoot.' },
-  { step: '06', name: 'Execute', desc: 'Support on-schedule production delivery without micromanagement.' },
-  { step: '07', name: 'Measure', desc: 'Audit actual delivery times, budget variances, and seat occupancy.' },
-  { step: '08', name: 'Learn', desc: 'Feed performance metrics back into future stage and crew matching.' },
+  { step: '05', name: 'Coordinate', desc: 'Maintain live alignment across departments through pre-production and filming.' },
+  { step: '06', name: 'Execute', desc: 'Support on-schedule production delivery without micromanaging craft heads.' },
+  { step: '07', name: 'Measure', desc: 'Audit actual delivery times, budget parameters, and theatrical attendance.' },
+  { step: '08', name: 'Learn', desc: 'Feed performance observations back into future stage and talent routing.' },
 ];
 
 export function HowItWorksPage() {
@@ -100,7 +119,7 @@ export function HowItWorksPage() {
           </h1>
 
           <p className="text-lg sm:text-xl text-zinc-400 font-normal leading-relaxed max-w-3xl mb-12">
-            We do not sell generic advice. We execute a disciplined four-phase coordination protocol engineered to eliminate operational bottlenecks, preserve balance sheets, and accelerate theatrical return.
+            DigiSynq coordinates capacity rather than requiring ownership of capacity. We execute a disciplined four-phase coordination protocol engineered to identify production constraints, match relevant existing capacity across the network, and coordinate execution through to delivery.
           </p>
 
           <div className="flex flex-wrap items-center gap-4">
@@ -222,7 +241,7 @@ export function HowItWorksPage() {
                   <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider block mb-1">
                     Systemic Impact
                   </span>
-                  <div className="text-2xl font-bold text-emerald-400 tracking-tight">
+                  <div className="text-xl font-bold text-emerald-400 tracking-tight">
                     {activePhase.metric}
                   </div>
                 </div>
@@ -236,7 +255,7 @@ export function HowItWorksPage() {
                     <ArrowRight size={13} />
                   </Link>
                   <p className="text-center text-[11px] text-zinc-500">
-                    Zero physical asset debt guarantee
+                    Zero physical infrastructure debt
                   </p>
                 </div>
               </div>
@@ -247,7 +266,44 @@ export function HowItWorksPage() {
         </div>
       </section>
 
-      {/* ── 03. The Operational Feedback Loop ── */}
+      {/* ── 03. Benefits of the Asset-Light Model ── */}
+      <section className="py-24 sm:py-32 border-t border-white/[0.06]">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8">
+          
+          <div className="max-w-2xl mb-14">
+            <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
+              Model Benefits
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
+              Why coordinate existing capacity?
+            </h2>
+            <p className="text-base text-zinc-400 leading-relaxed">
+              An asset-light coordination layer offers distinct structural advantages over heavy physical ownership.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {ASSET_LIGHT_BENEFITS.map((b, idx) => (
+              <div
+                key={idx}
+                className="p-6 rounded-2xl bg-white/[0.015] border border-white/[0.06] hover:border-white/15 transition-all flex flex-col justify-between space-y-4"
+              >
+                <div>
+                  <h3 className="text-base font-semibold text-white mb-2">
+                    {b.title}
+                  </h3>
+                  <p className="text-xs text-zinc-400 leading-relaxed">
+                    {b.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ── 04. The Operational Feedback Loop ── */}
       <section className="py-24 sm:py-32 border-t border-white/[0.06]">
         <div className="max-w-6xl mx-auto px-6 sm:px-8">
           
@@ -288,7 +344,7 @@ export function HowItWorksPage() {
         </div>
       </section>
 
-      {/* ── 04. Call to Action ── */}
+      {/* ── 05. Call to Action ── */}
       <section className="py-24 sm:py-32 border-t border-white/[0.06]">
         <div className="max-w-4xl mx-auto px-6 sm:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-6">

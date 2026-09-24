@@ -47,12 +47,12 @@ const STAGE_OPTIONS = [
 ];
 
 const SUPPORT_OPTIONS = [
-  'Fractional Soundstage Access',
-  'Technical Guild Crew Matching',
-  'Gap / Finishing Capital',
+  'Connected Stage & Volume Capacity',
+  'Verified Guild Crew Matching',
+  'Milestone Finishing Capital',
   'Programmatic Screen Allocation',
-  'Asset-Light Production Model',
-  'Initial Feasibility Diagnostic',
+  'Asset-Light Production Architecture',
+  'Constraint Feasibility Diagnostic',
 ];
 
 export function StartSynqPage() {
@@ -107,7 +107,7 @@ export function StartSynqPage() {
         </h1>
 
         <p className="text-lg sm:text-xl text-zinc-400 font-normal leading-relaxed max-w-2xl mx-auto">
-          Tell us your structural friction point. We audit idle soundstage floors, guild availability, and capital timing to engineer an asset-light resolution path.
+          Tell us your structural bottleneck. We connect production demand with existing industry capacity — auditing available partner stages, verified guild talent, and milestone capital to coordinate an asset-light resolution path.
         </p>
       </section>
 
@@ -257,11 +257,11 @@ export function StartSynqPage() {
 
                   <div>
                     <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-2">
-                      Primary Bottleneck or Gap (Required)
+                      Primary Bottleneck or Constraint (Required)
                     </label>
                     <textarea
                       rows={4}
-                      placeholder="Describe what is stalled: e.g. need 5 days of fractional volume floor, missing key sound supervisor, or avoiding release window clash..."
+                      placeholder="Describe the gap: e.g. need 5 days of partner stage floor, missing key sound supervisor, or coordinating release windowing..."
                       value={form.problem}
                       onChange={(e) => updateField('problem', e.target.value)}
                       className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/[0.08] text-sm text-white placeholder-zinc-600 focus:border-white/40 outline-none transition-colors resize-none"
@@ -358,7 +358,7 @@ export function StartSynqPage() {
 
                   <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] text-xs text-zinc-400 leading-relaxed">
                     <span className="text-white font-medium block mb-1">Confidentiality Guarantee</span>
-                    DigiSynq operates under strict non-disclosure covenants. All project materials and disclosures are used solely to assess operational and coordination feasibility.
+                    DigiSynq operates under strict non-disclosure covenants. All project materials and disclosures are used solely to assess operational feasibility and coordinate capacity across our verified network.
                   </div>
 
                   <div className="pt-4 flex items-center justify-between">

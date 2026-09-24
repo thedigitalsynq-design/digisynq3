@@ -7,56 +7,56 @@ const DETAILED_BRIEFS = [
     id: 'box-office-clashes',
     category: 'Theatrical Yield',
     code: 'Brief 01',
-    title: 'The weekend eviction dynamic: Why mid-budget cinema clashes die in 72 hours',
+    title: 'The weekend eviction dynamic: Why release date clustering impacts theatrical exposure',
     readTime: '6 min read',
     date: 'Oct 2024',
-    summary: 'An empirical analysis of multiplex screen allocation across top 10 metropolitan circuits. How release calendar clustering costs independent producers up to 68% of their gross domestic return, and how algorithmic demand sync creates defensible release windows.',
+    summary: 'An analysis of multiplex screen allocation and holdover thresholds. How release calendar clustering impacts theatrical exposure for independent features, and how coordinated regional demand sync creates defensible release windows.',
     takeaways: [
-      'Multiplex exhibitors operate on rigid 3-day holdover thresholds; missing opening weekend attendance by 12% triggers an 80% screen cut by Monday.',
-      'Clustering three similar genre titles within a 14-day window reduces average per-screen yield across all three titles by 42%.',
-      'Pre-demand territorial windowing allows independent titles to achieve 2.4x higher seat density by avoiding direct clashes with major studio tentpoles.',
+      'Multiplex exhibitors operate on rapid initial holdover thresholds; missing early attendance markers often triggers immediate screen reallocations.',
+      'Clustering multiple similar titles within narrow release windows splits core audience attention and shortens theatrical run lengths.',
+      'Pre-demand territorial windowing allows independent titles to build regional density and avoid direct clashes with major studio tentpoles.',
     ],
   },
   {
     id: 'stage-dark-time',
     category: 'Spatial Economics',
     code: 'Brief 02',
-    title: 'Dark floors and sunk capital: The 41% soundstage utilization problem',
+    title: 'Facility utilization and dark floors: The soundstage scheduling dilemma',
     readTime: '8 min read',
     date: 'Nov 2024',
-    summary: 'Evaluating traditional multi-month soundstage and LED volume leases against fractional burst-occupancy models. How asset-light production scheduling unlocks $4.2M in annual floor liquidity without construction debt.',
+    summary: 'Evaluating traditional multi-month soundstage leases against flexible burst-occupancy models. How coordinating existing facility capacity helps productions access studio infrastructure while improving floor utilization for facility operators.',
     takeaways: [
-      'Studio facilities average 41% dark floor time during pre-rigging and strike lulls between marquee long-term leases.',
-      'Rigid lease mandates lock independent productions into expensive external warehouse adaptations that lack soundproofing and power grids.',
-      'Fractional burst-occupancy allows independent films to utilize world-class volume floors during turnaround gaps at 40% below rack rates.',
+      'Studio facilities frequently experience unbooked turnaround gaps between marquee long-term tenant bookings.',
+      'Inflexible lease minimums often push independent productions into makeshift spaces that lack acoustic treatment and power infrastructure.',
+      'Coordinating fractional access allows productions to utilize professional stage floors during turnaround windows without heavy overhead.',
     ],
   },
   {
     id: 'guild-parity',
     category: 'Craft Labor',
     code: 'Brief 03',
-    title: 'The hidden network penalty: De-risking below-the-line crew assembly',
+    title: 'Crew assembly and availability: Overcoming informal network friction',
     readTime: '5 min read',
     date: 'Dec 2024',
-    summary: 'Why closed-circle phone trees and agency hiring models inflate line-item labor costs while stranding top-tier technical craftspeople in unbooked lulls. The case for dynamic talent meshes.',
+    summary: 'Why closed phone trees and informal hiring loops create pre-production friction while leaving qualified craftspeople between bookings. The case for verified availability coordination.',
     takeaways: [
-      'Producers lose an average of 3.2 weeks during pre-production simply attempting to verify crew availability across informal WhatsApp circles.',
-      'Top-tier cinematographers, gaffers, and sound mixers experience 60-day unbooked lulls between features despite active industry demand.',
-      'Direct verified guild matching eliminates agency placement surcharges while guaranteeing rate parity and milestone payment security.',
+      'Productions spend substantial pre-production time attempting to verify crew availability across informal networks.',
+      'Specialized technical department heads frequently experience unbooked lulls between feature slates despite active demand in the ecosystem.',
+      'Direct availability coordination connects verified craft guild talent with active production requirements on transparent terms.',
     ],
   },
   {
     id: 'asset-light-financing',
     category: 'Capital Flow',
     code: 'Brief 04',
-    title: 'Zero heavy assets: The balance sheet revolution in modern cinema',
+    title: 'Asset-light cinema: The balance sheet evolution in modern filmmaking',
     readTime: '10 min read',
     date: 'Jan 2025',
-    summary: 'Why the era of legacy studios owning fleets of cameras, real-estate complexes, and exclusive talent rosters is coming to an end. How coordination protocols outperform asset-heavy holding companies.',
+    summary: 'Why accumulating heavy physical equipment, real estate, and permanent payroll is no longer necessary to produce quality cinema. How coordinating existing capacity creates greater operational agility.',
     takeaways: [
-      'Holding physical equipment depreciation on corporate balance sheets drains working capital needed for packaging and marketing.',
-      'Asset-light cinema entities achieve higher ROIC by focusing purely on orchestration, risk mitigation, and distribution yield.',
-      'Milestone-locked capital covenants eliminate predatory equity surrenders during sound mixing and color finishing.',
+      'Holding heavy physical assets creates depreciation drag and financial pressure to force projects into owned facilities regardless of creative fit.',
+      'Asset-light coordination allows productions to assemble optimal talent and partner facilities on demand without fixed overhead.',
+      'Milestone-tied covenants provide financial transparency and schedule predictability throughout production and post-finishing.',
     ],
   },
 ];
@@ -91,11 +91,11 @@ export function InsightsPage() {
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            Empirical research on cinema fragmentation.
+            Research on cinema capacity and coordination.
           </h1>
 
           <p className="text-lg sm:text-xl text-zinc-400 font-normal leading-relaxed max-w-3xl mb-12">
-            Field investigations into release window cannibalization, dark soundstage floor utilization, guild assembly economics, and asset-light production models.
+            Field investigations into release window scheduling, facility floor utilization, craft crew assembly, and asset-light coordination models.
           </p>
 
           <div className="flex flex-wrap items-center gap-4">
@@ -221,7 +221,7 @@ export function InsightsPage() {
 
             <div className="space-y-4 pt-6 border-t border-white/[0.06]">
               <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 block font-medium">
-                Key Empirical Observations
+                Key Structural Observations
               </span>
               <ul className="space-y-3 text-xs sm:text-sm text-zinc-400 leading-relaxed list-disc list-inside">
                 {readingBrief.takeaways.map((item, idx) => (
@@ -255,16 +255,16 @@ export function InsightsPage() {
       <section className="py-24 sm:py-32 border-t border-white/[0.06]">
         <div className="max-w-4xl mx-auto px-6 sm:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-6">
-            Need custom telemetry for an upcoming film?
+            Need tailored telemetry for an upcoming production?
           </h2>
           <p className="text-base text-zinc-400 leading-relaxed max-w-xl mx-auto mb-10">
-            We run pre-production friction audits and theatrical release window simulations for select independent features and slates.
+            We run pre-production constraint audits and theatrical release window evaluations for independent projects and partner slates.
           </p>
           <Link
             to="/start"
             className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-white text-black font-medium text-sm hover:bg-zinc-200 transition-all shadow-xl hover:scale-[1.02] active:scale-[0.98]"
           >
-            Commission telemetry audit
+            Commission constraint audit
             <ArrowRight size={16} />
           </Link>
         </div>
