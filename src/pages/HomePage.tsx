@@ -405,6 +405,33 @@ export function HomePage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
+          03B — SYNQ LABS: WE ARE LABS. WE EXPERIMENT.
+         ══════════════════════════════════════════════════════ */}
+      <section className="py-12 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06]">
+        <div className="p-8 sm:p-10 rounded-3xl bg-[#090b10] border border-white/[0.08] hover:border-emerald-500/30 transition-all flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+          <div className="max-w-2xl space-y-2.5">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] text-xs text-zinc-300 font-mono tracking-wide">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              <span>Synq Labs // Applied Trials & R&D</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+              We are labs. We experiment.
+            </h2>
+            <p className="text-sm text-zinc-400 leading-relaxed">
+              Entertainment transformation happens on the floor. In Synq Labs, directors, craft department heads, facility operators, and engineers prototype and benchmark virtual volumes, camera-to-cloud telemetry, spatial audio, and asset-light coordination models before deploying them into active production.
+            </p>
+          </div>
+          <Link
+            to="/workshops"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-medium text-xs hover:bg-zinc-200 transition-all shrink-0 shadow-md"
+          >
+            <span>Explore active lab trials</span>
+            <ArrowRight size={14} />
+          </Link>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════
           04 — CLEAN PROBLEM DIAGNOSTIC (Spacious & Direct)
          ══════════════════════════════════════════════════════ */}
       <section className="py-24 sm:py-32 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06]">

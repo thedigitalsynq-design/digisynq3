@@ -18,7 +18,7 @@ const FOOTER_COLUMNS = [
   {
     title: 'Initiatives',
     links: [
-      { href: '/workshops', label: 'Workshops & Labs' },
+      { href: '/workshops', label: 'Synq Labs & Experiments' },
       { href: '/insights', label: 'Industry Insights' },
       { href: '/about', label: 'About DigiSynq' },
     ],

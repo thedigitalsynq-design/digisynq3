@@ -8,7 +8,7 @@ const NAV_LINKS = [
   { href: '/how-it-works', label: 'How It Works' },
   { href: '/ecosystem', label: 'Ecosystem' },
   { href: '/runbook', label: 'Runbook' },
-  { href: '/workshops', label: 'Workshops' },
+  { href: '/workshops', label: 'Labs' },
   { href: '/insights', label: 'Insights' },
   { href: '/about', label: 'About' },
 ];
