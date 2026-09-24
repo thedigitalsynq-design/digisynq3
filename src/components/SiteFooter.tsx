@@ -49,10 +49,10 @@ export function SiteFooter() {
               />
             </Link>
             <p className="text-sm text-zinc-400 leading-relaxed max-w-sm">
-              An asset-light coordination layer for filmmaking. Connecting production demand with existing industry capacity across talent, facilities, financing, and distribution.
+              The coordination layer for entertainment. An asset-light network connecting distributed talent, partner facilities, financing, and audience channels across the entertainment ecosystem.
             </p>
             <div className="text-xs text-zinc-500">
-              Asset-light model • Coordinating existing industry capacity
+              Asset-light model • Coordinating distributed entertainment capacity
             </div>
           </div>
 

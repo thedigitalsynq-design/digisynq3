@@ -6,55 +6,56 @@ import { EcosystemMap } from '../components/EcosystemMap';
 const STAKEHOLDER_GROUPS = [
   {
     id: 'creative',
-    role: 'Creators & Directors',
-    need: 'Access to verified technical heads and connected stage capacity without surrendering creative autonomy or excessive equity.',
+    role: 'Creators & Producers',
+    need: 'Access to verified talent, connected studio capacity, and packaging support without surrendering creative autonomy or excessive equity.',
     offer: 'Original visionary IP, package attachments, and directing talent ready for streamlined production.',
-    synqAction: 'Route demand to verified craft guilds and available partner stages tailored to project needs.',
+    synqAction: 'Route project demand to verified talent, partner facilities, and specialized services tailored to project requirements.',
   },
   {
     id: 'technical',
-    role: 'Crew & Craft Guilds',
+    role: 'Talent & Technical Crews',
     need: 'Continuous booked days, transparent compensation, and elimination of closed-circle hiring bottlenecks.',
-    offer: 'Master-level cinematography, production sound, gaffer, and colorist craftsmanship.',
-    synqAction: 'Real-time roster availability indexing connecting craftspeople directly to funded productions in need.',
+    offer: 'Master-level creative craft, technical heads, camera operators, sound supervisors, and production crew expertise.',
+    synqAction: 'Roster availability indexing connecting craftspeople and technicians directly to funded entertainment productions.',
   },
   {
     id: 'infrastructure',
-    role: 'Soundstages & Facilities',
-    need: 'Better utilization of unused stage days and high-cost LED volumes between marquee studio leases.',
-    offer: 'World-class physical soundstages, lighting packages, and virtual production infrastructure.',
-    synqAction: 'Route production demand into available turnaround windows, optimizing facility floor utilization.',
+    role: 'Studios, Stages & Venues',
+    need: 'Better floor utilization and monetization of dark dates across soundstages, LED volumes, and specialized venues.',
+    offer: 'World-class physical soundstages, lighting packages, virtual production volumes, and shooting locations.',
+    synqAction: 'Route production demand into available turnaround windows, optimizing facility floor utilization without asset debt.',
+  },
+  {
+    id: 'post',
+    role: 'Production Services, Post & VFX',
+    need: 'Standardized turnovers, clear scope alignment, and milestone-backed payment security.',
+    offer: 'Editorial suites, color finishing, Dolby Atmos mixing, animation, and visual effects pipelines.',
+    synqAction: 'Turnaround telemetry and milestone-tied covenants to ensure continuous, unhalted post-production workflows.',
   },
   {
     id: 'capital',
-    role: 'Financiers & Capital Partners',
-    need: 'Milestone certainty, burn-rate transparency, and mitigation of completion risk.',
-    offer: 'Finishing debt, gap equity, and completion guarantees.',
+    role: 'Capital & Commercial Partners',
+    need: 'Milestone certainty, budget transparency, and mitigation of completion risk.',
+    offer: 'Production financing, finishing debt, gap equity, completion guarantees, and brand sponsorships.',
     synqAction: 'Milestone governance and scene turnover verification that systematically unlock capital tranches.',
   },
   {
     id: 'distribution',
-    role: 'Exhibitors & Circuits',
-    need: 'High seat-occupancy films with targeted regional demand rather than empty multiplex screens.',
-    offer: 'DCI-compliant cinema screens, premium formats, and localized audience footprint.',
-    synqAction: 'Programmatic release windowing and pre-demand density matching across regional circuits.',
-  },
-  {
-    id: 'post',
-    role: 'Post & VFX Houses',
-    need: 'Standardized camera-to-cloud dailies turnovers, scope clarity, and milestone-backed payment security.',
-    offer: 'Editorial suites, color finishing, Dolby Atmos mixing, and visual effects pipelines.',
-    synqAction: 'Turnaround telemetry and milestone-tied covenants to ensure continuous, unhalted post-production.',
+    role: 'Distribution & Audience Platforms',
+    need: 'Compelling content with targeted pre-demand rather than empty screens or underperforming streaming launches.',
+    offer: 'Theatrical circuits, OTT/streaming platforms, television networks, digital channels, and event distribution.',
+    synqAction: 'Programmatic release windowing and pre-demand density matching across theatrical and digital channels.',
   },
 ];
 
 const ROLES = [
   { id: 'all', label: 'All Stakeholders' },
-  { id: 'creative', label: 'Creators & Directors' },
-  { id: 'technical', label: 'Crew & Guilds' },
-  { id: 'infrastructure', label: 'Stages & Studios' },
-  { id: 'capital', label: 'Capital & Producers' },
-  { id: 'distribution', label: 'Exhibitors & Screens' },
+  { id: 'creative', label: 'Creators & Producers' },
+  { id: 'technical', label: 'Talent & Crew' },
+  { id: 'infrastructure', label: 'Studios & Venues' },
+  { id: 'post', label: 'Services & Post' },
+  { id: 'capital', label: 'Capital & Commercial' },
+  { id: 'distribution', label: 'Distribution & Audience' },
 ];
 
 export function EcosystemPage() {
@@ -62,7 +63,7 @@ export function EcosystemPage() {
 
   const filteredGroups = selectedRole === 'all'
     ? STAKEHOLDER_GROUPS
-    : STAKEHOLDER_GROUPS.filter(g => g.id === selectedRole || (selectedRole === 'technical' && g.id === 'post'));
+    : STAKEHOLDER_GROUPS.filter(g => g.id === selectedRole);
 
   return (
     <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white">
@@ -71,15 +72,15 @@ export function EcosystemPage() {
       <section className="pt-40 sm:pt-48 pb-20 sm:pb-28 px-6 sm:px-8 max-w-6xl mx-auto">
         <div className="max-w-4xl">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-400 mb-8 tracking-wide">
-            <span>Cinema Ecosystem Network</span>
+            <span>Entertainment Ecosystem Network</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            The complete cinema constellation.
+            The complete entertainment constellation.
           </h1>
 
           <p className="text-lg sm:text-xl text-zinc-400 font-normal leading-relaxed max-w-3xl mb-12">
-            DigiSynq does not replace existing industry participants. We provide the neutral, asset-light coordination layer that allows creators, craft guilds, partner production facilities, capital, and screens to interface without friction.
+            Entertainment already has immense distributed capacity. DigiSynq does not replace existing industry participants. We provide the neutral, asset-light coordination layer that allows creators, creative talent, partner facilities, production services, commercial partners, and audience distribution channels to interface without friction.
           </p>
 
           <div className="flex flex-wrap items-center gap-4">
@@ -122,13 +123,13 @@ export function EcosystemPage() {
                 <span className="text-xs font-mono text-zinc-500 uppercase block mb-3">01 // ASSET OWNERS</span>
                 <h3 className="text-lg font-semibold text-white mb-2">Own or Operate Facilities</h3>
                 <p className="text-xs text-zinc-400 leading-relaxed mb-6">
-                  Maintain physical infrastructure and physical inventory across the industry.
+                  Maintain physical infrastructure, equipment packages, and venues across the industry.
                 </p>
                 <ul className="space-y-2 text-xs text-zinc-300">
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-500" /> Soundstages & studio lots</li>
+                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-500" /> Soundstages, lots & venues</li>
                   <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-500" /> Virtual production LED volumes</li>
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-500" /> Specialized camera & grip equipment</li>
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-500" /> Post-production editorial facilities</li>
+                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-500" /> Specialized camera, grip & lighting inventory</li>
+                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-500" /> Post-production editorial & mixing facilities</li>
                 </ul>
               </div>
               <div className="pt-6 border-t border-white/[0.06] text-[11px] text-zinc-500">
@@ -141,13 +142,13 @@ export function EcosystemPage() {
                 <span className="text-xs font-mono text-zinc-500 uppercase block mb-3">02 // NETWORK PARTICIPANTS</span>
                 <h3 className="text-lg font-semibold text-white mb-2">Provide Craft, Capital & Reach</h3>
                 <p className="text-xs text-zinc-400 leading-relaxed mb-6">
-                  Drive the creative execution, funding, and audience distribution of cinema.
+                  Drive the creative execution, funding, and audience distribution of entertainment.
                 </p>
                 <ul className="space-y-2 text-xs text-zinc-300">
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-500" /> Directors, writers & producers</li>
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-500" /> Key crew & craft guild technicians</li>
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-500" /> Finishing funds & completion capital</li>
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-500" /> Exhibitors & regional cinema circuits</li>
+                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-500" /> Creators, directors, showrunners & producers</li>
+                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-500" /> Key crew, technicians & creative talent</li>
+                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-500" /> Finishing funds, debt & commercial partners</li>
+                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-500" /> Theatrical, streaming & digital platforms</li>
                 </ul>
               </div>
               <div className="pt-6 border-t border-white/[0.06] text-[11px] text-zinc-500">
@@ -165,7 +166,7 @@ export function EcosystemPage() {
                 <span className="text-xs font-mono text-emerald-400 uppercase block mb-3">03 // COORDINATION LAYER</span>
                 <h3 className="text-lg font-semibold text-white mb-2">Orchestrates & Connects</h3>
                 <p className="text-xs text-zinc-400 leading-relaxed mb-6">
-                  Routes production demand to existing capacity with neutral governance.
+                  Routes project demand to existing capacity with neutral governance.
                 </p>
                 <ul className="space-y-2 text-xs text-zinc-200">
                   <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400" /> Capacity discovery & verification</li>
@@ -281,7 +282,7 @@ export function EcosystemPage() {
               Why neutral coordination works
             </h2>
             <p className="text-base text-zinc-400 leading-relaxed">
-              Traditional intermediaries extract rents by monopolizing physical infrastructure. DigiSynq generates value by routing and orchestrating capacity that already exists.
+              Traditional intermediaries extract rents by monopolizing physical infrastructure. DigiSynq generates value by routing and orchestrating capacity that already exists across the entertainment ecosystem.
             </p>
           </div>
 
@@ -294,7 +295,7 @@ export function EcosystemPage() {
                 Zero infrastructure debt
               </h3>
               <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
-                DigiSynq does not take out debt to acquire cameras or real estate. Because we have no idle physical assets to amortize, we remain completely objective in recommending the right facility for every production.
+                DigiSynq does not take out debt to acquire cameras or real estate. Because we have no idle physical assets to amortize, we remain completely objective in recommending the right facility and team for every project.
               </p>
             </div>
 
@@ -306,7 +307,7 @@ export function EcosystemPage() {
                 Access across the network
               </h3>
               <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
-                Productions access top-tier soundstages, LED volumes, and specialized technical heads across the entire network, turning unused facility days into active production windows.
+                Productions access top-tier soundstages, LED volumes, venues, and specialized talent across the entire network, turning unused facility days into active production windows.
               </p>
             </div>
 
@@ -333,7 +334,7 @@ export function EcosystemPage() {
             Connect your node to DigiSynq
           </h2>
           <p className="text-base text-zinc-400 leading-relaxed max-w-xl mx-auto mb-10">
-            Whether you operate a soundstage, represent a craft guild, manage private capital, or direct indie features, register your interest to join the synchronized network.
+            Whether you operate a studio facility, represent creative talent, manage entertainment capital, or lead production, register your interest to join the synchronized network.
           </p>
           <Link
             to="/start"

@@ -5,31 +5,31 @@ import { ArrowRight, Compass, Cpu, Zap, Check } from 'lucide-react';
 const GAPS = [
   {
     id: 'human',
-    title: 'Technician & Crew Assembly',
-    traditional: 'Productions traditionally hire through closed personal networks. Qualified cinematographers, gaffers, and sound artists experience unbooked lulls, while mid-tier productions struggle to identify available technical heads on short timelines.',
-    synqSolution: 'DigiSynq indexes verified availability, specialized skillsets, and open dates across craft guilds in real time, matching productions to existing talent without talent agency markups.',
+    title: 'Creative Talent & Crew Assembly',
+    traditional: 'Productions traditionally hire through closed personal phone trees. Qualified creative heads, technical craftspeople, and specialized crews experience unbooked lulls, while projects struggle to identify available talent on short timelines.',
+    synqSolution: 'DigiSynq indexes verified availability, specialized skillsets, and open schedules across guilds and independent professionals, matching productions to existing talent without agency middleman markups.',
     metric: 'Direct roster locking from verified network availability',
   },
   {
     id: 'spatial',
-    title: 'Soundstages & Virtual Volumes',
-    traditional: 'Studio soundstages and LED volumes often sit unbooked between long-term tenant leases, while independent productions struggle to access professional stage infrastructure due to rigid multi-month lease mandates.',
-    synqSolution: 'DigiSynq routes production demand to available partner facilities during turnaround windows, creating floor utilization for studios and accessible rates for productions.',
-    metric: 'Dynamic access to available studio floor capacity',
+    title: 'Studios, Stages & Production Venues',
+    traditional: 'Soundstages, virtual production LED volumes, and specialized venues often sit dark between long-term tenant bookings, while productions struggle to secure floor time due to rigid multi-month lease mandates.',
+    synqSolution: 'DigiSynq routes production demand to available partner facilities during turnaround windows, creating floor utilization for facility operators and accessible rates for productions.',
+    metric: 'Dynamic access to available studio and venue capacity',
   },
   {
     id: 'financial',
-    title: 'Finishing & Gap Capital',
-    traditional: 'Filmmakers often encounter financing bottlenecks during post-production when traditional credit lines are disconnected from real turnaround milestones, risking delivery stalls.',
-    synqSolution: 'DigiSynq aligns finishing capital tranches with verified delivery milestones — unlocking funding systematically as camera raw, editorial cuts, and final mix turnovers are completed.',
+    title: 'Finishing & Milestone Capital',
+    traditional: 'Entertainment projects frequently encounter financing bottlenecks during post-production and final delivery when traditional credit facilities are disconnected from real milestone handoffs.',
+    synqSolution: 'DigiSynq aligns finishing capital tranches with verified delivery milestones — unlocking funding systematically as editorial, VFX, sound mix, and master turnovers are completed.',
     metric: 'Capital tranches unlocked upon verified delivery milestones',
   },
   {
     id: 'theatrical',
-    title: 'Release Windowing & Exhibition',
-    traditional: 'Independent and mid-budget titles frequently clash on identical release weekends against major studio franchise releases, resulting in rapid screen loss and compressed theatrical exposure.',
-    synqSolution: 'DigiSynq coordinates release windowing with regional exhibitor circuits using pre-demand signals, securing defensible programming slots and targeted audience density.',
-    metric: 'Targeted regional windowing aligned with audience demand',
+    title: 'Distribution Channels & Release Windowing',
+    traditional: 'Independent titles and new formats frequently clash on identical release weekends against studio franchise tentpoles, resulting in rapid audience loss and compressed exposure across both screens and streaming.',
+    synqSolution: 'DigiSynq coordinates release windowing and exhibition across theatrical circuits and digital platforms using pre-demand signals, securing defensible programming slots and audience density.',
+    metric: 'Targeted windowing aligned with audience pre-demand',
   },
 ];
 
@@ -37,22 +37,22 @@ const ARCHITECTURE_LAYERS = [
   {
     num: '01',
     name: 'The Discovery Engine',
-    subtitle: 'Indexing Existing Capacity',
-    desc: 'We continuously identify available capacity across the filmmaking network — unbooked partner stages, verified crew availability, post-production bandwidth, and targeted screen windows.',
+    subtitle: 'Indexing Distributed Capacity',
+    desc: 'We continuously map available capacity across the entertainment network — unbooked partner stages and venues, verified crew availability, post-production bandwidth, and targeted distribution windows.',
     icon: Compass,
   },
   {
     num: '02',
     name: 'The Routing Mesh',
     subtitle: 'Asset-Light Synchronization',
-    desc: 'DigiSynq does not buy cameras or build soundstages. We serve as the operational coordination layer connecting existing industry resources at the precise instant of demand.',
+    desc: 'DigiSynq does not buy camera trucks or build physical studios. We serve as the operational coordination layer connecting existing industry resources at the precise instant of demand.',
     icon: Cpu,
   },
   {
     num: '03',
     name: 'Value Capture Protocol',
     subtitle: 'Orchestration-Driven Return',
-    desc: 'Our economic model is tied to coordination and orchestration value. We generate return by resolving friction and keeping productions on schedule, not by accumulating heavy physical assets.',
+    desc: 'Our economic model is tied to coordination and orchestration value. We generate return by resolving friction and keeping entertainment projects on schedule, not by accumulating heavy physical assets.',
     icon: Zap,
   },
 ];
@@ -72,12 +72,12 @@ export function TheSynqPage() {
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            The codex of cinema<br />
+            The codex of entertainment<br />
             synchronization.
           </h1>
 
           <p className="text-lg sm:text-xl text-zinc-400 leading-relaxed max-w-3xl font-normal mb-10">
-            Cinema possesses immense talent, cutting-edge facilities, and active capital. But these forces operate in isolated silos. DigiSynq is an asset-light coordination layer that aligns existing industry capacity with production demand — without requiring DigiSynq to own physical infrastructure.
+            The Synq connects fragmented entertainment capacity into a coordinated network. Entertainment possesses immense creative talent, cutting-edge facilities, and active capital. DigiSynq is an asset-light coordination layer that aligns existing industry capacity with entertainment demand — without requiring DigiSynq to own physical infrastructure.
           </p>
 
           <div className="flex flex-wrap items-center gap-4">
@@ -108,7 +108,7 @@ export function TheSynqPage() {
             Two distinct operating approaches.
           </h2>
           <p className="text-base text-zinc-400 leading-relaxed">
-            The conventional model relies on fragmented manual sourcing. DigiSynq introduces an asset-light orchestration layer that routes production demand to existing capacity.
+            The conventional model relies on fragmented individual sourcing. DigiSynq introduces an asset-light orchestration layer that routes entertainment demand to existing capacity.
           </p>
         </div>
 
@@ -124,7 +124,7 @@ export function TheSynqPage() {
               
               {/* Flow Sequence */}
               <div className="space-y-2 text-xs font-mono text-zinc-400 border-l border-white/10 pl-4 py-1">
-                <div>Production Demand</div>
+                <div>Entertainment Demand</div>
                 <div className="text-zinc-600">↓ Individually sourced resources</div>
                 <div>Fragmented Department Coordination</div>
                 <div className="text-zinc-600">↓ Delays & unbooked stage days</div>
@@ -147,16 +147,16 @@ export function TheSynqPage() {
               <span className="text-xs font-mono text-emerald-400 uppercase block mb-2">DigiSynq Model</span>
               <h3 className="text-xl font-semibold text-white mb-4">Orchestrated Capacity Routing</h3>
               <p className="text-sm text-zinc-400 leading-relaxed mb-6">
-                DigiSynq acts as a neutral coordination layer, discovering and matching existing industry capacity with verified production requirements.
+                DigiSynq acts as a neutral coordination layer, discovering and matching existing industry capacity with verified project requirements.
               </p>
               
               {/* Flow Sequence */}
               <div className="space-y-2 text-xs font-mono text-zinc-300 border-l border-emerald-500/30 pl-4 py-1">
-                <div>Production Demand</div>
+                <div>Entertainment Demand</div>
                 <div className="text-emerald-400">↓ DigiSynq coordination layer</div>
-                <div>Existing Ecosystem Capacity (Stages, Crew, Post)</div>
+                <div>Existing Ecosystem Capacity (Stages, Talent, Post)</div>
                 <div className="text-emerald-400">↓ Structured milestone covenants</div>
-                <div className="text-white font-medium">Coordinated Execution & On-Schedule Release</div>
+                <div className="text-white font-medium">Coordinated Execution & On-Schedule Delivery</div>
               </div>
             </div>
             <div className="pt-4 border-t border-white/[0.06] text-xs text-emerald-400 font-medium">
@@ -171,10 +171,10 @@ export function TheSynqPage() {
             Systemic Gaps
           </span>
           <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white [letter-spacing:-0.025em] mb-4">
-            Where cinema leaks capacity.
+            Where entertainment leaks capacity.
           </h2>
           <p className="text-sm text-zinc-400 leading-relaxed">
-            The resources to produce extraordinary cinema exist today across the ecosystem. What has been missing is the coordination layer.
+            The resources to produce extraordinary entertainment exist today across the ecosystem. What has been missing is the coordination layer.
           </p>
         </div>
 
@@ -224,7 +224,7 @@ export function TheSynqPage() {
             The three operational layers.
           </h2>
           <p className="text-sm text-zinc-400 leading-relaxed">
-            How DigiSynq translates distributed industry capacity into predictable, scalable production velocity.
+            How DigiSynq translates distributed entertainment capacity into predictable, scalable production velocity.
           </p>
         </div>
 
@@ -257,7 +257,7 @@ export function TheSynqPage() {
           Ready to eliminate coordination friction?
         </h2>
         <p className="text-base text-zinc-400 max-w-lg mx-auto leading-relaxed mb-10">
-          Whether you are packaging a script, balancing stage capacity, or seeking milestone-tied finishing capital.
+          Have an entertainment project, resource requirement, or capacity opportunity? Start a Synq and tell us what needs to be connected.
         </p>
         <Link
           to="/start"

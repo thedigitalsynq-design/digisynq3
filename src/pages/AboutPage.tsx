@@ -6,19 +6,46 @@ import { OPERATING_PRINCIPLES } from '../data/core_data';
 const WHAT_WE_ARE_NOT = [
   {
     title: 'Not a Talent Agency',
-    desc: 'We do not lock technicians or artists into exclusive representation or extract commission tolls. We provide transparent access to open market opportunities across verified guild craftspeople.',
+    desc: 'We do not lock creative professionals or crew into exclusive representation or extract commission tolls. We provide transparent access to open market opportunities across verified guilds and talent.',
   },
   {
-    title: 'Not an Asset-Heavy Studio',
-    desc: 'We do not accumulate physical camera fleets, lighting trucks, or real estate complexes that sit dark between production cycles. We coordinate existing capacity across partner facilities.',
+    title: 'Not an Asset-Heavy Studio or Venue',
+    desc: 'We do not accumulate camera fleets, lighting trucks, or physical real estate that sits dark between production cycles. We coordinate existing capacity across partner facilities and venues.',
   },
   {
     title: 'Not a Generic Consultancy',
-    desc: 'We do not deliver theoretical slide decks and walk away. We embed directly across pre-production logistics, camera-to-cloud dailies telemetry, and theatrical distribution.',
+    desc: 'We do not deliver theoretical slide decks and walk away. We embed directly across pre-production logistics, dailies telemetry, workflow coordination, and distribution execution.',
   },
   {
     title: 'Not a Predatory Financier',
-    desc: 'We do not demand oppressive backend equity surrenders or high-interest bridge debt. We tie milestone funding tranches directly to verified scene delivery.',
+    desc: 'We do not demand oppressive equity surrenders or high-interest bridge debt. We tie milestone funding tranches directly to verified deliverable turnarounds.',
+  },
+];
+
+const WHO_WE_SERVE = [
+  {
+    role: 'Creators',
+    desc: 'Writers, directors, artists, and showrunners creating entertainment content and experiences.',
+  },
+  {
+    role: 'Producers & Operators',
+    desc: 'Individuals and production companies responsible for packaging and executing projects.',
+  },
+  {
+    role: 'Talent & Crew',
+    desc: 'Creative heads, technical crews, and specialists providing on-set and digital capabilities.',
+  },
+  {
+    role: 'Asset Owners',
+    desc: 'Operators of soundstages, LED volumes, equipment packages, and production venues.',
+  },
+  {
+    role: 'Service Providers',
+    desc: 'Post-production, VFX, animation, sound, and specialized technology partners.',
+  },
+  {
+    role: 'Capital & Platforms',
+    desc: 'Financiers, brands, exhibitors, OTT platforms, and audience distribution channels.',
   },
 ];
 
@@ -34,11 +61,11 @@ export function AboutPage() {
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            The cinema coordination thesis.
+            The entertainment coordination thesis.
           </h1>
 
           <p className="text-lg sm:text-xl text-zinc-400 font-normal leading-relaxed max-w-3xl mb-12">
-            DigiSynq is designed around an asset-light model: value is created by coordinating existing filmmaking capacity rather than accumulating heavy physical infrastructure. We align fragmented forces across talent, partner facilities, and capital into unified momentum.
+            DigiSynq is building an asset-light coordination layer across the entertainment ecosystem. We don’t need to own every node. We need to connect the nodes. Value is created by coordinating, routing, and orchestrating existing capacity rather than accumulating heavy physical infrastructure.
           </p>
 
           <div className="flex flex-wrap items-center gap-4">
@@ -59,7 +86,7 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* ── 02. Canonical Definition ── */}
+      {/* ── 02. Canonical Definition & Central Idea ── */}
       <section className="py-24 sm:py-32 border-t border-white/[0.06]">
         <div className="max-w-5xl mx-auto px-6 sm:px-8">
           <div className="rounded-3xl bg-[#090b10] border border-white/[0.06] p-8 sm:p-14 space-y-8">
@@ -68,28 +95,61 @@ export function AboutPage() {
             </span>
 
             <blockquote className="text-2xl sm:text-4xl font-bold text-white leading-snug tracking-tight">
-              “An asset-light cinema problem-solving company building a synchronization layer across the filmmaking ecosystem.”
+              “An asset-light coordination and problem-solving company building a synchronization layer across the entertainment ecosystem.”
             </blockquote>
 
             <p className="text-base text-zinc-300 leading-relaxed max-w-3xl">
-              We identify friction points between craft skills, partner soundstages, technology, IP rights, distribution windows, and audience momentum — then assemble and synchronize the optimal elements to generate value without heavy balance-sheet debt.
+              Entertainment already has vast distributed infrastructure, talent, and resources. We identify friction points between creative ideas, talent, partner stages, venues, post facilities, and audience channels — then assemble and synchronize the optimal elements to generate value without heavy balance-sheet debt.
             </p>
 
             <div className="pt-6 border-t border-white/[0.06] flex flex-wrap items-center gap-6 text-xs text-zinc-400">
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                <span>Use the capacity that already exists.</span>
+                <span className="text-white font-medium">We don't need to own every node. We connect the nodes.</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                <span>Value created through coordination & orchestration.</span>
+                <span>Use the capacity that already exists.</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── 03. Boundary Definition (What We Are NOT) ── */}
+      {/* ── 03. Who DigiSynq Serves ── */}
+      <section className="py-24 sm:py-32 border-t border-white/[0.06]">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8">
+          
+          <div className="max-w-2xl mb-14">
+            <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
+              Stakeholder Framework
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
+              Who DigiSynq connects
+            </h2>
+            <p className="text-base text-zinc-400 leading-relaxed">
+              We coordinate relationships and capacity across the full entertainment lifecycle.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {WHO_WE_SERVE.map((stakeholder) => (
+              <div
+                key={stakeholder.role}
+                className="p-8 rounded-2xl bg-white/[0.015] border border-white/[0.06] flex flex-col justify-between space-y-4"
+              >
+                <div>
+                  <h3 className="text-base font-semibold text-white mb-2">{stakeholder.role}</h3>
+                  <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">{stakeholder.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ── 04. Boundary Definition (What We Are NOT) ── */}
       <section className="py-24 sm:py-32 border-t border-white/[0.06]">
         <div className="max-w-6xl mx-auto px-6 sm:px-8">
           
@@ -101,7 +161,7 @@ export function AboutPage() {
               What DigiSynq is deliberately not
             </h2>
             <p className="text-base text-zinc-400 leading-relaxed">
-              Discipline requires saying no. We maintain extreme focus by refusing to replicate existing legacy business models.
+              Discipline requires saying no. We maintain focus by refusing to replicate existing legacy business models.
             </p>
           </div>
 
@@ -130,7 +190,7 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* ── 04. The 8 Operating Principles ── */}
+      {/* ── 05. The 8 Operating Principles ── */}
       <section className="py-24 sm:py-32 border-t border-white/[0.06]">
         <div className="max-w-6xl mx-auto px-6 sm:px-8">
           
@@ -170,14 +230,14 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* ── 05. Call to Action ── */}
+      {/* ── 06. Call to Action ── */}
       <section className="py-24 sm:py-32 border-t border-white/[0.06]">
         <div className="max-w-4xl mx-auto px-6 sm:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-6">
             Build with the synchronization layer
           </h2>
           <p className="text-base text-zinc-400 leading-relaxed max-w-xl mx-auto mb-10">
-            Join the forward-looking producers, directors, facility owners, and technicians discovering a smarter, asset-light way to coordinate cinema.
+            Have an entertainment project, resource requirement, or capacity opportunity? Start a Synq and tell us what needs to be connected.
           </p>
           <Link
             to="/start"

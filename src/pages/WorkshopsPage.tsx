@@ -4,12 +4,12 @@ import { ArrowRight, ArrowUpRight, Check, ChevronRight, BookOpen, Layers, Award 
 import { WORKSHOP_PROGRAMS } from '../data/core_data';
 
 const DEPLOYMENT_STEPS = [
-  { step: '01', name: 'Learn', desc: 'Modern industry frameworks, optics, LED volumes, and digital workflows.' },
-  { step: '02', name: 'Practice', desc: 'Hands-on soundstage, lighting grid, and virtual volume execution.' },
-  { step: '03', name: 'Fine-Tune', desc: 'Direct review and guidance from active guild department heads.' },
-  { step: '04', name: 'Connect', desc: 'Matchmaking into verified independent and studio production pipelines.' },
-  { step: '05', name: 'Deploy', desc: 'Paid craft placement on active sets with clear milestone compensation.' },
-  { step: '06', name: 'Feedback', desc: 'Continuous career progression, skill verification, and rate transparency.' },
+  { step: '01', name: 'Learn', desc: 'Modern industry frameworks, virtual volumes, optics, audio, and digital workflows.' },
+  { step: '02', name: 'Practice', desc: 'Hands-on soundstage, lighting grid, virtual production, and studio execution.' },
+  { step: '03', name: 'Fine-Tune', desc: 'Direct review and workflow guidance from active department heads and craftspeople.' },
+  { step: '04', name: 'Connect', desc: 'Introduction into verified entertainment and production pipelines across the network.' },
+  { step: '05', name: 'Deploy', desc: 'Placement opportunities on active sets and creative projects with transparent terms.' },
+  { step: '06', name: 'Feedback', desc: 'Continuous skill verification, career progression, and expanding industry connections.' },
 ];
 
 export function WorkshopsPage() {
@@ -23,15 +23,15 @@ export function WorkshopsPage() {
       <section className="pt-40 sm:pt-48 pb-20 sm:pb-28 px-6 sm:px-8 max-w-6xl mx-auto">
         <div className="max-w-4xl">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-400 mb-8 tracking-wide">
-            <span>Guild Labs & Capabilities</span>
+            <span>Talent & Capability Development</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            Bridging skills into active production.
+            Connecting skills with entertainment opportunities.
           </h1>
 
           <p className="text-lg sm:text-xl text-zinc-400 font-normal leading-relaxed max-w-3xl mb-12">
-            DigiSynq guild labs are not theoretical lectures. They are intensive workshops engineered to train technicians and creators on modern workflows, then deploy them directly into verified productions.
+            Talent development is a vital node in the entertainment ecosystem. DigiSynq workshops bridge creative professionals, technicians, and crew to modern workflows, industry connections, and active production opportunities.
           </p>
 
           <div className="flex flex-wrap items-center gap-4">
@@ -61,10 +61,10 @@ export function WorkshopsPage() {
               Placement Protocol
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-              The six-stage deployment loop
+              The six-stage progression loop
             </h2>
             <p className="text-base text-zinc-400 leading-relaxed">
-              We do not leave participants with a generic certificate. Every lab connects to verified production demand.
+              We connect technical and creative learning directly to verified entertainment production demand.
             </p>
           </div>
 
@@ -170,7 +170,7 @@ export function WorkshopsPage() {
 
                 <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] space-y-2">
                   <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider block font-medium">
-                    Tangible Verified Outcome
+                    Verified Learning Outcome
                   </span>
                   <p className="text-sm text-zinc-200 leading-relaxed">
                     {activeLab.outcome}
@@ -222,7 +222,7 @@ export function WorkshopsPage() {
             Looking to upskill your production unit?
           </h2>
           <p className="text-base text-zinc-400 leading-relaxed max-w-xl mx-auto mb-10">
-            We partner with film guilds, camera houses, and studios to conduct custom technical training workshops.
+            We partner with industry guilds, camera houses, and studio facilities to conduct technical and workflow training.
           </p>
           <Link
             to="/start"

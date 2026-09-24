@@ -17,56 +17,56 @@ interface EcosystemNode {
 const ECOSYSTEM_NODES: EcosystemNode[] = [
   {
     id: 'talent',
-    name: 'Crew & Guilds',
-    role: 'Human Capital',
-    frictionState: 'Unverified availability and closed personal phone trees',
-    synqState: 'Direct verified roster matching and transparent parity',
-    frictionMetric: 'Lengthy pre-prod delays',
+    name: 'Creative Talent & Crews',
+    role: 'Creative & Technical',
+    frictionState: 'Unverified availability and reliance on closed personal networks',
+    synqState: 'Direct verified roster matching and transparent rate parity',
+    frictionMetric: 'Lengthy assembly delays',
     synqMetric: 'Direct verified locking',
   },
   {
     id: 'stages',
-    name: 'Soundstages & Volumes',
-    role: 'Physical Space',
-    frictionState: 'Unused stage days and rigid long-term lease mandates',
-    synqState: 'Access to available partner stage capacity and shared windows',
+    name: 'Studios, Stages & Venues',
+    role: 'Physical Infrastructure',
+    frictionState: 'Unused stage days, dark floors, and rigid multi-month lease mandates',
+    synqState: 'Dynamic access to available partner facilities and turnaround slots',
     frictionMetric: 'Unbooked dark time',
-    synqMetric: 'Optimized floor utilization',
+    synqMetric: 'Optimized facility utilization',
   },
   {
     id: 'capital',
-    name: 'Finishing Capital',
+    name: 'Production & Finishing Capital',
     role: 'Financial Flow',
-    frictionState: 'Opaque tranches and burdensome mezzanine bridge debt',
-    synqState: 'Milestone-tied capital routing on verified scene delivery',
+    frictionState: 'Opaque tranches and high-risk bridge financing terms',
+    synqState: 'Milestone-tied capital routing released on verified deliverables',
     frictionMetric: 'Financing uncertainty',
     synqMetric: 'Milestone-backed security',
   },
   {
     id: 'post',
-    name: 'Post & VFX Pipelines',
-    role: 'Digital Finishing',
-    frictionState: 'Turnover suspensions citing uncoordinated scope shifts',
-    synqState: 'Turnaround pipeline synchronization and milestone escrow',
-    frictionMetric: 'Delivery bottlenecks',
+    name: 'Post, VFX & Sound',
+    role: 'Technical Finishing',
+    frictionState: 'Handoff delays, scope misalignment, and stalled turnovers',
+    synqState: 'Synchronized pipeline telemetry and clear milestone covenants',
+    frictionMetric: 'Turnaround bottlenecks',
     synqMetric: 'On-schedule delivery',
   },
   {
     id: 'rights',
-    name: 'Story & Adaptation IP',
+    name: 'Formats, Stories & IP',
     role: 'Intellectual Property',
-    frictionState: 'High-value scripts trapped in multi-year packaging limbo',
-    synqState: 'Pre-vetted attachments and turnkey technical modeling',
+    frictionState: 'High-value properties trapped in prolonged packaging limbo',
+    synqState: 'Pre-vetted attachments and turnkey technical feasibility modeling',
     frictionMetric: 'Prolonged stagnation',
     synqMetric: 'Streamlined packaging',
   },
   {
     id: 'exhibition',
-    name: 'Screens & Release Windows',
+    name: 'Audience Channels & Distribution',
     role: 'Audience Reach',
-    frictionState: 'Independent films clashing blindly on identical weekends',
-    synqState: 'Targeted regional windowing aligned with audience demand',
-    frictionMetric: 'Instant screen eviction',
+    frictionState: 'Content clashing blindly across identical theatrical and OTT windows',
+    synqState: 'Targeted windowing and audience pre-demand density matching',
+    frictionMetric: 'Compressed exposure',
     synqMetric: 'Defensible release density',
   },
 ];
@@ -86,43 +86,43 @@ const PROBLEM_SCENARIOS: ProblemScenario[] = [
   {
     id: 'crew',
     title: 'Missing Technical Department Heads',
-    category: 'Human Capital',
-    symptom: 'Lead cinematographer or gaffer unavailable weeks prior to principal photography.',
+    category: 'Talent & Crew',
+    symptom: 'Lead cinematographer, sound supervisor, or gaffer unavailable weeks prior to shoot.',
     rootCause: 'Opaque availability calendars and reliance on closed personal phone trees.',
-    synqPathway: 'Direct matching against verified guild availability with turnkey rate parity.',
+    synqPathway: 'Direct matching against verified network availability with turnkey terms.',
     outcome: 'Locked key crew within days without agency middleman markups.',
   },
   {
     id: 'stages',
-    title: 'Soundstage Booking Bottleneck',
-    category: 'Spatial Infrastructure',
-    symptom: 'Production cannot secure continuous stage space in the target territory.',
+    title: 'Studio & Stage Booking Bottleneck',
+    category: 'Infrastructure',
+    symptom: 'Production cannot secure continuous stage or volume space in the target market.',
     rootCause: 'Major studio facilities locked into rigid multi-month tenant leases.',
-    synqPathway: 'Route demand to available partner facilities with shared setup windows.',
-    outcome: 'Secured shooting dates with optimized floor scheduling and zero facility ownership debt.',
+    synqPathway: 'Route demand to available partner facilities during verified turnaround windows.',
+    outcome: 'Secured shooting dates with optimized floor scheduling and zero facility debt.',
   },
   {
     id: 'capital',
-    title: 'Finishing & VFX Cash Deficit',
+    title: 'Finishing & Post Cash Deficit',
     category: 'Financial Flow',
-    symptom: 'Post-production halts on final composite shots weeks before theatrical delivery.',
+    symptom: 'Post-production halts on final composite shots weeks before delivery lock.',
     rootCause: 'Milestone financing triggers disconnected from real post turnover stages.',
-    synqPathway: 'Deploy milestone-tied capital release based on verified shot approvals.',
+    synqPathway: 'Deploy milestone-tied capital release based on verified turnover approvals.',
     outcome: 'Delivered final master on time with transparent covenant governance.',
   },
   {
     id: 'screens',
-    title: 'Theatrical Cannibalization Risk',
-    category: 'Exhibition',
-    symptom: 'Independent feature slated blindly against major studio tentpoles.',
+    title: 'Release Window Clashes',
+    category: 'Distribution',
+    symptom: 'Independent release slated blindly against major studio tentpoles.',
     rootCause: 'Lack of pre-release demand telemetry and rigid traditional distribution windows.',
-    synqPathway: 'Programmatic targeted screening clusters and synchronized regional event windows.',
-    outcome: 'Protected opening footprint through defensible regional seat occupancy.',
+    synqPathway: 'Targeted screening clusters and synchronized regional event windows.',
+    outcome: 'Protected opening footprint through defensible regional audience density.',
   },
   {
     id: 'rights',
     title: 'Trapped Intellectual Property',
-    category: 'Rights & Packaging',
+    category: 'IP & Packaging',
     symptom: 'Acclaimed property unable to attach director or finance for extended periods.',
     rootCause: 'Unrealistic budget assumptions and lack of packaged technical feasibility.',
     synqPathway: 'Asset-light packaging sprint aligning director vision with verified network capacity.',
@@ -151,7 +151,7 @@ export function HomePage() {
     <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white">
 
       {/* ══════════════════════════════════════════════════════
-          01 — HERO (Asset-Light Proposition: Clear, Spacious, Confident)
+          01 — HERO (Broad Entertainment Positioning: Clear, Spacious, Confident)
          ══════════════════════════════════════════════════════ */}
       <section className="relative pt-40 sm:pt-48 pb-24 sm:pb-32 px-6 sm:px-8 max-w-6xl mx-auto">
         <div className="max-w-4xl">
@@ -159,17 +159,18 @@ export function HomePage() {
           {/* Quiet Category Eyebrow */}
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-400 mb-8 tracking-wide">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            <span>Asset-Light Cinema Coordination</span>
+            <span>Asset-Light Entertainment Coordination</span>
           </div>
 
           {/* Large, Confident Headline */}
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            An asset-light coordination layer for filmmaking.
+            The coordination layer<br />
+            for entertainment.
           </h1>
 
-          {/* Spacious Editorial Lead: What it is, What it does, Why it matters */}
+          {/* Spacious Editorial Lead: What it is, Who it serves, How it works, Why it matters */}
           <p className="text-lg sm:text-xl text-zinc-400 leading-relaxed max-w-3xl font-normal mb-10">
-            DigiSynq connects production demand with existing industry capacity. We help filmmakers and producers access verified crew, available stage space, post-production, and distribution pathways across the ecosystem — without requiring DigiSynq to own the underlying physical infrastructure.
+            Entertainment already has enormous distributed capacity. DigiSynq is an asset-light coordination network that connects entertainment demand with existing industry capacity — helping productions, creators, and studios access verified talent, partner facilities, post-production, and distribution pathways without requiring DigiSynq to own the underlying physical infrastructure.
           </p>
 
           {/* Clean, Restrained CTAs */}
@@ -191,15 +192,15 @@ export function HomePage() {
           </div>
         </div>
 
-        {/* Quiet Metric Horizon — Grounded in Core Operational Realities */}
+        {/* Quiet Metric Horizon */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 mt-24 sm:mt-32 pt-12 border-t border-white/[0.06]">
           <div>
             <div className="text-3xl sm:text-4xl font-semibold text-white tracking-tight mb-1">Asset-Light</div>
-            <div className="text-xs text-zinc-400 leading-relaxed">Zero heavy infrastructure debt</div>
+            <div className="text-xs text-zinc-400 leading-relaxed">Zero physical infrastructure debt</div>
           </div>
           <div>
             <div className="text-3xl sm:text-4xl font-semibold text-white tracking-tight mb-1">Ecosystem</div>
-            <div className="text-xs text-zinc-400 leading-relaxed">Routing existing industry capacity</div>
+            <div className="text-xs text-zinc-400 leading-relaxed">Coordinating distributed entertainment capacity</div>
           </div>
           <div>
             <div className="text-3xl sm:text-4xl font-semibold text-white tracking-tight mb-1">&lt; 48h</div>
@@ -207,7 +208,7 @@ export function HomePage() {
           </div>
           <div>
             <div className="text-3xl sm:text-4xl font-semibold text-white tracking-tight mb-1">Lifecycle</div>
-            <div className="text-xs text-zinc-400 leading-relaxed">Pre-production through release</div>
+            <div className="text-xs text-zinc-400 leading-relaxed">Development through audience distribution</div>
           </div>
         </div>
       </section>
@@ -264,7 +265,7 @@ export function HomePage() {
               </span>
             </div>
             <div className="text-zinc-500">
-              {isSynchronized ? 'Routing active industry capacity' : 'Unused stage days & scheduling drag'}
+              {isSynchronized ? 'Routing active entertainment capacity' : 'Unused facility days & scheduling drag'}
             </div>
           </div>
 
@@ -335,7 +336,7 @@ export function HomePage() {
             Use the capacity that already exists.
           </h2>
           <p className="text-zinc-400 text-base leading-relaxed font-normal">
-            DigiSynq creates value by coordinating, connecting, routing, and orchestrating existing resources, capacity, talent, facilities, financing, and distribution infrastructure across the filmmaking ecosystem.
+            Entertainment already has vast distributed infrastructure, talent, and resources. DigiSynq creates value by coordinating, connecting, routing, and orchestrating that existing capacity across the ecosystem.
           </p>
         </div>
 
@@ -348,7 +349,7 @@ export function HomePage() {
                 Capacity Routing Over Asset Ownership
               </h3>
               <p className="text-sm text-zinc-400 leading-relaxed">
-                Owning heavy physical infrastructure creates pressure to force productions into specific facilities regardless of creative fit. DigiSynq operates without heavy fixed physical assets, allowing us to route productions to the ideal existing capacity across the entire network.
+                Owning heavy physical infrastructure creates commercial pressure to force productions into specific facilities regardless of creative fit. DigiSynq operates without heavy fixed physical assets, allowing us to route projects to the ideal existing capacity across the entire ecosystem.
               </p>
             </div>
             <div className="mt-8 pt-4 border-t border-white/[0.06] text-xs text-zinc-500">
@@ -363,7 +364,7 @@ export function HomePage() {
                 Synchronization Over Silos
               </h3>
               <p className="text-sm text-zinc-400 leading-relaxed">
-                Crew availability, soundstages, post houses, and exhibitors often operate in fragmented isolation. When one node encounters friction, the entire schedule risks stalling. We provide the coordination layer that keeps dependencies aligned.
+                Creators, technical crews, studio spaces, post houses, and audience platforms often operate in isolated silos. When one node encounters delays, the entire timeline risks stalling. We provide the neutral coordination layer that keeps dependencies synchronized.
               </p>
             </div>
             <div className="mt-8 pt-4 border-t border-white/[0.06] text-xs text-zinc-500">
@@ -393,7 +394,7 @@ export function HomePage() {
                 Orchestration-Driven Value
               </h3>
               <p className="text-sm text-zinc-400 leading-relaxed">
-                DigiSynq generates economic value from coordination and workflow orchestration rather than by extracting landlord rents on physical assets. We succeed when productions run smoothly, budgets hold, and releases achieve their potential.
+                DigiSynq generates economic value from coordination and workflow orchestration rather than by extracting landlord rents on physical assets. We succeed when entertainment projects run smoothly, budgets hold, and productions deliver on schedule.
               </p>
             </div>
             <div className="mt-8 pt-4 border-t border-white/[0.06] text-xs text-zinc-500">
@@ -415,7 +416,7 @@ export function HomePage() {
             Where is your production facing friction?
           </h2>
           <p className="text-sm text-zinc-400 leading-relaxed">
-            Select a common industry challenge to inspect the root cause and how DigiSynq coordinates an asset-light resolution.
+            Select a common production challenge to inspect the root cause and how DigiSynq coordinates an asset-light resolution.
           </p>
         </div>
 
@@ -498,7 +499,7 @@ export function HomePage() {
             Four stages. One accountable loop.
           </h2>
           <p className="text-sm text-zinc-400 leading-relaxed">
-            DigiSynq coordinates capacity rather than requiring ownership of capacity — guiding productions through a structured progression from diagnosis to realization.
+            DigiSynq coordinates capacity rather than requiring ownership of capacity — guiding entertainment productions through a structured progression from diagnosis to realization.
           </p>
         </div>
 
@@ -507,22 +508,22 @@ export function HomePage() {
             {
               step: '01',
               name: 'Diagnose',
-              desc: 'Identify the production requirement, key department dependencies, and operational constraints.',
+              desc: 'Understand the project requirements, creative vision, department dependencies, and operational constraints.',
             },
             {
               step: '02',
               name: 'Connect',
-              desc: 'Find relevant existing capacity across verified network crew, partner stages, facilities, and capital.',
+              desc: 'Identify relevant talent, partner facilities, infrastructure, services, capacity, or financing across the network.',
             },
             {
               step: '03',
               name: 'Orchestrate',
-              desc: 'Coordinate people, facilities, workflows, and milestones through structured covenants and neutral oversight.',
+              desc: 'Coordinate multiple stakeholders, workflows, and milestones through structured covenants and neutral oversight.',
             },
             {
               step: '04',
               name: 'Realize',
-              desc: 'Help convert fragmented capacity into on-schedule production output and transparent distribution return.',
+              desc: 'Turn distributed resources into on-schedule production output, final delivery masters, and audience reach.',
             },
           ].map((phase) => (
             <div
@@ -547,7 +548,7 @@ export function HomePage() {
           Bring us your production constraint.
         </h2>
         <p className="text-base sm:text-lg text-zinc-400 max-w-xl mx-auto leading-relaxed mb-10">
-          Whether you are a producer needing stage capacity, a filmmaker navigating gap capital, or a facility owner with available floor dates.
+          Have an entertainment project, resource requirement, or capacity opportunity? Start a Synq and tell us what needs to be connected.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4">
           <Link

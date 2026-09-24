@@ -7,16 +7,16 @@ const PHASES = [
   {
     step: '01',
     name: 'Diagnose',
-    tag: 'Constraint Identification',
-    title: 'Identifying production requirements and constraints',
-    lead: 'Before moving a single asset, DigiSynq audits the technical requirements, department dependencies, and operational constraints holding the project back.',
-    deliverable: 'Constraint Diagnostic & Feasibility Dossier',
+    tag: 'Requirement Analysis',
+    title: 'Understanding project requirements and constraints',
+    lead: 'Before moving a single asset, DigiSynq audits the creative vision, department dependencies, and operational constraints holding the project back.',
+    deliverable: 'Project Requirement & Constraint Dossier',
     timeframe: 'Initial Assessment',
     actions: [
-      'Audit production timeline and technical department dependencies',
-      'Identify schedule gaps across available soundstages and specialized equipment',
-      'Survey availability of required key craft guild department heads',
-      'Assess release windowing against current theatrical calendar slates',
+      'Audit production scope, department dependencies, and timeline requirements',
+      'Identify capacity gaps across available soundstages, volumes, and specialized equipment',
+      'Survey availability of required key creative talent and technical department heads',
+      'Assess release or delivery timeline against current market and platform windows',
     ],
     metric: 'Complete visibility into operational constraints',
   },
@@ -24,15 +24,15 @@ const PHASES = [
     step: '02',
     name: 'Connect',
     tag: 'Capacity Matching',
-    title: 'Finding relevant existing capacity across the network',
-    lead: 'We identify and match available resources across partner facilities, vetted craft guilds, and capital sources without broker markups or equipment ownership debt.',
+    title: 'Identifying relevant talent, infrastructure, and capacity',
+    lead: 'We identify and match available resources across partner facilities, vetted craft talent, and commercial capital without broker markups or equipment debt.',
     deliverable: 'Multi-Party Coordination Covenant',
     timeframe: 'Assembly Phase',
     actions: [
-      'Match productions to available stage slots across partner studio facilities',
-      'Connect verified craft guild department heads with transparent milestone terms',
-      'Coordinate finishing capital and completion guarantee frameworks',
-      'Align technical packaging requirements with regional exhibitor circuits',
+      'Match projects to available stage slots and volume dates across partner facilities',
+      'Connect verified creative and technical talent with transparent milestone terms',
+      'Coordinate finishing capital, production debt, and completion guarantees',
+      'Align technical packaging requirements with target distribution and audience platforms',
     ],
     metric: 'Rapid assembly from verified network capacity',
   },
@@ -41,14 +41,14 @@ const PHASES = [
     name: 'Orchestrate',
     tag: 'Workflow Governance',
     title: 'Coordinating people, facilities, workflows, and milestones',
-    lead: 'DigiSynq provides neutral oversight during principal photography and post-finishing, keeping dependencies synchronized and teams accountable.',
-    deliverable: 'Milestone Telemetry & Dailies Protocol',
-    timeframe: 'Principal Photography → Final Mix',
+    lead: 'DigiSynq provides neutral oversight during active production and post-finishing, keeping dependencies synchronized and stakeholders aligned.',
+    deliverable: 'Milestone Telemetry & Workflow Protocol',
+    timeframe: 'Production → Final Mix',
     actions: [
-      'Standardize camera-to-cloud dailies turnovers and ingest telemetry',
-      'Coordinate milestone-tied funding releases upon verified scene delivery',
-      'Manage dynamic rescheduling when location, weather, or schedule shifts occur',
-      'Maintain live alignment across producers, facilities, and post teams',
+      'Standardize dailies and asset turnovers with continuous ingest telemetry',
+      'Coordinate milestone-tied funding releases upon verified deliverable approvals',
+      'Manage dynamic rescheduling when location, weather, or timeline shifts occur',
+      'Maintain live communication across producers, facilities, and post-production units',
     ],
     metric: 'Neutral milestone oversight and workflow alignment',
   },
@@ -56,17 +56,17 @@ const PHASES = [
     step: '04',
     name: 'Realize',
     tag: 'Output & Delivery',
-    title: 'Converting fragmented capacity into production output',
-    lead: 'Turning synchronized capacity into on-schedule delivery masters, targeted theatrical release windows, and long-tail library value.',
+    title: 'Turning distributed resources into an executable outcome',
+    lead: 'Converting coordinated capacity into on-schedule delivery masters, targeted release windows, and long-tail library value.',
     deliverable: 'Delivery Master Audit & Release Ledger',
-    timeframe: 'Theatrical Delivery → Syndication',
+    timeframe: 'Final Delivery → Distribution',
     actions: [
-      'Programmatic release window coordination with regional theatrical circuits',
-      'Structured territorial delivery across international and ancillary windows',
-      'Transparent revenue attribution to participating network partners',
+      'Programmatic release and delivery coordination across theatrical, streaming, and digital channels',
+      'Structured territorial delivery across international, broadcast, and ancillary windows',
+      'Transparent revenue and compensation attribution to participating network partners',
       'Long-term asset archiving and catalog licensing coordination',
     ],
-    metric: 'On-schedule delivery and defensible theatrical reach',
+    metric: 'On-schedule delivery and defensible audience reach',
   },
 ];
 
@@ -90,14 +90,14 @@ const ASSET_LIGHT_BENEFITS = [
 ];
 
 const OPERATIONAL_LOOP = [
-  { step: '01', name: 'Problem', desc: 'Identify the exact structural bottleneck or capacity gap holding the project back.' },
-  { step: '02', name: 'Map', desc: 'Survey existing available capacity across partner stages, craft guilds, and screens.' },
+  { step: '01', name: 'Problem', desc: 'Identify the exact structural bottleneck or capacity gap holding the entertainment project back.' },
+  { step: '02', name: 'Map', desc: 'Survey existing available capacity across partner stages, venues, creative talent, and screens.' },
   { step: '03', name: 'Gap', desc: 'Pinpoint precisely where capital, time, or floor space is being underutilized.' },
   { step: '04', name: 'Synq', desc: 'Connect the missing nodes with verified covenants and transparent terms.' },
-  { step: '05', name: 'Coordinate', desc: 'Maintain live alignment across departments through pre-production and filming.' },
-  { step: '06', name: 'Execute', desc: 'Support on-schedule production delivery without micromanaging craft heads.' },
-  { step: '07', name: 'Measure', desc: 'Audit actual delivery times, budget parameters, and theatrical attendance.' },
-  { step: '08', name: 'Learn', desc: 'Feed performance observations back into future stage and talent routing.' },
+  { step: '05', name: 'Coordinate', desc: 'Maintain live alignment across all departments through pre-production, filming, and post.' },
+  { step: '06', name: 'Execute', desc: 'Support on-schedule production delivery without micromanaging creative craftspeople.' },
+  { step: '07', name: 'Measure', desc: 'Audit actual delivery timelines, budget parameters, and audience engagement.' },
+  { step: '08', name: 'Learn', desc: 'Feed performance observations back into future stage, venue, and talent routing.' },
 ];
 
 export function HowItWorksPage() {
@@ -115,11 +115,11 @@ export function HowItWorksPage() {
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            How DigiSynq coordinates cinema.
+            How DigiSynq coordinates entertainment.
           </h1>
 
           <p className="text-lg sm:text-xl text-zinc-400 font-normal leading-relaxed max-w-3xl mb-12">
-            DigiSynq coordinates capacity rather than requiring ownership of capacity. We execute a disciplined four-phase coordination protocol engineered to identify production constraints, match relevant existing capacity across the network, and coordinate execution through to delivery.
+            DigiSynq coordinates capacity rather than requiring ownership of capacity. We execute a disciplined four-phase protocol engineered to understand project requirements, match relevant existing capacity across the network, and coordinate execution through to realization across film, series, streaming, live entertainment, and media projects.
           </p>
 
           <div className="flex flex-wrap items-center gap-4">
@@ -315,7 +315,7 @@ export function HowItWorksPage() {
               The continuous coordination loop
             </h2>
             <p className="text-base text-zinc-400 leading-relaxed">
-              Cinema is not a linear waterfall. It is an evolving network where problems repeat if context is lost. DigiSynq operates in a continuous learning cycle.
+              Entertainment production is not a rigid waterfall. It is an evolving network where problems repeat if context is lost. DigiSynq operates in a continuous learning cycle.
             </p>
           </div>
 
@@ -348,10 +348,10 @@ export function HowItWorksPage() {
       <section className="py-24 sm:py-32 border-t border-white/[0.06]">
         <div className="max-w-4xl mx-auto px-6 sm:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-6">
-            Ready to synchronize your next production?
+            Ready to synchronize your next project?
           </h2>
           <p className="text-base text-zinc-400 leading-relaxed max-w-xl mx-auto mb-10">
-            Tell us about your project, current stage, and where friction is occurring. We will map a resolution within 48 hours.
+            Have an entertainment project, resource requirement, or capacity opportunity? Start a Synq and tell us what needs to be connected.
           </p>
           <Link
             to="/start"

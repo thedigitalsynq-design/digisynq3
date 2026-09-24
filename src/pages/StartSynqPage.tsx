@@ -27,30 +27,30 @@ const EMPTY_FORM: FormState = {
 };
 
 const WHO_OPTIONS = [
-  'Independent Producer',
-  'Director / Showrunner',
-  'Cinematographer / Craft Guild',
-  'Soundstage / Volume Facility',
-  'Financier / Gap Fund',
-  'Theatrical Exhibitor / Circuit',
-  'Post / VFX Facility',
-  'IP Holder / Writer',
+  'Creator / Director / Writer',
+  'Producer / Production Company',
+  'Crew & Technical Department Head',
+  'Studio, Stage & Venue Operator',
+  'Post-Production & VFX Facility',
+  'Financier / Capital Partner',
+  'Distributor / Platform / Exhibitor',
+  'Brand / Commercial Sponsor',
 ];
 
 const STAGE_OPTIONS = [
   'Packaging & Development',
-  'Pre-Production & Greenlight',
-  'Principal Photography',
-  'Post-Finishing & Sound Mix',
-  'Theatrical Distribution & Release',
-  'Catalogue Monetization',
+  'Pre-Production & Resource Assembly',
+  'Principal Production / Filming',
+  'Post-Finishing, Sound & VFX',
+  'Release, Distribution & Launch',
+  'Catalog & Rights Monetization',
 ];
 
 const SUPPORT_OPTIONS = [
-  'Connected Stage & Volume Capacity',
-  'Verified Guild Crew Matching',
+  'Connected Stage & Venue Capacity',
+  'Verified Creative & Crew Matching',
   'Milestone Finishing Capital',
-  'Programmatic Screen Allocation',
+  'Audience & Release Coordination',
   'Asset-Light Production Architecture',
   'Constraint Feasibility Diagnostic',
 ];
@@ -87,7 +87,7 @@ export function StartSynqPage() {
     e.preventDefault();
     const subject = encodeURIComponent(`Start a Synq — ${form.who}: ${form.project || 'Project'}`);
     const body = encodeURIComponent(
-      `STAKEHOLDER: ${form.who}\nSTAGE: ${form.stage}\nPROJECT: ${form.project}\nPROBLEM: ${form.problem}\nSUPPORT NEEDED: ${form.support_type.join(', ')}\nNAME: ${form.name}\nEMAIL: ${form.email}\nNOTES: ${form.notes}`
+      `STAKEHOLDER: ${form.who}\nSTAGE: ${form.stage}\nPROJECT: ${form.project}\nREQUIREMENT: ${form.problem}\nSUPPORT NEEDED: ${form.support_type.join(', ')}\nNAME: ${form.name}\nEMAIL: ${form.email}\nNOTES: ${form.notes}`
     );
     window.location.href = `mailto:hello@digisynq.com?subject=${subject}&body=${body}`;
     setSubmitted(true);
@@ -107,7 +107,7 @@ export function StartSynqPage() {
         </h1>
 
         <p className="text-lg sm:text-xl text-zinc-400 font-normal leading-relaxed max-w-2xl mx-auto">
-          Tell us your structural bottleneck. We connect production demand with existing industry capacity — auditing available partner stages, verified guild talent, and milestone capital to coordinate an asset-light resolution path.
+          Have an entertainment project, resource requirement, or capacity opportunity? Start a Synq and tell us what needs to be connected across talent, facilities, financing, and audience channels.
         </p>
       </section>
 
@@ -162,7 +162,7 @@ export function StartSynqPage() {
                     2
                   </span>
                   <span className={step === 2 ? 'text-white font-medium' : 'text-zinc-500'}>
-                    Bottleneck
+                    Requirement
                   </span>
                 </div>
                 <div className="h-px w-12 bg-white/[0.06]" />
@@ -181,7 +181,7 @@ export function StartSynqPage() {
                 <div className="space-y-8 animate-in fade-in duration-200">
                   <div>
                     <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-3">
-                      Your Role in the Cinema Network
+                      Your Role in the Entertainment Ecosystem
                     </label>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                       {WHO_OPTIONS.map((opt) => (
@@ -239,16 +239,16 @@ export function StartSynqPage() {
                 </div>
               )}
 
-              {/* STEP 2: Project & Bottleneck */}
+              {/* STEP 2: Project & Requirement */}
               {step === 2 && (
                 <div className="space-y-8 animate-in fade-in duration-200">
                   <div>
                     <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-2">
-                      Project Title or Working Code
+                      Project Title or Working Identifier
                     </label>
                     <input
                       type="text"
-                      placeholder="e.g. Untitled Psychological Thriller"
+                      placeholder="e.g. Untitled Drama Series / Live Tour / Feature"
                       value={form.project}
                       onChange={(e) => updateField('project', e.target.value)}
                       className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/[0.08] text-sm text-white placeholder-zinc-600 focus:border-white/40 outline-none transition-colors"
@@ -257,11 +257,11 @@ export function StartSynqPage() {
 
                   <div>
                     <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-2">
-                      Primary Bottleneck or Constraint (Required)
+                      Primary Requirement or Constraint (Required)
                     </label>
                     <textarea
                       rows={4}
-                      placeholder="Describe the gap: e.g. need 5 days of partner stage floor, missing key sound supervisor, or coordinating release windowing..."
+                      placeholder="Describe what needs to be connected: e.g. need 6 days of soundstage floor, missing lead technical crew, post-finishing capital, or distribution windowing..."
                       value={form.problem}
                       onChange={(e) => updateField('problem', e.target.value)}
                       className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/[0.08] text-sm text-white placeholder-zinc-600 focus:border-white/40 outline-none transition-colors resize-none"
@@ -319,7 +319,7 @@ export function StartSynqPage() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-2">
-                        Your Name / Title
+                        Your Name / Organization
                       </label>
                       <input
                         type="text"
@@ -345,7 +345,7 @@ export function StartSynqPage() {
 
                   <div>
                     <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-2">
-                      Confidential Production Notes
+                      Confidential Project Notes
                     </label>
                     <textarea
                       rows={3}
