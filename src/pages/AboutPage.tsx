@@ -230,7 +230,64 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* ── 06. Call to Action ── */}
+      {/* ── 06. Institutional Governance & Operational Disclosure ── */}
+      <section className="py-24 sm:py-32 border-t border-white/[0.06] bg-[#050608]">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8">
+          <div className="max-w-2xl mb-14">
+            <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
+              Institutional Governance
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
+              Operational disclosures & covenants
+            </h2>
+            <p className="text-base text-zinc-400 leading-relaxed">
+              DigiSynq operates with institutional discipline. We provide clear operational parameters for studio banners, completion guarantors, and enterprise partners.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-8 rounded-2xl bg-[#090b10] border border-white/[0.06] space-y-4">
+              <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider block">01 // Non-Custodial Neutrality</span>
+              <h3 className="text-base font-semibold text-white">Zero IP & Asset Encumbrance</h3>
+              <p className="text-xs text-zinc-400 leading-relaxed">
+                DigiSynq never takes equity in client intellectual property, screenplays, or masters. We operate strictly as an objective operational coordinator, preserving total creative independence for creators and production banners.
+              </p>
+            </div>
+
+            <div className="p-8 rounded-2xl bg-[#090b10] border border-white/[0.06] space-y-4">
+              <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider block">02 // Data & Script Security</span>
+              <h3 className="text-base font-semibold text-white">Institutional Mutual NDA</h3>
+              <p className="text-xs text-zinc-400 leading-relaxed">
+                All intake parameters, project budgets, and technical dossiers are protected under strict confidentiality covenants. Constraint audits are conducted on isolated channels with zero public exposure of sensitive project timelines.
+              </p>
+            </div>
+
+            <div className="p-8 rounded-2xl bg-[#090b10] border border-white/[0.06] space-y-4">
+              <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider block">03 // Cross-Regional Coordination</span>
+              <h3 className="text-base font-semibold text-white">Hubs & Partner Networks</h3>
+              <p className="text-xs text-zinc-400 leading-relaxed">
+                Coordinating active soundstage, virtual production, and post facilities across India and international entertainment hubs. Strategic partner inquiries and studio facility additions are reviewed directly by our executive network.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-8 p-6 rounded-2xl border border-white/[0.06] bg-white/[0.02] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <span className="text-xs text-zinc-400 block">Executive & Institutional Correspondence:</span>
+              <span className="text-sm font-mono text-white">partners@digisynq.com • hello@digisynq.com</span>
+            </div>
+            <Link
+              to="/runbook"
+              className="text-xs text-emerald-400 hover:text-emerald-300 font-medium inline-flex items-center gap-1.5"
+            >
+              <span>Review Complete Business Runbook</span>
+              <ArrowUpRight size={14} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 07. Call to Action ── */}
       <section className="py-24 sm:py-32 border-t border-white/[0.06]">
         <div className="max-w-4xl mx-auto px-6 sm:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-6">

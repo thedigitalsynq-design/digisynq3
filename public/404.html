@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>DigiSynq — Redirecting...</title>
+    <script type="text/javascript">
+      // Single Page Apps for GitHub Pages
+      // Redirects 404s on subpaths back to index.html with query parameter
+      var pathSegmentsToKeep = 1; // for /digisynq3/ repo subdirectory
+      var l = window.location;
+      
+      // Determine if we're hosted on a custom domain (0 subsegments) or github.io project (1 subsegment)
+      if (!l.pathname.includes('/digisynq3')) {
+        pathSegmentsToKeep = 0;
+      }
+
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
+    </script>
+  </head>
+  <body style="background-color: #07080b; color: #ECEEF5; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0;">
+    <p style="opacity: 0.6; font-size: 14px;">Loading DigiSynq...</p>
+  </body>
+</html>

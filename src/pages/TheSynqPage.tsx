@@ -165,10 +165,10 @@ export function TheSynqPage() {
           </div>
         </div>
 
-        {/* ── 03. The 4 Structural Capacity Gaps ── */}
-        <div className="max-w-2xl mb-12">
+        {/* ── 03. The 4 Structural Capacity Gaps (Use Cases) ── */}
+        <div id="use-cases" className="max-w-2xl mb-12 scroll-mt-24">
           <span className="text-xs font-semibold text-zinc-400 tracking-wider uppercase mb-2 block">
-            Systemic Gaps
+            Systemic Gaps & Use Cases
           </span>
           <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white [letter-spacing:-0.025em] mb-4">
             Where entertainment leaks capacity.
@@ -214,11 +214,11 @@ export function TheSynqPage() {
         </div>
       </section>
 
-      {/* ── 04. Architecture Layers ── */}
-      <section id="architecture-layers" className="py-24 sm:py-32 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06]">
+      {/* ── 04. Architecture Layers (Capabilities) ── */}
+      <section id="capabilities" className="py-24 sm:py-32 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06] scroll-mt-24">
         <div className="max-w-2xl mb-16">
           <span className="text-xs font-semibold text-zinc-400 tracking-wider uppercase mb-2 block">
-            System Topology
+            System Topology & Capabilities
           </span>
           <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white [letter-spacing:-0.025em] mb-4">
             The three operational layers.

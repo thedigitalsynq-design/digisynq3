@@ -287,8 +287,8 @@ export function ProblemEngine({ compact = false }: ProblemEngineProps) {
               <Link
                 to="/start"
                 state={{
-                  category: selectedCategory.name,
-                  problem: `${selectedCategory.name}: ${answers.map(a => a.values.join(', ')).filter(Boolean).join(' • ') || synqPath.description}`,
+                  category: selectedCategory.label,
+                  problem: `${selectedCategory.label}: ${answers.map(a => a.values.join(', ')).filter(Boolean).join(' • ') || synqPath.description}`,
                 }}
                 className="btn-primary justify-center"
                 id="problem-engine-start-synq-cta"

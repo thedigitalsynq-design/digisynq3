@@ -127,6 +127,11 @@ body {
   font-weight: 400;
 }
 
+:focus-visible {
+  outline: 2px solid rgba(35, 178, 114, 0.7);
+  outline-offset: 2px;
+}
+
 /* ── Typography — Modular Scale (Google Sans Flex) ──────── */
 /*
    Scale ratio ≈ 1.25 · Base 17px (1.0625rem)

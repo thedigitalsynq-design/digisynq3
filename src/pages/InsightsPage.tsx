@@ -76,6 +76,18 @@ export function InsightsPage() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
+  // Lock body scroll when brief modal is open
+  useEffect(() => {
+    if (readingBrief) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [readingBrief]);
+
   const filtered = activeCategory === 'All Dispatches'
     ? DETAILED_BRIEFS
     : DETAILED_BRIEFS.filter(b => b.category === activeCategory);
@@ -87,11 +99,11 @@ export function InsightsPage() {
       <section className="pt-40 sm:pt-48 pb-20 sm:pb-28 px-6 sm:px-8 max-w-6xl mx-auto">
         <div className="max-w-4xl">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-400 mb-8 tracking-wide">
-            <span>Theatrical Telemetry & Dispatches</span>
+            <span>Industry Telemetry & Dispatches</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            Research on cinema capacity and coordination.
+            Research on entertainment capacity and coordination.
           </h1>
 
           <p className="text-lg sm:text-xl text-zinc-400 font-normal leading-relaxed max-w-3xl mb-12">

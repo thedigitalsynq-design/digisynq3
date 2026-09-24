@@ -51,14 +51,14 @@ export function SiteNav() {
           </Link>
 
           {/* Desktop Nav - Clean & Spacious */}
-          <nav className="hidden lg:flex items-center gap-1 sm:gap-2" aria-label="Primary navigation">
+          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1.5" aria-label="Primary navigation">
             {NAV_LINKS.map((link) => {
               const active = isActive(link.href);
               return (
                 <Link
                   key={link.href}
                   to={link.href}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wide transition-all duration-200 whitespace-nowrap ${
+                  className={`px-2.5 xl:px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wide transition-all duration-200 whitespace-nowrap ${
                     active
                       ? 'text-white bg-white/[0.08] shadow-sm'
                       : 'text-white/60 hover:text-white hover:bg-white/[0.03]'

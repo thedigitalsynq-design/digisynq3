@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://thedigitalsynq-design.github.io/digisynq3/sitemap.xml

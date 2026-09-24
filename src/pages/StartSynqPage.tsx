@@ -68,11 +68,19 @@ const SUPPORT_OPTIONS = [
 
 export function StartSynqPage() {
   const location = useLocation();
-  const state = location.state as { problem?: string; category?: string } | null;
+  const state = location.state as { problem?: string; category?: string; role?: string } | null;
+
+  const initialWho = () => {
+    if (!state?.role) return '';
+    const clean = state.role.toLowerCase().split(' ')[0];
+    const match = WHO_OPTIONS.find(opt => opt.toLowerCase().includes(clean));
+    return match || state.role;
+  };
 
   const [form, setForm] = useState<FormState>(() => ({
     ...EMPTY_FORM,
     problem: state?.problem || '',
+    who: initialWho(),
   }));
   const [submitted, setSubmitted] = useState(false);
   const [step, setStep] = useState(1);
@@ -94,13 +102,29 @@ export function StartSynqPage() {
   const canAdvance2 = !!form.problem.trim();
   const canSubmit = !!form.name.trim() && !!form.email.trim() && form.email.includes('@');
 
+  const [copied, setCopied] = useState(false);
+
+  const getDossierText = () => {
+    return `DIGISYNQ INTAKE DOSSIER\n═════════════════════════\nSTAKEHOLDER: ${form.who}\nSTAGE: ${form.stage}\nPROJECT: ${form.project || 'Unspecified'}\nREQUIREMENT: ${form.problem}\nSUPPORT NEEDED: ${form.support_type.join(', ')}\nCONTACT NAME: ${form.name}\nEMAIL: ${form.email}\nCONFIDENTIAL NOTES: ${form.notes || 'None'}\nSUBMITTED AT: ${new Date().toISOString()}`;
+  };
+
+  const handleCopyDossier = () => {
+    navigator.clipboard.writeText(getDossierText());
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const subject = encodeURIComponent(`Start a Synq — ${form.who}: ${form.project || 'Project'}`);
-    const body = encodeURIComponent(
-      `STAKEHOLDER: ${form.who}\nSTAGE: ${form.stage}\nPROJECT: ${form.project}\nREQUIREMENT: ${form.problem}\nSUPPORT NEEDED: ${form.support_type.join(', ')}\nNAME: ${form.name}\nEMAIL: ${form.email}\nNOTES: ${form.notes}`
-    );
-    window.location.href = `mailto:hello@digisynq.com?subject=${subject}&body=${body}`;
+    const body = encodeURIComponent(getDossierText());
+    
+    // Attempt mailto trigger
+    try {
+      window.location.href = `mailto:hello@digisynq.com?subject=${subject}&body=${body}`;
+    } catch (err) {
+      console.warn('Mail client trigger bypassed', err);
+    }
     setSubmitted(true);
   };
 
@@ -127,20 +151,50 @@ export function StartSynqPage() {
         <div className="rounded-3xl bg-[#090b10] border border-white/[0.08] p-8 sm:p-12 shadow-2xl">
 
           {submitted ? (
-            <div className="text-center py-12 space-y-6">
+            <div className="text-center py-10 space-y-6">
               <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mx-auto text-emerald-400">
                 <Check size={28} />
               </div>
 
               <div>
                 <h2 className="text-2xl font-bold text-white mb-2">
-                  Project dossier pre-configured
+                  Project dossier generated
                 </h2>
                 <p className="text-sm text-zinc-400 max-w-md mx-auto leading-relaxed">
-                  Your mail client has been opened with your responses. If it did not launch automatically, transmit directly to{' '}
+                  Your project dossier has been formatted for our coordination team. If your default email client did not automatically launch, transmit directly to{' '}
                   <a href="mailto:hello@digisynq.com" className="text-white underline hover:text-emerald-400">
                     hello@digisynq.com
                   </a>.
+                </p>
+              </div>
+
+              {/* Action buttons */}
+              <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={handleCopyDossier}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black font-medium text-xs hover:bg-zinc-200 transition-all cursor-pointer shadow-sm"
+                >
+                  <Check size={14} className={copied ? 'text-emerald-600' : 'opacity-40'} />
+                  <span>{copied ? 'Dossier Copied to Clipboard!' : 'Copy Dossier to Clipboard'}</span>
+                </button>
+                <a
+                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=hello@digisynq.com&su=${encodeURIComponent(`Start a Synq — ${form.who}: ${form.project || 'Project'}`)}&body=${encodeURIComponent(getDossierText())}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/10 hover:border-white/20 bg-white/[0.02] text-xs text-zinc-300 font-medium transition-all"
+                >
+                  <span>Open in Gmail Web</span>
+                </a>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] text-xs text-zinc-400 max-w-md mx-auto text-left space-y-1.5">
+                <div className="text-white font-medium flex items-center gap-1.5">
+                  <ShieldCheck size={14} className="text-emerald-400" />
+                  <span>Next Step: 48-Hour Constraint Mapping</span>
+                </div>
+                <p>
+                  A DigiSynq project coordinator will review your parameters against active partner stages, guild availability, and milestone covenants within 48 business hours.
                 </p>
               </div>
 
@@ -148,9 +202,9 @@ export function StartSynqPage() {
                 <button
                   type="button"
                   onClick={() => { setSubmitted(false); setForm(EMPTY_FORM); setStep(1); }}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-medium text-xs hover:bg-zinc-200 transition-all cursor-pointer"
+                  className="text-xs text-zinc-500 hover:text-white underline transition-all cursor-pointer"
                 >
-                  Intake another project
+                  Intake another project or update parameters
                 </button>
               </div>
             </div>
@@ -390,6 +444,11 @@ export function StartSynqPage() {
                       <Send size={13} />
                       Transmit project synq
                     </button>
+                  </div>
+
+                  <div className="flex items-center justify-center gap-2 text-xs text-zinc-400 pt-2 border-t border-white/[0.04]">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>Non-custodial & confidential. Protected under standard mutual NDA principles.</span>
                   </div>
                 </div>
               )}

@@ -4,24 +4,38 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
+    <!-- Single Page Apps redirect handler for GitHub Pages -->
+    <script type="text/javascript">
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    </script>
+    
     <!-- Primary SEO -->
-    <title>DigiSynq — Sync in All Stages of Filmmaking</title>
-    <meta name="description" content="An asset-light cinema problem-solving company building a synchronization layer across the filmmaking ecosystem. Find the gap. SYNQ the system. Create value." />
-    <meta name="keywords" content="cinema synchronization, film production coordination, filmmaking ecosystem, asset-light entertainment, film technicians, production coordination India" />
+    <title>DigiSynq — Asset-Light Entertainment Coordination & Industry Network</title>
+    <meta name="description" content="DigiSynq is an asset-light coordination network connecting entertainment demand with distributed industry capacity across talent, partner soundstages, post-production, and audience distribution." />
+    <meta name="keywords" content="entertainment coordination, asset-light entertainment, soundstage capacity, virtual production, film production coordination, OTT release strategy, craft guilds, production infrastructure" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://thedigitalsynq-design.github.io/digisynq3/" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://thedigitalsynq-design.github.io/digisynq3/" />
-    <meta property="og:title" content="DigiSynq — Sync in All Stages of Filmmaking" />
-    <meta property="og:description" content="An asset-light cinema problem-solving company building a synchronization layer across the filmmaking ecosystem. Find the gap. SYNQ the system. Create value." />
+    <meta property="og:title" content="DigiSynq — Asset-Light Entertainment Coordination & Industry Network" />
+    <meta property="og:description" content="An asset-light coordination network connecting entertainment demand with distributed industry capacity across talent, partner soundstages, post-production, and audience distribution." />
     <meta property="og:image" content="https://thedigitalsynq-design.github.io/digisynq3/og-image.png" />
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="DigiSynq — Sync in All Stages of Filmmaking" />
-    <meta name="twitter:description" content="An asset-light cinema problem-solving company building a synchronization layer across the filmmaking ecosystem." />
+    <meta name="twitter:title" content="DigiSynq — Asset-Light Entertainment Coordination & Industry Network" />
+    <meta name="twitter:description" content="An asset-light coordination network connecting entertainment demand with distributed industry capacity across the entertainment ecosystem." />
     <meta name="twitter:image" content="https://thedigitalsynq-design.github.io/digisynq3/og-image.png" />
     
     <!-- Favicon -->
@@ -44,17 +58,19 @@
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "DigiSynq",
-      "description": "An asset-light cinema problem-solving company building a synchronization layer across the filmmaking ecosystem.",
+      "description": "An asset-light coordination layer and business ecosystem for the entertainment industry, connecting distributed talent, partner facilities, financing, and audience channels.",
       "url": "https://thedigitalsynq-design.github.io/digisynq3/",
       "logo": "https://thedigitalsynq-design.github.io/digisynq3/digisynq-logo.png",
       "sameAs": [],
       "foundingDate": "2024",
       "knowsAbout": [
-        "Cinema synchronization",
-        "Film production coordination",
-        "Filmmaking ecosystem",
+        "Entertainment ecosystem coordination",
         "Asset-light business model",
-        "Film technician development"
+        "Soundstage capacity orchestration",
+        "Virtual production workflows",
+        "Film and OTT production coordination",
+        "Talent guild synchronization",
+        "Distribution windowing"
       ]
     }
     </script>

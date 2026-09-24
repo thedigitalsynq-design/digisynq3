@@ -376,13 +376,23 @@ export function EcosystemPage() {
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-white/[0.06]">
-                  <span className="text-emerald-400 text-xs font-mono uppercase tracking-wider block mb-1">
-                    DigiSynq Coordination
-                  </span>
-                  <p className="text-xs text-zinc-300 leading-relaxed">
-                    {group.synqAction}
-                  </p>
+                <div className="pt-4 border-t border-white/[0.06] flex flex-col justify-between gap-3">
+                  <div>
+                    <span className="text-emerald-400 text-xs font-mono uppercase tracking-wider block mb-1">
+                      DigiSynq Coordination
+                    </span>
+                    <p className="text-xs text-zinc-300 leading-relaxed">
+                      {group.synqAction}
+                    </p>
+                  </div>
+                  <Link
+                    to="/start"
+                    state={{ role: group.role, category: group.category }}
+                    className="inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-white font-medium transition-colors pt-1"
+                  >
+                    <span>Connect as {group.role.split('&')[0].split('/')[0].trim()}</span>
+                    <ArrowUpRight size={13} className="opacity-60" />
+                  </Link>
                 </div>
               </div>
             ))}
