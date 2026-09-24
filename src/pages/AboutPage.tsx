@@ -58,9 +58,9 @@ export function AboutPage() {
         <div className="max-w-4xl">
           <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-300 mb-8 tracking-wide">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            <span className="font-mono text-zinc-400">MANIFESTO</span>
+            <span className="font-mono text-emerald-400 font-medium">FIRST OF ITS KIND</span>
             <span className="text-zinc-600">//</span>
-            <span className="text-white font-medium">Entertainment Intelligence &amp; Labs</span>
+            <span className="text-white font-medium">Entertainment Intelligence &amp; Labs Manifesto</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
@@ -69,7 +69,7 @@ export function AboutPage() {
           </h1>
 
           <p className="text-lg sm:text-xl text-zinc-300 font-normal leading-relaxed max-w-3xl mb-12">
-            Entertainment already has vast distributed infrastructure, elite artists, and active capital. DigiSynq connects them into an agile, synchronized operating network — coupled with <span className="text-white font-medium">Synq Labs</span>, an empirical laboratory trialing emergent production workflows. <em>We are orchestrators. We are labs. We experiment.</em>
+            Until now, the entertainment industry was trapped between capital-heavy legacy studios and transactional commission brokers. DigiSynq is the <span className="text-white font-medium">first-of-its-kind asset-light operating network</span> connecting distributed capacity, guild craft heads, and active capital into a synchronized fabric — coupled with <span className="text-white font-medium">Synq Labs</span>: <em>We are orchestrators. We are labs. We experiment.</em>
           </p>
 
           <div className="flex flex-wrap items-center gap-4">
@@ -102,15 +102,15 @@ export function AboutPage() {
           <div className="rounded-3xl bg-[#090b10] border border-white/[0.06] p-8 sm:p-14 space-y-10">
             <div>
               <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 block mb-3">
-                The DigiSynq Definition
+                First of its Kind // The DigiSynq Definition
               </span>
               <blockquote className="text-2xl sm:text-4xl font-bold text-white leading-snug tracking-tight">
-                “An asset-light coordination and intelligence network synchronizing capacity, talent, and workflows across the global entertainment ecosystem.”
+                “The world’s first asset-light coordination and intelligence network synchronizing capacity, talent, and workflows across the global entertainment ecosystem.”
               </blockquote>
             </div>
 
             <p className="text-base text-zinc-300 leading-relaxed max-w-3xl font-normal">
-              Entertainment does not suffer from a lack of physical studios, cameras, or creative imagination. It suffers from systemic friction: unbooked stages, trapped IP, fragmented talent discovery, and isolated post pipelines. DigiSynq resolves this by orchestrating existing industry capacity into a liquid operating system while driving active R&amp;D through Synq Labs.
+              Entertainment does not suffer from a lack of physical studios, cameras, or creative imagination. It suffers from systemic friction: unbooked stages, trapped IP, fragmented talent discovery, and isolated post pipelines. DigiSynq is the first entity designed specifically to coordinate existing industry capacity without fixed asset debt while driving empirical production R&amp;D through Synq Labs.
             </p>
 
             {/* Three Definitive Pillars */}

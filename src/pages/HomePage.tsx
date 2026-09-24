@@ -95,20 +95,20 @@ export function HomePage() {
           {/* Eyebrow */}
           <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-300 mb-8 tracking-wide">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="font-mono text-zinc-400">DIGISYNQ</span>
+            <span className="font-mono text-emerald-400 font-medium">FIRST OF ITS KIND</span>
             <span className="text-zinc-600">//</span>
-            <span className="text-white font-medium">Entertainment Lab &amp; Orchestration Network</span>
+            <span className="text-white font-medium">Asset-Light Entertainment Orchestration &amp; Labs</span>
           </div>
 
           {/* Master Headline */}
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            We don’t build studios.<br />
-            <span className="text-zinc-400 font-normal">We synchronize them.</span>
+            A first-of-its-kind network.<br />
+            <span className="text-zinc-400 font-light">We don’t build studios. We synchronize them.</span>
           </h1>
 
           {/* 10-Second Thesis */}
           <p className="text-lg sm:text-xl text-zinc-300 leading-relaxed max-w-3xl font-normal mb-10">
-            DigiSynq is an asset-light coordination layer and experimental laboratory for entertainment. We route production demand to unbooked soundstages, top-tier guild talent, and post pipelines across the ecosystem — paired with active R&amp;D through <span className="text-white font-medium">Synq Labs</span>: <em>We are labs. We experiment.</em>
+            DigiSynq is the world’s first asset-light coordination network and experimental laboratory for entertainment. We route production demand to unbooked soundstages, top-tier guild talent, and post pipelines across the global ecosystem — while actively pioneering next-generation workflows through <span className="text-white font-medium">Synq Labs</span>: <em>We are labs. We experiment.</em>
           </p>
 
           {/* Clean Restrained CTAs */}
@@ -154,6 +154,72 @@ export function HomePage() {
           <div>
             <div className="text-3xl sm:text-4xl font-semibold text-white tracking-tight mb-1 font-mono">&lt; 48h</div>
             <div className="text-xs text-zinc-400 leading-relaxed">Turnaround Telemetry</div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════
+          01B — CATEGORY GENESIS: THE FIRST OF ITS KIND
+         ══════════════════════════════════════════════════════ */}
+      <section className="py-20 sm:py-28 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06]">
+        <div className="max-w-2xl mb-14">
+          <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-2 block">
+            Category Genesis
+          </span>
+          <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white [letter-spacing:-0.025em] mb-4">
+            Why DigiSynq is the first of its kind.
+          </h2>
+          <p className="text-zinc-400 text-sm leading-relaxed">
+            Entertainment historically oscillated between two broken paradigms. DigiSynq pioneers the third: an asset-light coordination layer combined with empirical laboratory experimentation.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Era 1 */}
+          <div className="p-8 rounded-3xl bg-[#090b10] border border-white/[0.06] flex flex-col justify-between">
+            <div>
+              <span className="text-xs font-mono text-zinc-500 uppercase block mb-3">ERA 01 // LEGACY</span>
+              <h3 className="text-lg font-semibold text-white mb-2">The Heavy Studio Lot</h3>
+              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-6">
+                Billions spent acquiring concrete soundstages and camera fleets. Forces projects into owned facilities regardless of creative fit. Suffers from high debt and unbooked dark floors.
+              </p>
+            </div>
+            <div className="pt-4 border-t border-white/[0.06] text-xs font-mono text-zinc-500">
+              Heavy debt • Rigid multi-month leases
+            </div>
+          </div>
+
+          {/* Era 2 */}
+          <div className="p-8 rounded-3xl bg-[#090b10] border border-white/[0.06] flex flex-col justify-between">
+            <div>
+              <span className="text-xs font-mono text-zinc-500 uppercase block mb-3">ERA 02 // TRANSACTIONAL</span>
+              <h3 className="text-lg font-semibold text-white mb-2">Passive Directories &amp; Agencies</h3>
+              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-6">
+                Online job boards and commission-based agency middlemen (15–20% tolls). No on-set verification, no physical stage access, and zero workflow experimentation.
+              </p>
+            </div>
+            <div className="pt-4 border-t border-white/[0.06] text-xs font-mono text-zinc-500">
+              Agency tolls • Zero floor presence
+            </div>
+          </div>
+
+          {/* Era 3: DigiSynq */}
+          <div className="p-8 rounded-3xl bg-[#090b10] border border-emerald-500/30 shadow-lg relative flex flex-col justify-between">
+            <div className="absolute top-6 right-6">
+              <span className="px-2.5 py-1 rounded-full text-[10px] font-mono text-emerald-300 bg-emerald-500/10 border border-emerald-500/30">
+                First of its Kind
+              </span>
+            </div>
+            <div>
+              <span className="text-xs font-mono text-emerald-400 uppercase block mb-3">ERA 03 // THE NEW PARADIGM</span>
+              <h3 className="text-lg font-semibold text-white mb-2">DigiSynq Orchestration &amp; Labs</h3>
+              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-6">
+                The world’s first asset-light entertainment operating system. Routes demand dynamically to partner stages, pre-flights technology in Synq Labs, and releases capital on milestone covenants.
+              </p>
+            </div>
+            <div className="pt-4 border-t border-white/[0.06] text-xs font-mono text-emerald-400 font-medium">
+              $0 Fixed Asset Debt • Active R&amp;D Trials
+            </div>
           </div>
         </div>
       </section>
