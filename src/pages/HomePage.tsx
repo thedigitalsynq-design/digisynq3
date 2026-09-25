@@ -37,26 +37,26 @@ const FEATURED_EXPERIMENTS: ExperimentTrack[] = [
 const FOUR_PULSES = [
   {
     step: '01',
-    name: 'Demand Ingestion',
-    desc: 'Productions define critical constraints: schedules, volume requirements, craft attachments, and milestones.',
+    name: 'Production Intake',
+    desc: 'A production shares its needs — schedule, stage size, crew, and delivery milestones. We map the full picture.',
     icon: Terminal,
   },
   {
     step: '02',
-    name: 'Asset-Light Routing',
-    desc: 'Demand routes to dark dates on partner soundstages, certified guild crews, and finishing suites.',
+    name: 'Smart Matching',
+    desc: 'We connect that demand to available soundstages, qualified crew, and post facilities — no idle capacity wasted.',
     icon: Layers,
   },
   {
     step: '03',
-    name: 'Synq Labs Trials',
-    desc: 'We are labs. We stress-test workflows, camera rigs, and virtual assets before cameras roll.',
+    name: 'Live Testing',
+    desc: 'Before cameras roll, we trial the workflows, technology, and rigs in a controlled environment to eliminate risk.',
     icon: Activity,
   },
   {
     step: '04',
-    name: 'Milestone Settlement',
-    desc: 'Capital and escrow clear systematically upon verified scene turnovers and delivery specs.',
+    name: 'Verified Settlement',
+    desc: 'Payments and escrow release automatically when verified milestones are hit — no chasing, no disputes.',
     icon: ShieldCheck,
   },
 ];
@@ -64,7 +64,7 @@ const FOUR_PULSES = [
 const ENTRY_STRATA = [
   {
     code: '01',
-    name: 'Packaging & Feasibility',
+    name: 'Story & Packaging',
     forWhom: 'Writers & IP Holders',
     link: '/how-it-works#protocol',
   },
@@ -76,25 +76,25 @@ const ENTRY_STRATA = [
   },
   {
     code: '03',
-    name: 'Mid-Shoot Triage',
+    name: 'On-Set Problem Solving',
     forWhom: 'Line Producers & DPs',
     link: '/how-it-works#protocol',
   },
   {
     code: '04',
-    name: 'Post-Finishing & VFX',
+    name: 'Post & VFX Delivery',
     forWhom: 'Post Heads & Editors',
     link: '/how-it-works#protocol',
   },
   {
     code: '05',
-    name: 'Pre-Demand Distribution',
+    name: 'Distribution & Release',
     forWhom: 'Exhibitors & Streamers',
     link: '/how-it-works#protocol',
   },
   {
     code: '06',
-    name: 'Idle Stage Monetization',
+    name: 'Facility Revenue Recovery',
     forWhom: 'Studios & Rental Houses',
     link: '/how-it-works#protocol',
   },
@@ -158,20 +158,20 @@ export function HomePage() {
         {/* Minimal Telemetry Ribbon */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mt-20 sm:mt-24 pt-8 border-t border-white/[0.06]">
           <div>
-            <div className="text-2xl sm:text-3xl font-semibold text-white tracking-tight mb-1 font-mono">$0.00</div>
-            <div className="text-xs text-zinc-400">Fixed Balance-Sheet Debt</div>
+            <div className="text-2xl sm:text-3xl font-semibold text-white tracking-tight mb-1 font-mono">$0</div>
+            <div className="text-xs text-zinc-400">Infrastructure we own</div>
           </div>
           <div>
             <div className="text-2xl sm:text-3xl font-semibold text-white tracking-tight mb-1 font-mono">100%</div>
-            <div className="text-xs text-zinc-400">Partner Facility Capacity</div>
+            <div className="text-xs text-zinc-400">Partner-operated capacity</div>
           </div>
           <div>
-            <div className="text-2xl sm:text-3xl font-semibold text-white tracking-tight mb-1 font-mono">EXP-06</div>
-            <div className="text-xs text-zinc-400">Active R&amp;D Trials</div>
+            <div className="text-2xl sm:text-3xl font-semibold text-white tracking-tight mb-1 font-mono">6</div>
+            <div className="text-xs text-zinc-400">Live R&amp;D trials running</div>
           </div>
           <div>
             <div className="text-2xl sm:text-3xl font-semibold text-white tracking-tight mb-1 font-mono">&lt; 48h</div>
-            <div className="text-xs text-zinc-400">Turnaround Telemetry</div>
+            <div className="text-xs text-zinc-400">Average first response</div>
           </div>
         </div>
       </section>
@@ -244,7 +244,7 @@ export function HomePage() {
             </h2>
           </div>
           <p className="text-xs sm:text-sm text-zinc-400 max-w-md leading-relaxed">
-            No day-zero lock-in. Any stakeholder or facility can tap the pipeline at their specific moment of friction.
+            No long onboarding. Any stakeholder — from a writer to a distributor — can join the pipeline at the stage most relevant to them.
           </p>
         </div>
 
@@ -289,7 +289,7 @@ export function HomePage() {
                 <span className="text-zinc-400 font-light">We experiment.</span>
               </h2>
               <p className="text-xs sm:text-sm text-zinc-400 max-w-xl leading-relaxed">
-                We don't theorize about entertainment technology. We stress-test virtual volumes, camera-to-cloud dailies, and stage utilization in safe-to-fail sandboxes before live production.
+                Before any tool or workflow enters the pipeline, we test it — in controlled trials with real data, real rigs, and measurable outcomes. No guesswork on a live set.
               </p>
             </div>
 
@@ -335,11 +335,11 @@ export function HomePage() {
          ══════════════════════════════════════════════════════ */}
       <section className="py-24 sm:py-32 px-6 sm:px-8 max-w-4xl mx-auto text-center border-t border-white/[0.06]">
         <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white [letter-spacing:-0.03em] mb-4">
-          Ignite the Flow.<br />
-          <span className="text-zinc-400 font-light">Tell us what needs to move.</span>
+          Ready to move?<br />
+          <span className="text-zinc-400 font-light">Tell us what's stuck.</span>
         </h2>
         <p className="text-sm sm:text-base text-zinc-400 max-w-md mx-auto leading-relaxed mb-8">
-          Whether you need soundstage turnaround access, guild department heads, or virtual production validation — we synchronize what entertainment needs.
+          Whether you need a stage, a crew, a post pipeline, or just a clear plan — share your project and we'll show you where DigiSynq connects.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4">
           <Link
