@@ -117,6 +117,16 @@ export interface ContinuumStage {
   typicalFailure: string;
   synqIntervention: string;
   icon: string;
+  // Phase 8 Complete Architecture Fields
+  purpose: string;
+  inputs: string[];
+  outputs: string[];
+  stakeholders: string[];
+  commonFailures: string[];
+  rootCauses: string[];
+  dependencies: string[];
+  mechanisms: string[];
+  interventions: string[];
 }
 
 export const CONTINUUM_STAGES: ContinuumStage[] = [
@@ -128,6 +138,15 @@ export const CONTINUUM_STAGES: ContinuumStage[] = [
     typicalFailure: 'Unvalidated scale assumptions that lock unfeasible downstream budgets',
     synqIntervention: 'Early feasibility mapping, audience hypothesis testing, and packaging parameters',
     icon: 'Lightbulb',
+    purpose: 'Validate narrative premise and commercial scale before financial and legal commitments solidify.',
+    inputs: ['Original premise', 'Book / IP option', 'Director narrative treatment', 'Commercial thesis'],
+    outputs: ['Validated story bible', 'Preliminary budget tier bracket', 'Audience density hypothesis'],
+    stakeholders: ['Screenwriters & Creators', 'Producers', 'Financiers'],
+    commonFailures: ['Scale mismatch', 'Overestimating genre commercial viability', 'Unclear IP chain-of-title'],
+    rootCauses: ['Creative isolation', 'Absence of empirical market and production feasibility modeling'],
+    dependencies: ['Precedes Development', 'Feeds packaging covenants'],
+    mechanisms: ['M01 Observe', 'M03 Decompose', 'M06 Classify'],
+    interventions: ['Run script complexity analysis', 'Calibrate budget band against genre benchmarks'],
   },
   {
     step: '02',
@@ -137,6 +156,15 @@ export const CONTINUUM_STAGES: ContinuumStage[] = [
     typicalFailure: 'Unclear chain-of-title, unrealistic schedule commitments, loose investor terms',
     synqIntervention: 'Rights verification, dependency-aware milestone structuring, packaging intelligence',
     icon: 'FileText',
+    purpose: 'Structure legal, financial, and talent architecture into a bankable, de-risked production package.',
+    inputs: ['Draft screenplay', 'Talent letters of interest', 'Territory pre-sales estimates', 'Tax incentive quotes'],
+    outputs: ['Locked shooting draft', 'Chain-of-title escrow', 'Milestone capital schedule', 'Casting window locks'],
+    stakeholders: ['Producers', 'Screenwriters', 'Directors', 'Financiers'],
+    commonFailures: ['Prolonged development hell', 'Unhedged actor schedule holds', 'Ambiguous rights reversions'],
+    rootCauses: ['Decoupling between creative rewriting and physical production budget realities'],
+    dependencies: ['Depends on Stage 01 Idea', 'Enables Stage 03 Pre-Production'],
+    mechanisms: ['M02 Detect', 'M04 Map', 'M07 Prioritize', 'M19 Governance'],
+    interventions: ['Pre-flight rights audit', 'Contractual milestone synchronization', 'Dynamic budget stress test'],
   },
   {
     step: '03',
@@ -146,6 +174,15 @@ export const CONTINUUM_STAGES: ContinuumStage[] = [
     typicalFailure: 'Unvetted crew assembly, compressed pre-pro schedules, unconfirmed permits',
     synqIntervention: 'Cross-departmental schedule stress-testing, partner stage routing, verified talent matching',
     icon: 'Calendar',
+    purpose: 'Lock all operational, spatial, and technical dependencies before daily capital burn begins.',
+    inputs: ['Locked script', 'Budget breakdown', 'HOD crew wishlists', 'Director shot list'],
+    outputs: ['Master shooting schedule', 'Stage lease agreements', 'Crew deal memos', 'Camera/lighting contracts'],
+    stakeholders: ['Producers', 'Directors', 'Technicians & HODs', 'Rental Houses', 'Stages'],
+    commonFailures: ['Zero schedule buffer', 'Stage turnover overlaps', 'Permit delays', 'Camera package mismatches'],
+    rootCauses: ['Opaque availability networks', 'Unsynchronized vendor bids', 'Fragmented department phone trees'],
+    dependencies: ['Depends on Stage 02 Development', 'Dictates Stage 04 Production rhythm'],
+    mechanisms: ['M08 Simulate', 'M09 Connect', 'M10 Match', 'M21 Resilience'],
+    interventions: ['Route to partner dark-floor stages', 'Standardize turnaround rest covenants', 'Pre-rig buffer modeling'],
   },
   {
     step: '04',
@@ -155,6 +192,15 @@ export const CONTINUUM_STAGES: ContinuumStage[] = [
     typicalFailure: 'Actor illness, weather shocks, location loss, and uncoordinated call sheet revisions',
     synqIntervention: 'Live cascade mitigation, dynamic shooting resequencing, standby resource activation',
     icon: 'Film',
+    purpose: 'Execute principal photography with zero preventable downtime, safety violations, or cascade overruns.',
+    inputs: ['Daily call sheets', 'Soundstage floor availability', 'Talent on-set call', 'Camera raw media'],
+    outputs: ['Verified dailies wrap sheets', 'Camera-to-cloud media ingest', 'Sound track stems', 'VFX metadata logs'],
+    stakeholders: ['Talent & Cast', 'Technicians & Crew', 'Producers', 'Directors', 'Stages'],
+    commonFailures: ['Unannounced call sheet splits', 'Crew fatigue from 16h turns', 'Standby equipment penalties ($18k/day)'],
+    rootCauses: ['Single-threaded schedule dependency concentration without dynamic resequencing capability'],
+    dependencies: ['Depends on Stage 03 Pre-Pro', 'Feeds Stage 05 Post-Production directly'],
+    mechanisms: ['M01 Observe', 'M11 Coordinate', 'M12 Execute', 'M13 Monitor', 'M18 Escalation'],
+    interventions: ['Dynamic scene resequencing', 'Partner dark stage activation', 'Standby equipment parity routing'],
   },
   {
     step: '05',
@@ -164,6 +210,15 @@ export const CONTINUUM_STAGES: ContinuumStage[] = [
     typicalFailure: 'Late plates, editorial instability, scope creep, metadata errors triggering platform rejects',
     synqIntervention: 'Input quality standardization, milestone-tied asset turnovers, burst VFX house coordination',
     icon: 'Sliders',
+    purpose: 'Assemble, conform, grade, and mix raw footage into verified master deliverable packages.',
+    inputs: ['Camera raw dailies', 'Script supervisor logs', 'Editorial rough cuts', 'Sound audio stems'],
+    outputs: ['Conformed picture lock', 'Finished VFX shots', 'Dolby Atmos audio master', 'DCI DCP & IMF master packages'],
+    stakeholders: ['Post & VFX Houses', 'Music & Audio Professionals', 'Directors', 'Producers'],
+    commonFailures: ['6 weeks of VFX compressed into 14 days', 'ACES OCIO color space mismatch', 'Atmos phase cancellation'],
+    rootCauses: ['Upstream production delays absorbed entirely by downstream post without date elasticity'],
+    dependencies: ['Depends on Stage 04 Production', 'Enables Stage 07 Distribution delivery'],
+    mechanisms: ['M03 Decompose', 'M10 Match', 'M14 Verify', 'M20 Version Control'],
+    interventions: ['Deploy automated pre-flight QC tests', 'Secondary burst VFX studio routing', 'Lock picture milestones'],
   },
   {
     step: '06',
@@ -173,6 +228,15 @@ export const CONTINUUM_STAGES: ContinuumStage[] = [
     typicalFailure: 'Disconnected delivery assets, delayed teaser drops, poor audience-channel alignment',
     synqIntervention: 'Synchronized promotional asset handoffs, creator network matching, pre-demand telemetry',
     icon: 'Megaphone',
+    purpose: 'Build concentrated pre-demand and awareness synchronized with talent press windows and master delivery.',
+    inputs: ['Master trailer cuts', 'Talent press junket calendar', 'EPK footage', 'Target demographic telemetry'],
+    outputs: ['Localized trailer drops', 'Key art billboards', 'Digital creator activations', 'Premiere screening hype'],
+    stakeholders: ['Marketing & Media Channels', 'Producers', 'Talent & Cast', 'Distributors'],
+    commonFailures: ['Late trailer delivery missing cinema placement', 'Generic mass-market campaign fatigue'],
+    rootCauses: ['Marketing treated as an external parallel silo rather than synchronized post turnover stream'],
+    dependencies: ['Runs in parallel with Stage 05 Post', 'Feeds Stage 07 Distribution & 08 Audience'],
+    mechanisms: ['M06 Classify', 'M11 Coordinate', 'M16 Predict'],
+    interventions: ['Synchronize teaser asset pull from color dailies', 'Match narrative hooks to digital creators'],
   },
   {
     step: '07',
@@ -182,6 +246,15 @@ export const CONTINUUM_STAGES: ContinuumStage[] = [
     typicalFailure: 'QC rejects 72h before release, clashing theatrical dates against tentpole releases',
     synqIntervention: 'Automated delivery spec verification, multi-platform release coordination, screen optimization',
     icon: 'Send',
+    purpose: 'Deliver master assets flawlessly across theatrical circuits, OTT platforms, and international territories.',
+    inputs: ['DCI-compliant DCPs', 'IMF packages with 35-language timed text', 'KDM security keys', 'Territory rights'],
+    outputs: ['Simultaneous multi-territory debut', 'Verified platform ingestion receipts', 'Box office box logs'],
+    stakeholders: ['Distributors & Exhibitors', 'OTT & Streaming Platforms', 'Producers'],
+    commonFailures: ['Platform QC rejection 48h before release', 'Theatrical screens lost to competitor studio shifts'],
+    rootCauses: ['Divergent vendor IMF metadata wrappers and lack of pre-flight platform compliance testing'],
+    dependencies: ['Depends on Stage 05 Post & 06 Marketing', 'Enables Stage 08 Audience & 09 Monetization'],
+    mechanisms: ['M14 Verify', 'M17 Prevent', 'M21 Resilience'],
+    interventions: ['Automate platform profile validation', 'Deploy density-matched regional release clusters'],
   },
   {
     step: '08',
@@ -191,6 +264,15 @@ export const CONTINUUM_STAGES: ContinuumStage[] = [
     typicalFailure: 'Fragmented discovery, zero retention of theatrical viewers into digital fandoms',
     synqIntervention: 'Audience density mapping, creator-led community engagement, direct viewer connections',
     icon: 'Users',
+    purpose: 'Cultivate deep cultural resonance, positive word-of-mouth, and sustained fandom community density.',
+    inputs: ['Cinema screenings', 'Streaming availability', 'Creator social channels', 'Community screening hubs'],
+    outputs: ['Opening weekend box office density', 'Organic social virality', 'Fan community retention', 'Audience sentiment'],
+    stakeholders: ['Audiences & Fan Communities', 'Exhibitors', 'Creators', 'Platforms'],
+    commonFailures: ['Theatrical screenings with low room density', 'Disjointed independent film discovery'],
+    rootCauses: ['Relying on broad broadcast advertising rather than concentrated regional fan communities'],
+    dependencies: ['Depends on Stage 07 Distribution', 'Drives Stage 09 Monetization long-tail'],
+    mechanisms: ['M09 Connect', 'M16 Measure', 'M19 Learn'],
+    interventions: ['Deploy pre-demand density screening events', 'Creator-narrative direct community engagement'],
   },
   {
     step: '09',
@@ -200,6 +282,15 @@ export const CONTINUUM_STAGES: ContinuumStage[] = [
     typicalFailure: 'Revenue leakage across intermediaries, stalled recoupment schedules, unexploited music rights',
     synqIntervention: 'Transparent recoupment tracking, synchronized music licensing, ancillary IP coordination',
     icon: 'TrendingUp',
+    purpose: 'Maximize lifetime commercial recoupment and intellectual property value across all distribution windows.',
+    inputs: ['Box office gross receipts', 'Streaming license tranches', 'Music publishing cue sheets', 'Merchandise sales'],
+    outputs: ['Waterfall recoupment disbursement', 'Ancillary IP royalties', 'Compounding project ROI'],
+    stakeholders: ['Producers', 'Financiers', 'Platforms', 'Screenwriters & IP Holders'],
+    commonFailures: ['Recoupment freezes due to cue sheet disputes', 'Ancillary rights left unexploited'],
+    rootCauses: ['Disparate reporting ledgers and complex multi-party revenue waterfall accounting'],
+    dependencies: ['Sustained by Stage 08 Audience', 'Re-invests into Stage 01 Idea for new project slates'],
+    mechanisms: ['M15 Learn', 'M20 Version Control', 'M23 Value Engine'],
+    interventions: ['Transparent milestone recoupment ledgers', 'Synchronized music publishing clearance tracking'],
   },
 ];
 
