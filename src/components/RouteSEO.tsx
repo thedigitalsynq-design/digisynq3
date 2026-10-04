@@ -104,6 +104,11 @@ const ROUTE_REGISTRY: Record<string, RouteMetadata> = {
     title: 'Start a SYNQ — Production Intake & Case Registration | DigiSynq',
     description: 'Submit an operational breakdown or schedule rupture to the DigiSynq Production Gateway. Receive a tracked Case ID: SYNC-YYYY-XXXXX.',
     breadcrumb: 'Start a SYNQ'
+  },
+  '/system-flow': {
+    title: 'System Flowchart — Complete DigiSynq Decision Logic & Architecture | DigiSynq',
+    description: 'Interactive end-to-end flowchart illustrating the complete DigiSynq system: variance detection, triage routing, root-cause diagnosis, covenant structuring, and system memory.',
+    breadcrumb: 'System Flowchart'
   }
 };
 

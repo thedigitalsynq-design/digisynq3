@@ -69,6 +69,7 @@ const NAV_GROUPS: NavGroup[] = [
     icon: BookOpen,
     items: [
       { label: 'Master Blueprint', href: '/blueprint', desc: '70-section architectural specification' },
+      { label: 'System Flowchart', href: '/system-flow', desc: 'End-to-end decision logic & triage architecture', badge: 'New' },
       { label: 'System Philosophy', href: '/about', desc: 'Ten rules of entertainment synchronization' },
     ]
   }

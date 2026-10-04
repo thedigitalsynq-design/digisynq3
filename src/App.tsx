@@ -22,6 +22,7 @@ const EcosystemPage = React.lazy(() => import('./pages/EcosystemPage').then(m =>
 const RunbookPage = React.lazy(() => import('./pages/RunbookPage').then(m => ({ default: m.RunbookPage })));
 const InsightsPage = React.lazy(() => import('./pages/InsightsPage').then(m => ({ default: m.InsightsPage })));
 const DiagnosePage = React.lazy(() => import('./pages/DiagnosePage').then(m => ({ default: m.DiagnosePage })));
+const SystemFlowPage = React.lazy(() => import('./pages/SystemFlowPage').then(m => ({ default: m.SystemFlowPage })));
 
 // ── Public website layout wrapper ────────────────────────────
 function WebsiteLayout({ children }: { children: React.ReactNode }) {
@@ -76,6 +77,7 @@ function AppRoutes() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/diagnose" element={<DiagnosePage />} />
         <Route path="/start" element={<StartSynqPage />} />
+        <Route path="/system-flow" element={<SystemFlowPage />} />
 
         {/* Aliases & legacy route redirects */}
         <Route path="/labs" element={<Navigate to="/workshops" replace />} />
