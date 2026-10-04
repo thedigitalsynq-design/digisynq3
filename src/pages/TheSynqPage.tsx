@@ -1,314 +1,374 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Compass, Cpu, Zap, Activity, Layers, ShieldCheck, CheckCircle2 } from 'lucide-react';
-import { CinematicSynqDeck } from '../components/CinematicSynqDeck';
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Eye,
+  Search,
+  GitBranch,
+  Zap,
+  ShieldCheck,
+  Cpu,
+  Layers,
+  Activity,
+  CheckCircle2,
+  AlertTriangle,
+  Compass,
+  Sliders,
+  ChevronRight,
+  Play,
+  RotateCcw,
+} from 'lucide-react';
+import {
+  BRAND,
+  CORE_OPERATING_CHAIN,
+  PUBLIC_EXPLANATION_STAGES,
+  BUSINESS_ARCHITECTURE_LAYERS,
+} from '../data/blueprint_data';
 import { TopographicBackground } from '../components/TopographicBackground';
 
-const GAPS = [
+const ICON_MAP: Record<string, React.ElementType> = {
+  Eye,
+  Search,
+  GitBranch,
+  Zap,
+  ShieldCheck,
+};
+
+const CAPACITY_GAPS = [
   {
-    id: 'human',
-    title: 'Creative Talent & Crew Assembly',
+    id: 'talent',
+    title: 'Creative Talent & Guild Specialists',
     category: 'Human Layer',
-    traditional: 'Productions assemble key department heads through closed personal phone trees. Qualified cinematographers, sound designers, and virtual production leads sit on unbooked lulls, while projects experience multi-week assembly delays.',
-    synqSolution: 'DigiSynq indexes verified availability calendars and craft specializations across guilds, matching projects directly to available talent with standardized rate parity and turnkey contracts.',
-    metric: '< 48h direct roster locking',
+    symptom: 'Productions assemble key department heads through closed personal phone trees. Qualified cinematographers, sound designers, and virtual production leads sit on unbooked lulls, while projects experience multi-week assembly delays.',
+    intervention: 'DigiSynq indexes verified availability calendars and craft specializations across guilds, matching projects directly to available talent with standardized rate parity and turnkey contracts.',
+    metric: '< 48h Direct Roster Locking Target',
   },
   {
     id: 'spatial',
-    title: 'Studios, Stages & LED Volumes',
+    title: 'Soundstages & Virtual Volumes',
     category: 'Physical Infrastructure',
-    traditional: 'Soundstages, LED virtual production volumes, and scoring stages sit dark between multi-month tenant leases, while incoming productions face rigid long-term booking mandates.',
-    synqSolution: 'DigiSynq routes active productions into dark days and turnaround slots at partner facilities, unlocking incremental revenue for stage operators and dynamic access for productions.',
-    metric: '100% incremental floor yield',
+    symptom: 'Soundstages, LED virtual production volumes, and scoring stages sit dark between multi-month tenant leases, while incoming productions face rigid long-term booking mandates.',
+    intervention: 'DigiSynq routes active productions into dark days and turnaround slots at partner facilities, unlocking incremental revenue for stage operators and dynamic access for productions.',
+    metric: '100% Incremental Dark-Floor Yield',
   },
   {
-    id: 'financial',
+    id: 'capital',
     title: 'Finishing & Milestone Capital',
     category: 'Capital Flow',
-    traditional: 'Post-production stalls during VFX, final color grading, and Dolby Atmos mixing because traditional credit tranches are decoupled from technical deliverables.',
-    synqSolution: 'DigiSynq structures finishing capital disbursements strictly against verified delivery milestones and cloud dailies telemetry, protecting investors from speculative budget drift.',
-    metric: 'Milestone-anchored security',
+    symptom: 'Post-production stalls during VFX, final color grading, and Dolby Atmos mixing because traditional credit tranches are decoupled from technical deliverables.',
+    intervention: 'DigiSynq structures finishing capital disbursements strictly against verified delivery milestones and cloud dailies telemetry, protecting investors from speculative budget drift.',
+    metric: 'Milestone-Anchored Delivery Governance',
   },
   {
-    id: 'theatrical',
-    title: 'Release Windows & Audience Density',
-    category: 'Audience Reach',
-    traditional: 'Independent titles and new formats clash blindly against studio tentpoles on identical weekends, leading to compressed screen counts and rapid exhibition decay.',
-    synqSolution: 'DigiSynq coordinates targeted screening clusters and regional event windows using pre-demand density telemetry to guarantee defensible audience exposure.',
-    metric: '3.4x localized opening efficiency',
-  },
-];
-
-const ARCHITECTURE_LAYERS = [
-  {
-    num: '01',
-    name: 'The Discovery Engine',
-    subtitle: 'Indexing Distributed Capacity',
-    desc: 'Continuously monitors verified availability across the global entertainment network: unbooked partner soundstages, certified guild department heads, and certified post-production facilities.',
-    icon: Compass,
-  },
-  {
-    num: '02',
-    name: 'The Routing Mesh',
-    subtitle: 'Asset-Light Synchronization',
-    desc: 'Owns zero physical stages or camera trucks. Routes active entertainment demand directly into existing, pre-verified partner capacity at the precise instant of scheduling need.',
-    icon: Cpu,
-  },
-  {
-    num: '03',
-    name: 'The Governance Protocol',
-    subtitle: 'Milestone-Tied Covenants',
-    desc: 'Standardizes turnaround covenants, cloud telemetry, and milestone-backed capital release. Eliminates opaque broker markups and keeps complex multi-stakeholder productions on schedule.',
-    icon: ShieldCheck,
+    id: 'distribution',
+    title: 'Release Windows & Platform Specs',
+    category: 'Distribution Layer',
+    symptom: 'Titles clash blindly against tentpole dates or suffer platform QC master rejections 48 hours before streaming debut due to uncoordinated delivery specs.',
+    intervention: 'DigiSynq coordinates automated IMF spec verification, conform reviews, and audience density screening clusters to protect release momentum.',
+    metric: '100% Automated Platform QC Compliance',
   },
 ];
 
 export function TheSynqPage() {
-  const [activeGapIndex, setActiveGapIndex] = useState(0);
-  const activeGap = GAPS[activeGapIndex];
+  const [activePublicStage, setActivePublicStage] = useState(0);
+  const [activeCoreChainIdx, setActiveCoreChainIdx] = useState(0);
+  const [activeGapIdx, setActiveGapIdx] = useState(0);
+
+  const selectedPublic = PUBLIC_EXPLANATION_STAGES[activePublicStage];
+  const CurrentIcon = ICON_MAP[selectedPublic.iconName] || Zap;
+  const currentCore = CORE_OPERATING_CHAIN[activeCoreChainIdx];
+  const currentGap = CAPACITY_GAPS[activeGapIdx];
 
   return (
-    <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white min-h-screen relative overflow-hidden">
-      <TopographicBackground className="opacity-15 pointer-events-none -z-10 fixed inset-0" />
+    <main className="bg-[#03040A] text-[#ECEEF5] selection:bg-[#23B272] selection:text-[#03040A] min-h-screen relative overflow-hidden">
+      <TopographicBackground className="opacity-25 pointer-events-none -z-10 fixed inset-0" />
 
       {/* ── 01. Header Hero ── */}
-      <section className="pt-40 sm:pt-48 pb-16 sm:pb-20 px-6 sm:px-8 max-w-6xl mx-auto">
+      <section className="pt-36 sm:pt-48 pb-16 sm:pb-24 px-6 sm:px-8 max-w-6xl mx-auto">
         <div className="max-w-4xl">
-          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-300 mb-8 tracking-wide">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            <span className="font-mono text-emerald-400 font-medium">THE SYNQ PIPELINE</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/[0.1] bg-white/[0.03] text-xs text-zinc-300 font-mono mb-8">
+            <span className="w-2 h-2 rounded-full bg-[#52E3A4] animate-pulse" />
+            <span className="text-[#52E3A4] font-semibold">THE SYNQ OPERATING MODEL</span>
             <span className="text-zinc-600">//</span>
-            <span className="text-white font-medium">Architecture &amp; Capacity Orchestration</span>
+            <span>ENTERTAINMENT SYNCHRONIZATION INFRASTRUCTURE</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.03] [letter-spacing:-0.035em] mb-6">
-            The Unbroken Current.
-            <span className="text-zinc-400 font-light block text-2xl sm:text-4xl mt-2">
-              Where cinema stops leaking momentum.
-            </span>
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-white tracking-tight leading-[1.03] mb-6">
+            The Anatomy of a <span className="text-[#52E3A4]">SYNQ</span>.
           </h1>
 
-          <h2 className="text-lg sm:text-xl text-zinc-300 leading-relaxed max-w-3xl font-light mb-10">
-            Entertainment possesses immense creative genius, cutting-edge facilities, and active capital. DigiSynq is the asset-light pipeline that unifies fragmented industry capacity into an uninterrupted flow — connecting development, partner soundstages, cloud dailies, post finishing, and audience release with zero balance-sheet equipment debt.
-          </h2>
+          <p className="text-lg sm:text-xl text-zinc-300 leading-relaxed max-w-3xl font-light mb-8">
+            A <strong>SYNQ</strong> is a structured intervention that connects a specific system problem to the people, resources, capabilities, and decisions required to resolve it.
+          </p>
 
           <div className="flex flex-wrap items-center gap-4">
             <Link
-              to="/start"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white text-[#06080d] hover:bg-zinc-200 font-medium text-sm tracking-wide transition-all duration-200 active:scale-95 shadow-sm"
+              to="/diagnose"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#23B272] text-[#03040A] hover:bg-[#52E3A4] font-bold text-sm tracking-wide transition-all shadow-[0_0_30px_rgba(35,178,114,0.35)] active:scale-95"
             >
-              <span>Initiate a Synq</span>
-              <ArrowRight className="w-4 h-4" />
+              <span>Diagnose a Problem</span>
+              <ArrowRight className="w-4 h-4 stroke-[2.5]" />
             </Link>
-            <a
-              href="#interactive-deck"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/10 hover:border-white/20 bg-white/[0.02] text-zinc-300 font-medium text-sm transition-all duration-200"
+            <Link
+              to="/how-it-works"
+              className="inline-flex items-center gap-2 px-6 py-4 rounded-full border border-white/14 hover:border-white/25 bg-white/[0.03] text-white font-medium text-sm transition-all"
             >
-              <span>Explore Interactive Synq Deck</span>
-            </a>
+              <span>Explore Resolution Runbook</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* ── 02. Interactive Cinematic Synq Deck ── */}
-      <section id="interactive-deck" className="py-12 px-6 sm:px-8 max-w-6xl mx-auto scroll-mt-24">
-        <CinematicSynqDeck />
-      </section>
-
-      {/* ── 02. Traditional vs. Asset-Light Model Comparison ── */}
-      <section id="workflow-comparison" className="py-20 sm:py-28 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06]">
-        <div className="max-w-2xl mb-14">
-          <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-2 block">
-            Comparative Architecture
-          </span>
-          <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white [letter-spacing:-0.025em] mb-4">
-            Two Destinies.<br />
-            <span className="text-zinc-400 font-light">Silos versus synchronization.</span>
-          </h2>
-          <p className="text-zinc-400 text-sm leading-relaxed">
-            The conventional model relies on fragmented phone trees and unilateral risk. DigiSynq provides an asset-light orchestration layer routing demand to verified capacity.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-          {/* Traditional Workflow Card */}
-          <div className="p-8 sm:p-10 rounded-3xl border border-white/[0.06] bg-[#090b10] flex flex-col justify-between space-y-6">
-            <div>
-              <span className="text-xs font-mono text-zinc-500 uppercase block mb-2">Conventional Model</span>
-              <h3 className="text-xl font-semibold text-white mb-4">Fragmented Individual Sourcing</h3>
-              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-6">
-                Producers assemble each element through closed phone trees and isolated negotiations. Unbooked stage dark time and department delays cascade across the schedule.
-              </p>
-              
-              <div className="space-y-3 pt-2">
-                <div className="flex items-center gap-3 text-xs text-zinc-400">
-                  <span className="w-5 h-5 rounded-full bg-white/[0.04] border border-white/10 flex items-center justify-center font-mono text-[10px] text-zinc-500 shrink-0">1</span>
-                  <span>Demand originates in isolation</span>
-                </div>
-                <div className="flex items-center gap-3 text-xs text-zinc-400">
-                  <span className="w-5 h-5 rounded-full bg-white/[0.04] border border-white/10 flex items-center justify-center font-mono text-[10px] text-zinc-500 shrink-0">2</span>
-                  <span>Siloed sourcing through agency middlemen</span>
-                </div>
-                <div className="flex items-center gap-3 text-xs text-zinc-400">
-                  <span className="w-5 h-5 rounded-full bg-white/[0.04] border border-white/10 flex items-center justify-center font-mono text-[10px] text-zinc-500 shrink-0">3</span>
-                  <span>Dark stage days and turnover schedule drift</span>
-                </div>
-                <div className="flex items-center gap-3 text-xs text-zinc-300 font-medium">
-                  <span className="w-5 h-5 rounded-full bg-white/10 border border-white/20 flex items-center justify-center font-mono text-[10px] text-zinc-300 shrink-0">4</span>
-                  <span>Budget overruns &amp; predatory bridge debt</span>
-                </div>
-              </div>
-            </div>
-            <div className="pt-4 border-t border-white/[0.06] text-xs font-mono text-zinc-500">
-              High friction • Capital leakage
-            </div>
+      {/* ══════════════════════════════════════════════════════
+          02. PUBLIC EXPLANATION: 5 CORE STAGES
+         ══════════════════════════════════════════════════════ */}
+      <section className="py-20 px-6 sm:px-8 border-t border-white/[0.06] bg-[#06080D]">
+        <div className="max-w-6xl mx-auto">
+          <div className="max-w-3xl mb-12">
+            <div className="text-xs font-mono text-[#52E3A4] mb-2 uppercase">PUBLIC EXPLANATION FRAMEWORK</div>
+            <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight mb-4">
+              Five Stages of System Control.
+            </h2>
+            <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
+              How DigiSynq transforms acute, multi-party production chaos into verifiable, compounding stability.
+            </p>
           </div>
 
-          {/* DigiSynq Model Card */}
-          <div className="p-8 sm:p-10 rounded-3xl border border-emerald-500/25 bg-[#090b10] flex flex-col justify-between space-y-6 relative">
-            <div className="absolute top-6 right-6">
-              <span className="px-2.5 py-1 rounded-full text-[10px] font-mono text-emerald-300 bg-emerald-500/10 border border-emerald-500/30">
-                Asset-Light
-              </span>
-            </div>
-            <div>
-              <span className="text-xs font-mono text-emerald-400 uppercase block mb-2">DigiSynq Model</span>
-              <h3 className="text-xl font-semibold text-white mb-4">Orchestrated Capacity Routing</h3>
-              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-6">
-                DigiSynq dynamically matches production parameters to verified partner infrastructure, guild craft leaders, and milestone covenants.
-              </p>
-              
-              <div className="space-y-3 pt-2">
-                <div className="flex items-center gap-3 text-xs text-zinc-300">
-                  <span className="w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center font-mono text-[10px] text-emerald-400 shrink-0">1</span>
-                  <span>Demand parameters &amp; constraints ingested</span>
-                </div>
-                <div className="flex items-center gap-3 text-xs text-zinc-300">
-                  <span className="w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center font-mono text-[10px] text-emerald-400 shrink-0">2</span>
-                  <span>Dynamic routing to unbooked partner capacity</span>
-                </div>
-                <div className="flex items-center gap-3 text-xs text-zinc-300">
-                  <span className="w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center font-mono text-[10px] text-emerald-400 shrink-0">3</span>
-                  <span>Synq Labs sandbox pre-flight &amp; covenant governance</span>
-                </div>
-                <div className="flex items-center gap-3 text-xs text-emerald-300 font-medium">
-                  <span className="w-5 h-5 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center font-mono text-[10px] text-emerald-300 shrink-0">4</span>
-                  <span>On-schedule delivery &amp; milestone capital release</span>
-                </div>
-              </div>
-            </div>
-            <div className="pt-4 border-t border-white/[0.06] text-xs font-mono text-emerald-400 font-medium">
-              Zero fixed asset debt • Turnkey agility
-            </div>
-          </div>
-        </div>
-
-        {/* ── 03. The 4 Structural Capacity Gaps ── */}
-        <div id="use-cases" className="max-w-2xl mb-10 scroll-mt-24">
-          <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-2 block">
-            Systemic Gaps &amp; Use Cases
-          </span>
-          <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white [letter-spacing:-0.025em] mb-4">
-            The Fractures.<br />
-            <span className="text-zinc-400 font-light">Where velocity leaks.</span>
-          </h2>
-          <p className="text-zinc-400 text-sm leading-relaxed">
-            The resources to produce extraordinary entertainment exist today across the ecosystem. What has been missing is the coordination layer.
-          </p>
-        </div>
-
-        {/* Gap Selector Pills */}
-        <div className="flex flex-wrap gap-2 mb-8">
-          {GAPS.map((gap, i) => (
-            <button
-              key={gap.id}
-              onClick={() => setActiveGapIndex(i)}
-              className={`px-4 py-2 rounded-full text-xs font-medium transition-all cursor-pointer ${
-                i === activeGapIndex
-                  ? 'bg-white text-[#06080d] shadow-sm font-semibold'
-                  : 'bg-white/[0.03] text-zinc-400 hover:text-white hover:bg-white/[0.06] border border-white/[0.06]'
-              }`}
-            >
-              {gap.title}
-            </button>
-          ))}
-        </div>
-
-        {/* Gap Deep-Dive Card */}
-        <div className="p-8 sm:p-10 rounded-3xl border border-white/[0.08] bg-[#090b10] grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="space-y-4">
-            <span className="text-xs font-mono text-zinc-500 uppercase">{activeGap.category} // Conventional</span>
-            <h3 className="text-xl font-bold text-white tracking-tight">{activeGap.title}</h3>
-            <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">{activeGap.traditional}</p>
-          </div>
-
-          <div className="space-y-4 md:border-l md:border-white/[0.06] md:pl-8">
-            <span className="text-xs font-mono text-emerald-400 uppercase">DigiSynq Resolution</span>
-            <p className="text-xs sm:text-sm text-zinc-200 leading-relaxed">{activeGap.synqSolution}</p>
-            <div className="pt-4 border-t border-white/[0.06] text-xs text-zinc-400 flex items-center justify-between">
-              <span className="text-zinc-500 font-mono text-[11px]">Validated Metric:</span>
-              <span className="text-emerald-400 font-mono font-medium">{activeGap.metric}</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 04. Architecture Layers ── */}
-      <section id="capabilities" className="py-20 sm:py-28 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06] scroll-mt-24">
-        <div className="max-w-2xl mb-14">
-          <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-2 block">
-            System Topology
-          </span>
-          <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white [letter-spacing:-0.025em] mb-4">
-            Three Strata.<br />
-            <span className="text-zinc-400 font-light">Discovery, mesh, covenant.</span>
-          </h2>
-          <p className="text-zinc-400 text-sm leading-relaxed">
-            How DigiSynq translates distributed entertainment capacity into predictable, scalable production velocity.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {ARCHITECTURE_LAYERS.map((layer) => {
-            const Icon = layer.icon;
-            return (
-              <div
-                key={layer.num}
-                className="p-8 rounded-3xl border border-white/[0.06] bg-[#090b10] flex flex-col justify-between"
-              >
-                <div>
-                  <div className="w-10 h-10 rounded-2xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-zinc-300 mb-6">
-                    <Icon size={18} />
+          {/* Stepper Header Strip */}
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 mb-8">
+            {PUBLIC_EXPLANATION_STAGES.map((stg, idx) => {
+              const IconComponent = ICON_MAP[stg.iconName] || Zap;
+              const isActive = activePublicStage === idx;
+              return (
+                <button
+                  key={stg.step}
+                  onClick={() => setActivePublicStage(idx)}
+                  className={`p-4 rounded-2xl border text-left transition-all ${
+                    isActive
+                      ? 'bg-[#23B272] text-[#03040A] border-[#52E3A4] font-bold shadow-lg scale-[1.02]'
+                      : 'bg-[#090B14] border-white/[0.08] text-zinc-400 hover:text-white hover:border-white/20'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-mono text-xs">{stg.step}</span>
+                    <IconComponent className={`w-4 h-4 ${isActive ? 'text-[#03040A]' : 'text-zinc-500'}`} />
                   </div>
-                  <span className="text-xs font-mono text-zinc-500 mb-2 block">{layer.num} // LAYER</span>
-                  <h3 className="text-lg font-semibold text-white mb-1">{layer.name}</h3>
-                  <div className="text-xs text-zinc-400 mb-4">{layer.subtitle}</div>
-                  <p className="text-xs text-zinc-400 leading-relaxed">{layer.desc}</p>
+                  <div className="text-sm font-bold font-mono tracking-tight">{stg.name}</div>
+                  <div className={`text-[11px] truncate mt-1 ${isActive ? 'text-[#03040A]/80' : 'text-zinc-500'}`}>
+                    {stg.tagline}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Active Public Stage Card */}
+          <div className="p-8 sm:p-10 rounded-3xl border border-[#23B272]/30 bg-gradient-to-br from-[#090B14] to-[#04060C] shadow-2xl relative overflow-hidden">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-8 border-b border-white/[0.08]">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-[#23B272]/20 border border-[#23B272]/40 flex items-center justify-center text-[#52E3A4]">
+                  <CurrentIcon className="w-6 h-6" />
+                </div>
+                <div>
+                  <span className="font-mono text-xs text-[#52E3A4] font-semibold">STAGE {selectedPublic.step} OF 05</span>
+                  <h3 className="text-2xl sm:text-3xl font-black text-white">{selectedPublic.name}: {selectedPublic.tagline}</h3>
                 </div>
               </div>
+              <div className="font-mono text-xs text-zinc-400 bg-white/[0.04] px-3.5 py-1.5 rounded-lg border border-white/[0.08]">
+                Next: <span className="text-[#52E3A4] font-bold">{selectedPublic.next}</span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className="p-5 rounded-2xl bg-black/40 border border-white/[0.06]">
+                <div className="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mb-2">INPUT SIGNAL</div>
+                <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">{selectedPublic.input}</p>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-[#16543D]/25 border border-[#23B272]/30">
+                <div className="text-[11px] font-mono text-[#52E3A4] uppercase tracking-wider mb-2">SYSTEM ACTION</div>
+                <p className="text-xs sm:text-sm text-emerald-100 leading-relaxed">{selectedPublic.action}</p>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-black/40 border border-white/[0.06]">
+                <div className="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mb-2">VERIFIED OUTPUT</div>
+                <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">{selectedPublic.output}</p>
+              </div>
+            </div>
+
+            <div className="pt-6 border-t border-white/[0.08] flex items-center justify-between">
+              <button
+                onClick={() => setActivePublicStage((prev) => (prev > 0 ? prev - 1 : 4))}
+                className="text-xs font-mono text-zinc-400 hover:text-white transition-colors"
+              >
+                ← Previous Stage
+              </button>
+              <button
+                onClick={() => setActivePublicStage((prev) => (prev < 4 ? prev + 1 : 0))}
+                className="text-xs font-mono text-[#52E3A4] hover:text-white font-bold transition-colors"
+              >
+                Advance to Next Stage →
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════
+          03. CORE SYSTEM: 11-STAGE CAUSAL CHAIN
+         ══════════════════════════════════════════════════════ */}
+      <section className="py-24 px-6 sm:px-8 max-w-6xl mx-auto">
+        <div className="max-w-3xl mb-12">
+          <div className="text-xs font-mono text-[#52E3A4] mb-2 uppercase">CORE SYSTEM OPERATING MODEL</div>
+          <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight mb-4">
+            The 11-Stage Causal Chain.
+          </h2>
+          <p className="text-zinc-300 text-sm sm:text-base leading-relaxed">
+            DigiSynq traverses from surface emergency down to structural immunity without skipping causal layers:
+            <span className="text-[#52E3A4] font-mono text-xs block mt-2">
+              PROBLEM → SYMPTOM → EVENT → CONDITION → DEPENDENCY → ROOT CAUSE → MISSING CAPABILITY → INTERVENTION → OUTCOME → LEARNING → PREVENTION
+            </span>
+          </p>
+        </div>
+
+        {/* 11-Stage Ribbon */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-11 gap-1.5 mb-8 overflow-x-auto">
+          {CORE_OPERATING_CHAIN.map((node, idx) => {
+            const isSelected = activeCoreChainIdx === idx;
+            return (
+              <button
+                key={node.step}
+                onClick={() => setActiveCoreChainIdx(idx)}
+                className={`p-2.5 rounded-xl border text-center transition-all min-w-[85px] ${
+                  isSelected
+                    ? 'bg-[#23B272] text-[#03040A] border-[#52E3A4] font-bold shadow-md scale-105'
+                    : 'bg-[#090B14] border-white/[0.08] text-zinc-400 hover:text-white hover:border-white/20'
+                }`}
+              >
+                <div className="text-[10px] font-mono opacity-70">{node.step}</div>
+                <div className="text-xs font-mono font-bold mt-1 truncate">{node.name}</div>
+              </button>
             );
           })}
         </div>
+
+        {/* Selected Chain Stage Deep Inspector */}
+        <div className="p-8 rounded-3xl border border-white/[0.1] bg-[#090B14] shadow-2xl">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 mb-6 border-b border-white/[0.08]">
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-xs px-2.5 py-1 rounded bg-[#23B272]/20 border border-[#23B272]/40 text-[#52E3A4] font-bold">
+                STAGE {currentCore.step} // {currentCore.category}
+              </span>
+              <h3 className="text-2xl font-black text-white">{currentCore.name}</h3>
+            </div>
+            <span className="text-xs font-mono text-zinc-400 italic">
+              "{currentCore.interrogation}"
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div className="p-5 rounded-2xl bg-black/40 border border-white/[0.06]">
+              <div className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider mb-2">SYSTEM DEFINITION</div>
+              <p className="text-xs sm:text-sm text-zinc-200 leading-relaxed">{currentCore.definition}</p>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-[#16543D]/20 border border-[#23B272]/30">
+              <div className="text-[10px] font-mono text-[#52E3A4] uppercase tracking-wider mb-2">OPERATIONAL BENCHMARK EXAMPLE</div>
+              <p className="text-xs sm:text-sm text-emerald-100 leading-relaxed font-mono">{currentCore.example}</p>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between text-xs font-mono pt-4 border-t border-white/[0.06]">
+            <span className="text-zinc-500">Continuous causal flow: Node {currentCore.step} of 11</span>
+            <Link
+              to="/engines/root-map"
+              className="text-[#52E3A4] hover:text-white font-bold transition-colors inline-flex items-center gap-1"
+            >
+              <span>Explore Interactive 13-Step Root Map Pipeline →</span>
+            </Link>
+          </div>
+        </div>
       </section>
 
-      {/* ── 05. Final Invitation ── */}
-      <section className="py-28 sm:py-36 px-6 sm:px-8 max-w-4xl mx-auto text-center border-t border-white/[0.06]">
-        <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-6">
-          Sync the Current.<br />
-          <span className="text-zinc-400 font-light">Unify your production pipeline.</span>
-        </h2>
-        <p className="text-base text-zinc-400 max-w-lg mx-auto leading-relaxed mb-10">
-          Have an entertainment project, resource requirement, or capacity opportunity? Start a Synq and tell us what needs to be connected.
-        </p>
-        <Link
-          to="/start"
-          className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white text-[#06080d] hover:bg-zinc-200 font-medium text-sm tracking-wide transition-all duration-200 active:scale-95 shadow-sm"
-        >
-          <span>Initiate a Synq</span>
-          <ArrowRight className="w-4 h-4" />
-        </Link>
+      {/* ══════════════════════════════════════════════════════
+          04. STRUCTURAL CAPACITY GAPS
+         ══════════════════════════════════════════════════════ */}
+      <section className="py-20 px-6 sm:px-8 border-t border-white/[0.06] bg-[#06080D]">
+        <div className="max-w-6xl mx-auto">
+          <div className="max-w-3xl mb-12">
+            <div className="text-xs font-mono text-[#52E3A4] mb-2 uppercase">STRUCTURAL CAPACITY FRACTURES</div>
+            <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight mb-4">
+              Where Cinema Leaks Velocity.
+            </h2>
+            <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
+              The assets and expertise exist. What has been absent is the neutral synchronization layer.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-2 mb-8">
+            {CAPACITY_GAPS.map((gap, idx) => (
+              <button
+                key={gap.id}
+                onClick={() => setActiveGapIdx(idx)}
+                className={`px-5 py-2.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
+                  activeGapIdx === idx
+                    ? 'bg-[#23B272] text-[#03040A] shadow-md'
+                    : 'bg-white/[0.04] text-zinc-400 hover:text-white border border-white/[0.08]'
+                }`}
+              >
+                {gap.title}
+              </button>
+            ))}
+          </div>
+
+          <div className="p-8 sm:p-10 rounded-3xl border border-white/[0.1] bg-[#090B14] grid grid-cols-1 md:grid-cols-2 gap-8 shadow-2xl">
+            <div className="space-y-4">
+              <span className="text-xs font-mono text-zinc-500 uppercase">{currentGap.category} // Conventional Friction</span>
+              <h3 className="text-xl font-bold text-white tracking-tight">{currentGap.title}</h3>
+              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">{currentGap.symptom}</p>
+            </div>
+
+            <div className="space-y-4 md:border-l md:border-white/[0.08] md:pl-8">
+              <span className="text-xs font-mono text-[#52E3A4] uppercase">DigiSynq Asset-Light Resolution</span>
+              <p className="text-xs sm:text-sm text-zinc-200 leading-relaxed">{currentGap.intervention}</p>
+              <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between text-xs">
+                <span className="text-zinc-500 font-mono">Validated Benchmark:</span>
+                <span className="text-[#52E3A4] font-mono font-bold">{currentGap.metric}</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
+      {/* ── Final Call to Action ── */}
+      <section className="py-20 px-6 sm:px-8 border-t border-white/[0.06] bg-gradient-to-b from-[#06130E] to-[#03040A] text-center">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-4">
+            Ready to stabilize your project's critical path?
+          </h2>
+          <p className="text-sm sm:text-base text-zinc-300 leading-relaxed mb-8">
+            Start a structured diagnostic to isolate the root cause behind your production or delivery bottleneck.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Link
+              to="/diagnose"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#23B272] text-[#03040A] hover:bg-[#52E3A4] font-bold text-sm tracking-wide transition-all shadow-[0_0_30px_rgba(35,178,114,0.35)]"
+            >
+              <span>Diagnose a Problem</span>
+              <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+            </Link>
+            <Link
+              to="/start"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-white/14 hover:border-white/25 bg-white/[0.03] text-white font-medium text-sm transition-all"
+            >
+              <span>Start a SYNQ Case</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

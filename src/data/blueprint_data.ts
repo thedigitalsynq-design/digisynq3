@@ -1078,3 +1078,168 @@ export const ROADMAP_PHASES = [
     status: 'VISION',
   },
 ];
+
+// ── 59. Canonical Operating Model (Core System & Public Explanation) ───────────
+export interface CoreChainStage {
+  step: string;
+  name: string;
+  category: 'SURFACE' | 'SYSTEMIC' | 'RESOLUTION' | 'IMMUNITY';
+  definition: string;
+  example: string;
+  interrogation: string;
+}
+
+export const CORE_OPERATING_CHAIN: CoreChainStage[] = [
+  {
+    step: '01',
+    name: 'PROBLEM',
+    category: 'SURFACE',
+    definition: 'The overarching breakdown or schedule disruption threatening production viability.',
+    example: 'Principal photography on Stage 3 is 4 days behind with an immovable release window.',
+    interrogation: 'What is the immediate crisis threatening the project?',
+  },
+  {
+    step: '02',
+    name: 'SYMPTOM',
+    category: 'SURFACE',
+    definition: 'The observable surface alarm or warning flag visible to department heads.',
+    example: 'Standby camera packages idling at $18k/day; soundstage eviction notice issued.',
+    interrogation: 'What is visibly failing or sounding an alarm right now?',
+  },
+  {
+    step: '03',
+    name: 'EVENT',
+    category: 'SURFACE',
+    definition: 'The specific chronological rupture or milestone failure that triggered the alarm.',
+    example: 'Lead actor call sheet shifted by 6 days due to uncoordinated shooting order revision.',
+    interrogation: 'What specific event or milestone slip occurred?',
+  },
+  {
+    step: '04',
+    name: 'CONDITION',
+    category: 'SYSTEMIC',
+    definition: 'The structural environmental vulnerability or lack of elasticity that enabled the shock.',
+    example: 'Zero buffer days in stage turnover schedule; rigid back-to-back tenant handover.',
+    interrogation: 'What fragile conditions allowed this shock to create systemic chaos?',
+  },
+  {
+    step: '05',
+    name: 'DEPENDENCY',
+    category: 'SYSTEMIC',
+    definition: 'The interconnected critical-path links that propagate the failure downstream.',
+    example: 'Stage turn depends on lighting teardown → depends on VFX plate wrap → depends on lead actor.',
+    interrogation: 'What downstream departments and milestones are bound to this node?',
+  },
+  {
+    step: '06',
+    name: 'ROOT CAUSE',
+    category: 'SYSTEMIC',
+    definition: 'The underlying structural or behavioral origin — unhedged by local triage.',
+    example: 'Script rewrite injected 4 practical stunt setups without recalculating turnaround rest hours.',
+    interrogation: 'Why did the condition exist in the first place?',
+  },
+  {
+    step: '07',
+    name: 'MISSING CAPABILITY',
+    category: 'SYSTEMIC',
+    definition: 'The precise operational asset, legal covenant, or capacity absent from the production.',
+    example: 'Dynamic scene clustering capability and overflow access to an adjacent dark-floor stage.',
+    interrogation: 'What specific capability, tool, or resource was missing to handle this?',
+  },
+  {
+    step: '08',
+    name: 'INTERVENTION',
+    category: 'RESOLUTION',
+    definition: 'The structured, time-bounded SYNQ protocol executed with single-point accountability.',
+    example: 'Resequence interior dialogue scenes to Stage 4 dark floor; re-cluster exterior stunt units.',
+    interrogation: 'What structured intervention arrests the cascade and restores buffer?',
+  },
+  {
+    step: '09',
+    name: 'OUTCOME',
+    category: 'RESOLUTION',
+    definition: 'The deterministic, verifiable delta produced compared to uncoordinated failure.',
+    example: '5.5 schedule buffer days recovered; $84,000 in idle gear and stage penalties avoided.',
+    interrogation: 'What verified value, days, or capital were saved?',
+  },
+  {
+    step: '10',
+    name: 'LEARNING',
+    category: 'IMMUNITY',
+    definition: 'The systemic codification of the failure signature and effective remediation path.',
+    example: 'Script rewrite impact coefficient logged; turnaround buffer covenants codified.',
+    interrogation: 'What institutional insight was extracted from this resolution?',
+  },
+  {
+    step: '11',
+    name: 'PREVENTION',
+    category: 'IMMUNITY',
+    definition: 'The automated guardrail or telemetry rule that prevents identical recurrence.',
+    example: 'Algorithmic early-warning flag triggers if stunt rewrite occurs within 14 days of camera roll.',
+    interrogation: 'How does the DigiSynq system permanently prevent this failure across the network?',
+  },
+];
+
+export interface PublicExplanationStage {
+  step: string;
+  name: string;
+  tagline: string;
+  input: string;
+  action: string;
+  output: string;
+  next: string;
+  iconName: string;
+}
+
+export const PUBLIC_EXPLANATION_STAGES: PublicExplanationStage[] = [
+  {
+    step: '01',
+    name: 'SENSE',
+    tagline: 'Continuous Ecosystem Telemetry',
+    input: 'Daily production reports, dark-floor stage logs, crew call sheets, budget burn curves.',
+    action: 'Continuously ingest operational signals across all 9 continuum stages without manual friction.',
+    output: 'Normalized telemetry timeline with early anomaly detection and variance flags.',
+    next: '02 DIAGNOSE',
+    iconName: 'Eye',
+  },
+  {
+    step: '02',
+    name: 'DIAGNOSE',
+    tagline: 'Root-Cause Decomposition',
+    input: 'Anomaly flag or reported operational friction (e.g. stage eviction warning).',
+    action: 'Decompose surface symptoms across 6 problem domains to isolate actual structural cause.',
+    output: 'Classified root failure: unhedged script rewrite vs permit delay vs crew turn.',
+    next: '03 MAP',
+    iconName: 'Search',
+  },
+  {
+    step: '03',
+    name: 'MAP',
+    tagline: 'Multi-Party Blast Radius',
+    input: 'Identified root cause and affected production milestones.',
+    action: 'Traverse the entertainment dependency graph to calculate cascade blast radius across downstream nodes.',
+    output: 'Visualized dependency graph linking downstream VFX plates, stages, and talent locks.',
+    next: '04 SYNQ',
+    iconName: 'GitBranch',
+  },
+  {
+    step: '04',
+    name: 'SYNQ',
+    tagline: 'Structured Intervention Execution',
+    input: 'Blast radius map, missing capability specification, and network availability constraints.',
+    action: 'Match and route demand to verified partner capacity; execute time-bounded sprint under SLA covenants.',
+    output: 'Executed operational intervention: partner dark stage activated, burst VFX deployed, scene resequenced.',
+    next: '05 CONTROL',
+    iconName: 'Zap',
+  },
+  {
+    step: '05',
+    name: 'CONTROL',
+    tagline: 'Deterministic Value & System Memory',
+    input: 'Post-intervention timeline, verified delivery checks, and post-sprint milestones.',
+    action: 'Audit real outcomes against counterfactual baseline; deposit resolution pattern into System Memory.',
+    output: 'Verified System Value Created (days & dollars saved) + automated prevention guardrail.',
+    next: '01 SENSE (Continuous Lifecycle Feedback)',
+    iconName: 'ShieldCheck',
+  },
+];
