@@ -432,15 +432,15 @@ export function MechanismsPage() {
   };
 
   return (
-    <main className="bg-[#03040A] text-[#ECEEF5] selection:bg-[#23B272] selection:text-[#03040A] min-h-screen pt-36 pb-24 px-6 sm:px-8 max-w-6xl mx-auto relative overflow-hidden">
+    <main className="bg-[#03040A] text-[#ECEEF5] selection:bg-white selection:text-black min-h-screen pt-36 pb-24 px-6 sm:px-8 max-w-6xl mx-auto relative overflow-hidden">
       <TopographicBackground className="opacity-20 pointer-events-none -z-10 fixed inset-0" />
 
       {/* ── System Header & OS Status ── */}
       <div className="max-w-4xl mb-12">
         <div className="flex items-center gap-3 mb-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-white/10 bg-white/[0.03] text-xs font-mono">
-            <span className="w-2 h-2 rounded-full bg-[#52E3A4] animate-pulse" />
-            <span className="text-[#52E3A4] font-semibold">DIGISYNQ OS v3.2</span>
+            <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+            <span className="text-white font-semibold">DIGISYNQ OS v3.2</span>
             <span className="text-zinc-600">//</span>
             <span className="text-zinc-400">23 OPERATIONAL CONTROL MECHANISMS</span>
           </div>
@@ -468,7 +468,7 @@ export function MechanismsPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search mechanisms by name, number, or keyword..."
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-white/10 bg-black/50 text-white placeholder-zinc-500 text-xs font-mono focus:border-[#52E3A4] focus:outline-none"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-white/10 bg-black/50 text-white placeholder-zinc-500 text-xs font-mono focus:border-white/20 focus:outline-none"
               />
             </div>
 
@@ -508,7 +508,7 @@ export function MechanismsPage() {
                   setFunctionFilter('ALL');
                   setSearchQuery('');
                 }}
-                className="text-[#52E3A4] hover:underline ml-auto"
+                className="text-white hover:underline ml-auto"
               >
                 Reset Filters
               </button>
@@ -528,7 +528,7 @@ export function MechanismsPage() {
                 onClick={() => setSelectedNum(mech.num)}
                 className={`p-3 rounded-xl border text-center transition-all min-w-[76px] cursor-pointer ${
                   isSelected
-                    ? 'bg-[#23B272] text-[#03040A] border-[#52E3A4] font-bold shadow-lg scale-105'
+                    ? 'bg-white text-black border-white/20 font-bold shadow-lg scale-105'
                     : 'bg-[#090B14] border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/20'
                 }`}
               >
@@ -541,16 +541,16 @@ export function MechanismsPage() {
       </div>
 
       {/* ── Active Mechanism OS Console Inspector ── */}
-      <div className="p-8 sm:p-10 rounded-3xl border border-white/[0.1] bg-gradient-to-br from-[#06130E] via-[#090B14] to-[#04060C] shadow-2xl relative overflow-hidden mb-14">
+      <div className="p-8 sm:p-10 rounded-3xl border border-white/[0.1] bg-gradient-to-br from-[#090B14] via-[#06070B] to-[#04060C] shadow-2xl relative overflow-hidden mb-14">
         {/* Console Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-8 border-b border-white/[0.08]">
           <div className="flex items-center gap-4">
-            <span className="w-12 h-12 rounded-2xl bg-[#23B272]/20 border border-[#23B272]/40 flex items-center justify-center font-mono font-bold text-lg text-[#52E3A4]">
+            <span className="w-12 h-12 rounded-2xl bg-white/[0.08] border border-white/20 flex items-center justify-center font-mono font-bold text-lg text-white">
               {activeMech.num}
             </span>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-mono text-xs text-[#52E3A4] font-semibold">{activeMech.functionGroup}</span>
+                <span className="font-mono text-xs text-white font-semibold">{activeMech.functionGroup}</span>
                 <span className="text-zinc-600">//</span>
                 <span className="font-mono text-xs text-zinc-400">{activeMech.formulaOrRule}</span>
               </div>
@@ -579,7 +579,7 @@ export function MechanismsPage() {
 
         {/* Purpose Banner */}
         <div className="p-5 rounded-2xl bg-black/40 border border-white/[0.06] mb-8">
-          <span className="text-[11px] font-mono text-[#52E3A4] uppercase tracking-wider block mb-1">
+          <span className="text-[11px] font-mono text-white uppercase tracking-wider block mb-1">
             MECHANISM PURPOSE
           </span>
           <p className="text-sm sm:text-base text-zinc-200 leading-relaxed font-light">
@@ -591,7 +591,7 @@ export function MechanismsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <div className="p-4 rounded-xl bg-[#090B14] border border-white/[0.06]">
             <div className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
+              <span className="w-1.5 h-1.5 rounded-full bg-white" />
               <span>INPUT ARTIFACT</span>
             </div>
             <p className="text-xs text-zinc-300 leading-relaxed font-mono">{activeMech.input}</p>
@@ -599,7 +599,7 @@ export function MechanismsPage() {
 
           <div className="p-4 rounded-xl bg-[#090B14] border border-white/[0.06]">
             <div className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#52E3A4]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-white" />
               <span>SYSTEM PROCESS</span>
             </div>
             <p className="text-xs text-zinc-300 leading-relaxed font-mono">{activeMech.process}</p>
@@ -607,18 +607,18 @@ export function MechanismsPage() {
 
           <div className="p-4 rounded-xl bg-[#090B14] border border-white/[0.06]">
             <div className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+              <span className="w-1.5 h-1.5 rounded-full bg-white" />
               <span>VERIFIED OUTPUT</span>
             </div>
             <p className="text-xs text-zinc-300 leading-relaxed font-mono">{activeMech.output}</p>
           </div>
 
-          <div className="p-4 rounded-xl bg-[#16543D]/25 border border-[#23B272]/30">
-            <div className="text-[10px] font-mono text-[#52E3A4] uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#52E3A4]" />
+          <div className="p-4 rounded-xl bg-white/[0.04] border border-white/15">
+            <div className="text-[10px] font-mono text-white uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-white" />
               <span>DECISION CRITERIA</span>
             </div>
-            <p className="text-xs text-emerald-100 leading-relaxed font-mono">{activeMech.decision}</p>
+            <p className="text-xs text-zinc-300 leading-relaxed font-mono">{activeMech.decision}</p>
           </div>
         </div>
 
@@ -640,7 +640,7 @@ export function MechanismsPage() {
                 <Link
                   key={i}
                   to="/stakeholders"
-                  className="px-2 py-0.5 rounded bg-white/[0.04] text-[#52E3A4] hover:underline"
+                  className="px-2 py-0.5 rounded bg-white/[0.04] text-white hover:underline"
                 >
                   {stk}
                 </Link>
@@ -652,7 +652,7 @@ export function MechanismsPage() {
             <span className="text-zinc-500 uppercase block mb-1.5 text-[10px]">CONTINUUM STAGE</span>
             <Link
               to="/continuum"
-              className="text-white hover:text-[#52E3A4] underline truncate block mt-1"
+              className="text-white hover:text-white underline truncate block mt-1"
             >
               {activeMech.relatedContinuumStage} →
             </Link>
@@ -660,7 +660,7 @@ export function MechanismsPage() {
 
           <div>
             <span className="text-zinc-500 uppercase block mb-1.5 text-[10px]">SEQUENTIAL HANDOFF</span>
-            <div className="text-[#52E3A4] font-bold truncate mt-1">
+            <div className="text-white font-bold truncate mt-1">
               → Next: {activeMech.nextMechanism}
             </div>
           </div>
@@ -674,7 +674,7 @@ export function MechanismsPage() {
           <div className="flex items-center gap-3">
             <Link
               to="/diagnose"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#23B272] text-[#03040A] hover:bg-[#52E3A4] font-bold text-xs tracking-wide transition-all shadow-md"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black hover:bg-zinc-200 font-bold text-xs tracking-wide transition-all shadow-md"
             >
               <span>Diagnose Issue with M{activeMech.num}</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -693,9 +693,9 @@ export function MechanismsPage() {
       {/* ══════════════════════════════════════════════════════
           M07 PRIORITY FORMULA CALCULATOR CONSOLE
          ══════════════════════════════════════════════════════ */}
-      <section className="p-8 sm:p-10 rounded-3xl border border-[#23B272]/30 bg-gradient-to-br from-[#06130E] via-[#090B14] to-[#04060C] shadow-2xl relative overflow-hidden">
+      <section className="p-8 sm:p-10 rounded-3xl border border-white/15 bg-gradient-to-br from-[#090B14] via-[#06070B] to-[#04060C] shadow-2xl relative overflow-hidden">
         <div className="max-w-2xl mb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#23B272]/20 border border-[#23B272]/40 text-[#52E3A4] font-mono text-xs font-semibold mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.08] border border-white/20 text-white font-mono text-xs font-semibold mb-3">
             <Calculator className="w-3.5 h-3.5" />
             <span>M07 ALGORITHMIC PRIORITY CALCULATOR</span>
           </div>
@@ -713,7 +713,7 @@ export function MechanismsPage() {
             <div>
               <div className="flex justify-between text-zinc-400 mb-1">
                 <span>Urgency (1-10):</span>
-                <span className="text-[#52E3A4] font-bold">{urgency}</span>
+                <span className="text-white font-bold">{urgency}</span>
               </div>
               <input
                 type="range"
@@ -721,14 +721,14 @@ export function MechanismsPage() {
                 max="10"
                 value={urgency}
                 onChange={(e) => setUrgency(Number(e.target.value))}
-                className="w-full accent-[#23B272]"
+                className="w-full accent-white"
               />
             </div>
 
             <div>
               <div className="flex justify-between text-zinc-400 mb-1">
                 <span>Blast Radius (1-10):</span>
-                <span className="text-[#52E3A4] font-bold">{blastRadius}</span>
+                <span className="text-white font-bold">{blastRadius}</span>
               </div>
               <input
                 type="range"
@@ -736,14 +736,14 @@ export function MechanismsPage() {
                 max="10"
                 value={blastRadius}
                 onChange={(e) => setBlastRadius(Number(e.target.value))}
-                className="w-full accent-[#23B272]"
+                className="w-full accent-white"
               />
             </div>
 
             <div>
               <div className="flex justify-between text-zinc-400 mb-1">
                 <span>Cost Velocity (1-10):</span>
-                <span className="text-[#52E3A4] font-bold">{costVelocity}</span>
+                <span className="text-white font-bold">{costVelocity}</span>
               </div>
               <input
                 type="range"
@@ -751,7 +751,7 @@ export function MechanismsPage() {
                 max="10"
                 value={costVelocity}
                 onChange={(e) => setCostVelocity(Number(e.target.value))}
-                className="w-full accent-[#23B272]"
+                className="w-full accent-white"
               />
             </div>
 
@@ -776,7 +776,7 @@ export function MechanismsPage() {
             <span className="text-[11px] font-mono text-zinc-500 uppercase tracking-wider block mb-2">
               CALCULATED PRIORITY SCORE
             </span>
-            <div className="text-4xl sm:text-5xl font-black text-[#52E3A4] font-mono mb-2">
+            <div className="text-4xl sm:text-5xl font-black text-white font-mono mb-2">
               {priorityScore}
             </div>
             <div className="text-xs font-mono text-zinc-400 mb-4">
@@ -788,7 +788,7 @@ export function MechanismsPage() {
             </div>
             <Link
               to="/diagnose"
-              className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#52E3A4] hover:underline"
+              className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-white hover:underline"
             >
               <span>Transfer to Diagnostic Engine →</span>
             </Link>

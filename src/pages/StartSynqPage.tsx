@@ -43,24 +43,28 @@ const STAKEHOLDER_ROLES = [
 ];
 
 const CONTINUUM_STAGES = [
-  '01. Idea / Inception',
-  '02. Development & Packaging',
-  '03. Pre-Production & Prep',
-  '04. Production (Principal Photography)',
-  '05. Post-Production & VFX Finishing',
-  '06. Marketing & Asset Creation',
-  '07. Distribution & Platform Ingest',
-  '08. Audience & Exhibition',
-  '09. Monetization & Recoupment'
+  'Idea / Inception',
+  'Development & Packaging',
+  'Pre-Production & Prep',
+  'Production (Principal Photography)',
+  'Post-Production & VFX Finishing',
+  'Marketing & Asset Creation',
+  'Distribution & Platform Ingest',
+  'Audience & Exhibition',
+  'Monetization & Recoupment'
 ];
 
 const SUPPORT_TYPES = [
+  'BU-01: SYNQ.TALENT (Talent Verification & Role Matching)',
+  'BU-02: SYNQ.CASCADE (Live Schedule & Dependency Telemetry)',
+  'BU-03: SYNQ.FINISH (Post, VFX & Platform QC Synchronization)',
+  'BU-04: SYNQ.RIGHTS (Chain-of-Title & Royalty Recovery)',
+  'BU-05: SYNQ.RADAR (Pre-Greenlight Demand & Audience Forecasting)',
+  'BU-06: SYNQ.LIVE (Multi-Vendor Event Coordination OS)',
   'Emergency Bottleneck Diagnostic',
-  'Missing Capability & Crew Matching',
-  'Dark-Date Soundstage / Facility Floor Liquidity',
   'Downstream Cascade Simulation & Audit',
   'Multi-Party Coordination Covenant',
-  'Pre-Greenlight Schedule Risk Assessment'
+  'Dark-Date Soundstage / Facility Floor Liquidity'
 ];
 
 export function StartSynqPage() {
@@ -69,6 +73,8 @@ export function StartSynqPage() {
   const paramCaseId = searchParams.get('caseId');
   const paramStage = searchParams.get('stage');
   const paramProblem = searchParams.get('problem');
+  const paramUnit = searchParams.get('unit');
+  const paramTier = searchParams.get('tier');
 
   // Form State
   const [stakeholder, setStakeholder] = useState('');
@@ -77,12 +83,18 @@ export function StartSynqPage() {
   const [problem, setProblem] = useState(paramProblem || '');
   const [impact, setImpact] = useState('');
   const [resources, setResources] = useState('');
-  const [support, setSupport] = useState<string[]>([]);
+  const [support, setSupport] = useState<string[]>(() => {
+    if (paramUnit) {
+      const match = SUPPORT_TYPES.find(s => s.includes(paramUnit));
+      return match ? [match] : [];
+    }
+    return [];
+  });
   const [contactName, setContactName] = useState('');
   const [contactEmail, setContactEmail] = useState('');
   const [contactPhone, setContactPhone] = useState('');
-  const [contactRole, setContactRole] = useState('');
-  const [notes, setNotes] = useState('');
+  const [contactRole, setContactRole] = useState(paramTier ? `Contract Tier: ${paramTier}` : '');
+  const [notes, setNotes] = useState(paramTier ? `Requested Enterprise Contract: ${paramTier} under Unit ${paramUnit || ''}` : '');
   const [honeypot, setHoneypot] = useState(''); // Spam mitigation trap
 
   // Submission State
@@ -176,10 +188,10 @@ export function StartSynqPage() {
       {/* Header */}
       <header className="mb-12 max-w-4xl">
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-white/10 bg-white/[0.03] text-xs text-zinc-300 font-mono mb-4">
-          <span className="w-2 h-2 rounded-full bg-[#52E3A4] animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
           <span>PRODUCTION INTAKE GATEWAY</span>
           <span className="text-zinc-600">//</span>
-          <span className="text-[#52E3A4]">SYNQ CASE REGISTRATION</span>
+          <span className="text-white">SYNQ CASE REGISTRATION</span>
         </div>
 
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-4">
@@ -198,43 +210,44 @@ export function StartSynqPage() {
       {receivedCase && (
         <section
           aria-live="polite"
-          className="mb-12 p-8 sm:p-10 rounded-2xl border-2 border-[#52E3A4] bg-[#090B14] shadow-2xl relative overflow-hidden"
+          className="mb-12 p-8 sm:p-10 rounded-2xl border-2 border-white/20 bg-[#090B14] shadow-2xl relative overflow-hidden"
         >
           <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
-            <ShieldCheck className="w-48 h-48 text-[#52E3A4]" />
+            <ShieldCheck className="w-48 h-48 text-white" />
           </div>
 
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#16543D] text-[#52E3A4] font-mono text-xs font-semibold mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#090B14] text-white font-mono text-xs font-semibold mb-4">
             <Check className="w-3.5 h-3.5" />
-            <span>CASE RECEIVED & REGISTERED</span>
+            <span>CASE PREPARED &amp; REGISTERED LOCALLY</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
-            CASE RECEIVED
+            CASE REGISTERED
           </h2>
 
           <p className="text-base text-zinc-300 font-light mb-6 max-w-2xl">
-            Your operational synchronization request has been accepted by the DigiSynq intake gateway and assigned to our triage desk.
+            Your operational synchronization request has been validated and recorded into your local browser session ledger. This case ID can be queried directly or passed to the Cascade Simulation Engine.
           </p>
 
           {/* Case ID Box */}
-          <div className="p-6 rounded-xl border border-[#52E3A4]/40 bg-[#16543D]/20 mb-8 max-w-xl">
+          <div className="p-6 rounded-xl border border-white/20 bg-white/[0.03] mb-8 max-w-xl">
             <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider block mb-1">
               Your DigiSynq Case ID is:
             </span>
             <div className="flex items-center justify-between gap-4">
-              <span className="font-mono text-2xl sm:text-3xl font-bold text-[#52E3A4] tracking-wider">
+              <span className="font-mono text-2xl sm:text-3xl font-bold text-white tracking-wider">
                 {receivedCase.caseId}
               </span>
               <button
                 onClick={() => copyCaseId(receivedCase.caseId)}
-                className="px-3 py-1.5 rounded-lg border border-[#52E3A4]/40 bg-[#52E3A4]/10 hover:bg-[#52E3A4]/20 text-xs font-mono text-[#52E3A4] flex items-center gap-1.5 transition-colors"
+                className="px-3 py-1.5 rounded-lg border border-white/20 bg-white/[0.05] hover:bg-zinc-200/20 text-xs font-mono text-white flex items-center gap-1.5 transition-colors"
               >
                 {copiedId ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                 <span>{copiedId ? 'Copied' : 'Copy ID'}</span>
               </button>
             </div>
-            <div className="mt-3 pt-3 border-t border-[#52E3A4]/20 flex items-center justify-between text-xs font-mono text-zinc-400">
+            <div className="mt-3 pt-3 border-t border-white/20/20 flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-zinc-400">
+              <span>LEDGER: <strong className="text-white">Local Encrypted Cache</strong></span>
               <span>INITIAL STATUS: <strong className="text-white">{receivedCase.status}</strong></span>
               <span>TIMESTAMP: {new Date(receivedCase.createdAt).toLocaleTimeString()}</span>
             </div>
@@ -273,7 +286,7 @@ export function StartSynqPage() {
             </button>
             <Link
               to={`/engines/cascade?caseId=${receivedCase.caseId}`}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#52E3A4] text-[#03040A] text-xs font-semibold hover:bg-[#34D399] transition-colors"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-white text-[#03040A] text-xs font-semibold hover:bg-[#34D399] transition-colors"
             >
               <span>Simulate Downstream Blast Radius</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -295,7 +308,7 @@ export function StartSynqPage() {
                 FIELD SPECIFICATIONS // STRICT CONFIDENTIALITY GUARANTEED
               </p>
             </div>
-            <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-[#52E3A4] bg-[#16543D]/40 px-3 py-1 rounded-lg border border-[#52E3A4]/30">
+            <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-white bg-white/[0.05] px-3 py-1 rounded-lg border border-white/15">
               <ShieldCheck className="w-3.5 h-3.5" />
               <span>Clean-Room Protocol</span>
             </div>
@@ -327,13 +340,13 @@ export function StartSynqPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
-                  Stakeholder Role <span className="text-[#52E3A4]">*</span>
+                  Stakeholder Role <span className="text-white">*</span>
                 </label>
                 <select
                   required
                   value={stakeholder}
                   onChange={(e) => setStakeholder(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white focus:outline-none focus:border-[#52E3A4] transition-colors"
+                  className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white focus:outline-none focus:border-white/20 transition-colors"
                 >
                   <option value="" disabled className="bg-[#090B14] text-zinc-500">
                     Select your primary stakeholder role...
@@ -348,7 +361,7 @@ export function StartSynqPage() {
 
               <div>
                 <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
-                  Project Title / Working Name <span className="text-[#52E3A4]">*</span>
+                  Project Title / Working Name <span className="text-white">*</span>
                 </label>
                 <input
                   type="text"
@@ -356,7 +369,7 @@ export function StartSynqPage() {
                   placeholder="e.g. Project Meridian / Untitled Feature"
                   value={project}
                   onChange={(e) => setProject(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#52E3A4] transition-colors"
+                  className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-white/20 transition-colors"
                 />
               </div>
             </div>
@@ -364,13 +377,13 @@ export function StartSynqPage() {
             {/* Row 2: Continuum Stage */}
             <div>
               <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
-                Current Continuum Stage <span className="text-[#52E3A4]">*</span>
+                Current Continuum Stage <span className="text-white">*</span>
               </label>
               <select
                 required
                 value={stage}
                 onChange={(e) => setStage(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white focus:outline-none focus:border-[#52E3A4] transition-colors"
+                className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white focus:outline-none focus:border-white/20 transition-colors"
               >
                 <option value="" disabled className="bg-[#090B14] text-zinc-500">
                   Select the lifecycle stage where the rupture is occurring...
@@ -386,7 +399,7 @@ export function StartSynqPage() {
             {/* Row 3: Problem Description */}
             <div>
               <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
-                Operational Problem / System Rupture <span className="text-[#52E3A4]">*</span>
+                Operational Problem / System Rupture <span className="text-white">*</span>
               </label>
               <textarea
                 required
@@ -394,7 +407,7 @@ export function StartSynqPage() {
                 placeholder="Describe what is breaking: timeline delay, vendor insolvency, stage conflict, missing capability, or coordination breakdown..."
                 value={problem}
                 onChange={(e) => setProblem(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#52E3A4] transition-colors leading-relaxed"
+                className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-white/20 transition-colors leading-relaxed"
               />
             </div>
 
@@ -409,7 +422,7 @@ export function StartSynqPage() {
                   placeholder="e.g. 5 days behind, $45K/day unit cost burn"
                   value={impact}
                   onChange={(e) => setImpact(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#52E3A4] transition-colors"
+                  className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-white/20 transition-colors"
                 />
               </div>
 
@@ -422,7 +435,7 @@ export function StartSynqPage() {
                   placeholder="e.g. Stage 4 soundstage, ARRI Alexa 35 package"
                   value={resources}
                   onChange={(e) => setResources(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#52E3A4] transition-colors"
+                  className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-white/20 transition-colors"
                 />
               </div>
             </div>
@@ -442,7 +455,7 @@ export function StartSynqPage() {
                       onClick={() => toggleSupport(type)}
                       className={`p-3 rounded-xl border text-left text-xs font-mono transition-all flex items-center justify-between ${
                         isChecked
-                          ? 'bg-[#16543D]/50 border-[#52E3A4] text-white shadow'
+                          ? 'bg-white/[0.06] border-white/20 text-white shadow'
                           : 'bg-white/[0.01] border-white/10 text-zinc-400 hover:text-white hover:border-white/20'
                       }`}
                     >
@@ -450,7 +463,7 @@ export function StartSynqPage() {
                       <div
                         className={`w-4 h-4 rounded border flex items-center justify-center ${
                           isChecked
-                            ? 'bg-[#52E3A4] border-[#52E3A4] text-[#03040A]'
+                            ? 'bg-white border-white/20 text-[#03040A]'
                             : 'border-white/20'
                         }`}
                       >
@@ -464,13 +477,13 @@ export function StartSynqPage() {
 
             {/* Row 6: Contact Information */}
             <div className="pt-4 border-t border-white/10">
-              <span className="text-xs font-mono text-[#52E3A4] uppercase tracking-wider block mb-4">
+              <span className="text-xs font-mono text-white uppercase tracking-wider block mb-4">
                 Primary Contact Credentials
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
-                    Contact Name <span className="text-[#52E3A4]">*</span>
+                    Contact Name <span className="text-white">*</span>
                   </label>
                   <input
                     type="text"
@@ -478,13 +491,13 @@ export function StartSynqPage() {
                     placeholder="Full name"
                     value={contactName}
                     onChange={(e) => setContactName(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#52E3A4] transition-colors"
+                    className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-white/20 transition-colors"
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
-                    Business Email <span className="text-[#52E3A4]">*</span>
+                    Business Email <span className="text-white">*</span>
                   </label>
                   <input
                     type="email"
@@ -492,7 +505,7 @@ export function StartSynqPage() {
                     placeholder="name@production.com"
                     value={contactEmail}
                     onChange={(e) => setContactEmail(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#52E3A4] transition-colors"
+                    className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-white/20 transition-colors"
                   />
                 </div>
 
@@ -505,7 +518,7 @@ export function StartSynqPage() {
                     placeholder="+1 (555) 000-0000"
                     value={contactPhone}
                     onChange={(e) => setContactPhone(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#52E3A4] transition-colors"
+                    className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-white/20 transition-colors"
                   />
                 </div>
 
@@ -518,7 +531,7 @@ export function StartSynqPage() {
                     placeholder="e.g. Line Producer / Post Supervisor"
                     value={contactRole}
                     onChange={(e) => setContactRole(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#52E3A4] transition-colors"
+                    className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-white/20 transition-colors"
                   />
                 </div>
               </div>
@@ -534,7 +547,7 @@ export function StartSynqPage() {
                 placeholder="Special NDAs, time-zone constraints, guild requirements..."
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#52E3A4] transition-colors"
+                className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-white/20 transition-colors"
               />
             </div>
 
@@ -543,7 +556,7 @@ export function StartSynqPage() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#52E3A4] text-[#03040A] font-bold text-sm hover:bg-[#34D399] transition-all flex items-center justify-center gap-2 shadow-lg disabled:opacity-50 disabled:pointer-events-none"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white text-[#03040A] font-bold text-sm hover:bg-[#34D399] transition-all flex items-center justify-center gap-2 shadow-lg disabled:opacity-50 disabled:pointer-events-none"
               >
                 {isSubmitting ? (
                   <>
@@ -566,7 +579,7 @@ export function StartSynqPage() {
           {/* Tracker Card */}
           <div className="p-6 rounded-2xl border border-white/10 bg-[#090B14] shadow-lg">
             <h3 className="text-lg font-bold text-white mb-2 flex items-center gap-2">
-              <Search className="w-4 h-4 text-[#52E3A4]" />
+              <Search className="w-4 h-4 text-white" />
               <span>Track Existing Case</span>
             </h3>
             <p className="text-xs text-zinc-400 mb-4 font-light">
@@ -579,7 +592,7 @@ export function StartSynqPage() {
                 placeholder="e.g. SYNC-2026-AB123"
                 value={lookupId}
                 onChange={(e) => setLookupId(e.target.value)}
-                className="w-full px-3.5 py-2 rounded-xl border border-white/10 bg-white/[0.02] text-xs font-mono text-white placeholder-zinc-500 focus:outline-none focus:border-[#52E3A4]"
+                className="w-full px-3.5 py-2 rounded-xl border border-white/10 bg-white/[0.02] text-xs font-mono text-white placeholder-zinc-500 focus:outline-none focus:border-white/20"
               />
               <button
                 type="submit"
@@ -596,10 +609,10 @@ export function StartSynqPage() {
                 {searchedCase ? (
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="font-mono text-xs text-[#52E3A4] font-bold">
+                      <span className="font-mono text-xs text-white font-bold">
                         {searchedCase.caseId}
                       </span>
-                      <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-[#16543D] text-[#52E3A4] border border-[#52E3A4]/30">
+                      <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-[#090B14] text-white border border-white/15">
                         {searchedCase.status}
                       </span>
                     </div>
@@ -627,21 +640,21 @@ export function StartSynqPage() {
 
           {/* SLA & Operating Protocol */}
           <div className="p-6 rounded-2xl border border-white/10 bg-[#090B14] shadow-lg">
-            <h4 className="text-xs font-mono uppercase tracking-wider text-[#52E3A4] mb-3 font-semibold flex items-center gap-2">
+            <h4 className="text-xs font-mono uppercase tracking-wider text-white mb-3 font-semibold flex items-center gap-2">
               <Clock className="w-3.5 h-3.5" />
               <span>Response Protocol SLA</span>
             </h4>
             <ul className="space-y-3 text-xs text-zinc-400 font-light">
               <li className="flex items-start gap-2">
-                <span className="text-[#52E3A4] font-mono font-bold">•</span>
+                <span className="text-white font-mono font-bold">•</span>
                 <span><strong>Emergency Sets:</strong> Triage response within 60 minutes for active principal photography freezes.</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-[#52E3A4] font-mono font-bold">•</span>
+                <span className="text-white font-mono font-bold">•</span>
                 <span><strong>Post / VFX Bottlenecks:</strong> Dependency map and candidate matches delivered within 12 hours.</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-[#52E3A4] font-mono font-bold">•</span>
+                <span className="text-white font-mono font-bold">•</span>
                 <span><strong>Neutral Governance:</strong> Standardized clean-room multi-party covenants protect all proprietary IP.</span>
               </li>
             </ul>

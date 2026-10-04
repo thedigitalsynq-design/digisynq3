@@ -161,14 +161,14 @@ export function HomePage() {
   ];
 
   return (
-    <main className="bg-[#03040A] text-[#ECEEF5] selection:bg-[#23B272] selection:text-[#03040A] min-h-screen relative overflow-hidden">
+    <main className="bg-[#03040A] text-[#ECEEF5] selection:bg-white selection:text-black min-h-screen relative overflow-hidden">
       {/* ── Topographic Background Canvas ── */}
       <TopographicBackground className="opacity-35 pointer-events-none -z-10" />
 
       {/* ── Ambient Atmosphere ── */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-gradient-to-b from-[#23B272]/20 via-[#16543D]/10 to-transparent blur-[160px] pointer-events-none -z-10" />
-      <div className="absolute top-[1800px] -left-48 w-[600px] h-[600px] bg-[#52E3A4]/6 blur-[180px] pointer-events-none -z-10" />
-      <div className="absolute top-[3600px] -right-48 w-[700px] h-[700px] bg-[#23B272]/6 blur-[180px] pointer-events-none -z-10" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-gradient-to-b from-white/[0.08] via-white/[0.03] to-transparent blur-[160px] pointer-events-none -z-10" />
+      <div className="absolute top-[1800px] -left-48 w-[600px] h-[600px] bg-white/[0.03] blur-[180px] pointer-events-none -z-10" />
+      <div className="absolute top-[3600px] -right-48 w-[700px] h-[700px] bg-white/[0.03] blur-[180px] pointer-events-none -z-10" />
 
       {/* ══════════════════════════════════════════════════════
           01 — HERO: MASTER METAPHORIC STATEMENT & DYNAMIC CONSOLE
@@ -177,8 +177,8 @@ export function HomePage() {
         <div className="max-w-4xl mx-auto text-center">
           {/* Eyebrow badge */}
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.1] bg-white/[0.03] text-xs text-zinc-300 mb-8 tracking-wide backdrop-blur-xl">
-            <span className="w-2 h-2 rounded-full bg-[#52E3A4] animate-pulse" />
-            <span className="font-mono text-[#52E3A4] font-semibold">ENTERTAINMENT SYNCHRONIZATION INFRASTRUCTURE</span>
+            <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+            <span className="font-mono text-white font-semibold">ENTERTAINMENT SYNCHRONIZATION INFRASTRUCTURE</span>
             <span className="text-zinc-600">//</span>
             <span className="text-zinc-400 font-medium">ROOT-CAUSE ORCHESTRATION</span>
           </div>
@@ -186,7 +186,7 @@ export function HomePage() {
           {/* Master Clear H1 */}
           <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-white leading-[1.03] [letter-spacing:-0.035em] mb-6">
             When the entertainment system breaks,
-            <span className="text-[#52E3A4] block text-3xl sm:text-5xl md:text-6xl lg:text-7xl mt-2 font-extrabold">
+            <span className="text-white block text-3xl sm:text-5xl md:text-6xl lg:text-7xl mt-2 font-extrabold">
               DigiSynq finds why.
             </span>
           </h1>
@@ -196,7 +196,7 @@ export function HomePage() {
             DigiSynq identifies the root causes behind production, talent, capacity, financing and distribution bottlenecks — then connects the right people, resources and decisions to resolve them.
           </h2>
 
-          <div className="text-xs sm:text-sm text-[#52E3A4] font-mono tracking-wide mb-10 font-semibold">
+          <div className="text-xs sm:text-sm text-white font-mono tracking-wide mb-10 font-semibold">
             {BRAND.mission} • {BRAND.tagline}
           </div>
 
@@ -204,7 +204,7 @@ export function HomePage() {
           <div className="flex flex-wrap items-center justify-center gap-4 mb-16">
             <Link
               to="/diagnose"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#23B272] text-[#03040A] hover:bg-[#52E3A4] font-bold text-sm tracking-wide transition-all duration-200 active:scale-95 shadow-[0_0_35px_rgba(35,178,114,0.4)]"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-black hover:bg-zinc-200 font-bold text-sm tracking-wide transition-all duration-200 active:scale-95 shadow-[0_0_30px_rgba(255,255,255,0.25)]"
               id="hero-diagnose-cta"
             >
               <span>Diagnose a Problem</span>
@@ -212,10 +212,19 @@ export function HomePage() {
             </Link>
 
             <Link
-              to="/the-synq"
-              className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white/14 hover:border-[#52E3A4]/40 bg-white/[0.04] hover:bg-white/[0.08] text-white font-medium text-sm transition-all duration-200 backdrop-blur-xl"
+              to="/root-cause-graph"
+              className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white/20 hover:border-white/40 bg-white/[0.06] hover:bg-white/[0.1] text-white font-medium text-sm transition-all duration-200 backdrop-blur-xl"
             >
-              <Compass className="w-4 h-4 text-[#52E3A4]" />
+              <Network className="w-4 h-4 text-white" />
+              <span>Root-Cause Graph</span>
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/10 text-white font-bold ml-0.5">EERG</span>
+            </Link>
+
+            <Link
+              to="/the-synq"
+              className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white/14 hover:border-white/20 bg-white/[0.04] hover:bg-white/[0.08] text-white font-medium text-sm transition-all duration-200 backdrop-blur-xl"
+            >
+              <Compass className="w-4 h-4 text-white" />
               <span>Explore the System</span>
               <ArrowRight className="w-3.5 h-3.5 opacity-70" />
             </Link>
@@ -237,7 +246,7 @@ export function HomePage() {
             <div className="flex items-center gap-3">
               <span className="w-3 h-3 rounded-full bg-red-500/80 inline-block" />
               <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block" />
-              <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
+              <span className="w-3 h-3 rounded-full bg-white/80 inline-block" />
               <span className="font-mono text-xs text-zinc-400 ml-2">SYSTEM STATE TELEMETRY // SIMULATOR</span>
             </div>
 
@@ -256,7 +265,7 @@ export function HomePage() {
                 onClick={() => setHeroMode('SYNCHRONIZED')}
                 className={`px-3 py-1.5 rounded-lg transition-all ${
                   heroMode === 'SYNCHRONIZED'
-                    ? 'bg-[#23B272] text-[#03040A] font-bold shadow-md'
+                    ? 'bg-white text-black font-bold shadow-md'
                     : 'text-zinc-500 hover:text-white'
                 }`}
               >
@@ -292,27 +301,27 @@ export function HomePage() {
             </div>
           ) : (
             <div className="space-y-6">
-              <div className="p-4 rounded-xl border border-[#23B272]/40 bg-[#23B272]/10 text-xs sm:text-sm text-emerald-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div className="p-4 rounded-xl border border-white/20 bg-white/[0.05] text-xs sm:text-sm text-zinc-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <span>⚡ Cascade Arrested: Dynamic scene resequencing + burst partner stage activated.</span>
-                <span className="font-mono text-[11px] text-[#52E3A4] uppercase bg-black/40 px-2 py-0.5 rounded border border-[#23B272]/30">
+                <span className="font-mono text-[11px] text-white uppercase bg-black/40 px-2 py-0.5 rounded border border-white/15">
                   MODELLED SIMULATION: 5.5 Days &amp; $84k Protected
                 </span>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono text-xs">
-                <div className="p-4 rounded-xl bg-black/40 border border-emerald-500/20">
+                <div className="p-4 rounded-xl bg-black/40 border border-white/10">
                   <div className="text-zinc-500 mb-1">MECHANISM 08: SIMULATE</div>
                   <div className="text-white font-bold">Resequence Exterior Scenes</div>
-                  <div className="text-[#52E3A4] mt-1">Zero soundstage turnaround fines</div>
+                  <div className="text-white mt-1">Zero soundstage turnaround fines</div>
                 </div>
-                <div className="p-4 rounded-xl bg-black/40 border border-emerald-500/20">
+                <div className="p-4 rounded-xl bg-black/40 border border-white/10">
                   <div className="text-zinc-500 mb-1">MECHANISM 10: MATCH</div>
                   <div className="text-white font-bold">Partner Dark-Floor Floor Slot</div>
-                  <div className="text-[#52E3A4] mt-1">Activated with 15% rate parity</div>
+                  <div className="text-white mt-1">Activated with 15% rate parity</div>
                 </div>
-                <div className="p-4 rounded-xl bg-black/40 border border-emerald-500/20">
+                <div className="p-4 rounded-xl bg-black/40 border border-white/10">
                   <div className="text-zinc-500 mb-1">MECHANISM 14: VERIFY</div>
                   <div className="text-white font-bold">IMF Master Delivered on Time</div>
-                  <div className="text-[#52E3A4] mt-1">100% automated platform compliance</div>
+                  <div className="text-white mt-1">100% automated platform compliance</div>
                 </div>
               </div>
             </div>
@@ -321,48 +330,117 @@ export function HomePage() {
           {/* Terminal Footer Quote */}
           <div className="mt-6 pt-4 border-t border-white/[0.08] flex items-center justify-between text-[11px] font-mono text-zinc-500">
             <span>Fundamental System Axiom:</span>
-            <span className="text-[#52E3A4] italic">
+            <span className="text-white">
               "DIGISYNQ does not manage filmmaking. It manages the dependencies that make filmmaking possible."
             </span>
           </div>
         </div>
 
-        {/* ── Defined What is a SYNQ? ── */}
-        <div className="mt-16 p-8 rounded-3xl bg-gradient-to-b from-[#090B14] to-[#04060C] border border-[#23B272]/20 relative overflow-hidden">
-          <div className="max-w-3xl mb-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#23B272]/10 border border-[#23B272]/30 text-[#52E3A4] font-mono text-xs uppercase tracking-wider mb-3">
-              <Cpu className="w-3.5 h-3.5" />
-              <span>THE OPERATIONAL FOUNDATION</span>
-            </div>
-            <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight mb-3">
-              What is a <span className="text-[#52E3A4]">SYNQ</span>?
-            </h3>
-            <p className="text-base sm:text-lg text-zinc-300 leading-relaxed font-light">
-              A <strong>SYNQ</strong> is a structured intervention that connects a specific entertainment system problem to the people, resources, capabilities, and decisions required to resolve it.
-            </p>
-          </div>
+        {/* ── BENTO GRID: What is a SYNQ? ── */}
+        <div className="mt-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {/* Bento Card 1: Master Definition (Large 2x2 Square) */}
+            <div className="sm:col-span-2 sm:row-span-2 aspect-square p-7 sm:p-9 rounded-3xl bg-gradient-to-br from-[#090B14] via-[#06070B] to-[#04060C] border border-white/15 shadow-2xl relative overflow-hidden flex flex-col justify-between group soft-card">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white/[0.05] rounded-full blur-3xl pointer-events-none group-hover:bg-white/[0.08] transition-all duration-700" />
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.05] border border-white/15 text-white font-mono text-xs uppercase tracking-wider mb-4">
+                  <Cpu className="w-3.5 h-3.5" />
+                  <span>THE OPERATIONAL FOUNDATION</span>
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight mb-3">
+                  What is a <span className="text-white">SYNQ</span>?
+                </h3>
+                <p className="text-sm sm:text-base text-zinc-300 leading-relaxed font-light mb-6">
+                  A <strong>SYNQ</strong> is a structured intervention that connects a specific entertainment system problem to the people, resources, capabilities, and decisions required to resolve it.
+                </p>
+              </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-5 rounded-2xl bg-[#03040A] border border-white/[0.08]">
-              <div className="text-xs font-mono text-[#52E3A4] mb-1">PRINCIPLE 01</div>
-              <h4 className="text-sm font-bold text-white mb-1">Root-Cause Centered</h4>
-              <p className="text-xs text-zinc-400 leading-relaxed">
-                Decomposes surface emergencies into underlying schedule buffers, data schemas, and contract incentives.
-              </p>
+              <div className="pt-6 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-4">
+                <span className="text-xs font-mono text-zinc-400">
+                  Deterministic intervention sprint.
+                </span>
+                <Link
+                  to="/the-synq"
+                  className="inline-flex items-center gap-1.5 text-xs font-mono text-white hover:text-white font-bold transition-colors"
+                >
+                  <span>Explore Architecture →</span>
+                </Link>
+              </div>
             </div>
-            <div className="p-5 rounded-2xl bg-[#03040A] border border-white/[0.08]">
-              <div className="text-xs font-mono text-[#52E3A4] mb-1">PRINCIPLE 02</div>
-              <h4 className="text-sm font-bold text-white mb-1">Asset-Light Network</h4>
-              <p className="text-xs text-zinc-400 leading-relaxed">
-                DigiSynq owns zero stages or camera trucks. It orchestrates pre-vetted dark floors, burst VFX, and specialist teams.
-              </p>
+
+            {/* Bento Card 2: Principle Root Cause (1x1 Square) */}
+            <div className="aspect-square p-6 rounded-3xl bg-[#090B14] border border-white/[0.08] shadow-xl flex flex-col justify-between overflow-hidden soft-card">
+              <div>
+                <div className="text-xs font-mono text-white mb-2 font-semibold flex items-center gap-1.5">
+                  <Search className="w-3.5 h-3.5" />
+                  <span>ROOT-CAUSE DISCIPLINE</span>
+                </div>
+                <h4 className="text-base sm:text-lg font-bold text-white mb-2 leading-snug">Root-Cause Centered</h4>
+                <p className="text-xs text-zinc-400 leading-relaxed">
+                  Decomposes surface alarms into underlying schedule buffers, data schemas, and contract incentives.
+                </p>
+              </div>
+              <div className="pt-3 border-t border-white/[0.06] text-[11px] font-mono text-zinc-500">
+                Addresses root cause
+              </div>
             </div>
-            <div className="p-5 rounded-2xl bg-[#03040A] border border-white/[0.08]">
-              <div className="text-xs font-mono text-[#52E3A4] mb-1">PRINCIPLE 03</div>
-              <h4 className="text-sm font-bold text-white mb-1">Measured Value</h4>
-              <p className="text-xs text-zinc-400 leading-relaxed">
-                Every SYNQ delivers verifiable outcomes: days of schedule buffer restored, idle penalty avoidance, and delivery compliance.
-              </p>
+
+            {/* Bento Card 3: Principle Asset-Light (1x1 Square) */}
+            <div className="aspect-square p-6 rounded-3xl bg-[#090B14] border border-white/[0.08] shadow-xl flex flex-col justify-between overflow-hidden soft-card">
+              <div>
+                <div className="text-xs font-mono text-white mb-2 font-semibold flex items-center gap-1.5">
+                  <ShieldCheck className="w-3.5 h-3.5" />
+                  <span>ASSET-LIGHT AGILITY</span>
+                </div>
+                <h4 className="text-base sm:text-lg font-bold text-white mb-2 leading-snug">Asset-Light Network</h4>
+                <p className="text-xs text-zinc-400 leading-relaxed">
+                  Carries zero balance-sheet debt. We orchestrate pre-vetted dark floors, burst VFX, and specialist teams.
+                </p>
+              </div>
+              <div className="pt-3 border-t border-white/[0.06] text-[11px] font-mono text-zinc-300">
+                100% Unconflicted
+              </div>
+            </div>
+
+            {/* Bento Card 4: Principle Measured Value (1x1 Square) */}
+            <div className="aspect-square p-6 rounded-3xl bg-[#090B14] border border-white/[0.08] shadow-xl flex flex-col justify-between overflow-hidden soft-card">
+              <div>
+                <div className="text-xs font-mono text-white mb-2 font-semibold flex items-center gap-1.5">
+                  <CheckCircle2 className="w-3.5 h-3.5" />
+                  <span>MEASURED OUTCOMES</span>
+                </div>
+                <h4 className="text-base sm:text-lg font-bold text-white mb-2 leading-snug">Measured Outcomes</h4>
+                <p className="text-xs text-zinc-400 leading-relaxed">
+                  Every SYNQ delivers verifiable outcomes: schedule buffer restored, idle fines avoided, and spec compliance.
+                </p>
+              </div>
+              <div className="pt-3 border-t border-white/[0.06] text-[11px] font-mono text-zinc-500">
+                5.5 Days &amp; $84k+ Modelled
+              </div>
+            </div>
+
+            {/* Bento Card 5: Clean-Room Governance (1x1 Square) */}
+            <div className="aspect-square p-6 rounded-3xl bg-[#090B14] border border-white/[0.08] shadow-xl flex flex-col justify-between overflow-hidden soft-card">
+              <div>
+                <div className="text-xs font-mono text-white mb-2 font-semibold flex items-center gap-1.5">
+                  <Zap className="w-3.5 h-3.5" />
+                  <span>CLEAN-ROOM</span>
+                </div>
+                <h4 className="text-base font-bold text-white mb-2 leading-snug">
+                  Neutral Multi-Party Governance
+                </h4>
+                <p className="text-xs text-zinc-400 leading-relaxed">
+                  Standardized clean-room legal covenants ensure complete IP confidentiality and rate parity across guilds.
+                </p>
+              </div>
+              <div className="pt-3 border-t border-white/[0.06]">
+                <Link
+                  to="/runbook"
+                  className="text-xs font-mono text-white hover:underline flex items-center gap-1"
+                >
+                  <span>Operating Runbook →</span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -376,7 +454,7 @@ export function HomePage() {
           <div className="max-w-3xl mb-14">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 font-mono text-xs font-medium mb-3">
               <AlertTriangle className="w-3.5 h-3.5" />
-              <span>02 // THE ROOT-CAUSE CASCADE PROBLEM</span>
+              <span>THE ROOT-CAUSE CASCADE PROBLEM</span>
             </div>
 
             <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight mb-4">
@@ -389,7 +467,7 @@ export function HomePage() {
 
           {/* Visual Cascade Chain */}
           <div className="p-6 sm:p-8 rounded-2xl border border-white/[0.08] bg-[#090B14] shadow-2xl overflow-x-auto">
-            <div className="text-xs font-mono text-[#52E3A4] mb-6 flex items-center justify-between">
+            <div className="text-xs font-mono text-white mb-6 flex items-center justify-between">
               <span>UNSYNCHRONIZED CASCADE BLAST RADIUS</span>
               <span className="text-zinc-500">Without DIGISYNQ Intervention</span>
             </div>
@@ -405,7 +483,7 @@ export function HomePage() {
               ].map((item, idx) => (
                 <div key={idx} className={`p-4 rounded-xl border bg-black/40 ${item.color} flex flex-col justify-between`}>
                   <div>
-                    <div className="text-[10px] font-mono text-zinc-500 mb-1">{item.step} // {item.tag}</div>
+                    <div className="text-[10px] font-mono text-zinc-500 mb-1">{item.tag}</div>
                     <div className="font-semibold text-sm text-white mb-2">{item.title}</div>
                     <div className="text-xs text-zinc-400">{item.detail}</div>
                   </div>
@@ -418,11 +496,11 @@ export function HomePage() {
 
             <div className="mt-8 pt-6 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-4">
               <div className="text-sm text-zinc-300 font-mono">
-                <span className="text-[#52E3A4]">DIGISYNQ Solution:</span> Treats individual consequences as <strong className="text-white">one connected system</strong>.
+                <span className="text-white">DIGISYNQ Solution:</span> Treats individual consequences as <strong className="text-white">one connected system</strong>.
               </div>
               <Link
                 to="/engines/cascade"
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#52E3A4] hover:text-white transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-white hover:text-white transition-colors"
               >
                 <span>Launch Interactive Cascade Simulator</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -433,19 +511,19 @@ export function HomePage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          03 — DIGISYNQ PROCESS: 8-STAGE SYNCHRONIZATION LOOP
+          DIGISYNQ PROCESS: SYNCHRONIZATION LOOP
          ══════════════════════════════════════════════════════ */}
       <section className="py-24 px-6 sm:px-8 max-w-6xl mx-auto">
         <div className="max-w-3xl mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#16543D]/50 border border-[#23B272]/30 text-[#52E3A4] font-mono text-xs font-semibold mb-3">
-            <span>03 // THE 8-STAGE SYNQ ENGINE</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.06] border border-white/15 text-white font-mono text-xs font-semibold mb-3">
+            <span>THE SYNQ SYNCHRONIZATION ENGINE</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight mb-4">
             The Continuous Synchronization Loop.
           </h2>
           <p className="text-zinc-300 text-sm sm:text-base leading-relaxed">
             DigiSynq operates as an asset-light, closed-loop control system for complex creative infrastructure:
-            <span className="text-[#52E3A4] font-mono text-xs block mt-2">
+            <span className="text-white font-mono text-xs block mt-2">
               OBSERVE → DIAGNOSE → MAP → SIMULATE → CONNECT → COORDINATE → MEASURE → LEARN
             </span>
           </p>
@@ -462,12 +540,12 @@ export function HomePage() {
                 onClick={() => setActiveProcessStep(idx)}
                 className={`p-3 rounded-xl border text-left transition-all flex flex-col justify-between ${
                   isActive
-                    ? 'bg-[#23B272] text-[#03040A] border-[#52E3A4] font-bold shadow-[0_0_20px_rgba(35,178,114,0.3)]'
+                    ? 'bg-white text-black border-white/20 font-bold shadow-[0_0_20px_rgba(255,255,255,0.15)]'
                     : 'bg-[#090B14] border-white/[0.08] text-zinc-400 hover:text-white hover:border-white/20'
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="font-mono text-xs">{step.step}</span>
+                  <span className="text-[10px] uppercase font-mono tracking-widest text-white">•</span>
                   <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-[#03040A]' : 'text-zinc-500'}`} />
                 </div>
                 <div className="text-xs font-mono font-bold tracking-tight">{step.name}</div>
@@ -481,14 +559,14 @@ export function HomePage() {
           const current = coreProcessSteps[activeProcessStep];
           const StepIcon = current.icon;
           return (
-            <div className="p-8 rounded-3xl border border-[#23B272]/30 bg-gradient-to-br from-[#090B14] to-[#04060C] shadow-2xl relative overflow-hidden">
+            <div className="p-8 rounded-3xl border border-white/15 bg-gradient-to-br from-[#090B14] to-[#04060C] shadow-2xl relative overflow-hidden">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-6 border-b border-white/[0.08]">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#23B272]/20 border border-[#23B272]/40 flex items-center justify-center text-[#52E3A4]">
+                  <div className="w-10 h-10 rounded-xl bg-white/[0.08] border border-white/20 flex items-center justify-center text-white">
                     <StepIcon className="w-5 h-5" />
                   </div>
                   <div>
-                    <span className="font-mono text-xs text-[#52E3A4] font-semibold">STAGE {current.step} OF 08</span>
+                    <span className="font-mono text-xs text-white font-semibold tracking-wider">PROCESS PHASE // CLOSED-LOOP</span>
                     <h3 className="text-2xl font-black text-white">{current.name}: {current.tagline}</h3>
                   </div>
                 </div>
@@ -502,9 +580,9 @@ export function HomePage() {
                   <div className="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mb-2">INPUT SIGNAL</div>
                   <p className="text-xs text-zinc-300 leading-relaxed">{current.input}</p>
                 </div>
-                <div className="p-5 rounded-2xl bg-[#16543D]/20 border border-[#23B272]/30">
-                  <div className="text-[11px] font-mono text-[#52E3A4] uppercase tracking-wider mb-2">SYSTEM ACTION</div>
-                  <p className="text-xs text-emerald-100 leading-relaxed">{current.action}</p>
+                <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/15">
+                  <div className="text-[11px] font-mono text-white uppercase tracking-wider mb-2">SYSTEM ACTION</div>
+                  <p className="text-xs text-zinc-300 leading-relaxed">{current.action}</p>
                 </div>
                 <div className="p-5 rounded-2xl bg-black/50 border border-white/[0.06]">
                   <div className="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mb-2">DETERMINISTIC OUTPUT</div>
@@ -513,12 +591,12 @@ export function HomePage() {
               </div>
 
               <div className="mt-6 pt-6 border-t border-white/[0.08] flex items-center justify-between text-xs font-mono">
-                <span className="text-zinc-500">Sequential Cycle: Stage {current.step} feeds directly into Stage {activeProcessStep === 7 ? '01 (Memory Re-cycle)' : `0${activeProcessStep + 2}`}</span>
+                <span className="text-zinc-500">Sequential Cycle: {current.name} feeds directly into {coreProcessSteps[(activeProcessStep + 1) % coreProcessSteps.length].name}</span>
                 <Link
                   to="/how-it-works"
-                  className="inline-flex items-center gap-1.5 text-[#52E3A4] hover:text-white font-semibold transition-colors"
+                  className="inline-flex items-center gap-1.5 text-white hover:text-white font-semibold transition-colors"
                 >
-                  <span>Explore 10-Step Resolution Runbook →</span>
+                  <span>Explore Resolution Runbook →</span>
                 </Link>
               </div>
             </div>
@@ -533,7 +611,7 @@ export function HomePage() {
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-14">
             <div>
-              <div className="text-xs font-mono text-[#52E3A4] mb-2 uppercase">04 // RAPID SYSTEM TRIAGE</div>
+              <div className="text-xs font-mono text-white mb-2 uppercase">RAPID SYSTEM TRIAGE</div>
               <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight">
                 Diagnose Your Bottleneck in Real Time.
               </h2>
@@ -552,12 +630,12 @@ export function HomePage() {
                   onClick={() => setSelectedDiagnosticScenario(idx)}
                   className={`p-5 rounded-2xl border transition-all cursor-pointer text-left ${
                     selectedDiagnosticScenario === idx
-                      ? 'bg-[#16543D]/40 border-[#52E3A4] shadow-[0_0_25px_rgba(82,227,164,0.15)]'
+                      ? 'bg-white/[0.05] border-white/20 shadow-[0_0_20px_rgba(255,255,255,0.12)]'
                       : 'bg-[#090B14] border-white/[0.06] hover:border-white/15'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-1">
-                    <span className="font-mono text-xs text-[#52E3A4] font-semibold">SCENARIO 0{idx + 1}</span>
+                    <span className="font-mono text-xs text-white font-semibold">SCENARIO</span>
                     <span className="font-mono text-[10px] text-zinc-500 uppercase">{scen.mechanism.split('&')[0]}</span>
                   </div>
                   <h4 className="text-sm font-bold text-white mb-1">{scen.title}</h4>
@@ -574,7 +652,7 @@ export function HomePage() {
                   <div>
                     <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/[0.08]">
                       <div>
-                        <span className="font-mono text-xs text-[#52E3A4]">DIGISYNQ ROOT DECOMPOSITION</span>
+                        <span className="font-mono text-xs text-white">DIGISYNQ ROOT DECOMPOSITION</span>
                         <h3 className="text-xl font-black text-white mt-1">{current.title}</h3>
                       </div>
                       <span className="text-[10px] font-mono text-zinc-500 bg-white/[0.04] px-2.5 py-1 rounded border border-white/[0.08]">
@@ -598,21 +676,21 @@ export function HomePage() {
                         {current.blastRadius}
                       </div>
 
-                      <div className="p-3.5 rounded-xl bg-[#23B272]/15 border border-[#23B272]/30 text-emerald-200">
-                        <strong className="text-[#52E3A4] block mb-1">SYNQ INTERVENTION ({current.mechanism}):</strong>
+                      <div className="p-3.5 rounded-xl bg-white/[0.06] border border-white/15 text-zinc-200">
+                        <strong className="text-white block mb-1">SYNQ INTERVENTION ({current.mechanism}):</strong>
                         {current.intervention}
                       </div>
                     </div>
 
                     <div className="p-3 rounded-xl bg-black/60 border border-white/[0.06] flex items-center justify-between mb-6">
                       <span className="text-[11px] font-mono text-zinc-500 uppercase">Projected Value:</span>
-                      <span className="text-xs font-mono text-[#52E3A4] font-bold">{current.valueModel}</span>
+                      <span className="text-xs font-mono text-white font-bold">{current.valueModel}</span>
                     </div>
 
                     <div className="flex flex-col sm:flex-row items-center gap-3">
                       <Link
                         to="/diagnose"
-                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#23B272] text-[#03040A] hover:bg-[#52E3A4] font-bold text-xs tracking-wide transition-all shadow-md"
+                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white text-black hover:bg-zinc-200 font-bold text-xs tracking-wide transition-all shadow-md"
                       >
                         <span>Run Full 10-Step Root Diagnostic</span>
                         <ArrowRight className="w-3.5 h-3.5" />
@@ -638,8 +716,8 @@ export function HomePage() {
          ══════════════════════════════════════════════════════ */}
       <section className="py-24 px-6 sm:px-8 max-w-6xl mx-auto">
         <div className="max-w-3xl mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#16543D]/50 border border-[#23B272]/30 text-[#52E3A4] font-mono text-xs font-semibold mb-3">
-            <span>05 // THE CONNECTIVE TOPOLOGY</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.06] border border-white/15 text-white font-mono text-xs font-semibold mb-3">
+            <span>THE CONNECTIVE TOPOLOGY</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight mb-4">
             Cinema is an archipelago.
@@ -654,7 +732,7 @@ export function HomePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           <div className="p-8 rounded-2xl border border-white/[0.08] bg-[#090B14]">
-            <div className="font-mono text-xs text-zinc-500 mb-2">THESIS 5.1</div>
+            <div className="font-mono text-xs text-zinc-500 mb-2">OPERATIONAL THESIS // ASSETS</div>
             <h3 className="text-xl font-bold text-white mb-3">The industry does not lack assets</h3>
             <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed">
               Underutilized soundstages sit dark between tenant leases; verified cinematographers, editors, and colorists experience unbooked weeks. The resources exist, but they are fragmented.
@@ -662,15 +740,15 @@ export function HomePage() {
           </div>
 
           <div className="p-8 rounded-2xl border border-white/[0.08] bg-[#090B14]">
-            <div className="font-mono text-xs text-zinc-500 mb-2">THESIS 5.2</div>
+            <div className="font-mono text-xs text-zinc-500 mb-2">OPERATIONAL THESIS // INTELLIGENCE</div>
             <h3 className="text-xl font-bold text-white mb-3">The industry does not only lack software</h3>
             <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed">
               Another standalone project management app or generic database does not solve coordination. The missing layer is <strong>the intelligence and orchestration between systems</strong>.
             </p>
           </div>
 
-          <div className="p-8 rounded-2xl border border-[#23B272]/40 bg-gradient-to-br from-[#06130E] to-[#090B14]">
-            <div className="font-mono text-xs text-[#52E3A4] mb-2">THESIS 5.3</div>
+          <div className="p-8 rounded-2xl border border-white/20 bg-gradient-to-br from-[#090B14] to-[#04060C]">
+            <div className="font-mono text-xs text-white mb-2">OPERATIONAL THESIS // SYNQ GAP</div>
             <h3 className="text-xl font-bold text-white mb-3">The SYNQ Gap</h3>
             <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed">
               DIGISYNQ operates in the space between Stage A &amp; B, Team A &amp; B, Requirement &amp; Capability, Plan &amp; Reality. That operational space is <strong>THE SYNQ GAP</strong>.
@@ -681,7 +759,7 @@ export function HomePage() {
         {/* Ecosystem Entities Connected */}
         <div className="p-6 sm:p-8 rounded-2xl border border-white/[0.08] bg-[#090B14] flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="max-w-xl">
-            <span className="font-mono text-xs text-[#52E3A4] block mb-1">CONNECTED ENTITIES IN THE NETWORK</span>
+            <span className="font-mono text-xs text-white block mb-1">CONNECTED ENTITIES IN THE NETWORK</span>
             <h4 className="text-lg font-bold text-white mb-2">12 Core Stakeholder Archetypes &amp; 16 Specialized Disciplines</h4>
             <p className="text-xs text-zinc-400 leading-relaxed">
               Producers, Directors, Screenwriters, Line Producers, Soundstages, Rental Houses, Virtual Production Volumes, Post &amp; VFX Studios, Finishing Houses, Financiers, and Streaming Platforms.
@@ -689,7 +767,7 @@ export function HomePage() {
           </div>
           <Link
             to="/ecosystem"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#23B272] text-[#03040A] hover:bg-[#52E3A4] font-bold text-xs tracking-wide transition-all shrink-0"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black hover:bg-zinc-200 font-bold text-xs tracking-wide transition-all shrink-0"
           >
             <span>Explore Ecosystem Network Graph</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -703,7 +781,7 @@ export function HomePage() {
       <section className="py-24 px-6 sm:px-8 border-t border-white/[0.06] bg-[#06080D]">
         <div className="max-w-6xl mx-auto">
           <div className="max-w-3xl mb-14">
-            <div className="text-xs font-mono text-[#52E3A4] mb-2 uppercase">06 // THE UNBROKEN LIFECYCLE</div>
+            <div className="text-xs font-mono text-white mb-2 uppercase">THE UNBROKEN LIFECYCLE</div>
             <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight mb-4">
               The 9-Stage Entertainment Continuum.
             </h2>
@@ -722,11 +800,11 @@ export function HomePage() {
                   onClick={() => setSelectedContinuumStage(idx)}
                   className={`p-3 rounded-xl border text-left transition-all flex flex-col justify-between min-w-[100px] ${
                     isSelected
-                      ? 'bg-[#23B272] text-[#03040A] border-[#52E3A4] font-bold shadow-lg'
+                      ? 'bg-white text-black border-white/20 font-bold shadow-lg'
                       : 'bg-[#090B14] border-white/[0.08] text-zinc-400 hover:text-white hover:border-white/20'
                   }`}
                 >
-                  <span className="font-mono text-[10px] opacity-75">{stg.step}</span>
+                  <span className="font-mono text-[10px] opacity-75 text-white">STAGE</span>
                   <span className="text-xs font-mono font-bold mt-2 truncate">{stg.name}</span>
                 </button>
               );
@@ -740,13 +818,13 @@ export function HomePage() {
               <div className="p-8 rounded-3xl border border-white/[0.1] bg-[#090B14] shadow-2xl">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-6 border-b border-white/[0.08]">
                   <div>
-                    <span className="font-mono text-xs text-[#52E3A4] font-semibold">STAGE {current.step} OF 09</span>
+                    <span className="font-mono text-xs text-white font-semibold">STAGE {current.step} OF 09</span>
                     <h3 className="text-2xl font-black text-white mt-1">{current.name}</h3>
                     <p className="text-xs text-zinc-400 mt-1">{current.shortDesc}</p>
                   </div>
                   <Link
                     to="/continuum"
-                    className="inline-flex items-center gap-1.5 text-xs font-mono text-[#52E3A4] hover:text-white font-semibold transition-colors shrink-0"
+                    className="inline-flex items-center gap-1.5 text-xs font-mono text-white hover:text-white font-semibold transition-colors shrink-0"
                   >
                     <span>Full Hand-Off Protocol →</span>
                   </Link>
@@ -761,9 +839,9 @@ export function HomePage() {
                     <div className="text-[10px] font-mono text-red-400 uppercase tracking-wider mb-2">TYPICAL UNCOORDINATED FAILURE</div>
                     <p className="text-xs text-red-200 leading-relaxed">{current.typicalFailure}</p>
                   </div>
-                  <div className="p-5 rounded-2xl bg-[#16543D]/25 border border-[#23B272]/30">
-                    <div className="text-[10px] font-mono text-[#52E3A4] uppercase tracking-wider mb-2">DIGISYNQ INTERVENTION</div>
-                    <p className="text-xs text-emerald-100 leading-relaxed">{current.synqIntervention}</p>
+                  <div className="p-5 rounded-2xl bg-white/[0.04] border border-white/15">
+                    <div className="text-[10px] font-mono text-white uppercase tracking-wider mb-2">DIGISYNQ INTERVENTION</div>
+                    <p className="text-xs text-zinc-300 leading-relaxed">{current.synqIntervention}</p>
                   </div>
                 </div>
               </div>
@@ -778,7 +856,7 @@ export function HomePage() {
       <section className="py-24 px-6 sm:px-8 max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-14">
           <div>
-            <div className="text-xs font-mono text-[#52E3A4] mb-2 uppercase">07 // SYSTEMIC CONTROL ARSENAL</div>
+            <div className="text-xs font-mono text-white mb-2 uppercase">SYSTEMIC CONTROL ARSENAL</div>
             <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight">
               The 23 Master Mechanisms.
             </h2>
@@ -795,25 +873,25 @@ export function HomePage() {
               cluster: 'Detection & Mapping',
               range: 'M01 — M06',
               desc: 'Observe, Detect, Decompose, Map, Classify, and Prioritize system signals.',
-              color: 'border-blue-500/30 text-blue-400',
+              color: 'border-white/15 text-white',
             },
             {
               cluster: 'Simulation & Matching',
               range: 'M07 — M12',
               desc: 'Simulate downstream blast radiuses, Model counterfactuals, Match dark capacity, and Route capability.',
-              color: 'border-[#52E3A4]/30 text-[#52E3A4]',
+              color: 'border-white/15 text-white',
             },
             {
               cluster: 'Execution & Verification',
               range: 'M13 — M18',
               desc: 'Structure intervention sprints, Intervene, Verify compliance, Measure value, and Arbitrate covenants.',
-              color: 'border-amber-500/30 text-amber-400',
+              color: 'border-white/15 text-white',
             },
             {
               cluster: 'Memory & Prevention',
               range: 'M19 — M23',
               desc: 'Learn from outcomes, Codify institutional patterns, Forecast risks, Shield dependencies, and Prevent recurrence.',
-              color: 'border-purple-500/30 text-purple-400',
+              color: 'border-white/15 text-white',
             },
           ].map((grp, idx) => (
             <div key={idx} className="p-6 rounded-2xl border border-white/[0.08] bg-[#090B14] flex flex-col justify-between">
@@ -830,9 +908,9 @@ export function HomePage() {
         </div>
 
         {/* Priority Formula Feature Bar */}
-        <div className="p-6 sm:p-8 rounded-2xl border border-[#23B272]/30 bg-gradient-to-r from-[#06130E] to-[#090B14] flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="p-6 sm:p-8 rounded-2xl border border-white/15 bg-gradient-to-r from-[#090B14] to-[#04060C] flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="max-w-xl">
-            <span className="font-mono text-xs text-[#52E3A4] block mb-1">M06: SYSTEMIC PRIORITY FORMULA</span>
+            <span className="font-mono text-xs text-white block mb-1">M06: SYSTEMIC PRIORITY FORMULA</span>
             <div className="font-mono text-sm text-white font-bold mb-2">
               P = (Urgency × Blast Radius × Cost Velocity) ÷ Time to Delivery Window
             </div>
@@ -842,7 +920,7 @@ export function HomePage() {
           </div>
           <Link
             to="/mechanisms"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#23B272] text-[#03040A] hover:bg-[#52E3A4] font-bold text-xs tracking-wide transition-all shrink-0"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black hover:bg-zinc-200 font-bold text-xs tracking-wide transition-all shrink-0"
           >
             <span>Explore All 23 Mechanisms Console</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -856,7 +934,7 @@ export function HomePage() {
       <section className="py-24 px-6 sm:px-8 border-t border-white/[0.06] bg-[#06080D]">
         <div className="max-w-6xl mx-auto">
           <div className="max-w-3xl mb-14">
-            <div className="text-xs font-mono text-red-400 mb-2 uppercase">08 // STRATEGIC DIFFERENTIATION</div>
+            <div className="text-xs font-mono text-red-400 mb-2 uppercase">STRATEGIC DIFFERENTIATION</div>
             <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight mb-4">
               What DigiSynq Is NOT.
             </h2>
@@ -881,8 +959,8 @@ export function HomePage() {
           </div>
 
           {/* Differentiating Axiom */}
-          <div className="p-8 rounded-3xl border border-[#23B272]/30 bg-gradient-to-br from-[#06130E] to-[#04060C] text-center max-w-4xl mx-auto">
-            <span className="text-xs font-mono text-[#52E3A4] uppercase tracking-wider block mb-3">
+          <div className="p-8 rounded-3xl border border-white/15 bg-gradient-to-br from-[#090B14] to-[#04060C] text-center max-w-4xl mx-auto">
+            <span className="text-xs font-mono text-white uppercase tracking-wider block mb-3">
               THE DEFINITIVE CATEGORY DEFINITION
             </span>
             <h3 className="text-xl sm:text-2xl font-bold text-white leading-relaxed mb-4">
@@ -896,12 +974,12 @@ export function HomePage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          09 — PROOF / EVIDENCE: COMPOUNDING MEMORY & MODELLED KPIS
+          PROOF / EVIDENCE: COMPOUNDING MEMORY & MODELLED KPIS
          ══════════════════════════════════════════════════════ */}
       <section className="py-24 px-6 sm:px-8 max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
-            <div className="text-xs font-mono text-[#52E3A4] mb-2 uppercase">09 // COMPOUNDING ADVANTAGE</div>
+            <div className="text-xs font-mono text-white mb-2 uppercase">COMPOUNDING ADVANTAGE</div>
             <h2 className="text-3xl sm:text-5xl font-bold text-white mb-4">
               The Compounding Memory of Cinema.
             </h2>
@@ -909,18 +987,18 @@ export function HomePage() {
               Every crisis diagnosed and every dependency stabilized deposits institutional knowledge into systemic memory. Today's resolved breakdown becomes tomorrow's automated prevention.
             </p>
             <div className="p-5 rounded-2xl border border-white/[0.08] bg-black/50 font-mono text-xs text-zinc-300 space-y-2">
-              <div className="flex items-center gap-2"><span className="text-[#52E3A4]">MORE PROJECTS</span> → More Problems Observed</div>
-              <div className="flex items-center gap-2"><span className="text-[#52E3A4]">MORE SYSTEM MAPS</span> → More Verified Interventions</div>
-              <div className="flex items-center gap-2"><span className="text-[#52E3A4]">MORE OUTCOME DATA</span> → Compounding System Memory</div>
-              <div className="flex items-center gap-2"><span className="text-[#52E3A4]">BETTER PATTERNS</span> → Predictive Early Warnings</div>
-              <div className="flex items-center gap-2 font-bold text-[#D4F838]">HIGHER SYSTEM VALUE → REPEAT EXPANSION ↺</div>
+              <div className="flex items-center gap-2"><span className="text-white">MORE PROJECTS</span> → More Problems Observed</div>
+              <div className="flex items-center gap-2"><span className="text-white">MORE SYSTEM MAPS</span> → More Verified Interventions</div>
+              <div className="flex items-center gap-2"><span className="text-white">MORE OUTCOME DATA</span> → Compounding System Memory</div>
+              <div className="flex items-center gap-2"><span className="text-white">BETTER PATTERNS</span> → Predictive Early Warnings</div>
+              <div className="flex items-center gap-2 font-bold text-white">HIGHER SYSTEM VALUE → REPEAT EXPANSION ↺</div>
             </div>
           </div>
 
           {/* Modelled North Star KPIs */}
           <div className="p-8 rounded-2xl border border-white/[0.1] bg-[#090B14]">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-mono text-[#52E3A4] uppercase font-semibold">SECTION 60 TARGET BENCHMARKS</span>
+              <span className="text-xs font-mono text-white uppercase font-semibold">OPERATIONAL IMPACT BENCHMARKS</span>
               <span className="text-[10px] font-mono text-zinc-500 uppercase px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.08]">
                 Modelled System Metrics
               </span>
@@ -928,11 +1006,11 @@ export function HomePage() {
             <h3 className="text-2xl font-bold text-white mb-6">Target System Value Created</h3>
             <div className="grid grid-cols-2 gap-4 font-mono">
               <div className="p-4 rounded-xl bg-black/40 border border-white/[0.06]">
-                <div className="text-2xl sm:text-3xl font-bold text-[#52E3A4]">5.5 Days</div>
+                <div className="text-2xl sm:text-3xl font-bold text-white">5.5 Days</div>
                 <div className="text-[11px] text-zinc-400 mt-1">Modelled Schedule Buffer Recovery / Triage</div>
               </div>
               <div className="p-4 rounded-xl bg-black/40 border border-white/[0.06]">
-                <div className="text-2xl sm:text-3xl font-bold text-[#52E3A4]">$84,000+</div>
+                <div className="text-2xl sm:text-3xl font-bold text-white">$84,000+</div>
                 <div className="text-[11px] text-zinc-400 mt-1">Projected Idle Cost Avoidance / Sprint</div>
               </div>
               <div className="p-4 rounded-xl bg-black/40 border border-white/[0.06]">
@@ -944,7 +1022,7 @@ export function HomePage() {
                 <div className="text-[11px] text-zinc-400 mt-1">Asset-Light Network Orchestration</div>
               </div>
             </div>
-            <div className="mt-4 text-[10px] font-mono text-zinc-500 italic">
+            <div className="mt-4 text-[10px] font-mono text-zinc-500">
               * Metrics reflect simulated operational models and calibrated scenario benchmarks across production and post-production workflows.
             </div>
           </div>
@@ -954,9 +1032,9 @@ export function HomePage() {
       {/* ══════════════════════════════════════════════════════
           10 — FINAL CTA: WHERE IS YOUR FRICTION?
          ══════════════════════════════════════════════════════ */}
-      <section className="py-24 px-6 sm:px-8 border-t border-white/[0.06] bg-gradient-to-b from-[#06130E] to-[#03040A] text-center relative overflow-hidden">
+      <section className="py-24 px-6 sm:px-8 border-t border-white/[0.06] bg-gradient-to-b from-[#090B14] to-[#03040A] text-center relative overflow-hidden">
         <div className="max-w-3xl mx-auto relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#23B272]/20 border border-[#23B272]/40 text-[#52E3A4] font-mono text-xs font-semibold mb-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.08] border border-white/20 text-white font-mono text-xs font-semibold mb-6">
             NORTH STAR KPI: {BRAND.northStarMetric.toUpperCase()}
           </div>
 
@@ -971,7 +1049,7 @@ export function HomePage() {
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
               to="/diagnose"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#23B272] text-[#03040A] hover:bg-[#52E3A4] font-bold text-sm tracking-wide transition-all shadow-[0_0_35px_rgba(35,178,114,0.4)] active:scale-95"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-black hover:bg-zinc-200 font-bold text-sm tracking-wide transition-all shadow-[0_0_30px_rgba(255,255,255,0.25)] active:scale-95"
             >
               <span>Diagnose a Problem</span>
               <ArrowRight className="w-4 h-4 stroke-[2.5]" />

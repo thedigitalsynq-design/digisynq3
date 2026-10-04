@@ -17,6 +17,7 @@ const FOOTER_COLUMNS = [
   {
     title: 'Network',
     links: [
+      { href: '/root-cause-graph', label: 'Root-Cause Graph (EERG)' },
       { href: '/ecosystem', label: 'Ecosystem & Capacity Grid' },
       { href: '/stakeholders', label: '12 Stakeholder Archetypes' },
     ],
@@ -66,8 +67,8 @@ export function SiteFooter() {
               />
             </Link>
             
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-[#23B272]/10 border border-[#23B272]/20 text-[#52E3A4] text-[11px] font-mono">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#23B272] animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-white/10 border border-white/20 text-white text-[11px] font-mono">
+              <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
               <span>Grid Operational · Ready for Triage</span>
             </div>
 
@@ -93,7 +94,7 @@ export function SiteFooter() {
                       {link.isExternal ? (
                         <a
                           href={link.href}
-                          className="text-zinc-400 hover:text-[#52E3A4] transition-colors inline-flex items-center gap-1"
+                          className="text-zinc-400 hover:text-white transition-colors inline-flex items-center gap-1"
                         >
                           <span>{link.label}</span>
                           <ArrowUpRight className="w-3 h-3 opacity-60" />
@@ -120,11 +121,11 @@ export function SiteFooter() {
             &copy; {new Date().getFullYear()} DIGISYNQ · {BRAND.category}
           </div>
           <div className="flex flex-wrap items-center gap-4 sm:gap-6">
-            <Link to="/diagnose" className="hover:text-[#52E3A4] transition-colors">Diagnostic Engine</Link>
-            <Link to="/mechanisms" className="hover:text-[#52E3A4] transition-colors">23 Mechanisms</Link>
-            <Link to="/runbook" className="hover:text-[#52E3A4] transition-colors">Runbook</Link>
-            <Link to="/blueprint" className="hover:text-[#52E3A4] transition-colors">Master Codex</Link>
-            <Link to="/start" className="hover:text-[#52E3A4] transition-colors">Start a SYNQ</Link>
+            <Link to="/diagnose" className="hover:text-white transition-colors">Diagnostic Engine</Link>
+            <Link to="/mechanisms" className="hover:text-white transition-colors">23 Mechanisms</Link>
+            <Link to="/runbook" className="hover:text-white transition-colors">Runbook</Link>
+            <Link to="/blueprint" className="hover:text-white transition-colors">Master Codex</Link>
+            <Link to="/start" className="hover:text-white transition-colors">Start a SYNQ</Link>
           </div>
         </div>
       </div>

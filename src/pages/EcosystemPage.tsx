@@ -252,16 +252,16 @@ export function EcosystemPage() {
   };
 
   return (
-    <main className="bg-[#03040A] text-[#ECEEF5] selection:bg-[#23B272] selection:text-[#03040A] min-h-screen pt-36 pb-24 px-6 sm:px-8 max-w-6xl mx-auto relative overflow-hidden">
+    <main className="bg-[#03040A] text-[#ECEEF5] selection:bg-white selection:text-black min-h-screen pt-36 pb-24 px-6 sm:px-8 max-w-6xl mx-auto relative overflow-hidden">
       <TopographicBackground className="opacity-20 pointer-events-none -z-10 fixed inset-0" />
 
       {/* ── Header ── */}
       <div className="max-w-4xl mb-12">
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-white/10 bg-white/[0.03] text-xs text-zinc-300 font-mono mb-4">
-          <span className="w-2 h-2 rounded-full bg-[#52E3A4]" />
+          <span className="w-2 h-2 rounded-full bg-white" />
           <span>NETWORK TOPOLOGY</span>
           <span className="text-zinc-600">//</span>
-          <span className="text-[#52E3A4] font-semibold">15 CONNECTED ECOSYSTEM NODES</span>
+          <span className="text-white font-semibold">15 CONNECTED ECOSYSTEM NODES</span>
         </div>
 
         <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold text-white tracking-tight leading-[1.03] mb-4">
@@ -289,7 +289,7 @@ export function EcosystemPage() {
               onClick={() => setFilterCategory(flt.id)}
               className={`px-4 py-2 rounded-xl text-xs font-semibold font-mono transition-all cursor-pointer ${
                 filterCategory === flt.id
-                  ? 'bg-[#23B272] text-[#03040A] shadow-md'
+                  ? 'bg-white text-black shadow-md'
                   : 'text-zinc-400 hover:text-white bg-transparent'
               }`}
             >
@@ -305,7 +305,7 @@ export function EcosystemPage() {
         <div className="lg:col-span-7 p-6 rounded-3xl border border-white/[0.1] bg-[#070912] shadow-2xl relative flex flex-col items-center">
           <div className="w-full flex items-center justify-between pb-4 mb-2 border-b border-white/[0.06] text-xs font-mono">
             <span className="text-zinc-400">INTERACTIVE TOPOLOGY // CLICK NODE TO INSPECT</span>
-            <span className="text-[#52E3A4]">{activeEntity.name.toUpperCase()} ACTIVE</span>
+            <span className="text-white">{activeEntity.name.toUpperCase()} ACTIVE</span>
           </div>
 
           <svg
@@ -318,12 +318,12 @@ export function EcosystemPage() {
             <circle cx={CENTER} cy={CENTER} r={RADIUS} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="1" strokeDasharray="4 6" />
 
             {/* Central Digisynq Synchronization Hub */}
-            <circle cx={CENTER} cy={CENTER} r={34} fill="#06130E" stroke="#23B272" strokeWidth="2" />
+            <circle cx={CENTER} cy={CENTER} r={34} fill="#090B14" stroke="#FFFFFF" strokeWidth="2" />
             <text
               x={CENTER}
               y={CENTER + 4}
               textAnchor="middle"
-              fill="#52E3A4"
+              fill="#FFFFFF"
               fontSize="10"
               fontFamily="JetBrains Mono"
               fontWeight="bold"
@@ -345,7 +345,7 @@ export function EcosystemPage() {
                     y1={CENTER}
                     x2={pos.x}
                     y2={pos.y}
-                    stroke={isSelected ? '#52E3A4' : isRelated ? 'rgba(35,178,114,0.4)' : 'rgba(255,255,255,0.04)'}
+                    stroke={isSelected ? '#FFFFFF' : isRelated ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.04)'}
                     strokeWidth={isSelected ? 2 : isRelated ? 1.5 : 0.75}
                     strokeDasharray={isSelected ? 'none' : '2 4'}
                   />
@@ -357,7 +357,7 @@ export function EcosystemPage() {
                       y1={getCoordinates(activeEntity.angle).y}
                       x2={pos.x}
                       y2={pos.y}
-                      stroke="#52E3A4"
+                      stroke="#FFFFFF"
                       strokeWidth="1.5"
                       strokeOpacity="0.75"
                     />
@@ -383,8 +383,8 @@ export function EcosystemPage() {
                     cx={pos.x}
                     cy={pos.y}
                     r={isSelected ? 22 : 16}
-                    fill={isSelected ? '#23B272' : isRelated ? '#16543D' : '#090B14'}
-                    stroke={isSelected ? '#52E3A4' : isRelated ? '#52E3A4' : 'rgba(255,255,255,0.2)'}
+                    fill={isSelected ? '#FFFFFF' : isRelated ? '#27272A' : '#090B14'}
+                    stroke={isSelected ? '#FFFFFF' : isRelated ? '#D4D4D8' : 'rgba(255,255,255,0.2)'}
                     strokeWidth={isSelected ? 3 : 1.5}
                     className="transition-all"
                   />
@@ -413,7 +413,7 @@ export function EcosystemPage() {
                 onClick={() => setSelectedEntityId(ent.id)}
                 className={`px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all ${
                   ent.id === activeEntity.id
-                    ? 'bg-[#23B272] text-[#03040A] font-bold'
+                    ? 'bg-white text-black font-bold'
                     : 'bg-black/40 text-zinc-400 hover:text-white border border-white/[0.06]'
                 }`}
               >
@@ -427,10 +427,10 @@ export function EcosystemPage() {
         <div className="lg:col-span-5 p-6 sm:p-8 rounded-3xl border border-white/[0.1] bg-[#090B14] shadow-2xl space-y-6">
           <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
             <div>
-              <span className="font-mono text-xs text-[#52E3A4]">{activeEntity.category}</span>
+              <span className="font-mono text-xs text-white">{activeEntity.category}</span>
               <h2 className="text-2xl font-bold text-white mt-1">{activeEntity.name}</h2>
             </div>
-            <span className="text-[10px] font-mono px-2.5 py-1 rounded bg-[#23B272]/20 text-[#52E3A4] border border-[#23B272]/40 font-bold">
+            <span className="text-[10px] font-mono px-2.5 py-1 rounded bg-white/[0.08] text-white border border-white/20 font-bold">
               NODE ACTIVE
             </span>
           </div>
@@ -446,7 +446,7 @@ export function EcosystemPage() {
               <ul className="space-y-1 text-zinc-300 text-[11px]">
                 {activeEntity.whatItNeeds.map((item, i) => (
                   <li key={i} className="flex items-center gap-1.5">
-                    <span className="text-[#52E3A4]">←</span> {item}
+                    <span className="text-white">←</span> {item}
                   </li>
                 ))}
               </ul>
@@ -457,7 +457,7 @@ export function EcosystemPage() {
               <ul className="space-y-1 text-zinc-300 text-[11px]">
                 {activeEntity.whatItProvides.map((item, i) => (
                   <li key={i} className="flex items-center gap-1.5">
-                    <span className="text-[#23B272]">→</span> {item}
+                    <span className="text-zinc-200">→</span> {item}
                   </li>
                 ))}
               </ul>
@@ -471,11 +471,22 @@ export function EcosystemPage() {
               {activeEntity.cascadeRisk}
             </div>
 
-            <div className="p-3.5 rounded-xl bg-[#16543D]/25 border border-[#23B272]/30 text-emerald-100">
-              <strong className="text-[#52E3A4] block font-mono text-[11px] mb-1">
-                DIGISYNQ INTERVENTION ({activeEntity.activeMechanism}):
-              </strong>
-              {activeEntity.digisynqIntervention}
+            <div className="p-3.5 rounded-xl bg-white/[0.04] border border-white/15 text-zinc-300">
+              <div className="flex items-center justify-between gap-2 mb-1.5 flex-wrap">
+                <strong className="text-white font-mono text-[11px]">
+                  DIGISYNQ INTERVENTION:
+                </strong>
+                <Link
+                  to="/mechanisms"
+                  className="text-[11px] font-mono text-white hover:text-white underline underline-offset-2 inline-flex items-center gap-1 transition-colors"
+                >
+                  <span>{activeEntity.activeMechanism}</span>
+                  <ArrowRight className="w-3 h-3" />
+                </Link>
+              </div>
+              <p className="text-xs text-zinc-300 leading-relaxed">
+                {activeEntity.digisynqIntervention}
+              </p>
             </div>
           </div>
 
@@ -483,7 +494,7 @@ export function EcosystemPage() {
           <div className="pt-4 border-t border-white/[0.08] flex flex-col sm:flex-row gap-3">
             <Link
               to="/diagnose"
-              className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-[#23B272] text-[#03040A] hover:bg-[#52E3A4] font-bold text-xs tracking-wide transition-all shadow-md"
+              className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-white text-black hover:bg-zinc-200 font-bold text-xs tracking-wide transition-all shadow-md"
             >
               <span>Diagnose {activeEntity.name} Issue</span>
               <ArrowRight className="w-3.5 h-3.5" />

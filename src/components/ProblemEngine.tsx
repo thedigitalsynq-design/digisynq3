@@ -84,7 +84,7 @@ export function ProblemEngine({ compact = false }: ProblemEngineProps) {
         <div className="space-y-6">
           {!compact && (
             <div className="text-center">
-              <div className="label-mono text-[#23B272] mb-3">The DigiSynq problem engine</div>
+              <div className="label-mono text-zinc-200 mb-3">The DigiSynq problem engine</div>
               <h2 className="text-2xl sm:text-3xl font-denton font-black text-white mb-2">
                 Start with your problem.
               </h2>
@@ -105,7 +105,7 @@ export function ProblemEngine({ compact = false }: ProblemEngineProps) {
                 aria-label={`Problem category: ${cat.label}`}
               >
                 <span className="text-2xl" role="img" aria-hidden="true">{cat.icon}</span>
-                <span className="label-mono text-[10px] text-white/70 group-hover:text-[#23B272] transition-colors">
+                <span className="label-mono text-[10px] text-white/70 group-hover:text-zinc-200 transition-colors">
                   {cat.label}
                 </span>
               </button>
@@ -126,7 +126,7 @@ export function ProblemEngine({ compact = false }: ProblemEngineProps) {
           {/* Header */}
           <div className="flex items-center justify-between">
             <div>
-              <div className="label-mono text-[#23B272] mb-1">
+              <div className="label-mono text-zinc-200 mb-1">
                 {selectedCategory.icon} {selectedCategory.label}
               </div>
               <div className="text-xs text-white/40 font-mono">
@@ -146,7 +146,7 @@ export function ProblemEngine({ compact = false }: ProblemEngineProps) {
           {/* Progress bar */}
           <div className="h-0.5 bg-white/[0.06] rounded-full overflow-hidden">
             <div
-              className="h-full bg-[#23B272] transition-all duration-500"
+              className="h-full bg-white transition-all duration-500"
               style={{
                 width: `${((currentQuestionIndex + 1) / selectedCategory.sub_questions.length) * 100}%`
               }}
@@ -171,7 +171,7 @@ export function ProblemEngine({ compact = false }: ProblemEngineProps) {
                       onClick={() => handleOptionToggle(opt, q.type)}
                       className={`flex items-center gap-3 px-4 py-3.5 rounded-xl border text-left transition-all text-sm ${
                         selectedOptions.includes(opt)
-                          ? 'border-[#23B272]/50 bg-[#23B272]/08 text-white'
+                          ? 'border-white/20/50 bg-white/08 text-white'
                           : 'border-white/[0.07] bg-[#0E1120]/60 text-white/60 hover:border-white/20 hover:text-white/90'
                       }`}
                       aria-pressed={selectedOptions.includes(opt)}
@@ -180,7 +180,7 @@ export function ProblemEngine({ compact = false }: ProblemEngineProps) {
                         q.type === 'multi' ? 'rounded-[4px]' : 'rounded-full'
                       } ${
                         selectedOptions.includes(opt)
-                          ? 'border-[#23B272] bg-[#23B272]'
+                          ? 'border-white/20 bg-white'
                           : 'border-white/20'
                       }`}>
                         {selectedOptions.includes(opt) && (
@@ -213,7 +213,7 @@ export function ProblemEngine({ compact = false }: ProblemEngineProps) {
         <div className="space-y-6">
           {/* Header */}
           <div className="flex items-center justify-between">
-            <div className="label-mono text-[#23B272]">
+            <div className="label-mono text-zinc-200">
               {selectedCategory.icon} Synq path identified
             </div>
             <button onClick={reset} className="btn-ghost text-[10px] gap-1.5">
@@ -260,7 +260,7 @@ export function ProblemEngine({ compact = false }: ProblemEngineProps) {
                       {s}
                     </span>
                     {i < synqPath.steps.length - 1 && (
-                      <ArrowRight className="w-3 h-3 text-[#23B272]/50" />
+                      <ArrowRight className="w-3 h-3 text-zinc-200/50" />
                     )}
                   </React.Fragment>
                 ))}
@@ -274,7 +274,7 @@ export function ProblemEngine({ compact = false }: ProblemEngineProps) {
                 {synqPath.relevant_capabilities.map((cap) => (
                   <span
                     key={cap}
-                    className="px-2.5 py-1 rounded-full text-[10px] font-mono bg-[#23B272]/08 text-[#23B272] border border-[#23B272]/20"
+                    className="px-2.5 py-1 rounded-full text-[10px] font-mono bg-white/08 text-zinc-200 border border-white/10"
                   >
                     {cap}
                   </span>

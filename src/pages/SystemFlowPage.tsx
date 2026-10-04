@@ -324,10 +324,10 @@ export function SystemFlowPage() {
       {/* Header */}
       <header className="mb-10 max-w-4xl">
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-white/10 bg-white/[0.03] text-xs text-zinc-300 font-mono mb-4">
-          <span className="w-2 h-2 rounded-full bg-[#52E3A4] animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
           <span>SYSTEM ARCHITECTURE DIAGRAM</span>
           <span className="text-zinc-600">//</span>
-          <span className="text-[#52E3A4]">COMPLETE DIGISYNQ OPERATIONAL FLOWCHART</span>
+          <span className="text-white">COMPLETE DIGISYNQ OPERATIONAL FLOWCHART</span>
         </div>
 
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-4">
@@ -357,7 +357,7 @@ export function SystemFlowPage() {
                 onClick={() => setActivePathMode(mode.id as FlowPathMode)}
                 className={`px-3 py-1.5 rounded-xl text-xs font-mono whitespace-nowrap transition-all border ${
                   activePathMode === mode.id
-                    ? 'bg-[#16543D] text-[#52E3A4] border-[#52E3A4] shadow-md font-semibold'
+                    ? 'bg-[#090B14] text-white border-white/20 shadow-md font-semibold'
                     : 'bg-white/[0.02] text-zinc-400 border-white/5 hover:border-white/15 hover:text-white'
                 }`}
               >
@@ -400,7 +400,7 @@ export function SystemFlowPage() {
               className="p-2.5 rounded-xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.06] text-zinc-300 hover:text-white transition-colors text-xs font-mono flex items-center gap-1.5"
               title="Copy Diagram Link"
             >
-              {copiedLink ? <Check className="w-4 h-4 text-[#52E3A4]" /> : <Share2 className="w-4 h-4" />}
+              {copiedLink ? <Check className="w-4 h-4 text-white" /> : <Share2 className="w-4 h-4" />}
             </button>
           </div>
         </div>
@@ -414,7 +414,7 @@ export function SystemFlowPage() {
           <div
             className="absolute inset-0 opacity-15 pointer-events-none"
             style={{
-              backgroundImage: 'radial-gradient(circle at 1px 1px, #52E3A4 1px, transparent 0)',
+              backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)',
               backgroundSize: '24px 24px'
             }}
           />
@@ -427,7 +427,7 @@ export function SystemFlowPage() {
             <div
               onClick={() => setSelectedNodeId('start-node')}
               className={`cursor-pointer transition-all duration-300 transform hover:scale-105 ${
-                selectedNodeId === 'start-node' ? 'ring-2 ring-[#52E3A4] shadow-lg shadow-[#52E3A4]/20' : ''
+                selectedNodeId === 'start-node' ? 'ring-2 ring-white shadow-lg shadow-white/20' : ''
               } ${isNodeHighlighted('start-node') ? 'opacity-100' : 'opacity-30'}`}
             >
               <div className="px-8 py-3.5 rounded-full bg-[#1F1435] border-2 border-[#A855F7] text-white shadow-md text-center flex items-center gap-2.5">
@@ -468,7 +468,7 @@ export function SystemFlowPage() {
                 {/* Left Branch: Yes */}
                 <div className="flex flex-col items-center">
                   <div className="w-0.5 h-6 bg-zinc-600" />
-                  <span className="text-[10px] font-mono bg-[#090B14] px-1.5 py-0.5 rounded text-emerald-400 border border-emerald-500/30 my-1">
+                  <span className="text-[10px] font-mono bg-[#090B14] px-1.5 py-0.5 rounded text-zinc-300 border border-white/15 my-1">
                     Yes: Anomaly Flagged
                   </span>
                   <div className="w-0.5 h-6 bg-zinc-600" />
@@ -638,7 +638,7 @@ export function SystemFlowPage() {
             {/* Connecting Arrow (with loopback indicator note) */}
             <div className="flex items-center justify-center gap-6 py-1">
               <div className="flex flex-col items-center">
-                <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 mb-1">
+                <span className="text-[10px] font-mono text-zinc-300 bg-white/[0.05] px-2 py-0.5 rounded border border-white/10 mb-1">
                   Root Cause Certified (Confidence &gt; 85%)
                 </span>
                 <div className="w-0.5 h-6 bg-zinc-600" />
@@ -654,7 +654,7 @@ export function SystemFlowPage() {
               } ${isNodeHighlighted('process-covenant') ? 'opacity-100' : 'opacity-30'}`}
             >
               <div className="flex items-center justify-between mb-1.5">
-                <span className="text-[10px] font-mono text-[#52E3A4] font-bold">M11 + M12 // ORCHESTRATION</span>
+                <span className="text-[10px] font-mono text-white font-bold">M11 + M12 // ORCHESTRATION</span>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-300">BINDING COVENANT</span>
               </div>
               <div className="font-bold text-sm text-white mb-1">
@@ -722,11 +722,11 @@ export function SystemFlowPage() {
             <div
               onClick={() => setSelectedNodeId('end-node')}
               className={`cursor-pointer transition-all duration-300 transform hover:scale-105 ${
-                selectedNodeId === 'end-node' ? 'ring-2 ring-[#52E3A4] shadow-lg shadow-[#52E3A4]/20' : ''
+                selectedNodeId === 'end-node' ? 'ring-2 ring-white shadow-lg shadow-white/20' : ''
               } ${isNodeHighlighted('end-node') ? 'opacity-100' : 'opacity-30'}`}
             >
-              <div className="px-8 py-3.5 rounded-full bg-[#0D281E] border-2 border-[#52E3A4] text-white shadow-md text-center flex items-center gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-[#52E3A4]" />
+              <div className="px-8 py-3.5 rounded-full bg-[#090B14] border-2 border-white/20 text-white shadow-md text-center flex items-center gap-2.5">
+                <CheckCircle2 className="w-4 h-4 text-white" />
                 <span className="font-bold tracking-wide text-sm">End: System Restored &amp; Inoculated Against Recurrence</span>
               </div>
             </div>
@@ -738,7 +738,7 @@ export function SystemFlowPage() {
           <div className="p-6 sm:p-8 rounded-2xl border border-white/10 bg-[#090B14] shadow-xl sticky top-28">
             <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/10">
               <div className="flex items-center gap-2">
-                <span className="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold bg-[#16543D] text-[#52E3A4] border border-[#52E3A4]/30">
+                <span className="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold bg-[#090B14] text-white border border-white/15">
                   {selectedNode.badge}
                 </span>
                 <span className="text-[10px] font-mono text-zinc-500 uppercase">
@@ -761,7 +761,7 @@ export function SystemFlowPage() {
             {/* Node Specifications */}
             <div className="space-y-4 mb-6">
               <div className="p-3.5 rounded-xl border border-white/5 bg-white/[0.02]">
-                <div className="text-[10px] font-mono text-[#52E3A4] uppercase tracking-wider mb-1 font-semibold flex items-center gap-1.5">
+                <div className="text-[10px] font-mono text-white uppercase tracking-wider mb-1 font-semibold flex items-center gap-1.5">
                   <FileText className="w-3.5 h-3.5" />
                   <span>Primary Inputs</span>
                 </div>
@@ -798,7 +798,7 @@ export function SystemFlowPage() {
               )}
 
               <div className="p-3.5 rounded-xl border border-white/5 bg-white/[0.02]">
-                <div className="text-[10px] font-mono text-[#52E3A4] uppercase tracking-wider mb-1 font-semibold flex items-center gap-1.5">
+                <div className="text-[10px] font-mono text-white uppercase tracking-wider mb-1 font-semibold flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>Output Deliverable</span>
                 </div>
@@ -826,7 +826,7 @@ export function SystemFlowPage() {
               </div>
               <div className="flex items-center justify-between text-xs">
                 <span className="text-zinc-500 font-mono">Associated Mechanisms:</span>
-                <span className="text-[#52E3A4] font-mono font-semibold">{selectedNode.mechanisms.join(', ')}</span>
+                <span className="text-white font-mono font-semibold">{selectedNode.mechanisms.join(', ')}</span>
               </div>
             </div>
 
@@ -834,7 +834,7 @@ export function SystemFlowPage() {
             {selectedNode.linkToRoute && (
               <Link
                 to={selectedNode.linkToRoute.path}
-                className="w-full py-2.5 px-4 rounded-xl bg-[#52E3A4] text-[#03040A] font-bold text-xs hover:bg-[#34D399] transition-colors flex items-center justify-center gap-1.5 shadow-md"
+                className="w-full py-2.5 px-4 rounded-xl bg-white text-[#03040A] font-bold text-xs hover:bg-[#34D399] transition-colors flex items-center justify-center gap-1.5 shadow-md"
               >
                 <span>{selectedNode.linkToRoute.label}</span>
                 <ArrowRight className="w-3.5 h-3.5" />

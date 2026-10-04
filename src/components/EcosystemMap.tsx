@@ -64,8 +64,8 @@ export function EcosystemMap({ onSelectParticipant, size = 'full' }: EcosystemMa
           {/* Background glow */}
           <defs>
             <radialGradient id="center-glow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#23B272" stopOpacity="0.12" />
-              <stop offset="100%" stopColor="#23B272" stopOpacity="0" />
+              <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.12" />
+              <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
             </radialGradient>
             <filter id="node-shadow" x="-50%" y="-50%" width="200%" height="200%">
               <feGaussianBlur stdDeviation="3" result="blur" />
@@ -77,7 +77,7 @@ export function EcosystemMap({ onSelectParticipant, size = 'full' }: EcosystemMa
           <circle
             cx={CENTER} cy={CENTER} r={ORBIT_RADIUS}
             fill="none"
-            stroke="rgba(255,255,255,0.04)"
+            stroke="rgba(255,255,255,0.06)"
             strokeWidth="1"
             strokeDasharray="4 6"
           />
@@ -91,7 +91,7 @@ export function EcosystemMap({ onSelectParticipant, size = 'full' }: EcosystemMa
                 key={`line-${p.id}`}
                 x1={CENTER} y1={CENTER}
                 x2={pos.x} y2={pos.y}
-                stroke={active ? p.color : 'rgba(255,255,255,0.04)'}
+                stroke={active ? '#FFFFFF' : 'rgba(255,255,255,0.06)'}
                 strokeWidth={active ? 1.5 : 0.75}
                 strokeDasharray={active ? 'none' : '3 5'}
                 className="transition-all duration-300"
@@ -105,11 +105,9 @@ export function EcosystemMap({ onSelectParticipant, size = 'full' }: EcosystemMa
             const p = participants.find(x => x.id === activeId);
             if (!p) return null;
             const pos = polarToXY(p.angle, ORBIT_RADIUS);
-            const dx = pos.x - CENTER;
-            const dy = pos.y - CENTER;
             return (
               <g>
-                <circle r="3" fill="#23B272" opacity="0.9">
+                <circle r="3" fill="#FFFFFF" opacity="0.9">
                   <animateMotion
                     dur="1.5s"
                     repeatCount="indefinite"
@@ -130,31 +128,31 @@ export function EcosystemMap({ onSelectParticipant, size = 'full' }: EcosystemMa
             <circle
               cx={CENTER} cy={CENTER}
               r={CENTER_RADIUS}
-              fill="rgba(35, 178, 114,0.08)"
-              stroke="rgba(35, 178, 114,0.4)"
+              fill="rgba(255,255,255,0.06)"
+              stroke="rgba(255,255,255,0.3)"
               strokeWidth="1.5"
             />
             <circle
               cx={CENTER} cy={CENTER}
               r={CENTER_RADIUS + 8}
               fill="none"
-              stroke="rgba(35, 178, 114,0.1)"
+              stroke="rgba(255,255,255,0.1)"
               strokeWidth="1"
             />
             <circle
               cx={CENTER} cy={CENTER}
               r={CENTER_RADIUS - 8}
-              fill="rgba(35, 178, 114,0.06)"
-              stroke="rgba(35, 178, 114,0.2)"
+              fill="rgba(255,255,255,0.04)"
+              stroke="rgba(255,255,255,0.15)"
               strokeWidth="0.75"
             />
-            <text x={CENTER} y={CENTER - 6} textAnchor="middle" fill="#23B272" fontSize="10" fontFamily="Google Sans Flex, sans-serif" fontWeight="700" letterSpacing="0.5">DigiSynq</text>
-            <text x={CENTER} y={CENTER + 7} textAnchor="middle" fill="rgba(255,255,255,0.45)" fontSize="8" fontFamily="Google Sans Flex, sans-serif">Coordination</text>
-            <text x={CENTER} y={CENTER + 18} textAnchor="middle" fill="rgba(255,255,255,0.45)" fontSize="8" fontFamily="Google Sans Flex, sans-serif">Layer</text>
+            <text x={CENTER} y={CENTER - 6} textAnchor="middle" fill="#FFFFFF" fontSize="10" fontFamily="Google Sans Flex, sans-serif" fontWeight="700" letterSpacing="0.5">DigiSynq</text>
+            <text x={CENTER} y={CENTER + 7} textAnchor="middle" fill="rgba(255,255,255,0.5)" fontSize="8" fontFamily="Google Sans Flex, sans-serif">Coordination</text>
+            <text x={CENTER} y={CENTER + 18} textAnchor="middle" fill="rgba(255,255,255,0.5)" fontSize="8" fontFamily="Google Sans Flex, sans-serif">Layer</text>
             {/* Pulse ring */}
-            <circle cx={CENTER} cy={CENTER} r={CENTER_RADIUS + 16} fill="none" stroke="#23B272" strokeWidth="0.5" opacity="0.3">
+            <circle cx={CENTER} cy={CENTER} r={CENTER_RADIUS + 16} fill="none" stroke="#FFFFFF" strokeWidth="0.5" opacity="0.25">
               <animate attributeName="r" values={`${CENTER_RADIUS + 8};${CENTER_RADIUS + 24};${CENTER_RADIUS + 8}`} dur="3s" repeatCount="indefinite" />
-              <animate attributeName="opacity" values="0.3;0;0.3" dur="3s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0.25;0;0.25" dur="3s" repeatCount="indefinite" />
             </circle>
           </g>
 
@@ -235,7 +233,7 @@ export function EcosystemMap({ onSelectParticipant, size = 'full' }: EcosystemMa
               </button>
             </div>
 
-            <p className="text-sm text-white/60 italic leading-relaxed">{activeParticipant.tagline}</p>
+            <p className="text-sm text-white/60 leading-relaxed">{activeParticipant.tagline}</p>
 
             {/* What they need */}
             <div>
@@ -280,8 +278,8 @@ export function EcosystemMap({ onSelectParticipant, size = 'full' }: EcosystemMa
           </div>
         ) : (
           <div className="synq-card p-8 border border-white/[0.04] flex flex-col items-center justify-center gap-4 text-center min-h-[300px]">
-            <div className="w-12 h-12 rounded-full bg-[#23B272]/08 border border-[#23B272]/20 flex items-center justify-center">
-              <span className="text-[#23B272] text-xl">⟡</span>
+            <div className="w-12 h-12 rounded-full bg-white/08 border border-white/10 flex items-center justify-center">
+              <span className="text-zinc-200 text-xl">⟡</span>
             </div>
             <div>
               <p className="text-sm text-white/50 mb-1">Click any node to explore</p>

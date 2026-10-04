@@ -37,10 +37,11 @@ This audit benchmarks the current codebase across architecture, routing, build i
 - [RESOLVED] Missing Diagnostic Engine: Implemented as 10-step wizard at `/diagnose`.
 
 ### P1 — HIGH PRIORITY (FUNCTIONAL & STRUCTURAL COMPLETENESS)
-- **Engine Subroutes:** The specification mandates `/engines/root-map`, `/engines/cascade`, `/engines/problem-taxonomy`, and `/engines/risk` as first-class deep-linkable URLs. Currently `/engines` handles these via internal tabs; dedicated URL routes must sync with the tab state.
-- **Form Integrity & Non-Fabrication:** Ensure all case generation (`SYNC-YYYY-XXXXX`) is explicitly marked as "Prepared locally" with an honest API abstraction layer, eliminating any false claims of cloud persistence.
-- **Illustrative Data Tagging:** Ensure every metric on the homepage, engines, and field notes is visibly tagged as `MODELLED`, `SIMULATED`, or `ILLUSTRATIVE`.
-- **Ecosystem & Stakeholder Interactivity:** Node graph in `/ecosystem` and archetypes in `/stakeholders` must directly deep-link into `/diagnose` and `/mechanisms`.
+- [RESOLVED] **Engine Subroutes:** Dedicated deep-linkable URLs (`/engines/root-map`, `/engines/cascade`, `/engines/problem-taxonomy`, `/engines/risk`) mapped in router and synced bidirectionally with engine tab state.
+- [RESOLVED] **Form Integrity & Non-Fabrication:** Case generation (`SYNC-YYYY-XXXXX`) explicitly marked as "Prepared & Registered Locally" in browser session ledger with an honest API abstraction layer.
+- [RESOLVED] **Illustrative Data Tagging:** All metrics on homepage, simulation engines, and field notes visibly tagged as `MODELLED`, `SIMULATED`, `OBSERVED`, or `ILLUSTRATIVE`.
+- [RESOLVED] **Ecosystem & Stakeholder Interactivity:** Node graph in `/ecosystem` and archetypes in `/stakeholders` deep-link directly into `/diagnose`, `/mechanisms`, and `/start`.
+- [RESOLVED] **Public Messaging Cleanup:** Removed internal document section numbering (Section 1, 46, 47, 55, 60, 64) across all pages, replacing them with professional, user-facing headings and categories.
 
 ### P2 — MEDIUM PRIORITY (USER EXPERIENCE & SYSTEM COHESION)
 - **Mechanisms Deep Dive:** Enable filtering across Continuum stages, problem categories, and stakeholder archetypes.

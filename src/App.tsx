@@ -23,6 +23,7 @@ const RunbookPage = React.lazy(() => import('./pages/RunbookPage').then(m => ({ 
 const InsightsPage = React.lazy(() => import('./pages/InsightsPage').then(m => ({ default: m.InsightsPage })));
 const DiagnosePage = React.lazy(() => import('./pages/DiagnosePage').then(m => ({ default: m.DiagnosePage })));
 const SystemFlowPage = React.lazy(() => import('./pages/SystemFlowPage').then(m => ({ default: m.SystemFlowPage })));
+const RootCauseGraphPage = React.lazy(() => import('./pages/RootCauseGraphPage'));
 
 // ── Public website layout wrapper ────────────────────────────
 function WebsiteLayout({ children }: { children: React.ReactNode }) {
@@ -34,13 +35,13 @@ function WebsiteLayout({ children }: { children: React.ReactNode }) {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#03040A] text-[#ECEEF5] selection:bg-[#23B272] selection:text-[#03040A]">
+    <div className="min-h-screen flex flex-col bg-[#03040A] text-[#ECEEF5] selection:bg-white selection:text-black">
       <RouteSEO />
       <SiteNav />
       <div key={location.pathname} id="main-content" tabIndex={-1} className="flex-1 animate-page-fade focus:outline-none">
         <React.Suspense fallback={
           <div className="min-h-[70vh] flex flex-col items-center justify-center gap-3">
-            <div className="w-6 h-6 border-2 border-[#23B272] border-t-transparent rounded-full animate-spin" />
+            <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
             <span className="text-xs font-mono text-zinc-500">Loading DigiSynq module...</span>
           </div>
         }>
@@ -78,6 +79,8 @@ function AppRoutes() {
         <Route path="/diagnose" element={<DiagnosePage />} />
         <Route path="/start" element={<StartSynqPage />} />
         <Route path="/system-flow" element={<SystemFlowPage />} />
+        <Route path="/root-cause-graph" element={<RootCauseGraphPage />} />
+        <Route path="/eerg" element={<Navigate to="/root-cause-graph" replace />} />
 
         {/* Aliases & legacy route redirects */}
         <Route path="/labs" element={<Navigate to="/workshops" replace />} />

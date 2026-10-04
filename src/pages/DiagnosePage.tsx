@@ -39,7 +39,7 @@ interface DiagnosticStep {
 const DIAGNOSTIC_STEPS: DiagnosticStep[] = [
   {
     num: '01',
-    eyebrow: 'STEP 01 OF 11 // OPERATIONAL OBJECTIVE',
+    eyebrow: 'OPERATIONAL OBJECTIVE',
     question: 'What are you trying to accomplish?',
     subtitle: 'Select the primary production milestone or deliverable currently under active execution.',
     options: [
@@ -53,7 +53,7 @@ const DIAGNOSTIC_STEPS: DiagnosticStep[] = [
   },
   {
     num: '02',
-    eyebrow: 'STEP 02 OF 11 // BLOCKAGE & SYMPTOM',
+    eyebrow: 'BLOCKAGE & SYMPTOM',
     question: 'What is going wrong?',
     subtitle: 'Identify the active operational friction or emergency where reality is diverging from plan.',
     options: [
@@ -67,18 +67,18 @@ const DIAGNOSTIC_STEPS: DiagnosticStep[] = [
   },
   {
     num: '03',
-    eyebrow: 'STEP 03 OF 11 // LOCATION IN LIFECYCLE',
+    eyebrow: 'LOCATION IN LIFECYCLE',
     question: 'Where is it happening?',
-    subtitle: 'Pinpoint which stage of the 9-Stage Entertainment Continuum is the primary flashpoint.',
+    subtitle: 'Pinpoint which stage of the Entertainment Continuum is the primary flashpoint.',
     options: CONTINUUM_STAGES.map((s) => ({
       id: s.step,
-      title: `Stage ${s.step}: ${s.name}`,
+      title: s.name,
       desc: s.shortDesc,
     })),
   },
   {
     num: '04',
-    eyebrow: 'STEP 04 OF 11 // CHRONOLOGICAL ORIGIN',
+    eyebrow: 'CHRONOLOGICAL ORIGIN',
     question: 'When did it begin?',
     subtitle: 'Systems rarely fail instantly. At what point did the operational delta first surface?',
     options: [
@@ -90,7 +90,7 @@ const DIAGNOSTIC_STEPS: DiagnosticStep[] = [
   },
   {
     num: '05',
-    eyebrow: 'STEP 05 OF 11 // STAKEHOLDERS IN BLAST RADIUS',
+    eyebrow: 'STAKEHOLDERS IN BLAST RADIUS',
     question: 'Who is affected?',
     subtitle: 'Select the primary parties whose operational progress is directly blocked. (Multi-select)',
     multiSelect: true,
@@ -102,7 +102,7 @@ const DIAGNOSTIC_STEPS: DiagnosticStep[] = [
   },
   {
     num: '06',
-    eyebrow: 'STEP 06 OF 11 // IMPACT VECTOR',
+    eyebrow: 'IMPACT VECTOR',
     question: 'What is the impact?',
     subtitle: 'Where is collateral damage accumulating most aggressively across the system?',
     options: [
@@ -114,7 +114,7 @@ const DIAGNOSTIC_STEPS: DiagnosticStep[] = [
   },
   {
     num: '07',
-    eyebrow: 'STEP 07 OF 11 // DEPENDENCY LINKS',
+    eyebrow: 'DEPENDENCY LINKS',
     question: 'What dependencies are involved?',
     subtitle: 'What critical-path connections are propagating this failure downstream?',
     options: [
@@ -126,7 +126,7 @@ const DIAGNOSTIC_STEPS: DiagnosticStep[] = [
   },
   {
     num: '08',
-    eyebrow: 'STEP 08 OF 11 // ATTEMPTED TRIAGE',
+    eyebrow: 'ATTEMPTED TRIAGE',
     question: 'What has already been attempted?',
     subtitle: 'Understanding previous attempts reveals what systemic constraints remain unbroken.',
     options: [
@@ -138,7 +138,7 @@ const DIAGNOSTIC_STEPS: DiagnosticStep[] = [
   },
   {
     num: '09',
-    eyebrow: 'STEP 09 OF 11 // ROOT-CAUSE HYPOTHESIS',
+    eyebrow: 'ROOT-CAUSE HYPOTHESIS',
     question: 'What is the likely root cause?',
     subtitle: 'Surface emergencies are caused by underlying structural flaws. Select the core origin.',
     options: [
@@ -150,7 +150,7 @@ const DIAGNOSTIC_STEPS: DiagnosticStep[] = [
   },
   {
     num: '10',
-    eyebrow: 'STEP 10 OF 11 // MISSING CAPABILITY',
+    eyebrow: 'MISSING CAPABILITY',
     question: 'What capability is missing?',
     subtitle: 'What operational tool or resource was absent that enabled this crisis?',
     options: [
@@ -162,7 +162,7 @@ const DIAGNOSTIC_STEPS: DiagnosticStep[] = [
   },
   {
     num: '11',
-    eyebrow: 'STEP 11 OF 11 // INTERVENTION CLASS',
+    eyebrow: 'INTERVENTION CLASS',
     question: 'What intervention is possible?',
     subtitle: 'Determine the operational footprint and turnaround sprint required to resolve this.',
     options: [
@@ -312,16 +312,16 @@ export function DiagnosePage() {
   };
 
   return (
-    <main className="bg-[#03040A] text-[#ECEEF5] selection:bg-[#23B272] selection:text-[#03040A] min-h-screen pt-36 pb-24 px-6 sm:px-8 max-w-5xl mx-auto relative overflow-hidden">
+    <main className="bg-[#03040A] text-[#ECEEF5] selection:bg-white selection:text-black min-h-screen pt-36 pb-24 px-6 sm:px-8 max-w-5xl mx-auto relative overflow-hidden">
       <TopographicBackground className="opacity-20 pointer-events-none -z-10 fixed inset-0" />
 
       {/* ── Diagnostic Console Header ── */}
       <div className="text-center max-w-3xl mx-auto mb-10">
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-white/10 bg-white/[0.03] text-xs font-mono mb-4">
-          <span className="w-2 h-2 rounded-full bg-[#52E3A4] animate-pulse" />
-          <span className="text-[#52E3A4] font-semibold">ROOT-CAUSE DIAGNOSTIC ENGINE</span>
+          <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+          <span className="text-white font-semibold">ROOT-CAUSE DIAGNOSTIC ENGINE</span>
           <span className="text-zinc-600">//</span>
-          <span className="text-zinc-400">11-STEP INTERACTIVE DECOMPOSITION</span>
+          <span className="text-zinc-400">INTERACTIVE ROOT-CAUSE DECOMPOSITION</span>
         </div>
 
         <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-4">
@@ -337,13 +337,13 @@ export function DiagnosePage() {
         <div className="mb-10 p-4 rounded-2xl bg-[#090B14] border border-white/[0.08]">
           <div className="flex items-center justify-between text-xs font-mono mb-2">
             <span className="text-zinc-400">{currentStep.eyebrow}</span>
-            <span className="text-[#52E3A4] font-bold">
+            <span className="text-white font-bold">
               {Math.round(((currentStepIdx + 1) / 11) * 100)}% COMPLETE
             </span>
           </div>
           <div className="w-full h-1.5 bg-white/[0.06] rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-[#23B272] to-[#52E3A4] transition-all duration-300"
+              className="h-full bg-gradient-to-r from-zinc-200 to-white transition-all duration-300"
               style={{ width: `${((currentStepIdx + 1) / 11) * 100}%` }}
             />
           </div>
@@ -354,7 +354,7 @@ export function DiagnosePage() {
       {currentStepIdx < 11 && (
         <div className="p-8 sm:p-10 rounded-3xl border border-white/[0.1] bg-[#090B14] shadow-2xl relative overflow-hidden">
           <div className="mb-8">
-            <span className="text-xs font-mono text-[#52E3A4] tracking-wider uppercase block mb-1">
+            <span className="text-xs font-mono text-white tracking-wider uppercase block mb-1">
               QUESTION {currentStep.num}
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
@@ -379,12 +379,12 @@ export function DiagnosePage() {
                   onClick={() => handleSelectOption(opt.id)}
                   className={`p-5 rounded-2xl border text-left transition-all cursor-pointer relative group flex items-start justify-between gap-3 ${
                     isSelected
-                      ? 'bg-[#16543D]/40 border-[#52E3A4] shadow-[0_0_25px_rgba(82,227,164,0.18)] scale-[1.01]'
+                      ? 'bg-white/[0.05] border-white/20 shadow-[0_0_25px_rgba(82,227,164,0.18)] scale-[1.01]'
                       : 'bg-black/40 border-white/[0.06] hover:border-white/15'
                   }`}
                 >
                   <div>
-                    <h3 className={`text-sm font-bold transition-colors ${isSelected ? 'text-[#52E3A4]' : 'text-white'}`}>
+                    <h3 className={`text-sm font-bold transition-colors ${isSelected ? 'text-white' : 'text-white'}`}>
                       {opt.title}
                     </h3>
                     <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
@@ -394,7 +394,7 @@ export function DiagnosePage() {
                   <div
                     className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 border transition-all mt-0.5 ${
                       isSelected
-                        ? 'bg-[#23B272] border-[#23B272] text-[#03040A]'
+                        ? 'bg-white border-white/20 text-[#03040A]'
                         : 'border-white/20'
                     }`}
                   >
@@ -423,7 +423,7 @@ export function DiagnosePage() {
               type="button"
               onClick={handleNext}
               disabled={isGenerating}
-              className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-[#23B272] hover:bg-[#52E3A4] text-[#03040A] font-bold text-xs font-mono tracking-wide transition-all shadow-[0_0_30px_rgba(35,178,114,0.35)] active:scale-95"
+              className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-white hover:bg-zinc-200 text-[#03040A] font-bold text-xs font-mono tracking-wide transition-all shadow-[0_0_25px_rgba(255,255,255,0.2)] active:scale-95"
             >
               <span>{currentStepIdx === 10 ? (isGenerating ? 'Synthesizing Diagnosis...' : 'Generate Systemic Diagnosis →') : 'Continue →'}</span>
             </button>
@@ -437,15 +437,15 @@ export function DiagnosePage() {
       {currentStepIdx === 11 && diagnosticResult && (
         <div className="space-y-8 animate-in fade-in duration-300">
           {/* Header Badge & Identifier */}
-          <div className="p-8 sm:p-10 rounded-3xl border border-[#23B272]/40 bg-[#090B14] shadow-2xl relative">
+          <div className="p-8 sm:p-10 rounded-3xl border border-white/20 bg-[#090B14] shadow-2xl relative">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-6 border-b border-white/[0.08]">
               <div>
-                <div className="inline-flex items-center gap-2 text-xs font-mono text-[#52E3A4] uppercase tracking-wider mb-2">
+                <div className="inline-flex items-center gap-2 text-xs font-mono text-white uppercase tracking-wider mb-2">
                   <ShieldCheck className="w-4 h-4" />
                   <span>PRELIMINARY / MODELLED DIAGNOSTIC REPORT</span>
                 </div>
                 <h2 className="text-3xl font-black text-white">
-                  DIGISYNQ DIAGNOSTIC: <span className="font-mono text-[#23B272]">{diagnosticResult.caseId}</span>
+                  DIGISYNQ DIAGNOSTIC: <span className="font-mono text-zinc-200">{diagnosticResult.caseId}</span>
                 </h2>
                 <p className="text-xs text-zinc-500 mt-1 font-mono">
                   Timestamp: {new Date(diagnosticResult.createdAt).toLocaleString()} · Stored in System Client Memory
@@ -457,7 +457,7 @@ export function DiagnosePage() {
                   onClick={handleCopyCaseId}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-xs font-mono text-white transition-all"
                 >
-                  {copied ? <CheckCircle2 className="w-4 h-4 text-[#52E3A4]" /> : <Copy className="w-4 h-4" />}
+                  {copied ? <CheckCircle2 className="w-4 h-4 text-white" /> : <Copy className="w-4 h-4" />}
                   <span>{copied ? 'Case ID Copied' : 'Copy Case ID'}</span>
                 </button>
                 <button
@@ -484,9 +484,9 @@ export function DiagnosePage() {
                 <div className="text-[10px] text-amber-400 uppercase">URGENCY TIER</div>
                 <div className="text-amber-300 font-bold mt-1">IMMEDIATE TRIAGE</div>
               </div>
-              <div className="p-4 rounded-xl bg-[#23B272]/15 border border-[#23B272]/30">
-                <div className="text-[10px] text-[#52E3A4] uppercase">CONFIDENCE</div>
-                <div className="text-[#52E3A4] font-bold mt-1">89.4% MODELLED</div>
+              <div className="p-4 rounded-xl bg-white/[0.06] border border-white/15">
+                <div className="text-[10px] text-white uppercase">CONFIDENCE</div>
+                <div className="text-white font-bold mt-1">89.4% MODELLED</div>
               </div>
             </div>
 
@@ -513,14 +513,14 @@ export function DiagnosePage() {
                   <strong className="text-zinc-400 block mb-1 text-[11px]">DEPENDENCIES &amp; BLAST RADIUS:</strong>
                   <span className="text-zinc-300">Affecting {diagnosticResult.dependencies.join(', ')}</span>
                 </div>
-                <div className="p-4 rounded-xl bg-[#16543D]/25 border border-[#23B272]/30 text-emerald-100">
-                  <strong className="text-[#52E3A4] block mb-1 text-[11px]">MISSING CAPABILITY:</strong>
+                <div className="p-4 rounded-xl bg-white/[0.04] border border-white/15 text-zinc-300">
+                  <strong className="text-white block mb-1 text-[11px]">MISSING CAPABILITY:</strong>
                   <span>{diagnosticResult.missingCapability}</span>
                 </div>
               </div>
 
-              <div className="p-4 rounded-xl bg-[#23B272]/15 border border-[#23B272]/30 text-white">
-                <strong className="text-[#52E3A4] block mb-1 text-[11px]">RECOMMENDED SYNQ INTERVENTION:</strong>
+              <div className="p-4 rounded-xl bg-white/[0.06] border border-white/15 text-white">
+                <strong className="text-white block mb-1 text-[11px]">RECOMMENDED SYNQ INTERVENTION:</strong>
                 <span className="text-sm font-bold">{diagnosticResult.recommendedIntervention}</span>
                 <span className="block text-zinc-400 mt-1">{diagnosticResult.expectedOutcome}</span>
               </div>
@@ -528,13 +528,13 @@ export function DiagnosePage() {
 
             {/* ── Interactive Root Map (10 Stages from Problem to Outcome) ── */}
             <div className="p-6 rounded-2xl bg-black/50 border border-white/[0.08] mb-8">
-              <span className="text-[11px] font-mono text-[#52E3A4] uppercase tracking-wider block mb-4">
+              <span className="text-[11px] font-mono text-white uppercase tracking-wider block mb-4">
                 INTERACTIVE ROOT MAP CAUSAL CHAIN
               </span>
               <div className="space-y-2 text-xs font-mono">
                 {diagnosticResult.cascadePath.map((step, idx) => (
                   <div key={idx} className="flex items-center gap-3">
-                    <span className="text-[#52E3A4] w-6 text-right shrink-0">{`0${idx + 1}`.slice(-2)}</span>
+                    <span className="text-white shrink-0 font-bold">•</span>
                     <span className="text-zinc-600">→</span>
                     <span className="p-2 rounded bg-white/[0.03] border border-white/[0.06] text-zinc-300 w-full">
                       {step}
@@ -545,7 +545,7 @@ export function DiagnosePage() {
             </div>
 
             {/* Modelled Warning Note */}
-            <div className="text-[11px] font-mono text-zinc-500 mb-8 italic">
+            <div className="text-[11px] font-mono text-zinc-500 mb-8">
               * Note: Conclusions are preliminary modelled inferences generated from DigiSynq structural problem taxonomy. They do not imply AI omniscience. Full resolution requires human triage by the DigiSynq network.
             </div>
 
@@ -556,7 +556,7 @@ export function DiagnosePage() {
               </span>
               <Link
                 to={`/start?caseId=${diagnosticResult.caseId}&stage=${encodeURIComponent(diagnosticResult.stage)}&problem=${encodeURIComponent(diagnosticResult.blockage)}`}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-[#23B272] text-[#03040A] hover:bg-[#52E3A4] font-bold text-sm tracking-wide transition-all shadow-[0_0_35px_rgba(35,178,114,0.4)] active:scale-95"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white text-black hover:bg-zinc-200 font-bold text-sm tracking-wide transition-all shadow-[0_0_30px_rgba(255,255,255,0.25)] active:scale-95"
               >
                 <span>Proceed to Start a SYNQ Case with these Parameters →</span>
                 <ArrowRight className="w-4 h-4 stroke-[2.5]" />

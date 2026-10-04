@@ -98,7 +98,7 @@ export class ErrorBoundary extends Component<Props, State> {
               <button
                 type="button"
                 onClick={this.handleReset}
-                className="bg-[#23B272] px-4 py-2 text-[13px] font-semibold text-black hover:bg-[#52E3A4] transition rounded-lg flex items-center gap-1.5 cursor-pointer"
+                className="bg-white px-4 py-2 text-[13px] font-semibold text-black hover:bg-zinc-200 transition rounded-lg flex items-center gap-1.5 cursor-pointer"
               >
                 <RotateCcw size={16} />
                 <span>Retry View</span>

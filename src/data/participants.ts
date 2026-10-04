@@ -23,7 +23,7 @@ export const participants: Participant[] = [
     role: 'Film & Content Producers',
     tagline: 'Need the right crew, resources, and connections — at the right time.',
     angle: 0,
-    color: '#23B272',
+    color: '#FFFFFF',
     what_they_need: [
       'Reliable technicians and crew',
       'Budget visibility across departments',
@@ -48,7 +48,7 @@ export const participants: Participant[] = [
     role: 'Film & Content Directors',
     tagline: 'Need creative alignment and technical precision from the right team.',
     angle: 30,
-    color: '#B6F02A',
+    color: '#E4E4E7',
     what_they_need: [
       'Crew aligned with creative vision',
       'Technical department collaboration',
@@ -71,7 +71,7 @@ export const participants: Participant[] = [
     role: 'Technical Film Professionals',
     tagline: 'Need consistent opportunities, skill recognition, and career continuity.',
     angle: 60,
-    color: '#52E3A4',
+    color: '#D4D4D8',
     what_they_need: [
       'Consistent project opportunities',
       'Skill visibility and recognition',
@@ -95,7 +95,7 @@ export const participants: Participant[] = [
     role: 'Screenwriters & Story Developers',
     tagline: 'Need their stories to find the right production partners.',
     angle: 90,
-    color: '#10B981',
+    color: '#FFFFFF',
     what_they_need: [
       'Production partnerships',
       'IP protection understanding',
@@ -140,7 +140,7 @@ export const participants: Participant[] = [
     role: 'Brand Partners & Sponsors',
     tagline: 'Need authentic entertainment partnerships that connect with audiences.',
     angle: 150,
-    color: '#D4F838',
+    color: '#D4D4D8',
     what_they_need: [
       'Entertainment partnership opportunities',
       'Creator and influencer connections',
@@ -163,7 +163,7 @@ export const participants: Participant[] = [
     role: 'Digital Creators & Influencers',
     tagline: 'Need the right collaborations to grow audience and monetize work.',
     angle: 180,
-    color: '#4ADE80',
+    color: '#FFFFFF',
     what_they_need: [
       'Collaboration opportunities',
       'Brand and project partnerships',
@@ -186,7 +186,7 @@ export const participants: Participant[] = [
     role: 'Film Distribution & Exhibition',
     tagline: 'Need the right content and coordination to build better distribution.',
     angle: 210,
-    color: '#16543D',
+    color: '#E4E4E7',
     what_they_need: [
       'Quality content pipeline',
       'Marketing coordination',
@@ -209,7 +209,7 @@ export const participants: Participant[] = [
     role: 'Media Partners & Press',
     tagline: 'Need connected stories and coordinated access.',
     angle: 240,
-    color: '#E2E8F0',
+    color: '#D4D4D8',
     what_they_need: [
       'Story access and relationships',
       'Coordinated media partnerships',
@@ -230,7 +230,7 @@ export const participants: Participant[] = [
     role: 'Film Technology Providers',
     tagline: 'Need to connect solutions with projects that need them.',
     angle: 270,
-    color: '#A3E635',
+    color: '#FFFFFF',
     what_they_need: [
       'Production adoption opportunities',
       'Integration partnerships',
@@ -251,7 +251,7 @@ export const participants: Participant[] = [
     role: 'Film Finance & Investment',
     tagline: 'Need better intelligence, coordination, and risk visibility.',
     angle: 300,
-    color: '#22C55E',
+    color: '#E4E4E7',
     what_they_need: [
       'Project intelligence',
       'Risk visibility',
@@ -273,7 +273,7 @@ export const participants: Participant[] = [
     role: 'Film Audiences & Communities',
     tagline: 'Need better connection to the content and people they love.',
     angle: 330,
-    color: '#84CC16',
+    color: '#D4D4D8',
     what_they_need: [
       'Discovery of relevant content',
       'Direct community connection',

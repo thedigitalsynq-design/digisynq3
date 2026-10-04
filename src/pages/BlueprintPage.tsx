@@ -518,10 +518,10 @@ export function BlueprintPage() {
       {/* Header */}
       <header className="mb-10 max-w-4xl">
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-white/10 bg-white/[0.03] text-xs text-zinc-300 font-mono mb-4">
-          <span className="w-2 h-2 rounded-full bg-[#52E3A4] animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
           <span>DIGISYNQ CODEX</span>
           <span className="text-zinc-600">//</span>
-          <span className="text-[#52E3A4]">14 CORE ARCHITECTURAL DOMAINS</span>
+          <span className="text-white">14 CORE ARCHITECTURAL DOMAINS</span>
         </div>
 
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-4">
@@ -544,7 +544,7 @@ export function BlueprintPage() {
               placeholder="Search across all 14 codex domains..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-white/10 bg-[#090B14] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#52E3A4] transition-colors"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-white/10 bg-[#090B14] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-white/20 transition-colors"
             />
             {searchQuery && (
               <button
@@ -563,7 +563,7 @@ export function BlueprintPage() {
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-3 py-1.5 rounded-lg text-xs font-mono whitespace-nowrap transition-colors border ${
                   selectedCategory === cat
-                    ? 'bg-[#16543D] text-[#52E3A4] border-[#52E3A4]'
+                    ? 'bg-[#090B14] text-white border-white/20'
                     : 'bg-[#090B14] text-zinc-400 border-white/5 hover:border-white/15 hover:text-white'
                 }`}
               >
@@ -591,12 +591,12 @@ export function BlueprintPage() {
                 onClick={() => handleSelectSection(sec.id)}
                 className={`w-full text-left p-3.5 rounded-xl border transition-all ${
                   isSelected
-                    ? 'bg-[#16543D]/40 border-[#52E3A4] text-white shadow-lg'
+                    ? 'bg-white/[0.05] border-white/20 text-white shadow-lg'
                     : 'bg-[#090B14]/80 border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/15'
                 }`}
               >
                 <div className="flex items-center justify-between mb-1.5">
-                  <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 text-[#52E3A4]">
+                  <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-white/5 text-white">
                     {sec.category}
                   </span>
                   <span className="text-[10px] font-mono text-zinc-500">
@@ -626,7 +626,7 @@ export function BlueprintPage() {
           <div className="pb-6 mb-6 border-b border-white/10">
             <div className="flex items-center justify-between flex-wrap gap-4 mb-3">
               <div className="flex items-center gap-2">
-                <span className="px-2.5 py-1 rounded bg-[#16543D]/60 border border-[#52E3A4]/30 text-[#52E3A4] font-mono text-xs font-semibold">
+                <span className="px-2.5 py-1 rounded bg-[#090B14]/60 border border-white/15 text-white font-mono text-xs font-semibold">
                   {activeSection.category.toUpperCase()}
                 </span>
                 <span className="text-xs font-mono text-zinc-500">
@@ -639,7 +639,7 @@ export function BlueprintPage() {
                   onClick={handleCopy}
                   className="px-3 py-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 text-zinc-300 hover:text-white text-xs font-mono flex items-center gap-1.5 transition-colors"
                 >
-                  {copied ? <Check className="w-3.5 h-3.5 text-[#52E3A4]" /> : <Copy className="w-3.5 h-3.5" />}
+                  {copied ? <Check className="w-3.5 h-3.5 text-white" /> : <Copy className="w-3.5 h-3.5" />}
                   <span>{copied ? 'Copied' : 'Copy Section'}</span>
                 </button>
               </div>
@@ -654,8 +654,8 @@ export function BlueprintPage() {
           </div>
 
           {/* Executive Summary Card */}
-          <div className="p-4 rounded-xl border border-[#52E3A4]/20 bg-[#16543D]/10 mb-8">
-            <div className="text-[11px] font-mono text-[#52E3A4] mb-1 font-semibold uppercase tracking-wider flex items-center gap-1.5">
+          <div className="p-4 rounded-xl border border-white/20/20 bg-white/[0.02] mb-8">
+            <div className="text-[11px] font-mono text-white mb-1 font-semibold uppercase tracking-wider flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5" />
               <span>Core Operational Thesis</span>
             </div>
@@ -676,13 +676,13 @@ export function BlueprintPage() {
           {/* Key Takeaways */}
           <div className="p-5 rounded-xl border border-white/5 bg-white/[0.02] mb-8">
             <h3 className="text-xs font-mono uppercase tracking-wider text-white mb-3 flex items-center gap-2 font-semibold">
-              <CheckCircle2 className="w-4 h-4 text-[#52E3A4]" />
+              <CheckCircle2 className="w-4 h-4 text-white" />
               <span>Architectural Takeaways</span>
             </h3>
             <ul className="space-y-2">
               {activeSection.keyTakeaways.map((takeaway, idx) => (
                 <li key={idx} className="text-xs sm:text-sm text-zinc-300 flex items-start gap-2">
-                  <span className="text-[#52E3A4] mt-1">•</span>
+                  <span className="text-white mt-1">•</span>
                   <span>{takeaway}</span>
                 </li>
               ))}
@@ -700,7 +700,7 @@ export function BlueprintPage() {
                   <Link
                     key={route.path}
                     to={route.path}
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 text-xs text-zinc-200 hover:text-[#52E3A4] transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 text-xs text-zinc-200 hover:text-white transition-colors"
                   >
                     <span>{route.label}</span>
                     <ArrowRight className="w-3 h-3" />
@@ -715,7 +715,7 @@ export function BlueprintPage() {
               </span>
               <Link
                 to="/diagnose"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#52E3A4] text-[#03040A] font-semibold text-xs hover:bg-[#34D399] transition-colors shadow-md"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white text-[#03040A] font-semibold text-xs hover:bg-[#34D399] transition-colors shadow-md"
               >
                 <span>Diagnose a Problem</span>
                 <ArrowRight className="w-3.5 h-3.5" />

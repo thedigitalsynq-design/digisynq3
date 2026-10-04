@@ -10,74 +10,74 @@
    Systems visual cues: nodes, graphs, signals, flows, maps
    ============================================================ */
 
-/* ── DIGISYNQ Brand Tokens ───────────────────────────────── */
+/* ── DIGISYNQ Brand Tokens — Pure Monochrome Architecture ── */
 @theme {
   /* Background Layers */
-  --color-synq-void:      #03040A;
-  --color-synq-bg:        #06130E;
+  --color-synq-void:      #000000;
+  --color-synq-bg:        #03040A;
   --color-synq-surface:   #090B14;
-  --color-synq-surface-2: #0E1120;
-  --color-synq-surface-3: #141828;
+  --color-synq-surface-2: #0E101A;
+  --color-synq-surface-3: #141724;
 
   /* Borders */
-  --color-synq-border:       rgba(255,255,255,0.06);
-  --color-synq-border-light: rgba(255,255,255,0.12);
-  --color-synq-border-active: rgba(35, 178, 114,0.35);
+  --color-synq-border:       rgba(255,255,255,0.08);
+  --color-synq-border-light: rgba(255,255,255,0.15);
+  --color-synq-border-active: rgba(255, 255, 255, 0.4);
 
   /* Text */
-  --color-synq-text:       #ECEEF5;
-  --color-synq-text-dim:   #9299A8;
-  --color-synq-text-muted: #5A6170;
+  --color-synq-text:       #FFFFFF;
+  --color-synq-text-dim:   #A1A1AA;
+  --color-synq-text-muted: #71717A;
 
-  /* ── Jade Horizon Signature Palette ─────────────────── */
-  --color-jade-mint:     #52E3A4;
-  --color-jade-primary:  #23B272;
-  --color-jade-pine:     #16543D;
-  --color-jade-depth:    #0D281E;
-  --color-jade-void:     #06130E;
-  --color-jade-lime:     #D4F838;
+  /* ── Monochrome Platinum & Obsidian Signature Palette ── */
+  --color-jade-mint:     #FFFFFF;
+  --color-jade-primary:  #FFFFFF;
+  --color-jade-pine:     #141722;
+  --color-jade-depth:    #090B12;
+  --color-jade-void:     #03040A;
+  --color-jade-lime:     #FFFFFF;
 
-  /* Brand Colors aligned with Jade Horizon */
-  --color-synq-cyan:     #23B272;
-  --color-synq-mint:     #52E3A4;
-  --color-synq-pine:     #16543D;
-  --color-synq-depth:    #0D281E;
-  --color-synq-lime:     #D4F838;
-  --color-synq-gold:     #D4F838;
-  --color-synq-white:    #F5F6FA;
+  /* Brand Colors aligned with Monochrome */
+  --color-synq-cyan:     #FFFFFF;
+  --color-synq-mint:     #FFFFFF;
+  --color-synq-pine:     #141722;
+  --color-synq-depth:    #090B12;
+  --color-synq-lime:     #FFFFFF;
+  --color-synq-gold:     #E4E4E7;
+  --color-synq-white:    #FFFFFF;
 
   /* Semantic Colors */
-  --color-synq-success: #23B272;
-  --color-synq-warning: #D4F838;
+  --color-synq-success: #FFFFFF;
+  --color-synq-warning: #E4E4E7;
   --color-synq-error:   #71717A;
 
-  /* Legacy war-room tokens aligned with Green, Black & White */
-  --color-war-bg:         #07080D;
-  --color-war-surface:    rgba(20, 22, 31, 0.72);
-  --color-war-surface-2:  #14161f;
-  --color-war-surface-3:  #1f2230;
+  /* Legacy war-room tokens aligned with Monochrome */
+  --color-war-bg:         #03040A;
+  --color-war-surface:    rgba(14, 16, 26, 0.72);
+  --color-war-surface-2:  #0E101A;
+  --color-war-surface-3:  #141724;
   --color-war-border:     rgba(255, 255, 255, 0.08);
-  --color-war-border-light: rgba(255, 255, 255, 0.14);
-  --color-war-text:       #f5f5f7;
-  --color-war-text-dim:   #a1a1a6;
-  --color-war-text-muted: #6e6e73;
-  --color-war-accent:     #23B272;
+  --color-war-border-light: rgba(255, 255, 255, 0.16);
+  --color-war-text:       #FFFFFF;
+  --color-war-text-dim:   #A1A1AA;
+  --color-war-text-muted: #71717A;
+  --color-war-accent:     #FFFFFF;
   --color-war-critical:   #71717A;
-  --color-war-warning:    #D4F838;
-  --color-war-recovered:  #52E3A4;
-  --color-war-cyan:       #D4F838;
-  --color-war-purple:     #23B272;
-  --color-synq-neon:      #B6F02A;
-  --color-synq-violet:    #52E3A4;
+  --color-war-warning:    #E4E4E7;
+  --color-war-recovered:  #FFFFFF;
+  --color-war-cyan:       #FFFFFF;
+  --color-war-purple:     #E4E4E7;
+  --color-synq-neon:      #FFFFFF;
+  --color-synq-violet:    #E4E4E7;
 
-  /* Cinema monochrome + green palette */
-  --color-apple-blue:   #23B272;
-  --color-apple-cyan:   #D4F838;
-  --color-apple-green:  #23B272;
-  --color-apple-purple: #52E3A4;
+  /* Cinema monochrome palette */
+  --color-apple-blue:   #FFFFFF;
+  --color-apple-cyan:   #FFFFFF;
+  --color-apple-green:  #FFFFFF;
+  --color-apple-purple: #E4E4E7;
   --color-apple-red:    #71717A;
-  --color-apple-gray:   #f5f5f7;
-  --color-apple-muted:  #86868b;
+  --color-apple-gray:   #F5F5F7;
+  --color-apple-muted:  #86868B;
 
   /* Apple motion language — single source of truth */
   --ease-apple: cubic-bezier(0.16, 1, 0.3, 1);
@@ -86,10 +86,10 @@
   --dur-medium: 350ms;
   --dur-slow: 600ms;
 
-  /* Font Families — Google Sans Flex + JetBrains Mono + Space Grotesk */
-  --font-sans: 'Google Sans Flex', -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
-  --font-denton: 'Space Grotesk', 'Google Sans Flex', sans-serif;
+  /* Font Families — Google Sans Flex Across Entire Platform */
+  --font-sans: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Google Sans Flex', monospace;
+  --font-denton: 'Google Sans Flex', sans-serif;
 
   /* Apple motion language — EXPANDED */
   --ease-apple:      cubic-bezier(0.16, 1, 0.3, 1);      /* snappy decelerate */
@@ -111,13 +111,18 @@
   --radius-pill: 9999px;
 }
 
-/* ── Base Styles ────────────────────────────────────────── */
+/* ── Base Styles & Universal Google Sans Flex ───────────── */
+*, *::before, *::after {
+  font-style: normal !important;
+}
+
 html {
   scroll-behavior: smooth;
+  font-family: 'Google Sans Flex', sans-serif;
 }
 body {
   font-family: 'Google Sans Flex', sans-serif;
-  background-color: #06130E;
+  background-color: #03040A;
   color: #ECEEF5;
   min-height: 100vh;
   overflow-x: hidden;
@@ -125,10 +130,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   font-weight: 400;
+  font-style: normal !important;
+}
+
+/* Enforce no italic anywhere on website */
+i, em, .italic, [class*="italic"] {
+  font-style: normal !important;
 }
 
 :focus-visible {
-  outline: 2px solid rgba(35, 178, 114, 0.7);
+  outline: 2px solid rgba(255, 255, 255, );
   outline-offset: 2px;
 }
 
@@ -262,18 +273,18 @@ body {
   gap: 0.5rem;
   padding: 0.875rem 1.75rem;
   border-radius: 9999px;
-  background-color: #23B272;
+  background-color: #FFFFFF;
   color: #03040A;
   font-weight: 700;
   font-size: 0.875rem;
   letter-spacing: 0.025em;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 0 30px rgba(35, 178, 114, 0.35);
+  box-shadow: 0 0 30px rgba(255, 255, 255, );
   min-height: 44px;
 }
 .btn-primary:hover {
-  background-color: #52E3A4;
-  box-shadow: 0 0 40px rgba(82, 227, 164, 0.5);
+  background-color: #FFFFFF;
+  box-shadow: 0 0 40px rgba(255, 255, 255, );
 }
 .btn-primary:active {
   transform: scale(0.97);
@@ -296,7 +307,7 @@ body {
   min-height: 44px;
 }
 .btn-secondary:hover {
-  border-color: rgba(82, 227, 164, 0.4);
+  border-color: rgba(255, 255, 255, );
   background-color: rgba(255, 255, 255, 0.08);
 }
 .btn-secondary:active {
@@ -323,13 +334,18 @@ body {
 }
 
 .card-interactive {
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
+  will-change: transform, box-shadow;
 }
 .card-interactive:hover {
-  border-color: rgba(82, 227, 164, 0.35);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px -10px rgba(35, 178, 114, 0.15);
+  border-color: rgba(255, 255, 255, );
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.7),
+              0 0 24px rgba(255, 255, 255, );
 }
 
 /* Badges */
@@ -339,9 +355,9 @@ body {
   gap: 0.375rem;
   padding: 0.25rem 0.625rem;
   border-radius: 9999px;
-  background-color: rgba(35, 178, 114, 0.12);
-  border: 1px solid rgba(35, 178, 114, 0.3);
-  color: #52E3A4;
+  background-color: rgba(255, 255, 255, );
+  border: 1px solid rgba(255, 255, 255, );
+  color: #FFFFFF;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.6875rem;
   font-weight: 600;
@@ -376,8 +392,8 @@ body {
 }
 .input-text:focus {
   outline: none;
-  border-color: #52E3A4;
-  box-shadow: 0 0 0 2px rgba(82, 227, 164, 0.2);
+  border-color: #FFFFFF;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, );
 }
 
 /* Graph System Background Grid */
@@ -400,10 +416,10 @@ body {
   width: 20px;
   height: 20px;
 }
-.frame-mark-tl { top: 0; left: 0; border-top: 1.5px solid rgba(35, 178, 114,0.4); border-left: 1.5px solid rgba(35, 178, 114,0.4); }
-.frame-mark-tr { top: 0; right: 0; border-top: 1.5px solid rgba(35, 178, 114,0.4); border-right: 1.5px solid rgba(35, 178, 114,0.4); }
-.frame-mark-bl { bottom: 0; left: 0; border-bottom: 1.5px solid rgba(35, 178, 114,0.4); border-left: 1.5px solid rgba(35, 178, 114,0.4); }
-.frame-mark-br { bottom: 0; right: 0; border-bottom: 1.5px solid rgba(35, 178, 114,0.4); border-right: 1.5px solid rgba(35, 178, 114,0.4); }
+.frame-mark-tl { top: 0; left: 0; border-top: 1.5px solid rgba(255, 255, 255, ); border-left: 1.5px solid rgba(255, 255, 255, ); }
+.frame-mark-tr { top: 0; right: 0; border-top: 1.5px solid rgba(255, 255, 255, ); border-right: 1.5px solid rgba(255, 255, 255, ); }
+.frame-mark-bl { bottom: 0; left: 0; border-bottom: 1.5px solid rgba(255, 255, 255, ); border-left: 1.5px solid rgba(255, 255, 255, ); }
+.frame-mark-br { bottom: 0; right: 0; border-bottom: 1.5px solid rgba(255, 255, 255, ); border-right: 1.5px solid rgba(255, 255, 255, ); }
 
 /* ── Network / System Aesthetic ─────────────────────────── */
 /* Node pulse animation */
@@ -453,15 +469,15 @@ body {
   will-change: transform;
 }
 .synq-card:hover {
-  border-color: rgba(35, 178, 114, 0.3);
+  border-color: rgba(255, 255, 255, );
   transform: translateY(-2px);
   box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .synq-card-active {
-  background: rgba(35, 178, 114, 0.06);
-  border-color: rgba(35, 178, 114, 0.35);
-  box-shadow: 0 0 30px rgba(35, 178, 114, 0.1);
+  background: rgba(255, 255, 255, );
+  border-color: rgba(255, 255, 255, );
+  box-shadow: 0 0 30px rgba(255, 255, 255, );
 }
 
 /* ── Apple Bento Grid System ────────────────────────────── */
@@ -469,47 +485,51 @@ body {
    section at the bottom of this file — do not duplicate here. */
 
 /* ── Buttons — Apple-grade glow + spring hover ────────────── */
+/* ── Buttons — Apple-grade glow + spring hover (Monochrome) ── */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 15px 32px;
-  background: linear-gradient(135deg, #52E3A4 0%, #23B272 50%, #16543D 100%);
-  color: #020509;
+  background: #FFFFFF;
+  color: #03040A;
   font-family: 'Google Sans Flex', sans-serif;
   font-size: 0.9375rem;
   font-weight: 700;
   letter-spacing: -0.01em;
   text-transform: none;
   border-radius: var(--radius-pill);
-  border: none;
+  border: 1px solid #FFFFFF;
   cursor: pointer;
   position: relative;
   overflow: hidden;
   transition:
     transform var(--dur-fast) var(--ease-spring),
-    box-shadow var(--dur-medium) var(--ease-apple);
+    box-shadow var(--dur-medium) var(--ease-apple),
+    background-color var(--dur-fast) var(--ease-apple);
   box-shadow:
-    0 0 0 1px rgba(35, 178, 114,0.4),
-    0 4px 20px rgba(35, 178, 114,0.25),
-    inset 0 1px 0 rgba(255,255,255,0.35);
+    0 0 0 1px rgba(255, 255, 255, 0.4),
+    0 4px 20px rgba(255, 255, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
   will-change: transform, box-shadow;
 }
 .btn-primary::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, transparent 60%);
+  background: linear-gradient(to bottom, rgba(255,255,255,0.3) 0%, transparent 60%);
   border-radius: inherit;
   pointer-events: none;
 }
 .btn-primary:hover {
   transform: translateY(-2px) scale(1.02);
+  background-color: #E4E4E7;
+  color: #000000;
   box-shadow:
-    0 0 0 1px rgba(35, 178, 114,0.6),
-    0 8px 40px rgba(35, 178, 114,0.45),
-    0 0 80px rgba(35, 178, 114,0.15),
-    inset 0 1px 0 rgba(255,255,255,0.4);
+    0 0 0 1px rgba(255, 255, 255, 0.8),
+    0 8px 40px rgba(255, 255, 255, 0.35),
+    0 0 80px rgba(255, 255, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 .btn-primary:active { transform: translateY(0) scale(0.99); }
 
@@ -538,11 +558,11 @@ body {
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
 }
 .btn-secondary:hover {
-  background: rgba(255,255,255,0.09);
-  border-color: rgba(35, 178, 114,0.35);
-  color: #23B272;
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #FFFFFF;
   transform: translateY(-1px);
-  box-shadow: 0 0 24px rgba(35, 178, 114,0.12), inset 0 1px 0 rgba(255,255,255,0.14);
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.12), inset 0 1px 0 rgba(255,255,255,0.18);
 }
 
 .btn-ghost {
@@ -568,11 +588,11 @@ body {
   background: rgba(255,255,255,0.05);
 }
 
-/* ── Status Tags ────────────────────────────────────────── */
-.tag-live       { background: rgba(35, 178, 114, 0.12);  color: #23B272; border: 1px solid rgba(35, 178, 114, 0.3);  }
-.tag-pilot      { background: rgba(82, 227, 164, 0.1);  color: #52E3A4; border: 1px solid rgba(82, 227, 164, 0.3); }
-.tag-planned    { background: rgba(212, 248, 56, 0.1);  color: #D4F838; border: 1px solid rgba(212, 248, 56, 0.3); }
-.tag-experimental { background: rgba(255, 255, 255, 0.1); color: #F5F6FA; border: 1px solid rgba(255, 255, 255, 0.25); }
+/* ── Status Tags — Monochrome ──────────────────────────── */
+.tag-live       { background: rgba(255, 255, 255, 0.12); color: #FFFFFF; border: 1px solid rgba(255, 255, 255, 0.3); }
+.tag-pilot      { background: rgba(255, 255, 255, 0.08); color: #E4E4E7; border: 1px solid rgba(255, 255, 255, 0.2); }
+.tag-planned    { background: rgba(255, 255, 255, 0.06); color: #D4D4D8; border: 1px solid rgba(255, 255, 255, 0.15); }
+.tag-experimental { background: rgba(255, 255, 255, 0.06); color: #A1A1AA; border: 1px solid rgba(255, 255, 255, 0.15); }
 .tag { padding: 3px 11px; border-radius: 100px; font-family: 'Google Sans Flex', sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.01em; text-transform: none; }
 
 /* ── Section Layout ─────────────────────────────────────── */
@@ -593,7 +613,7 @@ body {
   font-weight: 700;
   letter-spacing: 0.035em;
   text-transform: none;
-  color: #23B272;
+  color: #FFFFFF;
   margin-bottom: 1rem;
 }
 
@@ -610,15 +630,15 @@ body {
   transition: all 0.2s ease;
 }
 .synq-step:hover, .synq-step.active {
-  background: rgba(35, 178, 114,0.06);
-  border-color: rgba(35, 178, 114,0.3);
+  background: rgba(255, 255, 255, );
+  border-color: rgba(255, 255, 255, );
 }
 .synq-step-number {
   font-family: 'Google Sans Flex', sans-serif;
   font-size: 0.625rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #23B272;
+  color: #FFFFFF;
 }
 .synq-step-title {
   font-family: 'Google Sans Flex', sans-serif;
@@ -643,13 +663,13 @@ body {
   text-align: center;
 }
 .problem-chip:hover {
-  border-color: rgba(35, 178, 114,0.25);
-  background: rgba(35, 178, 114,0.04);
+  border-color: rgba(255, 255, 255, );
+  background: rgba(255, 255, 255, );
 }
 .problem-chip.selected {
-  border-color: rgba(35, 178, 114,0.5);
-  background: rgba(35, 178, 114,0.08);
-  box-shadow: 0 0 16px rgba(35, 178, 114,0.1);
+  border-color: rgba(255, 255, 255, );
+  background: rgba(255, 255, 255, );
+  box-shadow: 0 0 16px rgba(255, 255, 255, );
 }
 
 /* ── Ecosystem Map ──────────────────────────────────────── */
@@ -666,11 +686,11 @@ body {
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: rgba(5, 6, 13, 0.8); }
 ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 9999px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(35, 178, 114,0.3); }
+::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, ); }
 
 /* ── Focus / Accessibility ──────────────────────────────── */
 :focus-visible {
-  outline: 2px solid rgba(35, 178, 114,0.7);
+  outline: 2px solid rgba(255, 255, 255, );
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -686,7 +706,7 @@ body {
 
 /* ── Gradient Utilities ─────────────────────────────────── */
 .gradient-synq {
-  background: linear-gradient(135deg, #23B272 0%, #3B82F6 50%, #8B5CF6 100%);
+  background: linear-gradient(135deg, #FFFFFF 0%, #3B82F6 50%, #8B5CF6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -703,48 +723,48 @@ body {
 .glow-cyan {
   position: absolute;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(35, 178, 114, 0.08) 0%, rgba(27, 127, 220, 0.04) 45%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 45%, transparent 70%);
   pointer-events: none;
 }
 
-/* ── Jade Horizon Signature Atmosphere ───────────────────── */
+/* ── Monochrome Signature Atmosphere ─────────────────────── */
 .jade-horizon-bg {
   position: relative;
-  background-color: #06130E;
+  background-color: #03040A;
   background-image: 
-    radial-gradient(ellipse 85% 55% at 50% -5%, rgba(35, 178, 114, 0.16) 0%, rgba(22, 84, 61, 0.10) 35%, rgba(13, 40, 30, 0.04) 65%, transparent 100%),
-    linear-gradient(rgba(35, 178, 114, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(35, 178, 114, 0.035) 1px, transparent 1px);
+    radial-gradient(ellipse 85% 55% at 50% -5%, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 40%, transparent 80%),
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   background-size: 100% 100%, 48px 48px, 48px 48px;
   background-position: center top, center top, center top;
 }
 
 .jade-card {
-  background: rgba(13, 40, 30, 0.35);
-  border: 1px solid rgba(35, 178, 114, 0.2);
+  background: rgba(14, 16, 26, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(16px);
-  box-shadow: 0 8px 32px 0 rgba(3, 10, 7, 0.45);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
   transition: all var(--dur-medium) var(--ease-apple);
 }
 
 .jade-card:hover {
-  border-color: rgba(35, 178, 114, 0.45);
-  box-shadow: 0 12px 40px 0 rgba(35, 178, 114, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 12px 40px 0 rgba(255, 255, 255, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
 .jade-title-gradient {
-  background: linear-gradient(180deg, #FFFFFF 0%, #D1FAE5 45%, #23B272 100%);
+  background: linear-gradient(180deg, #FFFFFF 0%, #E4E4E7 50%, #A1A1AA 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Jade Horizon Electric Lime Tag (matching 04 badge in design) */
+/* Monochrome Tag */
 .badge-lime {
-  background: rgba(212, 248, 56, 0.12);
-  color: #D4F838;
-  border: 1px solid rgba(212, 248, 56, 0.35);
-  box-shadow: 0 0 12px rgba(212, 248, 56, 0.15);
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.06);
 }
 
 /* ── Animation Keyframes ─────────────────────────────────── */
@@ -857,38 +877,42 @@ body {
   box-shadow:
     0 10px 30px -10px rgba(0, 0, 0, 0.5),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  /* Scoped transitions only — never `all` (backdrop-filter is expensive) */
-  transition: transform var(--dur-medium) var(--ease-apple), border-color var(--dur-fast) var(--ease-apple), box-shadow var(--dur-medium) var(--ease-apple), background-color var(--dur-fast) var(--ease-apple);
-  will-change: transform;
+  /* Soft motion scoped transitions */
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
 }
 
 .bento-card:hover {
-  border-color: rgba(255, 255, 255, 0.16);
-  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, );
+  transform: translateY(-3px);
   box-shadow:
-    0 20px 40px -15px rgba(0, 0, 0, 0.7),
-    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    0 24px 48px -15px rgba(0, 0, 0, 0.8),
+    0 0 30px rgba(255, 255, 255, ),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
 /* Bento card tones — stronger ambient gradients */
 .bento-card-neutral  { /* inherits base */ }
 .bento-card-subtle   { background: linear-gradient(145deg, rgba(10,12,20,0.7), rgba(8,10,16,0.55)); border-color: rgba(255,255,255,0.05); }
 .bento-card-primary  {
-  border-color: rgba(35, 178, 114, 0.38);
+  border-color: rgba(255, 255, 255, );
   box-shadow:
     0 2px 4px rgba(0,0,0,0.4),
     0 16px 40px -12px rgba(0,0,0,0.7),
-    0 0 0 1px rgba(35, 178, 114,0.15),
-    0 0 40px rgba(35, 178, 114,0.12),
-    inset 0 1px 0 rgba(35, 178, 114,0.3),
+    0 0 0 1px rgba(255, 255, 255, ),
+    0 0 40px rgba(255, 255, 255, ),
+    inset 0 1px 0 rgba(255, 255, 255, ),
     inset 0 -1px 0 rgba(0,0,0,0.2);
 }
 .bento-card-active {
-  border-color: rgba(35, 178, 114, 0.38);
+  border-color: rgba(255, 255, 255, );
   box-shadow:
-    0 0 0 1px rgba(35, 178, 114,0.15),
-    0 0 24px rgba(35, 178, 114,0.14),
-    inset 0 1px 0 rgba(35, 178, 114,0.28);
+    0 0 0 1px rgba(255, 255, 255, ),
+    0 0 24px rgba(255, 255, 255, ),
+    inset 0 1px 0 rgba(255, 255, 255, );
 }
 .bento-card-blue   { background: radial-gradient(ellipse at 90% 0%, rgba(41,151,255,0.18) 0%, transparent 65%), linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025)); border-color: rgba(41,151,255,0.20); }
 .bento-card-green  { background: radial-gradient(ellipse at 90% 0%, rgba(48,209,88,0.15) 0%, transparent 65%), linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025)); border-color: rgba(48,209,88,0.20); }
@@ -897,11 +921,11 @@ body {
 /* Accent aliases — stronger ambient orbs */
 .bento-cyan {
   background:
-    radial-gradient(ellipse at 85% 10%, rgba(35, 178, 114,0.22) 0%, transparent 60%),
+    radial-gradient(ellipse at 85% 10%, rgba(255, 255, 255, ) 0%, transparent 60%),
     linear-gradient(145deg, rgba(255,255,255,0.065), rgba(255,255,255,0.025));
-  border-color: rgba(35, 178, 114,0.22);
+  border-color: rgba(255, 255, 255, );
 }
-.bento-cyan:hover { border-color: rgba(35, 178, 114,0.44); box-shadow: 0 28px 60px -16px rgba(0,0,0,0.75), 0 0 32px rgba(35, 178, 114,0.1), inset 0 1px 0 rgba(255,255,255,0.22); }
+.bento-cyan:hover { border-color: rgba(255, 255, 255, ); box-shadow: 0 28px 60px -16px rgba(0,0,0,0.75), 0 0 32px rgba(255, 255, 255, ), inset 0 1px 0 rgba(255,255,255,0.22); }
 
 .bento-gold {
   background:
@@ -968,9 +992,9 @@ body {
   font-weight: 600;
   border: 1px solid transparent;
 }
-.bento-badge-green { background: rgba(35, 178, 114, 0.12); color: #23B272; border-color: rgba(35, 178, 114, 0.3); }
-.bento-badge-blue { background: rgba(212, 248, 56, 0.1); color: #D4F838; border-color: rgba(212, 248, 56, 0.3); }
-.bento-badge-purple { background: rgba(82, 227, 164, 0.1); color: #52E3A4; border-color: rgba(82, 227, 164, 0.3); }
+.bento-badge-green { background: rgba(255, 255, 255, ); color: #FFFFFF; border-color: rgba(255, 255, 255, ); }
+.bento-badge-blue { background: rgba(255, 255, 255, ); color: #FFFFFF; border-color: rgba(255, 255, 255, ); }
+.bento-badge-purple { background: rgba(255, 255, 255, ); color: #FFFFFF; border-color: rgba(255, 255, 255, ); }
 .bento-badge-cyan { background: rgba(255, 255, 255, 0.1); color: #FFFFFF; border-color: rgba(255, 255, 255, 0.25); }
 
 /* Bento category + pills — Google Sans Flex */
@@ -1032,7 +1056,7 @@ body {
   width: 100%;
   max-width: 44px;
   border-radius: 6px 6px 3px 3px;
-  background: linear-gradient(180deg, #23B272, rgba(35, 178, 114, 0.35));
+  background: linear-gradient(180deg, #FFFFFF, rgba(255, 255, 255, ));
   transform-origin: bottom;
   animation: bento-bar-grow var(--dur-slow) var(--ease-apple) both;
 }
@@ -1053,7 +1077,7 @@ body {
 .bento-quote {
   justify-content: center;
   text-align: center;
-  border-left: 2px solid rgba(35, 178, 114, 0.4);
+  border-left: 2px solid rgba(255, 255, 255, );
 }
 .bento-quote-text {
   font-size: clamp(1.1rem, 2vw, 1.5rem);
@@ -1171,23 +1195,98 @@ body {
     border-color var(--dur-fast) var(--ease-apple);
 }
 
-/* ── Shared Apple motion utilities ──────────────────────── */
-/* Gentle scroll cue — replaces harsh animate-bounce */
+/* ── Shared Apple & High-End Soft Motion Utilities ──────────── */
+/* Gentle scroll cue — replaces harsh bounce */
 @keyframes apple-drift {
   0%, 100% { opacity: 0.35; transform: translate(-50%, 0); }
-  50% { opacity: 0.9; transform: translate(-50%, 6px); }
+  50% { opacity: 0.9; transform: translate(-50%, 5px); }
 }
 .animate-apple-drift {
-  animation: apple-drift 2.4s var(--ease-apple) infinite;
+  animation: apple-drift 3s cubic-bezier(0.16, 1, 0.3, 1) infinite;
 }
 
-/* Page-level fade used on route change */
+/* Page-level soft fade & subtle blur dissolve on route change */
 @keyframes page-fade-in {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.997);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
 }
 .animate-page-fade {
-  animation: page-fade-in var(--dur-medium) var(--ease-apple) both;
+  animation: page-fade-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Soft Fade In for elements and tab switches */
+@keyframes soft-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-soft-fade {
+  animation: soft-fade-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ── Luxurious Soft Card Transitions ── */
+.soft-card,
+.soft-tile {
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
+}
+
+.soft-card:hover,
+.soft-tile:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, );
+  box-shadow:
+    0 24px 48px -12px rgba(0, 0, 0, 0.8),
+    0 0 32px rgba(255, 255, 255, ),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Soft Button Transitions */
+.soft-btn {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.25s ease;
+  will-change: transform;
+}
+.soft-btn:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 12px 24px -8px rgba(255, 255, 255, );
+}
+.soft-btn:active {
+  transform: scale(0.97);
+}
+
+/* Soft ambient breathing */
+@keyframes soft-pulse-glow {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.03);
+  }
+}
+.animate-soft-glow {
+  animation: soft-pulse-glow 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 /* Mobile drawer enter — pure CSS, no plugin dependency */
@@ -1196,7 +1295,7 @@ body {
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 .animate-drawer-in {
-  animation: drawer-in var(--dur-fast) var(--ease-apple) both;
+  animation: drawer-in 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
   transform-origin: top center;
 }
 
@@ -1267,7 +1366,7 @@ body {
   transform: translateX(-50%);
   width: 1.5px;
   height: 40px;
-  background: linear-gradient(to bottom, rgba(35, 178, 114,0.9), transparent);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, ), transparent);
   border-radius: 1px;
   animation: scroll-pulse 2.2s var(--ease-apple) infinite;
   pointer-events: none;
@@ -1282,7 +1381,7 @@ body {
   background: linear-gradient(
     90deg,
     #f5f5f7 20%,
-    rgba(35, 178, 114,0.85) 50%,
+    rgba(255, 255, 255, ) 50%,
     #f5f5f7 80%
   );
   background-size: 200% auto;
@@ -1297,7 +1396,7 @@ body {
   position: absolute;
   top: -100px;
   left: 1.5rem;
-  background: var(--color-jade-primary, #23B272);
+  background: var(--color-jade-primary, #FFFFFF);
   color: #03040A;
   font-weight: 700;
   font-size: 0.875rem;
@@ -1316,7 +1415,7 @@ body {
 
 /* Visible focus states */
 *:focus-visible {
-  outline: 2px solid #23B272;
+  outline: 2px solid rgba(255, 255, 255, 0.7);
   outline-offset: 2px;
 }
 
@@ -1328,4 +1427,91 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ============================================================
+   UNIVERSAL MONOCHROME ARCHITECTURAL THEME
+   Guarantees pure silver, white, obsidian, and graphite across
+   all page components, bento cards, buttons, badges, and SVGs.
+   ============================================================ */
+
+::selection {
+  background-color: #FFFFFF !important;
+  color: #03040A !important;
+}
+
+/* Text Highlights -> Crisp White & Silver */
+[class*="text-[#FFFFFF]"],
+[class*="text-[#FFFFFF]"],
+[class*="text-emerald-"],
+[class*="text-green-"] {
+  color: #FFFFFF !important;
+}
+
+/* Translucent / Subtle Borders -> Silver Translucency */
+[class*="border-[#FFFFFF]"],
+[class*="border-[#FFFFFF]"],
+[class*="border-emerald-"],
+[class*="border-green-"] {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Container Tints -> Carbon Obsidian */
+[class*="bg-[#18181B]"],
+[class*="bg-[#090B14]"],
+[class*="bg-[#090B14]"],
+[class*="bg-[#040C09]"],
+[class*="from-[#090B14]"],
+[class*="to-[#090B14]"],
+[class*="via-[#090B14]"],
+[class*="bg-emerald-"],
+[class*="bg-green-"] {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+/* Translucent Badges & Indicator Pills */
+[class*="bg-[#FFFFFF]/"],
+[class*="bg-[#FFFFFF]/"] {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Primary Solid Action Buttons with Hardcoded Emerald */
+button[class*="bg-[#FFFFFF]"]:not([class*="/"]),
+a[class*="bg-[#FFFFFF]"]:not([class*="/"]) {
+  background-color: #FFFFFF !important;
+  color: #03040A !important;
+  border-color: #FFFFFF !important;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.25) !important;
+}
+
+button[class*="bg-[#FFFFFF]"]:not([class*="/"]):hover,
+a[class*="bg-[#FFFFFF]"]:not([class*="/"]):hover {
+  background-color: #E4E4E7 !important;
+  color: #000000 !important;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Active Hover Text & Border States */
+[class*="hover:text-[#FFFFFF]"]:hover,
+[class*="hover:text-[#FFFFFF]"]:hover {
+  color: #FFFFFF !important;
+}
+
+[class*="hover:border-[#FFFFFF]"]:hover,
+[class*="hover:border-[#FFFFFF]"]:hover {
+  border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+[class*="accent-[#FFFFFF]"] {
+  accent-color: #FFFFFF !important;
+}
+
+svg [stroke="#FFFFFF"],
+svg [stroke="#FFFFFF"] {
+  stroke: #D4D4D8 !important;
+}
+
+svg [fill="#FFFFFF"],
+svg [fill="#FFFFFF"] {
+  fill: #FFFFFF !important;
 }

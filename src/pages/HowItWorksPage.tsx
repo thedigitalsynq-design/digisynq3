@@ -43,22 +43,20 @@ export function HowItWorksPage() {
   const currentResolutionStep = SYSTEM_RESOLUTION_ENGAGEMENT.steps[activeResolutionStepIdx];
 
   return (
-    <main className="bg-[#03040A] text-[#ECEEF5] selection:bg-[#23B272] selection:text-[#03040A] min-h-screen pt-36 pb-24 px-6 sm:px-8 max-w-6xl mx-auto relative overflow-hidden">
+    <main className="bg-[#03040A] text-[#ECEEF5] selection:bg-white selection:text-black min-h-screen pt-36 pb-24 px-6 sm:px-8 max-w-6xl mx-auto relative overflow-hidden">
       <TopographicBackground className="opacity-20 pointer-events-none -z-10 fixed inset-0" />
 
       {/* ── Header ── */}
       <div className="max-w-4xl mb-16">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/[0.03] text-xs text-zinc-300 font-mono mb-6">
-          <span className="w-2 h-2 rounded-full bg-[#52E3A4]" />
-          <span>SECTIONS 43, 44 &amp; 45</span>
-          <span className="text-zinc-600">//</span>
-          <span className="text-[#52E3A4] font-semibold">THE OPERATING ARCHITECTURE</span>
+          <span className="w-2 h-2 rounded-full bg-white" />
+          <span className="text-white font-semibold">THE OPERATING ARCHITECTURE</span>
         </div>
 
         <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold text-white tracking-tight leading-[1.03] mb-6">
-          From Upstream Shock to Verified Harmony.
+          How DigiSynq Resolves a Production Breakdown.
           <span className="text-zinc-400 font-light block text-2xl sm:text-4xl mt-2">
-            How DigiSynq Orchestrates Resolution.
+            From variance detection to verified outcome.
           </span>
         </h1>
 
@@ -67,31 +65,31 @@ export function HowItWorksPage() {
         </p>
 
         {/* First Customer Offer Quote */}
-        <div className="p-6 rounded-2xl border border-[#23B272]/30 bg-gradient-to-r from-[#06130E] via-[#090B14] to-[#06130E] backdrop-blur-xl">
-          <div className="text-xs font-mono text-[#52E3A4] mb-1 uppercase font-semibold">
+        <div className="p-6 rounded-2xl border border-white/15 bg-gradient-to-r from-[#090B14] via-[#06070B] to-[#090B14] backdrop-blur-xl">
+          <div className="text-xs font-mono text-white mb-1 uppercase font-semibold">
             First Customer Strategy // The Guarantee
           </div>
-          <div className="text-base sm:text-lg font-medium text-white italic">
+          <div className="text-base sm:text-lg font-medium text-white">
             "{SYSTEM_RESOLUTION_ENGAGEMENT.tagline}"
           </div>
         </div>
       </div>
 
       {/* ══════════════════════════════════════════════════════
-          01. PUBLIC EXPLANATION: 5 CORE OPERATIONAL STAGES
+          PUBLIC EXPLANATION: CORE OPERATIONAL STAGES
          ══════════════════════════════════════════════════════ */}
       <section className="mb-24">
-        <div className="text-xs font-mono text-[#52E3A4] mb-2 uppercase">
-          01 // PUBLIC EXPLANATION FRAMEWORK
+        <div className="text-xs font-mono text-white mb-2 uppercase">
+          CORE PROTOCOL // THE SYNQ LOOP
         </div>
         <h2 className="text-2xl sm:text-4xl font-bold text-white mb-4">
-          Five Stages of System Control.
+          Core Stages a SYNQ Follows.
         </h2>
         <p className="text-zinc-400 text-sm max-w-2xl mb-8">
-          The public operational loop: continuous sensing, root-cause decomposition, blast radius mapping, structured SYNQ intervention, and closed-loop control.
+          Every DigiSynq intervention moves through systematic stages: continuous sensing, root-cause decomposition, blast radius mapping, structured SYNQ coordination, and closed-loop outcome verification.
         </p>
 
-        {/* 5-Stage Stepper Ribbon */}
+        {/* Stepper Ribbon */}
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 mb-8">
           {PUBLIC_EXPLANATION_STAGES.map((stg, idx) => {
             const Icon = ICON_MAP[stg.iconName] || Zap;
@@ -102,12 +100,12 @@ export function HowItWorksPage() {
                 onClick={() => setActivePublicStage(idx)}
                 className={`p-4 rounded-2xl border text-left transition-all ${
                   isActive
-                    ? 'bg-[#23B272] text-[#03040A] border-[#52E3A4] font-bold shadow-lg scale-[1.02]'
+                    ? 'bg-white text-black border-white/20 font-bold shadow-lg scale-[1.02]'
                     : 'bg-[#090B14] border-white/[0.08] text-zinc-400 hover:text-white hover:border-white/20'
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="font-mono text-xs">{stg.step}</span>
+                  <span className={`inline-block w-2 h-2 rounded-full ${isActive ? 'bg-[#03040A]' : 'bg-white'}`} />
                   <Icon className={`w-4 h-4 ${isActive ? 'text-[#03040A]' : 'text-zinc-500'}`} />
                 </div>
                 <div className="text-sm font-bold font-mono tracking-tight">{stg.name}</div>
@@ -120,19 +118,19 @@ export function HowItWorksPage() {
         </div>
 
         {/* Active Stage Deep View */}
-        <div className="p-8 sm:p-10 rounded-3xl border border-[#23B272]/30 bg-gradient-to-br from-[#090B14] to-[#04060C] shadow-2xl relative overflow-hidden">
+        <div className="p-8 sm:p-10 rounded-3xl border border-white/15 bg-gradient-to-br from-[#090B14] to-[#04060C] shadow-2xl relative overflow-hidden">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-8 border-b border-white/[0.08]">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-[#23B272]/20 border border-[#23B272]/40 flex items-center justify-center text-[#52E3A4]">
+              <div className="w-12 h-12 rounded-2xl bg-white/[0.08] border border-white/20 flex items-center justify-center text-white">
                 <CurrentIcon className="w-6 h-6" />
               </div>
               <div>
-                <span className="font-mono text-xs text-[#52E3A4] font-semibold">STAGE {selectedPublic.step} OF 05</span>
+                <span className="font-mono text-xs text-white font-semibold">STAGE // {selectedPublic.name.toUpperCase()}</span>
                 <h3 className="text-2xl sm:text-3xl font-black text-white">{selectedPublic.name}: {selectedPublic.tagline}</h3>
               </div>
             </div>
             <div className="font-mono text-xs text-zinc-400 bg-white/[0.04] px-3.5 py-1.5 rounded-lg border border-white/[0.08]">
-              Next Stage: <span className="text-[#52E3A4] font-bold">{selectedPublic.next}</span>
+              Next Stage: <span className="text-white font-bold">{selectedPublic.next}</span>
             </div>
           </div>
 
@@ -142,9 +140,9 @@ export function HowItWorksPage() {
               <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">{selectedPublic.input}</p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-[#16543D]/25 border border-[#23B272]/30">
-              <div className="text-[11px] font-mono text-[#52E3A4] uppercase tracking-wider mb-2">SYSTEM ACTION</div>
-              <p className="text-xs sm:text-sm text-emerald-100 leading-relaxed">{selectedPublic.action}</p>
+            <div className="p-5 rounded-2xl bg-white/[0.04] border border-white/15">
+              <div className="text-[11px] font-mono text-white uppercase tracking-wider mb-2">SYSTEM ACTION</div>
+              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">{selectedPublic.action}</p>
             </div>
 
             <div className="p-5 rounded-2xl bg-black/40 border border-white/[0.06]">
@@ -162,7 +160,7 @@ export function HowItWorksPage() {
             </button>
             <button
               onClick={() => setActivePublicStage((prev) => (prev < 4 ? prev + 1 : 0))}
-              className="text-xs font-mono text-[#52E3A4] hover:text-white font-bold transition-colors"
+              className="text-xs font-mono text-white hover:text-white font-bold transition-colors"
             >
               Advance to Next Stage →
             </button>
@@ -171,20 +169,20 @@ export function HowItWorksPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          02. CORE SYSTEM: 11-STAGE CAUSAL CHAIN
+          CORE SYSTEM: CAUSAL CHAIN
          ══════════════════════════════════════════════════════ */}
       <section className="mb-24">
-        <div className="text-xs font-mono text-[#52E3A4] mb-2 uppercase">
-          02 // THE COMPLETE CAUSAL TAXONOMY
+        <div className="text-xs font-mono text-white mb-2 uppercase">
+          ZONE B // THE CAUSAL CHAIN
         </div>
         <h2 className="text-2xl sm:text-4xl font-bold text-white mb-4">
-          The 11-Stage Causal Chain.
+          Inside a Resolution Sprint.
         </h2>
         <p className="text-zinc-400 text-sm max-w-3xl mb-8 leading-relaxed">
           DigiSynq isolates root causes by peeling back the layers between surface alarms, enabling conditions, missing capabilities, and automated future prevention.
         </p>
 
-        {/* 11-Stage Ribbon */}
+        {/* Causal Chain Ribbon */}
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-11 gap-1.5 mb-6 overflow-x-auto">
           {CORE_OPERATING_CHAIN.map((node, idx) => {
             const isSelected = activeChainStep === idx;
@@ -194,11 +192,11 @@ export function HowItWorksPage() {
                 onClick={() => setActiveChainStep(idx)}
                 className={`p-2.5 rounded-xl border text-center transition-all min-w-[85px] ${
                   isSelected
-                    ? 'bg-[#23B272] text-[#03040A] border-[#52E3A4] font-bold shadow-md scale-105'
+                    ? 'bg-white text-black border-white/20 font-bold shadow-md scale-105'
                     : 'bg-[#090B14] border-white/[0.08] text-zinc-400 hover:text-white hover:border-white/20'
                 }`}
               >
-                <div className="text-[10px] font-mono opacity-70">{node.step}</div>
+                <div className="text-[10px] font-mono opacity-70">NODE</div>
                 <div className="text-xs font-mono font-bold mt-1 truncate">{node.name}</div>
               </button>
             );
@@ -209,12 +207,12 @@ export function HowItWorksPage() {
         <div className="p-8 rounded-3xl border border-white/[0.1] bg-[#090B14] shadow-2xl">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 mb-6 border-b border-white/[0.08]">
             <div className="flex items-center gap-3">
-              <span className="font-mono text-xs px-2.5 py-1 rounded bg-[#23B272]/20 border border-[#23B272]/40 text-[#52E3A4] font-bold">
-                NODE {currentChainNode.step} // {currentChainNode.category}
+              <span className="font-mono text-xs px-2.5 py-1 rounded bg-white/[0.08] border border-white/20 text-white font-bold">
+                {currentChainNode.category.toUpperCase()}
               </span>
               <h3 className="text-2xl font-black text-white">{currentChainNode.name}</h3>
             </div>
-            <span className="text-xs font-mono text-zinc-400 italic">
+            <span className="text-xs font-mono text-zinc-400">
               "{currentChainNode.interrogation}"
             </span>
           </div>
@@ -225,29 +223,32 @@ export function HowItWorksPage() {
               <p className="text-xs sm:text-sm text-zinc-200 leading-relaxed">{currentChainNode.definition}</p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-[#16543D]/20 border border-[#23B272]/30">
-              <div className="text-[10px] font-mono text-[#52E3A4] uppercase tracking-wider mb-2">OPERATIONAL BENCHMARK EXAMPLE</div>
-              <p className="text-xs sm:text-sm text-emerald-100 leading-relaxed font-mono">{currentChainNode.example}</p>
+            <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/15">
+              <div className="text-[10px] font-mono text-white uppercase tracking-wider mb-2">OPERATIONAL BENCHMARK EXAMPLE</div>
+              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-mono">{currentChainNode.example}</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          03. THE 10-STEP RESOLUTION ENGAGEMENT PROTOCOL
+          RESOLUTION ENGAGEMENT PROTOCOL
          ══════════════════════════════════════════════════════ */}
       <section className="mb-24">
-        <div className="text-xs font-mono text-[#52E3A4] mb-2 uppercase">
-          03 // SECTION 44 RESOLUTION RUNBOOK
+        <div className="text-xs font-mono text-white mb-2 uppercase">
+          ZONE C // RESOLUTION ENGAGEMENT PROTOCOL
         </div>
         <h2 className="text-2xl sm:text-4xl font-bold text-white mb-4">
-          The 10-Step Resolution Engagement.
+          The Resolution Engagement.
         </h2>
-        <p className="text-zinc-400 text-sm max-w-2xl mb-8">
+        <p className="text-zinc-400 text-sm max-w-2xl mb-2">
           The complete standardized protocol from initial triage intake to mathematical scoring, SLA execution, and permanent system memory capture.
         </p>
+        <p className="text-zinc-500 text-xs max-w-2xl mb-8 font-mono">
+          Standardized resolution protocol operationalizing the SYNQ Loop into field deployment.
+        </p>
 
-        {/* 10-Step Timeline Strip */}
+        {/* Timeline Strip */}
         <div className="grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-10 gap-2 mb-8">
           {SYSTEM_RESOLUTION_ENGAGEMENT.steps.map((st, sIdx) => (
             <button
@@ -255,11 +256,11 @@ export function HowItWorksPage() {
               onClick={() => setActiveResolutionStepIdx(sIdx)}
               className={`p-3 rounded-xl border text-center transition-all ${
                 activeResolutionStepIdx === sIdx
-                  ? 'bg-[#16543D] border-[#52E3A4] text-white shadow-lg scale-105 font-bold'
+                  ? 'bg-[#090B14] border-white/20 text-white shadow-lg scale-105 font-bold'
                   : 'bg-[#090B14] border-white/[0.06] text-zinc-400 hover:text-white'
               }`}
             >
-              <div className="font-mono text-[10px] text-[#52E3A4] mb-1">{st.num}</div>
+              <div className="font-mono text-[10px] text-white mb-1">PHASE</div>
               <div className="text-[11px] truncate">{st.name}</div>
             </button>
           ))}
@@ -268,10 +269,10 @@ export function HowItWorksPage() {
         {/* Active Step Showcase */}
         <div className="p-8 sm:p-10 rounded-2xl border border-white/[0.1] bg-[#090B14] shadow-2xl relative overflow-hidden">
           <div className="flex items-center justify-between mb-4">
-            <span className="font-mono text-xs text-[#52E3A4] font-semibold">
-              STEP {currentResolutionStep.num} OF 10 // RESOLUTION SPRINT
+            <span className="font-mono text-xs text-white font-semibold">
+              RESOLUTION SPRINT // {currentResolutionStep.name.toUpperCase()}
             </span>
-            <span className="font-mono text-xs text-zinc-500">DIGISYNQ Standard Operating Procedure</span>
+            <span className="font-mono text-xs text-zinc-500">DigiSynq Standard Operating Protocol</span>
           </div>
 
           <h3 className="text-3xl font-bold text-white mb-3">{currentResolutionStep.name}</h3>
@@ -299,37 +300,131 @@ export function HowItWorksPage() {
       {/* ══════════════════════════════════════════════════════
           04. CASE WALKTHROUGH: TALENT CRISIS RESOLUTION
          ══════════════════════════════════════════════════════ */}
-      <section className="mb-24 p-8 sm:p-10 rounded-3xl border border-white/[0.1] bg-gradient-to-br from-[#06080D] via-[#090B14] to-[#06130E]">
+      {/* ══════════════════════════════════════════════════════
+          04. CASE WALKTHROUGH: TALENT CRISIS RESOLUTION BENTO GRID
+         ══════════════════════════════════════════════════════ */}
+      <section className="mb-24">
         <div className="max-w-3xl mb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#16543D]/50 border border-[#23B272]/30 text-[#52E3A4] font-mono text-xs font-semibold mb-3">
-            SECTION 45 CASE WALKTHROUGH // SIMULATED SCENARIO
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.06] border border-white/15 text-white font-mono text-xs font-semibold mb-3">
+            <span>BENTO CASE STUDY // LIVE RESOLUTION SPRINT</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-            Case Breakdown: Lead Actor Schedule Rupture
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
+            Case Walkthrough: Lead Actor Schedule Rupture.
           </h2>
           <p className="text-zinc-300 text-sm leading-relaxed">
-            How DigiSynq arrests an acute production crisis where a lead actor becomes unavailable for 6 consecutive days on an active shoot.
+            How DigiSynq arrests an acute production crisis when a lead actor suddenly becomes unavailable for 6 consecutive shooting days.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
-          {[
-            { phase: '01. OBSERVE', desc: 'Captures talent schedule, shooting plan, stage bookings, crew commitments, and gear holds.' },
-            { phase: '02. DETECT', desc: 'Gap = 6 Days between contracted shooting calendar and actual talent availability.' },
-            { phase: '03. MAP', desc: 'Actor → Scenes → Location → Crew → Equipment → Post schedule → Platform Release Window.' },
-            { phase: '04. DIAGNOSE', desc: 'Root cause is schedule dependency concentration across sequential linear scenes.' },
-            { phase: '05. SIMULATE', desc: 'Evaluates options: wait, reschedule, reorder scenes, substitute stage, compress post-production.' },
-            { phase: '06. CONNECT', desc: 'Identifies available alternative soundstage floor and 2nd unit camera package.' },
-            { phase: '07. COORDINATE', desc: 'Reconciles affected stakeholders: Director, 1st AD, Cinematographer, Stage Manager, Producer.' },
-            { phase: '08. EXECUTE', desc: 'Deploys revised call sheets and shooting order with zero turnaround hour violations.' },
-            { phase: '09. VERIFY', desc: 'Measures: 5.5 days saved, $84,000 overtime penalty avoided, release window 100% protected.' },
-            { phase: '10. PREVENT', desc: 'Stores case in system memory; future slates with high talent concentration receive early risk alerts.' },
-          ].map((item, idx) => (
-            <div key={idx} className="p-4 rounded-xl border border-white/[0.06] bg-black/40">
-              <div className="text-[#52E3A4] font-bold mb-1">{item.phase}</div>
-              <div className="text-zinc-300 leading-snug">{item.desc}</div>
+        {/* Bento Grid (Pure Square Geometry) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {/* Card 1: Large 2x2 Square (The Incident & Cascade Blast Radius) */}
+          <div className="sm:col-span-2 sm:row-span-2 aspect-square p-7 sm:p-9 rounded-3xl border border-white/[0.08] bg-gradient-to-br from-[#06080D] via-[#090B14] to-[#04060C] shadow-xl flex flex-col justify-between overflow-hidden soft-card">
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="font-mono text-xs text-amber-400 font-semibold uppercase flex items-center gap-1.5">
+                  <AlertTriangle className="w-3.5 h-3.5 text-amber-400" />
+                  <span>UNMITIGATED UPSTREAM SHOCK</span>
+                </span>
+                <span className="text-[10px] font-mono text-zinc-500 bg-white/[0.04] px-2 py-0.5 rounded border border-white/[0.06]">
+                  Shoot Day 14 of 40
+                </span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">
+                Lead actor unavailable for 6 consecutive days.
+              </h3>
+              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-light mb-4">
+                Without DigiSynq, an actor date shift forces an immediate stage lockout, triggering $18k/day standby penalties, VFX plate turnover delays, and an inevitable $450k cascade cost overrun.
+              </p>
             </div>
-          ))}
+
+            <div className="space-y-3">
+              <div className="p-3.5 rounded-2xl bg-black/50 border border-white/[0.06] flex items-center justify-between text-xs font-mono">
+                <span className="text-zinc-400">Projected Conventional Loss:</span>
+                <span className="text-red-400 font-bold">$450,000 Overrun</span>
+              </div>
+              <div className="p-3.5 rounded-2xl bg-white/[0.04] border border-white/15 flex items-center justify-between text-xs font-mono">
+                <span className="text-zinc-200">DigiSynq Resolution:</span>
+                <span className="text-white font-bold">Cascade Arrested in 4h</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 2: 1x1 Square (Schedule Recovery) */}
+          <div className="aspect-square p-6 rounded-3xl border border-white/15 bg-[#090B14] shadow-xl flex flex-col justify-between overflow-hidden soft-card">
+            <div>
+              <div className="font-mono text-xs text-white mb-2 font-semibold flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-white" />
+                <span>SCHEDULE RECOVERY</span>
+              </div>
+              <div className="text-4xl font-black text-white tracking-tight mb-2">
+                5.5 Days
+              </div>
+              <p className="text-xs text-zinc-400 font-mono leading-relaxed">
+                Critical path buffer days restored through exterior scene resequencing.
+              </p>
+            </div>
+            <div className="pt-3 border-t border-white/[0.06] text-[11px] font-mono text-white">
+              Zero stage lease forfeiture
+            </div>
+          </div>
+
+          {/* Card 3: 1x1 Square (Cost Avoidance) */}
+          <div className="aspect-square p-6 rounded-3xl border border-white/[0.08] bg-[#090B14] shadow-xl flex flex-col justify-between overflow-hidden soft-card">
+            <div>
+              <div className="font-mono text-xs text-white mb-2 font-semibold flex items-center gap-1.5">
+                <Activity className="w-3.5 h-3.5 text-white" />
+                <span>COST AVOIDANCE</span>
+              </div>
+              <div className="text-3xl sm:text-4xl font-black text-white tracking-tight mb-2">
+                $84,000+
+              </div>
+              <p className="text-xs text-zinc-400 font-mono leading-relaxed">
+                Overtime fines and equipment standby penalties completely prevented.
+              </p>
+            </div>
+            <div className="pt-3 border-t border-white/[0.06] text-[11px] font-mono text-white">
+              Rest covenants protected
+            </div>
+          </div>
+
+          {/* Card 4: 1x1 Square (Sensing & Mapping) */}
+          <div className="aspect-square p-6 rounded-3xl border border-white/[0.08] bg-[#090B14] shadow-lg flex flex-col justify-between overflow-hidden soft-card">
+            <div>
+              <div className="font-mono text-xs text-white mb-2 font-semibold flex items-center gap-1.5">
+                <Search className="w-3.5 h-3.5" />
+                <span>ROOT DISCOVERY // SENSING</span>
+              </div>
+              <h4 className="text-sm font-bold text-white mb-2 leading-snug">
+                Isolate Root Cause &amp; Map Blast Radius
+              </h4>
+              <p className="text-xs text-zinc-400 leading-relaxed">
+                Raw call-sheet telemetry exposed the variance. Mapped dependencies across stage bookings and VFX plates.
+              </p>
+            </div>
+            <div className="pt-2 border-t border-white/[0.06] text-[10px] font-mono text-zinc-500 truncate">
+              Root: Sequential dependency
+            </div>
+          </div>
+
+          {/* Card 5: 1x1 Square (Orchestration & Verification) */}
+          <div className="aspect-square p-6 rounded-3xl border border-white/[0.08] bg-[#090B14] shadow-lg flex flex-col justify-between overflow-hidden soft-card">
+            <div>
+              <div className="font-mono text-xs text-zinc-200 mb-2 font-semibold flex items-center gap-1.5">
+                <Zap className="w-3.5 h-3.5" />
+                <span>INTERVENTION // EXECUTE</span>
+              </div>
+              <h4 className="text-sm font-bold text-white mb-2 leading-snug">
+                Simulation, Dark-Floor Match &amp; Memory
+              </h4>
+              <p className="text-xs text-zinc-400 leading-relaxed">
+                Matched dark-date stage floor for 2nd unit plates. Reconciled guild rest covenants. Inoculated future slates.
+              </p>
+            </div>
+            <div className="pt-2 border-t border-white/[0.06] text-[10px] font-mono text-zinc-300 truncate">
+              100% On-Time Delivery
+            </div>
+          </div>
         </div>
       </section>
 
@@ -344,7 +439,7 @@ export function HowItWorksPage() {
         <div className="flex flex-wrap items-center justify-center gap-4">
           <Link
             to="/diagnose"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#23B272] text-[#03040A] hover:bg-[#52E3A4] font-bold text-sm tracking-wide transition-all shadow-[0_0_30px_rgba(35,178,114,0.35)]"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-black hover:bg-zinc-200 font-bold text-sm tracking-wide transition-all shadow-[0_0_25px_rgba(255,255,255,0.2)]"
           >
             <span>Diagnose a Problem</span>
             <ArrowRight className="w-4 h-4 stroke-[2.5]" />
