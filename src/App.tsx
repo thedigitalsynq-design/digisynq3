@@ -79,8 +79,8 @@ function AppRoutes() {
         <Route path="/diagnose" element={<DiagnosePage />} />
         <Route path="/start" element={<StartSynqPage />} />
         <Route path="/system-flow" element={<SystemFlowPage />} />
-        <Route path="/root-cause-graph" element={<RootCauseGraphPage />} />
-        <Route path="/eerg" element={<Navigate to="/root-cause-graph" replace />} />
+        <Route path="/eerg" element={<RootCauseGraphPage />} />
+        <Route path="/root-cause-graph" element={<Navigate to="/eerg" replace />} />
 
         {/* Aliases & legacy route redirects */}
         <Route path="/labs" element={<Navigate to="/workshops" replace />} />

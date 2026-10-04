@@ -33,6 +33,7 @@ import {
   PROBLEM_TAXONOMY,
 } from '../data/blueprint_data';
 import { TopographicBackground } from '../components/TopographicBackground';
+import { EERGNetworkGraph } from '../components/EERGNetworkGraph';
 
 export function HomePage() {
   const [heroMode, setHeroMode] = useState<'FRAGMENTED' | 'SYNCHRONIZED'>('SYNCHRONIZED');
@@ -506,6 +507,90 @@ export function HomePage() {
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════
+          02B — EERG INTELLIGENCE: THE ECOSYSTEM IS CONNECTED
+         ══════════════════════════════════════════════════════ */}
+      <section className="py-24 px-6 sm:px-8 border-b border-white/[0.06] bg-[#03040A] relative" id="eerg-preview">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+            <div className="max-w-3xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.06] border border-white/15 text-white font-mono text-xs font-semibold mb-3">
+                <Network className="w-3.5 h-3.5" />
+                <span>DIGISYNQ // EERG INTELLIGENCE LAYER</span>
+              </div>
+              <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-4 leading-[1.1]">
+                THE ECOSYSTEM IS CONNECTED.<br />
+                THE PROBLEMS ARE TOO.
+              </h2>
+              <p className="text-zinc-300 text-base sm:text-lg leading-relaxed font-light">
+                Behind every visible entertainment-industry problem is a network of dependencies, incentives, information gaps and decisions.
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+              <Link
+                to="/eerg"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white text-black hover:bg-zinc-200 font-bold text-xs tracking-wider transition-all shadow-lg shadow-white/10 active:scale-95 shrink-0"
+              >
+                <span>EXPLORE EERG →</span>
+              </Link>
+            </div>
+          </div>
+
+          {/* Conceptual Relationship Comparison Bento */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            <div className="p-6 rounded-3xl bg-[#090B14] border border-white/[0.08] shadow-xl">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-mono text-white font-bold tracking-wider uppercase">
+                  DIGISYNQ // PARENT ECOSYSTEM
+                </span>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-white border border-white/15">
+                  Action &amp; Synchronization
+                </span>
+              </div>
+              <div className="text-lg font-bold text-white mb-2">Connects the Ecosystem</div>
+              <p className="text-xs text-zinc-400 leading-relaxed mb-4">
+                People · Resources · Capabilities · Technology · Markets · Projects · Data · Opportunities
+              </p>
+              <div className="text-[11px] font-mono text-zinc-500 pt-3 border-t border-white/[0.06]">
+                Intervention &amp; Execution Engine
+              </div>
+            </div>
+
+            <div className="p-6 rounded-3xl bg-white/[0.04] border border-white/20 shadow-xl">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-mono text-white font-bold tracking-wider uppercase">
+                  EERG // INTELLIGENCE LAYER
+                </span>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white text-black font-bold">
+                  Root-Cause Intelligence
+                </span>
+              </div>
+              <div className="text-lg font-bold text-white mb-2">Understands Why It Gets Stuck</div>
+              <p className="text-xs text-zinc-300 leading-relaxed mb-4">
+                Problems · Bottlenecks · Causes · Root Causes · Dependencies · Failure Propagation · Economic Impact
+              </p>
+              <div className="text-[11px] font-mono text-zinc-400 pt-3 border-t border-white/[0.08]">
+                Evolving Systemic Intelligence Model
+              </div>
+            </div>
+          </div>
+
+          {/* Interactive Network Graph Component */}
+          <EERGNetworkGraph />
+
+          {/* Research Targets Disclaimer Bar */}
+          <div className="mt-8 p-4 rounded-2xl bg-black/40 border border-white/[0.06] flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-mono text-zinc-400">
+            <div>
+              <span className="text-white font-semibold">RESEARCH SCALE TARGETS:</span> 150+ Stakeholders · 500+ Problems · 200+ Bottlenecks · 100+ Root Causes · 1,500+ Dependencies
+            </div>
+            <Link to="/eerg" className="text-white hover:underline flex items-center gap-1 font-bold shrink-0">
+              <span>View Full EERG Model →</span>
+            </Link>
           </div>
         </div>
       </section>

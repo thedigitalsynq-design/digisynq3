@@ -35,7 +35,7 @@ const NAV_GROUPS: NavGroup[] = [
     label: 'Who It Serves',
     icon: Network,
     items: [
-      { label: 'Root-Cause Graph', href: '/root-cause-graph', desc: '160+ Stakeholders, 75 Root Causes & Failure Loops', badge: 'Master Model' },
+      { label: 'EERG — Root-Cause Graph', href: '/eerg', desc: '160+ Stakeholders, 75 Root Causes, Bottlenecks & Failure Loops', badge: 'Intelligence Layer' },
       { label: 'Ecosystem', href: '/ecosystem', desc: 'The network of entities DigiSynq connects and coordinates' },
       { label: '12 Stakeholders', href: '/stakeholders', desc: 'See how DigiSynq serves your specific role' },
     ]
@@ -201,6 +201,21 @@ export function SiteNav() {
               );
             })}
 
+            {/* Standalone Quick Link: EERG (Root-Cause Intelligence) */}
+            <Link
+              to="/eerg"
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium tracking-wide transition-all duration-200 ${
+                location.pathname === '/eerg' || location.pathname === '/root-cause-graph'
+                  ? 'text-white bg-white/[0.12] border border-white/20 font-semibold'
+                  : 'text-white/80 hover:text-white hover:bg-white/[0.04]'
+              }`}
+            >
+              <span className="font-bold tracking-wider">EERG</span>
+              <span className="text-[9px] font-mono text-zinc-400 bg-white/[0.08] px-1.5 py-0.5 rounded border border-white/10 hidden xl:inline-block">
+                Root-Cause Intelligence
+              </span>
+            </Link>
+
             {/* Standalone Quick Link: About */}
             <Link
               to="/about"
@@ -244,6 +259,25 @@ export function SiteNav() {
             id="mobile-menu"
             className="lg:hidden mt-2 p-4 rounded-3xl bg-[#090b10]/98 backdrop-blur-2xl border border-white/[0.1] shadow-2xl max-h-[80vh] overflow-y-auto space-y-4 animate-in fade-in slide-in-from-top-2 duration-200"
           >
+            {/* Featured EERG Drawer Card */}
+            <Link
+              to="/eerg"
+              onClick={() => setMenuOpen(false)}
+              className="block p-3 rounded-2xl bg-white/[0.08] border border-white/20 hover:bg-white/[0.12] transition-all"
+            >
+              <div className="flex items-center justify-between mb-1">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-bold text-white tracking-wide">EERG</span>
+                  <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-white/20 text-white font-semibold">
+                    Root-Cause Intelligence
+                  </span>
+                </div>
+                <ArrowUpRight className="w-4 h-4 text-white" />
+              </div>
+              <p className="text-[11px] text-zinc-300">
+                Entertainment Ecosystem Root-Cause Graph: 160+ Stakeholders, 75 Root Causes & Systemic Failure Loops.
+              </p>
+            </Link>
             {NAV_GROUPS.map((group) => (
               <div key={group.id} className="border-b border-white/[0.06] pb-3 last:border-b-0 last:pb-0">
                 <div className="text-[11px] font-mono text-white uppercase tracking-wider mb-2 flex items-center gap-2 font-semibold">

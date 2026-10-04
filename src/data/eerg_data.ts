@@ -1271,3 +1271,455 @@ export const EERG_BUSINESS_UNITS: EERGBusinessUnit[] = [
     scaleMetric: 'Live event spectator capacity synchronized & zero-incident event operations verified.'
   }
 ];
+
+// ── 14. Top 10 Root-Cause Ranking with Telemetry (Sections 10 & 11) ──
+export interface EERGRootCauseTelemetry {
+  code: string;
+  name: string;
+  category: string;
+  description: string;
+  stakeholdersAffected: number;
+  problemsCount: number;
+  bottlenecksCount: number;
+  dependenciesCount: number;
+  centralityLevel: 'MAXIMUM' | 'VERY HIGH' | 'HIGH' | 'MEDIUM';
+  propagationDepth: number; // in levels
+  economicExposure: string;
+  evidenceConfidence: '94% EMPIRICAL' | '88% EMPIRICAL' | '82% MODELLED' | '76% HYPOTHESIS';
+  flowChain: {
+    problems: string[];
+    bottlenecks: string[];
+    affectedRoles: string[];
+    impacts: string[];
+    opportunity: string;
+  };
+}
+
+export const EERG_TOP_ROOT_CAUSES_TELEMETRY: EERGRootCauseTelemetry[] = [
+  {
+    code: 'R001',
+    name: 'Information Fragmentation',
+    category: 'Information / Data',
+    description: 'Information required for decision-making is distributed across disconnected people, platforms, spreadsheets, documents, informal networks and legacy systems.',
+    stakeholdersAffected: 73,
+    problemsCount: 142,
+    bottlenecksCount: 28,
+    dependenciesCount: 317,
+    centralityLevel: 'VERY HIGH',
+    propagationDepth: 8,
+    economicExposure: '$12.4B annual friction across global casting, call sheets, rights, and finance.',
+    evidenceConfidence: '94% EMPIRICAL',
+    flowChain: {
+      problems: ['Actor undiscovered', 'Producer out-of-sync schedule', 'Casting search delay', 'Vendor rate opacity'],
+      bottlenecks: ['Talent discovery (B001)', 'Production coordination (B011)', 'Rights verification (B021)'],
+      affectedRoles: ['Actors', 'Casting Directors', 'Producers', 'Heads of Dept', 'Financiers'],
+      impacts: ['15-30% shoot overtime', 'Prolonged development churn', 'Unverified talent reliance'],
+      opportunity: 'Unified entertainment data protocol & live synchronization ledger.'
+    }
+  },
+  {
+    code: 'R008',
+    name: 'Trust Deficit',
+    category: 'Trust & Uncertainty',
+    description: 'Historical non-payments, credit omissions, and broken verbal assurances create hyper-defensive counterparties and slow contractual negotiations.',
+    stakeholdersAffected: 68,
+    problemsCount: 119,
+    bottlenecksCount: 24,
+    dependenciesCount: 284,
+    centralityLevel: 'VERY HIGH',
+    propagationDepth: 7,
+    economicExposure: '$8.2B locked in defensive holdbacks, legal retainers, and stalled greenlights.',
+    evidenceConfidence: '88% EMPIRICAL',
+    flowChain: {
+      problems: ['Unsigned contracts on set', 'Vendor payment withholding', 'Uncredited creative work'],
+      bottlenecks: ['Contract execution (B022)', 'Vendor selection (B010)', 'Payment processing (B033)'],
+      affectedRoles: ['Writers', 'VFX Studios', 'Line Producers', 'Independent Talent', 'Financiers'],
+      impacts: ['Work stoppages', 'Litigation settlements', 'Exclusive reliance on small insider circles'],
+      opportunity: 'Milestone escrow protocols & cryptographic verified project credentials.'
+    }
+  },
+  {
+    code: 'R021',
+    name: 'Workflow Fragmentation',
+    category: 'Workflow & Process',
+    description: 'Editorial conform, color-grading suites, audio stem mixing, and visual effects operate in disconnected software silos with high-friction manual exports.',
+    stakeholdersAffected: 61,
+    problemsCount: 98,
+    bottlenecksCount: 22,
+    dependenciesCount: 245,
+    centralityLevel: 'HIGH',
+    propagationDepth: 6,
+    economicExposure: '$6.5B in post-production conform re-work and rushed delivery overtime.',
+    evidenceConfidence: '94% EMPIRICAL',
+    flowChain: {
+      problems: ['Editorial desync with VFX', 'Atmos downmix phase cancellation', 'Subtitle timecode drift'],
+      bottlenecks: ['Post handoffs (B017)', 'VFX delivery (B018)', 'Platform compliance (B039)'],
+      affectedRoles: ['Editors', 'VFX Supervisors', 'Sound Designers', 'Platform QC Teams'],
+      impacts: ['Rejected platform deliveries', 'Midnight overtime rushes', 'Festival premiere slips'],
+      opportunity: 'Cloud-native unified IMF conform pipeline & automated pre-flight QC gates.'
+    }
+  },
+  {
+    code: 'R027',
+    name: 'Coordination Failure',
+    category: 'Coordination & Operations',
+    description: 'Cross-departmental synchronization breakdown between physical sets, soundstages, lighting equipment rentals, and regulatory municipal authorities.',
+    stakeholdersAffected: 59,
+    problemsCount: 92,
+    bottlenecksCount: 21,
+    dependenciesCount: 231,
+    centralityLevel: 'HIGH',
+    propagationDepth: 7,
+    economicExposure: '$9.7B in physical set downtime, wasted generator fuel, and emergency rescheduling.',
+    evidenceConfidence: '88% EMPIRICAL',
+    flowChain: {
+      problems: ['Camera truck arrives before permits clear', 'Night shoot turnaround violates safety rules'],
+      bottlenecks: ['Schedule planning (B006)', 'Vendor coordination (B011)', 'Production communication (B012)'],
+      affectedRoles: ['1st ADs', 'Line Producers', 'Rental Houses', 'Police Authorities'],
+      impacts: ['$84k/day idle crew costs', 'Expired location permits', 'Crew exhaustion & safety risks'],
+      opportunity: 'Live critical-path dependency telemetry & geofenced equipment dispatch.'
+    }
+  },
+  {
+    code: 'R039',
+    name: 'Rights Fragmentation',
+    category: 'Legal, IP & Rights',
+    description: 'Territorial, platform, and temporal rights carved up among multiple historical co-producers, underlying authors, and international distributors with zero centralized tracking.',
+    stakeholdersAffected: 54,
+    problemsCount: 87,
+    bottlenecksCount: 19,
+    dependenciesCount: 214,
+    centralityLevel: 'HIGH',
+    propagationDepth: 6,
+    economicExposure: '$7.4B in frozen catalog acquisition deals and territorial copyright lawsuits.',
+    evidenceConfidence: '88% EMPIRICAL',
+    flowChain: {
+      problems: ['Territorial holdback conflicts', 'Song sync stuck in multi-heir probate', 'Missing master release docs'],
+      bottlenecks: ['Rights clearance (B021)', 'Content licensing (B024)', 'IP verification (B044)'],
+      affectedRoles: ['Distributors', 'Music Supervisors', 'Sales Agents', 'IP Attorneys'],
+      impacts: ['Delayed worldwide release dates', 'Millions in unallocated royalty pools', 'Canceled streaming deals'],
+      opportunity: 'Automated chain-of-title verification graph & multi-territory clearance engine.'
+    }
+  },
+  {
+    code: 'R058',
+    name: 'Measurement Gap',
+    category: 'Measurement & Feedback',
+    description: 'Lack of standardized, independent cross-platform audience metrics comparing theatrical box-office admissions, social short-form engagement, and proprietary streaming hours.',
+    stakeholdersAffected: 51,
+    problemsCount: 79,
+    bottlenecksCount: 18,
+    dependenciesCount: 198,
+    centralityLevel: 'HIGH',
+    propagationDepth: 5,
+    economicExposure: '$11.2B in misallocated marketing spend and inaccurate backend royalty participations.',
+    evidenceConfidence: '82% MODELLED',
+    flowChain: {
+      problems: ['Black-box streaming viewer data', 'Unverifiable viral marketing ROI', 'Disputed net profit splits'],
+      bottlenecks: ['Marketing attribution (B029)', 'Revenue reconciliation (B034)', 'Audience measurement (B036)'],
+      affectedRoles: ['Advertisers', 'Showrunners', 'Talent Agents', 'Platform Commissioners'],
+      impacts: ['Premature show cancellations', 'Wasted ad campaigns', 'Damaged creator trust'],
+      opportunity: 'Universal Attention Value (UAV) index & third-party verified telemetry.'
+    }
+  },
+  {
+    code: 'R046',
+    name: 'Platform Dependency',
+    category: 'Technology & Architecture',
+    description: 'Content creators, independent distributors, and theatrical circuits surrender their pricing power and audience data to global streaming and social algorithmic gatekeepers.',
+    stakeholdersAffected: 48,
+    problemsCount: 74,
+    bottlenecksCount: 16,
+    dependenciesCount: 186,
+    centralityLevel: 'HIGH',
+    propagationDepth: 6,
+    economicExposure: '$8.5B in lost direct-to-consumer relationships and creator monetization leakage.',
+    evidenceConfidence: '88% EMPIRICAL',
+    flowChain: {
+      problems: ['Sudden algorithmic demonetization', 'No access to subscriber emails', 'Non-negotiable licensing terms'],
+      bottlenecks: ['OTT discovery (B027)', 'Platform dependency (B038)', 'Creator monetization (B047)'],
+      affectedRoles: ['YouTubers', 'Indie Producers', 'Songwriters', 'Boutique Studios'],
+      impacts: ['Extreme revenue volatility', 'Total platform lock-in', 'Middle-tier production collapse'],
+      opportunity: 'Sovereign audience relationship ledgers & decentralized syndication networks.'
+    }
+  },
+  {
+    code: 'R050',
+    name: 'Market Fragmentation',
+    category: 'Market & Attention',
+    description: 'Audience splintered into thousands of hyper-niche fandoms across 20+ streaming apps, social video feeds, podcasts, and gaming ecosystems, ending the mass monoculture era.',
+    stakeholdersAffected: 46,
+    problemsCount: 71,
+    bottlenecksCount: 15,
+    dependenciesCount: 172,
+    centralityLevel: 'HIGH',
+    propagationDepth: 5,
+    economicExposure: '$14.1B in underperforming releases unable to reach critical discovery mass.',
+    evidenceConfidence: '94% EMPIRICAL',
+    flowChain: {
+      problems: ['Great movies buried on launch', 'Hyper-inflated marketing spend', 'Massive viewer decision fatigue'],
+      bottlenecks: ['Audience discovery (B028)', 'OTT discovery (B027)', 'Screen allocation (B026)'],
+      affectedRoles: ['Distributors', 'Marketers', 'Independent Filmmakers', 'Audiences'],
+      impacts: ['Box-office polarization', '18-minute browsing before abandonment', 'High content churn'],
+      opportunity: 'Context-aware micro-community discovery aggregators & fandom prediction tools.'
+    }
+  },
+  {
+    code: 'R032',
+    name: 'Cash-Flow Mismatch',
+    category: 'Financial & Capital',
+    description: 'Physical daily crews, equipment rentals, and soundstages must be paid weekly in cash, while streaming tranches and theatrical minimum guarantees disburse 90–180 days post-delivery.',
+    stakeholdersAffected: 44,
+    problemsCount: 68,
+    bottlenecksCount: 14,
+    dependenciesCount: 165,
+    centralityLevel: 'HIGH',
+    propagationDepth: 6,
+    economicExposure: '$5.8B in usurious bridge financing interest and vendor insolvency.',
+    evidenceConfidence: '88% EMPIRICAL',
+    flowChain: {
+      problems: ['Delayed crew payroll', 'Emergency hard-money loans at 18%+', 'Vendor liens on master files'],
+      bottlenecks: ['Project financing (B004)', 'Payment processing (B033)', 'Revenue reconciliation (B034)'],
+      affectedRoles: ['Independent Producers', 'Line Producers', 'Boutique Post Houses', 'Lenders'],
+      impacts: ['Mid-shoot shutdowns', 'Personal bankruptcy of producers', 'Frozen asset deliverables'],
+      opportunity: 'Fintech production receivable discounting & programmatic payroll factoring.'
+    }
+  },
+  {
+    code: 'R075',
+    name: 'Lack of Ecosystem-Level Visibility',
+    category: 'Ecosystem & Structural',
+    description: 'No single stakeholder possesses an end-to-end operational map of how decisions, schedule variances, rights holdbacks, and cost cascades propagate across the industry supply chain.',
+    stakeholdersAffected: 82,
+    problemsCount: 160,
+    bottlenecksCount: 34,
+    dependenciesCount: 412,
+    centralityLevel: 'MAXIMUM',
+    propagationDepth: 12,
+    economicExposure: '$61.9B in aggregate systemic friction, avoidable errors, and broken feedback loops.',
+    evidenceConfidence: '94% EMPIRICAL',
+    flowChain: {
+      problems: ['Siloed finger-pointing during delays', 'Repeatedly reinventing broken wheels', 'Inability to isolate root cause'],
+      bottlenecks: ['Industry standardization (B050)', 'Data integration (B035)', 'Vendor coordination (B011)'],
+      affectedRoles: ['All 160+ Stakeholders across Creation, Production, Commercial, Infra & Consumption'],
+      impacts: ['Ecosystem-wide inefficiency', 'Chronic margin compression', 'Systemic risk-aversion'],
+      opportunity: 'DigiSynq Master EERG Model — Turning fragmented problems into systemic leverage.'
+    }
+  }
+];
+
+// ── 15. The "Why?" Interactive 5-Whys Chains (Section 12) ─────
+export interface EERGWhyChain {
+  id: string;
+  title: string;
+  symptom: string;
+  steps: {
+    level: number;
+    question: string;
+    answer: string;
+    type: 'IMMEDIATE' | 'PROCESS' | 'STRUCTURAL' | 'SYSTEMIC' | 'ROOT';
+  }[];
+  systemicRootCause: string;
+  rootCauseCode: string;
+  leverageOpportunity: string;
+}
+
+export const EERG_WHY_CHAINS: EERGWhyChain[] = [
+  {
+    id: 'why-payment',
+    title: 'Vendor Payment Delay (Physical Production)',
+    symptom: 'Boutique VFX studio has not received final 20% milestone payment 90 days after delivery.',
+    steps: [
+      { level: 1, question: 'Why is the payment delayed?', answer: 'The studio invoice approval has been stalled in the platform accounts department.', type: 'IMMEDIATE' },
+      { level: 2, question: 'Why is the invoice approval stalled?', answer: 'There are 5 layers of corporate legal, technical, and accounting sign-offs required.', type: 'PROCESS' },
+      { level: 3, question: 'Why are there so many approval layers?', answer: 'Editorial conformed changes resulted in unbilled scope variance that accounting cannot reconcile against the original PO.', type: 'STRUCTURAL' },
+      { level: 4, question: 'Why cannot accounting reconcile the variance?', answer: 'The line producer approved shot additions on set via verbal WhatsApp message without formal change orders.', type: 'SYSTEMIC' },
+      { level: 5, question: 'Why is there no single source of truth connecting on-set changes to accounting?', answer: 'Information is distributed across isolated spreadsheets, personal messages, and legacy accounting software with zero real-time data interoperability.', type: 'ROOT' }
+    ],
+    systemicRootCause: 'Information Fragmentation & Data Silos',
+    rootCauseCode: 'R001 / R002',
+    leverageOpportunity: 'Automated Conformed Change-Order Escrow & Real-Time Production Ledger.'
+  },
+  {
+    id: 'why-schedule',
+    title: 'On-Set Schedule Slip Cascading into Budget Overrun',
+    symptom: 'Feature film wraps principal photography 6 days late, triggering a $540,000 budget deficit.',
+    steps: [
+      { level: 1, question: 'Why did the shoot wrap 6 days late?', answer: 'A crucial 3-day exterior night shoot was rained out and had to be remounted next week.', type: 'IMMEDIATE' },
+      { level: 2, question: 'Why was the weather contingency unable to absorb the rain?', answer: 'The lead actor had a strict hard-out date for another production, compressing the backup schedule.', type: 'PROCESS' },
+      { level: 3, question: 'Why was the lead actor on such a tight overlap?', answer: 'Casting attachments were finalized 4 weeks late during pre-production, pushing start dates.', type: 'STRUCTURAL' },
+      { level: 4, question: 'Why did casting take 4 weeks longer than budgeted?', answer: 'Casting directors and agents engaged in prolonged back-and-forth over unverified previous shoot wrap dates.', type: 'SYSTEMIC' },
+      { level: 5, question: 'Why is talent availability tracked through fragmented manual agency calls rather than live telemetry?', answer: 'The industry operates on informal relationship gatekeeping without standardized live availability infrastructure.', type: 'ROOT' }
+    ],
+    systemicRootCause: 'Relationship Dependency & Lack of Standardized Availability',
+    rootCauseCode: 'R017 / R006',
+    leverageOpportunity: 'Universal Live Talent Availability Graph & Critical-Path Scheduling Engine.'
+  },
+  {
+    id: 'why-vfx',
+    title: 'VFX Margin Wipeout & Delivery Rejection',
+    symptom: 'VFX facility incurs $180,000 in unpaid artist overtime and platform QC rejects master package on launch week.',
+    steps: [
+      { level: 1, question: 'Why did the VFX facility incur $180,000 in unpaid overtime?', answer: '500 complex CGI shots were revised 14 times within the final 10 days of post finishing.', type: 'IMMEDIATE' },
+      { level: 2, question: 'Why were shots revised 14 times so late in the process?', answer: 'Director and studio executives changed the edit picture lock 3 times after shot turnover.', type: 'PROCESS' },
+      { level: 3, question: 'Why was picture lock changed after VFX shots were already in final render?', answer: 'Test-screening audience feedback revealed story confusion in the climax, forcing re-edits.', type: 'STRUCTURAL' },
+      { level: 4, question: 'Why was test screening conducted only 3 weeks before international premiere?', answer: 'Late greenlight and rushed physical production compressed the post-production window by 40%.', type: 'SYSTEMIC' },
+      { level: 5, question: 'Why do productions consistently start shooting before script breakdowns and post pipelines are locked?', answer: 'Incentives reward rushing to production to trigger studio progress payments rather than verifying readiness.', type: 'ROOT' }
+    ],
+    systemicRootCause: 'Incentive Misalignment & Workflow Fragmentation',
+    rootCauseCode: 'R018 / R021',
+    leverageOpportunity: 'Conformed IMF Asset Tracking & Predictive Post Change-Management Desk.'
+  },
+  {
+    id: 'why-rights',
+    title: 'International Territorial Rights Clearance Stall',
+    symptom: 'Distributor unable to close $2.5M European theatrical sale because music sync rights are contested.',
+    steps: [
+      { level: 1, question: 'Why are music sync rights contested in Europe?', answer: 'The underlying master recording license was only cleared for North American theatrical exhibition.', type: 'IMMEDIATE' },
+      { level: 2, question: 'Why was international digital streaming and theatrical omitted from the original agreement?', answer: 'The independent producer used a standard template contract without understanding territorial holdbacks.', type: 'PROCESS' },
+      { level: 3, question: 'Why did the music supervisor not catch the territorial omission during post?', answer: 'Music cue sheets were manually submitted on paper PDFs after production wrapped without digital validation.', type: 'STRUCTURAL' },
+      { level: 4, question: 'Why are cue sheets still submitted as manual paper documents across major productions?', answer: 'Performing Rights Organizations (PROs), record labels, and film distributors use mutually incompatible legacy databases.', type: 'SYSTEMIC' },
+      { level: 5, question: 'Why is there no interoperable global chain-of-title and sync rights registry?', answer: 'Rights fragmentation and siloed catalog ownership preserve intermediary broker margins at the expense of creators.', type: 'ROOT' }
+    ],
+    systemicRootCause: 'Rights Fragmentation & Intermediary Dependency',
+    rootCauseCode: 'R039 / R066',
+    leverageOpportunity: 'Automated Global Rights Graph & Multi-Territory Clearance Ledger.'
+  }
+];
+
+// ── 16. Signature Convergence Visual Data (Section 8) ────────
+export interface EERGConvergenceCase {
+  title: string;
+  subtitle: string;
+  surfaceProblems: { role: string; complaint: string }[];
+  convergedRootCauses: { code: string; name: string }[];
+  underlyingBottleneck: string;
+  singleOpportunity: string;
+  payingStakeholders: string[];
+}
+
+export const EERG_SIGNATURE_CONVERGENCE: EERGConvergenceCase = {
+  title: 'MANY PROBLEMS → FEWER ROOT CAUSES',
+  subtitle: 'The Talent Discovery & Matching Convergence',
+  surfaceProblems: [
+    { role: 'Actor', complaint: 'Cannot find auditions or reach genuine decision-makers.' },
+    { role: 'Producer', complaint: 'Cannot find reliable, verified talent within tight production dates.' },
+    { role: 'Casting Director', complaint: 'Overwhelmed by thousands of unvetted DMs; casting takes too long.' },
+    { role: 'Talent Agency', complaint: 'Cannot efficiently match roster capabilities to incoming production briefs.' },
+    { role: 'Production House', complaint: 'Faces 4-week pre-production delays waiting for role confirmations.' }
+  ],
+  convergedRootCauses: [
+    { code: 'R001', name: 'Information Fragmentation' },
+    { code: 'R008', name: 'Trust Deficit & Quality Uncertainty' },
+    { code: 'R006', name: 'Lack of Standardized Profiles' },
+    { code: 'R017', name: 'Relationship Dependency' }
+  ],
+  underlyingBottleneck: 'B001 / B002: Talent Discovery & Matching Infrastructure',
+  singleOpportunity: 'SYNQ.TALENT: Universal Verified Talent Intelligence & Casting Exchange Protocol',
+  payingStakeholders: ['Production Houses', 'Casting Agencies', 'Talent Agencies', 'Film Studios', 'OTT Platforms']
+};
+
+// ── 17. The 5-Part Paying Customer Framework (Section 20) ─────
+export interface EERGCustomerRoleBreakdown {
+  domain: string;
+  problemOwner: string; // Who experiences the problem?
+  economicBeneficiary: string; // Who benefits from solving it?
+  budgetOwner: string; // Who controls the budget?
+  buyer: string; // Who purchases the solution?
+  endUser: string; // Who actually uses it?
+  commercialInsight: string;
+}
+
+export const EERG_CUSTOMER_ROLES: EERGCustomerRoleBreakdown[] = [
+  {
+    domain: 'Talent & Casting (SYNQ.TALENT)',
+    problemOwner: 'Actor / Performer (Unemployed, undiscovered)',
+    economicBeneficiary: 'Producer & Studio (Reduced downtime, optimal cast)',
+    budgetOwner: 'Studio Head of Casting / Executive Producer',
+    buyer: 'Casting Agency / Production Company',
+    endUser: 'Casting Director, Talent Agent, Director',
+    commercialInsight: 'Never monetize struggling actors directly. Sell enterprise efficiency to the casting agencies and production companies holding the hiring budgets.'
+  },
+  {
+    domain: 'Physical Production (SYNQ.CASCADE)',
+    problemOwner: 'Crew & Heads of Department (Overworked on set)',
+    economicBeneficiary: 'Financier & Completion Bonder (Protected equity)',
+    budgetOwner: 'Line Producer & Completion Bond Underwriter',
+    buyer: 'Production Company / Studio Physical Production Dept',
+    endUser: '1st AD, Production Manager, Line Producer',
+    commercialInsight: 'The crew suffers the pain, but the completion bonder and equity financier absorb the multi-million dollar catastrophe risk. Monetize the risk mitigators.'
+  },
+  {
+    domain: 'VFX & Post Finishing (SYNQ.FINISH)',
+    problemOwner: 'VFX Facility & 3D Artists (Unpaid overtime, burnout)',
+    economicBeneficiary: 'Distributor & Streamer (On-time, compliant release)',
+    budgetOwner: 'Post-Production Supervisor & Studio VP of Post',
+    buyer: 'Feature Film Production / VFX Studio',
+    endUser: 'VFX Producer, Lead Colorist, Master QC Engineer',
+    commercialInsight: 'Position the software as insurance for post supervisors against platform rejection fines, while helping VFX facilities bill verified change orders.'
+  },
+  {
+    domain: 'Rights & Royalties (SYNQ.RIGHTS)',
+    problemOwner: 'Songwriter / Estate (Uncollected black-box royalties)',
+    economicBeneficiary: 'Catalog Owner & International Sales Agent (Unlocked deals)',
+    budgetOwner: 'Acquisition Fund Managing Partner / Head of Legal Affairs',
+    buyer: 'Private Equity Media Fund / International Distributor',
+    endUser: 'Entertainment Attorney, Rights Clearance Manager',
+    commercialInsight: 'Charge contingency recovery fees (12–15%) on uncollected international royalties where capital has already been written off as lost.'
+  },
+  {
+    domain: 'Audience & Demand (SYNQ.RADAR)',
+    problemOwner: 'Audience (Decision fatigue, boring derivative IP)',
+    economicBeneficiary: 'Streaming Platform & Studio (Higher retention, hit rate)',
+    budgetOwner: 'Head of Content Strategy & Greenlight Committee',
+    buyer: 'OTT Platform / Studio Executive Committee',
+    endUser: 'Development Executives, Data Analysts, Showrunners',
+    commercialInsight: 'Sell institutional decision insurance. If an audit saves a single $30M greenlight mistake, a $250k annual subscription is an effortless 120x ROI.'
+  }
+];
+
+// ── 18. EERG → DIGISYNQ Continuous Flywheel (Section 35) ──────
+export const EERG_DIGISYNQ_FLYWHEEL = [
+  {
+    step: '01',
+    phase: 'UNDERSTAND',
+    engine: 'EERG',
+    description: 'EERG continuously maps, clusters, and diagnoses the systemic root causes and choke points where the entertainment ecosystem freezes.',
+    output: 'Root-Cause Centrality Rankings & Bottleneck Maps'
+  },
+  {
+    step: '02',
+    phase: 'CONNECT',
+    engine: 'DIGISYNQ',
+    description: 'DigiSynq identifies and connects the exact verified participants, facilities, and counter-parties required to bypass the bottleneck.',
+    output: 'Verified Stakeholder Network & Multi-Party Covenants'
+  },
+  {
+    step: '03',
+    phase: 'ORCHESTRATE',
+    engine: 'DIGISYNQ',
+    description: 'DigiSynq deploys the 23 codified mechanisms to synchronize schedules, align incentives, and execute real-time interventions.',
+    output: 'Active Case Triage & Physical Production Stabilization'
+  },
+  {
+    step: '04',
+    phase: 'MEASURE',
+    engine: 'DIGISYNQ',
+    description: 'Outcome verification engines record recovered schedule days, avoided delay penalties, and verified delivery compliance.',
+    output: 'Quantified Economic Value Created ($ Saved)'
+  },
+  {
+    step: '05',
+    phase: 'LEARN',
+    engine: 'EERG',
+    description: 'Empirical outcome data feeds back into EERG, refining dependency weights, failure propagation depth models, and confidence scores.',
+    output: 'Evolving Ecosystem Model with High-Confidence Evidence'
+  },
+  {
+    step: '06',
+    phase: 'MONETIZE',
+    engine: 'DIGISYNQ COMMERCIAL',
+    description: 'Discovered solution gaps are productized into high-margin recurring business engines, enterprise SaaS desks, and risk underwriting tools.',
+    output: 'Scaleable Commercial Value Capture'
+  }
+];

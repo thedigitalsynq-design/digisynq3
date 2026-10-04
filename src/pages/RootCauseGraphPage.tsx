@@ -26,6 +26,13 @@ import {
   FileText
 } from 'lucide-react';
 import { TopographicBackground } from '../components/TopographicBackground';
+import { EERGConvergenceVisual } from '../components/EERGConvergenceVisual';
+import { EERGNetworkGraph } from '../components/EERGNetworkGraph';
+import { EERGWhyDiagnostic } from '../components/EERGWhyDiagnostic';
+import { EERGCircularMap } from '../components/EERGCircularMap';
+import { EERGFlywheel } from '../components/EERGFlywheel';
+import { EERGCustomerRoles } from '../components/EERGCustomerRoles';
+import { EERGTopRootCauses } from '../components/EERGTopRootCauses';
 import {
   EERG_LAYERS,
   EERG_STAKEHOLDER_CATEGORIES,
@@ -44,14 +51,19 @@ import {
 
 type EERGTab =
   | 'OVERVIEW'
-  | 'STAKEHOLDERS'
+  | 'GRAPH'
+  | 'CONVERGENCE'
+  | 'WHY'
   | 'ROOT_CAUSES'
+  | 'STAKEHOLDERS'
   | 'BOTTLENECKS'
-  | 'LOOPS'
+  | 'CIRCULAR'
   | 'CASCADE'
   | 'MATRIX'
+  | 'CUSTOMERS'
   | 'OPPORTUNITIES'
   | 'BUSINESS'
+  | 'FLYWHEEL'
   | 'PIPELINE';
 
 export default function RootCauseGraphPage() {
@@ -62,6 +74,12 @@ export default function RootCauseGraphPage() {
   const [selectedRootFamily, setSelectedRootFamily] = useState<string>('ALL');
   const [bottleneckSearch, setBottleneckSearch] = useState('');
   const [selectedBottleneckDomain, setSelectedBottleneckDomain] = useState<string>('ALL');
+  const [selectedMatrixCell, setSelectedMatrixCell] = useState<{ rootCause: string; stakeholder: string; score: number } | null>({
+    rootCause: 'Information Fragmentation (R001)',
+    stakeholder: 'Casting Director',
+    score: 3
+  });
+  const [matrixSearch, setMatrixSearch] = useState('');
   const [activeLoopIndex, setActiveLoopIndex] = useState(0);
   const [activePathCaseIndex, setActivePathCaseIndex] = useState(0);
   const [selectedBusinessUnitIndex, setSelectedBusinessUnitIndex] = useState(0);
@@ -125,18 +143,18 @@ export default function RootCauseGraphPage() {
   const activeBusinessUnit = EERG_BUSINESS_UNITS[selectedBusinessUnitIndex] || EERG_BUSINESS_UNITS[0];
 
   const cascadeStages = [
-    { title: 'Actor Unavailable', role: 'Talent Variance', impact: 'Call time delayed by 3 hours due to overlapping schedule conflict on previous shoot.' },
-    { title: 'Shoot Delayed', role: 'Physical Production', impact: 'Daylight exterior scene missed; crew forced into standby incurring initial downtime cost.' },
-    { title: 'Location Expired', role: 'Municipal & Logistics', impact: 'Police and municipal filming permit expires; location manager must renegotiate or reschedule.' },
-    { title: 'Crew Turnaround Violated', role: 'Union & Safety', impact: 'Mandatory 12-hour turnaround rule pushed back, moving tomorrow call time and disrupting workflow.' },
-    { title: 'Equipment Incurring Penalties', role: 'Vendors & Capital', impact: 'Rental camera packages and specialized crane gear exceed booked rental period.' },
-    { title: 'Budget Overrun Compounded', role: 'Production Finance', impact: 'Contingency buffer burned by 18%; completion bonder requests immediate risk audit.' },
-    { title: 'Post-Production Starts Late', role: 'Editorial & VFX', impact: 'Raw footage arrives 5 days late; offline editor and visual effects team window compressed.' },
-    { title: 'VFX Crunch & Overtime', role: 'Creative Tech', impact: '500 complex CGI shots rushed into 24/7 overtime; vendor margins wiped out.' },
-    { title: 'Platform Acceptance Delayed', role: 'Distribution QC', impact: 'QC flags non-compliant sound bed and color space due to rushed finish; delivery rejected.' },
-    { title: 'Marketing Window Slipped', role: 'Commercial Launch', impact: 'Global synchronized promotional campaign lands without confirmed streaming availability.' },
-    { title: 'Revenue & Royalties Impaired', role: 'Ecosystem Return', impact: 'Opening weekend box-office / streaming acquisition drop; distributor imposes liquidated damages.' },
-    { title: 'Investor Confidence Eroded', role: 'Capital Architecture', impact: 'Equity partners pull back future slates, restricting development funding for new creative IP.' }
+    { title: 'Actor Unavailable', role: 'Talent Variance', depth: 'Level 01', stakeholders: 'Lead Actor, 1st AD, Casting Director', timeImpact: '+3 Hours', economicImpact: '$2,400 Call-Time Penalty', impact: 'Call time delayed by 3 hours due to overlapping schedule conflict on previous shoot.' },
+    { title: 'Production Delay', role: 'Physical Production', depth: 'Level 02', stakeholders: 'Director, Cinematographer, Camera Crew', timeImpact: '+1 Half-Day', economicImpact: '$18,500 Standby Labor', impact: 'Daylight exterior scene missed; crew forced into standby incurring initial downtime cost.' },
+    { title: 'Location Cancellation', role: 'Municipal & Logistics', depth: 'Level 03', stakeholders: 'Location Manager, Police Department, City Permits', timeImpact: '+2 Days Rescheduling', economicImpact: '$12,000 Re-Permitting Fees', impact: 'Police and municipal filming permit expires; location manager must renegotiate or reschedule.' },
+    { title: 'Crew Rescheduling', role: 'Union & Safety', depth: 'Level 04', stakeholders: 'Grip & Electric, Sound Department, Teamsters', timeImpact: '+12 Hours Turnaround Breach', economicImpact: '$28,000 Overtime Multipliers', impact: 'Mandatory 12-hour turnaround rule pushed back, moving tomorrow call time and disrupting workflow.' },
+    { title: 'Equipment Rescheduling', role: 'Vendors & Capital', depth: 'Level 05', stakeholders: 'ARRI Camera Rental, Panavision, Crane Operators', timeImpact: '+4 Days Holdover', economicImpact: '$34,000 Standby Equipment Fines', impact: 'Rental camera packages and specialized crane gear exceed booked rental period.' },
+    { title: 'Budget Increase', role: 'Production Finance', depth: 'Level 06', stakeholders: 'Line Producer, Completion Bonder, Production Accountant', timeImpact: '+18% Contingency Burn', economicImpact: '$140,000 Contingency Depletion', impact: 'Contingency buffer burned by 18%; completion bonder requests immediate risk audit.' },
+    { title: 'Post-Production Delay', role: 'Editorial & VFX', depth: 'Level 07', stakeholders: 'Lead Editor, Post Supervisor, Sound Conform', timeImpact: '+5 Days Late Dailies', economicImpact: '$45,000 Editorial Overrun', impact: 'Raw footage arrives 5 days late; offline editor and visual effects team window compressed.' },
+    { title: 'Marketing Compression', role: 'Creative Tech & PR', depth: 'Level 08', stakeholders: 'VFX Facility, 3D Artists, Trailer House', timeImpact: '-40% VFX Delivery Window', economicImpact: '$180,000 Unpaid Artist Overtime', impact: '500 complex CGI shots rushed into 24/7 overtime; vendor margins wiped out.' },
+    { title: 'Release Change', role: 'Commercial Launch', depth: 'Level 09', stakeholders: 'Trailer Finishing, PR Firm, Key Art Agency', timeImpact: '-10 Days Promo Lead Time', economicImpact: '$220,000 Media Buy Re-Booking', impact: 'Promotional media buys shifted without confirmed key art and teaser conform.' },
+    { title: 'Distribution Impact', role: 'Distribution QC', depth: 'Level 10', stakeholders: 'Platform QC Lead, Theatrical Booker, Subtitling Vendor', timeImpact: '+7 Days Redelivery Cycle', economicImpact: '$350,000 Platform QC Penalty Risk', impact: 'QC flags non-compliant sound bed and color space due to rushed finish; delivery rejected.' },
+    { title: 'Revenue Risk', role: 'Ecosystem Return', depth: 'Level 11', stakeholders: 'Distributor, Theatrical Exhibitors, Sales Agents', timeImpact: '-22% Opening Box-Office', economicImpact: '$2,500,000 Revenue Write-Down', impact: 'Opening weekend box-office / streaming acquisition drop; distributor imposes liquidated damages.' },
+    { title: 'Investor Confidence Impact', role: 'Capital Architecture', depth: 'Level 12', stakeholders: 'Private Equity Fund, Completion Bonder, Slate Backers', timeImpact: 'Future Slate Freeze', economicImpact: '$15,000,000 Withdrawn Slate Equity', impact: 'Equity partners pull back future slates, restricting development funding for new creative IP.' }
   ];
 
   return (
@@ -151,79 +169,170 @@ export default function RootCauseGraphPage() {
       {/* ══════════════════════════════════════════════════════
           01 — HEADER & TELEMETRY DASHBOARD
          ══════════════════════════════════════════════════════ */}
-      <header className="text-center max-w-4xl mx-auto mb-14">
-        {/* Eyebrow badge */}
-        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.12] bg-white/[0.04] text-xs text-zinc-300 mb-6 tracking-wide backdrop-blur-xl">
-          <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-          <span className="font-mono text-white font-semibold">ENTERTAINMENT ECOSYSTEM ROOT-CAUSE GRAPH</span>
-          <span className="text-zinc-600">//</span>
-          <span className="text-zinc-400 font-medium">MASTER ARCHITECTURE V1.0</span>
+      <header className="text-center max-w-5xl mx-auto mb-14">
+        {/* Visual Marker: DIGISYNQ // EERG */}
+        <div className="flex items-center justify-center gap-2 mb-4">
+          <span className="text-xs font-mono font-bold tracking-widest text-zinc-400">DIGISYNQ</span>
+          <span className="text-zinc-600 font-mono">//</span>
+          <span className="text-xs font-mono font-bold tracking-widest text-white">EERG</span>
+          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-white border border-white/20 ml-2">
+            ROOT-CAUSE INTELLIGENCE
+          </span>
         </div>
 
-        <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white leading-[1.08] mb-6">
-          The Connected System of Entertainment Breakdown.
+        {/* Product Hierarchy Breadcrumb */}
+        <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full border border-white/[0.08] bg-white/[0.03] text-[11px] font-mono text-zinc-400 mb-6 tracking-wide backdrop-blur-xl">
+          <span>DIGISYNQ</span>
+          <span className="text-zinc-600">→</span>
+          <span>Entertainment Ecosystem Intelligence</span>
+          <span className="text-zinc-600">→</span>
+          <span className="text-white font-bold">EERG</span>
+          <span className="text-zinc-600">→</span>
+          <span className="text-zinc-300">Root-Cause Graph</span>
+        </div>
+
+        {/* Hero Title & Supporting Line */}
+        <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white leading-[1.08] mb-4">
+          ENTERTAINMENT ECOSYSTEM<br />
+          ROOT-CAUSE GRAPH
         </h1>
 
-        <p className="text-base sm:text-lg text-zinc-300 font-normal leading-relaxed mb-8 max-w-3xl mx-auto">
-          Not just a stakeholder directory. A rigorous graph linking <span className="text-white font-semibold">Stakeholders</span> to <span className="text-white font-semibold">Bottlenecks</span>, <span className="text-white font-semibold">Systemic Root Causes</span>, <span className="text-white font-semibold">Failure Cascades</span>, and <span className="text-white font-semibold">High-Leverage Business Opportunities</span>.
+        <div className="text-lg sm:text-2xl font-light text-zinc-200 mb-4 tracking-tight">
+          From fragmented problems to systemic opportunities.
+        </div>
+
+        <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed mb-8 max-w-3xl mx-auto font-light">
+          EERG maps the interconnected problems, bottlenecks, dependencies and root causes that shape the entertainment ecosystem — revealing where intervention can create the greatest leverage.
         </p>
 
-        {/* Master One-Line Model Banner */}
-        <div className="p-4 sm:p-5 rounded-2xl border border-white/[0.1] bg-[#090B14]/90 backdrop-blur-xl text-left overflow-x-auto mb-8 shadow-xl">
-          <div className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider mb-2 font-semibold flex items-center justify-between">
-            <span>MASTER ONE-LINE OPERATIONAL CASCADE</span>
-            <span className="text-white font-bold">DIGISYNQ CORE PROTOCOL</span>
+        {/* Primary & Secondary CTAs */}
+        <div className="flex flex-wrap items-center justify-center gap-4 mb-10">
+          <button
+            onClick={() => setActiveTab('GRAPH')}
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white text-black hover:bg-zinc-200 font-bold text-xs tracking-wider transition-all shadow-[0_0_25px_rgba(255,255,255,0.25)] active:scale-95"
+          >
+            <span>EXPLORE THE GRAPH</span>
+            <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
+          </button>
+          <button
+            onClick={() => setActiveTab('WHY')}
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-white/20 bg-white/[0.04] hover:bg-white/[0.08] text-white font-semibold text-xs tracking-wider transition-all"
+          >
+            <HelpCircle className="w-3.5 h-3.5" />
+            <span>UNDERSTAND EERG</span>
+          </button>
+        </div>
+
+        {/* Section 1 & 25: Product Relationship & Conceptual Distinction Banner */}
+        <div className="p-6 sm:p-8 rounded-3xl border border-white/[0.1] bg-[#090B14]/90 backdrop-blur-xl mb-10 text-left shadow-2xl">
+          <div className="text-center mb-6">
+            <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest block font-semibold mb-1">
+              THE CORE DISTINCTION
+            </span>
+            <div className="text-base sm:text-xl font-bold text-white">
+              DIGISYNQ connects the ecosystem. EERG understands why the ecosystem gets stuck.
+            </div>
           </div>
-          <div className="text-xs sm:text-sm font-mono text-zinc-300 whitespace-nowrap flex items-center gap-2">
-            <span className="text-white font-bold">STAKEHOLDERS</span>
-            <span className="text-zinc-600">→</span>
-            <span>PROBLEMS</span>
-            <span className="text-zinc-600">→</span>
-            <span className="text-white font-semibold">BOTTLENECKS</span>
-            <span className="text-zinc-600">→</span>
-            <span>CAUSES</span>
-            <span className="text-zinc-600">→</span>
-            <span className="text-white font-bold bg-white/10 px-2 py-0.5 rounded border border-white/20">SYSTEMIC ROOT CAUSES</span>
-            <span className="text-zinc-600">→</span>
-            <span>DEPENDENCIES</span>
-            <span className="text-zinc-600">→</span>
-            <span className="text-zinc-200">FAILURE PROPAGATION</span>
-            <span className="text-zinc-600">→</span>
-            <span>ECONOMIC IMPACT</span>
-            <span className="text-zinc-600">→</span>
-            <span>EXISTING SOLUTIONS</span>
-            <span className="text-zinc-600">→</span>
-            <span className="text-zinc-200 font-semibold">SOLUTION GAPS</span>
-            <span className="text-zinc-600">→</span>
-            <span className="text-white font-bold">OPPORTUNITIES</span>
-            <span className="text-zinc-600">→</span>
-            <span className="text-white">PAYING CUSTOMERS</span>
-            <span className="text-zinc-600">→</span>
-            <span className="text-white font-bold">SYSTEM INTERVENTION</span>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div className="p-4 rounded-2xl bg-black/60 border border-white/[0.08]">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs font-mono font-bold text-white">DIGISYNQ CONNECTS:</span>
+                <span className="text-[10px] font-mono text-zinc-500">Execution Layer</span>
+              </div>
+              <div className="flex flex-wrap gap-1.5 text-xs text-zinc-300">
+                {['People', 'Resources', 'Capabilities', 'Technology', 'Markets', 'Projects', 'Data', 'Opportunities'].map((t, i) => (
+                  <span key={i} className="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06]">{t}</span>
+                ))}
+              </div>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/20">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs font-mono font-bold text-white">EERG UNDERSTANDS:</span>
+                <span className="text-[10px] font-mono text-white font-bold bg-white/10 px-1.5 rounded">Intelligence Layer</span>
+              </div>
+              <div className="flex flex-wrap gap-1.5 text-xs text-zinc-200 font-medium">
+                {['Problems', 'Bottlenecks', 'Causes', 'Root Causes', 'Dependencies', 'Failure Propagation', 'Economic Impact', 'Existing Solutions', 'Solution Gaps', 'Opportunities', 'Paying Customers'].map((t, i) => (
+                  <span key={i} className="px-2 py-0.5 rounded bg-white/10 border border-white/20">{t}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Section 25 Conceptual Flow */}
+          <div className="p-4 rounded-xl bg-black/80 border border-white/[0.06] text-center font-mono text-[11px] text-zinc-300 overflow-x-auto">
+            <div className="min-w-[700px] flex items-center justify-center gap-2">
+              <span className="px-3 py-1 rounded bg-white/10 text-white font-bold border border-white/20">DIGISYNQ: CONNECT</span>
+              <span className="text-zinc-600">→</span>
+              <span className="px-3 py-1 rounded bg-white/15 text-white font-bold border border-white/30">EERG: UNDERSTAND &amp; DISCOVER</span>
+              <span className="text-zinc-600">→</span>
+              <span className="px-2.5 py-1 rounded bg-white/[0.05] border border-white/10">FIND LEVERAGE</span>
+              <span className="text-zinc-600">→</span>
+              <span className="px-2.5 py-1 rounded bg-white/[0.05] border border-white/10">OPPORTUNITY</span>
+              <span className="text-zinc-600">→</span>
+              <span className="px-2.5 py-1 rounded bg-white/[0.05] border border-white/10">INTERVENTION</span>
+              <span className="text-zinc-600">→</span>
+              <span className="px-3 py-1 rounded bg-white text-black font-bold">SYSTEM IMPROVEMENT</span>
+            </div>
           </div>
         </div>
 
-        {/* Scale Metrics Bento Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 text-left">
-          <div className="p-4 rounded-2xl border border-white/[0.08] bg-[#090B14] shadow-md flex flex-col justify-between">
-            <span className="text-xs font-mono text-zinc-400 font-medium">STAKEHOLDERS</span>
-            <div className="text-2xl sm:text-3xl font-black text-white mt-1">160+</div>
-            <span className="text-[11px] text-zinc-500 mt-1">20 Functional Categories across 5 Layers</span>
+        {/* Section 9: EERG Dashboard & Research Scale Metrics */}
+        <div className="mb-10 text-left">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+            <div>
+              <div className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest font-semibold">
+                EERG / ECOSYSTEM INTELLIGENCE
+              </div>
+              <div className="text-base font-bold text-white">
+                Research-Scale Architectural Target Metrics
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2 text-[10px] font-mono">
+              <span className="px-2 py-0.5 rounded bg-white/10 text-zinc-300 border border-white/20">DEMO DATA</span>
+              <span className="px-2 py-0.5 rounded bg-white/20 text-white font-semibold border border-white/30">RESEARCH TARGETS</span>
+              <span className="px-2 py-0.5 rounded bg-white text-black font-bold">VALIDATED DATA</span>
+            </div>
           </div>
-          <div className="p-4 rounded-2xl border border-white/[0.08] bg-[#090B14] shadow-md flex flex-col justify-between">
-            <span className="text-xs font-mono text-zinc-400 font-medium">SYSTEMIC ROOTS</span>
-            <div className="text-2xl sm:text-3xl font-black text-white mt-1">75</div>
-            <span className="text-[11px] text-zinc-500 mt-1">Indexed by Centrality & Blast Radius</span>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            <div className="p-4 rounded-2xl border border-white/[0.08] bg-[#090B14] flex flex-col justify-between">
+              <span className="text-[10px] font-mono text-zinc-400">STAKEHOLDER TYPES</span>
+              <div className="text-2xl sm:text-3xl font-black text-white mt-1">150+</div>
+              <span className="text-[9px] text-zinc-500 mt-1 font-mono">20 Categories</span>
+            </div>
+            <div className="p-4 rounded-2xl border border-white/[0.08] bg-[#090B14] flex flex-col justify-between">
+              <span className="text-[10px] font-mono text-zinc-400">MAPPED PROBLEMS</span>
+              <div className="text-2xl sm:text-3xl font-black text-white mt-1">500+</div>
+              <span className="text-[9px] text-zinc-500 mt-1 font-mono">Operational Failures</span>
+            </div>
+            <div className="p-4 rounded-2xl border border-white/[0.08] bg-[#090B14] flex flex-col justify-between">
+              <span className="text-[10px] font-mono text-zinc-400">BOTTLENECK CHOKES</span>
+              <div className="text-2xl sm:text-3xl font-black text-white mt-1">200+</div>
+              <span className="text-[9px] text-zinc-500 mt-1 font-mono">Choke Points</span>
+            </div>
+            <div className="p-4 rounded-2xl border border-white/[0.08] bg-[#090B14] flex flex-col justify-between">
+              <span className="text-[10px] font-mono text-zinc-400">SYSTEMIC ROOT CAUSES</span>
+              <div className="text-2xl sm:text-3xl font-black text-white mt-1">100+</div>
+              <span className="text-[9px] text-zinc-500 mt-1 font-mono">Centrality Indexed</span>
+            </div>
+            <div className="p-4 rounded-2xl border border-white/[0.08] bg-[#090B14] flex flex-col justify-between">
+              <span className="text-[10px] font-mono text-zinc-400">DEPENDENCIES</span>
+              <div className="text-2xl sm:text-3xl font-black text-white mt-1">1,500+</div>
+              <span className="text-[9px] text-zinc-500 mt-1 font-mono">Relational Edges</span>
+            </div>
+            <div className="p-4 rounded-2xl border border-white/[0.08] bg-[#090B14] flex flex-col justify-between">
+              <span className="text-[10px] font-mono text-zinc-400">EXISTING SOLUTIONS</span>
+              <div className="text-2xl sm:text-3xl font-black text-white mt-1">200+</div>
+              <span className="text-[9px] text-zinc-500 mt-1 font-mono">Gaps Identified</span>
+            </div>
           </div>
-          <div className="p-4 rounded-2xl border border-white/[0.08] bg-[#090B14] shadow-md flex flex-col justify-between">
-            <span className="text-xs font-mono text-zinc-400 font-medium">BOTTLENECK FAMILIES</span>
-            <div className="text-2xl sm:text-3xl font-black text-white mt-1">50</div>
-            <span className="text-[11px] text-zinc-500 mt-1">Choke Points Across 10 Lifecycle Domains</span>
-          </div>
-          <div className="p-4 rounded-2xl border border-white/[0.08] bg-[#090B14] shadow-md flex flex-col justify-between">
-            <span className="text-xs font-mono text-zinc-400 font-medium">FEEDBACK LOOPS</span>
-            <div className="text-2xl sm:text-3xl font-black text-white mt-1">5 Master</div>
-            <span className="text-[11px] text-zinc-500 mt-1">Talent, Abundance, Hits, Platform, Cascade</span>
+
+          <div className="mt-3 p-3 rounded-xl bg-black/40 border border-white/[0.06] text-[11px] font-mono text-zinc-400 flex items-center justify-between">
+            <span>* Research/build targets — not validated final counts. Not presented as actual market statistics.</span>
+            <span className="text-white font-semibold">Active Build Pipeline</span>
           </div>
         </div>
       </header>
@@ -234,15 +343,20 @@ export default function RootCauseGraphPage() {
       <div className="mb-10 sticky top-20 z-40 bg-[#03040A]/95 backdrop-blur-xl p-2 rounded-2xl border border-white/[0.1] shadow-2xl overflow-x-auto">
         <div className="flex items-center gap-1.5 min-w-max">
           {[
-            { id: 'OVERVIEW', label: 'Ecosystem Architecture', icon: Layers },
-            { id: 'STAKEHOLDERS', label: '160+ Stakeholders', icon: Users },
-            { id: 'ROOT_CAUSES', label: '75 Root Causes', icon: GitBranch },
-            { id: 'BOTTLENECKS', label: '50 Bottlenecks', icon: AlertTriangle },
-            { id: 'LOOPS', label: '5 Feedback Loops', icon: RefreshCw },
+            { id: 'OVERVIEW', label: 'Architecture & Inquiry', icon: Layers },
+            { id: 'GRAPH', label: '11-Tier Network Graph', icon: Network },
+            { id: 'CONVERGENCE', label: 'Signature Convergence', icon: GitBranch },
+            { id: 'WHY', label: 'The "Why?" Diagnostic', icon: HelpCircle },
+            { id: 'ROOT_CAUSES', label: 'Root Causes (75)', icon: GitBranch },
+            { id: 'STAKEHOLDERS', label: 'Stakeholders (160+)', icon: Users },
+            { id: 'BOTTLENECKS', label: 'Bottlenecks (50)', icon: AlertTriangle },
+            { id: 'CIRCULAR', label: 'Circular Macro Map', icon: RefreshCw },
             { id: 'CASCADE', label: 'Failure Cascade', icon: Activity },
             { id: 'MATRIX', label: 'Exposure Matrix', icon: Grid },
+            { id: 'CUSTOMERS', label: 'Paying Customer Logic', icon: DollarSign },
             { id: 'OPPORTUNITIES', label: 'Opportunity Engine', icon: Sparkles },
             { id: 'BUSINESS', label: 'Commercial Business Engine', icon: DollarSign },
+            { id: 'FLYWHEEL', label: 'EERG ⇄ DIGISYNQ Flywheel', icon: RefreshCw },
             { id: 'PIPELINE', label: 'Research Pipeline', icon: Workflow }
           ].map((tab) => {
             const Icon = tab.icon;
@@ -416,6 +530,180 @@ export default function RootCauseGraphPage() {
               ))}
             </div>
           </div>
+
+          {/* Section 5: The 9 Foundational Questions EERG Answers */}
+          <div className="p-6 sm:p-10 rounded-3xl border border-white/[0.1] bg-[#090B14] shadow-2xl">
+            <div className="max-w-3xl mb-8">
+              <span className="text-xs font-mono text-white uppercase tracking-wider block mb-2 font-semibold">
+                SYSTEMIC INQUIRY PROTOCOL // SECTION 5
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-3">
+                The 9 Questions EERG Answers
+              </h2>
+              <p className="text-sm text-zinc-300 leading-relaxed font-light">
+                EERG is not a database, CRM, directory, or generic analytics dashboard. It is an evolving systemic intelligence model answering the 9 critical structural questions of entertainment failure.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {[
+                { q: 'WHO?', label: 'Who is affected?', detail: '160+ specific stakeholder roles across creation, production, distribution, and consumption.' },
+                { q: 'WHAT?', label: 'What is the problem?', detail: '500+ classified operational failure symptoms and friction points across the production lifecycle.' },
+                { q: 'WHERE?', label: 'Where does the flow get blocked?', detail: '50 discrete bottleneck choke points across 10 functional entertainment domains.' },
+                { q: 'WHY?', label: 'Why does the bottleneck exist?', detail: '75 systemic root causes driving repeated failure rather than isolated bad luck.' },
+                { q: 'WHAT NEXT?', label: 'What does the failure affect?', detail: 'Blast-radius propagation tracing across all downstream departments and timelines.' },
+                { q: 'HOW MUCH?', label: 'What value, time or money is lost?', detail: 'Quantified schedule drag days, standby fine multipliers, and uncollected royalties.' },
+                { q: 'WHAT EXISTS?', label: 'What solutions already exist?', detail: '200+ current workarounds (WhatsApp threads, manual PDF cue sheets, broker markups).' },
+                { q: 'WHAT IS MISSING?', label: 'Where is the solution gap?', detail: 'The structural lack of trusted APIs, shared ledgers, and live availability clearinghouses.' },
+                { q: 'WHO PAYS?', label: 'Who has the incentive to solve it?', detail: 'The budget owner and economic beneficiary who absorb the catastrophic downside risk.' }
+              ].map((item, idx) => (
+                <div key={idx} className="p-5 rounded-2xl border border-white/[0.08] bg-black/40 flex flex-col justify-between soft-card">
+                  <div>
+                    <div className="w-8 h-8 rounded-xl bg-white/10 text-white font-mono text-xs font-black flex items-center justify-center border border-white/20 mb-3">
+                      {item.q}
+                    </div>
+                    <h4 className="text-sm font-bold text-white mb-1.5">{item.label}</h4>
+                    <p className="text-xs text-zinc-400 leading-relaxed">{item.detail}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Section 6: Connect EERG to DIGISYNQ Philosophy */}
+          <div className="p-6 sm:p-10 rounded-3xl border border-white/[0.1] bg-[#090B14] shadow-2xl">
+            <div className="max-w-3xl mb-8">
+              <span className="text-xs font-mono text-white uppercase tracking-wider block mb-2 font-semibold">
+                SYSTEM CONTINUITY // SECTION 6
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-3">
+                Connecting EERG to the DIGISYNQ Philosophy
+              </h2>
+              <p className="text-sm text-zinc-300 leading-relaxed font-light">
+                DIGISYNQ operates through 6 core phases. EERG sits underneath this as the empirical intelligence foundation informing every phase:
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {[
+                { stage: 'DISCOVER', digisynq: 'Identify creative partners and assets', eerg: 'Stakeholders + problems mapped', badge: 'Input' },
+                { stage: 'AGGREGATE', digisynq: 'Pool fragmented capability telemetry', eerg: 'Evidence + data + relationships verified', badge: 'Synthesis' },
+                { stage: 'CONNECT', digisynq: 'Asset-light multi-party coordination', eerg: 'Dependencies + causes + stakeholders aligned', badge: 'Network' },
+                { stage: 'ORCHESTRATE', digisynq: 'Time-bounded intervention sprints', eerg: 'Identify bottlenecks + target interventions', badge: 'Action' },
+                { stage: 'MEASURE', digisynq: 'Deterministic outcome verification', eerg: 'Impact + centrality + economic exposure scored', badge: 'Audit' },
+                { stage: 'MONETIZE', digisynq: 'Scaleable commercial value capture', eerg: 'High-leverage opportunities + paying customers', badge: 'Value' }
+              ].map((item, idx) => (
+                <div key={idx} className="p-5 rounded-2xl border border-white/[0.08] bg-black/40 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-xs font-mono font-bold text-white tracking-widest">{item.stage}</span>
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.06] text-zinc-400 border border-white/10">{item.badge}</span>
+                    </div>
+                    <div className="text-xs text-zinc-400 mb-2 font-mono">
+                      DIGISYNQ: <strong className="text-zinc-200">{item.digisynq}</strong>
+                    </div>
+                    <div className="text-xs text-white font-mono bg-white/[0.04] p-2 rounded-lg border border-white/[0.06]">
+                      EERG LAYER: {item.eerg}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Section 22: The Evidence Layer & Visible Badges */}
+          <div className="p-6 sm:p-10 rounded-3xl border border-white/[0.1] bg-[#090B14] shadow-2xl">
+            <div className="max-w-3xl mb-8">
+              <span className="text-xs font-mono text-white uppercase tracking-wider block mb-2 font-semibold">
+                EMPIRICAL RIGOR // SECTION 22 & 23
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-3">
+                The Multi-Tiered Evidence Layer
+              </h2>
+              <p className="text-sm text-zinc-300 leading-relaxed font-light">
+                Every relationship in EERG is backed by verified evidence types. DigiSynq strictly separates empirical facts from stakeholder claims, research hypotheses, and inferences:
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-6">
+              {[
+                { badge: 'FACT', desc: 'Observed contract audit or telemetry data', style: 'bg-white text-black font-bold' },
+                { badge: 'CLAIM', desc: 'Direct qualitative stakeholder interview', style: 'bg-white/10 text-white border border-white/20' },
+                { badge: 'HYPOTHESIS', desc: 'Structural research proposition under test', style: 'bg-white/[0.06] text-zinc-300 border border-white/10' },
+                { badge: 'INFERENCE', desc: 'Algorithmic causal graph projection', style: 'bg-white/[0.04] text-zinc-400 border border-white/[0.06]' },
+                { badge: 'VALIDATED', desc: 'Confirmed across 3+ independent productions', style: 'bg-white/20 text-white font-bold border border-white/30' },
+                { badge: 'CONTRADICTED', desc: 'Refuted by empirical industry field notes', style: 'bg-red-500/10 text-red-300 border border-red-500/20' }
+              ].map((ev, i) => (
+                <div key={i} className="p-3.5 rounded-2xl bg-black/50 border border-white/[0.08] flex flex-col justify-between">
+                  <span className={`text-[10px] font-mono px-2 py-0.5 rounded text-center mb-2 ${ev.style}`}>
+                    {ev.badge}
+                  </span>
+                  <p className="text-[11px] text-zinc-400 leading-tight">
+                    {ev.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="p-4 rounded-xl bg-black/60 border border-white/[0.06] text-xs font-mono text-zinc-400 flex flex-wrap items-center justify-between gap-3">
+              <span>SUPPORTED METADATA: Source · Interview Date · Geography · Market Segment · Production Scale · Confidence Index</span>
+              <span className="text-white font-semibold">Strict Anti-Hallucination Protocol</span>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ══════════════════════════════════════════════════════
+          TAB: INTERACTIVE 11-TIER NETWORK GRAPH (SECTION 7)
+         ══════════════════════════════════════════════════════ */}
+      {activeTab === 'GRAPH' && (
+        <section className="space-y-8 animate-in fade-in duration-300">
+          <EERGNetworkGraph />
+        </section>
+      )}
+
+      {/* ══════════════════════════════════════════════════════
+          TAB: SIGNATURE CONVERGENCE (SECTION 8)
+         ══════════════════════════════════════════════════════ */}
+      {activeTab === 'CONVERGENCE' && (
+        <section className="space-y-8 animate-in fade-in duration-300">
+          <EERGConvergenceVisual />
+        </section>
+      )}
+
+      {/* ══════════════════════════════════════════════════════
+          TAB: THE "WHY?" DIAGNOSTIC (SECTION 12)
+         ══════════════════════════════════════════════════════ */}
+      {activeTab === 'WHY' && (
+        <section className="space-y-8 animate-in fade-in duration-300">
+          <EERGWhyDiagnostic />
+        </section>
+      )}
+
+      {/* ══════════════════════════════════════════════════════
+          TAB: CIRCULAR MACRO ECOSYSTEM MAP (SECTION 14)
+         ══════════════════════════════════════════════════════ */}
+      {activeTab === 'CIRCULAR' && (
+        <section className="space-y-8 animate-in fade-in duration-300">
+          <EERGCircularMap />
+        </section>
+      )}
+
+      {/* ══════════════════════════════════════════════════════
+          TAB: THE 5-PART PAYING CUSTOMER MODEL (SECTION 20)
+         ══════════════════════════════════════════════════════ */}
+      {activeTab === 'CUSTOMERS' && (
+        <section className="space-y-8 animate-in fade-in duration-300">
+          <EERGCustomerRoles />
+        </section>
+      )}
+
+      {/* ══════════════════════════════════════════════════════
+          TAB: EERG ⇄ DIGISYNQ CONTINUOUS FLYWHEEL (SECTION 35)
+         ══════════════════════════════════════════════════════ */}
+      {activeTab === 'FLYWHEEL' && (
+        <section className="space-y-8 animate-in fade-in duration-300">
+          <EERGFlywheel />
         </section>
       )}
 
@@ -423,8 +711,7 @@ export default function RootCauseGraphPage() {
           TAB 2: 160+ STAKEHOLDER DIRECTORY ACROSS 20 CATEGORIES
          ══════════════════════════════════════════════════════ */}
       {activeTab === 'STAKEHOLDERS' && (
-        <section className="space-y-8">
-          {/* Controls Bar */}
+        <section className="space-y-8 animate-in fade-in duration-300">
           <div className="p-5 rounded-2xl border border-white/[0.1] bg-[#090B14] flex flex-col md:flex-row items-center justify-between gap-4 shadow-xl">
             <div className="relative w-full md:w-80">
               <Search className="w-4 h-4 text-zinc-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -502,7 +789,27 @@ export default function RootCauseGraphPage() {
           TAB 3: 75 SYSTEMIC ROOT CAUSES (R001 - R075)
          ══════════════════════════════════════════════════════ */}
       {activeTab === 'ROOT_CAUSES' && (
-        <section className="space-y-8">
+        <section className="space-y-8 animate-in fade-in duration-300">
+          {/* Section 10 & 11: Top 10 Root Causes Ranking & Detailed Telemetry Panel */}
+          <EERGTopRootCauses />
+
+          {/* Section 10: Full 75 Root Causes Directory */}
+          <div className="pt-6 border-t border-white/[0.08]">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
+              <div>
+                <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest block font-semibold">
+                  COMPLETE TAXONOMY // R001 TO R075
+                </span>
+                <h3 className="text-xl font-bold text-white">
+                  The Full 75 Root-Cause System Registry
+                </h3>
+              </div>
+              <span className="text-xs font-mono text-zinc-400">
+                Filter by systemic family or search by code
+              </span>
+            </div>
+          </div>
+
           {/* Controls Bar */}
           <div className="p-5 rounded-2xl border border-white/[0.1] bg-[#090B14] flex flex-col md:flex-row items-center justify-between gap-4 shadow-xl">
             <div className="relative w-full md:w-80">
@@ -769,20 +1076,23 @@ export default function RootCauseGraphPage() {
       )}
 
       {/* ══════════════════════════════════════════════════════
-          TAB 6: FAILURE PROPAGATION & CASCADE MODEL
+          TAB 6: FAILURE PROPAGATION & CASCADE MODEL (SECTION 13)
          ══════════════════════════════════════════════════════ */}
       {activeTab === 'CASCADE' && (
-        <section className="space-y-8">
+        <section className="space-y-8 animate-in fade-in duration-300">
           <div className="p-6 sm:p-10 rounded-3xl border border-white/[0.1] bg-[#090B14] shadow-2xl">
             <div className="max-w-3xl mb-8">
-              <span className="text-xs font-mono text-white uppercase tracking-wider block mb-2 font-semibold">
-                FAILURE PROPAGATION SIMULATOR
-              </span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.06] border border-white/15 text-white font-mono text-xs font-semibold mb-3">
+                <Activity className="w-3.5 h-3.5" />
+                <span>TRACE FAILURE</span>
+                <span className="text-zinc-600">//</span>
+                <span>SECTION 13 SPECIFICATION</span>
+              </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-3">
-                How a 3-Hour Actor Delay Becomes an Equity Wipeout.
+                The 12-Stage Failure Propagation Cascade
               </h2>
-              <p className="text-sm text-zinc-300 leading-relaxed">
-                The graph does not merely record that a problem exists; it models what the problem causes next. Step through the 12-stage failure cascade below to see how localized scheduling friction propagates into systemic loss.
+              <p className="text-sm text-zinc-300 leading-relaxed font-light">
+                Follow the failure chain step by step. A localized 3-hour actor call time delay propagates across departments into an equity write-down.
               </p>
             </div>
 
@@ -802,18 +1112,61 @@ export default function RootCauseGraphPage() {
               />
             </div>
 
-            {/* Active Stage Detail */}
-            <div className="p-6 sm:p-8 rounded-2xl border border-white/20 bg-white/[0.03] mb-8">
-              <div className="flex items-center gap-3 mb-3">
-                <span className="w-8 h-8 rounded-xl bg-white text-black flex items-center justify-center font-bold text-sm font-mono">
-                  {cascadeStep + 1}
-                </span>
-                <div>
-                  <h3 className="text-lg font-bold text-white">{cascadeStages[cascadeStep].title}</h3>
-                  <span className="text-xs font-mono text-zinc-400">{cascadeStages[cascadeStep].role}</span>
+            {/* Active Stage Detail with Section 13 Metrics */}
+            <div className="p-6 sm:p-8 rounded-3xl border border-white/20 bg-white/[0.04] mb-8 shadow-xl">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 mb-4 border-b border-white/[0.08]">
+                <div className="flex items-center gap-3">
+                  <span className="w-10 h-10 rounded-xl bg-white text-black flex items-center justify-center font-bold text-base font-mono">
+                    {cascadeStep + 1}
+                  </span>
+                  <div>
+                    <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest block">
+                      PROPAGATION DEPTH: {cascadeStages[cascadeStep].depth}
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-black text-white">
+                      {cascadeStages[cascadeStep].title}
+                    </h3>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-mono px-3 py-1 rounded-full bg-white/10 text-white border border-white/20">
+                    {cascadeStages[cascadeStep].role}
+                  </span>
                 </div>
               </div>
-              <p className="text-sm text-zinc-200 leading-relaxed">{cascadeStages[cascadeStep].impact}</p>
+
+              <p className="text-sm text-zinc-200 leading-relaxed mb-6 font-light">
+                {cascadeStages[cascadeStep].impact}
+              </p>
+
+              {/* 3 Telemetry Metrics */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4 border-t border-white/[0.06]">
+                <div className="p-3.5 rounded-xl bg-black/60 border border-white/[0.06]">
+                  <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider block mb-1">
+                    STAKEHOLDERS AFFECTED:
+                  </span>
+                  <div className="text-xs font-semibold text-white">
+                    {cascadeStages[cascadeStep].stakeholders}
+                  </div>
+                </div>
+                <div className="p-3.5 rounded-xl bg-black/60 border border-white/[0.06]">
+                  <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider block mb-1">
+                    TIME IMPACT:
+                  </span>
+                  <div className="text-xs font-bold text-white">
+                    {cascadeStages[cascadeStep].timeImpact}
+                  </div>
+                </div>
+                <div className="p-3.5 rounded-xl bg-black/60 border border-red-500/20">
+                  <span className="text-[10px] font-mono text-red-400 uppercase tracking-wider block mb-1 font-semibold">
+                    ECONOMIC DAMAGE:
+                  </span>
+                  <div className="text-xs font-bold text-red-300">
+                    {cascadeStages[cascadeStep].economicImpact}
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Complete Cascade Pathway View */}
@@ -830,7 +1183,7 @@ export default function RootCauseGraphPage() {
                 >
                   <div className="flex items-center justify-between mb-1.5">
                     <span className="text-[10px] font-mono font-bold text-white">STAGE {idx + 1}</span>
-                    <span className="text-[10px] font-mono text-zinc-500">{stage.role}</span>
+                    <span className="text-[10px] font-mono text-zinc-500">{stage.depth}</span>
                   </div>
                   <h4 className="text-xs font-bold text-white mb-1">{stage.title}</h4>
                   <p className="text-[11px] text-zinc-400 line-clamp-2 leading-relaxed">{stage.impact}</p>
@@ -842,25 +1195,57 @@ export default function RootCauseGraphPage() {
       )}
 
       {/* ══════════════════════════════════════════════════════
-          TAB 7: ROOT CAUSE X STAKEHOLDER EXPOSURE MATRIX
+          TAB 7: ROOT CAUSE X STAKEHOLDER EXPOSURE MATRIX (SECTION 18)
          ══════════════════════════════════════════════════════ */}
       {activeTab === 'MATRIX' && (
-        <section className="space-y-8">
+        <section className="space-y-8 animate-in fade-in duration-300">
           <div className="p-6 sm:p-10 rounded-3xl border border-white/[0.1] bg-[#090B14] shadow-2xl">
-            <div className="max-w-3xl mb-8">
-              <span className="text-xs font-mono text-white uppercase tracking-wider block mb-2 font-semibold">
-                CROSS-DOMAIN HEATMAP MATRIX
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.06] border border-white/15 text-white font-mono text-xs font-semibold mb-3">
+                  <Grid className="w-3.5 h-3.5" />
+                  <span>CROSS-DOMAIN HEATMAP MATRIX</span>
+                  <span className="text-zinc-600">//</span>
+                  <span>SECTION 18 SPECIFICATION</span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-2">
+                  Root Cause × Stakeholder Exposure Matrix
+                </h2>
+                <p className="text-sm text-zinc-300 leading-relaxed font-light max-w-2xl">
+                  Quantitative scoring of systemic root causes across key industry archetypes. Click any cell to inspect the structural evidence and relationship rationale behind the vulnerability score.
+                </p>
+              </div>
+
+              {/* Research Model Disclaimer Badge */}
+              <div className="p-3 rounded-xl bg-white/[0.04] border border-white/20 text-right">
+                <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider block font-semibold">
+                  STATUS CLASSIFICATION:
+                </span>
+                <span className="text-xs font-mono text-white font-bold">
+                  Research model / requires validation
+                </span>
+              </div>
+            </div>
+
+            {/* Matrix Search & Filter Bar */}
+            <div className="p-4 rounded-2xl bg-black/60 border border-white/[0.08] mb-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="relative w-full sm:w-80">
+                <Search className="w-4 h-4 text-zinc-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <input
+                  type="text"
+                  placeholder="Filter matrix by root cause name or code..."
+                  value={matrixSearch}
+                  onChange={(e) => setMatrixSearch(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2 rounded-xl bg-black/80 border border-white/[0.08] text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-white/30"
+                />
+              </div>
+              <span className="text-xs font-mono text-zinc-400">
+                Showing {EERG_MATRIX.filter(r => !matrixSearch || r.rootCause.toLowerCase().includes(matrixSearch.toLowerCase()) || r.code.toLowerCase().includes(matrixSearch.toLowerCase())).length} of {EERG_MATRIX.length} Matrix Rows
               </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-3">
-                Root Cause x Stakeholder Exposure
-              </h2>
-              <p className="text-sm text-zinc-300 leading-relaxed">
-                Quantitative scoring of systemic root causes across key industry archetypes. Exposure score: 0 = No meaningful exposure, 1 = Low, 2 = Medium, 3 = High systemic vulnerability.
-              </p>
             </div>
 
             {/* Matrix Table */}
-            <div className="overflow-x-auto rounded-2xl border border-white/[0.1] bg-black/60">
+            <div className="overflow-x-auto rounded-2xl border border-white/[0.1] bg-black/60 mb-6">
               <table className="w-full text-left border-collapse text-xs">
                 <thead>
                   <tr className="border-b border-white/[0.1] bg-white/[0.04] font-mono text-[11px] text-zinc-400">
@@ -876,59 +1261,110 @@ export default function RootCauseGraphPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/[0.06] font-mono">
-                  {EERG_MATRIX.map((row, idx) => {
-                    const renderCell = (val: number) => {
-                      let bg = 'bg-white/[0.02] text-zinc-500';
-                      if (val === 1) bg = 'bg-white/[0.06] text-zinc-300 border border-white/10';
-                      if (val === 2) bg = 'bg-white/15 text-white border border-white/20 font-bold';
-                      if (val === 3) bg = 'bg-white text-black font-extrabold shadow-sm';
-                      return (
-                        <td key={Math.random()} className="p-2.5 text-center">
-                          <span className={`inline-block w-7 h-7 rounded-lg text-xs leading-7 ${bg}`}>
-                            {val}
-                          </span>
-                        </td>
-                      );
-                    };
+                  {EERG_MATRIX
+                    .filter(r => !matrixSearch || r.rootCause.toLowerCase().includes(matrixSearch.toLowerCase()) || r.code.toLowerCase().includes(matrixSearch.toLowerCase()))
+                    .map((row, idx) => {
+                      const renderCell = (val: number, stakeholderName: string) => {
+                        let bg = 'bg-white/[0.02] text-zinc-500 hover:border-white/20';
+                        if (val === 1) bg = 'bg-white/[0.06] text-zinc-300 border border-white/10 hover:border-white/40';
+                        if (val === 2) bg = 'bg-white/15 text-white border border-white/20 font-bold hover:bg-white/25';
+                        if (val === 3) bg = 'bg-white text-black font-extrabold shadow-sm hover:bg-zinc-200';
 
-                    return (
-                      <tr key={idx} className="hover:bg-white/[0.02] transition-colors">
-                        <td className="p-3.5 pl-5 font-sans font-medium text-white">{row.rootCause}</td>
-                        <td className="p-3.5 text-center text-zinc-400">{row.code}</td>
-                        {renderCell(row.exposures.actor)}
-                        {renderCell(row.exposures.producer)}
-                        {renderCell(row.exposures.casting)}
-                        {renderCell(row.exposures.vfx)}
-                        {renderCell(row.exposures.music)}
-                        {renderCell(row.exposures.ott)}
-                        {renderCell(row.exposures.audience)}
-                      </tr>
-                    );
-                  })}
+                        const isSelected =
+                          selectedMatrixCell?.rootCause === `${row.rootCause} (${row.code})` &&
+                          selectedMatrixCell?.stakeholder === stakeholderName;
+
+                        return (
+                          <td key={stakeholderName} className="p-2.5 text-center">
+                            <button
+                              onClick={() => setSelectedMatrixCell({
+                                rootCause: `${row.rootCause} (${row.code})`,
+                                stakeholder: stakeholderName,
+                                score: val
+                              })}
+                              className={`w-7 h-7 rounded-lg text-xs leading-7 cursor-pointer transition-all ${bg} ${isSelected ? 'ring-2 ring-white scale-110' : ''}`}
+                              title={`Click to drill down: ${row.rootCause} × ${stakeholderName}`}
+                            >
+                              {val}
+                            </button>
+                          </td>
+                        );
+                      };
+
+                      return (
+                        <tr key={idx} className="hover:bg-white/[0.02] transition-colors">
+                          <td className="p-3.5 pl-5 font-sans font-medium text-white">{row.rootCause}</td>
+                          <td className="p-3.5 text-center text-zinc-400">{row.code}</td>
+                          {renderCell(row.exposures.actor, 'Actor')}
+                          {renderCell(row.exposures.producer, 'Producer')}
+                          {renderCell(row.exposures.casting, 'Casting Director')}
+                          {renderCell(row.exposures.vfx, 'VFX Facility')}
+                          {renderCell(row.exposures.music, 'Music / Composer')}
+                          {renderCell(row.exposures.ott, 'OTT Platform')}
+                          {renderCell(row.exposures.audience, 'Audience')}
+                        </tr>
+                      );
+                    })}
                 </tbody>
               </table>
             </div>
 
             {/* Matrix Legend */}
-            <div className="flex flex-wrap items-center gap-6 mt-6 pt-6 border-t border-white/[0.06] text-xs font-mono text-zinc-400">
+            <div className="flex flex-wrap items-center gap-6 pt-4 border-t border-white/[0.06] text-xs font-mono text-zinc-400 mb-6">
               <span className="font-semibold text-white">EXPOSURE LEGEND:</span>
               <div className="flex items-center gap-2">
                 <span className="w-5 h-5 rounded bg-white/[0.02] text-zinc-500 border border-white/[0.06] inline-flex items-center justify-center font-bold text-[10px]">0</span>
-                <span>No meaningful exposure</span>
+                <span>0 = No meaningful exposure</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="w-5 h-5 rounded bg-white/[0.06] text-zinc-300 border border-white/10 inline-flex items-center justify-center font-bold text-[10px]">1</span>
-                <span>Low</span>
+                <span>1 = Low</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="w-5 h-5 rounded bg-white/15 text-white border border-white/20 inline-flex items-center justify-center font-bold text-[10px]">2</span>
-                <span>Medium</span>
+                <span>2 = Medium</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="w-5 h-5 rounded bg-white text-black inline-flex items-center justify-center font-extrabold text-[10px]">3</span>
-                <span>High systemic exposure</span>
+                <span>3 = High systemic exposure</span>
               </div>
             </div>
+
+            {/* Selected Cell Drill-Down Panel */}
+            {selectedMatrixCell && (
+              <div className="p-6 rounded-2xl bg-black/70 border border-white/20 shadow-xl">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 mb-4 border-b border-white/[0.08]">
+                  <div>
+                    <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest block font-semibold">
+                      CELL DRILL-DOWN // EVIDENCE &amp; RELATIONSHIP ANALYSIS
+                    </span>
+                    <h3 className="text-lg font-bold text-white">
+                      {selectedMatrixCell.rootCause} ⇄ {selectedMatrixCell.stakeholder}
+                    </h3>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-mono px-3 py-1 rounded-full bg-white text-black font-bold">
+                      EXPOSURE SCORE: {selectedMatrixCell.score} / 3
+                    </span>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-white border border-white/20">
+                      Research Model
+                    </span>
+                  </div>
+                </div>
+
+                <p className="text-xs text-zinc-300 leading-relaxed font-light mb-4">
+                  {selectedMatrixCell.score === 3 && `High systemic exposure: The ${selectedMatrixCell.stakeholder} is in the direct blast radius of ${selectedMatrixCell.rootCause}, absorbing significant schedule distortion, unbilled labor overtime, or catastrophic downside financial liability.`}
+                  {selectedMatrixCell.score === 2 && `Medium exposure: The ${selectedMatrixCell.stakeholder} regularly incurs operational friction and delayed milestones due to ${selectedMatrixCell.rootCause}, though partial contractual workarounds currently exist.`}
+                  {selectedMatrixCell.score === 1 && `Low exposure: The ${selectedMatrixCell.stakeholder} is buffered from direct impacts of ${selectedMatrixCell.rootCause}, though secondary downstream feedback loops can occasionally cause friction.`}
+                  {selectedMatrixCell.score === 0 && `No meaningful direct exposure documented in the current empirical research model.`}
+                </p>
+
+                <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-zinc-500 pt-3 border-t border-white/[0.06]">
+                  <span>* Research model score requires validation across diverse budget tiers.</span>
+                  <span className="text-zinc-300">Evidence status: Hypothesis under active field test</span>
+                </div>
+              </div>
+            )}
           </div>
         </section>
       )}
