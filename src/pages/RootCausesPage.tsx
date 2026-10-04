@@ -27,8 +27,8 @@ export function RootCausesPage() {
             <span className="font-mono text-xs text-zinc-400">MANY PROBLEMS → FEWER ROOT CAUSES</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white uppercase leading-none">
-            Many Surface Problems Come From One Systemic Failure.
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+            Many surface problems come from one systemic failure.
           </h1>
 
           <p className="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-3xl">
@@ -41,8 +41,8 @@ export function RootCausesPage() {
           <div className="flex items-center justify-between">
             <div className="space-y-1">
               <span className="font-mono text-xs uppercase text-zinc-500 tracking-wider">CONVERGENCE PROOF</span>
-              <h2 className="text-xl sm:text-2xl font-bold uppercase tracking-tight text-white">
-                Many Problems → Fewer Root Causes
+              <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white">
+                Many problems → fewer root causes
               </h2>
             </div>
             <span className="text-xs font-mono text-zinc-400">4 Domain Funnels</span>
@@ -55,8 +55,8 @@ export function RootCausesPage() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/[0.08]">
             <div>
               <span className="font-mono text-xs uppercase text-zinc-500 tracking-wider">SYSTEMIC BREAKDOWNS</span>
-              <h2 className="text-2xl font-bold uppercase tracking-tight text-white">
-                The 4 Systemic Root-Cause Clusters
+              <h2 className="text-2xl font-extrabold tracking-tight text-white">
+                The 4 systemic root-cause clusters
               </h2>
             </div>
             <div className="font-mono text-xs text-zinc-400">
@@ -86,7 +86,7 @@ export function RootCausesPage() {
                         {cluster.surfaceProblemsCount} Problems
                       </span>
                     </div>
-                    <h3 className={`text-base font-bold uppercase tracking-tight leading-tight ${isSelected ? 'text-black' : 'text-white'}`}>
+                    <h3 className={`text-base font-extrabold tracking-tight leading-tight ${isSelected ? 'text-black' : 'text-white'}`}>
                       {cluster.name}
                     </h3>
                   </div>
@@ -106,7 +106,7 @@ export function RootCausesPage() {
                 <span className="font-mono text-xs text-zinc-400 uppercase tracking-widest">
                   CLUSTER SPECIFICATION: {activeCluster.id}
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-bold text-white uppercase tracking-tight mt-1">
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mt-1">
                   {activeCluster.name}
                 </h3>
               </div>
@@ -172,8 +172,8 @@ export function RootCausesPage() {
         <div className="p-8 bg-[#090C15] border border-white/[0.08] flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
             <span className="text-xs font-mono uppercase tracking-widest text-zinc-400">NEXT IN THE SYSTEM</span>
-            <h3 className="text-2xl font-bold text-white uppercase tracking-tight">
-              Systemic Problems Reveal Commercial Opportunities.
+            <h3 className="text-2xl font-extrabold text-white tracking-tight">
+              Systemic problems reveal commercial opportunities.
             </h3>
             <p className="text-sm text-zinc-400 leading-relaxed">
               Every mapped root cause represents billions of dollars in economic friction — and an immediate commercial opportunity for paying enterprise customers.

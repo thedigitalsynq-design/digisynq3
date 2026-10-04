@@ -37,8 +37,8 @@ export function ParticipatePage() {
             <span className="font-mono text-xs text-zinc-400">CONTEXTUAL SYSTEM ENTRY</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white uppercase leading-none">
-            Enter the DIGISYNQ System Through Your Exact Operational Context.
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+            Enter the DIGISYNQ system through your exact operational context.
           </h1>
 
           <p className="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-3xl">
@@ -67,7 +67,7 @@ export function ParticipatePage() {
                   <span className={`font-mono text-[9px] block mb-1 uppercase ${isSelected ? 'text-zinc-600' : 'text-zinc-500'}`}>
                     {point.badge}
                   </span>
-                  <div className={`font-bold text-xs uppercase tracking-tight leading-tight ${isSelected ? 'text-black' : 'text-white'}`}>
+                  <div className={`font-extrabold text-xs tracking-tight leading-tight ${isSelected ? 'text-black' : 'text-white'}`}>
                     {point.title}
                   </div>
                 </div>
@@ -86,8 +86,8 @@ export function ParticipatePage() {
               <div className="w-12 h-12 bg-white text-black rounded-none flex items-center justify-center">
                 <Check className="w-6 h-6 stroke-[3]" />
               </div>
-              <h3 className="text-2xl font-bold uppercase tracking-tight text-white">
-                Submission Ingested Into DIGISYNQ
+              <h3 className="text-2xl font-extrabold tracking-tight text-white">
+                Submission ingested into DIGISYNQ
               </h3>
               <p className="text-sm text-zinc-400 leading-relaxed">
                 Your structured telemetry has been routed to our active coordination desk. A member of the technical team will verify credentials and initiate next-step matching within 4 business hours.
@@ -107,7 +107,7 @@ export function ParticipatePage() {
                   <span className="font-mono text-xs uppercase tracking-widest text-zinc-400">
                     SELECTED INTENT
                   </span>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-white uppercase tracking-tight">
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
                     {activeEntryPoint.title}
                   </h3>
                   <p className="text-sm font-mono text-emerald-400">{activeEntryPoint.subtitle}</p>

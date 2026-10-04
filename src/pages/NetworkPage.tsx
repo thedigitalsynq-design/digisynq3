@@ -26,8 +26,8 @@ export function NetworkPage() {
             <span className="font-mono text-xs text-zinc-400">WHAT EXISTS AND WHO/WHERE IS IT</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white uppercase leading-none">
-            We Don't Own Everything. We Connect What Exists.
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+            We don't own everything. We connect what exists.
           </h1>
 
           <p className="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-3xl">
@@ -63,8 +63,8 @@ export function NetworkPage() {
         {/* Interactive Category Selector Strip */}
         <div className="space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/[0.08]">
-            <h2 className="text-2xl font-bold uppercase tracking-tight text-white">
-              Indexed Resource Repositories
+            <h2 className="text-2xl font-extrabold tracking-tight text-white">
+              Indexed resource repositories
             </h2>
             <div className="font-mono text-xs text-zinc-400">
               5 Core Asset Classes · Real Capacity
@@ -88,7 +88,7 @@ export function NetworkPage() {
                     <span className={`font-mono text-[10px] block mb-2 uppercase ${isSelected ? 'text-zinc-600' : 'text-zinc-500'}`}>
                       {cat.assetCountEstimate}
                     </span>
-                    <h3 className={`text-sm font-bold uppercase tracking-tight leading-tight ${isSelected ? 'text-black' : 'text-white'}`}>
+                    <h3 className={`text-sm font-extrabold tracking-tight leading-tight ${isSelected ? 'text-black' : 'text-white'}`}>
                       {cat.name}
                     </h3>
                   </div>
@@ -107,7 +107,7 @@ export function NetworkPage() {
                 <span className="font-mono text-xs text-zinc-400 uppercase tracking-widest">
                   RESOURCE SPECIFICATION: {activeCategory.name}
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-bold text-white uppercase tracking-tight mt-1">
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mt-1">
                   {activeCategory.headline}
                 </h3>
               </div>
@@ -172,8 +172,8 @@ export function NetworkPage() {
         <div className="p-8 bg-[#090C15] border border-white/[0.08] flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
             <span className="text-xs font-mono uppercase tracking-widest text-zinc-400">NEXT IN THE SYSTEM</span>
-            <h3 className="text-2xl font-bold text-white uppercase tracking-tight">
-              An Asset Network Is Worthless Without Intelligent Connection.
+            <h3 className="text-2xl font-extrabold text-white tracking-tight">
+              An asset network is worthless without intelligent connection.
             </h3>
             <p className="text-sm text-zinc-400 leading-relaxed">
               Discover how DIGISYNQ turns a complex, high-stakes production requirement into an algorithmically verified, multi-resource match in hours instead of weeks.

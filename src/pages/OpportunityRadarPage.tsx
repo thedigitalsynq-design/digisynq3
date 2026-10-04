@@ -30,8 +30,8 @@ export function OpportunityRadarPage() {
             <span className="font-mono text-xs text-zinc-400">WHERE TO INTERVENE</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white uppercase leading-none">
-            Turning Systemic Friction Into High-Yield Commercial Solutions.
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+            Turning systemic friction into high-yield commercial solutions.
           </h1>
 
           <p className="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-3xl">
@@ -78,7 +78,7 @@ export function OpportunityRadarPage() {
                       Confidence: {opp.confidence}
                     </span>
                   </div>
-                  <h3 className="text-2xl font-bold uppercase tracking-tight text-white mt-1">
+                  <h3 className="text-2xl font-extrabold tracking-tight text-white mt-1">
                     {opp.title}
                   </h3>
                 </div>
@@ -160,8 +160,8 @@ export function OpportunityRadarPage() {
         <div className="p-8 bg-[#090C15] border border-white/[0.08] flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
             <span className="text-xs font-mono uppercase tracking-widest text-zinc-400">NEXT IN THE SYSTEM</span>
-            <h3 className="text-2xl font-bold text-white uppercase tracking-tight">
-              Executing Opportunities Requires an Asset-Light Network.
+            <h3 className="text-2xl font-extrabold text-white tracking-tight">
+              Executing opportunities requires an asset-light network.
             </h3>
             <p className="text-sm text-zinc-400 leading-relaxed">
               We do not need to own millions of dollars of camera gear or real estate to solve these problems. See how our asset-light network coordinates existing ecosystem resources.

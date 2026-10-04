@@ -45,8 +45,8 @@ export function ProblemAtlasPage() {
             <span className="font-mono text-xs text-zinc-400">WHAT PROBLEMS EXIST</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white uppercase leading-none">
-            Empirical Catalog of Entertainment Operational Breakdowns.
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+            Empirical catalog of entertainment operational breakdowns.
           </h1>
 
           <p className="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-3xl">
@@ -59,8 +59,8 @@ export function ProblemAtlasPage() {
           <div className="flex items-center justify-between">
             <div className="space-y-1">
               <span className="font-mono text-xs uppercase text-zinc-500 tracking-wider">SYSTEM DYNAMICS</span>
-              <h2 className="text-xl sm:text-2xl font-bold uppercase tracking-tight text-white">
-                Failure Propagation Chain
+              <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white">
+                Failure propagation chain
               </h2>
             </div>
             <span className="text-xs font-mono text-zinc-400">10-Node Blast Radius</span>
@@ -73,8 +73,8 @@ export function ProblemAtlasPage() {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-white/[0.08]">
             <div>
               <span className="font-mono text-xs uppercase text-zinc-500 tracking-wider">TAXONOMIC REPOSITORY</span>
-              <h2 className="text-2xl font-bold uppercase tracking-tight text-white">
-                Filterable Problem Directory
+              <h2 className="text-2xl font-extrabold tracking-tight text-white">
+                Filterable problem directory
               </h2>
             </div>
             <div className="font-mono text-xs text-zinc-400">
@@ -181,7 +181,7 @@ export function ProblemAtlasPage() {
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-bold text-white uppercase tracking-tight">
+                  <h3 className="text-lg font-extrabold text-white tracking-tight">
                     {prob.title}
                   </h3>
                   <div className="text-xs font-mono text-zinc-400 mt-1">
@@ -233,8 +233,8 @@ export function ProblemAtlasPage() {
         <div className="p-8 bg-[#090C15] border border-white/[0.08] flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
             <span className="text-xs font-mono uppercase tracking-widest text-zinc-400">NEXT IN THE SYSTEM</span>
-            <h3 className="text-2xl font-bold text-white uppercase tracking-tight">
-              Dozens of Surface Breakdowns Trace to Just 4 Systemic Root Causes.
+            <h3 className="text-2xl font-extrabold text-white tracking-tight">
+              Dozens of surface breakdowns trace to just 4 systemic root causes.
             </h3>
             <p className="text-sm text-zinc-400 leading-relaxed">
               Stop treating symptoms set by set. Understand the structural failures that create them, or explore commercial opportunities designed to resolve them.

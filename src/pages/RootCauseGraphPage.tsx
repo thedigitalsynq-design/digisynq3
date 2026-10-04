@@ -193,8 +193,8 @@ export default function RootCauseGraphPage() {
 
         {/* Hero Title & Supporting Line */}
         <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white leading-[1.08] mb-4">
-          ENTERTAINMENT ECOSYSTEM<br />
-          ROOT-CAUSE GRAPH
+          Entertainment Ecosystem<br />
+          Root-Cause Graph
         </h1>
 
         <div className="text-lg sm:text-2xl font-light text-zinc-200 mb-4 tracking-tight">

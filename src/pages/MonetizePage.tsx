@@ -23,8 +23,8 @@ export function MonetizePage() {
             <span className="font-mono text-xs text-zinc-400">HOW DIGISYNQ CREATES AND CAPTURES VALUE</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white uppercase leading-none">
-            An Asset-Light Business Model Built on Coordination, Not Markups.
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+            An asset-light business model built on coordination, not markups.
           </h1>
 
           <p className="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-3xl">
@@ -35,8 +35,8 @@ export function MonetizePage() {
         {/* 6 Value Capture Layers Grid */}
         <div className="space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/[0.08]">
-            <h2 className="text-2xl font-bold uppercase tracking-tight text-white">
-              The 6 Value Capture Layers
+            <h2 className="text-2xl font-extrabold tracking-tight text-white">
+              The 6 value capture layers
             </h2>
             <div className="font-mono text-xs text-zinc-400">
               Clear Pricing Models · Dedicated Budget Holders
@@ -59,7 +59,7 @@ export function MonetizePage() {
                     </span>
                   </div>
 
-                  <h3 className="text-lg font-bold text-white uppercase tracking-tight leading-snug">
+                  <h3 className="text-lg font-extrabold text-white tracking-tight leading-snug">
                     {layer.name}
                   </h3>
 
@@ -91,8 +91,8 @@ export function MonetizePage() {
         <div className="p-8 bg-[#090C15] border border-white/[0.08] flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
             <span className="text-xs font-mono uppercase tracking-widest text-zinc-400">READY TO ENGAGE</span>
-            <h3 className="text-2xl font-bold text-white uppercase tracking-tight">
-              Start With a Problem, Your Resources, or Your Data.
+            <h3 className="text-2xl font-extrabold text-white tracking-tight">
+              Start with a problem, your resources, or your data.
             </h3>
             <p className="text-sm text-zinc-400 leading-relaxed">
               We do not present a generic contact form. Select your specific entry point to connect directly into the DIGISYNQ operating system.

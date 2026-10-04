@@ -26,8 +26,8 @@ export function OrchestratePage() {
             <span className="font-mono text-xs text-zinc-400">HOW THE WORK ACTUALLY MOVES</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white uppercase leading-none">
-            Beyond a Marketplace: Living Multi-Party Execution Governance.
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+            Beyond a marketplace: living multi-party execution governance.
           </h1>
 
           <p className="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-3xl">
@@ -38,8 +38,8 @@ export function OrchestratePage() {
         {/* The 8 Stages of Orchestration Grid */}
         <div className="space-y-4">
           <div className="flex items-center justify-between pb-2 border-b border-white/[0.08]">
-            <h2 className="text-xl font-bold uppercase tracking-tight text-white">
-              The 8 Orchestration Milestones
+            <h2 className="text-xl font-extrabold tracking-tight text-white">
+              The 8 orchestration milestones
             </h2>
             <span className="text-xs font-mono text-zinc-500">Continuous Dynamic Governance</span>
           </div>
@@ -61,7 +61,7 @@ export function OrchestratePage() {
                     <span className={`font-mono text-[10px] block mb-1 uppercase ${isSelected ? 'text-zinc-600' : 'text-zinc-500'}`}>
                       {stg.step}
                     </span>
-                    <div className={`font-bold text-xs uppercase tracking-tight leading-tight ${isSelected ? 'text-black' : 'text-white'}`}>
+                    <div className={`font-extrabold text-xs tracking-tight leading-tight ${isSelected ? 'text-black' : 'text-white'}`}>
                       {stg.name}
                     </div>
                   </div>
@@ -81,7 +81,7 @@ export function OrchestratePage() {
               <span className="font-mono text-xs text-zinc-400 uppercase tracking-widest">
                 MILESTONE {activeStage.step} OF 08: {activeStage.name}
               </span>
-              <h3 className="text-2xl sm:text-3xl font-bold text-white uppercase tracking-tight mt-1">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mt-1">
                 {activeStage.role}
               </h3>
             </div>
@@ -137,8 +137,8 @@ export function OrchestratePage() {
         <div className="p-8 bg-[#090C15] border border-white/[0.08] flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
             <span className="text-xs font-mono uppercase tracking-widest text-zinc-400">NEXT IN THE SYSTEM</span>
-            <h3 className="text-2xl font-bold text-white uppercase tracking-tight">
-              Every Orchestrated Project Generates Decision Intelligence.
+            <h3 className="text-2xl font-extrabold text-white tracking-tight">
+              Every orchestrated project generates decision intelligence.
             </h3>
             <p className="text-sm text-zinc-400 leading-relaxed">
               We do not let operational data vanish into deleted spreadsheets. See how our measurement layer converts real execution telemetry into predictive intelligence.

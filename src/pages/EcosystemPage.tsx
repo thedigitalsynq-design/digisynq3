@@ -20,8 +20,8 @@ export function EcosystemPage() {
             <span className="font-mono text-xs text-zinc-400">WHO AND WHAT EXISTS</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white uppercase leading-none">
-            The Entertainment Ecosystem Mapped Across 5 Interdependent Layers.
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+            The entertainment ecosystem mapped across 5 interdependent layers.
           </h1>
 
           <p className="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-3xl">
@@ -32,16 +32,16 @@ export function EcosystemPage() {
         {/* The 5 Layers Summary Bento Strip */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
           {[
-            { step: '01', title: 'CREATION', desc: 'IP, screenwriters, directors, concept artists & music composition.' },
-            { step: '02', title: 'PRODUCTION', desc: 'Producers, guild crews, optical packages, locations & soundstages.' },
-            { step: '03', title: 'COMMERCIAL', desc: 'Financing facilities, distribution licenses, marketing & sponsors.' },
-            { step: '04', title: 'INFRASTRUCTURE', desc: 'Cloud rendering, DIT pipelines, Dolby finishing labs & market telemetry.' },
-            { step: '05', title: 'CONSUMPTION', desc: 'Audiences, cinema circuits, SVOD/AVOD streamers & interactive games.' },
+            { step: '01', title: 'Creation', desc: 'IP, screenwriters, directors, concept artists & music composition.' },
+            { step: '02', title: 'Production', desc: 'Producers, guild crews, optical packages, locations & soundstages.' },
+            { step: '03', title: 'Commercial', desc: 'Financing facilities, distribution licenses, marketing & sponsors.' },
+            { step: '04', title: 'Infrastructure', desc: 'Cloud rendering, DIT pipelines, Dolby finishing labs & market telemetry.' },
+            { step: '05', title: 'Consumption', desc: 'Audiences, cinema circuits, SVOD/AVOD streamers & interactive games.' },
           ].map((item) => (
             <div key={item.step} className="p-4 bg-[#080B12] border border-white/[0.06] flex flex-col justify-between">
               <div>
                 <span className="font-mono text-[10px] text-zinc-500 uppercase tracking-widest">{item.step} LAYER</span>
-                <h3 className="text-sm font-bold text-white uppercase tracking-tight mt-1">{item.title}</h3>
+                <h3 className="text-sm font-extrabold text-white tracking-tight mt-1">{item.title}</h3>
                 <p className="text-xs text-zinc-400 mt-2 leading-relaxed">{item.desc}</p>
               </div>
             </div>
@@ -51,8 +51,8 @@ export function EcosystemPage() {
         {/* Interactive 5 Layers Explorer */}
         <section className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl sm:text-2xl font-bold uppercase tracking-tight text-white">
-              Interactive Ecosystem Explorer
+            <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white">
+              Interactive ecosystem explorer
             </h2>
             <span className="text-xs font-mono text-zinc-500">23 Core Entities Mapped</span>
           </div>
@@ -63,8 +63,8 @@ export function EcosystemPage() {
         <div className="p-8 bg-[#090C15] border border-white/[0.08] flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
             <span className="text-xs font-mono uppercase tracking-widest text-zinc-400">NEXT IN THE SYSTEM</span>
-            <h3 className="text-2xl font-bold text-white uppercase tracking-tight">
-              Now That You See What Exists, Understand Why It Breaks.
+            <h3 className="text-2xl font-extrabold text-white tracking-tight">
+              Now that you see what exists, understand why it breaks.
             </h3>
             <p className="text-sm text-zinc-400 leading-relaxed">
               When 23 disparate entity types operate without synchronized telemetry, minor schedule or budget shocks propagate into catastrophic multi-million dollar failures. Explore the Entertainment Ecosystem Root-Cause Graph (EERG).

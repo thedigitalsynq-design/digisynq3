@@ -26,8 +26,8 @@ export function MeasurePage() {
             <span className="font-mono text-xs text-zinc-400">WHAT WE LEARN FROM ACTIVITY</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white uppercase leading-none">
-            Every Metric Must Answer: What Decision Does This Improve?
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+            Every metric must answer: what decision does this improve?
           </h1>
 
           <p className="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-3xl">
@@ -38,8 +38,8 @@ export function MeasurePage() {
         {/* Core Metrics Strip */}
         <div className="space-y-4">
           <div className="flex items-center justify-between pb-2 border-b border-white/[0.08]">
-            <h2 className="text-xl font-bold uppercase tracking-tight text-white">
-              Decision-Grade Operational Telemetry
+            <h2 className="text-xl font-extrabold tracking-tight text-white">
+              Decision-grade operational telemetry
             </h2>
             <span className="text-xs font-mono text-zinc-500">Real-Time Ingestion</span>
           </div>
@@ -61,7 +61,7 @@ export function MeasurePage() {
                     <span className={`font-mono text-[10px] block mb-2 font-bold uppercase ${isSelected ? 'text-zinc-600' : 'text-zinc-500'}`}>
                       {metric.id}
                     </span>
-                    <h3 className={`text-sm font-bold uppercase tracking-tight leading-tight ${isSelected ? 'text-black' : 'text-white'}`}>
+                    <h3 className={`text-sm font-extrabold tracking-tight leading-tight ${isSelected ? 'text-black' : 'text-white'}`}>
                       {metric.metricName}
                     </h3>
                   </div>
@@ -81,7 +81,7 @@ export function MeasurePage() {
               <span className="font-mono text-xs text-zinc-400 uppercase tracking-widest">
                 TELEMETRY METRIC {activeMetric.id}
               </span>
-              <h3 className="text-2xl sm:text-3xl font-bold text-white uppercase tracking-tight mt-1">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mt-1">
                 {activeMetric.metricName}
               </h3>
             </div>
@@ -125,8 +125,8 @@ export function MeasurePage() {
         <div className="p-8 bg-[#090C15] border border-white/[0.08] flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
             <span className="text-xs font-mono uppercase tracking-widest text-zinc-400">NEXT IN THE SYSTEM</span>
-            <h3 className="text-2xl font-bold text-white uppercase tracking-tight">
-              A Transparent, Multi-Layered Commercial Engine.
+            <h3 className="text-2xl font-extrabold text-white tracking-tight">
+              A transparent, multi-layered commercial engine.
             </h3>
             <p className="text-sm text-zinc-400 leading-relaxed">
               Understand how DIGISYNQ captures economic value across network access, transaction liquidity, orchestration fees, and enterprise decision intelligence.

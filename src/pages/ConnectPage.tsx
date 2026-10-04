@@ -26,8 +26,8 @@ export function ConnectPage() {
             <span className="font-mono text-xs text-zinc-400">HOW THINGS GET CONNECTED</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white uppercase leading-none">
-            Algorithmic Matching for High-Stakes Entertainment Resources.
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+            Algorithmic matching for high-stakes entertainment resources.
           </h1>
 
           <p className="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-3xl">
@@ -39,8 +39,8 @@ export function ConnectPage() {
         <div className="p-6 bg-[#080B12] border border-white/[0.08] flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="space-y-1">
             <span className="font-mono text-xs uppercase tracking-widest text-zinc-400">LIVE CASE WALKTHROUGH</span>
-            <h3 className="text-lg font-bold text-white uppercase tracking-tight">
-              Feature Production: Emergency 18-Day Vancouver Shoot Unit
+            <h3 className="text-lg font-extrabold text-white tracking-tight">
+              Feature production: emergency 18-day Vancouver shoot unit
             </h3>
             <p className="text-xs text-zinc-400">
               Requirements: A-List Cinematographer · Arri Alexa 35 Camera Package · 15,000 sq ft Stage · 3 Heritage Locations · IATSE 669 Crew
@@ -69,7 +69,7 @@ export function ConnectPage() {
                   <span className={`font-mono text-[10px] block mb-1 uppercase ${isSelected ? 'text-zinc-600' : 'text-zinc-500'}`}>
                     STAGE {step.stage}
                   </span>
-                  <div className={`font-bold text-xs uppercase tracking-tight leading-tight ${isSelected ? 'text-black' : 'text-white'}`}>
+                  <div className={`font-extrabold text-xs tracking-tight leading-tight ${isSelected ? 'text-black' : 'text-white'}`}>
                     {step.name}
                   </div>
                 </div>
@@ -88,7 +88,7 @@ export function ConnectPage() {
               <span className="font-mono text-xs text-zinc-400 uppercase tracking-widest">
                 STAGE {activeStep.stage} OF 06: {activeStep.name}
               </span>
-              <h3 className="text-2xl sm:text-3xl font-bold text-white uppercase tracking-tight mt-1">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mt-1">
                 {activeStep.action}
               </h3>
             </div>
@@ -139,8 +139,8 @@ export function ConnectPage() {
         <div className="p-8 bg-[#090C15] border border-white/[0.08] flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
             <span className="text-xs font-mono uppercase tracking-widest text-zinc-400">NEXT IN THE SYSTEM</span>
-            <h3 className="text-2xl font-bold text-white uppercase tracking-tight">
-              Connection Is Only Step 1. Then Comes Orchestration.
+            <h3 className="text-2xl font-extrabold text-white tracking-tight">
+              Connection is only step 1. Then comes orchestration.
             </h3>
             <p className="text-sm text-zinc-400 leading-relaxed">
               A marketplace stops at booking. DIGISYNQ orchestrates the live shoot: managing dependencies, schedules, crew rest turns, and resolving variances in real time.

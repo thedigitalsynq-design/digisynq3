@@ -31,8 +31,8 @@ export function AboutPage() {
             <span className="font-mono text-xs text-zinc-400">WHY DIGISYNQ EXISTS</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white uppercase leading-none">
-            Nothing Is Waste. Disconnected Value Is.
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+            Nothing is waste. Disconnected value is.
           </h1>
 
           <p className="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-3xl">
@@ -45,8 +45,8 @@ export function AboutPage() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/[0.08]">
             <div>
               <span className="font-mono text-xs uppercase text-zinc-500 tracking-wider">THE CONVERSION MECHANISM</span>
-              <h2 className="text-2xl font-bold uppercase tracking-tight text-white">
-                How Disconnected Value Becomes Waste — And How DIGISYNQ Reconnects It
+              <h2 className="text-2xl font-extrabold tracking-tight text-white">
+                How disconnected value becomes waste — and how DIGISYNQ reconnects it
               </h2>
             </div>
             <div className="font-mono text-xs text-zinc-400">
@@ -68,8 +68,8 @@ export function AboutPage() {
                     <span className="text-emerald-400 font-bold">{item.to}</span>
                   </div>
 
-                  <h3 className="text-base font-bold text-white uppercase tracking-tight">
-                    {item.from} Becomes {item.to}
+                  <h3 className="text-base font-extrabold text-white tracking-tight">
+                    {item.from} becomes {item.to}
                   </h3>
 
                   <p className="text-xs text-zinc-400 mt-2 leading-relaxed">
@@ -85,8 +85,8 @@ export function AboutPage() {
         <div className="p-8 bg-[#090C15] border border-white/[0.08] space-y-6">
           <div className="space-y-1">
             <span className="font-mono text-xs uppercase tracking-widest text-zinc-400">STRUCTURAL DEFINITION</span>
-            <h3 className="text-2xl font-bold text-white uppercase tracking-tight">
-              What DIGISYNQ Is Not
+            <h3 className="text-2xl font-extrabold text-white tracking-tight">
+              What DIGISYNQ is not
             </h3>
             <p className="text-sm text-zinc-400 max-w-2xl">
               We reject the conventional agency, production house, and rental models. DIGISYNQ is an asset-light ecosystem mechanism.
@@ -107,8 +107,8 @@ export function AboutPage() {
         <div className="p-8 bg-[#080B12] border border-white/[0.08] flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
             <span className="text-xs font-mono uppercase tracking-widest text-zinc-400">READY TO SYNCHRONIZE</span>
-            <h3 className="text-2xl font-bold text-white uppercase tracking-tight">
-              Join the Asset-Light Entertainment Network.
+            <h3 className="text-2xl font-extrabold text-white tracking-tight">
+              Join the asset-light entertainment network.
             </h3>
             <p className="text-sm text-zinc-400 leading-relaxed">
               Whether you need resources, have idle equipment, or hold operational data, connect directly with the DIGISYNQ operating mechanism.
