@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-route
 // ── Master website components & segregated pages ─────────────
 import { SiteNav } from './components/SiteNav';
 import { SiteFooter } from './components/SiteFooter';
+import { RouteSEO } from './components/RouteSEO';
 import { HomePage } from './pages/HomePage';
 
 // ── Lazy-loaded Sub-Routes for Performance & Bundle Splitting ──
@@ -33,8 +34,9 @@ function WebsiteLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#03040A] text-[#ECEEF5] selection:bg-[#23B272] selection:text-[#03040A]">
+      <RouteSEO />
       <SiteNav />
-      <div key={location.pathname} className="flex-1 animate-page-fade">
+      <div key={location.pathname} id="main-content" tabIndex={-1} className="flex-1 animate-page-fade focus:outline-none">
         <React.Suspense fallback={
           <div className="min-h-[70vh] flex flex-col items-center justify-center gap-3">
             <div className="w-6 h-6 border-2 border-[#23B272] border-t-transparent rounded-full animate-spin" />
