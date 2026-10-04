@@ -62,7 +62,7 @@ function AppRoutes() {
         <Route path="/ecosystem" element={<EcosystemPage />} />
         <Route path="/engines" element={<EnginesPage />} />
         <Route path="/engines/cascade" element={<EnginesPage initialTab="CASCADE" />} />
-        <Route path="/engines/root-map" element={<EnginesPage initialTab="TREE_PIPELINE" />} />
+        <Route path="/engines/root-map" element={<EnginesPage initialTab="ROOT_MAP" />} />
         <Route path="/engines/problem-taxonomy" element={<EnginesPage initialTab="TAXONOMY" />} />
         <Route path="/engines/risk" element={<EnginesPage initialTab="RISK_ENGINE" />} />
         <Route path="/how-it-works" element={<HowItWorksPage />} />
