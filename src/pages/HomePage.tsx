@@ -61,52 +61,52 @@ export function HomePage() {
           {/* Eyebrow badge */}
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.1] bg-white/[0.03] text-xs text-zinc-300 mb-8 tracking-wide backdrop-blur-xl">
             <span className="w-2 h-2 rounded-full bg-[#52E3A4] animate-pulse" />
-            <span className="font-mono text-[#52E3A4] font-semibold">{BRAND.category.toUpperCase()}</span>
+            <span className="font-mono text-[#52E3A4] font-semibold">ENTERTAINMENT SYNCHRONIZATION INFRASTRUCTURE</span>
             <span className="text-zinc-600">//</span>
-            <span className="text-zinc-400 font-medium">THE ARCHITECTURE OF THE SPACE BETWEEN</span>
+            <span className="text-zinc-400 font-medium">ROOT-CAUSE ORCHESTRATION</span>
           </div>
 
-          {/* Master Metaphoric H1 */}
-          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-[1.03] [letter-spacing:-0.035em] mb-6">
-            Cinema is made in the silos.
-            <span className="text-zinc-400 font-light block text-3xl sm:text-5xl md:text-6xl lg:text-7xl mt-2">
-              It lives or dies in the spaces between.
+          {/* Master Clear H1 */}
+          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-white leading-[1.03] [letter-spacing:-0.035em] mb-6">
+            When the entertainment system breaks,
+            <span className="text-[#52E3A4] block text-3xl sm:text-5xl md:text-6xl lg:text-7xl mt-2 font-extrabold">
+              DigiSynq finds why.
             </span>
           </h1>
 
-          {/* Master Metaphoric H2 */}
-          <h2 className="text-lg sm:text-2xl text-zinc-300 font-normal leading-relaxed mb-6 max-w-3xl mx-auto">
-            The invisible synchronization infrastructure orchestrating the silent dependencies between talent, soundstages, schedules, and screens.
+          {/* Master Explanatory H2 */}
+          <h2 className="text-base sm:text-xl text-zinc-300 font-normal leading-relaxed mb-6 max-w-3xl mx-auto">
+            DigiSynq identifies where an entertainment system is breaking, understands why, maps the dependencies, connects what is missing, coordinates the intervention, measures the outcome, and helps prevent recurrence.
           </h2>
 
-          <div className="text-sm sm:text-base text-[#52E3A4] font-mono tracking-wide mb-10 font-semibold">
+          <div className="text-xs sm:text-sm text-[#52E3A4] font-mono tracking-wide mb-10 font-semibold">
             {BRAND.mission} • {BRAND.tagline}
           </div>
 
           {/* Action Row */}
           <div className="flex flex-wrap items-center justify-center gap-4 mb-16">
             <Link
-              to="/start"
+              to="/diagnose"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#23B272] text-[#03040A] hover:bg-[#52E3A4] font-bold text-sm tracking-wide transition-all duration-200 active:scale-95 shadow-[0_0_35px_rgba(35,178,114,0.4)]"
-              id="hero-start-cta"
+              id="hero-diagnose-cta"
             >
-              <span>Initiate System Resolution</span>
-              <ArrowRight className="w-4 h-4" />
+              <span>Diagnose a Problem</span>
+              <ArrowRight className="w-4 h-4 stroke-[2.5]" />
             </Link>
 
             <Link
-              to="/engines"
+              to="/mechanisms"
               className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white/14 hover:border-[#52E3A4]/40 bg-white/[0.04] hover:bg-white/[0.08] text-white font-medium text-sm transition-all duration-200 backdrop-blur-xl"
             >
-              <Activity className="w-4 h-4 text-[#52E3A4]" />
-              <span>Launch Simulation Engines</span>
+              <Layers className="w-4 h-4 text-[#52E3A4]" />
+              <span>Explore 23 Mechanisms</span>
             </Link>
 
             <Link
-              to="/blueprint"
+              to="/the-synq"
               className="inline-flex items-center gap-2 px-6 py-4 rounded-full border border-white/10 hover:border-white/20 bg-transparent text-zinc-400 hover:text-white font-mono text-xs transition-all duration-200"
             >
-              <span>70-Section Codex</span>
+              <span>What is a SYNQ?</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
           </div>
@@ -174,9 +174,11 @@ export function HomePage() {
             </div>
           ) : (
             <div className="space-y-6">
-              <div className="p-4 rounded-xl border border-[#23B272]/40 bg-[#23B272]/10 text-xs sm:text-sm text-emerald-200 flex items-center justify-between">
+              <div className="p-4 rounded-xl border border-[#23B272]/40 bg-[#23B272]/10 text-xs sm:text-sm text-emerald-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <span>⚡ Cascade Arrested: Dynamic scene resequencing + burst partner stage activated.</span>
-                <span className="font-mono font-bold text-[#52E3A4] uppercase text-xs">Verified Saved: 5.5 Days &amp; $84k</span>
+                <span className="font-mono text-[11px] text-[#52E3A4] uppercase bg-black/40 px-2 py-0.5 rounded border border-[#23B272]/30">
+                  MODELLED SIMULATION: 5.5 Days &amp; $84k Protected
+                </span>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono text-xs">
                 <div className="p-4 rounded-xl bg-black/40 border border-emerald-500/20">
@@ -200,10 +202,76 @@ export function HomePage() {
 
           {/* Terminal Footer Quote */}
           <div className="mt-6 pt-4 border-t border-white/[0.08] flex items-center justify-between text-[11px] font-mono text-zinc-500">
-            <span>Section 0 // Fundamental Axiom:</span>
+            <span>Fundamental System Axiom:</span>
             <span className="text-[#52E3A4] italic">
               "DIGISYNQ does not manage filmmaking. It manages the dependencies that make filmmaking possible."
             </span>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════
+          01.5 — WHAT IS A SYNQ? THE SYSTEM DEFINITION
+         ══════════════════════════════════════════════════════ */}
+      <section className="py-20 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06]">
+        <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-b from-[#090B14] to-[#04060C] border border-[#23B272]/20 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-[#23B272]/10 blur-[120px] pointer-events-none" />
+          
+          <div className="max-w-3xl mb-10 relative z-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#23B272]/10 border border-[#23B272]/30 text-[#52E3A4] font-mono text-xs uppercase tracking-wider mb-4">
+              <Cpu className="w-3.5 h-3.5" />
+              <span>THE OPERATIONAL FOUNDATION</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight mb-4">
+              What is a <span className="text-[#52E3A4]">SYNQ</span>?
+            </h2>
+            <p className="text-base sm:text-lg text-zinc-300 leading-relaxed font-light">
+              A <strong>SYNQ</strong> is a structured intervention that connects a specific entertainment system problem to the people, resources, capabilities, and decisions required to resolve it.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
+            <div className="p-6 rounded-2xl bg-[#03040A] border border-white/[0.08]">
+              <div className="w-9 h-9 rounded-xl bg-[#23B272]/10 border border-[#23B272]/30 flex items-center justify-center text-[#52E3A4] mb-4">
+                <GitBranch className="w-5 h-5" />
+              </div>
+              <h3 className="text-base font-bold text-white mb-2">Root-Cause Centered</h3>
+              <p className="text-xs text-zinc-400 leading-relaxed">
+                Never treats symptoms in isolation. Decomposes surface emergencies into underlying schedule buffers, data schemas, and contract incentives.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-[#03040A] border border-white/[0.08]">
+              <div className="w-9 h-9 rounded-xl bg-[#23B272]/10 border border-[#23B272]/30 flex items-center justify-center text-[#52E3A4] mb-4">
+                <Network className="w-5 h-5" />
+              </div>
+              <h3 className="text-base font-bold text-white mb-2">Asset-Light Network</h3>
+              <p className="text-xs text-zinc-400 leading-relaxed">
+                DigiSynq does not buy stages or lease camera trucks. It orchestrates pre-vetted dark-floor stages, burst VFX studios, and specialist technicians.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-[#03040A] border border-white/[0.08]">
+              <div className="w-9 h-9 rounded-xl bg-[#23B272]/10 border border-[#23B272]/30 flex items-center justify-center text-[#52E3A4] mb-4">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
+              <h3 className="text-base font-bold text-white mb-2">Measured Value</h3>
+              <p className="text-xs text-zinc-400 leading-relaxed">
+                Every SYNQ delivers verifiable outcomes: days of schedule buffer restored, idle penalty avoidance, and guaranteed platform QC compliance.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-8 pt-6 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-4 relative z-10">
+            <span className="text-xs font-mono text-zinc-400">
+              Explore the complete anatomy and intervention classes:
+            </span>
+            <Link
+              to="/the-synq"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#52E3A4] hover:text-white transition-colors"
+            >
+              <span>Read The Synq Architecture →</span>
+            </Link>
           </div>
         </div>
       </section>
@@ -588,27 +656,35 @@ export function HomePage() {
             </div>
           </div>
 
-          {/* Verified North Star KPIs */}
+          {/* Modelled North Star KPIs */}
           <div className="p-8 rounded-2xl border border-white/[0.1] bg-[#090B14]">
-            <div className="text-xs font-mono text-[#52E3A4] mb-1 uppercase font-semibold">SECTION 60 CORE KPIS</div>
-            <h3 className="text-2xl font-bold text-white mb-6">Verified System Value Created</h3>
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs font-mono text-[#52E3A4] uppercase font-semibold">SECTION 60 TARGET BENCHMARKS</span>
+              <span className="text-[10px] font-mono text-zinc-500 uppercase px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.08]">
+                Modelled System Metrics
+              </span>
+            </div>
+            <h3 className="text-2xl font-bold text-white mb-6">Target System Value Created</h3>
             <div className="grid grid-cols-2 gap-4 font-mono">
               <div className="p-4 rounded-xl bg-black/40 border border-white/[0.06]">
                 <div className="text-2xl sm:text-3xl font-bold text-[#52E3A4]">5.5 Days</div>
-                <div className="text-[11px] text-zinc-400 mt-1">Average Schedule Recovered / Emergency</div>
+                <div className="text-[11px] text-zinc-400 mt-1">Modelled Schedule Buffer Recovery / Triage</div>
               </div>
               <div className="p-4 rounded-xl bg-black/40 border border-white/[0.06]">
                 <div className="text-2xl sm:text-3xl font-bold text-[#52E3A4]">$84,000+</div>
-                <div className="text-[11px] text-zinc-400 mt-1">Avoided Idle Penalties / Sprint</div>
+                <div className="text-[11px] text-zinc-400 mt-1">Projected Idle Cost Avoidance / Sprint</div>
               </div>
               <div className="p-4 rounded-xl bg-black/40 border border-white/[0.06]">
                 <div className="text-2xl sm:text-3xl font-bold text-white">100%</div>
-                <div className="text-[11px] text-zinc-400 mt-1">Platform Delivery Spec Compliance</div>
+                <div className="text-[11px] text-zinc-400 mt-1">Platform Delivery Spec Compliance Target</div>
               </div>
               <div className="p-4 rounded-xl bg-black/40 border border-white/[0.06]">
                 <div className="text-2xl sm:text-3xl font-bold text-white">Zero Debt</div>
-                <div className="text-[11px] text-zinc-400 mt-1">Asset-Light Network Footprint</div>
+                <div className="text-[11px] text-zinc-400 mt-1">Asset-Light Network Orchestration</div>
               </div>
+            </div>
+            <div className="mt-4 text-[10px] font-mono text-zinc-500 italic">
+              * Metrics reflect simulated operational models and calibrated scenario benchmarks across production and post-production workflows.
             </div>
           </div>
         </div>
@@ -634,18 +710,18 @@ export function HomePage() {
 
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
-              to="/start"
+              to="/diagnose"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#23B272] text-[#03040A] hover:bg-[#52E3A4] font-bold text-sm tracking-wide transition-all shadow-[0_0_35px_rgba(35,178,114,0.4)] active:scale-95"
             >
-              <span>Submit a Project Challenge</span>
-              <ArrowRight className="w-4 h-4" />
+              <span>Diagnose a Problem</span>
+              <ArrowRight className="w-4 h-4 stroke-[2.5]" />
             </Link>
 
             <Link
-              to="/blueprint"
+              to="/start"
               className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white/14 hover:border-white/25 bg-white/[0.03] text-white font-medium text-sm transition-all"
             >
-              <span>Browse Master Blueprint</span>
+              <span>Start a SYNQ Case</span>
               <ArrowUpRight className="w-4 h-4" />
             </Link>
           </div>

@@ -1,114 +1,97 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import digisynqLogo from '../assets/digisynq-logo.png';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, ShieldCheck, Activity } from 'lucide-react';
 import { BRAND } from '../data/blueprint_data';
-import { LinkedinIcon, InstagramIcon, FacebookIcon } from './SocialIcons';
 
 const FOOTER_COLUMNS = [
   {
-    title: 'Infrastructure & System',
+    title: 'System',
     links: [
+      { href: '/the-synq', label: 'The Synq Definition' },
       { href: '/mechanisms', label: '23 Master Mechanisms' },
       { href: '/continuum', label: '9-Stage Continuum' },
+      { href: '/how-it-works', label: 'Resolution Engine' },
+    ],
+  },
+  {
+    title: 'Network',
+    links: [
+      { href: '/ecosystem', label: 'Ecosystem & Capacity Grid' },
       { href: '/stakeholders', label: '12 Stakeholder Archetypes' },
-      { href: '/engines', label: 'Simulation & Diagnostic Engines' },
-      { href: '/the-synq', label: 'Cinematic Synq Deck' },
     ],
   },
   {
-    title: 'Resolution & Intelligence',
+    title: 'Intelligence',
     links: [
-      { href: '/how-it-works', label: 'System Resolution Engagement' },
-      { href: '/runbook', label: 'Operational Runbook' },
-      { href: '/insights', label: 'Industry Research Briefs' },
-      { href: '/workshops', label: '6 Capability Labs' },
-      { href: '/blueprint', label: '70-Section Master Codex' },
-      { href: '/about', label: 'About & Operating Principles' },
+      { href: '/diagnose', label: 'Diagnostic Engine (10-Step)' },
+      { href: '/engines', label: 'CASCADE & TREE Engines' },
+      { href: '/insights', label: 'DigiSynq Field Notes' },
     ],
   },
   {
-    title: 'Engage',
+    title: 'Engagement',
     links: [
-      { href: '/start', label: 'Initiate System Resolution' },
-      { href: '/start?mode=audit', label: 'Request Slate Risk Audit' },
-      { href: 'mailto:hello@digisynq.com', label: 'Direct Operational Hotline', isExternal: true },
+      { href: '/diagnose', label: 'Diagnose a Problem' },
+      { href: '/start', label: 'Start a SYNQ Case' },
+      { href: '/workshops', label: 'DigiSynq Labs' },
+      { href: '/runbook', label: 'Resolution Runbook' },
+    ],
+  },
+  {
+    title: 'Codex & Company',
+    links: [
+      { href: '/blueprint', label: 'Master Architecture Codex' },
+      { href: '/about', label: 'About DigiSynq' },
+      { href: 'mailto:operations@digisynq.com', label: 'Operational Dispatch', isExternal: true },
     ],
   },
 ];
 
 export function SiteFooter() {
   return (
-    <footer className="bg-[#03040A] border-t border-white/[0.06] pt-20 pb-16 relative overflow-hidden text-zinc-400" role="contentinfo">
-      <div className="max-w-6xl mx-auto px-6 sm:px-8">
+    <footer className="bg-[#03040A] border-t border-white/[0.08] pt-16 pb-12 relative overflow-hidden text-zinc-400" role="contentinfo">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 sm:gap-16 pb-16 border-b border-white/[0.06]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 pb-12 border-b border-white/[0.06]">
           {/* Brand info */}
-          <div className="md:col-span-5 space-y-4">
+          <div className="lg:col-span-4 space-y-4">
             <Link to="/" className="inline-block" aria-label="DigiSynq home">
               <img
                 src={digisynqLogo}
                 alt="DigiSynq"
-                className="h-5 w-auto object-contain opacity-90"
+                className="h-5.5 w-auto object-contain opacity-90"
               />
             </Link>
-            <div className="text-xs font-mono text-[#52E3A4]">
-              {BRAND.tagline}
-            </div>
-            <p className="text-xs text-zinc-400 leading-relaxed max-w-sm">
-              {BRAND.executiveDefinition}
-            </p>
-            <div className="pt-2 text-[11px] font-mono text-zinc-500 space-y-1">
-              <div><strong>Mission:</strong> {BRAND.mission}</div>
-              <div><strong>Philosophy:</strong> {BRAND.philosophy}</div>
+            
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-[#23B272]/10 border border-[#23B272]/20 text-[#52E3A4] text-[11px] font-mono">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#23B272] animate-pulse" />
+              <span>Grid Operational · Ready for Triage</span>
             </div>
 
-            {/* Social Icons from SocialIcons.tsx */}
-            <div className="pt-3 flex items-center gap-3">
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noreferrer"
-                className="p-2 rounded-lg border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.08] hover:text-[#52E3A4] transition-all text-zinc-400"
-                aria-label="LinkedIn"
-              >
-                <LinkedinIcon className="w-4 h-4" />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noreferrer"
-                className="p-2 rounded-lg border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.08] hover:text-[#52E3A4] transition-all text-zinc-400"
-                aria-label="Instagram"
-              >
-                <InstagramIcon className="w-4 h-4" />
-              </a>
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noreferrer"
-                className="p-2 rounded-lg border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.08] hover:text-[#52E3A4] transition-all text-zinc-400"
-                aria-label="Facebook"
-              >
-                <FacebookIcon className="w-4 h-4" />
-              </a>
+            <p className="text-xs text-zinc-400 leading-relaxed">
+              <strong>DIGISYNQ</strong> is Entertainment Synchronization Infrastructure. When the entertainment system breaks, DigiSynq finds why, maps the dependencies, connects missing capabilities, coordinates the intervention, and protects delivery windows.
+            </p>
+
+            <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.05] text-[11px] text-zinc-400">
+              <strong className="text-white font-medium">Definition:</strong> A SYNQ is a structured intervention that connects a specific system problem to the people, resources, capabilities and decisions required to resolve it.
             </div>
           </div>
 
           {/* Nav columns */}
-          <div className="md:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8">
+          <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8">
             {FOOTER_COLUMNS.map((col) => (
-              <div key={col.title} className="space-y-4">
-                <div className="text-xs font-semibold text-white tracking-wide">
+              <div key={col.title} className="space-y-3">
+                <div className="text-[11px] font-mono uppercase tracking-wider text-white font-semibold">
                   {col.title}
                 </div>
-                <ul className="space-y-2.5 text-xs">
+                <ul className="space-y-2 text-xs">
                   {col.links.map((link) => (
                     <li key={link.label}>
                       {link.isExternal ? (
                         <a
                           href={link.href}
-                          className="text-zinc-400 hover:text-white transition-colors inline-flex items-center gap-1"
+                          className="text-zinc-400 hover:text-[#52E3A4] transition-colors inline-flex items-center gap-1"
                         >
                           <span>{link.label}</span>
                           <ArrowUpRight className="w-3 h-3 opacity-60" />
@@ -132,13 +115,14 @@ export function SiteFooter() {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500 font-mono">
           <div>
-            &copy; {new Date().getFullYear()} DIGISYNQ. {BRAND.oneSentenceCategory}
+            &copy; {new Date().getFullYear()} DIGISYNQ · {BRAND.category}
           </div>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+            <Link to="/diagnose" className="hover:text-[#52E3A4] transition-colors">Diagnostic Engine</Link>
+            <Link to="/mechanisms" className="hover:text-[#52E3A4] transition-colors">23 Mechanisms</Link>
             <Link to="/runbook" className="hover:text-[#52E3A4] transition-colors">Runbook</Link>
-            <Link to="/insights" className="hover:text-[#52E3A4] transition-colors">Insights</Link>
             <Link to="/blueprint" className="hover:text-[#52E3A4] transition-colors">Master Codex</Link>
-            <Link to="/start" className="hover:text-[#52E3A4] transition-colors">Start a Synq</Link>
+            <Link to="/start" className="hover:text-[#52E3A4] transition-colors">Start a SYNQ</Link>
           </div>
         </div>
       </div>

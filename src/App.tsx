@@ -5,19 +5,22 @@ import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-route
 import { SiteNav } from './components/SiteNav';
 import { SiteFooter } from './components/SiteFooter';
 import { HomePage } from './pages/HomePage';
-import { MechanismsPage } from './pages/MechanismsPage';
-import { ContinuumPage } from './pages/ContinuumPage';
-import { StakeholdersPage } from './pages/StakeholdersPage';
-import { EnginesPage } from './pages/EnginesPage';
-import { HowItWorksPage } from './pages/HowItWorksPage';
-import { WorkshopsPage } from './pages/WorkshopsPage';
-import { BlueprintPage } from './pages/BlueprintPage';
-import { AboutPage } from './pages/AboutPage';
-import { StartSynqPage } from './pages/StartSynqPage';
-import { TheSynqPage } from './pages/TheSynqPage';
-import { EcosystemPage } from './pages/EcosystemPage';
-import { RunbookPage } from './pages/RunbookPage';
-import { InsightsPage } from './pages/InsightsPage';
+
+// ── Lazy-loaded Sub-Routes for Performance & Bundle Splitting ──
+const MechanismsPage = React.lazy(() => import('./pages/MechanismsPage').then(m => ({ default: m.MechanismsPage })));
+const ContinuumPage = React.lazy(() => import('./pages/ContinuumPage').then(m => ({ default: m.ContinuumPage })));
+const StakeholdersPage = React.lazy(() => import('./pages/StakeholdersPage').then(m => ({ default: m.StakeholdersPage })));
+const EnginesPage = React.lazy(() => import('./pages/EnginesPage').then(m => ({ default: m.EnginesPage })));
+const HowItWorksPage = React.lazy(() => import('./pages/HowItWorksPage').then(m => ({ default: m.HowItWorksPage })));
+const WorkshopsPage = React.lazy(() => import('./pages/WorkshopsPage').then(m => ({ default: m.WorkshopsPage })));
+const BlueprintPage = React.lazy(() => import('./pages/BlueprintPage').then(m => ({ default: m.BlueprintPage })));
+const AboutPage = React.lazy(() => import('./pages/AboutPage').then(m => ({ default: m.AboutPage })));
+const StartSynqPage = React.lazy(() => import('./pages/StartSynqPage').then(m => ({ default: m.StartSynqPage })));
+const TheSynqPage = React.lazy(() => import('./pages/TheSynqPage').then(m => ({ default: m.TheSynqPage })));
+const EcosystemPage = React.lazy(() => import('./pages/EcosystemPage').then(m => ({ default: m.EcosystemPage })));
+const RunbookPage = React.lazy(() => import('./pages/RunbookPage').then(m => ({ default: m.RunbookPage })));
+const InsightsPage = React.lazy(() => import('./pages/InsightsPage').then(m => ({ default: m.InsightsPage })));
+const DiagnosePage = React.lazy(() => import('./pages/DiagnosePage').then(m => ({ default: m.DiagnosePage })));
 
 // ── Public website layout wrapper ────────────────────────────
 function WebsiteLayout({ children }: { children: React.ReactNode }) {
@@ -32,7 +35,14 @@ function WebsiteLayout({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen flex flex-col bg-[#03040A] text-[#ECEEF5] selection:bg-[#23B272] selection:text-[#03040A]">
       <SiteNav />
       <div key={location.pathname} className="flex-1 animate-page-fade">
-        {children}
+        <React.Suspense fallback={
+          <div className="min-h-[70vh] flex flex-col items-center justify-center gap-3">
+            <div className="w-6 h-6 border-2 border-[#23B272] border-t-transparent rounded-full animate-spin" />
+            <span className="text-xs font-mono text-zinc-500">Loading DigiSynq module...</span>
+          </div>
+        }>
+          {children}
+        </React.Suspense>
       </div>
       <SiteFooter />
     </div>
@@ -58,9 +68,11 @@ function AppRoutes() {
         <Route path="/runbook" element={<RunbookPage />} />
         <Route path="/insights" element={<InsightsPage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/diagnose" element={<DiagnosePage />} />
         <Route path="/start" element={<StartSynqPage />} />
 
         {/* Aliases & legacy route redirects */}
+        <Route path="/labs" element={<Navigate to="/workshops" replace />} />
         <Route path="/capabilities" element={<Navigate to="/mechanisms" replace />} />
         <Route path="/use-cases" element={<Navigate to="/how-it-works" replace />} />
         <Route path="*" element={<Navigate to="/" replace />} />

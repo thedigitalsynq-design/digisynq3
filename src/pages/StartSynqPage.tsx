@@ -66,8 +66,15 @@ const SUPPORT_OPTIONS = [
   'Constraint Feasibility Diagnostic',
 ];
 
+import { intakeService, SynqRequest } from '../services/intakeService';
+
 export function StartSynqPage() {
   const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const caseIdParam = searchParams.get('caseId');
+  const trackParam = searchParams.get('track');
+  const modeParam = searchParams.get('mode');
+
   const state = location.state as { problem?: string; category?: string; role?: string } | null;
 
   const initialWho = () => {
@@ -77,13 +84,27 @@ export function StartSynqPage() {
     return match || state.role;
   };
 
+  const initialProblem = () => {
+    if (state?.problem) return state.problem;
+    if (caseIdParam) {
+      const stored = intakeService.getCaseById(caseIdParam);
+      if (stored) {
+        return `[Diagnostic Reference: ${stored.caseId}] ${stored.objective}. Obstacle: ${stored.blockage}. Identified Root Cause: ${stored.rootCause}. Recommended Intervention: ${stored.recommendedIntervention}.`;
+      }
+      return `Linked to Diagnostic Case ID: ${caseIdParam}`;
+    }
+    if (trackParam) return `Inquiry regarding DigiSynq Lab Track: ${trackParam}`;
+    return '';
+  };
+
   const [form, setForm] = useState<FormState>(() => ({
     ...EMPTY_FORM,
-    problem: state?.problem || '',
+    problem: initialProblem(),
     who: initialWho(),
   }));
-  const [submitted, setSubmitted] = useState(false);
-  const [step, setStep] = useState(1);
+  const [submittedCase, setSubmittedCase] = useState<SynqRequest | null>(null);
+  const [step, setStep] = useState(caseIdParam ? 2 : 1);
+  const [submitting, setSubmitting] = useState(false);
 
   const updateField = (key: keyof FormState, value: string) => {
     setForm(prev => ({ ...prev, [key]: value }));
@@ -104,28 +125,42 @@ export function StartSynqPage() {
 
   const [copied, setCopied] = useState(false);
 
-  const getDossierText = () => {
-    return `DIGISYNQ INTAKE DOSSIER\n═════════════════════════\nSTAKEHOLDER: ${form.who}\nSTAGE: ${form.stage}\nPROJECT: ${form.project || 'Unspecified'}\nREQUIREMENT: ${form.problem}\nSUPPORT NEEDED: ${form.support_type.join(', ')}\nCONTACT NAME: ${form.name}\nEMAIL: ${form.email}\nCONFIDENTIAL NOTES: ${form.notes || 'None'}\nSUBMITTED AT: ${new Date().toISOString()}`;
+  const getDossierText = (activeCaseId?: string) => {
+    return `DIGISYNQ INTAKE DOSSIER\n═════════════════════════\nCASE ID: ${activeCaseId || caseIdParam || 'PENDING'}\nSTAKEHOLDER: ${form.who}\nSTAGE: ${form.stage}\nPROJECT: ${form.project || 'Unspecified'}\nREQUIREMENT: ${form.problem}\nSUPPORT NEEDED: ${form.support_type.join(', ')}\nCONTACT NAME: ${form.name}\nEMAIL: ${form.email}\nCONFIDENTIAL NOTES: ${form.notes || 'None'}\nSUBMITTED AT: ${new Date().toISOString()}`;
   };
 
   const handleCopyDossier = () => {
-    navigator.clipboard.writeText(getDossierText());
+    navigator.clipboard.writeText(getDossierText(submittedCase?.caseId));
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Start a Synq — ${form.who}: ${form.project || 'Project'}`);
-    const body = encodeURIComponent(getDossierText());
-    
-    // Attempt mailto trigger
+    setSubmitting(true);
+
+    const savedRequest = await intakeService.submitSynqRequest({
+      name: form.name,
+      organization: form.who,
+      email: form.email,
+      projectStage: form.stage,
+      urgency: 'urgent',
+      problemDescription: form.problem,
+      symptoms: form.support_type,
+      diagnosticCaseId: caseIdParam || undefined
+    });
+
+    setSubmittedCase(savedRequest);
+    setSubmitting(false);
+
+    // Optional mailto fallback trigger
+    const subject = encodeURIComponent(`[${savedRequest.caseId}] SYNQ Case — ${form.who}: ${form.project || 'Project'}`);
+    const body = encodeURIComponent(getDossierText(savedRequest.caseId));
     try {
-      window.location.href = `mailto:hello@digisynq.com?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:operations@digisynq.com?subject=${subject}&body=${body}`;
     } catch (err) {
       console.warn('Mail client trigger bypassed', err);
     }
-    setSubmitted(true);
   };
 
   return (
@@ -154,21 +189,23 @@ export function StartSynqPage() {
       <section className="pb-32 px-6 sm:px-8 max-w-3xl mx-auto">
         <div className="rounded-3xl bg-[#090b10] border border-white/[0.08] p-8 sm:p-12 shadow-2xl">
 
-          {submitted ? (
+          {submittedCase ? (
             <div className="text-center py-10 space-y-6">
-              <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mx-auto text-emerald-400">
-                <Check size={28} />
+              <div className="w-16 h-16 rounded-full bg-[#23B272]/15 border border-[#23B272]/30 flex items-center justify-center mx-auto text-[#52E3A4]">
+                <Check size={28} className="stroke-[3]" />
               </div>
 
               <div>
-                <h2 className="text-2xl font-bold text-white mb-2">
-                  Dossier Formatted.<br />
-                  <span className="text-zinc-400 font-light">Transmission ready.</span>
+                <div className="text-xs font-mono text-[#52E3A4] uppercase tracking-wider mb-1">
+                  CASE DOSSIER PREPARED &amp; REGISTERED
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-black text-white mb-2">
+                  Case ID: <span className="font-mono text-[#23B272]">{submittedCase.caseId}</span>
                 </h2>
-                <p className="text-sm text-zinc-400 max-w-md mx-auto leading-relaxed">
-                  Your project dossier has been formatted for our coordination team. If your default email client did not automatically launch, transmit directly to{' '}
-                  <a href="mailto:hello@digisynq.com" className="text-white underline hover:text-emerald-400">
-                    hello@digisynq.com
+                <p className="text-sm text-zinc-300 max-w-md mx-auto leading-relaxed">
+                  Your project dossier has been formatted and stored in browser memory. Transmit directly to our dispatch coordination desk at{' '}
+                  <a href="mailto:operations@digisynq.com" className="text-white underline hover:text-[#52E3A4]">
+                    operations@digisynq.com
                   </a>.
                 </p>
               </div>
@@ -313,28 +350,30 @@ export function StartSynqPage() {
               {step === 2 && (
                 <div className="space-y-8 animate-in fade-in duration-200">
                   <div>
-                    <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-2">
+                    <label htmlFor="synq-project" className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-2">
                       Project Title or Working Identifier
                     </label>
                     <input
+                      id="synq-project"
                       type="text"
                       placeholder="e.g. Untitled Drama Series / Live Tour / Feature"
                       value={form.project}
                       onChange={(e) => updateField('project', e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/[0.08] text-sm text-white placeholder-zinc-600 focus:border-white/40 outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/[0.08] text-sm text-white placeholder-zinc-600 focus:border-[#23B272] outline-none transition-colors"
                     />
                   </div>
 
                   <div>
-                    <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-2">
+                    <label htmlFor="synq-problem" className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-2">
                       Primary Requirement or Constraint (Required)
                     </label>
                     <textarea
+                      id="synq-problem"
                       rows={4}
                       placeholder="Describe what needs to be connected: e.g. need 6 days of soundstage floor, missing lead technical crew, post-finishing capital, or distribution windowing..."
                       value={form.problem}
                       onChange={(e) => updateField('problem', e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/[0.08] text-sm text-white placeholder-zinc-600 focus:border-white/40 outline-none transition-colors resize-none"
+                      className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/[0.08] text-sm text-white placeholder-zinc-600 focus:border-[#23B272] outline-none transition-colors resize-none"
                     />
                   </div>
 
@@ -350,7 +389,7 @@ export function StartSynqPage() {
                           onClick={() => toggleSupportType(opt)}
                           className={`p-3.5 rounded-xl text-left border text-xs transition-all cursor-pointer ${
                             form.support_type.includes(opt)
-                              ? 'bg-white text-black font-medium border-white'
+                              ? 'bg-[#23B272] text-[#03040A] font-bold border-[#23B272]'
                               : 'bg-white/[0.015] border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/20'
                           }`}
                         >
@@ -372,7 +411,7 @@ export function StartSynqPage() {
                       type="button"
                       disabled={!canAdvance2}
                       onClick={() => setStep(3)}
-                      className={`inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white text-black font-medium text-xs hover:bg-zinc-200 transition-all cursor-pointer ${
+                      className={`inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#23B272] text-[#03040A] font-bold text-xs hover:bg-[#52E3A4] transition-all cursor-pointer ${
                         !canAdvance2 ? 'opacity-30 pointer-events-none' : ''
                       }`}
                     >
@@ -388,41 +427,44 @@ export function StartSynqPage() {
                 <div className="space-y-8 animate-in fade-in duration-200">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-2">
+                      <label htmlFor="synq-name" className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-2">
                         Your Name / Organization
                       </label>
                       <input
+                        id="synq-name"
                         type="text"
                         placeholder="e.g. Elena Rostova / Producer"
                         value={form.name}
                         onChange={(e) => updateField('name', e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/[0.08] text-sm text-white placeholder-zinc-600 focus:border-white/40 outline-none transition-colors"
+                        className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/[0.08] text-sm text-white placeholder-zinc-600 focus:border-[#23B272] outline-none transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-2">
+                      <label htmlFor="synq-email" className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-2">
                         Direct Email Address
                       </label>
                       <input
+                        id="synq-email"
                         type="email"
                         placeholder="producer@domain.com"
                         value={form.email}
                         onChange={(e) => updateField('email', e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/[0.08] text-sm text-white placeholder-zinc-600 focus:border-white/40 outline-none transition-colors"
+                        className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/[0.08] text-sm text-white placeholder-zinc-600 focus:border-[#23B272] outline-none transition-colors"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-2">
+                    <label htmlFor="synq-notes" className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-2">
                       Confidential Project Notes
                     </label>
                     <textarea
+                      id="synq-notes"
                       rows={3}
                       placeholder="Any specific NDAs, calendar deadlines, or territorial restrictions..."
                       value={form.notes}
                       onChange={(e) => updateField('notes', e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/[0.08] text-sm text-white placeholder-zinc-600 focus:border-white/40 outline-none transition-colors resize-none"
+                      className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/[0.08] text-sm text-white placeholder-zinc-600 focus:border-[#23B272] outline-none transition-colors resize-none"
                     />
                   </div>
 

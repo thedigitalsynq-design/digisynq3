@@ -245,15 +245,23 @@ export function MechanismsPage() {
             </ul>
           </div>
 
-          <div className="mt-10 pt-6 border-t border-white/[0.08] flex items-center justify-between">
+          <div className="mt-8 pt-6 border-t border-white/[0.08] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <span className="text-xs font-mono text-zinc-500">Master Blueprint Reference: Section {7 + parseInt(activeMech.num, 10) - 1}</span>
-            <Link
-              to="/engines"
-              className="text-xs font-semibold text-[#52E3A4] hover:underline inline-flex items-center gap-1.5"
-            >
-              <span>Test in System Engine</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
+            <div className="flex items-center gap-3">
+              <Link
+                to="/diagnose"
+                className="px-4 py-2 rounded-full bg-[#23B272] text-[#03040A] hover:bg-[#52E3A4] text-xs font-bold transition-all shadow-sm"
+              >
+                Diagnose with Mechanism {activeMech.num} →
+              </Link>
+              <Link
+                to="/engines"
+                className="text-xs font-semibold text-[#52E3A4] hover:underline inline-flex items-center gap-1.5"
+              >
+                <span>Simulator</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>

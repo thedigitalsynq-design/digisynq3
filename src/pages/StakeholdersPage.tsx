@@ -196,13 +196,22 @@ export function StakeholdersPage() {
           <span className="text-xs font-mono text-zinc-500">
             Asset-Light Network Orchestration • Verified Capability Matching
           </span>
-          <Link
-            to={`/start?stakeholder=${activeStakeholder.id}`}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#23B272] text-[#03040A] hover:bg-[#52E3A4] font-bold text-xs tracking-wide transition-all shadow-md"
-          >
-            <span>Onboard as {activeStakeholder.name}</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              to="/diagnose"
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full border border-[#23B272]/40 hover:border-[#52E3A4] bg-white/[0.03] text-[#52E3A4] font-semibold text-xs tracking-wide transition-all"
+            >
+              <span>Diagnose {activeStakeholder.name} Issue</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+            <Link
+              to={`/start?stakeholder=${activeStakeholder.id}`}
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#23B272] text-[#03040A] hover:bg-[#52E3A4] font-bold text-xs tracking-wide transition-all shadow-md"
+            >
+              <span>Onboard as {activeStakeholder.name}</span>
+              <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
+            </Link>
+          </div>
         </div>
       </div>
         </>

@@ -8,10 +8,12 @@ const DETAILED_BRIEFS = [
   {
     id: 'box-office-clashes',
     category: 'Theatrical Yield',
-    code: 'Brief 01',
+    code: 'Field Note 01',
     title: 'The weekend eviction dynamic: Why release date clustering impacts theatrical exposure',
     readTime: '6 min read',
     date: 'Oct 2024',
+    methodology: 'Exhibitor screen holdover tracking across 42 multiplex circuits & territorial release calendar logs.',
+    relevantMechanisms: ['02. DETECT', '07. PRIORITIZE', '18. ALIGN'],
     summary: 'An analysis of multiplex screen allocation and holdover thresholds. How release calendar clustering impacts theatrical exposure for independent features, and how coordinated regional demand sync creates defensible release windows.',
     takeaways: [
       'Multiplex exhibitors operate on rapid initial holdover thresholds; missing early attendance markers often triggers immediate screen reallocations.',
@@ -22,10 +24,12 @@ const DETAILED_BRIEFS = [
   {
     id: 'stage-dark-time',
     category: 'Spatial Economics',
-    code: 'Brief 02',
+    code: 'Field Note 02',
     title: 'Facility utilization and dark floors: The soundstage scheduling dilemma',
     readTime: '8 min read',
     date: 'Nov 2024',
+    methodology: 'Occupancy logs & turnaround window audit across 18 regional soundstage facilities over a 12-month cycle.',
+    relevantMechanisms: ['01. OBSERVE', '10. MATCH', '16. ADAPT'],
     summary: 'Evaluating traditional multi-month soundstage leases against flexible burst-occupancy models. How coordinating existing facility capacity helps productions access studio infrastructure while improving floor utilization for facility operators.',
     takeaways: [
       'Studio facilities frequently experience unbooked turnaround gaps between marquee long-term tenant bookings.',
@@ -36,10 +40,12 @@ const DETAILED_BRIEFS = [
   {
     id: 'guild-parity',
     category: 'Craft Labor',
-    code: 'Brief 03',
+    code: 'Field Note 03',
     title: 'Crew assembly and availability: Overcoming informal network friction',
     readTime: '5 min read',
     date: 'Dec 2024',
+    methodology: 'Turnaround surveys & call sheet crew replacements across 26 feature and series productions.',
+    relevantMechanisms: ['04. MAP', '09. CONNECT', '12. STABILIZE'],
     summary: 'Why closed phone trees and informal hiring loops create pre-production friction while leaving qualified craftspeople between bookings. The case for verified availability coordination.',
     takeaways: [
       'Productions spend substantial pre-production time attempting to verify crew availability across informal networks.',
@@ -50,10 +56,12 @@ const DETAILED_BRIEFS = [
   {
     id: 'asset-light-financing',
     category: 'Capital Flow',
-    code: 'Brief 04',
+    code: 'Field Note 04',
     title: 'Asset-light cinema: The balance sheet evolution in modern filmmaking',
     readTime: '10 min read',
     date: 'Jan 2025',
+    methodology: 'Production budget decomposition & capital utilization analysis comparing owned facilities vs network-orchestrated pipelines.',
+    relevantMechanisms: ['08. SIMULATE', '11. RESOLVE', '23. PREVENT'],
     summary: 'Why accumulating heavy physical equipment, real estate, and permanent payroll is no longer necessary to produce quality cinema. How coordinating existing capacity creates greater operational agility.',
     takeaways: [
       'Holding heavy physical assets creates depreciation drag and financial pressure to force projects into owned facilities regardless of creative fit.',
@@ -101,43 +109,43 @@ export function InsightsPage() {
       {/* ── 01. Hero Section ── */}
       <section className="pt-40 sm:pt-48 pb-20 sm:pb-28 px-6 sm:px-8 max-w-6xl mx-auto">
         <div className="max-w-4xl">
-          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-300 mb-8 tracking-wide">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            <span className="font-mono text-emerald-400 font-medium">DISPATCHES</span>
+          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-[#23B272]/30 bg-[#23B272]/5 text-xs text-zinc-300 mb-8 tracking-wide">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#52E3A4] animate-pulse" />
+            <span className="font-mono text-[#52E3A4] font-medium">DIGISYNQ FIELD NOTES</span>
             <span className="text-zinc-600">//</span>
-            <span className="text-white font-medium">Research &amp; Industry Telemetry</span>
+            <span className="text-white font-medium">Empirical Operational Telemetry</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.03] [letter-spacing:-0.035em] mb-6">
-            The Signals in the Noise.
-            <span className="text-zinc-400 font-light block text-2xl sm:text-4xl mt-2">
-              Empirical Field Telemetry.
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white leading-[1.03] [letter-spacing:-0.035em] mb-6">
+            DigiSynq Field Notes.
+            <span className="text-[#52E3A4] font-bold block text-2xl sm:text-4xl mt-2">
+              Empirical Learnings from the Entertainment Floor.
             </span>
           </h1>
 
-          <h2 className="text-lg sm:text-xl text-zinc-300 font-light leading-relaxed max-w-3xl mb-12">
-            Field investigations into theatrical release eviction curves, soundstage dark-floor economics, craft crew assembly friction, and asset-light balance sheet models.
+          <h2 className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed max-w-3xl mb-12">
+            Field audits, root-cause investigations, and operational telemetry examining theatrical release eviction curves, soundstage dark-floor economics, and asset-light coordination models.
           </h2>
 
           <div className="flex flex-wrap items-center gap-4">
             <Link
-              to="/start"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white text-[#06080d] hover:bg-zinc-200 font-medium text-sm tracking-wide transition-all duration-200 active:scale-95 shadow-sm"
+              to="/diagnose"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#23B272] text-[#03040A] hover:bg-[#52E3A4] font-bold text-sm tracking-wide transition-all duration-200 active:scale-95 shadow-md"
             >
-              <span>Request Project Telemetry</span>
-              <ArrowRight className="w-4 h-4" />
+              <span>Diagnose a Production Issue</span>
+              <ArrowRight className="w-4 h-4 stroke-[2.5]" />
             </Link>
             <Link
               to="/workshops"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-emerald-500/25 hover:border-emerald-500/40 bg-emerald-500/[0.03] text-emerald-300 font-medium text-sm transition-all duration-200"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-[#23B272]/30 hover:border-[#52E3A4] bg-white/[0.03] text-[#52E3A4] font-medium text-sm transition-all duration-200"
             >
-              <span>Explore Synq Labs</span>
+              <span>Explore DigiSynq Labs</span>
             </Link>
             <a
               href="#dispatches"
               className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/10 hover:border-white/20 bg-white/[0.02] text-zinc-300 font-medium text-sm transition-all duration-200"
             >
-              <span>Field Dispatches</span>
+              <span>Read Field Notes</span>
             </a>
           </div>
         </div>
@@ -148,15 +156,15 @@ export function InsightsPage() {
         <div className="max-w-5xl mx-auto px-6 sm:px-8">
 
           <div className="max-w-2xl mb-12">
-            <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
-              Intelligence Ledger
+            <span className="text-xs font-mono uppercase tracking-widest text-[#52E3A4] mb-3 block">
+              Field Telemetry Ledger
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-              The Telemetry Ledger.<br />
-              <span className="text-zinc-400 font-light">Empirical audits &amp; field findings.</span>
+              Field Findings &amp; Root-Cause Audits.<br />
+              <span className="text-zinc-400 font-light">Empirical data from active productions.</span>
             </h2>
-            <p className="text-base text-zinc-400 leading-relaxed">
-              Real-world telemetry gathered from active soundstages, virtual volumes, and territorial distribution circuits.
+            <p className="text-sm text-zinc-400 leading-relaxed">
+              Synthesized learnings and operational takeaways gathered across soundstages, virtual production volumes, and international delivery pipelines.
             </p>
           </div>
 
@@ -205,6 +213,19 @@ export function InsightsPage() {
                   <p className="text-sm text-zinc-400 leading-relaxed line-clamp-2">
                     {brief.summary}
                   </p>
+
+                  {brief.methodology && (
+                    <div className="pt-1 flex flex-wrap items-center gap-2 text-xs">
+                      <span className="font-mono text-[11px] text-zinc-500 bg-white/[0.03] px-2 py-0.5 rounded border border-white/[0.05]">
+                        <strong className="text-zinc-400">Audit Source:</strong> {brief.methodology}
+                      </span>
+                      {brief.relevantMechanisms?.map(m => (
+                        <span key={m} className="font-mono text-[10px] text-[#52E3A4] bg-[#23B272]/10 px-2 py-0.5 rounded border border-[#23B272]/20">
+                          {m}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-500 group-hover:text-white transition-colors shrink-0 pt-2">
