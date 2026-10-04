@@ -2,46 +2,49 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import digisynqLogo from '../assets/digisynq-logo.png';
 import { ArrowUpRight } from 'lucide-react';
-import { InstagramIcon, FacebookIcon, LinkedinIcon } from './SocialIcons';
+import { BRAND } from '../data/blueprint_data';
+import { LinkedinIcon, InstagramIcon, FacebookIcon } from './SocialIcons';
 
 const FOOTER_COLUMNS = [
   {
-    title: 'Model',
+    title: 'Infrastructure & System',
     links: [
-      { href: '/the-synq', label: 'The Synq' },
-      { href: '/how-it-works', label: 'How It Works' },
-      { href: '/ecosystem', label: 'Ecosystem' },
-      { href: '/runbook', label: 'Business Runbook' },
-      { href: '/the-synq#problem-engine', label: 'Problem Engine' },
+      { href: '/mechanisms', label: '23 Master Mechanisms' },
+      { href: '/continuum', label: '9-Stage Continuum' },
+      { href: '/stakeholders', label: '12 Stakeholder Archetypes' },
+      { href: '/engines', label: 'Simulation & Diagnostic Engines' },
+      { href: '/the-synq', label: 'Cinematic Synq Deck' },
     ],
   },
   {
-    title: 'Initiatives',
+    title: 'Resolution & Intelligence',
     links: [
-      { href: '/workshops', label: 'Synq Labs & Experiments' },
-      { href: '/insights', label: 'Industry Insights' },
-      { href: '/about', label: 'About DigiSynq' },
+      { href: '/how-it-works', label: 'System Resolution Engagement' },
+      { href: '/runbook', label: 'Operational Runbook' },
+      { href: '/insights', label: 'Industry Research Briefs' },
+      { href: '/workshops', label: '6 Capability Labs' },
+      { href: '/blueprint', label: '70-Section Master Codex' },
+      { href: '/about', label: 'About & Operating Principles' },
     ],
   },
   {
     title: 'Engage',
     links: [
-      { href: '/start', label: 'Start a Synq' },
-      { href: 'mailto:hello@digisynq.com', label: 'Direct Inquiries', isExternal: true },
+      { href: '/start', label: 'Initiate System Resolution' },
+      { href: '/start?mode=audit', label: 'Request Slate Risk Audit' },
+      { href: 'mailto:hello@digisynq.com', label: 'Direct Operational Hotline', isExternal: true },
     ],
   },
 ];
 
 export function SiteFooter() {
   return (
-    <footer className="bg-[#050609] border-t border-white/[0.06] pt-24 pb-16 relative overflow-hidden text-zinc-400" role="contentinfo">
+    <footer className="bg-[#03040A] border-t border-white/[0.06] pt-20 pb-16 relative overflow-hidden text-zinc-400" role="contentinfo">
       <div className="max-w-6xl mx-auto px-6 sm:px-8">
-        
         {/* Main Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 sm:gap-16 pb-16 border-b border-white/[0.06]">
-          
           {/* Brand info */}
-          <div className="md:col-span-5 space-y-5">
+          <div className="md:col-span-5 space-y-4">
             <Link to="/" className="inline-block" aria-label="DigiSynq home">
               <img
                 src={digisynqLogo}
@@ -49,11 +52,46 @@ export function SiteFooter() {
                 className="h-5 w-auto object-contain opacity-90"
               />
             </Link>
-            <p className="text-sm text-zinc-400 leading-relaxed max-w-sm">
-              The coordination layer for entertainment. An asset-light network connecting distributed talent, partner facilities, financing, and audience channels across the entertainment ecosystem.
+            <div className="text-xs font-mono text-[#52E3A4]">
+              {BRAND.tagline}
+            </div>
+            <p className="text-xs text-zinc-400 leading-relaxed max-w-sm">
+              {BRAND.executiveDefinition}
             </p>
-            <div className="text-xs text-zinc-500">
-              Asset-light model • Coordinating distributed entertainment capacity
+            <div className="pt-2 text-[11px] font-mono text-zinc-500 space-y-1">
+              <div><strong>Mission:</strong> {BRAND.mission}</div>
+              <div><strong>Philosophy:</strong> {BRAND.philosophy}</div>
+            </div>
+
+            {/* Social Icons from SocialIcons.tsx */}
+            <div className="pt-3 flex items-center gap-3">
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noreferrer"
+                className="p-2 rounded-lg border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.08] hover:text-[#52E3A4] transition-all text-zinc-400"
+                aria-label="LinkedIn"
+              >
+                <LinkedinIcon className="w-4 h-4" />
+              </a>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noreferrer"
+                className="p-2 rounded-lg border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.08] hover:text-[#52E3A4] transition-all text-zinc-400"
+                aria-label="Instagram"
+              >
+                <InstagramIcon className="w-4 h-4" />
+              </a>
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noreferrer"
+                className="p-2 rounded-lg border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.08] hover:text-[#52E3A4] transition-all text-zinc-400"
+                aria-label="Facebook"
+              >
+                <FacebookIcon className="w-4 h-4" />
+              </a>
             </div>
           </div>
 
@@ -92,13 +130,15 @@ export function SiteFooter() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500 font-mono">
           <div>
-            &copy; {new Date().getFullYear()} DigiSynq. All rights reserved.
+            &copy; {new Date().getFullYear()} DIGISYNQ. {BRAND.oneSentenceCategory}
           </div>
           <div className="flex items-center gap-6">
-            <Link to="/about" className="hover:text-zinc-300 transition-colors">Privacy & Principles</Link>
-            <Link to="/start" className="hover:text-zinc-300 transition-colors">Client Intake</Link>
+            <Link to="/runbook" className="hover:text-[#52E3A4] transition-colors">Runbook</Link>
+            <Link to="/insights" className="hover:text-[#52E3A4] transition-colors">Insights</Link>
+            <Link to="/blueprint" className="hover:text-[#52E3A4] transition-colors">Master Codex</Link>
+            <Link to="/start" className="hover:text-[#52E3A4] transition-colors">Start a Synq</Link>
           </div>
         </div>
       </div>

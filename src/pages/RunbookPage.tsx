@@ -4,6 +4,7 @@ import {
   ArrowRight, ArrowUpRight, Check, ShieldCheck, 
   Cpu, Compass, Zap, Layers, FileText, Activity, Clock, ChevronRight
 } from 'lucide-react';
+import { TopographicBackground } from '../components/TopographicBackground';
 
 const RUNBOOK_SECTIONS = [
   { id: 'model', label: '01. Operating Model' },
@@ -202,26 +203,29 @@ export function RunbookPage() {
   const activePlaybook = STAKEHOLDER_PLAYBOOKS.find(p => p.id === activePlaybookId) || STAKEHOLDER_PLAYBOOKS[0];
 
   return (
-    <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white min-h-screen">
+    <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white min-h-screen relative overflow-hidden">
+      <TopographicBackground className="opacity-15 pointer-events-none -z-10 fixed inset-0" />
 
       {/* ── 01. Hero Section ── */}
       <section className="pt-40 sm:pt-48 pb-20 sm:pb-28 px-6 sm:px-8 max-w-6xl mx-auto">
         <div className="max-w-4xl">
           <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-300 mb-8 tracking-wide">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            <span className="font-mono text-zinc-400">RUNBOOK</span>
+            <span className="font-mono text-emerald-400 font-medium">OPERATIONAL RUNBOOK</span>
             <span className="text-zinc-600">//</span>
-            <span className="text-white font-medium">Institutional Specification &amp; Codex</span>
+            <span className="text-white font-medium">Standard Operating Protocols</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            The Operating Bible.<br />
-            <span className="text-zinc-400 font-light">The institutional codex.</span>
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.03] [letter-spacing:-0.035em] mb-6">
+            The Mechanics of Order.
+            <span className="text-zinc-400 font-light block text-2xl sm:text-4xl mt-2">
+              The Institutional Runbook.
+            </span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-zinc-300 leading-relaxed max-w-3xl font-normal mb-10">
-            An institutional operational runbook detailing how DigiSynq coordinates the entertainment ecosystem as an asset-light network — commercial models, covenant structures, risk mitigation, and economic realization.
-          </p>
+          <h2 className="text-lg sm:text-xl text-zinc-300 leading-relaxed max-w-3xl font-light mb-10">
+            The institutional blueprint detailing how DigiSynq coordinates the entertainment ecosystem as an asset-light network — commercial models, covenant structures, risk mitigation, and economic realization.
+          </h2>
 
           {/* Quick Anchor Pills */}
           <div className="flex flex-wrap items-center gap-2 pt-2">

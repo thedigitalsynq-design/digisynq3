@@ -1,457 +1,166 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  ArrowRight, ArrowUpRight, Check, ChevronRight, 
-  FlaskConical, Cpu, Layers, Radio, Sparkles, Activity, ShieldCheck 
+import {
+  ArrowRight,
+  GraduationCap,
+  CheckCircle2,
+  Cpu,
+  Layers,
+  Sparkles,
+  Video,
+  PenTool,
+  Wrench,
+  Megaphone,
+  TrendingUp,
+  FileText,
 } from 'lucide-react';
-import { WORKSHOP_PROGRAMS } from '../data/core_data';
-
-interface ExperimentTrack {
-  code: string;
-  title: string;
-  domain: string;
-  hypothesis: string;
-  methodology: string;
-  status: 'ACTIVE TRIAL' | 'BENCHMARKING' | 'SANDBOX DEPLOYMENT' | 'PILOT STAGE';
-  targetOutcome: string;
-}
-
-const ACTIVE_EXPERIMENTS: ExperimentTrack[] = [
-  {
-    code: 'EXP-01',
-    title: 'Virtual Production & Real-Time Volume Calibration',
-    domain: 'Virtual Production / Unreal Engine',
-    hypothesis: 'Pre-flight virtual asset standardization and multi-camera parallax sync eliminates costly on-set real-time adjustments.',
-    methodology: 'Stress-testing photorealistic Unreal Engine 5.4 environments across partner LED volumes and camera tracking rigs.',
-    status: 'ACTIVE TRIAL',
-    targetOutcome: 'Zero on-set asset adjustments; strict adherence to stage shoot schedules without volume overtime bleed.',
-  },
-  {
-    code: 'EXP-02',
-    title: 'Camera-to-Cloud (C2C) Real-Time Ingest Telemetry',
-    domain: 'Data & Editorial Pipeline',
-    hypothesis: 'Streaming encrypted proxy dailies directly from camera packages to remote editorial suites reduces turnover latency from 72 hours to < 4 hours.',
-    methodology: 'Benchmarking cellular bonded and satellite ingest from active field locations directly into finishing color and editorial pipelines.',
-    status: 'BENCHMARKING',
-    targetOutcome: 'Editorial rough-cuts available on wrap day; rapid cross-department review loops for directors and showrunners.',
-  },
-  {
-    code: 'EXP-03',
-    title: 'Fractional Soundstage Burst-Occupancy Protocols',
-    domain: 'Facility Economics',
-    hypothesis: 'Coordinating dark turnaround windows between long-term tenant bookings unlocks premium soundstage floors for agile productions at accessible rates.',
-    methodology: 'Pilot scheduling frameworks with partner studio lots in South Asian production corridors to monetize idle stage floor days.',
-    status: 'PILOT STAGE',
-    targetOutcome: 'High floor utilization for facility operators; professional acoustic soundstages accessible to independent creators.',
-  },
-  {
-    code: 'EXP-04',
-    title: 'Spatial Audio & Multi-Channel Acoustic Pre-Modeling',
-    domain: 'Sound Engineering',
-    hypothesis: 'Integrating virtual acoustic room impulse response modeling during pre-production prevents phase cancellation and expensive re-mix passes.',
-    methodology: 'A/B testing binaural monitoring and Dolby Atmos theatrical mastering setups across live set recording environments.',
-    status: 'ACTIVE TRIAL',
-    targetOutcome: 'Unified acoustic continuity from set recording directly through final multi-format theatrical/OTT mix.',
-  },
-  {
-    code: 'EXP-05',
-    title: 'AI-Assisted Packaging & Technical Feasibility Modeling',
-    domain: 'Packaging & Pre-Production',
-    hypothesis: 'Generative spatial pre-visualization and budget constraint modeling reduces script-to-greenlight packaging cycles by 60%.',
-    methodology: 'Testing algorithmic department dependency mapping and automated line-item feasibility audits against verified guild rate cards.',
-    status: 'SANDBOX DEPLOYMENT',
-    targetOutcome: 'Fully bonded, feasible production architectures ready for director attachment and milestone capital release.',
-  },
-  {
-    code: 'EXP-06',
-    title: 'Pre-Demand Release Clustering & Screen Optimization',
-    domain: 'Distribution & Exhibition',
-    hypothesis: 'Coordinating regional audience density telemetry prevents premature multiplex screen eviction for independent and mid-budget features.',
-    methodology: 'Deploying geo-targeted demand pooling and synchronized weekend event screening clusters across multiplex circuits.',
-    status: 'PILOT STAGE',
-    targetOutcome: 'Defensible theatrical holdover metrics; extended box office longevity and optimized territorial OTT licensing.',
-  },
-];
-
-const LAB_STAGES = [
-  { step: '01', name: 'Formulate', desc: 'Identify critical production bottlenecks, friction points, or emerging technological shifts.' },
-  { step: '02', name: 'Hypothesize', desc: 'Design an asset-light operational or technical workflow that resolves the constraint.' },
-  { step: '03', name: 'Sandbox Trial', desc: 'Stress-test the protocol on partner soundstages, virtual volumes, or editing bays.' },
-  { step: '04', name: 'Benchmark', desc: 'Measure speed, cost, parity, and fidelity against traditional industry standards.' },
-  { step: '05', name: 'Deploy', desc: 'Package verified workflows into live production and guild capability programs.' },
-  { step: '06', name: 'Open Dispatch', desc: 'Publish telemetry and field insights to elevate the broader entertainment ecosystem.' },
-];
+import { WORKSHOP_TRACKS, WorkshopTrack } from '../data/blueprint_data';
 
 export function WorkshopsPage() {
-  const [activeExpIndex, setActiveExpIndex] = useState(0);
-  const [activeLabIndex, setActiveLabIndex] = useState(0);
-
-  const activeExp = ACTIVE_EXPERIMENTS[activeExpIndex];
-  const activeLab = WORKSHOP_PROGRAMS[activeLabIndex] || WORKSHOP_PROGRAMS[0];
+  const [selectedTrackIdx, setSelectedTrackIdx] = useState(0);
+  const activeTrack = WORKSHOP_TRACKS[selectedTrackIdx];
 
   return (
-    <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white min-h-screen">
+    <main className="bg-[#03040A] text-[#ECEEF5] selection:bg-[#23B272] selection:text-[#03040A] min-h-screen pt-36 pb-24 px-6 sm:px-8 max-w-6xl mx-auto">
+      {/* ── Header ── */}
+      <div className="max-w-4xl mb-14">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-white/10 bg-white/[0.03] text-xs text-zinc-300 font-mono mb-4">
+          <span className="w-2 h-2 rounded-full bg-[#52E3A4]" />
+          <span>SECTION 42</span>
+          <span className="text-zinc-600">//</span>
+          <span className="text-[#52E3A4]">CAPABILITY &amp; WORKSHOP SYSTEM</span>
+        </div>
 
-      {/* ── 01. Hero Section ── */}
-      <section className="pt-40 sm:pt-48 pb-20 sm:pb-28 px-6 sm:px-8 max-w-6xl mx-auto">
-        <div className="max-w-4xl">
-          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-300 mb-8 tracking-wide">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="font-mono text-zinc-400">SYNQ LABS</span>
-            <span className="text-zinc-600">//</span>
-            <span className="text-white font-medium">Applied R&amp;D &amp; Empirical Trials</span>
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold text-white tracking-tight leading-[1.03] mb-4">
+          Forging the Adaptive Craftsman.
+          <span className="text-zinc-400 font-light block text-2xl sm:text-4xl mt-2">
+            Six Professional Capability Tracks.
+          </span>
+        </h1>
+
+        <h2 className="text-base sm:text-xl text-zinc-300 leading-relaxed font-light max-w-3xl mb-8">
+          Where practical floor discipline meets systemic agility — building technicians and creators who thrive across the evolving entertainment landscape.
+        </h2>
+
+        {/* Strategic Purpose Callout */}
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 p-4 rounded-xl border border-white/[0.08] bg-[#090B14] font-mono text-xs text-zinc-300">
+          <div className="text-center p-2 rounded bg-black/40">
+            <span className="text-[#52E3A4] block text-[10px]">PILLAR 1</span>
+            Capability Dev
           </div>
-
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            We are labs.<br />
-            <span className="text-zinc-400 font-light">We experiment.</span>
-          </h1>
-
-          <p className="text-lg sm:text-xl text-zinc-300 font-normal leading-relaxed max-w-3xl mb-12">
-            Entertainment transformation does not originate in slide decks. We operate active experimental sandboxes where directors, technical department heads, facility operators, and engineers stress-test new workflows, virtual volumes, camera-to-cloud pipelines, and coordination models before deploying them on live production sets.
-          </p>
-
-          <div className="flex flex-wrap items-center gap-4">
-            <Link
-              to="/start"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white text-[#06080d] hover:bg-zinc-200 font-medium text-sm tracking-wide transition-all duration-200 active:scale-95 shadow-sm"
-            >
-              <span>Initiate a Lab Trial</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <a
-              href="#experiments"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/10 hover:border-white/20 bg-white/[0.02] text-zinc-300 font-medium text-sm transition-all duration-200"
-            >
-              <span>Inspect Active Trials</span>
-            </a>
+          <div className="text-center p-2 rounded bg-black/40">
+            <span className="text-[#52E3A4] block text-[10px]">PILLAR 2</span>
+            Talent Discovery
+          </div>
+          <div className="text-center p-2 rounded bg-black/40">
+            <span className="text-[#52E3A4] block text-[10px]">PILLAR 3</span>
+            Network Expansion
+          </div>
+          <div className="text-center p-2 rounded bg-black/40">
+            <span className="text-[#52E3A4] block text-[10px]">PILLAR 4</span>
+            Trust Formation
+          </div>
+          <div className="text-center p-2 rounded bg-black/40">
+            <span className="text-[#52E3A4] block text-[10px]">PILLAR 5</span>
+            System Intelligence
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* ── 02. The Scientific Progression Loop ── */}
-      <section className="py-24 sm:py-32 border-t border-white/[0.06] bg-[#050608]">
-        <div className="max-w-6xl mx-auto px-6 sm:px-8">
-          
-          <div className="max-w-2xl mb-14">
-            <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
-              Methodology
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-              The Scientific Loop.<br />
-              <span className="text-zinc-400 font-light">From hypothesis to field proof.</span>
-            </h2>
-            <p className="text-base text-zinc-400 leading-relaxed">
-              Every workflow and technical standard we deploy is proven through structured, safe-to-fail experimentation.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {LAB_STAGES.map((s) => (
-              <div
-                key={s.step}
-                className="p-6 rounded-2xl bg-[#090b10] border border-white/[0.06] hover:border-white/15 transition-all flex flex-col justify-between h-44"
-              >
-                <div className="flex items-center justify-between text-xs font-mono text-zinc-500">
-                  <span>Phase {s.step}</span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/80" />
-                </div>
-                <div>
-                  <h4 className="text-base font-semibold text-white mb-1.5">
-                    {s.name}
-                  </h4>
-                  <p className="text-xs text-zinc-400 leading-relaxed">
-                    {s.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* ── 03. Active Experiments Terminal ── */}
-      <section id="experiments" className="py-24 sm:py-32 border-t border-white/[0.06]">
-        <div className="max-w-6xl mx-auto px-6 sm:px-8">
-          
-          <div className="max-w-3xl mb-14">
-            <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
-              Active Lab Trials
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-              Active Sandboxes.<br />
-              <span className="text-zinc-400 font-light">Six empirical industry trials.</span>
-            </h2>
-            <p className="text-base text-zinc-400 leading-relaxed">
-              Live technical, operational, and commercial prototypes currently running across our partner soundstages, digital suites, and distribution circuits.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            
-            {/* Left: Experiment Selector */}
-            <div className="lg:col-span-5 space-y-2.5">
-              {ACTIVE_EXPERIMENTS.map((exp, i) => {
-                const isSelected = i === activeExpIndex;
-                return (
-                  <button
-                    key={exp.code}
-                    type="button"
-                    onClick={() => setActiveExpIndex(i)}
-                    className={`w-full p-5 rounded-2xl text-left border transition-all cursor-pointer flex items-center justify-between ${
-                      isSelected
-                        ? 'bg-white/[0.05] border-emerald-500/40 text-white shadow-sm'
-                        : 'bg-white/[0.015] border-white/[0.06] text-zinc-400 hover:border-white/15 hover:text-white'
-                    }`}
-                  >
-                    <div>
-                      <div className="flex items-center gap-2 mb-1 text-[11px] font-mono text-zinc-500">
-                        <span className="text-emerald-400 font-bold">{exp.code}</span>
-                        <span>•</span>
-                        <span>{exp.domain}</span>
-                      </div>
-                      <div className="text-sm font-semibold text-white">
-                        {exp.title}
-                      </div>
-                      <div className="text-xs text-zinc-500 mt-1 flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                        <span>{exp.status}</span>
-                      </div>
-                    </div>
-                    <ChevronRight size={16} className={`shrink-0 transition-opacity ${isSelected ? 'text-emerald-400 opacity-100' : 'opacity-20'}`} />
-                  </button>
-                );
-              })}
+      {/* ── Track Selector Grid ── */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+        {WORKSHOP_TRACKS.map((trk, tIdx) => (
+          <button
+            key={trk.id}
+            onClick={() => setSelectedTrackIdx(tIdx)}
+            className={`p-5 rounded-2xl border text-left transition-all ${
+              selectedTrackIdx === tIdx
+                ? 'bg-[#16543D] border-[#52E3A4] text-white shadow-[0_0_24px_rgba(82,227,164,0.2)]'
+                : 'bg-[#090B14] border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/[0.14]'
+            }`}
+          >
+            <div className="flex items-center justify-between mb-2">
+              <span className="font-mono text-xs text-[#52E3A4]">{trk.code}</span>
+              <span className="text-[10px] font-mono text-zinc-400 px-2 py-0.5 rounded bg-black/30">
+                {trk.category}
+              </span>
             </div>
+            <div className="font-bold text-sm text-white mb-1">{trk.name}</div>
+            <div className="text-xs text-zinc-400 line-clamp-2">{trk.scope}</div>
+          </button>
+        ))}
+      </div>
 
-            {/* Right: Experiment Detail Slate */}
-            <div className="lg:col-span-7 rounded-3xl bg-[#090b10] border border-white/[0.06] p-8 sm:p-12 space-y-8">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-white/[0.06] gap-3">
-                <div>
-                  <div className="flex items-center gap-2 text-xs font-mono text-emerald-400 mb-1">
-                    <span>{activeExp.code}</span>
-                    <span>//</span>
-                    <span>{activeExp.domain}</span>
-                  </div>
-                  <h3 className="text-2xl font-bold text-white tracking-tight">
-                    {activeExp.title}
-                  </h3>
-                </div>
-                <span className="text-[11px] font-mono text-emerald-300 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 shrink-0 self-start sm:self-center">
-                  {activeExp.status}
+      {/* ── Active Track Deep-Dive ── */}
+      <div className="p-8 sm:p-10 rounded-2xl border border-white/[0.1] bg-[#090B14] shadow-2xl relative mb-16">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+          <div>
+            <div className="font-mono text-xs text-[#52E3A4] mb-1">
+              LEARNING TRACK {activeTrack.code} // {activeTrack.category.toUpperCase()}
+            </div>
+            <h2 className="text-3xl font-bold text-white tracking-tight">{activeTrack.name}</h2>
+          </div>
+          <div className="px-4 py-2 rounded-xl border border-white/[0.08] bg-black/40 font-mono text-xs text-[#D4F838] shrink-0">
+            Format: {activeTrack.format}
+          </div>
+        </div>
+
+        <p className="text-base text-zinc-300 leading-relaxed mb-8 max-w-3xl">
+          {activeTrack.scope}
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6 border-t border-white/[0.08]">
+          {/* Key Learning Outcomes */}
+          <div>
+            <div className="text-xs font-mono text-[#52E3A4] uppercase tracking-wider mb-3">
+              Mastery Outcomes:
+            </div>
+            <ul className="space-y-3">
+              {activeTrack.outcomes.map((out, oIdx) => (
+                <li key={oIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-zinc-300">
+                  <CheckCircle2 className="w-4 h-4 text-[#52E3A4] shrink-0 mt-0.5" />
+                  <span>{out}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Tools & Workflow Environments */}
+          <div>
+            <div className="text-xs font-mono text-[#D4F838] uppercase tracking-wider mb-3">
+              Production Workflows &amp; Tooling:
+            </div>
+            <div className="flex flex-wrap gap-2 mb-6">
+              {activeTrack.keyTools.map((tool, tIdx) => (
+                <span
+                  key={tIdx}
+                  className="px-3 py-1.5 rounded-lg border border-white/[0.08] bg-black/40 font-mono text-xs text-white"
+                >
+                  {tool}
                 </span>
-              </div>
-
-              <div className="space-y-6">
-                <div>
-                  <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider block mb-2">
-                    Core Hypothesis
-                  </span>
-                  <p className="text-sm sm:text-base text-zinc-200 leading-relaxed">
-                    {activeExp.hypothesis}
-                  </p>
-                </div>
-
-                <div>
-                  <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider block mb-2">
-                    Methodology & Sandbox Environment
-                  </span>
-                  <p className="text-sm text-zinc-400 leading-relaxed">
-                    {activeExp.methodology}
-                  </p>
-                </div>
-
-                <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] space-y-2">
-                  <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider block font-medium">
-                    Target Verified Outcome
-                  </span>
-                  <p className="text-sm text-zinc-200 leading-relaxed">
-                    {activeExp.targetOutcome}
-                  </p>
-                </div>
-
-                <div className="pt-6 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4">
-                  <div className="text-xs text-zinc-400">
-                    <span className="text-white block font-medium">Have a related project or facility?</span>
-                    <span>Collaborate with Synq Labs on this trial</span>
-                  </div>
-                  <Link
-                    to="/start"
-                    state={{ problem: `${activeExp.code}: ${activeExp.title}`, role: 'Research & Lab Collaborator' }}
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white text-black font-medium text-xs hover:bg-zinc-200 transition-all shadow-md"
-                  >
-                    Participate in this trial
-                    <ArrowRight size={14} />
-                  </Link>
-                </div>
-              </div>
-
+              ))}
             </div>
 
-          </div>
-
-        </div>
-      </section>
-
-      {/* ── 04. Guild Capability Sprints (Applied Masterclasses) ── */}
-      <section id="curriculum" className="py-24 sm:py-32 border-t border-white/[0.06] bg-[#050608]">
-        <div className="max-w-6xl mx-auto px-6 sm:px-8">
-          
-          <div className="max-w-3xl mb-14">
-            <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
-              Capability Sprints
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-              Capability Sprints.<br />
-              <span className="text-zinc-400 font-light">Packaging breakthroughs into craft.</span>
-            </h2>
-            <p className="text-base text-zinc-400 leading-relaxed">
-              When an experiment produces a verified breakthrough, we package it into intensive hands-on labs for directors, cinematographers, sound mixers, and technicians.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            
-            {/* Left: Program Directory Selector */}
-            <div className="lg:col-span-5 space-y-2.5">
-              {WORKSHOP_PROGRAMS.map((prog, i) => {
-                const isSelected = i === activeLabIndex;
-                return (
-                  <button
-                    key={prog.id}
-                    type="button"
-                    onClick={() => setActiveLabIndex(i)}
-                    className={`w-full p-5 rounded-2xl text-left border transition-all cursor-pointer flex items-center justify-between ${
-                      isSelected
-                        ? 'bg-white/[0.05] border-white/30 text-white shadow-sm'
-                        : 'bg-white/[0.015] border-white/[0.06] text-zinc-400 hover:border-white/15 hover:text-white'
-                    }`}
-                  >
-                    <div>
-                      <div className="flex items-center gap-2 mb-1 text-[11px] font-mono text-zinc-500">
-                        <span>Sprint 0{i + 1}</span>
-                        <span>•</span>
-                        <span className="text-emerald-400">{prog.category}</span>
-                      </div>
-                      <div className="text-sm font-semibold text-white">
-                        {prog.title}
-                      </div>
-                      <div className="text-xs text-zinc-400 mt-0.5">
-                        {prog.format}
-                      </div>
-                    </div>
-                    <ChevronRight size={16} className={`shrink-0 transition-opacity ${isSelected ? 'text-white opacity-100' : 'opacity-20'}`} />
-                  </button>
-                );
-              })}
+            <div className="p-4 rounded-xl border border-white/[0.06] bg-black/30 text-xs text-zinc-400 font-mono">
+              Participants are vetted and onboarded directly into the verified DIGISYNQ technician and creator capacity network upon completion.
             </div>
-
-            {/* Right: Masterclass Deep Dive Slate */}
-            <div className="lg:col-span-7 rounded-3xl bg-[#090b10] border border-white/[0.06] p-8 sm:p-12 space-y-8">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-white/[0.06] gap-3">
-                <div>
-                  <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider block mb-1">
-                    {activeLab.category} Sprint
-                  </span>
-                  <h3 className="text-2xl font-bold text-white tracking-tight">
-                    {activeLab.title}
-                  </h3>
-                </div>
-                <span className="text-xs font-mono text-zinc-400 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] shrink-0 self-start sm:self-center">
-                  {activeLab.format}
-                </span>
-              </div>
-
-              <div className="space-y-6">
-                <div>
-                  <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider block mb-2">
-                    Curriculum Architecture
-                  </span>
-                  <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
-                    {activeLab.description}
-                  </p>
-                </div>
-
-                <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] space-y-2">
-                  <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider block font-medium">
-                    Verified Learning Outcome
-                  </span>
-                  <p className="text-sm text-zinc-200 leading-relaxed">
-                    {activeLab.outcome}
-                  </p>
-                </div>
-
-                {activeLab.flow && (
-                  <div>
-                    <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider block mb-3">
-                      Sprint Progression
-                    </span>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                      {activeLab.flow.map((fl, idx) => (
-                        <div key={idx} className="p-3 rounded-xl bg-white/[0.015] border border-white/[0.06] text-center">
-                          <span className="text-[10px] font-mono text-zinc-500 block">0{idx + 1}</span>
-                          <span className="text-xs font-medium text-white">{fl}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                <div className="pt-6 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4">
-                  <div className="text-xs text-zinc-400">
-                    <span className="text-white block font-medium">Cohort Applications</span>
-                    <span>Reviewed on a rolling basis</span>
-                  </div>
-                  <Link
-                    to="/start"
-                    state={{ problem: `Cohort Application: ${activeLab.title}`, role: 'Guild Craft Technician' }}
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white text-black font-medium text-xs hover:bg-zinc-200 transition-all shadow-md"
-                  >
-                    Apply for this sprint
-                    <ArrowRight size={14} />
-                  </Link>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* ── 05. Call to Action ── */}
-      <section className="py-24 sm:py-32 border-t border-white/[0.06]">
-        <div className="max-w-4xl mx-auto px-6 sm:px-8 text-center">
-          <div className="w-12 h-12 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mx-auto text-emerald-400 mb-6">
-            <FlaskConical size={22} />
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-6">
-            Formulate a Hypothesis.<br />
-            <span className="text-zinc-400 font-light">Stress-test your pipeline with Synq Labs.</span>
-          </h2>
-          <p className="text-base text-zinc-400 leading-relaxed max-w-xl mx-auto mb-10">
-            Whether you operate a facility, build real-time media software, develop entertainment IP, or engineer camera packages, collaborate with Synq Labs.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <Link
-              to="/start"
-              className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-white text-black font-medium text-sm hover:bg-zinc-200 transition-all shadow-xl hover:scale-[1.02] active:scale-[0.98]"
-            >
-              Propose an experiment
-              <ArrowRight size={16} />
-            </Link>
-            <Link
-              to="/runbook"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/10 hover:border-white/20 bg-white/[0.02] text-zinc-300 font-medium text-sm transition-all"
-            >
-              Review business runbook
-            </Link>
           </div>
         </div>
-      </section>
 
+        {/* Enrollment CTA */}
+        <div className="mt-10 pt-6 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-4">
+          <span className="text-xs font-mono text-zinc-500">
+            Track Intake: Limited cohort sizes for maximum on-set hands-on synchronization
+          </span>
+          <Link
+            to={`/start?track=${activeTrack.id}`}
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#23B272] text-[#03040A] hover:bg-[#52E3A4] font-semibold text-xs tracking-wide transition-all shadow-md"
+          >
+            <span>Apply for Track Intake</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
+      </div>
     </main>
   );
 }

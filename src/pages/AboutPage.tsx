@@ -1,358 +1,245 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, Check, X, Shield, Zap, Sparkles } from 'lucide-react';
-import { OPERATING_PRINCIPLES } from '../data/core_data';
-
-const WHAT_WE_ARE_NOT = [
-  {
-    title: 'Not a Talent Agency',
-    desc: 'We do not lock creative professionals or crew into exclusive representation or extract commission tolls. We provide transparent access to open market opportunities across verified guilds and talent.',
-  },
-  {
-    title: 'Not an Asset-Heavy Studio or Venue',
-    desc: 'We do not accumulate camera fleets, lighting trucks, or physical real estate that sits dark between production cycles. We coordinate existing capacity across partner facilities and venues.',
-  },
-  {
-    title: 'Not a Generic Consultancy',
-    desc: 'We do not deliver theoretical slide decks and walk away. We embed directly across pre-production logistics, dailies telemetry, workflow coordination, and distribution execution.',
-  },
-  {
-    title: 'Not a Predatory Financier',
-    desc: 'We do not demand oppressive equity surrenders or high-interest bridge debt. We tie milestone funding tranches directly to verified deliverable turnarounds.',
-  },
-];
-
-const WHO_WE_SERVE = [
-  {
-    role: 'Creators',
-    desc: 'Writers, directors, artists, and showrunners creating entertainment content and experiences.',
-  },
-  {
-    role: 'Producers & Operators',
-    desc: 'Individuals and production companies responsible for packaging and executing projects.',
-  },
-  {
-    role: 'Talent & Crew',
-    desc: 'Creative heads, technical crews, and specialists providing on-set and digital capabilities.',
-  },
-  {
-    role: 'Asset Owners',
-    desc: 'Operators of soundstages, LED volumes, equipment packages, and production venues.',
-  },
-  {
-    role: 'Service Providers',
-    desc: 'Post-production, VFX, animation, sound, and specialized technology partners.',
-  },
-  {
-    role: 'Capital & Platforms',
-    desc: 'Financiers, brands, exhibitors, OTT platforms, and audience distribution channels.',
-  },
-];
+import {
+  ArrowRight,
+  ShieldCheck,
+  Zap,
+  CheckCircle2,
+  Users,
+  Compass,
+  Cpu,
+  Layers,
+  GitBranch,
+  TrendingUp,
+} from 'lucide-react';
+import {
+  BRAND,
+  PHILOSOPHY_RULES,
+  WHAT_DIGISYNQ_IS_NOT,
+  COMPETITIVE_MOAT_LAYERS,
+  ROADMAP_PHASES,
+} from '../data/blueprint_data';
+import { OPERATING_PRINCIPLES, REVENUE_STREAMS } from '../data/core_data';
+import { TopographicBackground } from '../components/TopographicBackground';
 
 export function AboutPage() {
+  const [activePhilosophyTab, setActivePhilosophyTab] = useState(0);
+
   return (
-    <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white">
+    <main className="bg-[#03040A] text-[#ECEEF5] selection:bg-[#23B272] selection:text-[#03040A] min-h-screen pt-36 pb-24 px-6 sm:px-8 max-w-6xl mx-auto relative overflow-hidden">
+      <TopographicBackground className="opacity-15 pointer-events-none -z-10 fixed inset-0" />
+      {/* ── Header ── */}
+      <div className="max-w-4xl mb-14">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-white/10 bg-white/[0.03] text-xs text-zinc-300 font-mono mb-4">
+          <span className="w-2 h-2 rounded-full bg-[#52E3A4]" />
+          <span>SECTIONS 3, 4, 56 &amp; 61</span>
+          <span className="text-zinc-600">//</span>
+          <span className="text-[#52E3A4]">COMPANY MANIFESTO &amp; ORGANIZATION</span>
+        </div>
 
-      {/* ── 01. Hero Section ── */}
-      <section className="pt-40 sm:pt-48 pb-20 sm:pb-28 px-6 sm:px-8 max-w-6xl mx-auto">
-        <div className="max-w-4xl">
-          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-300 mb-8 tracking-wide">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            <span className="font-mono text-emerald-400 font-medium">FIRST OF ITS KIND</span>
-            <span className="text-zinc-600">//</span>
-            <span className="text-white font-medium">Entertainment Intelligence &amp; Labs Manifesto</span>
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold text-white tracking-tight leading-[1.03] mb-4">
+          The Invisible Architecture.
+          <span className="text-zinc-400 font-light block text-2xl sm:text-4xl mt-2">
+            We don’t own the soundstage. We orchestrate the ecosystem.
+          </span>
+        </h1>
+
+        <h2 className="text-base sm:text-xl text-zinc-300 leading-relaxed font-light max-w-3xl mb-8">
+          Complex industries do not fail because individual participants are incapable. They fail because the relationships between capable participants are poorly synchronized. DIGISYNQ exists to operate inside those relationships.
+        </h2>
+
+        {/* 4 One-Sentence Pillars */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-5 rounded-2xl border border-white/[0.08] bg-[#090B14] font-mono text-xs">
+          <div className="p-3 rounded-xl bg-black/40 border border-white/[0.05]">
+            <span className="text-[#52E3A4] block text-[10px] uppercase font-bold">Category</span>
+            {BRAND.oneSentenceCategory}
           </div>
-
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            The Invisible Architecture.<br />
-            <span className="text-zinc-400 font-light">We don’t own the studio. We orchestrate the ecosystem.</span>
-          </h1>
-
-          <p className="text-lg sm:text-xl text-zinc-300 font-normal leading-relaxed max-w-3xl mb-12">
-            Until now, the entertainment industry was trapped between capital-heavy legacy studios and transactional commission brokers. DigiSynq is the <span className="text-white font-medium">first-of-its-kind asset-light operating network</span> connecting distributed capacity, guild craft heads, and active capital into a synchronized fabric — coupled with <span className="text-white font-medium">Synq Labs</span>: <em>We are orchestrators. We are labs. We experiment.</em>
-          </p>
-
-          <div className="flex flex-wrap items-center gap-4">
-            <Link
-              to="/start"
-              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-white text-black font-medium text-sm hover:bg-zinc-200 transition-all shadow-lg hover:scale-[1.02] active:scale-[0.98]"
-            >
-              Start a synq
-              <ArrowRight size={15} />
-            </Link>
-            <Link
-              to="/workshops"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-emerald-500/25 hover:border-emerald-500/40 bg-emerald-500/[0.03] hover:bg-emerald-500/[0.08] text-emerald-300 font-medium text-sm transition-all duration-200"
-            >
-              <span>Explore Synq Labs</span>
-            </Link>
-            <Link
-              to="/the-synq"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-sm text-zinc-300 transition-all hover:scale-[1.02] active:scale-[0.98]"
-            >
-              The Synq codex
-            </Link>
+          <div className="p-3 rounded-xl bg-black/40 border border-white/[0.05]">
+            <span className="text-[#52E3A4] block text-[10px] uppercase font-bold">Philosophy</span>
+            {BRAND.oneSentencePhilosophy}
           </div>
+          <div className="p-3 rounded-xl bg-black/40 border border-white/[0.05]">
+            <span className="text-[#52E3A4] block text-[10px] uppercase font-bold">Mission</span>
+            {BRAND.oneSentenceMission}
+          </div>
+          <div className="p-3 rounded-xl bg-black/40 border border-white/[0.05]">
+            <span className="text-[#52E3A4] block text-[10px] uppercase font-bold">Business</span>
+            {BRAND.oneSentenceBusiness}
+          </div>
+        </div>
+      </div>
+
+      {/* ══════════════════════════════════════════════════════
+          01 — THE 10 IMMUTABLE PHILOSOPHY RULES (SECTION 3)
+         ══════════════════════════════════════════════════════ */}
+      <section className="mb-20">
+        <div className="text-xs font-mono text-[#52E3A4] mb-2 uppercase">SECTION 3 // THE OPERATING PHILOSOPHY</div>
+        <h2 className="text-3xl font-bold text-white mb-8">10 Principles of Synchronization</h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {PHILOSOPHY_RULES.map((rule, idx) => (
+            <div key={idx} className="p-6 rounded-2xl border border-white/[0.06] bg-[#090B14]">
+              <div className="flex items-center justify-between mb-2">
+                <span className="font-mono text-xs text-[#52E3A4] font-semibold">{rule.num}</span>
+                <span className="font-mono text-[10px] text-zinc-500">{rule.subtitle}</span>
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2">{rule.title}</h3>
+              <p className="text-xs text-zinc-300 leading-relaxed">{rule.desc}</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* ── 02. Canonical Definition & Central Idea ── */}
-      <section className="py-24 sm:py-32 border-t border-white/[0.06]">
-        <div className="max-w-5xl mx-auto px-6 sm:px-8">
-          <div className="rounded-3xl bg-[#090b10] border border-white/[0.06] p-8 sm:p-14 space-y-10">
-            <div>
-              <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 block mb-3">
-                First of its Kind // The DigiSynq Definition
+      {/* ══════════════════════════════════════════════════════
+          02 — WHAT DIGISYNQ IS NOT (SECTION 4)
+         ══════════════════════════════════════════════════════ */}
+      <section className="mb-20 p-8 sm:p-10 rounded-3xl border border-white/[0.08] bg-[#06080D]">
+        <div className="max-w-2xl mb-8">
+          <div className="text-xs font-mono text-zinc-500 mb-2 uppercase">SECTION 4 // CATEGORY INTEGRITY</div>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">What DIGISYNQ is NOT</h2>
+          <p className="text-zinc-400 text-xs sm:text-sm">
+            We do not compete with the physical network. We orchestrate the dependencies between them.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {WHAT_DIGISYNQ_IS_NOT.map((item, idx) => (
+            <div key={idx} className="p-4 rounded-xl border border-white/[0.06] bg-black/40">
+              <div className="text-red-400 font-mono text-xs font-bold mb-1">✕ NOT {item.item.toUpperCase()}</div>
+              <div className="text-xs text-zinc-400">{item.reason}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════
+          03 — ASSET-LIGHT ORGANIZATIONAL MODEL (SECTION 61)
+         ══════════════════════════════════════════════════════ */}
+      <section className="mb-20">
+        <div className="text-xs font-mono text-[#52E3A4] mb-2 uppercase">SECTION 61 // INTERNAL CAPABILITIES</div>
+        <h2 className="text-3xl font-bold text-white mb-8">Asset-Light Organizational Model</h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[
+            { role: 'System Analysts', desc: 'Deconstruct complex operational crises through 5-Why root cause diagnosis and living graph mapping.' },
+            { role: 'Synchronization Managers', desc: 'Coordinate multi-stakeholder interfaces across producers, directors, vendors, and platforms.' },
+            { role: 'Domain Specialists', desc: 'Provide deep, specialized technical expertise across camera, virtual production, sound, and rights.' },
+            { role: 'Intelligence / Data Team', desc: 'Build the institutional system memory, failure pattern engine, and predictive risk models.' },
+            { role: 'Network Team', desc: 'Build trusted, verified relationships with vetted soundstages, rental houses, and craft guilds.' },
+            { role: 'Technology Team', desc: 'Develop the neutral synchronization platform, telemetry APIs, and cascade simulation tools.' },
+          ].map((org, oIdx) => (
+            <div key={oIdx} className="p-5 rounded-2xl border border-white/[0.06] bg-[#090B14]">
+              <div className="font-mono text-xs text-[#52E3A4] font-semibold mb-1">CORE FUNCTION</div>
+              <div className="font-bold text-base text-white mb-2">{org.role}</div>
+              <p className="text-xs text-zinc-400 leading-relaxed">{org.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════
+          03.5 — 8 CORE OPERATING PRINCIPLES
+         ══════════════════════════════════════════════════════ */}
+      <section className="mb-20">
+        <div className="text-xs font-mono text-[#52E3A4] mb-2 uppercase">THE OPERATING CODE // CORE PRINCIPLES</div>
+        <h2 className="text-3xl font-bold text-white mb-8">8 Operating Standards</h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {OPERATING_PRINCIPLES.map((principle) => (
+            <div key={principle.id} className="p-5 rounded-2xl border border-white/[0.06] bg-[#090B14] flex flex-col justify-between">
+              <div>
+                <div className="w-2 h-2 rounded-full bg-[#52E3A4] mb-3" />
+                <h3 className="text-sm font-bold text-white mb-2">{principle.label}</h3>
+                <p className="text-xs text-zinc-400 leading-relaxed">{principle.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════
+          03.6 — REVENUE STREAMS & COMMERCIAL INFRASTRUCTURE
+         ══════════════════════════════════════════════════════ */}
+      <section className="mb-20 p-8 sm:p-10 rounded-3xl border border-white/[0.08] bg-[#06080D]">
+        <div className="max-w-2xl mb-8">
+          <div className="text-xs font-mono text-[#52E3A4] mb-2 uppercase">COMMERCIAL ARCHITECTURE // REVENUE STREAMS</div>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Sustainable Economic Engine</h2>
+          <p className="text-zinc-400 text-xs sm:text-sm">
+            How DIGISYNQ monetizes value creation through transparent covenants without holding asset debt.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {REVENUE_STREAMS.map((stream) => (
+            <div key={stream.id} className="p-5 rounded-2xl border border-white/[0.06] bg-black/40 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="font-mono text-[10px] text-zinc-500 uppercase">{stream.id}</span>
+                  <span className={`px-2 py-0.5 rounded text-[9px] font-mono border ${
+                    stream.status === 'LIVE' ? 'border-[#52E3A4]/40 text-[#52E3A4] bg-[#52E3A4]/10' :
+                    stream.status === 'PILOT' ? 'border-[#23B272]/40 text-[#23B272] bg-[#23B272]/10' :
+                    'border-white/10 text-zinc-400 bg-white/[0.02]'
+                  }`}>
+                    {stream.status}
+                  </span>
+                </div>
+                <h4 className="text-sm font-bold text-white mb-1.5">{stream.name}</h4>
+                <p className="text-xs text-zinc-400 leading-relaxed mb-3">{stream.description}</p>
+              </div>
+              <div className="pt-3 border-t border-white/[0.04] text-[11px] text-zinc-500">
+                {stream.detail}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════
+          04 — ROADMAP: 5 PHASES OF EVOLUTION (SECTION 58)
+         ══════════════════════════════════════════════════════ */}
+      <section className="mb-20">
+        <div className="text-xs font-mono text-[#52E3A4] mb-2 uppercase">SECTION 58 // 5-PHASE ROADMAP</div>
+        <h2 className="text-3xl font-bold text-white mb-8">Evolution of Synchronization</h2>
+
+        <div className="space-y-3">
+          {ROADMAP_PHASES.map((p, idx) => (
+            <div key={idx} className="p-6 rounded-2xl border border-white/[0.08] bg-[#090B14] flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="max-w-xl">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="font-mono text-xs text-[#52E3A4] font-bold">{p.phase}</span>
+                  <span className="text-white font-bold text-base">— {p.name}</span>
+                </div>
+                <div className="text-xs text-zinc-300 leading-relaxed">{p.focus}</div>
+                <div className="text-[11px] font-mono text-zinc-500 mt-1">Goal: {p.goal}</div>
+              </div>
+              <span className={`px-3 py-1 rounded-full text-[10px] font-mono shrink-0 border ${
+                p.status === 'ACTIVE'
+                  ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-300 font-bold'
+                  : p.status === 'IN PROGRESS'
+                  ? 'bg-amber-500/20 border-amber-500/40 text-amber-300'
+                  : 'bg-white/5 border-white/10 text-zinc-400'
+              }`}>
+                {p.status}
               </span>
-              <blockquote className="text-2xl sm:text-4xl font-bold text-white leading-snug tracking-tight">
-                “The world’s first asset-light coordination and intelligence network synchronizing capacity, talent, and workflows across the global entertainment ecosystem.”
-              </blockquote>
             </div>
-
-            <p className="text-base text-zinc-300 leading-relaxed max-w-3xl font-normal">
-              Entertainment does not suffer from a lack of physical studios, cameras, or creative imagination. It suffers from systemic friction: unbooked stages, trapped IP, fragmented talent discovery, and isolated post pipelines. DigiSynq is the first entity designed specifically to coordinate existing industry capacity without fixed asset debt while driving empirical production R&amp;D through Synq Labs.
-            </p>
-
-            {/* Three Definitive Pillars */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
-              <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
-                <div className="text-xs font-mono text-zinc-400 mb-2">01. ORCHESTRATION</div>
-                <div className="text-sm font-semibold text-white mb-1.5">Asset-Light Coordination</div>
-                <div className="text-xs text-zinc-400 leading-relaxed">
-                  Connecting production demand with pre-verified partner stages, equipment, and crew without balance-sheet debt.
-                </div>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
-                <div className="text-xs font-mono text-emerald-400 mb-2">02. SYNQ LABS</div>
-                <div className="text-sm font-semibold text-white mb-1.5">We Are Labs. We Experiment.</div>
-                <div className="text-xs text-zinc-400 leading-relaxed">
-                  Empirical sandbox R&amp;D conducting active trials on virtual production, cloud telemetry, and fractional floor models.
-                </div>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
-                <div className="text-xs font-mono text-zinc-400 mb-2">03. PROTOCOL</div>
-                <div className="text-sm font-semibold text-white mb-1.5">Covenant Governance</div>
-                <div className="text-xs text-zinc-400 leading-relaxed">
-                  Milestone-tied capital release and standardized turnaround covenants replacing closed phone trees and agency markups.
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-6 border-t border-white/[0.06] flex flex-wrap items-center gap-6 text-xs text-zinc-400">
-              <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                <span className="text-white font-medium">We don't need to own every node. We connect the nodes.</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                <span>Use the capacity that already exists.</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                <span className="text-white font-medium">We are labs. We experiment.</span>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 
-      {/* ── 03. Who DigiSynq Serves ── */}
-      <section className="py-24 sm:py-32 border-t border-white/[0.06]">
-        <div className="max-w-6xl mx-auto px-6 sm:px-8">
-          
-          <div className="max-w-2xl mb-14">
-            <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
-              Stakeholder Framework
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-              The Constellation.<br />
-              <span className="text-zinc-400 font-light">Every discipline in resonance.</span>
-            </h2>
-            <p className="text-base text-zinc-400 leading-relaxed">
-              We coordinate relationships and capacity across the full entertainment lifecycle.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {WHO_WE_SERVE.map((stakeholder) => (
-              <div
-                key={stakeholder.role}
-                className="p-8 rounded-2xl bg-white/[0.015] border border-white/[0.06] flex flex-col justify-between space-y-4"
-              >
-                <div>
-                  <h3 className="text-base font-semibold text-white mb-2">{stakeholder.role}</h3>
-                  <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">{stakeholder.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* ── 04. Boundary Definition (What We Are NOT) ── */}
-      <section className="py-24 sm:py-32 border-t border-white/[0.06]">
-        <div className="max-w-6xl mx-auto px-6 sm:px-8">
-          
-          <div className="max-w-2xl mb-14">
-            <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
-              Clear Boundaries
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-              The Perimeter.<br />
-              <span className="text-zinc-400 font-light">Discipline through absolute refusal.</span>
-            </h2>
-            <p className="text-base text-zinc-400 leading-relaxed">
-              Discipline requires saying no. We maintain focus by refusing to replicate existing legacy business models.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {WHAT_WE_ARE_NOT.map((item) => (
-              <div
-                key={item.title}
-                className="p-8 rounded-2xl bg-white/[0.015] border border-white/[0.06] flex flex-col justify-between space-y-4"
-              >
-                <div>
-                  <div className="flex items-center gap-2 text-zinc-400 text-sm font-medium mb-3">
-                    <X size={16} className="text-zinc-500 shrink-0" />
-                    <span>{item.title}</span>
-                  </div>
-                  <p className="text-sm text-zinc-400 leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-                <span className="text-[11px] font-mono text-zinc-500 uppercase tracking-wider pt-3 border-t border-white/[0.04]">
-                  Operational Boundary
-                </span>
-              </div>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* ── 05. The 8 Operating Principles ── */}
-      <section className="py-24 sm:py-32 border-t border-white/[0.06]">
-        <div className="max-w-6xl mx-auto px-6 sm:px-8">
-          
-          <div className="max-w-2xl mb-14">
-            <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
-              Governance Axioms
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-              The Eight Axioms.<br />
-              <span className="text-zinc-400 font-light">First principles of entertainment flow.</span>
-            </h2>
-            <p className="text-base text-zinc-400 leading-relaxed">
-              Every decision we make — from protocol architecture to engagement structure — is governed by these foundational axioms.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {OPERATING_PRINCIPLES.map((principle, index) => (
-              <div
-                key={principle.id}
-                className="p-8 rounded-2xl bg-[#090b10] border border-white/[0.06] hover:border-white/15 transition-all flex items-start gap-5"
-              >
-                <span className="text-xs font-mono text-zinc-500 shrink-0 mt-0.5">
-                  0{index + 1}
-                </span>
-                <div>
-                  <h3 className="text-base font-semibold text-white mb-1.5">
-                    {principle.label}
-                  </h3>
-                  <p className="text-sm text-zinc-400 leading-relaxed">
-                    {principle.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* ── 06. Institutional Governance & Operational Disclosure ── */}
-      <section className="py-24 sm:py-32 border-t border-white/[0.06] bg-[#050608]">
-        <div className="max-w-6xl mx-auto px-6 sm:px-8">
-          <div className="max-w-2xl mb-14">
-            <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
-              Institutional Governance
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-              The Covenant.<br />
-              <span className="text-zinc-400 font-light">Institutional trust without compromise.</span>
-            </h2>
-            <p className="text-base text-zinc-400 leading-relaxed">
-              DigiSynq operates with institutional discipline. We provide clear operational parameters for studio banners, completion guarantors, and enterprise partners.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-8 rounded-2xl bg-[#090b10] border border-white/[0.06] space-y-4">
-              <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider block">01 // Non-Custodial Neutrality</span>
-              <h3 className="text-base font-semibold text-white">Zero IP & Asset Encumbrance</h3>
-              <p className="text-xs text-zinc-400 leading-relaxed">
-                DigiSynq never takes equity in client intellectual property, screenplays, or masters. We operate strictly as an objective operational coordinator, preserving total creative independence for creators and production banners.
-              </p>
-            </div>
-
-            <div className="p-8 rounded-2xl bg-[#090b10] border border-white/[0.06] space-y-4">
-              <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider block">02 // Data & Script Security</span>
-              <h3 className="text-base font-semibold text-white">Institutional Mutual NDA</h3>
-              <p className="text-xs text-zinc-400 leading-relaxed">
-                All intake parameters, project budgets, and technical dossiers are protected under strict confidentiality covenants. Constraint audits are conducted on isolated channels with zero public exposure of sensitive project timelines.
-              </p>
-            </div>
-
-            <div className="p-8 rounded-2xl bg-[#090b10] border border-white/[0.06] space-y-4">
-              <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider block">03 // Cross-Regional Coordination</span>
-              <h3 className="text-base font-semibold text-white">Hubs & Partner Networks</h3>
-              <p className="text-xs text-zinc-400 leading-relaxed">
-                Coordinating active soundstage, virtual production, and post facilities across India and international entertainment hubs. Strategic partner inquiries and studio facility additions are reviewed directly by our executive network.
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-8 p-6 rounded-2xl border border-white/[0.06] bg-white/[0.02] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div>
-              <span className="text-xs text-zinc-400 block">Executive & Institutional Correspondence:</span>
-              <span className="text-sm font-mono text-white">partners@digisynq.com • hello@digisynq.com</span>
-            </div>
-            <Link
-              to="/runbook"
-              className="text-xs text-emerald-400 hover:text-emerald-300 font-medium inline-flex items-center gap-1.5"
-            >
-              <span>Review Complete Business Runbook</span>
-              <ArrowUpRight size={14} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 07. Call to Action ── */}
-      <section className="py-24 sm:py-32 border-t border-white/[0.06]">
-        <div className="max-w-4xl mx-auto px-6 sm:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-6">
-            Enter the Stream.<br />
-            <span className="text-zinc-400 font-light">Connect your node to the current.</span>
-          </h2>
-          <p className="text-base text-zinc-400 leading-relaxed max-w-xl mx-auto mb-10">
-            Have an entertainment project, resource requirement, or capacity opportunity? Start a Synq and tell us what needs to be connected.
-          </p>
-          <Link
-            to="/start"
-            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-white text-black font-medium text-sm hover:bg-zinc-200 transition-all shadow-xl hover:scale-[1.02] active:scale-[0.98]"
-          >
-            Start a synq
-            <ArrowRight size={16} />
-          </Link>
-        </div>
-      </section>
-
+      {/* ── CTA ── */}
+      <div className="p-8 rounded-2xl border border-white/[0.08] bg-black/40 text-center">
+        <h3 className="text-2xl font-bold text-white mb-3">Join the Synchronization Network</h3>
+        <p className="text-xs sm:text-sm text-zinc-400 max-w-lg mx-auto mb-6">
+          Whether you are a studio looking to monetize idle stage floor capacity, a technician seeking schedule visibility, or a producer managing a slate.
+        </p>
+        <Link
+          to="/start"
+          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#23B272] text-[#03040A] hover:bg-[#52E3A4] font-bold text-xs tracking-wide transition-all shadow-md"
+        >
+          <span>Initiate Network Intake</span>
+          <ArrowRight className="w-3.5 h-3.5" />
+        </Link>
+      </div>
     </main>
   );
 }

@@ -1,463 +1,227 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, Check, Compass, Cpu, Zap, Activity } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
-
-const PHASES = [
-  {
-    step: '01',
-    name: 'Diagnose',
-    tag: 'Requirement Analysis',
-    title: 'Understanding project requirements and constraints',
-    lead: 'Before moving a single asset, DigiSynq audits the creative vision, department dependencies, and operational constraints holding the project back.',
-    deliverable: 'Project Requirement & Constraint Dossier',
-    timeframe: 'Initial Assessment',
-    actions: [
-      'Audit production scope, department dependencies, and timeline requirements',
-      'Identify capacity gaps across available soundstages, volumes, and specialized equipment',
-      'Survey availability of required key creative talent and technical department heads',
-      'Assess release or delivery timeline against current market and platform windows',
-    ],
-    metric: 'Complete visibility into operational constraints',
-  },
-  {
-    step: '02',
-    name: 'Connect',
-    tag: 'Capacity Matching',
-    title: 'Identifying relevant talent, infrastructure, and capacity',
-    lead: 'We identify and match available resources across partner facilities, vetted craft talent, and commercial capital without broker markups or equipment debt.',
-    deliverable: 'Multi-Party Coordination Covenant',
-    timeframe: 'Assembly Phase',
-    actions: [
-      'Match projects to available stage slots and volume dates across partner facilities',
-      'Connect verified creative and technical talent with transparent milestone terms',
-      'Coordinate finishing capital, production debt, and completion guarantees',
-      'Align technical packaging requirements with target distribution and audience platforms',
-    ],
-    metric: 'Rapid assembly from verified network capacity',
-  },
-  {
-    step: '03',
-    name: 'Orchestrate',
-    tag: 'Workflow Governance',
-    title: 'Coordinating people, facilities, workflows, and milestones',
-    lead: 'DigiSynq provides neutral oversight during active production and post-finishing, keeping dependencies synchronized and stakeholders aligned.',
-    deliverable: 'Milestone Telemetry & Workflow Protocol',
-    timeframe: 'Production → Final Mix',
-    actions: [
-      'Standardize dailies and asset turnovers with continuous ingest telemetry',
-      'Coordinate milestone-tied funding releases upon verified deliverable approvals',
-      'Manage dynamic rescheduling when location, weather, or timeline shifts occur',
-      'Maintain live communication across producers, facilities, and post-production units',
-    ],
-    metric: 'Neutral milestone oversight and workflow alignment',
-  },
-  {
-    step: '04',
-    name: 'Realize',
-    tag: 'Output & Delivery',
-    title: 'Turning distributed resources into an executable outcome',
-    lead: 'Converting coordinated capacity into on-schedule delivery masters, targeted release windows, and long-tail library value.',
-    deliverable: 'Delivery Master Audit & Release Ledger',
-    timeframe: 'Final Delivery → Distribution',
-    actions: [
-      'Programmatic release and delivery coordination across theatrical, streaming, and digital channels',
-      'Structured territorial delivery across international, broadcast, and ancillary windows',
-      'Transparent revenue and compensation attribution to participating network partners',
-      'Long-term asset archiving and catalog licensing coordination',
-    ],
-    metric: 'On-schedule delivery and defensible audience reach',
-  },
-];
-
-const ASSET_LIGHT_BENEFITS = [
-  {
-    title: 'Lower Fixed Requirements',
-    desc: 'No heavy real estate or equipment depreciation on our books, keeping capital intensity low.',
-  },
-  {
-    title: 'Greater Flexibility',
-    desc: 'Access the ideal stage, camera package, or crew for each project rather than whatever sits in an owned warehouse.',
-  },
-  {
-    title: 'Distributed Capacity',
-    desc: 'Leverage available floor time and talent across a broad regional network of facilities and guilds.',
-  },
-  {
-    title: 'Better Resource Utilization',
-    desc: 'Activate unused stage days and unbooked technician windows, turning idle time into productive output.',
-  },
-];
+import {
+  ArrowRight,
+  CheckCircle2,
+  AlertTriangle,
+  Layers,
+  Activity,
+  ShieldCheck,
+  GitBranch,
+  RefreshCw,
+  Search,
+  Sliders,
+  TrendingUp,
+} from 'lucide-react';
+import {
+  SYSTEM_RESOLUTION_ENGAGEMENT,
+  OPERATING_MODES,
+  BRAND,
+} from '../data/blueprint_data';
+import { SynqFlowDiagram } from '../components/SynqFlowDiagram';
+import { TopographicBackground } from '../components/TopographicBackground';
 
 export function HowItWorksPage() {
-  const [activePhaseIndex, setActivePhaseIndex] = useState(0);
-  const activePhase = PHASES[activePhaseIndex];
+  const [activeStepIdx, setActiveStepIdx] = useState(0);
+
+  const activeStep = SYSTEM_RESOLUTION_ENGAGEMENT.steps[activeStepIdx];
 
   return (
-    <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white min-h-screen">
+    <main className="bg-[#03040A] text-[#ECEEF5] selection:bg-[#23B272] selection:text-[#03040A] min-h-screen pt-36 pb-24 px-6 sm:px-8 max-w-6xl mx-auto relative overflow-hidden">
+      <TopographicBackground className="opacity-15 pointer-events-none -z-10 fixed inset-0" />
+      {/* ── Header ── */}
+      <div className="max-w-4xl mb-14">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-white/10 bg-white/[0.03] text-xs text-zinc-300 font-mono mb-4">
+          <span className="w-2 h-2 rounded-full bg-[#52E3A4]" />
+          <span>SECTIONS 43, 44 &amp; 45</span>
+          <span className="text-zinc-600">//</span>
+          <span className="text-[#52E3A4]">SERVICE PRODUCT &amp; RESOLUTION WORKFLOW</span>
+        </div>
 
-      {/* ── 01. Hero Section ── */}
-      <section className="pt-40 sm:pt-48 pb-20 sm:pb-28 px-6 sm:px-8 max-w-6xl mx-auto">
-        <div className="max-w-4xl">
-          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-300 mb-8 tracking-wide">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            <span className="font-mono text-zinc-400">PROTOCOL</span>
-            <span className="text-zinc-600">//</span>
-            <span className="text-white font-medium">Four-Phase Coordination Engine</span>
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold text-white tracking-tight leading-[1.03] mb-4">
+          From Upstream Shock to Verified Harmony.
+          <span className="text-zinc-400 font-light block text-2xl sm:text-4xl mt-2">
+            The 10-Step Resolution Engagement.
+          </span>
+        </h1>
+
+        <h2 className="text-base sm:text-xl text-zinc-300 leading-relaxed font-light max-w-3xl mb-8">
+          The cleanest commercial product in entertainment: A structured protocol that turns an acute operational emergency into systemic immunity and verified outcome value.
+        </h2>
+
+        {/* First Customer Strategy Banner */}
+        <div className="p-6 rounded-2xl border border-[#23B272]/30 bg-gradient-to-r from-[#06130E] via-[#090B14] to-[#06130E] backdrop-blur-xl">
+          <div className="text-xs font-mono text-[#52E3A4] mb-1 uppercase font-semibold">
+            Section 43 — The First Customer Offer
+          </div>
+          <div className="text-base sm:text-lg font-medium text-white italic">
+            "{SYSTEM_RESOLUTION_ENGAGEMENT.tagline}"
+          </div>
+        </div>
+      </div>
+
+      {/* ══════════════════════════════════════════════════════
+          00 — INTERACTIVE 8-STAGE SYNQ PIPELINE SIMULATION
+         ══════════════════════════════════════════════════════ */}
+      <section className="mb-20">
+        <div className="text-xs font-mono text-[#52E3A4] mb-2 uppercase">
+          Continuous Execution Flow // The Synq Cycle
+        </div>
+        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6">
+          Interactive Operational Pipeline
+        </h2>
+        <div className="p-6 sm:p-8 rounded-3xl border border-white/[0.08] bg-[#090B14] shadow-2xl">
+          <SynqFlowDiagram />
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════
+          01 — THE 10-STEP RESOLUTION WORKFLOW
+         ══════════════════════════════════════════════════════ */}
+      <section className="mb-20">
+        <div className="text-xs font-mono text-[#52E3A4] mb-2 uppercase">
+          Section 44 // The 10-Step Resolution Architecture
+        </div>
+        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8">
+          From Chaos to Documented Verification
+        </h2>
+
+        {/* 10-Step Timeline Strip */}
+        <div className="grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-10 gap-2 mb-8">
+          {SYSTEM_RESOLUTION_ENGAGEMENT.steps.map((st, sIdx) => (
+            <button
+              key={sIdx}
+              onClick={() => setActiveStepIdx(sIdx)}
+              className={`p-3 rounded-xl border text-center transition-all ${
+                activeStepIdx === sIdx
+                  ? 'bg-[#16543D] border-[#52E3A4] text-white shadow-lg scale-105'
+                  : 'bg-[#090B14] border-white/[0.06] text-zinc-400 hover:text-white'
+              }`}
+            >
+              <div className="font-mono text-[10px] text-[#52E3A4] mb-1">{st.num}</div>
+              <div className="font-bold text-[11px] truncate">{st.name}</div>
+            </button>
+          ))}
+        </div>
+
+        {/* Active Step Showcase */}
+        <div className="p-8 sm:p-10 rounded-2xl border border-white/[0.1] bg-[#090B14] shadow-2xl relative overflow-hidden">
+          <div className="flex items-center justify-between mb-4">
+            <span className="font-mono text-xs text-[#52E3A4] font-semibold">
+              STEP {activeStep.num} OF 10 // OPERATIONAL PHASE
+            </span>
+            <span className="font-mono text-xs text-zinc-500">DIGISYNQ Core Standard</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            The Orchestration Loop.<br />
-            <span className="text-zinc-400 font-light">From first diagnostic to final delivery.</span>
-          </h1>
-
-          <p className="text-lg sm:text-xl text-zinc-300 font-normal leading-relaxed max-w-3xl mb-12">
-            DigiSynq routes demand to existing industry capacity rather than requiring fixed physical asset ownership. We execute a disciplined four-stage protocol engineered to ingest project constraints, match pre-verified partner stages and guild talent, and synchronize milestones through to final audience release.
+          <h3 className="text-3xl font-bold text-white mb-3">{activeStep.name}</h3>
+          <p className="text-base sm:text-lg text-zinc-300 leading-relaxed mb-8 max-w-3xl">
+            {activeStep.desc}
           </p>
 
-          <div className="flex flex-wrap items-center gap-4">
-            <Link
-              to="/start"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white text-[#06080d] hover:bg-zinc-200 font-medium text-sm tracking-wide transition-all duration-200 active:scale-95 shadow-sm"
-            >
-              <span>Initiate a Synq</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <a
-              href="#protocol"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/10 hover:border-white/20 bg-white/[0.02] text-zinc-300 font-medium text-sm transition-all duration-200"
-            >
-              <span>Inspect 4 Phases</span>
-            </a>
-            <Link
-              to="/runbook"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-emerald-500/25 hover:border-emerald-500/40 bg-emerald-500/[0.03] text-emerald-300 font-medium text-sm transition-all duration-200"
-            >
-              <span>Business Runbook</span>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 02. The 4-Phase Protocol Workbench ── */}
-      <section id="protocol" className="py-24 sm:py-32 border-t border-white/[0.06]">
-        <div className="max-w-6xl mx-auto px-6 sm:px-8">
-          
-          <div className="mb-14">
-            <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
-              Execution Architecture
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-              Four Horizons.<br />
-              <span className="text-zinc-400 font-light">Diagnose, connect, orchestrate, realize.</span>
-            </h2>
-          </div>
-
-          {/* Phase Selector Tabs */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
-            {PHASES.map((phase, idx) => {
-              const isActive = idx === activePhaseIndex;
-              return (
-                <button
-                  key={phase.step}
-                  type="button"
-                  onClick={() => setActivePhaseIndex(idx)}
-                  className={`p-5 rounded-2xl text-left border transition-all cursor-pointer ${
-                    isActive
-                      ? 'bg-white/[0.05] border-white/30 text-white shadow-sm'
-                      : 'bg-white/[0.015] border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/15'
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs font-mono text-zinc-500">
-                      Phase {phase.step}
-                    </span>
-                    {isActive && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                    )}
-                  </div>
-                  <div className="text-base font-semibold text-white">
-                    {phase.name}
-                  </div>
-                  <div className="text-xs text-zinc-400 mt-0.5">
-                    {phase.tag}
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Active Phase Detail Console */}
-          <div className="rounded-3xl bg-[#090b10] border border-white/[0.06] p-8 sm:p-12">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-              
-              {/* Left Column: Scope & Action List */}
-              <div className="lg:col-span-8 space-y-8">
-                <div>
-                  <div className="flex items-center gap-3 text-xs font-mono text-zinc-400 mb-3">
-                    <span className="text-emerald-400 font-medium">Phase {activePhase.step}</span>
-                    <span>•</span>
-                    <span>{activePhase.timeframe}</span>
-                  </div>
-                  <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-3">
-                    {activePhase.title}
-                  </h3>
-                  <p className="text-base text-zinc-300 leading-relaxed">
-                    {activePhase.lead}
-                  </p>
-                </div>
-
-                <div className="space-y-4 pt-4 border-t border-white/[0.06]">
-                  <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 block">
-                    Operational actions executed:
-                  </span>
-                  <div className="space-y-3">
-                    {activePhase.actions.map((act, i) => (
-                      <div key={i} className="flex items-start gap-3.5">
-                        <div className="w-5 h-5 rounded-full bg-white/[0.05] border border-white/10 flex items-center justify-center shrink-0 mt-0.5 text-emerald-400">
-                          <Check size={12} />
-                        </div>
-                        <span className="text-sm text-zinc-300 leading-relaxed">
-                          {act}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+          <div className="pt-6 border-t border-white/[0.08] grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="p-4 rounded-xl border border-white/[0.06] bg-black/40">
+              <div className="text-[11px] font-mono text-zinc-500 uppercase mb-1">Standard Outputs</div>
+              <div className="text-xs text-zinc-200">
+                Audited action protocols with designated owner, input, output, deadline, and verification gate.
               </div>
-
-              {/* Right Column: Key Deliverable Card */}
-              <div className="lg:col-span-4 rounded-2xl bg-white/[0.02] border border-white/[0.08] p-6 sm:p-8 space-y-6">
-                <div>
-                  <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider block mb-2">
-                    Primary Deliverable
-                  </span>
-                  <div className="text-base font-medium text-white leading-snug">
-                    {activePhase.deliverable}
-                  </div>
-                </div>
-
-                <div className="pt-6 border-t border-white/[0.06]">
-                  <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider block mb-1">
-                    Systemic Impact
-                  </span>
-                  <div className="text-xl font-bold text-emerald-400 tracking-tight">
-                    {activePhase.metric}
-                  </div>
-                </div>
-
-                <div className="pt-6 border-t border-white/[0.06] space-y-3">
-                  <Link
-                    to="/start"
-                    className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-white text-black font-medium text-xs hover:bg-zinc-200 transition-all"
-                  >
-                    Apply Phase {activePhase.step} to project
-                    <ArrowRight size={13} />
-                  </Link>
-                  <p className="text-center text-[11px] text-zinc-500">
-                    Zero physical infrastructure debt
-                  </p>
-                </div>
-              </div>
-
             </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* ── 02B. Open-Entry Pipeline: 6 Lifecycle Injection Points ── */}
-      <section className="py-24 sm:py-32 border-t border-white/[0.06] bg-[#050608]">
-        <div className="max-w-6xl mx-auto px-6 sm:px-8">
-          <div className="max-w-3xl mb-14">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] text-xs text-zinc-300 font-mono mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              <span>LIFECYCLE AGILITY // ZERO THRESHOLD</span>
-            </div>
-            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white [letter-spacing:-0.03em] mb-4">
-              Zero Threshold.<br />
-              <span className="text-zinc-400 font-light">Enter the stream anywhere.</span>
-            </h2>
-            <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
-              You don’t have to start with DigiSynq on Day Zero. Whether you're an asset owner with dark soundstage days next month, an independent producer facing a mid-shoot post stall, or a director needing virtual production pre-vis — any stakeholder can plug into the DigiSynq pipeline at the exact moment of need.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                stage: '01',
-                title: 'Packaging & Feasibility',
-                stakeholder: 'Writers, Producers & IP Holders',
-                scenario: 'Trapped screenplay or IP requiring realistic budget modeling, department attachments, and studio packaging.',
-                action: 'Deploy asset-light packaging sprint with verified rate cards and feasibility models.',
-              },
-              {
-                stage: '02',
-                title: 'Pre-Production & Stage Booking',
-                stakeholder: 'Directors & Production Banners',
-                scenario: 'Production greenlit but facing soundstage availability locks or missing key craft department heads.',
-                action: 'Direct routing to dark days on partner acoustic floors and verified guild roster matching.',
-              },
-              {
-                stage: '03',
-                title: 'Mid-Shoot & On-Set Triage',
-                stakeholder: 'Producers & Line Producers',
-                scenario: 'Active production facing stage extension issues, weather delays, or volume rig tracking failures.',
-                action: 'Dynamic burst-occupancy floor reallocation and Synq Labs on-set telemetry intervention.',
-              },
-              {
-                stage: '04',
-                title: 'Post-Finishing & VFX Turnover',
-                stakeholder: 'Post Supervisors & Financiers',
-                scenario: 'Editorial bottlenecks, VFX composite turnover drift, or completion bond cash disbursements stalled.',
-                action: 'Deploy camera-to-cloud dailies pipeline and milestone-tied escrow release upon approved turnover.',
-              },
-              {
-                stage: '05',
-                title: 'Pre-Demand Distribution',
-                stakeholder: 'Independent Titles & Distributors',
-                scenario: 'Completed feature facing premature theatrical eviction or clashing directly against studio tentpoles.',
-                action: 'Targeted multiplex screening clusters synchronized with regional audience density telemetry.',
-              },
-              {
-                stage: '06',
-                title: 'Idle Capacity Monetization',
-                stakeholder: 'Studio Lots, Venues & Rental Houses',
-                scenario: 'Soundstage floors, LED volumes, or specialized camera packages sitting dark between marquee client bookings.',
-                action: 'List unbooked turnaround windows into the DigiSynq mesh to capture 100% incremental revenue.',
-              },
-            ].map((entry) => (
-              <div
-                key={entry.stage}
-                className="p-7 rounded-3xl bg-[#090b10] border border-white/[0.06] hover:border-emerald-500/30 transition-all flex flex-col justify-between space-y-6"
-              >
-                <div>
-                  <div className="flex items-center justify-between text-xs font-mono text-zinc-400 mb-3">
-                    <span className="text-emerald-400 font-bold">ENTRY {entry.stage}</span>
-                    <span className="text-[11px] truncate max-w-[160px] text-zinc-400">{entry.stakeholder}</span>
-                  </div>
-                  <h3 className="text-lg font-semibold text-white mb-2 leading-snug">
-                    {entry.title}
-                  </h3>
-                  <p className="text-xs text-zinc-400 leading-relaxed mb-4">
-                    {entry.scenario}
-                  </p>
-                  <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] text-xs text-zinc-200 leading-relaxed">
-                    <span className="text-emerald-400 font-medium block mb-1">Pipeline Action:</span>
-                    {entry.action}
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-white/[0.06]">
-                  <Link
-                    to="/start"
-                    state={{ problem: `${entry.title}: ${entry.scenario}`, role: entry.stakeholder }}
-                    className="w-full inline-flex items-center justify-between text-xs text-zinc-300 hover:text-white group"
-                  >
-                    <span className="font-medium">Enter pipeline here</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-emerald-400 transition-transform group-hover:translate-x-1" />
-                  </Link>
-                </div>
+            <div className="p-4 rounded-xl border border-white/[0.06] bg-black/40">
+              <div className="text-[11px] font-mono text-zinc-500 uppercase mb-1">Downstream Telemetry</div>
+              <div className="text-xs text-zinc-200">
+                Continuous variance monitoring against planned target state to arrest subsequent cascade.
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 03. Benefits of the Asset-Light Model ── */}
-      <section className="py-24 sm:py-32 border-t border-white/[0.06]">
-        <div className="max-w-6xl mx-auto px-6 sm:px-8">
-          
-          <div className="max-w-2xl mb-14">
-            <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
-              Model Benefits
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-              Light Beats Heavy.<br />
-              <span className="text-zinc-400 font-light">The structural leverage of fluid capacity.</span>
-            </h2>
-            <p className="text-base text-zinc-400 leading-relaxed">
-              An asset-light coordination layer offers distinct structural advantages over heavy physical ownership.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {ASSET_LIGHT_BENEFITS.map((b, idx) => (
-              <div
-                key={idx}
-                className="p-6 rounded-2xl bg-white/[0.015] border border-white/[0.06] hover:border-white/15 transition-all flex flex-col justify-between space-y-4"
-              >
-                <div>
-                  <h3 className="text-base font-semibold text-white mb-2">
-                    {b.title}
-                  </h3>
-                  <p className="text-xs text-zinc-400 leading-relaxed">
-                    {b.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* ── 04. Execution Covenants & Runbook Reference ── */}
-      <section className="py-24 sm:py-32 border-t border-white/[0.06] bg-[#050608]">
-        <div className="max-w-6xl mx-auto px-6 sm:px-8">
-          <div className="p-8 sm:p-14 rounded-3xl bg-[#090b10] border border-white/[0.08] flex flex-col lg:flex-row lg:items-center justify-between gap-10">
-            <div className="max-w-2xl space-y-4">
-              <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 block">
-                Standardized Governance
-              </span>
-              <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white">
-                The Institutional Playbook.<br />
-                <span className="text-zinc-400 font-light">Rigorous covenants and economic playbooks.</span>
-              </h2>
-              <p className="text-sm sm:text-base text-zinc-400 leading-relaxed">
-                For producers, studio operators, and financiers requiring complete operational specifications, inspect our institutional runbook covering 6 commercial revenue models, multi-party covenants, and phase-by-phase delivery milestones.
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 shrink-0">
-              <Link
-                to="/runbook"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-white text-black font-medium text-xs hover:bg-zinc-200 transition-all shadow-lg"
-              >
-                <span>Read the business runbook</span>
-                <ArrowRight size={14} />
-              </Link>
-              <Link
-                to="/start"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-white/10 hover:border-white/20 bg-white/[0.02] text-zinc-300 font-medium text-xs transition-all"
-              >
-                <span>Start project intake</span>
-              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── 05. Call to Action ── */}
-      <section className="py-24 sm:py-32 border-t border-white/[0.06]">
-        <div className="max-w-4xl mx-auto px-6 sm:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-6">
-            Activate the Circuit.<br />
-            <span className="text-zinc-400 font-light">Synchronize your upcoming production.</span>
+      {/* ══════════════════════════════════════════════════════
+          02 — CASE STUDY: LEAD ACTOR SCHEDULE FAILURE
+         ══════════════════════════════════════════════════════ */}
+      <section className="mb-20 p-8 sm:p-10 rounded-2xl border border-white/[0.1] bg-gradient-to-br from-[#06080D] via-[#090B14] to-[#06130E]">
+        <div className="max-w-3xl mb-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#16543D]/50 border border-[#23B272]/30 text-[#52E3A4] font-mono text-xs font-semibold mb-3">
+            SECTION 45 EMPIRICAL WALKTHROUGH
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+            Case Breakdown: Production Schedule Failure
           </h2>
-          <p className="text-base text-zinc-400 leading-relaxed max-w-xl mx-auto mb-10">
-            Have an entertainment project, resource requirement, or capacity opportunity? Start a Synq and tell us what needs to be connected.
+          <p className="text-zinc-300 text-sm leading-relaxed">
+            How DIGISYNQ resolves an emergency where a lead actor becomes unavailable for 6 consecutive days.
           </p>
-          <Link
-            to="/start"
-            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-white text-black font-medium text-sm hover:bg-zinc-200 transition-all shadow-xl hover:scale-[1.02] active:scale-[0.98]"
-          >
-            Start a synq
-            <ArrowRight size={16} />
-          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          {[
+            { phase: '01. OBSERVE', desc: 'Captures talent schedule, shooting plan, stage bookings, crew commitments, and gear holds.' },
+            { phase: '02. DETECT', desc: 'Gap = 6 Days between contracted shooting calendar and actual talent availability.' },
+            { phase: '03. MAP', desc: 'Actor → Scenes → Location → Crew → Equipment → Post schedule → Platform Release Window.' },
+            { phase: '04. DIAGNOSE', desc: 'Root cause is schedule dependency concentration across sequential linear scenes.' },
+            { phase: '05. SIMULATE', desc: 'Evaluates options: wait, reschedule, reorder scenes, substitute stage, compress post-production.' },
+            { phase: '06. CONNECT', desc: 'Identifies available alternative soundstage floor and 2nd unit camera package.' },
+            { phase: '07. COORDINATE', desc: 'Reconciles affected stakeholders: Director, 1st AD, Cinematographer, Stage Manager, Producer.' },
+            { phase: '08. EXECUTE', desc: 'Deploys revised call sheets and shooting order with zero turnaround hour violations.' },
+            { phase: '09. VERIFY', desc: 'Measures: 5.5 days saved, $84,000 overtime penalty avoided, release window 100% protected.' },
+            { phase: '10. PREVENT', desc: 'Stores case in system memory; future slates with high talent concentration receive early risk alerts.' },
+          ].map((item, idx) => (
+            <div key={idx} className="p-4 rounded-xl border border-white/[0.06] bg-black/40">
+              <div className="font-mono text-[#52E3A4] font-bold mb-1">{item.phase}</div>
+              <div className="text-zinc-300 leading-snug">{item.desc}</div>
+            </div>
+          ))}
         </div>
       </section>
 
+      {/* ══════════════════════════════════════════════════════
+          03 — ASSET-LIGHT OPERATING MODEL & TRUST
+         ══════════════════════════════════════════════════════ */}
+      <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+        <div className="p-8 rounded-2xl border border-white/[0.08] bg-[#090B14]">
+          <div className="text-xs font-mono text-[#52E3A4] mb-2 uppercase">
+            Section 62 // Core Strategic Rule
+          </div>
+          <h3 className="text-2xl font-bold text-white mb-4">
+            Own the Logic, Not the Assets
+          </h3>
+          <p className="text-zinc-300 text-sm leading-relaxed mb-6">
+            DIGISYNQ does not own soundstages, camera trucks, post facilities, or transportation fleets. Owning heavy physical assets creates perverse incentives to push suboptimal internal capacity.
+          </p>
+          <div className="p-4 rounded-xl border border-white/[0.06] bg-black/40 text-xs text-zinc-300 leading-relaxed font-mono">
+            Value comes from knowing: What is needed • When it is needed • Why it is needed • Who can provide it • What it affects • What it costs • What alternatives exist • Whether it worked.
+          </div>
+        </div>
+
+        <div className="p-8 rounded-2xl border border-white/[0.08] bg-[#090B14]">
+          <div className="text-xs font-mono text-[#52E3A4] mb-2 uppercase">
+            Section 39 &amp; 40 // Trust Infrastructure
+          </div>
+          <h3 className="text-2xl font-bold text-white mb-4">
+            The Professional Reliability Graph
+          </h3>
+          <p className="text-zinc-300 text-sm leading-relaxed mb-6">
+            Instead of superficial 5-star ratings or vanity endorsements, DIGISYNQ builds trust around observed operational outcomes and delivery histories.
+          </p>
+          <div className="grid grid-cols-2 gap-2 text-xs font-mono text-zinc-300">
+            <span className="p-2 rounded bg-black/30 border border-white/[0.05]">• Schedule Adherence</span>
+            <span className="p-2 rounded bg-black/30 border border-white/[0.05]">• On-Time Delivery</span>
+            <span className="p-2 rounded bg-black/30 border border-white/[0.05]">• Quality Consistency</span>
+            <span className="p-2 rounded bg-black/30 border border-white/[0.05]">• Capacity Accuracy</span>
+            <span className="p-2 rounded bg-black/30 border border-white/[0.05]">• Revision Discipline</span>
+            <span className="p-2 rounded bg-black/30 border border-white/[0.05]">• Problem Resolution</span>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <div className="text-center pt-8 border-t border-white/[0.08]">
+        <Link
+          to="/start"
+          className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#23B272] text-[#03040A] hover:bg-[#52E3A4] font-bold text-sm tracking-wide transition-all shadow-[0_0_30px_rgba(35,178,114,0.3)]"
+        >
+          <span>Initiate System Resolution Engagement</span>
+          <ArrowRight className="w-4 h-4" />
+        </Link>
+      </div>
     </main>
   );
 }

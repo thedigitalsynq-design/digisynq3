@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, X, Clock, Calendar } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, X, Clock, Calendar, BookOpen } from 'lucide-react';
+import { INSIGHTS_TOPICS } from '../data/core_data';
+import { TopographicBackground } from '../components/TopographicBackground';
 
 const DETAILED_BRIEFS = [
   {
@@ -93,26 +95,29 @@ export function InsightsPage() {
     : DETAILED_BRIEFS.filter(b => b.category === activeCategory);
 
   return (
-    <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white min-h-screen">
+    <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white min-h-screen relative overflow-hidden">
+      <TopographicBackground className="opacity-15 pointer-events-none -z-10 fixed inset-0" />
 
       {/* ── 01. Hero Section ── */}
       <section className="pt-40 sm:pt-48 pb-20 sm:pb-28 px-6 sm:px-8 max-w-6xl mx-auto">
         <div className="max-w-4xl">
           <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-300 mb-8 tracking-wide">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            <span className="font-mono text-zinc-400">DISPATCHES</span>
+            <span className="font-mono text-emerald-400 font-medium">DISPATCHES</span>
             <span className="text-zinc-600">//</span>
             <span className="text-white font-medium">Research &amp; Industry Telemetry</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            Field Telemetry.<br />
-            <span className="text-zinc-400 font-light">Dispatches from the frontier.</span>
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.03] [letter-spacing:-0.035em] mb-6">
+            The Signals in the Noise.
+            <span className="text-zinc-400 font-light block text-2xl sm:text-4xl mt-2">
+              Empirical Field Telemetry.
+            </span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-zinc-300 font-normal leading-relaxed max-w-3xl mb-12">
-            Field investigations and telemetry into theatrical release clustering, soundstage dark-floor economics, craft crew assembly, and asset-light coordination models.
-          </p>
+          <h2 className="text-lg sm:text-xl text-zinc-300 font-light leading-relaxed max-w-3xl mb-12">
+            Field investigations into theatrical release eviction curves, soundstage dark-floor economics, craft crew assembly friction, and asset-light balance sheet models.
+          </h2>
 
           <div className="flex flex-wrap items-center gap-4">
             <Link
@@ -208,6 +213,44 @@ export function InsightsPage() {
                 </div>
               </article>
             ))}
+          </div>
+
+          {/* Research Agenda & Core Insights Index */}
+          <div className="mt-20 pt-16 border-t border-white/[0.08]">
+            <div className="max-w-2xl mb-8">
+              <span className="text-xs font-mono uppercase tracking-widest text-[#52E3A4] mb-2 block">
+                Field Research Agenda
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">
+                Core Industry Research Catalog
+              </h3>
+              <p className="text-zinc-400 text-xs sm:text-sm">
+                Active working papers and systemic telemetry frameworks developed by DIGISYNQ analysts.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {INSIGHTS_TOPICS.map((topic) => (
+                <div
+                  key={topic.id}
+                  className="p-5 rounded-2xl border border-white/[0.06] bg-[#090B14] hover:border-[#52E3A4]/40 transition-all flex flex-col justify-between group"
+                >
+                  <div>
+                    <div className="flex items-center justify-between text-[10px] font-mono text-zinc-500 mb-2">
+                      <span className="text-[#52E3A4] font-semibold uppercase">{topic.category}</span>
+                      <span>{topic.reading_time}</span>
+                    </div>
+                    <h4 className="text-sm font-bold text-white group-hover:text-[#52E3A4] transition-colors leading-snug">
+                      {topic.title}
+                    </h4>
+                  </div>
+                  <div className="pt-4 mt-4 border-t border-white/[0.04] flex items-center justify-between text-[11px] font-mono text-zinc-500">
+                    <span>Working Paper</span>
+                    <ArrowUpRight size={13} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
         </div>

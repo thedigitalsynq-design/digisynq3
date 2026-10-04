@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Compass, Cpu, Zap, Activity, Layers, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { CinematicSynqDeck } from '../components/CinematicSynqDeck';
+import { TopographicBackground } from '../components/TopographicBackground';
 
 const GAPS = [
   {
@@ -66,26 +68,29 @@ export function TheSynqPage() {
   const activeGap = GAPS[activeGapIndex];
 
   return (
-    <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white min-h-screen">
+    <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white min-h-screen relative overflow-hidden">
+      <TopographicBackground className="opacity-15 pointer-events-none -z-10 fixed inset-0" />
 
       {/* ── 01. Header Hero ── */}
-      <section className="pt-40 sm:pt-48 pb-20 sm:pb-28 px-6 sm:px-8 max-w-6xl mx-auto">
+      <section className="pt-40 sm:pt-48 pb-16 sm:pb-20 px-6 sm:px-8 max-w-6xl mx-auto">
         <div className="max-w-4xl">
           <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-300 mb-8 tracking-wide">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
             <span className="font-mono text-emerald-400 font-medium">THE SYNQ PIPELINE</span>
             <span className="text-zinc-600">//</span>
-            <span className="text-white font-medium">Architecture &amp; Orchestration Codex</span>
+            <span className="text-white font-medium">Architecture &amp; Capacity Orchestration</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            The Living Codex.<br />
-            <span className="text-zinc-400 font-light">The architecture of capacity.</span>
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.03] [letter-spacing:-0.035em] mb-6">
+            The Unbroken Current.
+            <span className="text-zinc-400 font-light block text-2xl sm:text-4xl mt-2">
+              Where cinema stops leaking momentum.
+            </span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-zinc-300 leading-relaxed max-w-3xl font-normal mb-10">
+          <h2 className="text-lg sm:text-xl text-zinc-300 leading-relaxed max-w-3xl font-light mb-10">
             Entertainment possesses immense creative genius, cutting-edge facilities, and active capital. DigiSynq is the asset-light pipeline that unifies fragmented industry capacity into an uninterrupted flow — connecting development, partner soundstages, cloud dailies, post finishing, and audience release with zero balance-sheet equipment debt.
-          </p>
+          </h2>
 
           <div className="flex flex-wrap items-center gap-4">
             <Link
@@ -96,13 +101,18 @@ export function TheSynqPage() {
               <ArrowRight className="w-4 h-4" />
             </Link>
             <a
-              href="#workflow-comparison"
+              href="#interactive-deck"
               className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/10 hover:border-white/20 bg-white/[0.02] text-zinc-300 font-medium text-sm transition-all duration-200"
             >
-              <span>Compare Operating Models</span>
+              <span>Explore Interactive Synq Deck</span>
             </a>
           </div>
         </div>
+      </section>
+
+      {/* ── 02. Interactive Cinematic Synq Deck ── */}
+      <section id="interactive-deck" className="py-12 px-6 sm:px-8 max-w-6xl mx-auto scroll-mt-24">
+        <CinematicSynqDeck />
       </section>
 
       {/* ── 02. Traditional vs. Asset-Light Model Comparison ── */}
