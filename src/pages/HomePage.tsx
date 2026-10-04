@@ -24,6 +24,7 @@ import {
   DollarSign,
   Users,
   Check,
+  Network,
 } from 'lucide-react';
 import {
   BRAND,

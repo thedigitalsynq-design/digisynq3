@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   ArrowRight,
   Activity,
@@ -22,8 +22,50 @@ import {
 } from '../data/blueprint_data';
 import { ProblemEngine } from '../components/ProblemEngine';
 
-export function EnginesPage() {
-  const [activeEngineTab, setActiveEngineTab] = useState<'CASCADE' | 'TREE_PIPELINE' | 'TAXONOMY' | 'RISK_ENGINE' | 'PROBLEM_WIZARD'>('CASCADE');
+export type EngineTab = 'CASCADE' | 'TREE_PIPELINE' | 'TAXONOMY' | 'RISK_ENGINE' | 'PROBLEM_WIZARD';
+
+interface EnginesPageProps {
+  initialTab?: EngineTab;
+}
+
+export function EnginesPage({ initialTab }: EnginesPageProps) {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const getTabFromLocation = (): EngineTab => {
+    if (initialTab) return initialTab;
+    if (location.pathname.includes('/engines/root-map')) return 'TREE_PIPELINE';
+    if (location.pathname.includes('/engines/cascade')) return 'CASCADE';
+    if (location.pathname.includes('/engines/problem-taxonomy')) return 'TAXONOMY';
+    if (location.pathname.includes('/engines/risk')) return 'RISK_ENGINE';
+    return 'CASCADE';
+  };
+
+  const [activeEngineTab, setActiveEngineTab] = useState<EngineTab>(getTabFromLocation);
+
+  useEffect(() => {
+    setActiveEngineTab(getTabFromLocation());
+  }, [location.pathname, initialTab]);
+
+  const handleTabChange = (tab: EngineTab) => {
+    setActiveEngineTab(tab);
+    switch (tab) {
+      case 'CASCADE':
+        navigate('/engines/cascade');
+        break;
+      case 'TREE_PIPELINE':
+        navigate('/engines/root-map');
+        break;
+      case 'TAXONOMY':
+        navigate('/engines/problem-taxonomy');
+        break;
+      case 'RISK_ENGINE':
+        navigate('/engines/risk');
+        break;
+      default:
+        navigate('/engines');
+    }
+  };
 
   // ── Cascade Simulator State ────────────────────────────────
   const [selectedShock, setSelectedShock] = useState<'ACTOR_DELAY' | 'STAGE_EVICTION' | 'VFX_PLATE_SLIP'>('ACTOR_DELAY');
@@ -162,7 +204,7 @@ export function EnginesPage() {
           ].map((tab) => (
             <button
               key={tab.key}
-              onClick={() => setActiveEngineTab(tab.key as any)}
+              onClick={() => handleTabChange(tab.key as any)}
               className={`px-4 py-2 rounded-xl font-medium text-xs tracking-wide transition-all ${
                 activeEngineTab === tab.key
                   ? 'bg-[#23B272] text-[#03040A] font-bold shadow-md'

@@ -44,9 +44,12 @@ const NAV_GROUPS: NavGroup[] = [
     label: 'Intelligence',
     icon: Cpu,
     items: [
-      { label: 'Diagnostic Engine', href: '/diagnose', desc: '10-step interactive root-cause analyzer', badge: 'Signature' },
-      { label: 'Engines & CASCADE', href: '/engines', desc: 'TREE engine & live failure simulation' },
-      { label: 'Field Notes', href: '/insights', desc: 'Empirical research & operational learnings' },
+      { label: 'Problem Diagnostic', href: '/diagnose', desc: '10-step interactive root-cause analyzer', badge: 'Flagship' },
+      { label: 'Cascade Simulator', href: '/engines/cascade', desc: 'Real-time blast radius & shock simulation' },
+      { label: 'Root Map Tree', href: '/engines/root-map', desc: '13-step decomposition tree pipeline' },
+      { label: 'Risk Engine', href: '/engines/risk', desc: 'Multi-factor systemic priority calculator' },
+      { label: 'Problem Taxonomy', href: '/engines/problem-taxonomy', desc: '6-domain operational failure taxonomy' },
+      { label: 'Field Notes', href: '/insights', desc: 'Empirical telemetry & field observations' },
     ]
   },
   {
@@ -54,10 +57,19 @@ const NAV_GROUPS: NavGroup[] = [
     label: 'Engagement',
     icon: Compass,
     items: [
+      { label: 'Diagnose a Problem', href: '/diagnose', desc: 'Instant interactive system diagnosis' },
       { label: 'Start a SYNQ', href: '/start', desc: 'Confidential case intake & team deployment' },
       { label: 'DigiSynq Labs', href: '/workshops', desc: 'Operational simulation & capability labs' },
       { label: 'Resolution Runbook', href: '/runbook', desc: 'Operational playbooks & emergency escalation' },
-      { label: 'Master Codex', href: '/blueprint', desc: 'Unified architectural specification' },
+    ]
+  },
+  {
+    id: 'codex',
+    label: 'Codex',
+    icon: BookOpen,
+    items: [
+      { label: 'Master Blueprint', href: '/blueprint', desc: '70-section architectural specification' },
+      { label: 'System Philosophy', href: '/about', desc: 'Ten rules of entertainment synchronization' },
     ]
   }
 ];

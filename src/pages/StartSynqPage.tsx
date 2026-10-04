@@ -243,7 +243,7 @@ export function StartSynqPage() {
               <div className="pt-4">
                 <button
                   type="button"
-                  onClick={() => { setSubmitted(false); setForm(EMPTY_FORM); setStep(1); }}
+                  onClick={() => { setSubmittedCase(null); setForm(EMPTY_FORM); setStep(1); }}
                   className="text-xs text-zinc-500 hover:text-white underline transition-all cursor-pointer"
                 >
                   Intake another project or update parameters

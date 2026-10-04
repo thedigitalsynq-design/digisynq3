@@ -24,8 +24,10 @@ const FOOTER_COLUMNS = [
   {
     title: 'Intelligence',
     links: [
-      { href: '/diagnose', label: 'Diagnostic Engine (10-Step)' },
-      { href: '/engines', label: 'CASCADE & TREE Engines' },
+      { href: '/diagnose', label: 'Problem Diagnostic' },
+      { href: '/engines/cascade', label: 'Cascade Simulator' },
+      { href: '/engines/root-map', label: 'Root Map Tree' },
+      { href: '/engines/risk', label: 'Risk Engine' },
       { href: '/insights', label: 'DigiSynq Field Notes' },
     ],
   },
