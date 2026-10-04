@@ -16,14 +16,14 @@ interface NavItem {
 
 const PRIMARY_NAV_ITEMS: NavItem[] = [
   { label: 'Ecosystem', href: '/ecosystem', desc: '5 Interdependent Layers' },
-  { label: 'EERG', href: '/eerg', badge: 'Intelligence', desc: 'Entertainment Ecosystem Root-Cause Graph' },
-  { label: 'Problems', href: '/problems', desc: 'Problem Atlas & Failure Propagation' },
-  { label: 'Root Causes', href: '/root-causes', desc: 'Many → Fewer Convergence' },
-  { label: 'Opportunities', href: '/opportunities', desc: 'Commercial Intervention Radar' },
-  { label: 'Network', href: '/network', desc: 'Asset-Light Resource Registry' },
-  { label: 'Connect', href: '/connect', desc: 'Scenario Matching Protocol' },
-  { label: 'Orchestrate', href: '/orchestrate', desc: 'Living Execution Governance' },
-  { label: 'Measure', href: '/measure', desc: 'Decision-Grade Telemetry' },
+  { label: 'EERG', href: '/eerg', badge: 'Intelligence', desc: 'Root-Cause Graph' },
+  { label: 'Problems', href: '/problems', desc: 'Problem Atlas & Blast Radius' },
+  { label: 'Root Causes', href: '/root-causes', desc: 'Many → Fewer Funnels' },
+  { label: 'Opportunities', href: '/opportunities', desc: 'Commercial Radar' },
+  { label: 'Network', href: '/network', desc: 'Asset-Light Registry' },
+  { label: 'Connect', href: '/connect', desc: 'Matching Protocol' },
+  { label: 'Orchestrate', href: '/orchestrate', desc: 'Execution Governance' },
+  { label: 'Measure', href: '/measure', desc: 'Decision Telemetry' },
   { label: 'Monetize', href: '/monetize', desc: '6-Layer Value Capture' },
 ];
 
@@ -65,13 +65,13 @@ export function SiteNav() {
   const isActive = (href: string) => location.pathname === href;
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 pt-2 sm:pt-3 px-2 sm:px-4 pointer-events-none" role="banner" ref={navRef}>
+    <header className="fixed top-0 left-0 right-0 z-50 pt-3 sm:pt-4 px-3 sm:px-6 pointer-events-none" role="banner" ref={navRef}>
       <div className="max-w-7xl mx-auto pointer-events-auto relative">
         <div
-          className={`px-3 sm:px-5 py-2 rounded-none border transition-all duration-300 flex items-center justify-between gap-2 sm:gap-4 ${
+          className={`px-4 sm:px-6 py-2.5 rounded-full border transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-between gap-3 sm:gap-4 shadow-[0_20px_50px_rgba(0,0,0,0.8)] ${
             scrolled 
-              ? 'bg-[#05070D]/95 border-white/[0.15] shadow-[0_16px_40px_rgba(0,0,0,0.8)] backdrop-blur-2xl' 
-              : 'bg-[#05070D]/85 border-white/[0.08] backdrop-blur-xl'
+              ? 'bg-[#000000]/85 border-white/[0.14] shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] backdrop-blur-3xl' 
+              : 'bg-[#000000]/65 border-white/[0.08] shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] backdrop-blur-2xl'
           }`}
         >
           {/* Brand Logo */}
@@ -87,23 +87,23 @@ export function SiteNav() {
             />
           </Link>
 
-          {/* Desktop Primary Nav */}
-          <nav className="hidden xl:flex items-center gap-0.5" aria-label="System navigation">
+          {/* Desktop Primary Nav Pill Strip */}
+          <nav className="hidden xl:flex items-center gap-1" aria-label="System navigation">
             {PRIMARY_NAV_ITEMS.map((item) => {
               const active = isActive(item.href);
               return (
                 <Link
                   key={item.href}
                   to={item.href}
-                  className={`px-2.5 py-1 text-xs font-mono uppercase tracking-wider transition-all relative flex items-center gap-1.5 ${
+                  className={`px-3 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-200 relative flex items-center gap-1.5 ${
                     active
-                      ? 'text-white font-bold bg-white/[0.08] border border-white/[0.15]'
-                      : 'text-zinc-400 hover:text-white hover:bg-white/[0.03] border border-transparent'
+                      ? 'text-white font-bold bg-white/[0.12] border border-white/[0.2] shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]'
+                      : 'text-zinc-400 hover:text-white hover:bg-white/[0.05] border border-transparent'
                   }`}
                 >
                   <span>{item.label}</span>
                   {item.badge && (
-                    <span className="text-[9px] px-1 py-0.2 bg-emerald-950/80 text-emerald-400 border border-emerald-500/30">
+                    <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-500/30">
                       {item.badge}
                     </span>
                   )}
@@ -111,14 +111,14 @@ export function SiteNav() {
               );
             })}
 
-            {/* Codex Drawer Trigger */}
+            {/* Codex Drawer Dropdown */}
             <div className="relative ml-1">
               <button
                 onClick={() => setCodexOpen(!codexOpen)}
-                className={`px-2.5 py-1 text-xs font-mono uppercase tracking-wider transition-all flex items-center gap-1 border ${
+                className={`px-3 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-200 flex items-center gap-1 border ${
                   codexOpen
                     ? 'bg-white text-black border-white'
-                    : 'text-zinc-500 hover:text-zinc-300 border-white/[0.05] hover:border-zinc-700'
+                    : 'text-zinc-500 hover:text-zinc-300 border-white/[0.06] hover:border-white/[0.15]'
                 }`}
               >
                 <span>Codex</span>
@@ -126,15 +126,15 @@ export function SiteNav() {
               </button>
 
               {codexOpen && (
-                <div className="absolute top-full right-0 mt-2 w-72 bg-[#090C15] border border-white/[0.15] shadow-2xl p-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
-                  <div className="text-[10px] font-mono text-zinc-500 uppercase px-2 py-1 border-b border-white/[0.06] mb-1">
+                <div className="absolute top-full right-0 mt-2.5 w-72 rounded-2xl bg-[#080A10]/95 border border-white/[0.15] shadow-2xl p-2.5 z-50 backdrop-blur-2xl animate-in fade-in slide-in-from-top-1 duration-150">
+                  <div className="text-[10px] font-mono text-zinc-500 uppercase px-2.5 py-1 border-b border-white/[0.06] mb-1">
                     System Simulation & Philosophy
                   </div>
                   {CODEX_ITEMS.map((c) => (
                     <Link
                       key={c.href}
                       to={c.href}
-                      className="block p-2 text-left hover:bg-white/[0.05] border border-transparent hover:border-white/[0.05] transition-colors"
+                      className="block p-2 rounded-xl text-left hover:bg-white/[0.06] transition-colors"
                     >
                       <div className="text-xs font-mono text-white font-bold uppercase">{c.label}</div>
                       <div className="text-[11px] text-zinc-400 mt-0.5">{c.desc}</div>
@@ -145,11 +145,11 @@ export function SiteNav() {
             </div>
           </nav>
 
-          {/* Right Action: Contextual CTA */}
+          {/* Right Action: Apple Pill CTA */}
           <div className="hidden sm:flex items-center gap-2 shrink-0">
             <Link
               to="/participate"
-              className="bg-white text-black hover:bg-zinc-200 px-3.5 sm:px-4 py-1.5 text-xs font-mono uppercase font-bold tracking-wider transition-colors flex items-center gap-1.5"
+              className="bg-white text-black hover:bg-zinc-200 px-5 py-2 rounded-full text-xs font-mono uppercase font-bold tracking-wider transition-all duration-200 flex items-center gap-1.5 shadow-[0_4px_14px_rgba(255,255,255,0.2)]"
             >
               <span>PARTICIPATE</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -159,7 +159,7 @@ export function SiteNav() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="xl:hidden p-2 text-zinc-400 hover:text-white border border-white/[0.08] focus:outline-none"
+            className="xl:hidden p-2 text-zinc-400 hover:text-white rounded-full border border-white/[0.08] focus:outline-none"
             aria-label="Toggle navigation"
           >
             {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -168,26 +168,26 @@ export function SiteNav() {
 
         {/* Mobile Full Screen Menu Drawer */}
         {menuOpen && (
-          <div className="xl:hidden mt-2 p-5 bg-[#05070D] border border-white/[0.15] shadow-2xl space-y-4 max-h-[85vh] overflow-y-auto">
+          <div className="xl:hidden mt-2 p-6 rounded-3xl bg-[#05070D]/95 border border-white/[0.15] shadow-2xl space-y-4 max-h-[85vh] overflow-y-auto backdrop-blur-2xl">
             <div className="text-xs font-mono text-zinc-500 uppercase tracking-widest pb-2 border-b border-white/[0.08]">
               DIGISYNQ SYSTEM NAVIGATION
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {PRIMARY_NAV_ITEMS.map((item) => (
                 <Link
                   key={item.href}
                   to={item.href}
-                  className={`p-2.5 text-left border flex flex-col justify-between ${
+                  className={`p-3 rounded-2xl text-left border flex flex-col justify-between transition-all ${
                     isActive(item.href)
-                      ? 'bg-white text-black border-white font-bold'
-                      : 'bg-white/[0.02] text-zinc-300 border-white/[0.06] hover:bg-white/[0.05]'
+                      ? 'bg-white text-black border-white font-bold shadow-md'
+                      : 'bg-white/[0.02] text-zinc-300 border-white/[0.06] hover:bg-white/[0.06]'
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <span className="font-mono text-xs uppercase">{item.label}</span>
                     {item.badge && (
-                      <span className="text-[9px] px-1 py-0.2 bg-emerald-950 text-emerald-400 border border-emerald-500/30">
+                      <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-500/30">
                         {item.badge}
                       </span>
                     )}
@@ -197,13 +197,13 @@ export function SiteNav() {
               ))}
             </div>
 
-            <div className="pt-2 border-t border-white/[0.08] space-y-1.5">
+            <div className="pt-3 border-t border-white/[0.08] space-y-2">
               <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider block">Codex & Simulation</span>
               {CODEX_ITEMS.map((c) => (
                 <Link
                   key={c.href}
                   to={c.href}
-                  className="block p-2 text-xs font-mono text-zinc-400 hover:text-white bg-white/[0.02] border border-white/[0.04]"
+                  className="block p-2.5 rounded-xl text-xs font-mono text-zinc-400 hover:text-white bg-white/[0.02] border border-white/[0.04]"
                 >
                   {c.label}
                 </Link>
@@ -213,7 +213,7 @@ export function SiteNav() {
             <div className="pt-2">
               <Link
                 to="/participate"
-                className="w-full bg-white text-black hover:bg-zinc-200 py-3 text-xs font-mono uppercase font-bold tracking-wider transition-colors flex items-center justify-center gap-2"
+                className="w-full bg-white text-black hover:bg-zinc-200 py-3.5 rounded-full text-xs font-mono uppercase font-bold tracking-wider transition-colors flex items-center justify-center gap-2 shadow-lg"
               >
                 <span>START WITH A PROBLEM →</span>
               </Link>
