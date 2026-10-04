@@ -1,354 +1,418 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { 
-  CheckCircle2, ArrowRight, ArrowLeft, RefreshCw, 
-  Copy, AlertTriangle, ShieldCheck, Cpu, GitFork, 
-  Layers, Check, Sparkles, FileText, ChevronRight
+import {
+  CheckCircle2,
+  ArrowRight,
+  ArrowLeft,
+  RefreshCw,
+  Copy,
+  AlertTriangle,
+  ShieldCheck,
+  Cpu,
+  GitBranch,
+  Layers,
+  Check,
+  ChevronRight,
+  Clock,
+  Sparkles,
+  RotateCcw,
 } from 'lucide-react';
-import { CONTINUUM_STAGES, STAKEHOLDERS, MECHANISMS } from '../data/blueprint_data';
+import { CONTINUUM_STAGES, STAKEHOLDERS } from '../data/blueprint_data';
 import { intakeService, DiagnosticResult } from '../services/intakeService';
+import { TopographicBackground } from '../components/TopographicBackground';
 
 interface StepOption {
   id: string;
   title: string;
   desc: string;
-  category?: string;
 }
 
-const STEP_DATA: {
-  title: string;
+interface DiagnosticStep {
+  num: string;
   eyebrow: string;
   question: string;
   subtitle: string;
   options: StepOption[];
   multiSelect?: boolean;
-}[] = [
+}
+
+const DIAGNOSTIC_STEPS: DiagnosticStep[] = [
   {
-    eyebrow: 'STEP 01 / 10 · OBJECTIVE',
-    title: 'Operational Goal',
+    num: '01',
+    eyebrow: 'STEP 01 OF 11 // OPERATIONAL OBJECTIVE',
     question: 'What are you trying to accomplish?',
-    subtitle: 'Select the primary milestone or deliverable currently under active execution.',
+    subtitle: 'Select the primary production milestone or deliverable currently under active execution.',
     options: [
-      { id: 'pre_pro_lock', title: 'Lock Pre-Production & Budget', desc: 'Secure location permits, department HoD attachments, and finance drawdown schedule.' },
-      { id: 'principal_shoot', title: 'Complete Principal Photography', desc: 'Execute shooting schedule within turnaround covenants and avoid daily overruns.' },
-      { id: 'vp_stage', title: 'Virtual Production / LED Volume Shoot', desc: 'Synchronize in-camera VFX, Unreal Engine environments, and camera tracking arrays.' },
-      { id: 'post_delivery', title: 'Post-Production & VFX Turnover', desc: 'Coordinate multi-vendor VFX plate handoffs, color grading, sound conform, and mastering.' },
-      { id: 'theatrical_date', title: 'Meet Fixed Theatrical / Festival Date', desc: 'Comply with strict theater delivery windows and localized cinema DCP distribution.' },
-      { id: 'ott_delivery', title: 'OTT Streaming Platform Handover', desc: 'Pass stringent platform QC specs, IMF packages, multilingual dubs, and timed subtitles.' },
-      { id: 'music_licensing', title: 'Music Score & Commercial Rights Lock', desc: 'Synchronize master licensing, synchronization rights, and stem turnovers for mix.' },
-      { id: 'crew_scale', title: 'Crew & Technical Capacity Scaling', desc: 'Assemble high-demand specialist crew under tight market constraints.' }
-    ]
+      { id: 'principal_shoot', title: 'Complete Principal Photography On-Schedule', desc: 'Execute daily call sheets, wrap key sets, and preserve turnaround buffers.' },
+      { id: 'lock_pre_pro', title: 'Lock Pre-Production & Floor Dates', desc: 'Secure location permits, HoD attachments, and soundstage tenant handover.' },
+      { id: 'vp_volume_shoot', title: 'Execute In-Camera VFX / LED Volume Shoot', desc: 'Synchronize 3D Unreal environments, camera tracking, and volume lighting rigs.' },
+      { id: 'post_finishing_delivery', title: 'Deliver Picture Lock & Multi-Vendor VFX', desc: 'Conform 120+ hero CGI shots, complete DI color grade, and master Dolby Atmos audio.' },
+      { id: 'platform_qc_handover', title: 'Pass OTT Streaming Platform QC & IMF Delivery', desc: 'Meet strict streaming platform delivery profiles, timed subtitles, and multi-language dubs.' },
+      { id: 'theatrical_release_window', title: 'Lock Theatrical Screen Count & Release Date', desc: 'Comply with fixed distributor delivery deadlines and avoid competitor tentpole clashes.' },
+    ],
   },
   {
-    eyebrow: 'STEP 02 / 10 · BLOCKAGE',
-    title: 'Identified Obstacle',
-    question: 'What is blocking or threatening this objective?',
-    subtitle: 'Identify the friction point where operational reality has diverged from plan.',
+    num: '02',
+    eyebrow: 'STEP 02 OF 11 // BLOCKAGE & SYMPTOM',
+    question: 'What is going wrong?',
+    subtitle: 'Identify the active operational friction or emergency where reality is diverging from plan.',
     options: [
-      { id: 'schedule_slip', title: 'Schedule Slippage & Compounding Delays', desc: 'Upstream delays are eating downstream contingency buffer days.' },
-      { id: 'department_silo', title: 'Inter-Departmental Silo Breakdown', desc: 'Art, Camera, and VFX are executing against inconsistent technical assumptions.' },
-      { id: 'asset_mismatch', title: 'Asset Handover & Plate Rejections', desc: 'Delivered files fail technical metadata conform, format standards, or color space specs.' },
-      { id: 'vendor_capacity', title: 'Vendor Capacity & Burst Bottleneck', desc: 'Lead VFX house or sound facility is overbooked and unable to take critical shots.' },
-      { id: 'creative_technical', title: 'Creative vs Technical Misalignment', desc: 'Director intent conflicts with practical budget limits or stage technical tolerances.' },
-      { id: 'cost_burn', title: 'Daily Cash Burn Escalation', desc: 'Standby stage costs and idle crew turnaround are burning contingency funds.' },
-      { id: 'rights_dispute', title: 'Unresolved Chain of Title / Rights', desc: 'Talent option expiry or music sync clearances threatening final distribution release.' }
-    ]
+      { id: 'schedule_drift', title: 'Schedule Slippage Compounding Downstream', desc: 'Upstream filming delays have consumed all buffer days before stage eviction.' },
+      { id: 'soundstage_turnover_crunch', title: 'Soundstage Booking Overlap & Turnaround Penalty', desc: 'Lease expiration approaching with 4 essential sequences remaining unshot.' },
+      { id: 'talent_window_collision', title: 'Lead Talent Availability Hard-Out Collision', desc: 'Key actor departing for another project before coverage is completed.' },
+      { id: 'vfx_plate_compression', title: 'VFX Plate Delivery Squeeze & Vendor Overload', desc: 'Conform window compressed by 60%, forcing secondary vendor crisis.' },
+      { id: 'qc_delivery_rejection', title: 'Platform Master QC Rejection', desc: 'IMF package or Atmos bed phase error rejected 72h before global rollout.' },
+      { id: 'budget_overtime_burn', title: 'Unscheduled Overtime Cash Burn Spikes', desc: 'Turnaround hour breaches and standby equipment penalties burning contingency capital.' },
+    ],
   },
   {
-    eyebrow: 'STEP 03 / 10 · LOCATION',
-    title: 'Continuum Stage',
-    question: 'In which stage of the Continuum is this blockage located?',
-    subtitle: 'Pinpoint the exact zone where the breakdown is currently manifesting.',
-    options: CONTINUUM_STAGES.map(s => ({
-      id: s.name.toLowerCase().replace(/\s+/g, '_'),
-      title: `${s.step}. ${s.name}`,
-      desc: s.shortDesc
-    }))
+    num: '03',
+    eyebrow: 'STEP 03 OF 11 // LOCATION IN LIFECYCLE',
+    question: 'Where is it happening?',
+    subtitle: 'Pinpoint which stage of the 9-Stage Entertainment Continuum is the primary flashpoint.',
+    options: CONTINUUM_STAGES.map((s) => ({
+      id: s.step,
+      title: `Stage ${s.step}: ${s.name}`,
+      desc: s.shortDesc,
+    })),
   },
   {
-    eyebrow: 'STEP 04 / 10 · CHANGE EVENT',
-    title: 'Triggering Event',
-    question: 'What recent change or event catalyzed this breakdown?',
-    subtitle: 'Systems rarely fail spontaneously; identify the specific catalyst.',
+    num: '04',
+    eyebrow: 'STEP 04 OF 11 // CHRONOLOGICAL ORIGIN',
+    question: 'When did it begin?',
+    subtitle: 'Systems rarely fail instantly. At what point did the operational delta first surface?',
     options: [
-      { id: 'scope_expansion', title: 'Unbudgeted Scope Expansion', desc: 'Script revisions or additional sequences added without extending calendar schedule.' },
-      { id: 'key_hod_turnover', title: 'Key HoD or Personnel Change', desc: 'Director of Photography, VFX Supervisor, or Line Producer replaced mid-flight.' },
-      { id: 'vendor_milestone_miss', title: 'Vendor Missed Critical Turnaround', desc: 'External facility failed to deliver preliminary temp cut or plate turnover on date.' },
-      { id: 'technical_format_switch', title: 'Camera Format or Pipeline Switch', desc: 'Capture resolution, aspect ratio, or color pipeline changed during production.' },
-      { id: 'schedule_compression', title: 'Delivery Date Pulled Forward', desc: 'Platform or distributor accelerated delivery deadline by 2–4 weeks.' },
-      { id: 'location_loss', title: 'Location or Stage Cancellation', desc: 'Permit revoked, weather shock, or soundstage booking overlap forced emergency halt.' }
-    ]
+      { id: 'current_sprint', title: 'Within the Last 24–48 Hours', desc: 'Acute on-set shock: actor illness, sudden permit cancellation, or hardware failure.' },
+      { id: 'current_milestone', title: 'During Current Milestone Transition (1–2 Weeks)', desc: 'Late dailies turnovers or unhedged script revisions during filming.' },
+      { id: 'upstream_prep', title: 'Rooted in Upstream Pre-Production Prep', desc: 'Unrealistic turnaround assumptions and lack of schedule buffer baked in from day 1.' },
+      { id: 'development_phase', title: 'Inherited from Script Development & Rights', desc: 'Ambiguous chain-of-title or unbudgeted practical stunt complexity.' },
+    ],
   },
   {
-    eyebrow: 'STEP 05 / 10 · IMPACT VECTOR',
-    title: 'Impact Magnitude',
-    question: 'What is the immediate and downstream impact vector?',
-    subtitle: 'Where is the damage accumulating most aggressively?',
-    options: [
-      { id: 'financial_burn', title: 'Daily Financial Capital Burn ($25k–$100k+/day)', desc: 'Idle crew, booked studio floors, and standby rental packages.' },
-      { id: 'cascading_post_delay', title: 'Cascading Post-Production Compression', desc: 'Compressing 16 weeks of VFX and conform into an unfeasible 6-week window.' },
-      { id: 'qc_rejection_risk', title: 'Critical Platform QC Rejection Risk', desc: 'Risk of failing delivery specs and missing coordinated worldwide streaming drop.' },
-      { id: 'talent_window_loss', title: 'Key Talent Availability Window Loss', desc: 'Leading cast commitment expiring; reshoots become impossible or cost-prohibitive.' },
-      { id: 'creative_compromise', title: 'Severe Creative Compromise', desc: 'Forced to cut intended sequences or accept subpar temporary visual effects.' }
-    ]
-  },
-  {
-    eyebrow: 'STEP 06 / 10 · DEPENDENCIES',
-    title: 'Affected Stakeholders',
-    question: 'Which stakeholders and downstream nodes depend on resolving this?',
-    subtitle: 'Select all parties whose operational progress is directly blocked. (Multiple selection)',
+    num: '05',
+    eyebrow: 'STEP 05 OF 11 // STAKEHOLDERS IN BLAST RADIUS',
+    question: 'Who is affected?',
+    subtitle: 'Select the primary parties whose operational progress is directly blocked. (Multi-select)',
     multiSelect: true,
-    options: STAKEHOLDERS.map(st => ({
+    options: STAKEHOLDERS.slice(0, 8).map((st) => ({
       id: st.id,
       title: st.name,
-      desc: st.role
-    }))
+      desc: st.role,
+    })),
   },
   {
-    eyebrow: 'STEP 07 / 10 · ROOT CAUSE',
-    title: 'Root Cause Diagnosis',
-    question: 'What is the underlying structural root cause?',
-    subtitle: 'Surface symptoms are caused by deeper systemic deficiencies. Select the core origin.',
+    num: '06',
+    eyebrow: 'STEP 06 OF 11 // IMPACT VECTOR',
+    question: 'What is the impact?',
+    subtitle: 'Where is collateral damage accumulating most aggressively across the system?',
     options: [
-      { id: 'silo_contract', title: 'Information Silo & Missing Schema Contract', desc: 'Departments operate in isolation with no shared single source of truth or asset spec.' },
-      { id: 'unbuffered_chain', title: 'Unbuffered Dependency Chain', desc: 'Zero buffer days between dependent phases; any upstream delay instantly breaks downstream.' },
-      { id: 'unvetted_vendor', title: 'Unverified Vendor / Capability Mismatch', desc: 'Subcontractor contracted for work beyond their true throughput or technical capability.' },
-      { id: 'incentive_misalignment', title: 'Misaligned Contractual Incentives', desc: 'Agreements reward speed over input quality, penalizing downstream finishing houses.' },
-      { id: 'opaque_telemetry', title: 'Zero Operational Telemetry', desc: 'Leadership only discovers failure after milestones have already lapsed.' }
-    ]
+      { id: 'financial_penalties', title: 'Immediate Capital Burn ($25k–$100k+/day)', desc: 'Standby camera equipment, dark floor penalties, and crew overtime turnaround fines.' },
+      { id: 'delivery_window_loss', title: 'Irreversible Delivery Window Forfeiture', desc: 'Missing global OTT simultaneous launch or locked theatrical screen bookings.' },
+      { id: 'post_finishing_collapse', title: 'Cascading Post-Production Compression', desc: 'Forcing 8 weeks of compositing and sound mixing into an impossible 12-day crunch.' },
+      { id: 'creative_mutilation', title: 'Severe Creative Compromise', desc: 'Forced to cut climax sequences or accept unfinished visual effects.' },
+    ],
   },
   {
-    eyebrow: 'STEP 08 / 10 · MISSING CAPABILITY',
-    title: 'Missing Capability',
-    question: 'What system capability is missing from the current setup?',
-    subtitle: 'What mechanism would have absorbed this shock before it became a crisis?',
+    num: '07',
+    eyebrow: 'STEP 07 OF 11 // DEPENDENCY LINKS',
+    question: 'What dependencies are involved?',
+    subtitle: 'What critical-path connections are propagating this failure downstream?',
     options: [
-      { id: 'dynamic_telemetry', title: 'Live Dependency Telemetry (TREE Engine)', desc: 'Real-time monitoring of asset turnovers, stage status, and schedule buffer health.' },
-      { id: 'burst_network', title: 'Orchestrated Burst Capacity Network', desc: 'Pre-vetted overflow VFX, sound, and editorial partners ready on zero notice.' },
-      { id: 'spec_standard', title: 'Unified Technical Specification & Pre-Flight QC', desc: 'Rigorous machine-verified input compliance before any asset enters post.' },
-      { id: 'neutral_arbitrator', title: 'Neutral Synchronization Liaison', desc: 'An impartial operational bridge aligning creative intent with technical physics.' },
-      { id: 'contract_guardrails', title: 'Dependency-Aware Milestone Governance', desc: 'Financial drawdowns tied strictly to verified dependency handovers.' }
-    ]
+      { id: 'talent_stage_deps', title: 'Talent Availability → Soundstage Floor → Camera Rig', desc: 'Physical production dependencies locked into strict sequential order.' },
+      { id: 'plate_conform_deps', title: 'Camera Dailies → VFX Plates → Editorial Lock → Sound Mix', desc: 'Digital finishing dependencies bound to strict upstream input quality.' },
+      { id: 'contract_capital_deps', title: 'Milestone Delivery Report → Capital Drawdown → Vendor Payment', desc: 'Financial tranches decoupled from technical deliverable reality.' },
+      { id: 'spec_platform_deps', title: 'Color Conform → IMF Metadata Wrapping → Platform QC Ingest', desc: 'Technical delivery dependencies governed by automated platform gates.' },
+    ],
   },
   {
-    eyebrow: 'STEP 09 / 10 · INTERVENTION CLASS',
-    title: 'Intervention Class',
-    question: 'Which class of SYNQ intervention is required?',
-    subtitle: 'Determine the operational footprint and turnaround urgency of the fix.',
+    num: '08',
+    eyebrow: 'STEP 08 OF 11 // ATTEMPTED TRIAGE',
+    question: 'What has already been attempted?',
+    subtitle: 'Understanding previous attempts reveals what systemic constraints remain unbroken.',
     options: [
-      { id: 'rapid_triage', title: 'Rapid Triage SYNQ (24–48 Hours)', desc: 'Emergency stabilization: resequence shoot schedule, unlock immediate bottleneck.' },
-      { id: 'pipeline_sync', title: 'Pipeline & Handshake SYNQ (3–7 Days)', desc: 'Standardize data schemas, establish verified asset handovers between departments.' },
-      { id: 'capacity_burst', title: 'Capacity Burst SYNQ (1–3 Weeks)', desc: 'Route critical overflow shots/conform to pre-vetted network facilities without balance-sheet debt.' },
-      { id: 'preflight_audit', title: 'Pre-Flight Risk & Dependency Audit', desc: 'Systemic stress-test of pre-production schedule and vendor contracts before cameras roll.' },
-      { id: 'full_continuum', title: 'End-to-End System Synchronization', desc: 'Continuous dependency orchestration across production, post-production, and platform delivery.' }
-    ]
-  }
+      { id: 'overtime_push', title: 'Extended Overtime Shifts & Crew Burnout', desc: 'Attempted to shoot through the delay, triggering safety limits and budget spikes.' },
+      { id: 'vendor_pressure', title: 'Informal Vendor Expediting & Phone Calls', desc: 'Pressuring post facilities to accelerate work without providing clearer inputs.' },
+      { id: 'scene_cuts', title: 'Internal Scene Reshuffling & Tactical Cuts', desc: 'Ad-hoc changes made without recalculating downstream lighting or talent impacts.' },
+      { id: 'no_action_yet', title: 'No Intervention Attempted Yet', desc: 'Emergency just surfaced; seeking initial diagnosis before making costly moves.' },
+    ],
+  },
+  {
+    num: '09',
+    eyebrow: 'STEP 09 OF 11 // ROOT-CAUSE HYPOTHESIS',
+    question: 'What is the likely root cause?',
+    subtitle: 'Surface emergencies are caused by underlying structural flaws. Select the core origin.',
+    options: [
+      { id: 'dependency_concentration', title: 'Schedule Dependency Concentration', desc: 'Too many high-risk elements chained in single-file without elastic buffers.' },
+      { id: 'missing_schema_covenants', title: 'Missing Interface Specs & Input Standards', desc: 'Departments operating with inconsistent color spaces, schemas, or delivery formats.' },
+      { id: 'unhedged_scope_creep', title: 'Unhedged Creative Scope Expansion', desc: 'Script revisions injected into production without technical feasibility recalibration.' },
+      { id: 'opaque_capacity_tracking', title: 'Zero Real-Time Capacity Telemetry', desc: 'Leadership discovering bottlenecks only after milestones have already broken.' },
+    ],
+  },
+  {
+    num: '10',
+    eyebrow: 'STEP 10 OF 11 // MISSING CAPABILITY',
+    question: 'What capability is missing?',
+    subtitle: 'What operational tool or resource was absent that enabled this crisis?',
+    options: [
+      { id: 'burst_network_routing', title: 'Pre-Vetted Burst Partner Routing', desc: 'Immediate access to partner dark-floor stages, secondary VFX, or specialist crew.' },
+      { id: 'dynamic_resequencing_engine', title: 'Dynamic Counterfactual Resequencing Tool', desc: 'Algorithmic ability to simulate multi-party schedule shifts in minutes.' },
+      { id: 'preflight_automated_qc', title: 'Automated Pre-Flight QC Validation Pipeline', desc: 'Rigorous machine-checking of deliverable assets before handoff.' },
+      { id: 'milestone_escrow_governance', title: 'Dependency-Aware Milestone Governance', desc: 'Single-source neutral operational accountability aligning all parties.' },
+    ],
+  },
+  {
+    num: '11',
+    eyebrow: 'STEP 11 OF 11 // INTERVENTION CLASS',
+    question: 'What intervention is possible?',
+    subtitle: 'Determine the operational footprint and turnaround sprint required to resolve this.',
+    options: [
+      { id: 'rapid_triage_synq', title: 'Rapid Triage SYNQ (24–48 Hours)', desc: 'Emergency stabilization: dynamic scene resequencing and immediate bottleneck bypass.' },
+      { id: 'pipeline_sync_sprint', title: 'Pipeline & Interface SYNQ (3–7 Days)', desc: 'Standardize schemas, establish verified asset handovers between departments.' },
+      { id: 'capacity_burst_sprint', title: 'Capacity Burst SYNQ (1–3 Weeks)', desc: 'Route critical overflow shots to pre-vetted network facilities under rate parity.' },
+      { id: 'continuum_orchestration', title: 'Full Continuum Synchronization Engagement', desc: 'End-to-end dependency management across production, post, and platform delivery.' },
+    ],
+  },
 ];
+
+const LOCAL_STORAGE_KEY = 'digisynq_diagnostic_v2_progress';
 
 export function DiagnosePage() {
   const navigate = useNavigate();
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStepIdx, setCurrentStepIdx] = useState(0);
   const [selections, setSelections] = useState<Record<number, string | string[]>>({
-    0: 'post_delivery',
-    1: 'schedule_slip',
-    2: 'post-production',
-    3: 'vendor_milestone_miss',
-    4: 'cascading_post_delay',
-    5: ['producers', 'post-vfx', 'distributors'],
-    6: 'silo_contract',
-    7: 'dynamic_telemetry',
-    8: 'rapid_triage'
+    0: 'principal_shoot',
+    1: 'schedule_drift',
+    2: '04',
+    3: 'current_milestone',
+    4: ['producers', 'talent', 'technicians'],
+    5: 'financial_penalties',
+    6: 'talent_stage_deps',
+    7: 'overtime_push',
+    8: 'dependency_concentration',
+    9: 'burst_network_routing',
+    10: 'rapid_triage_synq',
   });
 
   const [diagnosticResult, setDiagnosticResult] = useState<DiagnosticResult | null>(null);
   const [copied, setCopied] = useState(false);
-  const [saving, setSaving] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
 
-  const stepMeta = STEP_DATA[currentStep];
-
-  const handleSelectOption = (optionId: string) => {
-    if (stepMeta.multiSelect) {
-      const current = (selections[currentStep] as string[]) || [];
-      if (current.includes(optionId)) {
-        setSelections({ ...selections, [currentStep]: current.filter(x => x !== optionId) });
-      } else {
-        setSelections({ ...selections, [currentStep]: [...current, optionId] });
+  // Load progress from localStorage on mount
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.selections) setSelections(parsed.selections);
+        if (typeof parsed.step === 'number') setCurrentStepIdx(parsed.step);
       }
-    } else {
-      setSelections({ ...selections, [currentStep]: optionId });
+    } catch (e) {
+      console.warn('Could not load saved diagnostic progress', e);
+    }
+  }, []);
+
+  // Save progress to localStorage
+  const saveProgress = (newSelections: Record<number, string | string[]>, step: number) => {
+    try {
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify({ selections: newSelections, step }));
+    } catch (e) {
+      console.warn('Could not save diagnostic progress', e);
     }
   };
 
-  const isStepComplete = () => {
-    const sel = selections[currentStep];
-    if (Array.isArray(sel)) return sel.length > 0;
-    return Boolean(sel);
+  const currentStep = DIAGNOSTIC_STEPS[currentStepIdx];
+
+  const handleSelectOption = (optId: string) => {
+    let updated: Record<number, string | string[]>;
+    if (currentStep.multiSelect) {
+      const current = (selections[currentStepIdx] as string[]) || [];
+      const next = current.includes(optId)
+        ? current.filter((x) => x !== optId)
+        : [...current, optId];
+      updated = { ...selections, [currentStepIdx]: next };
+    } else {
+      updated = { ...selections, [currentStepIdx]: optId };
+    }
+    setSelections(updated);
+    saveProgress(updated, currentStepIdx);
   };
 
   const handleNext = async () => {
-    if (currentStep < 8) {
-      setCurrentStep(currentStep + 1);
+    if (currentStepIdx < 10) {
+      const nextStep = currentStepIdx + 1;
+      setCurrentStepIdx(nextStep);
+      saveProgress(selections, nextStep);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      // Step 10: Generate Diagnostic Report
-      setSaving(true);
-      
-      const stageName = (selections[2] as string) || 'Production';
-      const objective = STEP_DATA[0].options.find(o => o.id === selections[0])?.title || 'System Milestone';
-      const blockage = STEP_DATA[1].options.find(o => o.id === selections[1])?.title || 'Operational Friction';
-      const event = STEP_DATA[3].options.find(o => o.id === selections[3])?.title || 'Schedule Shift';
-      const impact = STEP_DATA[4].options.find(o => o.id === selections[4])?.title || 'Cascading Delay';
-      const rootCause = STEP_DATA[6].options.find(o => o.id === selections[6])?.title || 'Information Silo';
-      const missingCap = STEP_DATA[7].options.find(o => o.id === selections[7])?.title || 'Live Dependency Telemetry';
-      const intervention = STEP_DATA[8].options.find(o => o.id === selections[8])?.title || 'Rapid Triage SYNQ';
-      
-      const rawDeps = (selections[5] as string[]) || ['producers', 'post-vfx'];
-      const depLabels = rawDeps.map(id => STAKEHOLDERS.find(s => s.id === id)?.name || id);
+      // Step 11 completed: synthesize diagnostic
+      setIsGenerating(true);
+
+      const objective = DIAGNOSTIC_STEPS[0].options.find((o) => o.id === selections[0])?.title || 'Principal Photography Execution';
+      const blockage = DIAGNOSTIC_STEPS[1].options.find((o) => o.id === selections[1])?.title || 'Schedule Slippage';
+      const stageCode = (selections[2] as string) || '04';
+      const stageName = CONTINUUM_STAGES.find((s) => s.step === stageCode)?.name || 'Production';
+      const originWhen = DIAGNOSTIC_STEPS[3].options.find((o) => o.id === selections[3])?.title || 'Current Milestone';
+      const impact = DIAGNOSTIC_STEPS[5].options.find((o) => o.id === selections[5])?.title || 'Capital Burn Acceleration';
+      const dependencies = DIAGNOSTIC_STEPS[6].options.find((o) => o.id === selections[6])?.title || 'Talent to Stage Dependency';
+      const rootCause = DIAGNOSTIC_STEPS[8].options.find((o) => o.id === selections[8])?.title || 'Dependency Concentration';
+      const missingCap = DIAGNOSTIC_STEPS[9].options.find((o) => o.id === selections[9])?.title || 'Pre-Vetted Burst Routing';
+      const intervention = DIAGNOSTIC_STEPS[10].options.find((o) => o.id === selections[10])?.title || 'Rapid Triage SYNQ';
+
+      const rawDeps = (selections[4] as string[]) || ['producers', 'talent'];
+      const depLabels = rawDeps.map((id) => STAKEHOLDERS.find((s) => s.id === id)?.name || id);
 
       const result = await intakeService.saveDiagnosticResult({
-        stage: stageName,
+        stage: `Stage ${stageCode}: ${stageName}`,
         objective,
         blockage,
-        location: stageName,
-        event,
+        location: `Stage ${stageCode}: ${stageName}`,
+        event: originWhen,
         impact,
         dependencies: depLabels,
         rootCause,
         missingCapability: missingCap,
         recommendedIntervention: intervention,
-        interventionClass: (selections[8] as string) || 'rapid_triage',
-        relevantMechanisms: ['01. OBSERVE', '02. DETECT', '03. DECOMPOSE', '04. MAP', '05. DIAGNOSE', '08. SIMULATE', '11. RESOLVE'],
-        expectedOutcome: 'Stabilize schedule buffer within 48h; eliminate downstream dependency cascade.',
-        confidence: '96.4% Structural Match',
+        interventionClass: (selections[10] as string) || 'rapid_triage_synq',
+        relevantMechanisms: ['M01: Observe', 'M04: Map', 'M08: Simulate', 'M10: Match', 'M12: Execute', 'M14: Verify'],
+        expectedOutcome: 'Modelled 5.5 days schedule buffer recovery and $84k+ avoided idle fines.',
+        confidence: '89.4% Modelled Inference (DigiSynq Taxonomy)',
         riskScore: 'High',
         cascadePath: [
-          `Event: ${event}`,
-          `Condition: ${blockage}`,
-          `Root: ${rootCause}`,
-          `Missing: ${missingCap}`,
-          `Intervention: ${intervention}`
-        ]
+          `Problem: ${objective} blocked by ${blockage}`,
+          `Symptom: Operational variance active in Stage ${stageCode}`,
+          `Event: Originating during ${originWhen}`,
+          `Condition: Critical dependencies bound across ${dependencies}`,
+          `Dependency: Multi-stakeholder blast radius impacting ${depLabels.join(', ')}`,
+          `Root Cause: ${rootCause}`,
+          `Missing Capability: ${missingCap}`,
+          `Intervention: ${intervention}`,
+          `Outcome: Modelled Schedule & Capital Stabilization`,
+        ],
       });
 
       setDiagnosticResult(result);
-      setSaving(false);
-      setCurrentStep(9);
+      setIsGenerating(false);
+      setCurrentStepIdx(11); // Show result screen
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+  };
+
+  const handleRestart = () => {
+    setDiagnosticResult(null);
+    setCurrentStepIdx(0);
+    localStorage.removeItem(LOCAL_STORAGE_KEY);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleCopyCaseId = () => {
     if (!diagnosticResult) return;
     navigator.clipboard.writeText(diagnosticResult.caseId);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
-  };
-
-  const handleRestart = () => {
-    setDiagnosticResult(null);
-    setCurrentStep(0);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
-    <main id="main-content" className="pt-28 pb-32 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-      {/* Engine Header */}
+    <main className="bg-[#03040A] text-[#ECEEF5] selection:bg-[#23B272] selection:text-[#03040A] min-h-screen pt-36 pb-24 px-6 sm:px-8 max-w-5xl mx-auto relative overflow-hidden">
+      <TopographicBackground className="opacity-20 pointer-events-none -z-10 fixed inset-0" />
+
+      {/* ── Diagnostic Console Header ── */}
       <div className="text-center max-w-3xl mx-auto mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#23B272]/30 bg-[#23B272]/5 text-[#52E3A4] text-xs font-mono tracking-wider uppercase mb-4">
-          <Cpu className="w-3.5 h-3.5" />
-          <span>Interactive Diagnostic Engine · 10-Step Root Cause Analysis</span>
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-white/10 bg-white/[0.03] text-xs font-mono mb-4">
+          <span className="w-2 h-2 rounded-full bg-[#52E3A4] animate-pulse" />
+          <span className="text-[#52E3A4] font-semibold">ROOT-CAUSE DIAGNOSTIC ENGINE</span>
+          <span className="text-zinc-600">//</span>
+          <span className="text-zinc-400">11-STEP INTERACTIVE DECOMPOSITION</span>
         </div>
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white mb-4">
-          Diagnose an Entertainment Breakdown
+
+        <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-4">
+          Diagnose an Entertainment System Breakdown.
         </h1>
-        <p className="text-base sm:text-lg text-white/70">
-          Deconstruct symptoms, expose hidden dependency cascades, and determine the exact class of SYNQ intervention required to stabilize the system.
+        <p className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed">
+          Deconstruct surface friction, identify structural root causes, calculate cascade blast radius, and determine the exact class of SYNQ intervention required.
         </p>
       </div>
 
-      {/* Progress Bar */}
-      <div className="mb-10 bg-[#090B14] border border-white/[0.08] rounded-2xl p-4">
-        <div className="flex items-center justify-between text-xs font-mono text-white/50 mb-2">
-          <span>PROGRESS</span>
-          <span className="text-[#52E3A4] font-bold">
-            {currentStep === 9 ? 'DIAGNOSIS COMPLETE' : `STEP ${currentStep + 1} OF 10`}
-          </span>
-        </div>
-        <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
-          <div 
-            className="h-full bg-gradient-to-r from-[#23B272] to-[#52E3A4] transition-all duration-300"
-            style={{ width: `${((currentStep + 1) / 10) * 100}%` }}
-          />
-        </div>
-      </div>
-
-      {/* Diagnostic Steps 1 through 9 */}
-      {currentStep < 9 && (
-        <div className="bg-[#090B14] border border-white/[0.08] rounded-3xl p-6 sm:p-10 shadow-2xl animate-in fade-in duration-200">
-          <div className="mb-8">
-            <span className="text-xs font-mono text-[#52E3A4] tracking-widest uppercase">
-              {stepMeta.eyebrow}
+      {/* ── Step Progress Indicator ── */}
+      {currentStepIdx < 11 && (
+        <div className="mb-10 p-4 rounded-2xl bg-[#090B14] border border-white/[0.08]">
+          <div className="flex items-center justify-between text-xs font-mono mb-2">
+            <span className="text-zinc-400">{currentStep.eyebrow}</span>
+            <span className="text-[#52E3A4] font-bold">
+              {Math.round(((currentStepIdx + 1) / 11) * 100)}% COMPLETE
             </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mt-1 mb-2">
-              {stepMeta.question}
+          </div>
+          <div className="w-full h-1.5 bg-white/[0.06] rounded-full overflow-hidden">
+            <div
+              className="h-full bg-gradient-to-r from-[#23B272] to-[#52E3A4] transition-all duration-300"
+              style={{ width: `${((currentStepIdx + 1) / 11) * 100}%` }}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* ── Steps 01 to 11 Workspace ── */}
+      {currentStepIdx < 11 && (
+        <div className="p-8 sm:p-10 rounded-3xl border border-white/[0.1] bg-[#090B14] shadow-2xl relative overflow-hidden">
+          <div className="mb-8">
+            <span className="text-xs font-mono text-[#52E3A4] tracking-wider uppercase block mb-1">
+              QUESTION {currentStep.num}
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
+              {currentStep.question}
             </h2>
-            <p className="text-sm sm:text-base text-white/60">
-              {stepMeta.subtitle}
+            <p className="text-sm text-zinc-400">
+              {currentStep.subtitle}
             </p>
           </div>
 
           {/* Options Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 mb-10">
-            {stepMeta.options.map((opt) => {
-              const isSelected = stepMeta.multiSelect
-                ? ((selections[currentStep] as string[]) || []).includes(opt.id)
-                : selections[currentStep] === opt.id;
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+            {currentStep.options.map((opt) => {
+              const isSelected = currentStep.multiSelect
+                ? ((selections[currentStepIdx] as string[]) || []).includes(opt.id)
+                : selections[currentStepIdx] === opt.id;
 
               return (
                 <button
                   key={opt.id}
                   type="button"
                   onClick={() => handleSelectOption(opt.id)}
-                  className={`text-left p-4 sm:p-5 rounded-2xl border transition-all duration-200 relative group ${
+                  className={`p-5 rounded-2xl border text-left transition-all cursor-pointer relative group flex items-start justify-between gap-3 ${
                     isSelected
-                      ? 'bg-[#23B272]/10 border-[#23B272] shadow-[0_0_20px_rgba(35,178,114,0.15)] ring-1 ring-[#23B272]'
-                      : 'bg-white/[0.02] border-white/[0.06] hover:bg-white/[0.05] hover:border-white/20'
+                      ? 'bg-[#16543D]/40 border-[#52E3A4] shadow-[0_0_25px_rgba(82,227,164,0.18)] scale-[1.01]'
+                      : 'bg-black/40 border-white/[0.06] hover:border-white/15'
                   }`}
                 >
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <h3 className={`text-sm sm:text-base font-bold transition-colors ${
-                        isSelected ? 'text-[#52E3A4]' : 'text-white group-hover:text-[#52E3A4]'
-                      }`}>
-                        {opt.title}
-                      </h3>
-                      <p className="text-xs text-white/60 mt-1 leading-relaxed">
-                        {opt.desc}
-                      </p>
-                    </div>
-                    <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 border transition-all ${
+                  <div>
+                    <h3 className={`text-sm font-bold transition-colors ${isSelected ? 'text-[#52E3A4]' : 'text-white'}`}>
+                      {opt.title}
+                    </h3>
+                    <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
+                      {opt.desc}
+                    </p>
+                  </div>
+                  <div
+                    className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 border transition-all mt-0.5 ${
                       isSelected
                         ? 'bg-[#23B272] border-[#23B272] text-[#03040A]'
-                        : 'border-white/20 group-hover:border-white/40'
-                    }`}>
-                      {isSelected && <Check className="w-3 h-3 stroke-[3]" />}
-                    </div>
+                        : 'border-white/20'
+                    }`}
+                  >
+                    {isSelected && <Check className="w-3 h-3 stroke-[3]" />}
                   </div>
                 </button>
               );
             })}
           </div>
 
-          {/* Navigation Controls */}
-          <div className="flex items-center justify-between border-t border-white/[0.08] pt-6">
+          {/* Nav Controls */}
+          <div className="flex items-center justify-between pt-6 border-t border-white/[0.08]">
             <button
               type="button"
-              onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}
-              disabled={currentStep === 0}
-              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold transition-all ${
-                currentStep === 0 
-                  ? 'opacity-30 cursor-not-allowed text-white/40' 
-                  : 'text-white/70 hover:text-white hover:bg-white/5'
+              onClick={() => setCurrentStepIdx(Math.max(0, currentStepIdx - 1))}
+              disabled={currentStepIdx === 0}
+              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold font-mono transition-all ${
+                currentStepIdx === 0 ? 'opacity-30 cursor-not-allowed text-zinc-500' : 'text-zinc-300 hover:text-white'
               }`}
             >
               <ArrowLeft className="w-4 h-4" />
@@ -358,162 +422,144 @@ export function DiagnosePage() {
             <button
               type="button"
               onClick={handleNext}
-              disabled={!isStepComplete() || saving}
-              className={`inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full text-xs sm:text-sm font-bold tracking-wide transition-all ${
-                isStepComplete() && !saving
-                  ? 'bg-[#23B272] hover:bg-[#52E3A4] text-[#03040A] shadow-lg active:scale-95'
-                  : 'bg-white/10 text-white/40 cursor-not-allowed'
-              }`}
+              disabled={isGenerating}
+              className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-[#23B272] hover:bg-[#52E3A4] text-[#03040A] font-bold text-xs font-mono tracking-wide transition-all shadow-[0_0_30px_rgba(35,178,114,0.35)] active:scale-95"
             >
-              <span>{currentStep === 8 ? (saving ? 'Synthesizing...' : 'Generate Diagnosis →') : 'Continue'}</span>
-              <ArrowRight className="w-4 h-4" />
+              <span>{currentStepIdx === 10 ? (isGenerating ? 'Synthesizing Diagnosis...' : 'Generate Systemic Diagnosis →') : 'Continue →'}</span>
             </button>
           </div>
         </div>
       )}
 
-      {/* Step 10: Diagnostic Result Dossier */}
-      {currentStep === 9 && diagnosticResult && (
-        <div className="space-y-8 animate-in fade-in zoom-in-95 duration-300">
-          {/* Case Identifier Card */}
-          <div className="bg-[#090B14] border border-[#23B272]/40 rounded-3xl p-6 sm:p-8 shadow-[0_0_40px_rgba(35,178,114,0.1)]">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/[0.08] pb-6 mb-6">
+      {/* ══════════════════════════════════════════════════════
+          RESULT SCREEN: DIGISYNQ DIAGNOSTIC DOSSIER
+         ══════════════════════════════════════════════════════ */}
+      {currentStepIdx === 11 && diagnosticResult && (
+        <div className="space-y-8 animate-in fade-in duration-300">
+          {/* Header Badge & Identifier */}
+          <div className="p-8 sm:p-10 rounded-3xl border border-[#23B272]/40 bg-[#090B14] shadow-2xl relative">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-6 border-b border-white/[0.08]">
               <div>
-                <div className="inline-flex items-center gap-2 text-xs font-mono text-[#52E3A4] uppercase tracking-wider mb-1">
+                <div className="inline-flex items-center gap-2 text-xs font-mono text-[#52E3A4] uppercase tracking-wider mb-2">
                   <ShieldCheck className="w-4 h-4" />
-                  <span>Diagnostic Case Dossier Prepared</span>
+                  <span>PRELIMINARY / MODELLED DIAGNOSTIC REPORT</span>
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-black text-white">
-                  Case ID: <span className="font-mono text-[#23B272]">{diagnosticResult.caseId}</span>
+                <h2 className="text-3xl font-black text-white">
+                  DIGISYNQ DIAGNOSTIC: <span className="font-mono text-[#23B272]">{diagnosticResult.caseId}</span>
                 </h2>
-                <p className="text-xs text-white/50 mt-1 font-mono">
-                  Generated: {new Date(diagnosticResult.createdAt).toLocaleString()} · Stored locally
+                <p className="text-xs text-zinc-500 mt-1 font-mono">
+                  Timestamp: {new Date(diagnosticResult.createdAt).toLocaleString()} · Stored in System Client Memory
                 </p>
               </div>
 
               <div className="flex items-center gap-3">
                 <button
-                  type="button"
                   onClick={handleCopyCaseId}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 text-xs font-mono text-white transition-all"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-xs font-mono text-white transition-all"
                 >
                   {copied ? <CheckCircle2 className="w-4 h-4 text-[#52E3A4]" /> : <Copy className="w-4 h-4" />}
-                  <span>{copied ? 'Copied Case ID' : 'Copy Case ID'}</span>
+                  <span>{copied ? 'Case ID Copied' : 'Copy Case ID'}</span>
                 </button>
                 <button
-                  type="button"
                   onClick={handleRestart}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] text-xs text-white/60 hover:text-white transition-all"
-                  title="Run another diagnosis"
+                  className="p-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-zinc-400 hover:text-white transition-all"
+                  title="Restart Diagnostic"
                 >
-                  <RefreshCw className="w-3.5 h-3.5" />
-                  <span className="hidden sm:inline">Reset</span>
+                  <RotateCcw className="w-4 h-4" />
                 </button>
               </div>
             </div>
 
-            {/* Diagnostic Matrix Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-              <div className="bg-[#03040A] p-4 rounded-2xl border border-white/[0.06]">
-                <div className="text-[10px] font-mono text-white/40 uppercase tracking-wider">Continuum Location</div>
-                <div className="text-sm font-bold text-white mt-1">{diagnosticResult.location}</div>
+            {/* Diagnostic Core Scorecards: Case Type, Risk, Urgency, Confidence */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8 font-mono text-xs">
+              <div className="p-4 rounded-xl bg-black/40 border border-white/[0.06]">
+                <div className="text-[10px] text-zinc-500 uppercase">CASE TYPE</div>
+                <div className="text-white font-bold mt-1 truncate">{diagnosticResult.stage}</div>
               </div>
-              <div className="bg-[#03040A] p-4 rounded-2xl border border-white/[0.06]">
-                <div className="text-[10px] font-mono text-white/40 uppercase tracking-wider">Risk Score</div>
-                <div className="inline-flex items-center gap-1.5 text-sm font-bold text-[#D4F838] mt-1">
-                  <AlertTriangle className="w-3.5 h-3.5" />
-                  <span>{diagnosticResult.riskScore} Cascade Risk</span>
-                </div>
+              <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20">
+                <div className="text-[10px] text-red-400 uppercase">RISK LEVEL</div>
+                <div className="text-red-300 font-bold mt-1">HIGH (Cascade Shock)</div>
               </div>
-              <div className="bg-[#03040A] p-4 rounded-2xl border border-white/[0.06]">
-                <div className="text-[10px] font-mono text-white/40 uppercase tracking-wider">Model Confidence</div>
-                <div className="text-sm font-bold text-[#52E3A4] mt-1">{diagnosticResult.confidence}</div>
+              <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20">
+                <div className="text-[10px] text-amber-400 uppercase">URGENCY TIER</div>
+                <div className="text-amber-300 font-bold mt-1">IMMEDIATE TRIAGE</div>
+              </div>
+              <div className="p-4 rounded-xl bg-[#23B272]/15 border border-[#23B272]/30">
+                <div className="text-[10px] text-[#52E3A4] uppercase">CONFIDENCE</div>
+                <div className="text-[#52E3A4] font-bold mt-1">89.4% MODELLED</div>
               </div>
             </div>
 
-            {/* Breakdown Cascade Visualizer */}
-            <div className="bg-[#03040A] rounded-2xl p-5 border border-white/[0.06] mb-6">
-              <div className="text-xs font-mono text-[#52E3A4] uppercase tracking-wider mb-4 flex items-center gap-2">
-                <GitFork className="w-3.5 h-3.5" />
-                <span>CASCADE FAILURE PATHWAY (ROOT-CAUSE DECOMPOSITION)</span>
+            {/* Complete Diagnostic Decomposition Matrix */}
+            <div className="space-y-4 mb-8 text-xs font-mono">
+              <div className="p-4 rounded-xl bg-black/40 border border-white/[0.06]">
+                <strong className="text-zinc-400 block mb-1 text-[11px]">PROBLEM:</strong>
+                <span className="text-white text-sm font-sans">{diagnosticResult.objective} blocked by {diagnosticResult.blockage}</span>
               </div>
-              <div className="space-y-3 font-mono text-xs">
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-200">
+                  <strong className="text-red-400 block mb-1 text-[11px]">SYMPTOMS &amp; IMPACT:</strong>
+                  <span>{diagnosticResult.impact}</span>
+                </div>
+                <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-200">
+                  <strong className="text-amber-400 block mb-1 text-[11px]">IDENTIFIED ROOT CAUSE:</strong>
+                  <span>{diagnosticResult.rootCause}</span>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-4 rounded-xl bg-black/40 border border-white/[0.06]">
+                  <strong className="text-zinc-400 block mb-1 text-[11px]">DEPENDENCIES &amp; BLAST RADIUS:</strong>
+                  <span className="text-zinc-300">Affecting {diagnosticResult.dependencies.join(', ')}</span>
+                </div>
+                <div className="p-4 rounded-xl bg-[#16543D]/25 border border-[#23B272]/30 text-emerald-100">
+                  <strong className="text-[#52E3A4] block mb-1 text-[11px]">MISSING CAPABILITY:</strong>
+                  <span>{diagnosticResult.missingCapability}</span>
+                </div>
+              </div>
+
+              <div className="p-4 rounded-xl bg-[#23B272]/15 border border-[#23B272]/30 text-white">
+                <strong className="text-[#52E3A4] block mb-1 text-[11px]">RECOMMENDED SYNQ INTERVENTION:</strong>
+                <span className="text-sm font-bold">{diagnosticResult.recommendedIntervention}</span>
+                <span className="block text-zinc-400 mt-1">{diagnosticResult.expectedOutcome}</span>
+              </div>
+            </div>
+
+            {/* ── Interactive Root Map (10 Stages from Problem to Outcome) ── */}
+            <div className="p-6 rounded-2xl bg-black/50 border border-white/[0.08] mb-8">
+              <span className="text-[11px] font-mono text-[#52E3A4] uppercase tracking-wider block mb-4">
+                INTERACTIVE ROOT MAP CAUSAL CHAIN
+              </span>
+              <div className="space-y-2 text-xs font-mono">
                 {diagnosticResult.cascadePath.map((step, idx) => (
                   <div key={idx} className="flex items-center gap-3">
-                    <span className="w-6 h-6 rounded-full bg-white/[0.06] flex items-center justify-center text-white/50 text-[10px] font-bold">
-                      {idx + 1}
+                    <span className="text-[#52E3A4] w-6 text-right shrink-0">{`0${idx + 1}`.slice(-2)}</span>
+                    <span className="text-zinc-600">→</span>
+                    <span className="p-2 rounded bg-white/[0.03] border border-white/[0.06] text-zinc-300 w-full">
+                      {step}
                     </span>
-                    <span className="text-white/80">{step}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Recommended Intervention Box */}
-            <div className="p-6 rounded-2xl bg-[#23B272]/10 border border-[#23B272]/30 mb-8">
-              <div className="text-xs font-mono text-[#52E3A4] uppercase tracking-wider mb-1">
-                RECOMMENDED SYNQ INTERVENTION
-              </div>
-              <h3 className="text-xl sm:text-2xl font-black text-white mb-2">
-                {diagnosticResult.recommendedIntervention}
-              </h3>
-              <p className="text-sm text-white/80 leading-relaxed mb-4">
-                <strong>Structural Root:</strong> {diagnosticResult.rootCause}. DIGISYNQ will coordinate the missing capability ({diagnosticResult.missingCapability}) across {diagnosticResult.dependencies.join(', ')} to protect delivery windows.
-              </p>
-              
-              <div className="flex flex-wrap gap-2">
-                {diagnosticResult.relevantMechanisms.map(m => (
-                  <span key={m} className="px-2.5 py-1 rounded-lg bg-black/40 border border-white/10 text-[11px] font-mono text-white/70">
-                    {m}
-                  </span>
-                ))}
-              </div>
+            {/* Modelled Warning Note */}
+            <div className="text-[11px] font-mono text-zinc-500 mb-8 italic">
+              * Note: Conclusions are preliminary modelled inferences generated from DigiSynq structural problem taxonomy. They do not imply AI omniscience. Full resolution requires human triage by the DigiSynq network.
             </div>
 
-            {/* Next Steps Engagement Actions */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-white/[0.08]">
-              <div className="text-xs text-white/50">
-                Case prepared in browser. Ready for operational triage and confidential coordination.
-              </div>
-              <div className="flex items-center gap-3 w-full sm:w-auto">
-                <Link
-                  to={`/start?caseId=${diagnosticResult.caseId}`}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#23B272] hover:bg-[#52E3A4] text-[#03040A] font-bold text-xs sm:text-sm tracking-wide transition-all shadow-md active:scale-95"
-                >
-                  <span>Initiate This SYNQ With Case ID</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* Additional Guidance Box */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-[#090B14] p-5 rounded-2xl border border-white/[0.06]">
-              <h4 className="text-sm font-bold text-white mb-2 flex items-center gap-2">
-                <Layers className="w-4 h-4 text-[#52E3A4]" />
-                <span>Explore the 23 Master Mechanisms</span>
-              </h4>
-              <p className="text-xs text-white/60 mb-3">
-                Review how DigiSynq mathematically decomposes issues, prioritizes root causes, and simulates recovery before spend.
-              </p>
-              <Link to="/mechanisms" className="text-xs font-semibold text-[#52E3A4] hover:underline inline-flex items-center gap-1">
-                <span>View all 23 Mechanisms</span>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-
-            <div className="bg-[#090B14] p-5 rounded-2xl border border-white/[0.06]">
-              <h4 className="text-sm font-bold text-white mb-2 flex items-center gap-2">
-                <FileText className="w-4 h-4 text-[#D4F838]" />
-                <span>DigiSynq Resolution Runbook</span>
-              </h4>
-              <p className="text-xs text-white/60 mb-3">
-                Examine the battle-tested protocols, escalation ladders, and multi-department handoffs used during live interventions.
-              </p>
-              <Link to="/runbook" className="text-xs font-semibold text-[#D4F838] hover:underline inline-flex items-center gap-1">
-                <span>Read the Resolution Runbook</span>
-                <ChevronRight className="w-3.5 h-3.5" />
+            {/* Action Bar: Seamless connection to /start */}
+            <div className="pt-6 border-t border-white/[0.08] flex flex-col sm:flex-row items-center justify-between gap-4">
+              <span className="text-xs font-mono text-zinc-400">
+                Case ID <strong className="text-white">{diagnosticResult.caseId}</strong> ready for intake:
+              </span>
+              <Link
+                to={`/start?caseId=${diagnosticResult.caseId}&stage=${encodeURIComponent(diagnosticResult.stage)}&problem=${encodeURIComponent(diagnosticResult.blockage)}`}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-[#23B272] text-[#03040A] hover:bg-[#52E3A4] font-bold text-sm tracking-wide transition-all shadow-[0_0_35px_rgba(35,178,114,0.4)] active:scale-95"
+              >
+                <span>Proceed to Start a SYNQ Case with these Parameters →</span>
+                <ArrowRight className="w-4 h-4 stroke-[2.5]" />
               </Link>
             </div>
           </div>
