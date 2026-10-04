@@ -1,631 +1,475 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  ArrowRight, ArrowUpRight, Check, ShieldCheck, 
-  Cpu, Compass, Zap, Layers, FileText, Activity, Clock, ChevronRight
+import {
+  ArrowRight,
+  CheckCircle2,
+  Activity,
+  Layers,
+  FileText,
+  Clock,
+  Compass,
+  Zap,
+  ShieldAlert,
+  ShieldCheck,
+  Search,
+  Filter,
+  Sparkles,
+  GitBranch,
+  Terminal,
+  UserCheck,
+  Target
 } from 'lucide-react';
 import { TopographicBackground } from '../components/TopographicBackground';
 
-const RUNBOOK_SECTIONS = [
-  { id: 'model', label: '01. Operating Model' },
-  { id: 'commercials', label: '02. Commercial Model' },
-  { id: 'execution', label: '03. Execution Protocol' },
-  { id: 'playbooks', label: '04. Stakeholder Playbooks' },
-  { id: 'governance', label: '05. Risk & Governance' },
-  { id: 'differentiation', label: '06. Differentiation' },
-];
+export interface RunbookStep {
+  stepNumber: string;
+  name: string;
+  codename: string;
+  phase: 'SENSING' | 'ANALYSIS' | 'ORCHESTRATION' | 'ASSURANCE';
+  summary: string;
+  input: string;
+  action: string;
+  output: string;
+  decision: string;
+  owner: string;
+  successCondition: string;
+  riskIfSkipped: string;
+}
 
-const COMMERCIAL_STREAMS = [
+export const RUNBOOK_13_STEPS: RunbookStep[] = [
   {
-    code: 'REV-01',
-    name: 'Problem-Solving Engagements',
-    description: 'Clients engage DigiSynq to diagnose, map, and resolve acute structural bottlenecks in production, scheduling, or facility access.',
-    structure: 'Fixed scoping and diagnostic fee based on project complexity and turnaround timeline.',
-    deliverable: 'Constraint Audit, Resolution Dossier & Multi-Party Covenant.',
+    stepNumber: '01',
+    name: 'Observe',
+    codename: 'OBSERVE',
+    phase: 'SENSING',
+    summary: 'Continuous ingestion of raw operational telemetry across production departments, call sheets, dailies ingest, and vendor delivery gates.',
+    input: 'Daily production reports (DPRs), call sheets, soundstage gate logs, camera-to-cloud metadata, and vendor milestone tracking.',
+    action: 'Harvest and timestamp all operational events into the raw telemetry bus without premature filtering or interpretation.',
+    output: 'Normalized Operational Event Stream (NOES) indexed by stage, timestamp, and stakeholder node.',
+    decision: 'Is the event stream complete and verified against source logs, or are there blind spots requiring manual inquiry?',
+    owner: 'Telemetry Systems Engineer / Lead Production Coordinator',
+    successCondition: '100% of planned set reports, turnaround timestamps, and vendor delivery pings accounted for within 4 hours of wrap.',
+    riskIfSkipped: 'Invisible slippage goes undetected until downstream cash burn explodes.'
   },
   {
-    code: 'REV-02',
-    name: 'Project Coordination Retainers',
-    description: 'Ongoing operational alignment across pre-production, filming, camera-to-cloud dailies telemetry, and post-turnover workflows.',
-    structure: 'Milestone-based coordination compensation aligned with key delivery gates.',
-    deliverable: 'Live Telemetry Dashboard, Schedule Governance & Inter-Department Alignment.',
+    stepNumber: '02',
+    name: 'Detect',
+    codename: 'DETECT',
+    phase: 'SENSING',
+    summary: 'Algorithmic variance detection evaluating Expected State vs. Actual State across schedule, budget, and resource metrics.',
+    input: 'Normalized Event Stream + Baseline Project Manifest (Schedule, Approved Budget, Technical Deliverable Specs).',
+    action: 'Evaluate variance formula: GAP = Expected State − Actual State across all milestone nodes.',
+    output: 'Variance Warning Signals (VWS) tagged with delta magnitude, department tag, and confidence interval.',
+    decision: 'Does the detected variance exceed tolerance thresholds (>0.5 days schedule or >$10K unbudgeted cost velocity)?',
+    owner: 'Diagnostic Algorithm / Lead Analyst',
+    successCondition: 'Variance detected and categorized within 60 minutes of event recording.',
+    riskIfSkipped: 'Symptom masking: small delays compound exponentially into multi-million dollar cascade collapses.'
   },
   {
-    code: 'REV-03',
-    name: 'Talent & Capacity Synchronization',
-    description: 'Commercial arrangements for discovering, verifying, and routing specialized craft guild department heads and equipment inventory.',
-    structure: 'Direct transparent coordination fees without the 20% commission tolls of traditional talent agencies.',
-    deliverable: 'Verified Roster Matching, Rate Parity Contracts & Crew Schedules.',
+    stepNumber: '03',
+    name: 'Decompose',
+    codename: 'DECOMPOSE',
+    phase: 'ANALYSIS',
+    summary: 'Break down detected anomalies into discrete atomic units: symptoms, events, conditions, and dependencies.',
+    input: 'Variance Warning Signals + Departmental Contextual Notes.',
+    action: 'Dissect the anomaly into constituent parts: Surface Symptom, Triggering Event, Background Condition, Structural Dependency.',
+    output: 'Decomposed Problem Matrix isolating human error from systemic and infrastructural bottlenecks.',
+    decision: 'Is this an isolated human incident or an emergent failure of interconnected dependencies?',
+    owner: 'Senior System Architect / Root-Cause Specialist',
+    successCondition: 'Every symptom is linked to at least one verified upstream condition and dependency node.',
+    riskIfSkipped: 'False diagnosis: punishing personnel for structural and scheduling impossibilities.'
   },
   {
-    code: 'REV-04',
-    name: 'Guild Capability Workshops',
-    description: 'Intensive hands-on technical labs bridging creative professionals and crews into modern virtual production and digital workflows.',
-    structure: 'Tuition fees, studio sponsorships, and institutional development contracts.',
-    deliverable: 'Practical Soundstage Training, Verified Workflows & Industry Placement.',
+    stepNumber: '04',
+    name: 'Map',
+    codename: 'MAP',
+    phase: 'ANALYSIS',
+    summary: 'Construct the live dependency graph connecting the decomposed problem to all adjacent stakeholders, assets, and milestones.',
+    input: 'Decomposed Problem Matrix + Master Stakeholder & Asset Directory.',
+    action: 'Trace all directional graph edges: Upstream Precedents, Concurrent Constraints, Downstream Dependents.',
+    output: 'Interactive Local Dependency Graph highlighting the immediate blast radius and secondary shockwaves.',
+    decision: 'Which critical path milestones are directly or indirectly threatened within the next 14 calendar days?',
+    owner: 'Network Topology Engineer',
+    successCondition: 'Complete topological graph rendered with 100% of affected vendors and departmental milestones flagged.',
+    riskIfSkipped: 'Unmapped downstream collapse: fixing one department accidentally causes catastrophic delays in another.'
   },
   {
-    code: 'REV-05',
-    name: 'Audience & Release Coordination',
-    description: 'Programmatic release windowing across theatrical circuits, OTT streaming platforms, and international territorial syndication.',
-    structure: 'Distribution coordination fee tied to release execution and density optimization.',
-    deliverable: 'Pre-Demand Density Modeling, DCP Circuit Dispatch & Box Office Audit.',
+    stepNumber: '05',
+    name: 'Diagnose',
+    codename: 'DIAGNOSE',
+    phase: 'ANALYSIS',
+    summary: 'Execute recursive Five-Whys and causal tree traversal to isolate the true root cause and missing capabilities.',
+    input: 'Local Dependency Graph + Stakeholder Depositions + Historic Case Repository.',
+    action: 'Traverse the causal chain from surface friction down to structural deficiency using the 13-Step Tree Pipeline.',
+    output: 'Certified Root-Cause Finding (CRCF) defining the exact missing capability, asset, or decision authority.',
+    decision: 'Has the foundational root cause been isolated with >85% diagnostic confidence, or is further discovery required?',
+    owner: 'Lead Product Architect / Principal Diagnostic Arbiter',
+    successCondition: 'Root cause validated by consensus or incontrovertible telemetry evidence.',
+    riskIfSkipped: 'Treating symptoms repeatedly without ever eliminating the recurring cause.'
   },
   {
-    code: 'REV-06',
-    name: 'Strategic Facility Partnerships',
-    description: 'Commercial frameworks with soundstage complexes, LED volume operators, and equipment houses to monetize dark turnaround dates.',
-    structure: 'Shared upside from activated floor liquidity that would otherwise sit dark and unbooked.',
-    deliverable: 'Burst-Occupancy Calendars, Pre-Rigging Protocols & Facility Agreements.',
-  },
-];
-
-const EXECUTION_STAGES = [
-  {
-    phase: 'Stage 01',
-    name: 'Constraint Diagnostic & Triage',
-    timeframe: 'Days 01 – 03',
-    desc: 'The project intake is audited for operational bottlenecks, timeline dependencies, stage requirements, and specialized talent gaps. We separate symptoms from root causes.',
-    actions: [
-      'Analyze script breakdown and department requirements',
-      'Identify availability gaps across soundstages, equipment, and key crew',
-      'Audit budget pacing against deliverable milestones',
-    ],
+    stepNumber: '06',
+    name: 'Classify',
+    codename: 'CLASSIFY',
+    phase: 'ANALYSIS',
+    summary: 'Categorize the root cause across 5 systemic dimensions: Origin, Behavior, Scope, Urgency, and Impact.',
+    input: 'Certified Root-Cause Finding + Historical Failure Taxonomy.',
+    action: 'Map finding into the 6 Structural Domains and 24 Sub-patterns in the DigiSynq Problem Taxonomy.',
+    output: 'Multi-Dimensional Problem Classification Dossier with standardized risk and urgency ratings.',
+    decision: 'Does this classification mandate an acute emergency SYNQ, a strategic advisory sprint, or routine telemetry monitoring?',
+    owner: 'Taxonomy Governance Lead',
+    successCondition: 'Unambiguous categorization matching one of the 24 validated failure archetypes.',
+    riskIfSkipped: 'Incorrect operational resource allocation; deploying massive interventions for minor friction.'
   },
   {
-    phase: 'Stage 02',
-    name: 'Distributed Capacity Discovery',
-    timeframe: 'Days 04 – 07',
-    desc: 'DigiSynq scans its network for unbooked partner studio floor dates, verified guild technicians, and compatible post-production suites with available bandwidth.',
-    actions: [
-      'Match requirements against regional partner studio dark dates',
-      'Index verified guild craft heads available for project dates',
-      'Confirm technical compatibility for camera and volume rigs',
-    ],
+    stepNumber: '07',
+    name: 'Prioritize',
+    codename: 'PRIORITIZE',
+    phase: 'ANALYSIS',
+    summary: 'Compute algorithmic priority score using the M07 Priority Formula to rank competing interventions.',
+    input: 'Classification Dossier + Financial Velocity Model + Release Calendar.',
+    action: 'Calculate P = (Urgency × Blast Radius × Cost Velocity) / Time to Delivery Window.',
+    output: 'Ranked Priority Index (1–100) determining operational queue and executive attention.',
+    decision: 'Is priority score >75, triggering immediate same-day intervention design and executive notification?',
+    owner: 'Operations Director',
+    successCondition: 'Quantitative priority score established with complete formula transparency.',
+    riskIfSkipped: 'Subjective political prioritization: solving the loudest stakeholder problem instead of the most dangerous one.'
   },
   {
-    phase: 'Stage 03',
-    name: 'Multi-Party Covenant Structuring',
-    timeframe: 'Days 08 – 12',
-    desc: 'All participating nodes are bound by clear milestone covenants, standardized rate cards, and transparent delivery dates with zero hidden broker markups.',
-    actions: [
-      'Execute neutral coordination covenants across all participants',
-      'Lock stage floor access on fractional burst-occupancy terms',
-      'Establish clean-room milestone triggers for capital releases',
-    ],
+    stepNumber: '08',
+    name: 'Simulate',
+    codename: 'SIMULATE',
+    phase: 'ORCHESTRATION',
+    summary: 'Run multi-scenario simulations across the 13 Intervention Classes before committing budget or rebooking stages.',
+    input: 'Ranked Priority Dossier + Network Capacity Feeds + Scenario Engine Parameters.',
+    action: 'Generate Scenarios A (Resequence), B (Replace/Burst), and C (Decouple/Buffer); simulate cost velocity and delivery certainty.',
+    output: 'Comparative Scenario Simulation Report with predicted blast radius reduction and cost variance.',
+    decision: 'Which intervention scenario maximizes schedule recovery while maintaining creative integrity and budget caps?',
+    owner: 'Simulation Engineer / Financial Controller',
+    successCondition: 'Simulation models 3 viable counter-strategies with quantified recovery confidence and risk metrics.',
+    riskIfSkipped: 'Costly real-world trial and error; locking into an intervention that exacerbates downstream bottlenecks.'
   },
   {
-    phase: 'Stage 04',
-    name: 'Production Telemetry & Governance',
-    timeframe: 'Principal Photography',
-    desc: 'During active production, DigiSynq monitors camera-to-cloud dailies telemetry, schedule adherence, and department dependencies to prevent delivery stalls.',
-    actions: [
-      'Track dailies telemetry and camera ingest in real time',
-      'Coordinate dynamic rescheduling if weather or location shifts occur',
-      'Provide neutral progress verification to producers and financiers',
-    ],
+    stepNumber: '09',
+    name: 'Connect',
+    codename: 'CONNECT',
+    phase: 'ORCHESTRATION',
+    summary: 'Query the DigiSynq Network to match and bridge the specific missing capabilities, facilities, or talent nodes.',
+    input: 'Chosen Simulation Scenario + Required Capability Specification.',
+    action: 'Execute algorithmic matching across the Professional Reliability Graph: filter by capability, date availability, and technical spec.',
+    output: 'Candidate Match Roster with verified reliability scores, rate cards, and clean-room confidentiality clearance.',
+    decision: 'Do matched candidate nodes fulfill all technical dependencies without introducing new schedule conflicts?',
+    owner: 'Network Matching Director',
+    successCondition: 'At least 2 pre-cleared, verified candidate matches delivered within 12 hours of priority certification.',
+    riskIfSkipped: 'Emergency procurement of unvetted vendors resulting in technical mismatches and QC rejections.'
   },
   {
-    phase: 'Stage 05',
-    name: 'Milestone-Tied Escrow Disbursement',
-    timeframe: 'Post-Production & VFX',
-    desc: 'Capital tranches are unlocked systematically upon verified scene wraps and shot turnovers, ensuring vendors are paid promptly and equity is protected.',
-    actions: [
-      'Verify completed picture and sound turnovers against technical specs',
-      'Release milestone funds to editorial, color, and VFX teams',
-      'Enforce scope freeze covenants to eliminate uncompensated overruns',
-    ],
+    stepNumber: '10',
+    name: 'Coordinate',
+    codename: 'COORDINATE',
+    phase: 'ORCHESTRATION',
+    summary: 'Bind all participating stakeholders into a neutral, synchronized DigiSynq Multi-Party Covenant with clear delivery gates.',
+    input: 'Candidate Match Selection + Scenario Milestone Manifest.',
+    action: 'Draft and execute the DigiSynq Operational Covenant: milestone gates, fractional floor terms, and shared verification criteria.',
+    output: 'Executed Multi-Party Covenant with legally binding milestone gates and transparent fee structure.',
+    decision: 'Have all affected department heads, facility operators, and financiers signed off on the revised synchronization timeline?',
+    owner: 'Lead Engagement Coordinator / Legal Counsel',
+    successCondition: '100% stakeholder consensus and covenant execution prior to commencement of field work.',
+    riskIfSkipped: 'Misaligned expectations and finger-pointing when subsequent milestones arrive.'
   },
   {
-    phase: 'Stage 06',
-    name: 'Release Windowing & Realization',
-    timeframe: 'Theatrical & Distribution',
-    desc: 'Converting coordinated production capacity into audience reach, box office yield, and long-tail library monetization across screens and platforms.',
-    actions: [
-      'Coordinate targeted release windows with regional exhibitor circuits',
-      'Structure international and digital ancillary delivery packages',
-      'Conduct final revenue attribution and archival preservation',
-    ],
-  },
-];
-
-const STAKEHOLDER_PLAYBOOKS = [
-  {
-    id: 'producers',
-    name: 'For Producers & Creators',
-    headline: 'Access studio-grade resources without fixed overhead debt.',
-    points: [
-      'Submit an intake describing your project timeline and constraint bottlenecks.',
-      'Access available partner stages, LED volumes, and verified guild crews at fair market rates.',
-      'Maintain 100% creative control without taking on oppressive mezzanine debt.',
-      'Rely on DigiSynq for neutral milestone tracking and inter-department synchronization.',
-    ],
+    stepNumber: '11',
+    name: 'Measure',
+    codename: 'MEASURE',
+    phase: 'ASSURANCE',
+    summary: 'Continuous telemetry monitoring during intervention execution to verify milestone adherence and measure actual variance reduction.',
+    input: 'Live Daily Telemetry + Executed Covenant Gates.',
+    action: 'Track real-time variance vs. predicted recovery curve: audit days reclaimed, cost burn avoided, and deliverable compliance.',
+    output: 'Intervention Performance Telemetry Report with verified delta calculations and risk score updates.',
+    decision: 'Has the intervention stabilized the schedule within expected tolerances, or is an adjustment sprint required?',
+    owner: 'Assurance Lead / Completion Auditor',
+    successCondition: 'Confirmed milestone turnover on or ahead of covenant delivery date with zero QC failures.',
+    riskIfSkipped: 'Assuming a plan worked without verifying actual deliverable quality and turnaround timestamps.'
   },
   {
-    id: 'talent',
-    name: 'For Guild Craftspeople & Crews',
-    headline: 'Continuous bookings with guaranteed compensation parity.',
-    points: [
-      'Index your verified availability, union credits, and technical specializations.',
-      'Directly connect to funded entertainment productions in need of your exact craft.',
-      'Eliminate the 15–20% commission tolls typical of traditional talent representation.',
-      'Receive milestone-backed payment security with zero uncompensated scope creep.',
-    ],
+    stepNumber: '12',
+    name: 'Learn',
+    codename: 'LEARN',
+    phase: 'ASSURANCE',
+    summary: 'Deconstruct the completed intervention, harvest performance metrics, and deposit the case signature into System Memory.',
+    input: 'Completed Covenant Dossier + Variance Post-Mortem + Stakeholder Reviews.',
+    action: 'Structure case data: root cause archetype, intervention class effectiveness, vendor reliability delta, and financial outcome.',
+    output: 'System Memory Ingestion Package (SMIP) archived into the compounding global intelligence database.',
+    decision: 'Does this case reveal a novel failure signature that requires an update to the DigiSynq Problem Taxonomy or risk models?',
+    owner: 'Machine Learning & Knowledge Systems Lead',
+    successCondition: 'Case fully indexed and searchable within 48 hours of covenant closure.',
+    riskIfSkipped: 'Amnesia: repeating the exact same expensive operational mistakes on the next production.'
   },
   {
-    id: 'facilities',
-    name: 'For Studio, Stage & Venue Owners',
-    headline: 'Monetize dark floors and turnaround lulls with zero friction.',
-    points: [
-      'List unbooked stage dates, volume windows, and equipment packages with DigiSynq.',
-      'Receive pre-vetted, bonded independent productions ready for burst occupancy.',
-      'Transform empty floor time into high-margin gross operating revenue.',
-      'Benefit from standardized pre-vis assets that eliminate on-set rig delays.',
-    ],
-  },
-  {
-    id: 'post',
-    name: 'For Post, VFX & Audio Facilities',
-    headline: 'Protected turnovers with milestone-guaranteed escrow.',
-    points: [
-      'Receive standardized camera-to-cloud dailies and clean turnover packages.',
-      'Operate under clear milestone-tied escrow agreements that guarantee prompt pay.',
-      'Eliminate client payment disputes through neutral third-party verification.',
-      'Maintain continuous pipeline occupancy across color, mixing, and visual effects suites.',
-    ],
-  },
-  {
-    id: 'financiers',
-    name: 'For Financiers & Capital Partners',
-    headline: 'Live telemetry that mitigates entertainment completion risk.',
-    points: [
-      'Deploy capital against real-time operational telemetry rather than opaque verbal updates.',
-      'Structure tranches that release only upon verified scene wraps and turnover approvals.',
-      'Drastically reduce default probability through disciplined workflow coordination.',
-      'Gain clear chain-of-title visibility and structured theatrical delivery compliance.',
-    ],
-  },
-  {
-    id: 'distributors',
-    name: 'For Exhibitors & Streaming Platforms',
-    headline: 'Targeted content with localized pre-demand density.',
-    points: [
-      'Program high-occupancy theatrical titles routed around studio tentpole clashes.',
-      'Receive certified DCI/IMF delivery masters on guaranteed release schedules.',
-      'Access pre-demand audience signals that optimize marketing spend and screen density.',
-      'Collaborate on event screenings, localized windows, and premium presentation formats.',
-    ],
-  },
+    stepNumber: '13',
+    name: 'Prevent',
+    codename: 'PREVENT',
+    phase: 'ASSURANCE',
+    summary: 'Synthesize automated predictive guards and pre-production checks to eliminate similar failure modes across future slates.',
+    input: 'System Memory Archive + New Production Pre-Production Manifests.',
+    action: 'Deploy automated pre-flight dependency audits on incoming productions matching the historic risk signature.',
+    output: 'Pre-Production Risk Inoculation Report with proactive covenant templates and early-warning trigger alarms.',
+    decision: 'Are preventative tripwires active in the telemetry bus to halt similar cascade collapses before they begin?',
+    owner: 'Chief Product Architect',
+    successCondition: 'Zero recurrence of the specific failure archetype across all monitored slates for the subsequent 12 months.',
+    riskIfSkipped: 'Remaining perpetually reactive; failing to transform hard-won operational experience into enduring structural immunity.'
+  }
 ];
 
 export function RunbookPage() {
-  const [activePlaybookId, setActivePlaybookId] = useState('producers');
-  const activePlaybook = STAKEHOLDER_PLAYBOOKS.find(p => p.id === activePlaybookId) || STAKEHOLDER_PLAYBOOKS[0];
+  const [selectedStep, setSelectedStep] = useState<RunbookStep>(RUNBOOK_13_STEPS[0]);
+  const [filterPhase, setFilterPhase] = useState<string>('ALL');
+  const [search, setSearch] = useState<string>('');
+
+  const filteredSteps = RUNBOOK_13_STEPS.filter((step) => {
+    const matchesPhase = filterPhase === 'ALL' || step.phase === filterPhase;
+    const q = search.toLowerCase().trim();
+    if (!q) return matchesPhase;
+
+    const matchesSearch =
+      step.name.toLowerCase().includes(q) ||
+      step.summary.toLowerCase().includes(q) ||
+      step.action.toLowerCase().includes(q) ||
+      step.owner.toLowerCase().includes(q) ||
+      step.decision.toLowerCase().includes(q);
+
+    return matchesPhase && matchesSearch;
+  });
 
   return (
-    <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white min-h-screen relative overflow-hidden">
+    <main className="min-h-screen bg-[#03040A] text-[#ECEEF5] pt-28 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative">
       <TopographicBackground className="opacity-15 pointer-events-none -z-10 fixed inset-0" />
 
-      {/* ── 01. Hero Section ── */}
-      <section className="pt-40 sm:pt-48 pb-20 sm:pb-28 px-6 sm:px-8 max-w-6xl mx-auto">
-        <div className="max-w-4xl">
-          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-300 mb-8 tracking-wide">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            <span className="font-mono text-emerald-400 font-medium">OPERATIONAL RUNBOOK</span>
-            <span className="text-zinc-600">//</span>
-            <span className="text-white font-medium">Standard Operating Protocols</span>
+      {/* Header */}
+      <header className="mb-12 max-w-4xl">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-white/10 bg-white/[0.03] text-xs text-zinc-300 font-mono mb-4">
+          <span className="w-2 h-2 rounded-full bg-[#52E3A4] animate-pulse" />
+          <span>STANDARD OPERATING PROCEDURE</span>
+          <span className="text-zinc-600">//</span>
+          <span className="text-[#52E3A4]">THE 13-STEP OPERATIONAL RUNBOOK</span>
+        </div>
+
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-4">
+          The Synchronization Runbook.
+          <span className="block text-xl sm:text-2xl lg:text-3xl text-zinc-400 font-normal mt-2">
+            The 13-Step Standard Operating Procedure for System Interventions.
+          </span>
+        </h1>
+
+        <p className="text-base sm:text-lg text-zinc-400 leading-relaxed font-light">
+          A deterministic, repeatable protocol for observing, diagnosing, resolving, and inoculating against operational failure across complex entertainment ecosystems.
+        </p>
+
+        {/* Phase Filter & Search Bar */}
+        <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+          <div className="relative flex-1">
+            <Search className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <input
+              type="text"
+              placeholder="Search steps, actions, decisions, owners..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-white/10 bg-[#090B14] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#52E3A4] transition-colors"
+            />
           </div>
 
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.03] [letter-spacing:-0.035em] mb-6">
-            The Mechanics of Order.
-            <span className="text-zinc-400 font-light block text-2xl sm:text-4xl mt-2">
-              The Institutional Runbook.
-            </span>
-          </h1>
-
-          <h2 className="text-lg sm:text-xl text-zinc-300 leading-relaxed max-w-3xl font-light mb-10">
-            The institutional blueprint detailing how DigiSynq coordinates the entertainment ecosystem as an asset-light network — commercial models, covenant structures, risk mitigation, and economic realization.
-          </h2>
-
-          {/* Quick Anchor Pills */}
-          <div className="flex flex-wrap items-center gap-2 pt-2">
-            {RUNBOOK_SECTIONS.map((sec) => (
-              <a
-                key={sec.id}
-                href={`#${sec.id}`}
-                className="px-3 py-1.5 rounded-full text-xs font-mono bg-white/[0.03] border border-white/[0.08] text-zinc-400 hover:text-white hover:border-white/20 transition-all"
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0 scrollbar-none">
+            {['ALL', 'SENSING', 'ANALYSIS', 'ORCHESTRATION', 'ASSURANCE'].map((phase) => (
+              <button
+                key={phase}
+                onClick={() => setFilterPhase(phase)}
+                className={`px-3 py-1.5 rounded-lg text-xs font-mono whitespace-nowrap transition-colors border ${
+                  filterPhase === phase
+                    ? 'bg-[#16543D] text-[#52E3A4] border-[#52E3A4]'
+                    : 'bg-[#090B14] text-zinc-400 border-white/5 hover:border-white/15 hover:text-white'
+                }`}
               >
-                {sec.label}
-              </a>
+                {phase}
+              </button>
             ))}
           </div>
         </div>
-      </section>
+      </header>
 
-      {/* ── 02. SECTION 01: THE OPERATING MODEL ── */}
-      <section id="model" className="py-24 sm:py-32 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06] scroll-mt-20">
-        <div className="max-w-3xl mb-14">
-          <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
-            01. Core Business Logic
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-            The Operating Engine.<br />
-            <span className="text-zinc-400 font-light">Capacity routing over capital lockup.</span>
-          </h2>
-          <p className="text-base text-zinc-400 leading-relaxed">
-            Entertainment already possesses immense physical capacity, creative brilliance, and capital. What it lacks is coordination. DigiSynq operates as the neutral connective layer that routes demand to existing resources.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <div className="p-8 rounded-3xl bg-[#090b10] border border-white/[0.06] space-y-4">
-            <span className="text-xs font-mono text-zinc-500 uppercase block">Principle 01</span>
-            <h3 className="text-lg font-bold text-white">Use Existing Capacity</h3>
-            <p className="text-xs text-zinc-400 leading-relaxed">
-              We do not build soundstages or purchase equipment fleets. We identify dark dates across existing facilities and connect them directly to active production requirements.
-            </p>
+      {/* 2-Column Runbook Explorer */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {/* Step Sequence List */}
+        <div className="lg:col-span-4 space-y-2 max-h-[820px] overflow-y-auto pr-2 custom-scrollbar">
+          <div className="flex items-center justify-between px-2 py-1 text-xs font-mono text-zinc-500 border-b border-white/5 mb-2">
+            <span>SEQUENCE ({filteredSteps.length} STEPS)</span>
+            <span>PHASE</span>
           </div>
 
-          <div className="p-8 rounded-3xl bg-[#090b10] border border-white/[0.06] space-y-4">
-            <span className="text-xs font-mono text-zinc-500 uppercase block">Principle 02</span>
-            <h3 className="text-lg font-bold text-white">Connect the Nodes</h3>
-            <p className="text-xs text-zinc-400 leading-relaxed">
-              We don’t need to own every node in the entertainment ecosystem. By maintaining neutral relationships across all participants, we eliminate agency bias and middleman tolls.
-            </p>
-          </div>
-
-          <div className="p-8 rounded-3xl bg-[#090b10] border border-white/[0.06] space-y-4">
-            <span className="text-xs font-mono text-zinc-500 uppercase block">Principle 03</span>
-            <h3 className="text-lg font-bold text-white">Milestone Governance</h3>
-            <p className="text-xs text-zinc-400 leading-relaxed">
-              Value is sustained through structured covenants. We ensure that financing, stage floors, craft talent, and post-turnovers operate on synchronized milestones with transparent accountability.
-            </p>
-          </div>
-        </div>
-
-        {/* Operating Flow Canvas */}
-        <div className="p-8 sm:p-12 rounded-3xl bg-[#090b10] border border-white/[0.08] text-xs font-mono">
-          <span className="text-emerald-400 uppercase tracking-wider block mb-4 font-bold">
-            End-to-End Orchestration Architecture
-          </span>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-white/[0.06]">
-            <div>
-              <span className="text-zinc-500 block mb-1">01. DISTRIBUTED CAPACITY</span>
-              <p className="text-zinc-300 leading-relaxed font-sans text-xs">
-                Unbooked stage days, verified guild availability, underutilized post suites, and regional screen slots.
-              </p>
-            </div>
-            <div>
-              <span className="text-emerald-400 block mb-1">02. DIGISYNQ LAYER</span>
-              <p className="text-zinc-300 leading-relaxed font-sans text-xs">
-                Discovery engine, capacity matching, multi-party covenants, live telemetry, and milestone-tied escrow.
-              </p>
-            </div>
-            <div>
-              <span className="text-white block mb-1">03. PRODUCTION DEMAND</span>
-              <p className="text-zinc-300 leading-relaxed font-sans text-xs">
-                Indie features, streaming series, live events, and commercial campaigns delivering on schedule.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 03. SECTION 02: COMMERCIAL ARCHITECTURE ── */}
-      <section id="commercials" className="py-24 sm:py-32 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06] scroll-mt-20">
-        <div className="max-w-3xl mb-14">
-          <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
-            02. Commercial Architecture
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-            The Six Currents.<br />
-            <span className="text-zinc-400 font-light">Commercial flows of orchestration.</span>
-          </h2>
-          <p className="text-base text-zinc-400 leading-relaxed">
-            DigiSynq generates economic value through coordination, capacity matching, and workflow orchestration rather than by extracting landlord rents on physical assets.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {COMMERCIAL_STREAMS.map((stream) => (
-            <div
-              key={stream.code}
-              className="p-8 rounded-3xl bg-[#090b10] border border-white/[0.06] hover:border-white/15 transition-all flex flex-col justify-between space-y-6"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-3 text-xs font-mono">
-                  <span className="text-emerald-400 font-medium">{stream.code}</span>
-                  <span className="text-zinc-500">Commercial Stream</span>
-                </div>
-                <h3 className="text-lg font-bold text-white mb-2">{stream.name}</h3>
-                <p className="text-xs text-zinc-400 leading-relaxed mb-4">{stream.description}</p>
-                <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] text-xs text-zinc-300">
-                  <span className="text-zinc-500 font-mono block mb-1 text-[10px] uppercase">Structure</span>
-                  {stream.structure}
-                </div>
-              </div>
-              <div className="pt-4 border-t border-white/[0.06] text-xs text-zinc-400 flex items-center justify-between">
-                <span className="text-zinc-500">Key Deliverable:</span>
-                <span className="text-white font-medium text-right text-[11px]">{stream.deliverable}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── 04. SECTION 03: EXECUTION PROTOCOL ── */}
-      <section id="execution" className="py-24 sm:py-32 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06] scroll-mt-20">
-        <div className="max-w-3xl mb-14">
-          <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
-            03. Operational Lifecycle
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-            The Execution Ring.<br />
-            <span className="text-zinc-400 font-light">From first triage to final realization.</span>
-          </h2>
-          <p className="text-base text-zinc-400 leading-relaxed">
-            Every engagement follows a structured progression from initial constraint diagnosis to final release realization.
-          </p>
-        </div>
-
-        <div className="space-y-4">
-          {EXECUTION_STAGES.map((stg) => (
-            <div
-              key={stg.phase}
-              className="p-8 rounded-3xl bg-[#090b10] border border-white/[0.06] hover:border-white/15 transition-all"
-            >
-              <div className="flex flex-col md:flex-row md:items-center justify-between pb-6 mb-6 border-b border-white/[0.06] gap-3">
-                <div className="flex items-center gap-3">
-                  <span className="text-xs font-mono text-emerald-400 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
-                    {stg.phase}
-                  </span>
-                  <h3 className="text-xl font-bold text-white">{stg.name}</h3>
-                </div>
-                <span className="text-xs font-mono text-zinc-500">{stg.timeframe}</span>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-                <div className="md:col-span-6">
-                  <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">{stg.desc}</p>
-                </div>
-                <div className="md:col-span-6 space-y-2">
-                  <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-500 block mb-2">
-                    Action Protocols Executed:
-                  </span>
-                  {stg.actions.map((act, idx) => (
-                    <div key={idx} className="flex items-start gap-2.5 text-xs text-zinc-300">
-                      <div className="w-4 h-4 rounded-full bg-white/[0.04] border border-white/10 flex items-center justify-center shrink-0 mt-0.5 text-emerald-400">
-                        <Check size={10} />
-                      </div>
-                      <span>{act}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── 05. SECTION 04: STAKEHOLDER PLAYBOOKS ── */}
-      <section id="playbooks" className="py-24 sm:py-32 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06] scroll-mt-20">
-        <div className="max-w-3xl mb-14">
-          <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
-            04 // Integration Guides
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-            The Five Playbooks.<br />
-            <span className="text-zinc-400 font-light">Discipline protocols across the stream.</span>
-          </h2>
-          <p className="text-base text-zinc-400 leading-relaxed">
-            How each participant category interfaces with the DigiSynq network to coordinate capacity and extract value.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Selector Tabs */}
-          <div className="lg:col-span-4 space-y-2">
-            {STAKEHOLDER_PLAYBOOKS.map((p) => {
-              const isActive = p.id === activePlaybookId;
-              return (
-                <button
-                  key={p.id}
-                  type="button"
-                  onClick={() => setActivePlaybookId(p.id)}
-                  className={`w-full p-4 rounded-2xl text-left border text-xs transition-all cursor-pointer flex items-center justify-between ${
-                    isActive
-                      ? 'bg-white text-black font-medium border-white shadow-sm'
-                      : 'bg-white/[0.015] border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/15'
-                  }`}
-                >
-                  <span>{p.name}</span>
-                  <ChevronRight size={14} className={isActive ? 'text-black' : 'opacity-30'} />
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Active Playbook Slate */}
-          <div className="lg:col-span-8 p-8 sm:p-12 rounded-3xl bg-[#090b10] border border-white/[0.08] space-y-6">
-            <div>
-              <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider block mb-2 font-medium">
-                Operating Playbook
-              </span>
-              <h3 className="text-2xl font-bold text-white mb-2">{activePlaybook.name}</h3>
-              <p className="text-sm text-zinc-300 leading-relaxed">{activePlaybook.headline}</p>
-            </div>
-
-            <div className="space-y-3 pt-6 border-t border-white/[0.06]">
-              <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider block mb-2">
-                Operational Protocols:
-              </span>
-              {activePlaybook.points.map((pt, i) => (
-                <div key={i} className="flex items-start gap-3 text-xs sm:text-sm text-zinc-400">
-                  <div className="w-5 h-5 rounded-full bg-white/[0.04] border border-white/10 flex items-center justify-center shrink-0 mt-0.5 text-emerald-400">
-                    <Check size={12} />
-                  </div>
-                  <span className="leading-relaxed">{pt}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className="pt-6 border-t border-white/[0.06] flex items-center justify-between">
-              <Link
-                to="/start"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-medium text-xs hover:bg-zinc-200 transition-all shadow-md"
+          {filteredSteps.map((step) => {
+            const isSelected = step.stepNumber === selectedStep.stepNumber;
+            return (
+              <button
+                key={step.stepNumber}
+                onClick={() => setSelectedStep(step)}
+                className={`w-full text-left p-3.5 rounded-xl border transition-all ${
+                  isSelected
+                    ? 'bg-[#16543D]/40 border-[#52E3A4] text-white shadow-lg'
+                    : 'bg-[#090B14]/80 border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/15'
+                }`}
               >
-                Engage as {activePlaybook.name.replace('For ', '')}
-                <ArrowRight size={13} />
-              </Link>
-              <span className="text-xs font-mono text-zinc-500">
-                Confidential onboarding
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 06. SECTION 05: RISK GOVERNANCE & COVENANTS ── */}
-      <section id="governance" className="py-24 sm:py-32 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06] scroll-mt-20">
-        <div className="max-w-3xl mb-14">
-          <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
-            05. Risk Architecture
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-            The Risk Moat.<br />
-            <span className="text-zinc-400 font-light">Non-custodial covenants and escrow.</span>
-          </h2>
-          <p className="text-base text-zinc-400 leading-relaxed">
-            Coordination across independent entertainment stakeholders requires institutional trust. DigiSynq operates under four non-negotiable governance principles.
-          </p>
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className="font-mono text-xs font-bold text-[#52E3A4]">
+                    STEP {step.stepNumber}
+                  </span>
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400">
+                    {step.phase}
+                  </span>
+                </div>
+                <div className="font-semibold text-sm text-zinc-200">
+                  {step.name}
+                </div>
+                <div className="text-xs text-zinc-500 line-clamp-1 mt-1 font-light">
+                  {step.summary}
+                </div>
+              </button>
+            );
+          })}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="p-8 rounded-3xl bg-[#090b10] border border-white/[0.06] space-y-4">
-            <div className="w-10 h-10 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-emerald-400">
-              <ShieldCheck size={20} />
+        {/* Selected Step Inspector */}
+        <article className="lg:col-span-8 p-6 sm:p-10 rounded-2xl border border-white/10 bg-[#090B14] shadow-2xl relative">
+          {/* Header */}
+          <div className="pb-6 mb-6 border-b border-white/10">
+            <div className="flex items-center justify-between flex-wrap gap-4 mb-3">
+              <div className="flex items-center gap-2">
+                <span className="px-2.5 py-1 rounded bg-[#16543D]/60 border border-[#52E3A4]/30 text-[#52E3A4] font-mono text-xs font-semibold">
+                  STEP {selectedStep.stepNumber} OF 13
+                </span>
+                <span className="text-xs font-mono text-zinc-500">
+                  PHASE: {selectedStep.phase}
+                </span>
+              </div>
+
+              <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-400 bg-white/5 px-3 py-1 rounded-lg border border-white/5">
+                <UserCheck className="w-3.5 h-3.5 text-[#52E3A4]" />
+                <span>Owner: {selectedStep.owner}</span>
+              </div>
             </div>
-            <h3 className="text-lg font-bold text-white">01. Non-Disclosure & IP Security</h3>
-            <p className="text-xs text-zinc-400 leading-relaxed">
-              DigiSynq does not claim copyright, title, or intellectual property rights over connected projects. All creative scripts, treatments, and footage are protected by strict legal covenants.
+
+            <h2 className="text-3xl font-bold text-white mb-2">
+              {selectedStep.stepNumber}. {selectedStep.name}
+            </h2>
+            <p className="text-sm sm:text-base text-zinc-400 font-light">
+              {selectedStep.summary}
             </p>
           </div>
 
-          <div className="p-8 rounded-3xl bg-[#090b10] border border-white/[0.06] space-y-4">
-            <div className="w-10 h-10 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-emerald-400">
-              <Zap size={20} />
-            </div>
-            <h3 className="text-lg font-bold text-white">02. Anti-Rent-Seeking Neutrality</h3>
-            <p className="text-xs text-zinc-400 leading-relaxed">
-              We never inflate facility rates, take undisclosed kickbacks from vendors, or lock creative talent into exclusive agency tolls. Our compensation is transparently defined in coordination agreements.
-            </p>
-          </div>
-
-          <div className="p-8 rounded-3xl bg-[#090b10] border border-white/[0.06] space-y-4">
-            <div className="w-10 h-10 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-emerald-400">
-              <Activity size={20} />
-            </div>
-            <h3 className="text-lg font-bold text-white">03. Clean-Room Milestone Escrow</h3>
-            <p className="text-xs text-zinc-400 leading-relaxed">
-              Capital disbursements are tied directly to verified scene wraps, picture locks, or color turnovers. This prevents premature cash depletion and protects vendors from unpaid work.
-            </p>
-          </div>
-
-          <div className="p-8 rounded-3xl bg-[#090b10] border border-white/[0.06] space-y-4">
-            <div className="w-10 h-10 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-emerald-400">
-              <Compass size={20} />
-            </div>
-            <h3 className="text-lg font-bold text-white">04. Zero Balance-Sheet Conflict</h3>
-            <p className="text-xs text-zinc-400 leading-relaxed">
-              Because DigiSynq does not own camera fleets or studio real estate, we have no incentive to steer productions into suboptimal packages. We match projects purely based on creative fit and schedule.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 07. SECTION 06: DIFFERENTIATION ── */}
-      <section id="differentiation" className="py-24 sm:py-32 px-6 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.06] scroll-mt-20">
-        <div className="max-w-3xl mb-14">
-          <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
-            06. Strategic Differentiation
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-            The Structural Moat.<br />
-            <span className="text-zinc-400 font-light">Synchronization versus passive tollbooths.</span>
-          </h2>
-          <p className="text-base text-zinc-400 leading-relaxed">
-            Understanding the distinction between DigiSynq and other traditional industry models.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="p-8 rounded-3xl bg-[#090b10] border border-white/[0.06] flex flex-col justify-between space-y-6">
-            <div>
-              <span className="text-xs font-mono text-zinc-500 uppercase block mb-2">Vs. Marketplaces</span>
-              <h3 className="text-lg font-bold text-white mb-3">Orchestration, Not Listings</h3>
-              <p className="text-xs text-zinc-400 leading-relaxed">
-                Marketplaces simply host static profiles and charge transaction fees. DigiSynq actively coordinates workflows, verifies stage compatibility, manages schedules, and governs delivery milestones.
+          {/* 6 Required SOP Dimensions */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            {/* INPUT */}
+            <div className="p-4 rounded-xl border border-white/10 bg-white/[0.02]">
+              <div className="text-[11px] font-mono text-[#52E3A4] uppercase tracking-wider mb-2 font-semibold flex items-center gap-1.5">
+                <FileText className="w-3.5 h-3.5" />
+                <span>INPUT</span>
+              </div>
+              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-light">
+                {selectedStep.input}
               </p>
             </div>
-            <div className="pt-4 border-t border-white/[0.06] text-[11px] text-zinc-500">
-              Active governance vs. passive listings
-            </div>
-          </div>
 
-          <div className="p-8 rounded-3xl bg-[#090b10] border border-white/[0.06] flex flex-col justify-between space-y-6">
-            <div>
-              <span className="text-xs font-mono text-zinc-500 uppercase block mb-2">Vs. Legacy Studios</span>
-              <h3 className="text-lg font-bold text-white mb-3">Asset-Light, Not Heavy Debt</h3>
-              <p className="text-xs text-zinc-400 leading-relaxed">
-                Legacy studios carry massive real estate overhead and equipment depreciation that forces high markups. DigiSynq accesses network capacity on demand, keeping capital intensity low.
+            {/* ACTION */}
+            <div className="p-4 rounded-xl border border-white/10 bg-white/[0.02]">
+              <div className="text-[11px] font-mono text-[#52E3A4] uppercase tracking-wider mb-2 font-semibold flex items-center gap-1.5">
+                <Terminal className="w-3.5 h-3.5" />
+                <span>ACTION</span>
+              </div>
+              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-light">
+                {selectedStep.action}
               </p>
             </div>
-            <div className="pt-4 border-t border-white/[0.06] text-[11px] text-zinc-500">
-              Infinite flexibility vs. fixed asset debt
-            </div>
-          </div>
 
-          <div className="p-8 rounded-3xl bg-[#090b10] border border-white/[0.06] flex flex-col justify-between space-y-6">
-            <div>
-              <span className="text-xs font-mono text-zinc-500 uppercase block mb-2">Vs. Consultancies</span>
-              <h3 className="text-lg font-bold text-white mb-3">Embedded Execution, Not Decks</h3>
-              <p className="text-xs text-zinc-400 leading-relaxed">
-                Traditional consultants deliver theoretical slide presentations. DigiSynq embeds directly across stage bookings, camera-to-cloud dailies, and distribution release execution.
+            {/* OUTPUT */}
+            <div className="p-4 rounded-xl border border-white/10 bg-white/[0.02]">
+              <div className="text-[11px] font-mono text-[#52E3A4] uppercase tracking-wider mb-2 font-semibold flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>OUTPUT</span>
+              </div>
+              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-light">
+                {selectedStep.output}
               </p>
             </div>
-            <div className="pt-4 border-t border-white/[0.06] text-[11px] text-zinc-500">
-              Operational execution vs. advisory slides
+
+            {/* DECISION */}
+            <div className="p-4 rounded-xl border border-white/10 bg-white/[0.02]">
+              <div className="text-[11px] font-mono text-[#52E3A4] uppercase tracking-wider mb-2 font-semibold flex items-center gap-1.5">
+                <Compass className="w-3.5 h-3.5" />
+                <span>DECISION GATE</span>
+              </div>
+              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-light">
+                {selectedStep.decision}
+              </p>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* ── 08. Closing CTA ── */}
-      <section className="py-32 sm:py-44 px-6 sm:px-8 max-w-4xl mx-auto text-center border-t border-white/[0.06]">
-        <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-6">
-          Engage the Runbook.<br />
-          <span className="text-zinc-400 font-light">Synchronize your upcoming production.</span>
-        </h2>
-        <p className="text-base text-zinc-400 max-w-xl mx-auto leading-relaxed mb-10">
-          Have an entertainment project, resource requirement, or capacity opportunity? Start a Synq and tell us what needs to be connected.
-        </p>
-        <div className="flex flex-wrap items-center justify-center gap-4">
-          <Link
-            to="/start"
-            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-white text-black font-medium text-sm hover:bg-zinc-200 transition-all shadow-xl hover:scale-[1.02] active:scale-[0.98]"
-          >
-            Start a synq
-            <ArrowRight size={16} />
-          </Link>
-          <Link
-            to="/the-synq"
-            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/10 hover:border-white/20 bg-white/[0.02] text-zinc-300 font-medium text-sm transition-all duration-200"
-          >
-            Read the codex
-          </Link>
-        </div>
-      </section>
+          {/* SUCCESS CONDITION & RISK IF SKIPPED */}
+          <div className="space-y-4 mb-8">
+            <div className="p-4 rounded-xl border border-[#52E3A4]/30 bg-[#16543D]/15">
+              <div className="text-[11px] font-mono text-[#52E3A4] uppercase tracking-wider mb-1.5 font-semibold flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#52E3A4]" />
+                <span>SUCCESS CONDITION</span>
+              </div>
+              <p className="text-xs sm:text-sm text-zinc-200 leading-relaxed">
+                {selectedStep.successCondition}
+              </p>
+            </div>
 
+            <div className="p-4 rounded-xl border border-amber-500/30 bg-amber-500/[0.06]">
+              <div className="text-[11px] font-mono text-amber-400 uppercase tracking-wider mb-1.5 font-semibold flex items-center gap-1.5">
+                <ShieldAlert className="w-4 h-4 text-amber-400" />
+                <span>RISK IF STEP IS SKIPPED</span>
+              </div>
+              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                {selectedStep.riskIfSkipped}
+              </p>
+            </div>
+          </div>
+
+          {/* Footer Actions & Navigation */}
+          <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex items-center gap-2">
+              <button
+                disabled={selectedStep.stepNumber === '01'}
+                onClick={() => {
+                  const idx = RUNBOOK_13_STEPS.findIndex((s) => s.stepNumber === selectedStep.stepNumber);
+                  if (idx > 0) setSelectedStep(RUNBOOK_13_STEPS[idx - 1]);
+                }}
+                className="px-3 py-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 disabled:opacity-40 disabled:pointer-events-none text-xs text-zinc-300 font-mono transition-colors"
+              >
+                ← Previous Step
+              </button>
+
+              <button
+                disabled={selectedStep.stepNumber === '13'}
+                onClick={() => {
+                  const idx = RUNBOOK_13_STEPS.findIndex((s) => s.stepNumber === selectedStep.stepNumber);
+                  if (idx < RUNBOOK_13_STEPS.length - 1) setSelectedStep(RUNBOOK_13_STEPS[idx + 1]);
+                }}
+                className="px-3 py-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 disabled:opacity-40 disabled:pointer-events-none text-xs text-zinc-300 font-mono transition-colors"
+              >
+                Next Step →
+              </button>
+            </div>
+
+            <Link
+              to="/diagnose"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#52E3A4] text-[#03040A] font-semibold text-xs hover:bg-[#34D399] transition-colors shadow-md"
+            >
+              <span>Execute Diagnostic Now</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+        </article>
+      </div>
     </main>
   );
 }
