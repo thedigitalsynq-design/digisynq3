@@ -1,1159 +1,598 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  ArrowRight,
-  ArrowUpRight,
-  ShieldCheck,
-  Zap,
-  GitBranch,
-  Cpu,
-  Compass,
-  AlertTriangle,
-  CheckCircle2,
-  Sliders,
-  Terminal,
-  Clock,
-  DollarSign,
-  Users,
-  Check,
-  Network,
-  Eye,
-  Search,
-  FileText,
-  XCircle,
-  Lightbulb,
-  Film,
-  Sparkles,
+import { 
+  ArrowRight, ArrowUpRight, ShieldCheck, AlertTriangle, 
+  GitBranch, Layers, Cpu, Database, CheckCircle2, Sparkles, 
+  RefreshCw, Sliders, Users, Film, DollarSign 
 } from 'lucide-react';
-import {
-  BRAND,
-  WHAT_DIGISYNQ_IS_NOT,
-  CONTINUUM_STAGES,
-  MECHANISMS,
-  PROBLEM_TAXONOMY,
-} from '../data/blueprint_data';
 import { TopographicBackground } from '../components/TopographicBackground';
-import { EERGNetworkGraph } from '../components/EERGNetworkGraph';
+import { EERGConvergenceVisual } from '../components/EERGConvergenceVisual';
+import { EERGFlywheel } from '../components/EERGFlywheel';
+import { FAILURE_PROPAGATION_CHAIN } from '../data/system_architecture_data';
 
 export function HomePage() {
-  const [heroMode, setHeroMode] = useState<'FRAGMENTED' | 'SYNCHRONIZED'>('SYNCHRONIZED');
-  const [activeProcessStep, setActiveProcessStep] = useState(0);
-  const [selectedDiagnosticScenario, setSelectedDiagnosticScenario] = useState(0);
-  const [selectedContinuumStage, setSelectedContinuumStage] = useState(3); // Stage 4: Production
+  const [fragmentationState, setFragmentationState] = useState<'FRAGMENTED' | 'SYNCHRONIZED'>('FRAGMENTED');
+  const [activeModelStage, setActiveModelStage] = useState<number>(0);
+  const [activeChainStep, setActiveChainStep] = useState<number>(0);
 
-  // 8-Step Core Process
-  const coreProcessSteps = [
+  // 10 Key Ecosystem Resources (Section 02)
+  const ecosystemResources = [
+    { name: 'Talent', fragmented: 'Trapped in agency silos & unverified availability', synchronized: 'Dynamic capacity indexed across guild rosters' },
+    { name: 'Equipment', fragmented: 'Sitting on rental shelves unmonetized mid-week', synchronized: 'Real-time dark inventory routing & optical parity' },
+    { name: 'Locations', fragmented: 'Lost due to permit friction & calendar overlaps', synchronized: 'Pre-cleared architectural network with municipal locks' },
+    { name: 'Capital', fragmented: 'Frozen in bureaucratic milestone holding periods', synchronized: 'Telemetry-attested automated smart milestone escrow' },
+    { name: 'Content', fragmented: 'B-roll & unused cuts abandoned in offline drives', synchronized: 'Transmedia adaptation & instant sync monetization' },
+    { name: 'Technology', fragmented: 'Incompatible metadata schemas and lost ALE files', synchronized: 'Unified cryptographic checksum & color pipelines' },
+    { name: 'Rights', fragmented: 'Stalemates between music supervisors & streamers', synchronized: 'Pre-cleared global multi-territory rights ledger' },
+    { name: 'Distribution', fragmented: 'Rigid territorial windowing & missed festival slots', synchronized: 'Algorithmic platform buyer gap matching' },
+    { name: 'Audience', fragmented: 'Generic social noise & speculative marketing spend', synchronized: 'Direct cultural affinity & viewing telemetry loop' },
+    { name: 'Data', fragmented: 'Vanishes into deleted spreadsheets after project wrap', synchronized: 'Fed into EERG knowledge graph to prevent future waste' },
+  ];
+
+  // 6 Operating Model Stages (Section 04)
+  const operatingStages = [
     {
       step: '01',
-      name: 'OBSERVE',
-      tagline: 'Continuous System Telemetry',
-      input: 'Daily production reports, schedule shifts, dark-floor stage logs, budget burns',
-      action: 'Ingest raw operational signals across all 9 continuum stages without manual friction.',
-      output: 'Normalized telemetry timeline highlighting schedule & budget delta anomalies.',
-      icon: Eye,
+      name: 'DISCOVER',
+      tagline: 'Identify People, Assets, Capabilities & Needs',
+      desc: 'Traverse the decentralized entertainment landscape without owning physical inventory. Index verified guild credentials, dark stage days, camera optic serials, and production needs in real time.',
+      outcome: 'Zero invisible capacity. Real-time ecosystem visibility.',
     },
     {
       step: '02',
-      name: 'DIAGNOSE',
-      tagline: 'Root-Cause Decomposition',
-      input: 'Observed surface symptom (e.g. "soundstage handover delay by 48 hours")',
-      action: 'Decompose surface symptom through 6 problem domains to isolate actual systemic cause.',
-      output: 'Classified root failure: unhedged script rewrite vs permit delay vs crew turn.',
-      icon: Search,
+      name: 'AGGREGATE',
+      tagline: 'Bring Fragmented Information Into Structured Intelligence',
+      desc: 'Convert informal phone trees, scattered PDFs, and private spreadsheets into unified, machine-readable graphs with standardized schemas and cryptographic verification.',
+      outcome: 'Normalized telemetry replacing anecdotal gossip.',
     },
     {
       step: '03',
-      name: 'MAP',
-      tagline: 'Multi-Party Blast Radius',
-      input: 'Identified root cause and affected production milestone',
-      action: 'Traverse the entertainment dependency graph to calculate cascade blast radius.',
-      output: 'Visualized dependency graph linking downstream VFX plates, stages, and talent locks.',
-      icon: GitBranch,
+      name: 'CONNECT',
+      tagline: 'Match Needs With the Right People, Resources & Opportunities',
+      desc: 'Execute multi-party compatibility algorithms that align union rates, equipment prep dates, stage acoustic ratings, and location permits into one synchronized reservation lock.',
+      outcome: 'Matches executed in 14 hours instead of 3 weeks.',
     },
     {
       step: '04',
-      name: 'SIMULATE',
-      tagline: 'Counterfactual Impact Modelling',
-      input: 'Dependency graph + 3 potential remediation paths',
-      action: 'Run algorithmic cascade simulations to project days recovered and costs prevented.',
-      output: 'Comparative scorecards: Option A (overtime) vs Option B (scene resequence) vs Option C (burst stage).',
-      icon: Sliders,
+      name: 'ORCHESTRATE',
+      tagline: 'Coordinate Relationships, Dependencies, Schedules & Workflows',
+      desc: 'Active execution governance after the contract is signed. Model schedule shockwaves, monitor mandatory guild rest covenants, and dynamically re-sequence scenes when variances occur.',
+      outcome: 'A 2-hour set delay is halted before it cascades into a $2M disaster.',
     },
     {
       step: '05',
-      name: 'CONNECT',
-      tagline: 'Asset-Light Capability Routing',
-      input: 'Selected intervention requirement (e.g. "pre-lit 15,000 sq ft stage for 3 days")',
-      action: 'Query pre-vetted network partners with verified dark capacity and rate parity.',
-      output: 'Matched dark floor slot, certified specialty crew, or burst VFX vendor ready to contract.',
-      icon: Network,
+      name: 'MEASURE',
+      tagline: 'Understand Performance, Utilization, Cost Leakage & Value',
+      desc: 'Track decision-grade metrics: dark soundstage utilization yield, schedule cascade multipliers, and post-production turnover velocity. Every metric answers: What decision does this improve?',
+      outcome: 'Empirical accountability across every dollar and day spent.',
     },
     {
       step: '06',
-      name: 'COORDINATE',
-      tagline: 'Structured Intervention Execution',
-      input: 'Matched partner resources + single-point decision authority',
-      action: 'Orchestrate time-bounded SYNQ sprint with verified legal and technical SLAs.',
-      output: 'Active triage sprint executed with zero collateral friction on other departments.',
-      icon: Zap,
-    },
-    {
-      step: '07',
-      name: 'MEASURE',
-      tagline: 'Deterministic Value Verification',
-      input: 'Post-intervention timeline, burn rate, and master delivery checkpoints',
-      action: 'Audit real outcomes against initial counterfactual baseline.',
-      output: 'Verified System Value Created: exact schedule buffer days recovered and dollars saved.',
-      icon: CheckCircle2,
-    },
-    {
-      step: '08',
-      name: 'LEARN',
-      tagline: 'Systemic Memory & Recurrence Prevention',
-      input: 'De-identified case anatomy, resolution path, and outcome delta',
-      action: 'Deposit resolution template and early-warning signatures into DigiSynq System Memory.',
-      output: 'Automated predictive guardrail preventing identical failure on future productions.',
-      icon: Cpu,
+      name: 'MONETIZE',
+      tagline: 'Turn Coordination, Intelligence & Outcomes Into Economic Value',
+      desc: 'Transparent value capture: low transaction take-rates on dark capacity, workflow coordination subscriptions for studios, and enterprise EERG intelligence licenses for lenders.',
+      outcome: 'High-margin asset-light revenue aligned strictly with saved client capital.',
     },
   ];
 
-  // Interactive Diagnostic Scenarios
-  const diagnosticScenarios = [
-    {
-      id: 'soundstage-delay',
-      title: 'Soundstage Turnover Conflict',
-      symptom: 'Principal photography running 4 days over scheduled floor lease on Stage 3.',
-      rootCause: 'Unscheduled practical stunt adjustments forced split-shift lighting overruns.',
-      blastRadius: 'Next tenant eviction notice, $24k/day standby penalties, crew turnaround breach.',
-      mechanism: 'M10: Match & M15: Intervene',
-      intervention: 'Route overflow pickup shots to pre-vetted dark stage; resequence interior dialogue.',
-      valueModel: 'MODELLED: 3.5 Days Recovered // $68k Idle Penalty Avoided',
-    },
-    {
-      id: 'vfx-crunch',
-      title: 'Post-Production VFX Plate Squeeze',
-      symptom: 'Turnover plates delivered 14 days late with conform delivery date fixed.',
-      rootCause: 'Color pipeline color-space mismatch between camera raw and vendor conform OCIO.',
-      blastRadius: '120 hero CGI shots compressed from 6 weeks to 18 days; platform release window threatened.',
-      mechanism: 'M08: Simulate & M11: Route',
-      intervention: 'Inject automated ACES OCIO validation config; spin up burst secondary VFX studio partner.',
-      valueModel: 'MODELLED: 100% Platform Delivery Spec Compliance Target',
-    },
-    {
-      id: 'talent-window',
-      title: 'Lead Talent Availability Collision',
-      symptom: 'A-list lead actor has immovable hard-out for international press tour in 9 days.',
-      rootCause: 'Weather-induced location cancellation caused shooting schedule to invert without buffer.',
-      blastRadius: 'Unshot climax scenes; $320k insurance deductible triggered; potential cast recast crisis.',
-      mechanism: 'M07: Classify & M09: Model',
-      intervention: 'Dynamic scene clustering: group all lead coverage with 2-camera simultaneous units.',
-      valueModel: 'MODELLED: 6 Climax Scenes Completed Before Hard-Out',
-    },
-    {
-      id: 'platform-qc',
-      title: 'Platform QC Delivery Rejection',
-      symptom: 'Streaming platform rejects IMF master 72 hours before global simultaneous debut.',
-      rootCause: 'Subtle Dolby Atmos 7.1.4 bed downmix phase cancellation and dead subtitle TC sync.',
-      blastRadius: 'Global marketing spend burned; platform delayed launch fines; reputation damage.',
-      mechanism: 'M14: Verify & M17: Stabilize',
-      intervention: 'Deploy 24-hour certified IMF remediation sprint with platform-certified QC engineers.',
-      valueModel: 'MODELLED: Zero Window Slip // Platform Accepted in 18 Hours',
-    },
+  // 11-Tier Root-Cause Chain (Section 06)
+  const rootCauseChain = [
+    { tier: '01', label: 'STAKEHOLDER', example: 'Lead Actor & Line Producer', detail: 'Key performers and fiscal leaders managing immovable shooting windows.' },
+    { tier: '02', label: 'PROBLEM', example: 'Irregular Work & Delayed Casting', detail: 'Weeks lost during casting while unbudgeted holding fees accumulate.' },
+    { tier: '03', label: 'BOTTLENECK', example: 'Talent Discovery & Verification Deficit', detail: 'No real-time registry connecting open roles to verified calendar availability.' },
+    { tier: '04', label: 'IMMEDIATE CAUSE', example: 'Fragmented Databases & Unverified Profiles', detail: 'Casting relies on disparate websites, PDF resumes, and informal agent phone calls.' },
+    { tier: '05', label: 'ROOT CAUSE', example: 'Information Fragmentation & Trust Deficit', detail: 'Systemic market failure: asset availability is invisible across company boundaries.' },
+    { tier: '06', label: 'DEPENDENCIES', example: 'Shooting Schedule ↔ Soundstage ↔ Location Permit', detail: 'Actor availability locks dictate soundstage load-in and municipal street permits.' },
+    { tier: '07', label: 'OTHER STAKEHOLDERS', example: 'Director, Crew Guilds, Rental Houses, Bond Co.', detail: 'When actor schedule shifts, 120 technicians and vendors suffer downstream chaos.' },
+    { tier: '08', label: 'ECONOMIC IMPACT', example: '$2.8B+ Annual Waste in Cascade Delays', detail: 'Unrecoverable burn rate from idle soundstages, overtime, and rush VFX fees.' },
+    { tier: '09', label: 'EXISTING WORKAROUND', example: 'Paying 300% Overtime & Emergency Standby', detail: 'Producers burn contingency budget to patch structural ecosystem disconnection.' },
+    { tier: '10', label: 'SOLUTION GAP', example: 'Absence of Live Multi-Party Coordination Engine', detail: 'No living graph dynamically reroutes dependencies when a variance occurs.' },
+    { tier: '11', label: 'OPPORTUNITY', example: 'Verified Talent Intelligence & Availability Exchange', detail: 'Enterprise subscription funded by studio physical production & bond guarantors.' },
   ];
 
   return (
-    <main className="bg-[#03040A] text-[#ECEEF5] selection:bg-white selection:text-black min-h-screen relative overflow-hidden">
-      {/* ── Topographic Background Canvas ── */}
-      <TopographicBackground className="opacity-35 pointer-events-none -z-10" />
+    <div className="relative min-h-screen bg-[#03040A] text-[#ECEEF5] selection:bg-white selection:text-black">
+      <TopographicBackground />
 
-      {/* ── Ambient Atmosphere ── */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-gradient-to-b from-white/[0.08] via-white/[0.03] to-transparent blur-[160px] pointer-events-none -z-10" />
-      <div className="absolute top-[1800px] -left-48 w-[600px] h-[600px] bg-white/[0.03] blur-[180px] pointer-events-none -z-10" />
-      <div className="absolute top-[3600px] -right-48 w-[700px] h-[700px] bg-white/[0.03] blur-[180px] pointer-events-none -z-10" />
-
-      {/* ══════════════════════════════════════════════════════
-          01 — HERO: MASTER METAPHORIC STATEMENT & DYNAMIC CONSOLE
-         ══════════════════════════════════════════════════════ */}
-      <section className="relative pt-36 sm:pt-48 pb-20 sm:pb-32 px-6 sm:px-8 max-w-6xl mx-auto">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Eyebrow badge */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.1] bg-white/[0.03] text-xs text-zinc-300 mb-8 tracking-wide backdrop-blur-xl">
+      {/* ============================================================ */}
+      {/* SECTION 01 — THE QUESTION */}
+      {/* ============================================================ */}
+      <section className="relative pt-32 sm:pt-40 pb-20 px-4 sm:px-6 max-w-6xl mx-auto border-b border-white/[0.08]">
+        <div className="space-y-6 max-w-4xl">
+          <div className="inline-flex items-center gap-2 bg-white/[0.05] border border-white/[0.1] px-3 py-1 font-mono text-xs uppercase tracking-widest text-zinc-300">
             <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-            <span className="font-mono text-white font-semibold">ENTERTAINMENT SYNCHRONIZATION INFRASTRUCTURE</span>
-            <span className="text-zinc-600">//</span>
-            <span className="text-zinc-400 font-medium">ROOT-CAUSE ORCHESTRATION</span>
+            <span>01 — THE FOUNDATIONAL QUESTION</span>
           </div>
 
-          {/* Master Clear H1 */}
-          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-white leading-[1.03] [letter-spacing:-0.035em] mb-6">
-            When the entertainment system breaks,
-            <span className="text-white block text-3xl sm:text-5xl md:text-6xl lg:text-7xl mt-2 font-extrabold">
-              DigiSynq finds why.
-            </span>
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white uppercase leading-[1.02]">
+            What If the Entertainment Ecosystem Could See Itself?
           </h1>
 
-          {/* Master Explanatory H2 */}
-          <h2 className="text-base sm:text-xl text-zinc-300 font-normal leading-relaxed mb-6 max-w-3xl mx-auto">
-            DigiSynq identifies the root causes behind production, talent, capacity, financing and distribution bottlenecks — then connects the right people, resources and decisions to resolve them.
-          </h2>
+          <p className="text-lg sm:text-xl text-zinc-400 font-sans leading-relaxed max-w-3xl">
+            The people, resources, equipment, soundstages, workflows, distribution markets, and capital already exist. The industry does not lack talent or gear. The challenge is connecting them intelligently.
+          </p>
 
-          <div className="text-xs sm:text-sm text-white font-mono tracking-wide mb-10 font-semibold">
-            {BRAND.mission} • {BRAND.tagline}
-          </div>
-
-          {/* Action Row */}
-          <div className="flex flex-wrap items-center justify-center gap-4 mb-16">
+          <div className="pt-4 flex flex-wrap items-center gap-4">
             <Link
-              to="/diagnose"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-black hover:bg-zinc-200 font-bold text-sm tracking-wide transition-all duration-200 active:scale-95 shadow-[0_0_30px_rgba(255,255,255,0.25)]"
-              id="hero-diagnose-cta"
+              to="/ecosystem"
+              className="inline-flex items-center gap-2 bg-white text-black hover:bg-zinc-200 px-6 py-3.5 text-xs font-mono uppercase font-bold tracking-wider transition-colors"
             >
-              <span>Diagnose a Problem</span>
-              <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+              <span>EXPLORE THE SYSTEM</span>
+              <ArrowRight className="w-4 h-4" />
             </Link>
-
             <Link
-              to="/root-cause-graph"
-              className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white/20 hover:border-white/40 bg-white/[0.06] hover:bg-white/[0.1] text-white font-medium text-sm transition-all duration-200 backdrop-blur-xl"
+              to="/eerg"
+              className="inline-flex items-center gap-2 bg-white/[0.05] hover:bg-white/[0.1] text-white border border-white/[0.1] px-6 py-3.5 text-xs font-mono uppercase font-semibold tracking-wider transition-colors"
             >
-              <Network className="w-4 h-4 text-white" />
-              <span>Root-Cause Graph</span>
-              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/10 text-white font-bold ml-0.5">EERG</span>
+              <span>TRACE ROOT-CAUSE GRAPH (EERG)</span>
+              <ArrowUpRight className="w-4 h-4" />
             </Link>
-
-            <Link
-              to="/the-synq"
-              className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white/14 hover:border-white/20 bg-white/[0.04] hover:bg-white/[0.08] text-white font-medium text-sm transition-all duration-200 backdrop-blur-xl"
-            >
-              <Compass className="w-4 h-4 text-white" />
-              <span>Explore the System</span>
-              <ArrowRight className="w-3.5 h-3.5 opacity-70" />
-            </Link>
-
-            <Link
-              to="/mechanisms"
-              className="inline-flex items-center gap-2 px-6 py-4 rounded-full border border-white/10 hover:border-white/20 bg-transparent text-zinc-400 hover:text-white font-mono text-xs transition-all duration-200"
-            >
-              <span>23 Mechanisms</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-        </div>
-
-        {/* ── Interactive Hero Terminal: Fragmented vs Synchronized ── */}
-        <div className="max-w-5xl mx-auto rounded-3xl border border-white/[0.1] bg-[#090B14]/90 backdrop-blur-2xl shadow-2xl p-6 sm:p-8 relative overflow-hidden">
-          {/* Console Header & Toggle */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-6 border-b border-white/[0.08]">
-            <div className="flex items-center gap-3">
-              <span className="w-3 h-3 rounded-full bg-red-500/80 inline-block" />
-              <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block" />
-              <span className="w-3 h-3 rounded-full bg-white/80 inline-block" />
-              <span className="font-mono text-xs text-zinc-400 ml-2">SYSTEM STATE TELEMETRY // SIMULATOR</span>
-            </div>
-
-            <div className="inline-flex p-1 rounded-xl border border-white/[0.08] bg-black/60 font-mono text-xs">
-              <button
-                onClick={() => setHeroMode('FRAGMENTED')}
-                className={`px-3 py-1.5 rounded-lg transition-all ${
-                  heroMode === 'FRAGMENTED'
-                    ? 'bg-red-500/20 text-red-300 border border-red-500/30 font-semibold'
-                    : 'text-zinc-500 hover:text-white'
-                }`}
-              >
-                Fragmented Silos (Default)
-              </button>
-              <button
-                onClick={() => setHeroMode('SYNCHRONIZED')}
-                className={`px-3 py-1.5 rounded-lg transition-all ${
-                  heroMode === 'SYNCHRONIZED'
-                    ? 'bg-white text-black font-bold shadow-md'
-                    : 'text-zinc-500 hover:text-white'
-                }`}
-              >
-                DIGISYNQ Infrastructure (Active)
-              </button>
-            </div>
-          </div>
-
-          {/* Dynamic Content Display */}
-          {heroMode === 'FRAGMENTED' ? (
-            <div className="space-y-6">
-              <div className="p-4 rounded-xl border border-red-500/30 bg-red-500/10 text-xs sm:text-sm text-red-200 flex items-center justify-between">
-                <span>⚠️ Uncoordinated Cascade in Progress: Lead Actor date shifts by 6 days.</span>
-                <span className="font-mono font-bold text-red-400 uppercase text-xs">Blast Radius: $450k Overrun</span>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono text-xs">
-                <div className="p-4 rounded-xl bg-black/40 border border-white/[0.06]">
-                  <div className="text-zinc-500 mb-1">STAGE A: PRODUCTION</div>
-                  <div className="text-white font-bold">Soundstage Eviction</div>
-                  <div className="text-red-400 mt-1">Standby gear penalty: $18k/day</div>
-                </div>
-                <div className="p-4 rounded-xl bg-black/40 border border-white/[0.06]">
-                  <div className="text-zinc-500 mb-1">STAGE B: POST-PRODUCTION</div>
-                  <div className="text-white font-bold">VFX Delivery Squeeze</div>
-                  <div className="text-red-400 mt-1">Conform cut compressed by 12 days</div>
-                </div>
-                <div className="p-4 rounded-xl bg-black/40 border border-white/[0.06]">
-                  <div className="text-zinc-500 mb-1">STAGE C: DISTRIBUTION</div>
-                  <div className="text-white font-bold">Release Window Lost</div>
-                  <div className="text-red-400 mt-1">Platform QC rejection 48h before launch</div>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="space-y-6">
-              <div className="p-4 rounded-xl border border-white/20 bg-white/[0.05] text-xs sm:text-sm text-zinc-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <span>⚡ Cascade Arrested: Dynamic scene resequencing + burst partner stage activated.</span>
-                <span className="font-mono text-[11px] text-white uppercase bg-black/40 px-2 py-0.5 rounded border border-white/15">
-                  MODELLED SIMULATION: 5.5 Days &amp; $84k Protected
-                </span>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono text-xs">
-                <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-                  <div className="text-zinc-500 mb-1">MECHANISM 08: SIMULATE</div>
-                  <div className="text-white font-bold">Resequence Exterior Scenes</div>
-                  <div className="text-white mt-1">Zero soundstage turnaround fines</div>
-                </div>
-                <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-                  <div className="text-zinc-500 mb-1">MECHANISM 10: MATCH</div>
-                  <div className="text-white font-bold">Partner Dark-Floor Floor Slot</div>
-                  <div className="text-white mt-1">Activated with 15% rate parity</div>
-                </div>
-                <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-                  <div className="text-zinc-500 mb-1">MECHANISM 14: VERIFY</div>
-                  <div className="text-white font-bold">IMF Master Delivered on Time</div>
-                  <div className="text-white mt-1">100% automated platform compliance</div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Terminal Footer Quote */}
-          <div className="mt-6 pt-4 border-t border-white/[0.08] flex items-center justify-between text-[11px] font-mono text-zinc-500">
-            <span>Fundamental System Axiom:</span>
-            <span className="text-white">
-              "DIGISYNQ does not manage filmmaking. It manages the dependencies that make filmmaking possible."
-            </span>
-          </div>
-        </div>
-
-        {/* ── BENTO GRID: What is a SYNQ? ── */}
-        <div className="mt-16">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {/* Bento Card 1: Master Definition (Large 2x2 Square) */}
-            <div className="sm:col-span-2 sm:row-span-2 aspect-square p-7 sm:p-9 rounded-3xl bg-gradient-to-br from-[#090B14] via-[#06070B] to-[#04060C] border border-white/15 shadow-2xl relative overflow-hidden flex flex-col justify-between group soft-card">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/[0.05] rounded-full blur-3xl pointer-events-none group-hover:bg-white/[0.08] transition-all duration-700" />
-              <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.05] border border-white/15 text-white font-mono text-xs uppercase tracking-wider mb-4">
-                  <Cpu className="w-3.5 h-3.5" />
-                  <span>THE OPERATIONAL FOUNDATION</span>
-                </div>
-                <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight mb-3">
-                  What is a <span className="text-white">SYNQ</span>?
-                </h3>
-                <p className="text-sm sm:text-base text-zinc-300 leading-relaxed font-light mb-6">
-                  A <strong>SYNQ</strong> is a structured intervention that connects a specific entertainment system problem to the people, resources, capabilities, and decisions required to resolve it.
-                </p>
-              </div>
-
-              <div className="pt-6 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-4">
-                <span className="text-xs font-mono text-zinc-400">
-                  Deterministic intervention sprint.
-                </span>
-                <Link
-                  to="/the-synq"
-                  className="inline-flex items-center gap-1.5 text-xs font-mono text-white hover:text-white font-bold transition-colors"
-                >
-                  <span>Explore Architecture →</span>
-                </Link>
-              </div>
-            </div>
-
-            {/* Bento Card 2: Principle Root Cause (1x1 Square) */}
-            <div className="aspect-square p-6 rounded-3xl bg-[#090B14] border border-white/[0.08] shadow-xl flex flex-col justify-between overflow-hidden soft-card">
-              <div>
-                <div className="text-xs font-mono text-white mb-2 font-semibold flex items-center gap-1.5">
-                  <Search className="w-3.5 h-3.5" />
-                  <span>ROOT-CAUSE DISCIPLINE</span>
-                </div>
-                <h4 className="text-base sm:text-lg font-bold text-white mb-2 leading-snug">Root-Cause Centered</h4>
-                <p className="text-xs text-zinc-400 leading-relaxed">
-                  Decomposes surface alarms into underlying schedule buffers, data schemas, and contract incentives.
-                </p>
-              </div>
-              <div className="pt-3 border-t border-white/[0.06] text-[11px] font-mono text-zinc-500">
-                Addresses root cause
-              </div>
-            </div>
-
-            {/* Bento Card 3: Principle Asset-Light (1x1 Square) */}
-            <div className="aspect-square p-6 rounded-3xl bg-[#090B14] border border-white/[0.08] shadow-xl flex flex-col justify-between overflow-hidden soft-card">
-              <div>
-                <div className="text-xs font-mono text-white mb-2 font-semibold flex items-center gap-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5" />
-                  <span>ASSET-LIGHT AGILITY</span>
-                </div>
-                <h4 className="text-base sm:text-lg font-bold text-white mb-2 leading-snug">Asset-Light Network</h4>
-                <p className="text-xs text-zinc-400 leading-relaxed">
-                  Carries zero balance-sheet debt. We orchestrate pre-vetted dark floors, burst VFX, and specialist teams.
-                </p>
-              </div>
-              <div className="pt-3 border-t border-white/[0.06] text-[11px] font-mono text-zinc-300">
-                100% Unconflicted
-              </div>
-            </div>
-
-            {/* Bento Card 4: Principle Measured Value (1x1 Square) */}
-            <div className="aspect-square p-6 rounded-3xl bg-[#090B14] border border-white/[0.08] shadow-xl flex flex-col justify-between overflow-hidden soft-card">
-              <div>
-                <div className="text-xs font-mono text-white mb-2 font-semibold flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5" />
-                  <span>MEASURED OUTCOMES</span>
-                </div>
-                <h4 className="text-base sm:text-lg font-bold text-white mb-2 leading-snug">Measured Outcomes</h4>
-                <p className="text-xs text-zinc-400 leading-relaxed">
-                  Every SYNQ delivers verifiable outcomes: schedule buffer restored, idle fines avoided, and spec compliance.
-                </p>
-              </div>
-              <div className="pt-3 border-t border-white/[0.06] text-[11px] font-mono text-zinc-500">
-                5.5 Days &amp; $84k+ Modelled
-              </div>
-            </div>
-
-            {/* Bento Card 5: Clean-Room Governance (1x1 Square) */}
-            <div className="aspect-square p-6 rounded-3xl bg-[#090B14] border border-white/[0.08] shadow-xl flex flex-col justify-between overflow-hidden soft-card">
-              <div>
-                <div className="text-xs font-mono text-white mb-2 font-semibold flex items-center gap-1.5">
-                  <Zap className="w-3.5 h-3.5" />
-                  <span>CLEAN-ROOM</span>
-                </div>
-                <h4 className="text-base font-bold text-white mb-2 leading-snug">
-                  Neutral Multi-Party Governance
-                </h4>
-                <p className="text-xs text-zinc-400 leading-relaxed">
-                  Standardized clean-room legal covenants ensure complete IP confidentiality and rate parity across guilds.
-                </p>
-              </div>
-              <div className="pt-3 border-t border-white/[0.06]">
-                <Link
-                  to="/runbook"
-                  className="text-xs font-mono text-white hover:underline flex items-center gap-1"
-                >
-                  <span>Operating Runbook →</span>
-                </Link>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════
-          02 — SYSTEM PROBLEM: CASCADE BLAST RADIUS
-         ══════════════════════════════════════════════════════ */}
-      <section className="py-24 px-6 sm:px-8 border-y border-white/[0.06] bg-[#06080E]/70 relative">
-        <div className="max-w-6xl mx-auto">
-          <div className="max-w-3xl mb-14">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 font-mono text-xs font-medium mb-3">
-              <AlertTriangle className="w-3.5 h-3.5" />
-              <span>THE ROOT-CAUSE CASCADE PROBLEM</span>
-            </div>
-
-            <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight mb-4">
-              A single dropped beat echoes through the entire orchestra.
+      {/* ============================================================ */}
+      {/* SECTION 02 — THE PROBLEM: TOO MUCH EXISTS. TOO LITTLE IS CONNECTED. */}
+      {/* ============================================================ */}
+      <section className="py-20 px-4 sm:px-6 max-w-6xl mx-auto border-b border-white/[0.08] space-y-10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div className="space-y-2 max-w-2xl">
+            <span className="font-mono text-xs uppercase tracking-widest text-zinc-500">02 — THE PROBLEM</span>
+            <h2 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white">
+              Too Much Exists. Too Little Is Connected.
             </h2>
-            <p className="text-zinc-300 text-base sm:text-lg leading-relaxed font-light">
-              Entertainment is an intricate polyphony of 20 distinct stakeholders. When one upstream date slips, it doesn't stay local — it triggers a compounded seismic wave down the entire critical path.
+            <p className="text-sm sm:text-base text-zinc-400">
+              When resources exist in artificial silos, they generate immense friction. Toggle below to compare the current fragmented reality against the DIGISYNQ synchronized ecosystem.
             </p>
           </div>
 
-          {/* Visual Cascade Chain */}
-          <div className="p-6 sm:p-8 rounded-2xl border border-white/[0.08] bg-[#090B14] shadow-2xl overflow-x-auto">
-            <div className="text-xs font-mono text-white mb-6 flex items-center justify-between">
-              <span>UNSYNCHRONIZED CASCADE BLAST RADIUS</span>
-              <span className="text-zinc-500">Without DIGISYNQ Intervention</span>
-            </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 min-w-[760px]">
-              {[
-                { step: '01', title: 'Actor Schedule Shift', detail: '+6 days unavailable', tag: 'Upstream Shock', color: 'border-amber-500/40 text-amber-400' },
-                { step: '02', title: 'Shooting Order Alters', detail: 'Sequential scenes split', tag: 'Direct Effect', color: 'border-amber-500/30 text-zinc-300' },
-                { step: '03', title: 'Location Booking Clash', detail: 'Permit & stage lost', tag: 'Spatial Loss', color: 'border-amber-500/30 text-zinc-300' },
-                { step: '04', title: 'Crew & Gear Extension', detail: 'Turnaround hour breach', tag: 'Cost Spike', color: 'border-red-500/40 text-red-400' },
-                { step: '05', title: 'Post-Pro Compressed', detail: 'VFX receives late plates', tag: 'Bottleneck', color: 'border-red-500/50 text-red-400' },
-                { step: '06', title: 'Delivery Window Risk', detail: 'Platform QC rejection', tag: 'Release Loss', color: 'border-red-500/80 text-red-300' },
-              ].map((item, idx) => (
-                <div key={idx} className={`p-4 rounded-xl border bg-black/40 ${item.color} flex flex-col justify-between`}>
-                  <div>
-                    <div className="text-[10px] font-mono text-zinc-500 mb-1">{item.tag}</div>
-                    <div className="font-semibold text-sm text-white mb-2">{item.title}</div>
-                    <div className="text-xs text-zinc-400">{item.detail}</div>
-                  </div>
-                  <div className="mt-4 pt-2 border-t border-white/[0.06] text-[10px] font-mono text-zinc-500">
-                    Cascades downstream ↓
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-8 pt-6 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-4">
-              <div className="text-sm text-zinc-300 font-mono">
-                <span className="text-white">DIGISYNQ Solution:</span> Treats individual consequences as <strong className="text-white">one connected system</strong>.
-              </div>
-              <Link
-                to="/engines/cascade"
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-white hover:text-white transition-colors"
-              >
-                <span>Launch Interactive Cascade Simulator</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
+          <div className="flex items-center bg-[#080B12] border border-white/[0.1] p-1 self-start md:self-auto">
+            <button
+              onClick={() => setFragmentationState('FRAGMENTED')}
+              className={`px-4 py-2 font-mono text-xs uppercase tracking-wider transition-colors ${
+                fragmentationState === 'FRAGMENTED'
+                  ? 'bg-red-950/60 text-red-300 border border-red-500/40 font-bold'
+                  : 'text-zinc-500 hover:text-zinc-300'
+              }`}
+            >
+              Fragmented Reality
+            </button>
+            <button
+              onClick={() => setFragmentationState('SYNCHRONIZED')}
+              className={`px-4 py-2 font-mono text-xs uppercase tracking-wider transition-colors ${
+                fragmentationState === 'SYNCHRONIZED'
+                  ? 'bg-emerald-950/60 text-emerald-300 border border-emerald-500/40 font-bold'
+                  : 'text-zinc-500 hover:text-zinc-300'
+              }`}
+            >
+              Synchronized System
+            </button>
           </div>
+        </div>
+
+        {/* 10 Resource Grid Visualizer */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+          {ecosystemResources.map((res, idx) => (
+            <div
+              key={res.name}
+              className={`p-4 border transition-all duration-300 ${
+                fragmentationState === 'FRAGMENTED'
+                  ? 'bg-[#0A0707] border-red-900/30 hover:border-red-500/40'
+                  : 'bg-[#060D0A] border-emerald-900/30 hover:border-emerald-500/40'
+              }`}
+            >
+              <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/[0.06]">
+                <span className="font-mono text-[10px] text-zinc-500 uppercase">RESOURCE 0{idx + 1}</span>
+                <span
+                  className={`w-1.5 h-1.5 rounded-full ${
+                    fragmentationState === 'FRAGMENTED' ? 'bg-red-400' : 'bg-emerald-400'
+                  }`}
+                />
+              </div>
+              <h3 className="font-bold text-sm text-white uppercase tracking-tight">{res.name}</h3>
+              <p className="text-xs text-zinc-400 mt-2 leading-relaxed">
+                {fragmentationState === 'FRAGMENTED' ? res.fragmented : res.synchronized}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════
-          02B — EERG INTELLIGENCE: THE ECOSYSTEM IS CONNECTED
-         ══════════════════════════════════════════════════════ */}
-      <section className="py-24 px-6 sm:px-8 border-b border-white/[0.06] bg-[#03040A] relative" id="eerg-preview">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
-            <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.06] border border-white/15 text-white font-mono text-xs font-semibold mb-3">
-                <Network className="w-3.5 h-3.5" />
-                <span>DIGISYNQ // EERG INTELLIGENCE LAYER</span>
-              </div>
-              <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-4 leading-[1.1]">
-                THE ECOSYSTEM IS CONNECTED.<br />
-                THE PROBLEMS ARE TOO.
-              </h2>
-              <p className="text-zinc-300 text-base sm:text-lg leading-relaxed font-light">
-                Behind every visible entertainment-industry problem is a network of dependencies, incentives, information gaps and decisions.
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-              <Link
-                to="/eerg"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white text-black hover:bg-zinc-200 font-bold text-xs tracking-wider transition-all shadow-lg shadow-white/10 active:scale-95 shrink-0"
-              >
-                <span>EXPLORE EERG →</span>
-              </Link>
-            </div>
-          </div>
-
-          {/* Conceptual Relationship Comparison Bento */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-            <div className="p-6 rounded-3xl bg-[#090B14] border border-white/[0.08] shadow-xl">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-mono text-white font-bold tracking-wider uppercase">
-                  DIGISYNQ // PARENT ECOSYSTEM
-                </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-white border border-white/15">
-                  Action &amp; Synchronization
-                </span>
-              </div>
-              <div className="text-lg font-bold text-white mb-2">Connects the Ecosystem</div>
-              <p className="text-xs text-zinc-400 leading-relaxed mb-4">
-                People · Resources · Capabilities · Technology · Markets · Projects · Data · Opportunities
-              </p>
-              <div className="text-[11px] font-mono text-zinc-500 pt-3 border-t border-white/[0.06]">
-                Intervention &amp; Execution Engine
-              </div>
-            </div>
-
-            <div className="p-6 rounded-3xl bg-white/[0.04] border border-white/20 shadow-xl">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-mono text-white font-bold tracking-wider uppercase">
-                  EERG // INTELLIGENCE LAYER
-                </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white text-black font-bold">
-                  Root-Cause Intelligence
-                </span>
-              </div>
-              <div className="text-lg font-bold text-white mb-2">Understands Why It Gets Stuck</div>
-              <p className="text-xs text-zinc-300 leading-relaxed mb-4">
-                Problems · Bottlenecks · Causes · Root Causes · Dependencies · Failure Propagation · Economic Impact
-              </p>
-              <div className="text-[11px] font-mono text-zinc-400 pt-3 border-t border-white/[0.08]">
-                Evolving Systemic Intelligence Model
-              </div>
-            </div>
-          </div>
-
-          {/* Interactive Network Graph Component */}
-          <EERGNetworkGraph />
-
-          {/* Research Targets Disclaimer Bar */}
-          <div className="mt-8 p-4 rounded-2xl bg-black/40 border border-white/[0.06] flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-mono text-zinc-400">
-            <div>
-              <span className="text-white font-semibold">RESEARCH SCALE TARGETS:</span> 150+ Stakeholders · 500+ Problems · 200+ Bottlenecks · 100+ Root Causes · 1,500+ Dependencies
-            </div>
-            <Link to="/eerg" className="text-white hover:underline flex items-center gap-1 font-bold shrink-0">
-              <span>View Full EERG Model →</span>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════════
-          DIGISYNQ PROCESS: SYNCHRONIZATION LOOP
-         ══════════════════════════════════════════════════════ */}
-      <section className="py-24 px-6 sm:px-8 max-w-6xl mx-auto">
-        <div className="max-w-3xl mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.06] border border-white/15 text-white font-mono text-xs font-semibold mb-3">
-            <span>THE SYNQ SYNCHRONIZATION ENGINE</span>
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight mb-4">
-            The Continuous Synchronization Loop.
+      {/* ============================================================ */}
+      {/* SECTION 03 — THE IDEA: NOTHING IS WASTE. DISCONNECTED VALUE IS. */}
+      {/* ============================================================ */}
+      <section className="py-20 px-4 sm:px-6 max-w-6xl mx-auto border-b border-white/[0.08] space-y-12">
+        <div className="space-y-4 max-w-3xl">
+          <span className="font-mono text-xs uppercase tracking-widest text-zinc-500">03 — THE IDEA</span>
+          <h2 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white leading-tight">
+            Nothing Is Waste. Disconnected Value Is.
           </h2>
-          <p className="text-zinc-300 text-sm sm:text-base leading-relaxed">
-            DigiSynq operates as an asset-light, closed-loop control system for complex creative infrastructure:
-            <span className="text-white font-mono text-xs block mt-2">
-              OBSERVE → DIAGNOSE → MAP → SIMULATE → CONNECT → COORDINATE → MEASURE → LEARN
-            </span>
+          <p className="text-base sm:text-lg text-zinc-400 leading-relaxed">
+            This is not an inspirational marketing slogan. It is an operational law. Value does not disappear; it degrades into waste when the connections between who owns it, who needs it, and where it is available break down.
           </p>
         </div>
 
-        {/* Process Step Selector */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 mb-8">
-          {coreProcessSteps.map((step, idx) => {
-            const Icon = step.icon;
-            const isActive = activeProcessStep === idx;
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {[
+            { waste: 'Idle talent', value: 'Available capacity', desc: 'Performers between bookings become discovered capacity for rapid turnarounds.' },
+            { waste: 'Idle equipment', value: 'Productive capacity', desc: 'Optics and lighting generate revenue mid-week instead of shelf depreciation.' },
+            { waste: 'Unused locations', value: 'Revenue resources', desc: 'Civic landmarks and private estates unlock high-margin filming fees.' },
+            { waste: 'Fragmented data', value: 'Systemic intelligence', desc: 'Isolated spreadsheets coalesce into an empirical root-cause knowledge graph.' },
+            { waste: 'Unused content', value: 'Additional value', desc: 'Dailies and cut scenes power marketing campaigns and digital transmedia.' },
+            { waste: 'Siloed relationships', value: 'Ecosystem network', desc: 'Independent vendors collaborate without parasitic agency markups.' },
+            { waste: 'Unused telemetry', value: 'Decision intelligence', desc: 'Schedule variance history predicts and prevents future delay cascades.' },
+            { waste: 'Failed workflows', value: 'Business opportunity', desc: 'Every production shock reveals a gap that a paying customer needs solved.' },
+          ].map((pair, i) => (
+            <div key={i} className="p-5 bg-[#080B12] border border-white/[0.06] flex flex-col justify-between">
+              <div>
+                <div className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mb-1.5">
+                  TRANSFORMATION 0{i + 1}
+                </div>
+                <div className="text-xs font-mono mb-2">
+                  <span className="text-red-400 line-through">{pair.waste}</span>
+                  <span className="text-zinc-600 mx-1.5">→</span>
+                  <span className="text-emerald-400 font-bold">{pair.value}</span>
+                </div>
+                <p className="text-xs text-zinc-400 leading-relaxed mt-2">{pair.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* SECTION 04 — THE SYSTEM: DIGISYNQ CONNECTS THE DOTS */}
+      {/* ============================================================ */}
+      <section className="py-20 px-4 sm:px-6 max-w-6xl mx-auto border-b border-white/[0.08] space-y-10">
+        <div className="space-y-3 max-w-3xl">
+          <span className="font-mono text-xs uppercase tracking-widest text-zinc-500">04 — THE OPERATING SYSTEM</span>
+          <h2 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white">
+            DIGISYNQ Connects the Dots.
+          </h2>
+          <p className="text-sm sm:text-base text-zinc-400">
+            A continuous 6-stage mechanism that converts decentralized resources into synchronized execution: Discover → Aggregate → Connect → Orchestrate → Measure → Monetize.
+          </p>
+        </div>
+
+        {/* 6 Stage Buttons */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+          {operatingStages.map((stg, idx) => {
+            const isSelected = idx === activeModelStage;
             return (
               <button
-                key={idx}
-                onClick={() => setActiveProcessStep(idx)}
-                className={`p-3 rounded-xl border text-left transition-all flex flex-col justify-between ${
-                  isActive
-                    ? 'bg-white text-black border-white/20 font-bold shadow-[0_0_20px_rgba(255,255,255,0.15)]'
-                    : 'bg-[#090B14] border-white/[0.08] text-zinc-400 hover:text-white hover:border-white/20'
+                key={stg.step}
+                onClick={() => setActiveModelStage(idx)}
+                className={`p-3.5 text-left border transition-all ${
+                  isSelected
+                    ? 'bg-white text-black border-white shadow-xl'
+                    : 'bg-[#080B12] text-zinc-400 border-white/[0.06] hover:border-zinc-600 hover:text-white'
                 }`}
               >
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-[10px] uppercase font-mono tracking-widest text-white">•</span>
-                  <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-[#03040A]' : 'text-zinc-500'}`} />
+                <span className={`font-mono text-[10px] block mb-1 uppercase ${isSelected ? 'text-zinc-600' : 'text-zinc-500'}`}>
+                  STAGE {stg.step}
+                </span>
+                <div className={`font-bold text-xs uppercase tracking-tight ${isSelected ? 'text-black' : 'text-white'}`}>
+                  {stg.name}
                 </div>
-                <div className="text-xs font-mono font-bold tracking-tight">{step.name}</div>
               </button>
             );
           })}
         </div>
 
-        {/* Active Process Step Card */}
+        {/* Active Stage Deep Detail */}
         {(() => {
-          const current = coreProcessSteps[activeProcessStep];
-          const StepIcon = current.icon;
+          const currentStage = operatingStages[activeModelStage];
           return (
-            <div className="p-8 rounded-3xl border border-white/15 bg-gradient-to-br from-[#090B14] to-[#04060C] shadow-2xl relative overflow-hidden">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-6 border-b border-white/[0.08]">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-white/[0.08] border border-white/20 flex items-center justify-center text-white">
-                    <StepIcon className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="font-mono text-xs text-white font-semibold tracking-wider">PROCESS PHASE // CLOSED-LOOP</span>
-                    <h3 className="text-2xl font-black text-white">{current.name}: {current.tagline}</h3>
-                  </div>
+            <div className="p-6 sm:p-8 bg-[#090C15] border border-white/[0.08] space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/[0.08]">
+                <div>
+                  <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest">
+                    STAGE {currentStage.step} OF 06: {currentStage.name}
+                  </span>
+                  <h3 className="text-2xl font-bold text-white uppercase tracking-tight mt-1">
+                    {currentStage.tagline}
+                  </h3>
                 </div>
-                <div className="font-mono text-xs text-zinc-500 bg-white/[0.04] px-3 py-1.5 rounded-lg border border-white/[0.08]">
-                  Closed-Loop Feedback System
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="p-5 rounded-2xl bg-black/50 border border-white/[0.06]">
-                  <div className="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mb-2">INPUT SIGNAL</div>
-                  <p className="text-xs text-zinc-300 leading-relaxed">{current.input}</p>
-                </div>
-                <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/15">
-                  <div className="text-[11px] font-mono text-white uppercase tracking-wider mb-2">SYSTEM ACTION</div>
-                  <p className="text-xs text-zinc-300 leading-relaxed">{current.action}</p>
-                </div>
-                <div className="p-5 rounded-2xl bg-black/50 border border-white/[0.06]">
-                  <div className="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mb-2">DETERMINISTIC OUTPUT</div>
-                  <p className="text-xs text-zinc-300 leading-relaxed">{current.output}</p>
+                <div className="font-mono text-xs text-emerald-400 bg-emerald-950/30 border border-emerald-500/20 px-3 py-1.5 self-start sm:self-auto">
+                  {currentStage.outcome}
                 </div>
               </div>
+              <p className="text-sm text-zinc-300 leading-relaxed font-sans max-w-4xl">
+                {currentStage.desc}
+              </p>
+            </div>
+          );
+        })()}
+      </section>
 
-              <div className="mt-6 pt-6 border-t border-white/[0.08] flex items-center justify-between text-xs font-mono">
-                <span className="text-zinc-500">Sequential Cycle: {current.name} feeds directly into {coreProcessSteps[(activeProcessStep + 1) % coreProcessSteps.length].name}</span>
-                <Link
-                  to="/how-it-works"
-                  className="inline-flex items-center gap-1.5 text-white hover:text-white font-semibold transition-colors"
+      {/* ============================================================ */}
+      {/* SECTION 05 — THE INTELLIGENCE: INTRODUCE EERG */}
+      {/* ============================================================ */}
+      <section className="py-20 px-4 sm:px-6 max-w-6xl mx-auto border-b border-white/[0.08] space-y-8">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 p-8 bg-[#080B12] border border-white/[0.08]">
+          <div className="space-y-4 max-w-2xl">
+            <span className="font-mono text-xs uppercase tracking-widest text-zinc-500">05 — THE REASONING LAYER</span>
+            <h2 className="text-3xl sm:text-4xl font-bold uppercase tracking-tight text-white leading-tight">
+              But First, Understand Why the System Breaks.
+            </h2>
+            <p className="text-sm sm:text-base text-zinc-400 leading-relaxed">
+              Before you can connect resources, you must understand why the entertainment ecosystem gets stuck. That is the function of EERG (Entertainment Ecosystem Root-Cause Graph) — the intelligence and reasoning engine of DIGISYNQ.
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-3 shrink-0">
+            <Link
+              to="/eerg"
+              className="inline-flex items-center gap-2 bg-white text-black hover:bg-zinc-200 px-6 py-3.5 text-xs font-mono uppercase font-bold tracking-wider transition-colors justify-center"
+            >
+              <span>EXPLORE EERG ENGINE</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <div className="text-[11px] font-mono text-zinc-500 text-center">
+              160+ Stakeholders · 75 Root Causes · 50 Bottlenecks
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* SECTION 06 — ROOT-CAUSE GRAPH: THE 11-TIER CHAIN */}
+      {/* ============================================================ */}
+      <section className="py-20 px-4 sm:px-6 max-w-6xl mx-auto border-b border-white/[0.08] space-y-8">
+        <div className="space-y-3 max-w-3xl">
+          <span className="font-mono text-xs uppercase tracking-widest text-zinc-500">06 — SYSTEMIC DECOMPOSITION</span>
+          <h2 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white">
+            The 11-Tier Root-Cause Chain
+          </h2>
+          <p className="text-sm sm:text-base text-zinc-400">
+            Every operational breakdown follows an exact chain from surface stakeholder complaint down to paying customer opportunity. Select any tier to inspect the mechanism.
+          </p>
+        </div>
+
+        {/* Horizontal Strip of 11 Tiers */}
+        <div className="overflow-x-auto pb-4 custom-scrollbar">
+          <div className="flex items-center gap-2 min-w-[950px]">
+            {rootCauseChain.map((tier, idx) => {
+              const isSelected = idx === activeChainStep;
+              return (
+                <button
+                  key={tier.tier}
+                  onClick={() => setActiveChainStep(idx)}
+                  className={`p-3 text-left border flex-1 transition-all ${
+                    isSelected
+                      ? 'bg-white text-black border-white shadow-xl'
+                      : 'bg-[#080B12] text-zinc-400 border-white/[0.06] hover:border-zinc-600 hover:text-white'
+                  }`}
                 >
-                  <span>Explore Resolution Runbook →</span>
-                </Link>
+                  <span className={`font-mono text-[9px] block mb-1 uppercase ${isSelected ? 'text-zinc-600' : 'text-zinc-500'}`}>
+                    TIER {tier.tier}
+                  </span>
+                  <div className={`font-bold text-[11px] uppercase tracking-tight truncate ${isSelected ? 'text-black' : 'text-white'}`}>
+                    {tier.label}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Selected Tier Detail Panel */}
+        {(() => {
+          const currentTier = rootCauseChain[activeChainStep];
+          return (
+            <div className="p-6 sm:p-8 bg-[#090C15] border border-white/[0.08] grid grid-cols-1 md:grid-cols-12 gap-6">
+              <div className="md:col-span-5 space-y-2">
+                <span className="font-mono text-xs text-zinc-400 uppercase tracking-widest">
+                  TIER {currentTier.tier} OF 11
+                </span>
+                <h3 className="text-2xl font-bold text-white uppercase tracking-tight">
+                  {currentTier.label}
+                </h3>
+                <div className="text-xs font-mono text-emerald-400 pt-1">
+                  Case Sample: {currentTier.example}
+                </div>
+              </div>
+
+              <div className="md:col-span-7 border-t md:border-t-0 md:border-l border-white/[0.08] pt-4 md:pt-0 md:pl-6 flex items-center">
+                <p className="text-sm text-zinc-300 leading-relaxed font-sans">
+                  {currentTier.detail}
+                </p>
               </div>
             </div>
           );
         })()}
       </section>
 
-      {/* ══════════════════════════════════════════════════════
-          04 — INTERACTIVE DIAGNOSTIC: REAL-TIME PROBLEM TRIAGE
-         ══════════════════════════════════════════════════════ */}
-      <section className="py-24 px-6 sm:px-8 border-t border-white/[0.06] bg-[#06080D]">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-14">
-            <div>
-              <div className="text-xs font-mono text-white mb-2 uppercase">RAPID SYSTEM TRIAGE</div>
-              <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight">
-                Diagnose Your Bottleneck in Real Time.
-              </h2>
-            </div>
-            <p className="text-zinc-400 text-xs sm:text-sm max-w-md mt-4 md:mt-0 font-mono">
-              Select where friction is surfacing in your project to reveal the underlying root cause and intervention mechanism.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            {/* Scenario Buttons */}
-            <div className="lg:col-span-5 space-y-3">
-              {diagnosticScenarios.map((scen, idx) => (
-                <div
-                  key={scen.id}
-                  onClick={() => setSelectedDiagnosticScenario(idx)}
-                  className={`p-5 rounded-2xl border transition-all cursor-pointer text-left ${
-                    selectedDiagnosticScenario === idx
-                      ? 'bg-white/[0.05] border-white/20 shadow-[0_0_20px_rgba(255,255,255,0.12)]'
-                      : 'bg-[#090B14] border-white/[0.06] hover:border-white/15'
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="font-mono text-xs text-white font-semibold">SCENARIO</span>
-                    <span className="font-mono text-[10px] text-zinc-500 uppercase">{scen.mechanism.split('&')[0]}</span>
-                  </div>
-                  <h4 className="text-sm font-bold text-white mb-1">{scen.title}</h4>
-                  <p className="text-xs text-zinc-400 line-clamp-2">{scen.symptom}</p>
-                </div>
-              ))}
-            </div>
-
-            {/* Diagnostic Result Card */}
-            <div className="lg:col-span-7 p-6 sm:p-8 rounded-3xl border border-white/[0.1] bg-[#090B14] shadow-2xl">
-              {(() => {
-                const current = diagnosticScenarios[selectedDiagnosticScenario];
-                return (
-                  <div>
-                    <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/[0.08]">
-                      <div>
-                        <span className="font-mono text-xs text-white">DIGISYNQ ROOT DECOMPOSITION</span>
-                        <h3 className="text-xl font-black text-white mt-1">{current.title}</h3>
-                      </div>
-                      <span className="text-[10px] font-mono text-zinc-500 bg-white/[0.04] px-2.5 py-1 rounded border border-white/[0.08]">
-                        MODELLED SIMULATION
-                      </span>
-                    </div>
-
-                    <div className="space-y-4 mb-6 text-xs font-mono">
-                      <div className="p-3.5 rounded-xl bg-red-500/10 border border-red-500/20 text-red-200">
-                        <strong className="text-red-400 block mb-1">SURFACE SYMPTOM:</strong>
-                        {current.symptom}
-                      </div>
-
-                      <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-200">
-                        <strong className="text-amber-400 block mb-1">IDENTIFIED ROOT CAUSE:</strong>
-                        {current.rootCause}
-                      </div>
-
-                      <div className="p-3.5 rounded-xl bg-black/40 border border-white/[0.08] text-zinc-300">
-                        <strong className="text-white block mb-1">CASCADE BLAST RADIUS:</strong>
-                        {current.blastRadius}
-                      </div>
-
-                      <div className="p-3.5 rounded-xl bg-white/[0.06] border border-white/15 text-zinc-200">
-                        <strong className="text-white block mb-1">SYNQ INTERVENTION ({current.mechanism}):</strong>
-                        {current.intervention}
-                      </div>
-                    </div>
-
-                    <div className="p-3 rounded-xl bg-black/60 border border-white/[0.06] flex items-center justify-between mb-6">
-                      <span className="text-[11px] font-mono text-zinc-500 uppercase">Projected Value:</span>
-                      <span className="text-xs font-mono text-white font-bold">{current.valueModel}</span>
-                    </div>
-
-                    <div className="flex flex-col sm:flex-row items-center gap-3">
-                      <Link
-                        to="/diagnose"
-                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white text-black hover:bg-zinc-200 font-bold text-xs tracking-wide transition-all shadow-md"
-                      >
-                        <span>Run Full 10-Step Root Diagnostic</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </Link>
-                      <Link
-                        to="/engines/root-map"
-                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-white/10 hover:border-white/20 bg-white/[0.03] text-zinc-300 text-xs font-mono transition-all"
-                      >
-                        <span>View Tree Pipeline</span>
-                        <ArrowUpRight className="w-3 h-3" />
-                      </Link>
-                    </div>
-                  </div>
-                );
-              })()}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════════
-          05 — ECOSYSTEM: ARCHIPELAGO TOPOLOGY
-         ══════════════════════════════════════════════════════ */}
-      <section className="py-24 px-6 sm:px-8 max-w-6xl mx-auto">
-        <div className="max-w-3xl mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.06] border border-white/15 text-white font-mono text-xs font-semibold mb-3">
-            <span>THE CONNECTIVE TOPOLOGY</span>
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight mb-4">
-            Cinema is an archipelago.
-            <span className="text-zinc-400 font-light block text-2xl sm:text-4xl mt-2">
-              We build the current that connects the islands.
-            </span>
+      {/* ============================================================ */}
+      {/* SECTION 07 — MANY → FEWER: CONVERGENCE ENGINE */}
+      {/* ============================================================ */}
+      <section className="py-20 px-4 sm:px-6 max-w-6xl mx-auto border-b border-white/[0.08] space-y-8">
+        <div className="space-y-3 max-w-3xl">
+          <span className="font-mono text-xs uppercase tracking-widest text-zinc-500">07 — CONVERGENCE</span>
+          <h2 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white">
+            Many Problems → Fewer Root Causes
           </h2>
-          <p className="text-zinc-300 text-sm sm:text-base leading-relaxed">
-            The entertainment ecosystem does not lack genius, soundstages, or camera packages. It lacks the connective infrastructure between them.
+          <p className="text-sm sm:text-base text-zinc-400">
+            Dozens of different complaints across casting, soundstages, grip gear, and distribution converge mathematically into just 4 systemic root causes.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-          <div className="p-8 rounded-2xl border border-white/[0.08] bg-[#090B14]">
-            <div className="font-mono text-xs text-zinc-500 mb-2">OPERATIONAL THESIS // ASSETS</div>
-            <h3 className="text-xl font-bold text-white mb-3">The industry does not lack assets</h3>
-            <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed">
-              Underutilized soundstages sit dark between tenant leases; verified cinematographers, editors, and colorists experience unbooked weeks. The resources exist, but they are fragmented.
+        <EERGConvergenceVisual />
+      </section>
+
+      {/* ============================================================ */}
+      {/* SECTION 08 — OPPORTUNITY: SYSTEMIC PROBLEMS REVEAL SYSTEMIC OPPORTUNITIES */}
+      {/* ============================================================ */}
+      <section className="py-20 px-4 sm:px-6 max-w-6xl mx-auto border-b border-white/[0.08] space-y-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div className="space-y-3 max-w-2xl">
+            <span className="font-mono text-xs uppercase tracking-widest text-zinc-500">08 — COMMERCIAL VALUE</span>
+            <h2 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white">
+              Systemic Problems Reveal Systemic Opportunities.
+            </h2>
+            <p className="text-sm sm:text-base text-zinc-400">
+              When a problem affects multiple stakeholders and causes millions in damage, someone is willing to pay to eliminate it.
             </p>
           </div>
 
-          <div className="p-8 rounded-2xl border border-white/[0.08] bg-[#090B14]">
-            <div className="font-mono text-xs text-zinc-500 mb-2">OPERATIONAL THESIS // INTELLIGENCE</div>
-            <h3 className="text-xl font-bold text-white mb-3">The industry does not only lack software</h3>
-            <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed">
-              Another standalone project management app or generic database does not solve coordination. The missing layer is <strong>the intelligence and orchestration between systems</strong>.
-            </p>
-          </div>
-
-          <div className="p-8 rounded-2xl border border-white/20 bg-gradient-to-br from-[#090B14] to-[#04060C]">
-            <div className="font-mono text-xs text-white mb-2">OPERATIONAL THESIS // SYNQ GAP</div>
-            <h3 className="text-xl font-bold text-white mb-3">The SYNQ Gap</h3>
-            <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed">
-              DIGISYNQ operates in the space between Stage A &amp; B, Team A &amp; B, Requirement &amp; Capability, Plan &amp; Reality. That operational space is <strong>THE SYNQ GAP</strong>.
-            </p>
-          </div>
-        </div>
-
-        {/* Ecosystem Entities Connected */}
-        <div className="p-6 sm:p-8 rounded-2xl border border-white/[0.08] bg-[#090B14] flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="max-w-xl">
-            <span className="font-mono text-xs text-white block mb-1">CONNECTED ENTITIES IN THE NETWORK</span>
-            <h4 className="text-lg font-bold text-white mb-2">12 Core Stakeholder Archetypes &amp; 16 Specialized Disciplines</h4>
-            <p className="text-xs text-zinc-400 leading-relaxed">
-              Producers, Directors, Screenwriters, Line Producers, Soundstages, Rental Houses, Virtual Production Volumes, Post &amp; VFX Studios, Finishing Houses, Financiers, and Streaming Platforms.
-            </p>
-          </div>
           <Link
-            to="/ecosystem"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black hover:bg-zinc-200 font-bold text-xs tracking-wide transition-all shrink-0"
+            to="/opportunities"
+            className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-zinc-400 hover:text-white underline self-start md:self-auto"
           >
-            <span>Explore Ecosystem Network Graph</span>
+            <span>View Opportunity Radar</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
-      </section>
 
-      {/* ══════════════════════════════════════════════════════
-          06 — 9-STAGE CONTINUUM: THE UNBROKEN LIFECYCLE
-         ══════════════════════════════════════════════════════ */}
-      <section className="py-24 px-6 sm:px-8 border-t border-white/[0.06] bg-[#06080D]">
-        <div className="max-w-6xl mx-auto">
-          <div className="max-w-3xl mb-14">
-            <div className="text-xs font-mono text-white mb-2 uppercase">THE UNBROKEN LIFECYCLE</div>
-            <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight mb-4">
-              The 9-Stage Entertainment Continuum.
-            </h2>
-            <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
-              Filmmaking is not nine siloed events. It is an unbroken continuum where upstream decisions silently dictate downstream survival.
-            </p>
-          </div>
-
-          {/* Continuum Horizontal Scroller / Grid */}
-          <div className="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-9 gap-2 mb-8 overflow-x-auto">
-            {CONTINUUM_STAGES.map((stg, idx) => {
-              const isSelected = selectedContinuumStage === idx;
-              return (
-                <button
-                  key={stg.step}
-                  onClick={() => setSelectedContinuumStage(idx)}
-                  className={`p-3 rounded-xl border text-left transition-all flex flex-col justify-between min-w-[100px] ${
-                    isSelected
-                      ? 'bg-white text-black border-white/20 font-bold shadow-lg'
-                      : 'bg-[#090B14] border-white/[0.08] text-zinc-400 hover:text-white hover:border-white/20'
-                  }`}
-                >
-                  <span className="font-mono text-[10px] opacity-75 text-white">STAGE</span>
-                  <span className="text-xs font-mono font-bold mt-2 truncate">{stg.name}</span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Active Continuum Stage Card */}
-          {(() => {
-            const current = CONTINUUM_STAGES[selectedContinuumStage];
-            return (
-              <div className="p-8 rounded-3xl border border-white/[0.1] bg-[#090B14] shadow-2xl">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-6 border-b border-white/[0.08]">
-                  <div>
-                    <span className="font-mono text-xs text-white font-semibold">STAGE {current.step} OF 09</span>
-                    <h3 className="text-2xl font-black text-white mt-1">{current.name}</h3>
-                    <p className="text-xs text-zinc-400 mt-1">{current.shortDesc}</p>
-                  </div>
-                  <Link
-                    to="/continuum"
-                    className="inline-flex items-center gap-1.5 text-xs font-mono text-white hover:text-white font-semibold transition-colors shrink-0"
-                  >
-                    <span>Full Hand-Off Protocol →</span>
-                  </Link>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div className="p-5 rounded-2xl bg-black/40 border border-white/[0.06]">
-                    <div className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider mb-2">SCOPE BOUNDARY</div>
-                    <p className="text-xs text-zinc-300 leading-relaxed">{current.scope}</p>
-                  </div>
-                  <div className="p-5 rounded-2xl bg-red-500/10 border border-red-500/20">
-                    <div className="text-[10px] font-mono text-red-400 uppercase tracking-wider mb-2">TYPICAL UNCOORDINATED FAILURE</div>
-                    <p className="text-xs text-red-200 leading-relaxed">{current.typicalFailure}</p>
-                  </div>
-                  <div className="p-5 rounded-2xl bg-white/[0.04] border border-white/15">
-                    <div className="text-[10px] font-mono text-white uppercase tracking-wider mb-2">DIGISYNQ INTERVENTION</div>
-                    <p className="text-xs text-zinc-300 leading-relaxed">{current.synqIntervention}</p>
-                  </div>
-                </div>
-              </div>
-            );
-          })()}
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════════
-          07 — 23 MECHANISMS: SYSTEMIC CONTROL ARSENAL
-         ══════════════════════════════════════════════════════ */}
-      <section className="py-24 px-6 sm:px-8 max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-14">
-          <div>
-            <div className="text-xs font-mono text-white mb-2 uppercase">SYSTEMIC CONTROL ARSENAL</div>
-            <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight">
-              The 23 Master Mechanisms.
-            </h2>
-          </div>
-          <p className="text-zinc-400 text-xs sm:text-sm max-w-md mt-4 md:mt-0 font-mono">
-            Codified operational engines that turn chaotic production friction into deterministic, verified resolutions.
-          </p>
-        </div>
-
-        {/* 4 Mechanism Clusters */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
             {
-              cluster: 'Detection & Mapping',
-              range: 'M01 — M06',
-              desc: 'Observe, Detect, Decompose, Map, Classify, and Prioritize system signals.',
-              color: 'border-white/15 text-white',
+              id: 'OPP-01',
+              title: 'Verified Talent Intelligence',
+              cause: 'Information Fragmentation',
+              buyer: 'Studio Physical Production & Casting Agencies',
+              impact: 'Reduces casting search cycle from 4 weeks to 72 hours.',
             },
             {
-              cluster: 'Simulation & Matching',
-              range: 'M07 — M12',
-              desc: 'Simulate downstream blast radiuses, Model counterfactuals, Match dark capacity, and Route capability.',
-              color: 'border-white/15 text-white',
+              id: 'OPP-02',
+              title: 'Dark Capacity Soundstage Routing',
+              cause: 'Asset Under-Utilization',
+              buyer: 'Soundstage Facilities & Independent Producers',
+              impact: 'Monetizes unbooked gap weeks with zero ownership cost.',
             },
             {
-              cluster: 'Execution & Verification',
-              range: 'M13 — M18',
-              desc: 'Structure intervention sprints, Intervene, Verify compliance, Measure value, and Arbitrate covenants.',
-              color: 'border-white/15 text-white',
+              id: 'OPP-03',
+              title: 'Living Dependency Cascade Sentinel',
+              cause: 'Dependency Visibility Failure',
+              buyer: 'Completion Bond Companies & Studio Risk Heads',
+              impact: 'Halts set-side schedule shockwaves before contingency depletion.',
             },
-            {
-              cluster: 'Memory & Prevention',
-              range: 'M19 — M23',
-              desc: 'Learn from outcomes, Codify institutional patterns, Forecast risks, Shield dependencies, and Prevent recurrence.',
-              color: 'border-white/15 text-white',
-            },
-          ].map((grp, idx) => (
-            <div key={idx} className="p-6 rounded-2xl border border-white/[0.08] bg-[#090B14] flex flex-col justify-between">
+          ].map((card) => (
+            <div key={card.id} className="p-6 bg-[#080B12] border border-white/[0.06] flex flex-col justify-between space-y-4">
               <div>
-                <div className={`font-mono text-xs mb-1 font-semibold ${grp.color}`}>{grp.range}</div>
-                <h3 className="text-lg font-bold text-white mb-2">{grp.cluster}</h3>
-                <p className="text-xs text-zinc-400 leading-relaxed mb-4">{grp.desc}</p>
+                <span className="font-mono text-[10px] text-zinc-500 uppercase">{card.id} • {card.cause}</span>
+                <h3 className="text-lg font-bold text-white uppercase tracking-tight mt-1">{card.title}</h3>
+                <p className="text-xs text-zinc-300 mt-2 leading-relaxed">{card.impact}</p>
               </div>
-              <div className="pt-3 border-t border-white/[0.06] text-[10px] font-mono text-zinc-500">
-                Operating Formula Codified
+              <div className="pt-3 border-t border-white/[0.06] text-[11px] font-mono text-zinc-400">
+                <span className="text-zinc-500 block text-[9px] uppercase">Paying Customer:</span>
+                <span className="text-white">{card.buyer}</span>
               </div>
             </div>
           ))}
         </div>
-
-        {/* Priority Formula Feature Bar */}
-        <div className="p-6 sm:p-8 rounded-2xl border border-white/15 bg-gradient-to-r from-[#090B14] to-[#04060C] flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="max-w-xl">
-            <span className="font-mono text-xs text-white block mb-1">M06: SYSTEMIC PRIORITY FORMULA</span>
-            <div className="font-mono text-sm text-white font-bold mb-2">
-              P = (Urgency × Blast Radius × Cost Velocity) ÷ Time to Delivery Window
-            </div>
-            <p className="text-xs text-zinc-400">
-              Interactive calculator available in the 23 Mechanisms console to objectively prioritize conflicting on-set triage requests.
-            </p>
-          </div>
-          <Link
-            to="/mechanisms"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black hover:bg-zinc-200 font-bold text-xs tracking-wide transition-all shrink-0"
-          >
-            <span>Explore All 23 Mechanisms Console</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
-        </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════
-          08 — DIFFERENTIATION: WHAT DIGISYNQ IS NOT
-         ══════════════════════════════════════════════════════ */}
-      <section className="py-24 px-6 sm:px-8 border-t border-white/[0.06] bg-[#06080D]">
-        <div className="max-w-6xl mx-auto">
-          <div className="max-w-3xl mb-14">
-            <div className="text-xs font-mono text-red-400 mb-2 uppercase">STRATEGIC DIFFERENTIATION</div>
-            <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight mb-4">
-              What DigiSynq Is NOT.
-            </h2>
-            <p className="text-zinc-300 text-sm sm:text-base leading-relaxed">
-              Understanding what DigiSynq is not is the fastest way to understand the critical category we invent.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
-            {WHAT_DIGISYNQ_IS_NOT.map((item, idx) => (
-              <div
-                key={idx}
-                className="p-5 rounded-2xl border border-white/[0.08] bg-[#090B14] hover:border-white/15 transition-all"
-              >
-                <div className="flex items-center gap-2 mb-2 text-red-400">
-                  <XCircle className="w-4 h-4 shrink-0" />
-                  <span className="font-bold text-sm text-white">{item.item}</span>
-                </div>
-                <p className="text-xs text-zinc-400 leading-relaxed">{item.reason}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Differentiating Axiom */}
-          <div className="p-8 rounded-3xl border border-white/15 bg-gradient-to-br from-[#090B14] to-[#04060C] text-center max-w-4xl mx-auto">
-            <span className="text-xs font-mono text-white uppercase tracking-wider block mb-3">
-              THE DEFINITIVE CATEGORY DEFINITION
-            </span>
-            <h3 className="text-xl sm:text-2xl font-bold text-white leading-relaxed mb-4">
-              "DigiSynq does not manage filmmaking. It manages the dependencies between the people, processes, resources and decisions that make filmmaking possible."
-            </h3>
-            <div className="text-xs font-mono text-zinc-400">
-              Asset-Light • Network-Orchestrated • Root-Cause First
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════════
-          PROOF / EVIDENCE: COMPOUNDING MEMORY & MODELLED KPIS
-         ══════════════════════════════════════════════════════ */}
-      <section className="py-24 px-6 sm:px-8 max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <div className="text-xs font-mono text-white mb-2 uppercase">COMPOUNDING ADVANTAGE</div>
-            <h2 className="text-3xl sm:text-5xl font-bold text-white mb-4">
-              The Compounding Memory of Cinema.
-            </h2>
-            <p className="text-zinc-300 text-sm sm:text-base leading-relaxed mb-6 font-light">
-              Every crisis diagnosed and every dependency stabilized deposits institutional knowledge into systemic memory. Today's resolved breakdown becomes tomorrow's automated prevention.
-            </p>
-            <div className="p-5 rounded-2xl border border-white/[0.08] bg-black/50 font-mono text-xs text-zinc-300 space-y-2">
-              <div className="flex items-center gap-2"><span className="text-white">MORE PROJECTS</span> → More Problems Observed</div>
-              <div className="flex items-center gap-2"><span className="text-white">MORE SYSTEM MAPS</span> → More Verified Interventions</div>
-              <div className="flex items-center gap-2"><span className="text-white">MORE OUTCOME DATA</span> → Compounding System Memory</div>
-              <div className="flex items-center gap-2"><span className="text-white">BETTER PATTERNS</span> → Predictive Early Warnings</div>
-              <div className="flex items-center gap-2 font-bold text-white">HIGHER SYSTEM VALUE → REPEAT EXPANSION ↺</div>
-            </div>
-          </div>
-
-          {/* Modelled North Star KPIs */}
-          <div className="p-8 rounded-2xl border border-white/[0.1] bg-[#090B14]">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-mono text-white uppercase font-semibold">OPERATIONAL IMPACT BENCHMARKS</span>
-              <span className="text-[10px] font-mono text-zinc-500 uppercase px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.08]">
-                Modelled System Metrics
-              </span>
-            </div>
-            <h3 className="text-2xl font-bold text-white mb-6">Target System Value Created</h3>
-            <div className="grid grid-cols-2 gap-4 font-mono">
-              <div className="p-4 rounded-xl bg-black/40 border border-white/[0.06]">
-                <div className="text-2xl sm:text-3xl font-bold text-white">5.5 Days</div>
-                <div className="text-[11px] text-zinc-400 mt-1">Modelled Schedule Buffer Recovery / Triage</div>
-              </div>
-              <div className="p-4 rounded-xl bg-black/40 border border-white/[0.06]">
-                <div className="text-2xl sm:text-3xl font-bold text-white">$84,000+</div>
-                <div className="text-[11px] text-zinc-400 mt-1">Projected Idle Cost Avoidance / Sprint</div>
-              </div>
-              <div className="p-4 rounded-xl bg-black/40 border border-white/[0.06]">
-                <div className="text-2xl sm:text-3xl font-bold text-white">100%</div>
-                <div className="text-[11px] text-zinc-400 mt-1">Platform Delivery Spec Compliance Target</div>
-              </div>
-              <div className="p-4 rounded-xl bg-black/40 border border-white/[0.06]">
-                <div className="text-2xl sm:text-3xl font-bold text-white">Zero Debt</div>
-                <div className="text-[11px] text-zinc-400 mt-1">Asset-Light Network Orchestration</div>
-              </div>
-            </div>
-            <div className="mt-4 text-[10px] font-mono text-zinc-500">
-              * Metrics reflect simulated operational models and calibrated scenario benchmarks across production and post-production workflows.
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════════
-          10 — FINAL CTA: WHERE IS YOUR FRICTION?
-         ══════════════════════════════════════════════════════ */}
-      <section className="py-24 px-6 sm:px-8 border-t border-white/[0.06] bg-gradient-to-b from-[#090B14] to-[#03040A] text-center relative overflow-hidden">
-        <div className="max-w-3xl mx-auto relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.08] border border-white/20 text-white font-mono text-xs font-semibold mb-6">
-            NORTH STAR KPI: {BRAND.northStarMetric.toUpperCase()}
-          </div>
-
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-6">
-            Where is your production losing its rhythm?
+      {/* ============================================================ */}
+      {/* SECTION 09 — ACTION: UNDERSTAND. CONNECT. ORCHESTRATE. MEASURE. */}
+      {/* ============================================================ */}
+      <section className="py-20 px-4 sm:px-6 max-w-6xl mx-auto border-b border-white/[0.08] space-y-8">
+        <div className="space-y-3 max-w-3xl">
+          <span className="font-mono text-xs uppercase tracking-widest text-zinc-500">09 — THE EXECUTION PILLARS</span>
+          <h2 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white">
+            Understand. Connect. Orchestrate. Measure.
           </h2>
-
-          <p className="text-base sm:text-lg text-zinc-300 leading-relaxed mb-10 max-w-2xl mx-auto font-light">
-            Bring us an active schedule slip, post-production crunch, soundstage bottleneck, or talent friction. We diagnose the system, identify the root cause, coordinate the solution, and prove the outcome.
+          <p className="text-sm sm:text-base text-zinc-400">
+            Four coordinated disciplines that turn fragmented chaos into synchronized entertainment execution.
           </p>
+        </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <Link
-              to="/diagnose"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-black hover:bg-zinc-200 font-bold text-sm tracking-wide transition-all shadow-[0_0_30px_rgba(255,255,255,0.25)] active:scale-95"
-            >
-              <span>Diagnose a Problem</span>
-              <ArrowRight className="w-4 h-4 stroke-[2.5]" />
-            </Link>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {[
+            {
+              num: '01',
+              title: 'UNDERSTAND',
+              desc: 'Trace root causes, bottlenecks, and failure propagation through the EERG knowledge graph.',
+              link: '/eerg',
+              cta: 'Explore EERG',
+            },
+            {
+              num: '02',
+              title: 'CONNECT',
+              desc: 'Algorithmic matching across verified talent, dark soundstages, camera optics, and locations.',
+              link: '/connect',
+              cta: 'See Connect Protocol',
+            },
+            {
+              num: '03',
+              title: 'ORCHESTRATE',
+              desc: 'Active execution governance, live schedule shockwave balancing, and variance resolution.',
+              link: '/orchestrate',
+              cta: 'See Orchestration',
+            },
+            {
+              num: '04',
+              title: 'MEASURE',
+              desc: 'Continuous operational telemetry: dark capacity yield, cost leakage, and decision intelligence.',
+              link: '/measure',
+              cta: 'See Telemetry Metrics',
+            },
+          ].map((pillar) => (
+            <div key={pillar.num} className="p-6 bg-[#080B12] border border-white/[0.06] flex flex-col justify-between space-y-4">
+              <div>
+                <span className="font-mono text-xs text-zinc-500 uppercase">{pillar.num} PILLAR</span>
+                <h3 className="text-xl font-bold text-white uppercase tracking-tight mt-1">{pillar.title}</h3>
+                <p className="text-xs text-zinc-400 mt-2 leading-relaxed">{pillar.desc}</p>
+              </div>
+              <Link
+                to={pillar.link}
+                className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-white hover:text-zinc-300 font-semibold pt-3 border-t border-white/[0.06]"
+              >
+                <span>{pillar.cta}</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          ))}
+        </div>
+      </section>
 
-            <Link
-              to="/start"
-              className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white/14 hover:border-white/25 bg-white/[0.03] text-white font-medium text-sm transition-all"
-            >
-              <span>Start a SYNQ Case</span>
-              <ArrowUpRight className="w-4 h-4" />
-            </Link>
+      {/* ============================================================ */}
+      {/* SECTION 10 — FINAL LOOP: THE CONTINUOUS FLYWHEEL & CTA */}
+      {/* ============================================================ */}
+      <section className="py-20 px-4 sm:px-6 max-w-6xl mx-auto space-y-12">
+        <div className="space-y-3 max-w-3xl">
+          <span className="font-mono text-xs uppercase tracking-widest text-zinc-500">10 — THE MASTER LOOP</span>
+          <h2 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white leading-tight">
+            Understand → Connect → Orchestrate → Measure → Learn → Improve
+          </h2>
+          <p className="text-sm sm:text-base text-zinc-400">
+            DIGISYNQ is not a static directory or a one-time service. It is a self-reinforcing closed-loop system where every production generates telemetry that sharpens the intelligence graph for the entire entertainment industry.
+          </p>
+        </div>
+
+        {/* EERG Closed Loop Flywheel Component */}
+        <EERGFlywheel />
+
+        {/* Master Final CTA Banner */}
+        <div className="p-8 sm:p-12 bg-white text-black flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="space-y-2 max-w-2xl">
+            <span className="font-mono text-xs uppercase tracking-widest text-zinc-700">
+              OPERATIONAL ENGAGEMENT
+            </span>
+            <h3 className="text-3xl sm:text-4xl font-bold uppercase tracking-tight leading-none">
+              Explore the System or Start With an Active Problem.
+            </h3>
+            <p className="text-sm text-zinc-800 leading-relaxed font-sans">
+              Connect directly into the asset-light mechanism: submit an urgent production breakdown, index idle equipment, or request an enterprise intelligence briefing.
+            </p>
           </div>
 
-          <div className="mt-14 font-mono text-xs text-zinc-500">
-            {BRAND.oneSentencePhilosophy} // {BRAND.oneSentenceMission}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
+            <Link
+              to="/participate"
+              className="bg-black text-white hover:bg-zinc-800 px-6 py-4 text-xs font-mono uppercase font-bold tracking-widest transition-colors text-center"
+            >
+              START WITH A PROBLEM →
+            </Link>
+            <Link
+              to="/ecosystem"
+              className="bg-transparent text-black border border-black hover:bg-black/5 px-6 py-4 text-xs font-mono uppercase font-bold tracking-widest transition-colors text-center"
+            >
+              EXPLORE ECOSYSTEM →
+            </Link>
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

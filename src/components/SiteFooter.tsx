@@ -2,50 +2,50 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import digisynqLogo from '../assets/digisynq-logo.png';
 import { ArrowUpRight, ShieldCheck, Activity } from 'lucide-react';
-import { BRAND } from '../data/blueprint_data';
 
 const FOOTER_COLUMNS = [
   {
-    title: 'System',
+    title: 'Ecosystem & Root Causes',
     links: [
-      { href: '/the-synq', label: 'The Synq Definition' },
-      { href: '/mechanisms', label: '23 Master Mechanisms' },
-      { href: '/continuum', label: '9-Stage Continuum' },
-      { href: '/how-it-works', label: 'Resolution Engine' },
+      { href: '/ecosystem', label: 'Ecosystem (5 Layers)' },
+      { href: '/eerg', label: 'EERG Root-Cause Graph' },
+      { href: '/problems', label: 'Problem Atlas' },
+      { href: '/root-causes', label: 'Many → Fewer Root Causes' },
     ],
   },
   {
-    title: 'Network',
+    title: 'Mechanism & Coordination',
     links: [
-      { href: '/root-cause-graph', label: 'Root-Cause Graph (EERG)' },
-      { href: '/ecosystem', label: 'Ecosystem & Capacity Grid' },
-      { href: '/stakeholders', label: '12 Stakeholder Archetypes' },
+      { href: '/opportunities', label: 'Opportunity Radar' },
+      { href: '/network', label: 'Asset-Light Network' },
+      { href: '/connect', label: 'Scenario Connect Protocol' },
+      { href: '/orchestrate', label: 'Living Orchestration' },
     ],
   },
   {
-    title: 'Intelligence',
+    title: 'Telemetry & Commercial',
     links: [
-      { href: '/diagnose', label: 'Problem Diagnostic' },
+      { href: '/measure', label: 'Decision Telemetry' },
+      { href: '/monetize', label: '6-Layer Value Capture' },
       { href: '/engines/cascade', label: 'Cascade Simulator' },
       { href: '/engines/root-map', label: 'Root Map Tree' },
-      { href: '/engines/risk', label: 'Risk Engine' },
-      { href: '/insights', label: 'DigiSynq Field Notes' },
     ],
   },
   {
-    title: 'Engagement',
+    title: 'Participation',
     links: [
-      { href: '/diagnose', label: 'Diagnose a Problem' },
-      { href: '/start', label: 'Start a SYNQ Case' },
-      { href: '/workshops', label: 'DigiSynq Labs' },
-      { href: '/runbook', label: 'Resolution Runbook' },
+      { href: '/participate', label: 'I Have a Problem' },
+      { href: '/participate', label: 'I Have Resources' },
+      { href: '/participate', label: 'I Have Data' },
+      { href: '/participate', label: 'Explore Opportunity' },
     ],
   },
   {
-    title: 'Codex & Company',
+    title: 'Codex & Philosophy',
     links: [
+      { href: '/about', label: 'System Philosophy' },
       { href: '/blueprint', label: 'Master Architecture Codex' },
-      { href: '/about', label: 'About DigiSynq' },
+      { href: '/system-flow', label: 'System Flowchart' },
       { href: 'mailto:operations@digisynq.com', label: 'Operational Dispatch', isExternal: true },
     ],
   },
@@ -59,25 +59,25 @@ export function SiteFooter() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 pb-12 border-b border-white/[0.06]">
           {/* Brand info */}
           <div className="lg:col-span-4 space-y-4">
-            <Link to="/" className="inline-block" aria-label="DigiSynq home">
+            <Link to="/" className="inline-block" aria-label="DIGISYNQ home">
               <img
                 src={digisynqLogo}
-                alt="DigiSynq"
+                alt="DIGISYNQ"
                 className="h-5.5 w-auto object-contain opacity-90"
               />
             </Link>
             
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-white/10 border border-white/20 text-white text-[11px] font-mono">
-              <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-              <span>Grid Operational · Ready for Triage</span>
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 bg-white/[0.05] border border-white/[0.1] text-white text-[11px] font-mono">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Asset-Light Network Active · Operational</span>
             </div>
 
-            <p className="text-xs text-zinc-400 leading-relaxed">
-              <strong>DIGISYNQ</strong> is Entertainment Synchronization Infrastructure. When the entertainment system breaks, DigiSynq finds why, maps the dependencies, connects missing capabilities, coordinates the intervention, and protects delivery windows.
+            <p className="text-xs text-zinc-400 leading-relaxed font-sans">
+              <strong className="text-white">DIGISYNQ</strong> is an Asset-Light Entertainment Ecosystem Mechanism. It connects people, skills, equipment, studios, locations, production resources, technology, rights, capital, distribution, and market intelligence without needing to own the physical assets.
             </p>
 
-            <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.05] text-[11px] text-zinc-400">
-              <strong className="text-white font-medium">Definition:</strong> A SYNQ is a structured intervention that connects a specific system problem to the people, resources, capabilities and decisions required to resolve it.
+            <div className="p-3 bg-white/[0.02] border border-white/[0.05] text-[11px] text-zinc-400 font-mono">
+              <strong className="text-white font-medium">Core Principle:</strong> Nothing is waste. Disconnected value is. DIGISYNQ exists to reduce that disconnection.
             </div>
           </div>
 
@@ -88,9 +88,9 @@ export function SiteFooter() {
                 <div className="text-[11px] font-mono uppercase tracking-wider text-white font-semibold">
                   {col.title}
                 </div>
-                <ul className="space-y-2 text-xs">
-                  {col.links.map((link) => (
-                    <li key={link.label}>
+                <ul className="space-y-2 text-xs font-mono">
+                  {col.links.map((link, idx) => (
+                    <li key={idx}>
                       {link.isExternal ? (
                         <a
                           href={link.href}
@@ -115,17 +115,13 @@ export function SiteFooter() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500 font-mono">
+        {/* Bottom bar */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-zinc-600">
           <div>
-            &copy; {new Date().getFullYear()} DIGISYNQ · {BRAND.category}
+            DIGISYNQ // ENTERTAINMENT SYNCHRONIZATION INFRASTRUCTURE © {new Date().getFullYear()}
           </div>
-          <div className="flex flex-wrap items-center gap-4 sm:gap-6">
-            <Link to="/diagnose" className="hover:text-white transition-colors">Diagnostic Engine</Link>
-            <Link to="/mechanisms" className="hover:text-white transition-colors">23 Mechanisms</Link>
-            <Link to="/runbook" className="hover:text-white transition-colors">Runbook</Link>
-            <Link to="/blueprint" className="hover:text-white transition-colors">Master Codex</Link>
-            <Link to="/start" className="hover:text-white transition-colors">Start a SYNQ</Link>
+          <div className="flex items-center gap-4 text-zinc-500">
+            <span>OBSERVE → DIAGNOSE → MAP → CONNECT → ORCHESTRATE → MEASURE</span>
           </div>
         </div>
       </div>

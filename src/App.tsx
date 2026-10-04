@@ -7,23 +7,26 @@ import { SiteFooter } from './components/SiteFooter';
 import { RouteSEO } from './components/RouteSEO';
 import { HomePage } from './pages/HomePage';
 
-// ── Lazy-loaded Sub-Routes for Performance & Bundle Splitting ──
-const MechanismsPage = React.lazy(() => import('./pages/MechanismsPage').then(m => ({ default: m.MechanismsPage })));
-const ContinuumPage = React.lazy(() => import('./pages/ContinuumPage').then(m => ({ default: m.ContinuumPage })));
-const StakeholdersPage = React.lazy(() => import('./pages/StakeholdersPage').then(m => ({ default: m.StakeholdersPage })));
-const EnginesPage = React.lazy(() => import('./pages/EnginesPage').then(m => ({ default: m.EnginesPage })));
-const HowItWorksPage = React.lazy(() => import('./pages/HowItWorksPage').then(m => ({ default: m.HowItWorksPage })));
-const WorkshopsPage = React.lazy(() => import('./pages/WorkshopsPage').then(m => ({ default: m.WorkshopsPage })));
-const BlueprintPage = React.lazy(() => import('./pages/BlueprintPage').then(m => ({ default: m.BlueprintPage })));
-const AboutPage = React.lazy(() => import('./pages/AboutPage').then(m => ({ default: m.AboutPage })));
-const StartSynqPage = React.lazy(() => import('./pages/StartSynqPage').then(m => ({ default: m.StartSynqPage })));
-const TheSynqPage = React.lazy(() => import('./pages/TheSynqPage').then(m => ({ default: m.TheSynqPage })));
+// ── Lazy-loaded Core System Pages ──
 const EcosystemPage = React.lazy(() => import('./pages/EcosystemPage').then(m => ({ default: m.EcosystemPage })));
+const RootCauseGraphPage = React.lazy(() => import('./pages/RootCauseGraphPage'));
+const ProblemAtlasPage = React.lazy(() => import('./pages/ProblemAtlasPage').then(m => ({ default: m.ProblemAtlasPage })));
+const RootCausesPage = React.lazy(() => import('./pages/RootCausesPage').then(m => ({ default: m.RootCausesPage })));
+const OpportunityRadarPage = React.lazy(() => import('./pages/OpportunityRadarPage').then(m => ({ default: m.OpportunityRadarPage })));
+const NetworkPage = React.lazy(() => import('./pages/NetworkPage').then(m => ({ default: m.NetworkPage })));
+const ConnectPage = React.lazy(() => import('./pages/ConnectPage').then(m => ({ default: m.ConnectPage })));
+const OrchestratePage = React.lazy(() => import('./pages/OrchestratePage').then(m => ({ default: m.OrchestratePage })));
+const MeasurePage = React.lazy(() => import('./pages/MeasurePage').then(m => ({ default: m.MeasurePage })));
+const MonetizePage = React.lazy(() => import('./pages/MonetizePage').then(m => ({ default: m.MonetizePage })));
+const ParticipatePage = React.lazy(() => import('./pages/ParticipatePage').then(m => ({ default: m.ParticipatePage })));
+const AboutPage = React.lazy(() => import('./pages/AboutPage').then(m => ({ default: m.AboutPage })));
+
+// ── Simulation & Deep Reference Pages ──
+const EnginesPage = React.lazy(() => import('./pages/EnginesPage').then(m => ({ default: m.EnginesPage })));
+const BlueprintPage = React.lazy(() => import('./pages/BlueprintPage').then(m => ({ default: m.BlueprintPage })));
 const RunbookPage = React.lazy(() => import('./pages/RunbookPage').then(m => ({ default: m.RunbookPage })));
 const InsightsPage = React.lazy(() => import('./pages/InsightsPage').then(m => ({ default: m.InsightsPage })));
-const DiagnosePage = React.lazy(() => import('./pages/DiagnosePage').then(m => ({ default: m.DiagnosePage })));
 const SystemFlowPage = React.lazy(() => import('./pages/SystemFlowPage').then(m => ({ default: m.SystemFlowPage })));
-const RootCauseGraphPage = React.lazy(() => import('./pages/RootCauseGraphPage'));
 
 // ── Public website layout wrapper ────────────────────────────
 function WebsiteLayout({ children }: { children: React.ReactNode }) {
@@ -42,7 +45,7 @@ function WebsiteLayout({ children }: { children: React.ReactNode }) {
         <React.Suspense fallback={
           <div className="min-h-[70vh] flex flex-col items-center justify-center gap-3">
             <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
-            <span className="text-xs font-mono text-zinc-500">Loading DigiSynq module...</span>
+            <span className="text-xs font-mono text-zinc-500">Loading DIGISYNQ system module...</span>
           </div>
         }>
           {children}
@@ -58,34 +61,48 @@ function AppRoutes() {
   return (
     <WebsiteLayout>
       <Routes>
-        {/* Core Segregated Pages */}
+        {/* ── 01 to 13 Canonical System Pillars ── */}
         <Route path="/" element={<HomePage />} />
-        <Route path="/mechanisms" element={<MechanismsPage />} />
-        <Route path="/continuum" element={<ContinuumPage />} />
-        <Route path="/stakeholders" element={<StakeholdersPage />} />
         <Route path="/ecosystem" element={<EcosystemPage />} />
+        <Route path="/eerg" element={<RootCauseGraphPage />} />
+        <Route path="/problems" element={<ProblemAtlasPage />} />
+        <Route path="/root-causes" element={<RootCausesPage />} />
+        <Route path="/opportunities" element={<OpportunityRadarPage />} />
+        <Route path="/network" element={<NetworkPage />} />
+        <Route path="/connect" element={<ConnectPage />} />
+        <Route path="/orchestrate" element={<OrchestratePage />} />
+        <Route path="/measure" element={<MeasurePage />} />
+        <Route path="/monetize" element={<MonetizePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/philosophy" element={<Navigate to="/about" replace />} />
+        <Route path="/participate" element={<ParticipatePage />} />
+
+        {/* ── Simulation & Deep Reference (Codex) ── */}
         <Route path="/engines" element={<EnginesPage />} />
         <Route path="/engines/cascade" element={<EnginesPage initialTab="CASCADE" />} />
         <Route path="/engines/root-map" element={<EnginesPage initialTab="ROOT_MAP" />} />
         <Route path="/engines/problem-taxonomy" element={<EnginesPage initialTab="TAXONOMY" />} />
         <Route path="/engines/risk" element={<EnginesPage initialTab="RISK_ENGINE" />} />
-        <Route path="/how-it-works" element={<HowItWorksPage />} />
-        <Route path="/the-synq" element={<TheSynqPage />} />
-        <Route path="/workshops" element={<WorkshopsPage />} />
         <Route path="/blueprint" element={<BlueprintPage />} />
         <Route path="/runbook" element={<RunbookPage />} />
         <Route path="/insights" element={<InsightsPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/diagnose" element={<DiagnosePage />} />
-        <Route path="/start" element={<StartSynqPage />} />
         <Route path="/system-flow" element={<SystemFlowPage />} />
-        <Route path="/eerg" element={<RootCauseGraphPage />} />
-        <Route path="/root-cause-graph" element={<Navigate to="/eerg" replace />} />
 
-        {/* Aliases & legacy route redirects */}
-        <Route path="/labs" element={<Navigate to="/workshops" replace />} />
-        <Route path="/capabilities" element={<Navigate to="/mechanisms" replace />} />
-        <Route path="/use-cases" element={<Navigate to="/how-it-works" replace />} />
+        {/* ── Aliases & Backward Compatibility Redirects ── */}
+        <Route path="/the-synq" element={<Navigate to="/connect" replace />} />
+        <Route path="/mechanisms" element={<Navigate to="/orchestrate" replace />} />
+        <Route path="/continuum" element={<Navigate to="/ecosystem" replace />} />
+        <Route path="/stakeholders" element={<Navigate to="/ecosystem" replace />} />
+        <Route path="/how-it-works" element={<Navigate to="/orchestrate" replace />} />
+        <Route path="/diagnose" element={<Navigate to="/participate" replace />} />
+        <Route path="/start" element={<Navigate to="/participate" replace />} />
+        <Route path="/root-cause-graph" element={<Navigate to="/eerg" replace />} />
+        <Route path="/labs" element={<Navigate to="/engines" replace />} />
+        <Route path="/workshops" element={<Navigate to="/participate" replace />} />
+        <Route path="/capabilities" element={<Navigate to="/orchestrate" replace />} />
+        <Route path="/use-cases" element={<Navigate to="/connect" replace />} />
+
+        {/* Catch-all fallback */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </WebsiteLayout>
