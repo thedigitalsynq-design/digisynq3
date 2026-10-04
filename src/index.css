@@ -234,9 +234,156 @@ body {
   letter-spacing: 0.025em;
 }
 
-/* Enforce sentence case everywhere */
-.uppercase {
-  text-transform: none !important;
+/* ── PUBLIC DIGISYNQ vs DIGISYNQ SYSTEM Visual Modes ────── */
+/* Mode 1: Public DigiSynq (Editorial, Spacious, Calm, Premium) */
+.mode-public,
+.public-digisynq {
+  --mode-spacing: 2rem;
+  --mode-card-padding: 2.25rem;
+  --mode-border-opacity: 0.08;
+  letter-spacing: -0.01em;
+}
+
+/* Mode 2: DigiSynq System (Technical, Dense, Graph-Based, Information-Rich) */
+.mode-system,
+.system-digisynq {
+  --mode-spacing: 1.25rem;
+  --mode-card-padding: 1.25rem;
+  --mode-border-opacity: 0.12;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── Global Centralized UI Component Classes ─────────────── */
+/* Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: 9999px;
+  background-color: #23B272;
+  color: #03040A;
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.025em;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 30px rgba(35, 178, 114, 0.35);
+  min-height: 44px;
+}
+.btn-primary:hover {
+  background-color: #52E3A4;
+  box-shadow: 0 0 40px rgba(82, 227, 164, 0.5);
+}
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background-color: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(16px);
+  min-height: 44px;
+}
+.btn-secondary:hover {
+  border-color: rgba(82, 227, 164, 0.4);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+.btn-secondary:active {
+  transform: scale(0.98);
+}
+
+/* Cards */
+.card-editorial {
+  padding: 2rem;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: rgba(9, 11, 20, 0.85);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+}
+
+.card-system {
+  padding: 1.25rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #070912;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+}
+
+.card-interactive {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+.card-interactive:hover {
+  border-color: rgba(82, 227, 164, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px -10px rgba(35, 178, 114, 0.15);
+}
+
+/* Badges */
+.badge-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  background-color: rgba(35, 178, 114, 0.12);
+  border: 1px solid rgba(35, 178, 114, 0.3);
+  color: #52E3A4;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+
+.badge-simulated {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 0.375rem;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #9299A8;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Inputs */
+.input-text {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.45);
+  color: #ECEEF5;
+  font-size: 0.875rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  min-height: 44px;
+}
+.input-text:focus {
+  outline: none;
+  border-color: #52E3A4;
+  box-shadow: 0 0 0 2px rgba(82, 227, 164, 0.2);
+}
+
+/* Graph System Background Grid */
+.graph-dot-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 16px 16px;
 }
 
 /* ── Cinema Frame Aesthetic ─────────────────────────────── */
