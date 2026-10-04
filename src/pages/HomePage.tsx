@@ -4,7 +4,7 @@ import {
   ArrowRight, ArrowUpRight, ShieldCheck, AlertTriangle, 
   GitBranch, Layers, Cpu, Database, CheckCircle2, Sparkles, 
   RefreshCw, Sliders, Users, Film, DollarSign, Activity, 
-  Clock, MapPin, Zap, Check, Eye, Network 
+  Clock, MapPin, Zap, Check, Eye, Network, Building 
 } from 'lucide-react';
 import { TopographicBackground } from '../components/TopographicBackground';
 import { EERGConvergenceVisual } from '../components/EERGConvergenceVisual';
@@ -19,8 +19,8 @@ export function HomePage() {
   const operatingStages = [
     {
       step: '01',
-      name: 'DISCOVER',
-      tagline: 'Index People, Dark Capacity & Technical Assets',
+      name: 'Discover',
+      tagline: 'Index people, dark capacity & technical assets',
       metric: '14,000+ Verified Nodes',
       desc: 'Traverse the entertainment ecosystem without owning physical inventory. Index verified guild credentials, dark soundstage floor availability, optical lens serials, and immediate production needs in real time.',
       inputs: ['Daily production calls', 'Rental house dark inventory manifests', 'Guild availability lists'],
@@ -28,8 +28,8 @@ export function HomePage() {
     },
     {
       step: '02',
-      name: 'AGGREGATE',
-      tagline: 'Structure Fragmented Signals Into Living Knowledge',
+      name: 'Aggregate',
+      tagline: 'Structure fragmented signals into living knowledge',
       metric: 'Unified Cryptographic Graph',
       desc: 'Convert informal phone trees, scattered PDFs, and private spreadsheets into unified, machine-readable operational graphs with standardized schemas and automated credential verification.',
       inputs: ['Cross-department call sheets', 'Budget ledgers', 'Municipal permit covenants'],
@@ -37,8 +37,8 @@ export function HomePage() {
     },
     {
       step: '03',
-      name: 'CONNECT',
-      tagline: 'Algorithmic Multi-Party Compatibility Matching',
+      name: 'Connect',
+      tagline: 'Algorithmic multi-party compatibility matching',
       metric: '14-Hour Match Velocity',
       desc: 'Execute multi-party compatibility algorithms that simultaneously align guild rate cards, optical prep dates, soundstage acoustic ratings, and location noise permits into a synchronized reservation hold.',
       inputs: ['Technical requirements', 'Schedule buffer tolerances', 'Insurance covenants'],
@@ -46,8 +46,8 @@ export function HomePage() {
     },
     {
       step: '04',
-      name: 'ORCHESTRATE',
-      tagline: 'Living Execution Governance & Variance Rerouting',
+      name: 'Orchestrate',
+      tagline: 'Living execution governance & variance rerouting',
       metric: '100% Turnaround Compliance',
       desc: 'Active execution governance after the contract is signed. Model schedule shockwaves, monitor mandatory guild rest covenants, and dynamically re-sequence scenes when set-side variances occur.',
       inputs: ['Daily wrap reports', 'Camera card offload checksums', 'Weather variances'],
@@ -55,8 +55,8 @@ export function HomePage() {
     },
     {
       step: '05',
-      name: 'MEASURE',
-      tagline: 'Decision-Grade Telemetry & Cost Leakage Metrics',
+      name: 'Measure',
+      tagline: 'Decision-grade telemetry & cost leakage metrics',
       metric: '8.2% Capital Saved',
       desc: 'Track decision-grade metrics: dark soundstage utilization yield, schedule cascade multipliers, and post-production turnover velocity. Every metric answers: What decision does this improve?',
       inputs: ['Historical schedule burn', 'Vendor rate variance', 'Turnaround overtime fines'],
@@ -64,8 +64,8 @@ export function HomePage() {
     },
     {
       step: '06',
-      name: 'MONETIZE',
-      tagline: 'Convert Coordination & Intelligence Into Enterprise Value',
+      name: 'Monetize',
+      tagline: 'Convert coordination & intelligence into enterprise value',
       metric: '6 Value Capture Layers',
       desc: 'Transparent value capture: low transaction take-rates on dark capacity, workflow coordination subscriptions for studios, and enterprise EERG intelligence licenses for completion bond guarantors.',
       inputs: ['Booked dark floor revenue', 'Recovered shooting days', 'Syndicated data queries'],
@@ -75,17 +75,17 @@ export function HomePage() {
 
   // 11-Tier Root-Cause Chain (Section 06)
   const rootCauseChain = [
-    { tier: '01', label: 'STAKEHOLDER', role: 'A-List Actor & Line Producer', detail: 'Key performers and fiscal leaders managing immovable production windows.' },
-    { tier: '02', label: 'PROBLEM', role: 'Irregular Work & Casting Friction', detail: 'Weeks lost during casting while unbudgeted holding fees accumulate.' },
-    { tier: '03', label: 'BOTTLENECK', role: 'Talent Discovery & Verification Deficit', detail: 'No real-time registry connecting open roles to verified calendar availability.' },
-    { tier: '04', label: 'IMMEDIATE CAUSE', role: 'Fragmented Databases & Unverified Resumes', detail: 'Casting relies on disparate websites, PDF resumes, and informal agent phone calls.' },
-    { tier: '05', label: 'ROOT CAUSE', role: 'Information Fragmentation & Trust Deficit', detail: 'Systemic market failure: asset availability is invisible across company boundaries.' },
-    { tier: '06', label: 'DEPENDENCIES', role: 'Shooting Schedule ↔ Soundstage ↔ Location', detail: 'Actor availability locks dictate soundstage load-in and municipal street permits.' },
-    { tier: '07', label: 'OTHER STAKEHOLDERS', role: 'Director, Crew Guilds, Rental Houses, Bond Co.', detail: 'When actor schedule shifts, 120 technicians and vendors suffer downstream chaos.' },
-    { tier: '08', label: 'ECONOMIC IMPACT', role: '$2.8B+ Annual Waste in Cascade Delays', detail: 'Unrecoverable burn rate from idle soundstages, overtime, and rush VFX fees.' },
-    { tier: '09', label: 'WORKAROUND', role: 'Paying 300% Overtime & Standby Penalties', detail: 'Producers burn contingency budget to patch structural ecosystem disconnection.' },
-    { tier: '10', label: 'SOLUTION GAP', role: 'Absence of Live Multi-Party Coordination', detail: 'No living graph dynamically reroutes dependencies when a variance occurs.' },
-    { tier: '11', label: 'OPPORTUNITY', role: 'Verified Talent Intelligence Exchange', detail: 'Enterprise subscription funded by studio physical production & bond guarantors.' },
+    { tier: '01', label: 'Stakeholder', role: 'A-List Actor & Line Producer', detail: 'Key performers and fiscal leaders managing immovable production windows.' },
+    { tier: '02', label: 'Problem', role: 'Irregular Work & Casting Friction', detail: 'Weeks lost during casting while unbudgeted holding fees accumulate.' },
+    { tier: '03', label: 'Bottleneck', role: 'Talent Discovery & Verification Deficit', detail: 'No real-time registry connecting open roles to verified calendar availability.' },
+    { tier: '04', label: 'Immediate cause', role: 'Fragmented Databases & Unverified Resumes', detail: 'Casting relies on disparate websites, PDF resumes, and informal agent phone calls.' },
+    { tier: '05', label: 'Root cause', role: 'Information Fragmentation & Trust Deficit', detail: 'Systemic market failure: asset availability is invisible across company boundaries.' },
+    { tier: '06', label: 'Dependencies', role: 'Shooting Schedule ↔ Soundstage ↔ Location', detail: 'Actor availability locks dictate soundstage load-in and municipal street permits.' },
+    { tier: '07', label: 'Other stakeholders', role: 'Director, Crew Guilds, Rental Houses, Bond Co.', detail: 'When actor schedule shifts, 120 technicians and vendors suffer downstream chaos.' },
+    { tier: '08', label: 'Economic impact', role: '$2.8B+ Annual Waste in Cascade Delays', detail: 'Unrecoverable burn rate from idle soundstages, overtime, and rush VFX fees.' },
+    { tier: '09', label: 'Workaround', role: 'Paying 300% Overtime & Standby Penalties', detail: 'Producers burn contingency budget to patch structural ecosystem disconnection.' },
+    { tier: '10', label: 'Solution gap', role: 'Absence of Live Multi-Party Coordination', detail: 'No living graph dynamically reroutes dependencies when a variance occurs.' },
+    { tier: '11', label: 'Opportunity', role: 'Verified Talent Intelligence Exchange', detail: 'Enterprise subscription funded by studio physical production & bond guarantors.' },
   ];
 
   return (
@@ -104,7 +104,7 @@ export function HomePage() {
           </div>
 
           {/* Hero Headline */}
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white uppercase leading-[1.03]">
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.03]">
             What if the entertainment ecosystem could see itself?
           </h1>
 
@@ -134,14 +134,14 @@ export function HomePage() {
           {/* Minimal Keynote Metric Strip */}
           <div className="pt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-white/[0.08]">
             {[
-              { val: '14,000+', lbl: 'Indexed Resource Nodes' },
-              { val: '75', lbl: 'Cataloged Root Causes' },
-              { val: '$2.8B+', lbl: 'Preventable Cascade Friction' },
-              { val: '14 Hours', lbl: 'Average Matching Velocity' },
+              { val: '14,000+', lbl: 'Indexed resource nodes' },
+              { val: '75', lbl: 'Cataloged root causes' },
+              { val: '$2.8B+', lbl: 'Preventable cascade friction' },
+              { val: '14 Hours', lbl: 'Average matching velocity' },
             ].map((stat, i) => (
               <div key={i} className="space-y-1">
-                <div className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-mono">{stat.val}</div>
-                <div className="text-xs text-zinc-500 font-mono tracking-wider uppercase">{stat.lbl}</div>
+                <div className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white font-mono">{stat.val}</div>
+                <div className="text-xs text-zinc-500 font-mono tracking-wider">{stat.lbl}</div>
               </div>
             ))}
           </div>
@@ -155,10 +155,10 @@ export function HomePage() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-3 max-w-2xl">
             <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-zinc-400">
-              <span>02 — THE STRUCTURAL BREAKDOWN</span>
+              <span>02 — The Structural Breakdown</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white">
-              Too Much Exists. Too Little Is Connected.
+            <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
+              Too much exists. Too little is connected.
             </h2>
             <p className="text-base sm:text-lg text-zinc-400 leading-relaxed">
               When resources exist in artificial silos, they generate immense friction. Toggle below to compare the current fragmented reality against the DIGISYNQ synchronized ecosystem.
@@ -207,8 +207,8 @@ export function HomePage() {
             </div>
 
             <div className="space-y-3">
-              <h3 className="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-white">
-                Talent & High-End Optical Equipment
+              <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+                Talent & high-end optical equipment
               </h3>
               <p className="text-base text-zinc-300 leading-relaxed font-sans max-w-2xl">
                 {fragmentationMode === 'FRAGMENTED'
@@ -248,8 +248,8 @@ export function HomePage() {
             </div>
 
             <div className="space-y-2">
-              <h4 className="text-xl font-bold uppercase tracking-tight text-white">
-                Dark Soundstage Floors
+              <h4 className="text-xl font-extrabold tracking-tight text-white">
+                Dark soundstage floors
               </h4>
               <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
                 {fragmentationMode === 'FRAGMENTED'
@@ -272,8 +272,8 @@ export function HomePage() {
             </div>
 
             <div className="space-y-2">
-              <h4 className="text-xl font-bold uppercase tracking-tight text-white">
-                Milestone Telemetry Escrow
+              <h4 className="text-xl font-extrabold tracking-tight text-white">
+                Milestone telemetry escrow
               </h4>
               <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
                 {fragmentationMode === 'FRAGMENTED'
@@ -296,8 +296,8 @@ export function HomePage() {
             </div>
 
             <div className="space-y-2">
-              <h4 className="text-xl font-bold uppercase tracking-tight text-white">
-                Distribution & Buyer Gaps
+              <h4 className="text-xl font-extrabold tracking-tight text-white">
+                Distribution & buyer gaps
               </h4>
               <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
                 {fragmentationMode === 'FRAGMENTED'
@@ -320,8 +320,8 @@ export function HomePage() {
             </div>
 
             <div className="space-y-2">
-              <h4 className="text-xl font-bold uppercase tracking-tight text-white">
-                EERG Knowledge Loop
+              <h4 className="text-xl font-extrabold tracking-tight text-white">
+                EERG knowledge loop
               </h4>
               <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
                 {fragmentationMode === 'FRAGMENTED'
@@ -344,10 +344,10 @@ export function HomePage() {
       <section className="py-24 px-4 sm:px-8 max-w-7xl mx-auto border-b border-white/[0.08] space-y-12">
         <div className="space-y-4 max-w-3xl">
           <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-zinc-400">
-            <span>03 — THE CORE PHILOSOPHY</span>
+            <span>03 — The Core Philosophy</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white leading-tight">
-            Nothing Is Waste. Disconnected Value Is.
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
+            Nothing is waste. Disconnected value is.
           </h2>
           <p className="text-base sm:text-lg text-zinc-400 leading-relaxed">
             This is not an inspirational slogan. It is an operational mechanism. Value does not disappear; it degrades into waste when the connections between who owns it, who needs it, and where it exists break down.
@@ -358,26 +358,26 @@ export function HomePage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {[
             {
-              from: 'Idle Talent',
-              to: 'Available Capacity',
+              from: 'Idle talent',
+              to: 'Available capacity',
               metric: '48hr Booking',
               desc: 'Performers and craftspeople between bookings become discoverable capability for sudden shoot turns.',
             },
             {
-              from: 'Idle Equipment',
-              to: 'Productive Yield',
+              from: 'Idle equipment',
+              to: 'Productive yield',
               metric: '+24% Utilization',
               desc: 'High-end cinema optics generate revenue mid-week instead of warehouse depreciation.',
             },
             {
-              from: 'Dark Soundstages',
-              to: 'Revenue Assets',
+              from: 'Dark soundstages',
+              to: 'Revenue assets',
               metric: 'Zero Empty Days',
               desc: 'Acoustic facilities monetize calendar gap weeks between multi-month tentpole leases.',
             },
             {
-              from: 'Workflow Failures',
-              to: 'Systemic Intelligence',
+              from: 'Workflow failures',
+              to: 'Systemic intelligence',
               metric: 'EERG Knowledge',
               desc: 'Every set-side shock reveals a root cause and a paying customer opportunity.',
             },
@@ -393,8 +393,8 @@ export function HomePage() {
                 </div>
 
                 <div className="space-y-1 mb-3">
-                  <div className="text-xs font-mono text-zinc-500 line-through uppercase">{item.from}</div>
-                  <div className="text-lg font-bold text-white uppercase tracking-tight">{item.to}</div>
+                  <div className="text-xs font-mono text-zinc-500 line-through">{item.from}</div>
+                  <div className="text-lg font-extrabold text-white tracking-tight">{item.to}</div>
                 </div>
 
                 <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-sans">
@@ -417,10 +417,10 @@ export function HomePage() {
       <section className="py-24 px-4 sm:px-8 max-w-7xl mx-auto border-b border-white/[0.08] space-y-12">
         <div className="space-y-3 max-w-3xl">
           <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-zinc-400">
-            <span>04 — THE OPERATING SYSTEM</span>
+            <span>04 — The Operating System</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white">
-            DIGISYNQ Connects the Dots.
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
+            DIGISYNQ connects the dots.
           </h2>
           <p className="text-base sm:text-lg text-zinc-400 leading-relaxed">
             A continuous 6-stage mechanism that converts decentralized resources into synchronized execution: Discover → Aggregate → Connect → Orchestrate → Measure → Monetize.
@@ -445,7 +445,7 @@ export function HomePage() {
                   <span className={`font-mono text-[10px] block mb-1 uppercase ${isSelected ? 'text-zinc-600' : 'text-zinc-500'}`}>
                     STAGE {stg.step}
                   </span>
-                  <div className={`font-bold text-xs uppercase tracking-tight ${isSelected ? 'text-black' : 'text-white'}`}>
+                  <div className={`font-extrabold text-xs tracking-tight ${isSelected ? 'text-black' : 'text-white'}`}>
                     {stg.name}
                   </div>
                 </div>
@@ -467,7 +467,7 @@ export function HomePage() {
                   <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest">
                     STAGE {currentStage.step} OF 06: {currentStage.name}
                   </span>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-white uppercase tracking-tight mt-1">
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mt-1">
                     {currentStage.tagline}
                   </h3>
                 </div>
@@ -509,10 +509,10 @@ export function HomePage() {
         <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-white/[0.06] via-white/[0.02] to-transparent border border-white/[0.12] backdrop-blur-2xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.12)] flex flex-col lg:flex-row lg:items-center justify-between gap-8">
           <div className="space-y-4 max-w-2xl">
             <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-zinc-400">
-              <span>05 — THE REASONING ENGINE</span>
+              <span>05 — The Reasoning Engine</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white leading-tight">
-              But First, Understand Why the System Breaks.
+            <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
+              But first, understand why the system breaks.
             </h2>
             <p className="text-base sm:text-lg text-zinc-400 leading-relaxed">
               Before you can connect resources, you must understand why the entertainment ecosystem gets stuck. That is the function of EERG (Entertainment Ecosystem Root-Cause Graph) — the intelligence and reasoning engine of DIGISYNQ.
@@ -540,10 +540,10 @@ export function HomePage() {
       <section className="py-24 px-4 sm:px-8 max-w-7xl mx-auto border-b border-white/[0.08] space-y-10">
         <div className="space-y-3 max-w-3xl">
           <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-zinc-400">
-            <span>06 — SYSTEMIC DECOMPOSITION</span>
+            <span>06 — Systemic Decomposition</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white">
-            The 11-Tier Root-Cause Chain
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
+            The 11-tier root-cause chain
           </h2>
           <p className="text-base text-zinc-400">
             Every operational breakdown follows an exact chain from surface stakeholder complaint down to paying customer opportunity. Select any tier below.
@@ -568,7 +568,7 @@ export function HomePage() {
                   <span className={`font-mono text-[9px] block mb-1 uppercase ${isSelected ? 'text-zinc-600' : 'text-zinc-500'}`}>
                     TIER {tier.tier}
                   </span>
-                  <div className={`font-bold text-[11px] uppercase tracking-tight truncate ${isSelected ? 'text-black' : 'text-white'}`}>
+                  <div className={`font-extrabold text-[11px] tracking-tight truncate ${isSelected ? 'text-black' : 'text-white'}`}>
                     {tier.label}
                   </div>
                 </button>
@@ -586,7 +586,7 @@ export function HomePage() {
                 <span className="font-mono text-xs text-zinc-400 uppercase tracking-widest">
                   TIER {currentTier.tier} OF 11
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-bold text-white uppercase tracking-tight">
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
                   {currentTier.label}
                 </h3>
                 <div className="text-xs font-mono text-emerald-400 pt-1">
@@ -610,10 +610,10 @@ export function HomePage() {
       <section className="py-24 px-4 sm:px-8 max-w-7xl mx-auto border-b border-white/[0.08] space-y-10">
         <div className="space-y-3 max-w-3xl">
           <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-zinc-400">
-            <span>07 — CONVERGENCE PRINCIPLE</span>
+            <span>07 — Convergence Principle</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white">
-            Many Problems → Fewer Root Causes
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
+            Many problems → fewer root causes
           </h2>
           <p className="text-base text-zinc-400">
             Dozens of different complaints across casting, soundstages, grip gear, and distribution converge mathematically into just 4 systemic root causes.
@@ -630,10 +630,10 @@ export function HomePage() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-3 max-w-2xl">
             <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-zinc-400">
-              <span>08 — COMMERCIAL VALUE CREATION</span>
+              <span>08 — Commercial Value Creation</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white">
-              Systemic Problems Reveal Systemic Opportunities.
+            <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
+              Systemic problems reveal systemic opportunities.
             </h2>
             <p className="text-base text-zinc-400">
               When a problem affects multiple stakeholders and causes millions in damage, someone is willing to pay to eliminate it.
@@ -654,7 +654,7 @@ export function HomePage() {
           {[
             {
               id: 'OPP-01',
-              title: 'Verified Talent Intelligence',
+              title: 'Verified talent intelligence',
               cause: 'Information Fragmentation',
               buyer: 'Studio Physical Production & Casting Agencies',
               impact: 'Reduces casting search cycle from 4 weeks to 72 hours.',
@@ -662,7 +662,7 @@ export function HomePage() {
             },
             {
               id: 'OPP-02',
-              title: 'Dark Capacity Soundstage Routing',
+              title: 'Dark capacity soundstage routing',
               cause: 'Asset Under-Utilization',
               buyer: 'Soundstage Facilities & Independent Producers',
               impact: 'Monetizes unbooked gap weeks with zero ownership cost.',
@@ -670,7 +670,7 @@ export function HomePage() {
             },
             {
               id: 'OPP-03',
-              title: 'Living Dependency Cascade Sentinel',
+              title: 'Living dependency cascade sentinel',
               cause: 'Dependency Visibility Failure',
               buyer: 'Completion Bond Companies & Studio Risk Heads',
               impact: 'Halts set-side schedule shockwaves before contingency depletion.',
@@ -687,7 +687,7 @@ export function HomePage() {
                   <span className="font-mono text-[10px] text-emerald-400 uppercase tracking-wider">{card.status}</span>
                 </div>
                 <div className="font-mono text-[10px] text-zinc-500 uppercase">{card.cause}</div>
-                <h3 className="text-xl font-bold text-white uppercase tracking-tight mt-1">{card.title}</h3>
+                <h3 className="text-xl font-extrabold text-white tracking-tight mt-1">{card.title}</h3>
                 <p className="text-xs sm:text-sm text-zinc-300 mt-2 leading-relaxed">{card.impact}</p>
               </div>
 
@@ -706,9 +706,9 @@ export function HomePage() {
       <section className="py-24 px-4 sm:px-8 max-w-7xl mx-auto border-b border-white/[0.08] space-y-10">
         <div className="space-y-3 max-w-3xl">
           <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-zinc-400">
-            <span>09 — THE EXECUTION PILLARS</span>
+            <span>09 — The Execution Pillars</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white">
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
             Understand. Connect. Orchestrate. Measure.
           </h2>
           <p className="text-base text-zinc-400">
@@ -721,28 +721,28 @@ export function HomePage() {
           {[
             {
               num: '01',
-              title: 'UNDERSTAND',
+              title: 'Understand',
               desc: 'Trace root causes, bottlenecks, and failure propagation through the EERG knowledge graph.',
               link: '/eerg',
               cta: 'Explore EERG',
             },
             {
               num: '02',
-              title: 'CONNECT',
+              title: 'Connect',
               desc: 'Algorithmic matching across verified talent, dark soundstages, camera optics, and locations.',
               link: '/connect',
               cta: 'See Connect Protocol',
             },
             {
               num: '03',
-              title: 'ORCHESTRATE',
+              title: 'Orchestrate',
               desc: 'Active execution governance, live schedule shockwave balancing, and variance resolution.',
               link: '/orchestrate',
               cta: 'See Orchestration',
             },
             {
               num: '04',
-              title: 'MEASURE',
+              title: 'Measure',
               desc: 'Continuous operational telemetry: dark capacity yield, cost leakage, and decision intelligence.',
               link: '/measure',
               cta: 'See Telemetry Metrics',
@@ -754,7 +754,7 @@ export function HomePage() {
             >
               <div>
                 <span className="font-mono text-xs text-zinc-500 uppercase">{pillar.num} PILLAR</span>
-                <h3 className="text-2xl font-bold text-white uppercase tracking-tight mt-1">{pillar.title}</h3>
+                <h3 className="text-2xl font-extrabold text-white tracking-tight mt-1">{pillar.title}</h3>
                 <p className="text-xs sm:text-sm text-zinc-400 mt-2 leading-relaxed">{pillar.desc}</p>
               </div>
               <Link
@@ -775,9 +775,9 @@ export function HomePage() {
       <section className="py-24 px-4 sm:px-8 max-w-7xl mx-auto space-y-16">
         <div className="space-y-3 max-w-3xl">
           <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-zinc-400">
-            <span>10 — THE CONTINUOUS FLYWHEEL</span>
+            <span>10 — The Continuous Flywheel</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white leading-tight">
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
             Understand → Connect → Orchestrate → Measure → Learn → Improve
           </h2>
           <p className="text-base sm:text-lg text-zinc-400">
@@ -794,7 +794,7 @@ export function HomePage() {
             <span className="font-mono text-xs uppercase tracking-widest text-zinc-600 font-semibold">
               OPERATIONAL ENGAGEMENT
             </span>
-            <h3 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight leading-none text-black">
+            <h3 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight text-black">
               Explore the system or start with an active problem.
             </h3>
             <p className="text-base text-zinc-700 leading-relaxed font-sans">
