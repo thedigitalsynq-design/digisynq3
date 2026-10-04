@@ -214,6 +214,16 @@ export interface StakeholderArchetype {
   valueProp: string;
   icon: string;
   color: string;
+  // Full System Relationship Fields
+  whoTheyAre: string;
+  whatTheyNeed: string;
+  whatTheyProvide: string;
+  commonFriction: string;
+  rootCauses: string;
+  digisynqIntervention: string;
+  valueCreated: string;
+  relatedMechanisms: string[];
+  relatedStages: string[];
 }
 
 export const STAKEHOLDERS: StakeholderArchetype[] = [
@@ -227,6 +237,15 @@ export const STAKEHOLDERS: StakeholderArchetype[] = [
     valueProp: 'Reduce coordination risk and protect time, money and delivery.',
     icon: 'Briefcase',
     color: '#23B272',
+    whoTheyAre: 'Lead financial, legal, and operational orchestrators responsible for delivering the project within capital and delivery covenants.',
+    whatTheyNeed: 'Reliable department schedules, dark-floor stage access, burn-rate transparency, and delivery window protection.',
+    whatTheyProvide: 'Packaged intellectual property, capital allocation, casting attachments, and industry commercial demand.',
+    commonFriction: 'Managing 20 disconnected phone trees, unbudgeted on-set overtime spikes, and surprise post-production delivery slips.',
+    rootCauses: 'Schedule dependency concentration, absence of multi-party shared telemetry, and opaque vendor contracting.',
+    digisynqIntervention: 'Deploy living dependency graph, track milestone covenants in real time, and match burst capacity during schedule crunches.',
+    valueCreated: 'Target 5.5 days buffer recovery per sprint and $84k+ avoided standby penalties.',
+    relatedMechanisms: ['M01 Observe', 'M04 Map', 'M06 Prioritize', 'M13 Structure', 'M16 Measure'],
+    relatedStages: ['02 Development', '03 Pre-Production', '04 Production', '07 Distribution'],
   },
   {
     id: 'directors',
@@ -238,6 +257,15 @@ export const STAKEHOLDERS: StakeholderArchetype[] = [
     valueProp: 'Keep creative intent synchronized with technical execution.',
     icon: 'Clapperboard',
     color: '#52E3A4',
+    whoTheyAre: 'Artistic directors responsible for narrative pacing, actor performance, and visual language continuity.',
+    whatTheyNeed: 'Uninterrupted shooting momentum, reliable stage/camera rigs, and synchronized visual pre-visualization.',
+    whatTheyProvide: 'Cinematic vision, script interpretation, shot design, and cross-department aesthetic direction.',
+    commonFriction: 'Key creative choices drifting between camera, art department, and downstream VFX houses.',
+    rootCauses: 'Siloed pre-production prep, unvalidated technical feasibility, and lack of unified look management.',
+    digisynqIntervention: 'Harmonize pre-vis assets directly with stage volume technicians and post conform leads.',
+    valueCreated: 'Zero compromise on creative intent; elimination of duplicate pickup shot days.',
+    relatedMechanisms: ['M02 Detect', 'M08 Simulate', 'M14 Verify', 'M18 Stabilize'],
+    relatedStages: ['02 Development', '03 Pre-Production', '04 Production', '05 Post-Production'],
   },
   {
     id: 'writers',
@@ -249,6 +277,15 @@ export const STAKEHOLDERS: StakeholderArchetype[] = [
     valueProp: 'Protect IP rights, access verified packaging, and accelerate development.',
     icon: 'PenTool',
     color: '#D4F838',
+    whoTheyAre: 'Narrative originators, screenwriters, book authors, and franchise worldbuilders.',
+    whatTheyNeed: 'Clear market demand signals, transparent option covenants, and early production feasibility parameters.',
+    whatTheyProvide: 'Original screenplays, episodic bibles, worldbuilding lore, and character dialogue.',
+    commonFriction: 'Scripts stalled in prolonged revision limbo; rights optioned without transparent production momentum.',
+    rootCauses: 'Disconnection between literary development and physical production budget reality.',
+    digisynqIntervention: 'Pre-flight script feasibility mapping, automated scene complexity breakdowns, and clean chain-of-title verification.',
+    valueCreated: 'Accelerated greenlight velocity; rights protection with zero predatory intermediary lockups.',
+    relatedMechanisms: ['M03 Decompose', 'M07 Classify', 'M12 Route', 'M17 Arbitrate'],
+    relatedStages: ['01 Idea', '02 Development'],
   },
   {
     id: 'technicians',
@@ -260,6 +297,15 @@ export const STAKEHOLDERS: StakeholderArchetype[] = [
     valueProp: 'Increase utilization, reduce downtime, and improve schedule visibility.',
     icon: 'Wrench',
     color: '#23B272',
+    whoTheyAre: 'Specialized department heads and craft crew: Cinematographers, Gaffers, Grips, Production Designers, and Sound Mixers.',
+    whatTheyNeed: 'Transparent shoot calendars, guaranteed turnaround rest covenants, and rate parity.',
+    whatTheyProvide: 'World-class practical craft, lighting setups, sound capture, camera operation, and physical set rigging.',
+    commonFriction: '16-hour turnaround days causing burnout and on-set safety hazards; unexpected dark weeks between bookings.',
+    rootCauses: 'Opaque guild booking phone trees and last-minute production calendar shifts.',
+    digisynqIntervention: 'Dynamic craft availability indexing, standardized turnaround rest covenants, and verified skill matching.',
+    valueCreated: 'Target 100% schedule visibility and reduction of uncompensated downtime between projects.',
+    relatedMechanisms: ['M01 Observe', 'M10 Match', 'M15 Intervene', 'M21 Shield'],
+    relatedStages: ['03 Pre-Production', '04 Production'],
   },
   {
     id: 'talent',
@@ -271,6 +317,15 @@ export const STAKEHOLDERS: StakeholderArchetype[] = [
     valueProp: 'Eliminate booking conflicts, protect production windows, and ensure seamless communication.',
     icon: 'UserCheck',
     color: '#52E3A4',
+    whoTheyAre: 'Lead actors, supporting cast, stunt doubles, and character voice performers.',
+    whatTheyNeed: 'Immovable hard-out window respect, scene preparation buffers, and prompt milestone compensation.',
+    whatTheyProvide: 'On-screen dramatic performance, character voiceover, and worldwide audience drawing power.',
+    commonFriction: 'Schedule slips forcing emergency release from subsequent international film commitments.',
+    rootCauses: 'Single-threaded shoot schedules where talent availability acts as a fragile unhedged bottleneck.',
+    digisynqIntervention: 'Dynamic scene clustering and 2nd unit coverage resequencing to compress talent shooting days.',
+    valueCreated: 'Guaranteed adherence to actor hard-out dates; zero cast recast emergencies.',
+    relatedMechanisms: ['M05 Classify', 'M08 Simulate', 'M11 Route', 'M18 Stabilize'],
+    relatedStages: ['03 Pre-Production', '04 Production'],
   },
   {
     id: 'post-vfx',
@@ -282,6 +337,15 @@ export const STAKEHOLDERS: StakeholderArchetype[] = [
     valueProp: 'Improve input quality, predictability and delivery planning.',
     icon: 'Layers',
     color: '#D4F838',
+    whoTheyAre: 'Post-production supervisors, picture editors, VFX compositors, 3D animators, and DI colorists.',
+    whatTheyNeed: 'ACES/OCIO standardized camera color pipelines, verified conform turnovers, and locked edit cuts.',
+    whatTheyProvide: 'Conformed master picture, high-fidelity CGI shots, photoreal grading, and finishing deliverables.',
+    commonFriction: 'Principal photography running late, leaving 6 weeks of VFX work to be compressed into 14 panic days.',
+    rootCauses: 'Upstream schedule slippage absorbed entirely by downstream post-production without date elasticity.',
+    digisynqIntervention: 'Inject burst secondary VFX partner capacity; enforce automated conform spec validation.',
+    valueCreated: '100% adherence to platform master delivery dates; elimination of unpaid facility overtime.',
+    relatedMechanisms: ['M03 Decompose', 'M08 Simulate', 'M10 Match', 'M14 Verify'],
+    relatedStages: ['04 Production', '05 Post-Production'],
   },
   {
     id: 'music-audio',
@@ -293,6 +357,15 @@ export const STAKEHOLDERS: StakeholderArchetype[] = [
     valueProp: 'Synchronize musical turnovers and eliminate rights/dubbing bottleneck friction.',
     icon: 'Music',
     color: '#23B272',
+    whoTheyAre: 'Film composers, supervising sound editors, Foley artists, ADR leads, and Dolby Atmos mixing engineers.',
+    whatTheyNeed: 'Locked conform video cues, timely temp sound turnovers, and pre-cleared music publishing splits.',
+    whatTheyProvide: 'Original orchestral score, spatial audio sound design, Foley sound effects, and multi-language dubs.',
+    commonFriction: 'Scoring against fluctuating picture edits; music publishing clearance disputes freezing release.',
+    rootCauses: 'Audio treated as an afterthought at the tail end of the post schedule rather than an integrated stream.',
+    digisynqIntervention: 'Pre-flight audio spec conformity and synchronized music licensing covenants during picture lock.',
+    valueCreated: 'Zero phase cancellation or mix QC rejections; clean worldwide publishing chain-of-title.',
+    relatedMechanisms: ['M02 Detect', 'M13 Structure', 'M14 Verify', 'M20 Codify'],
+    relatedStages: ['05 Post-Production'],
   },
   {
     id: 'distributors',
@@ -304,6 +377,15 @@ export const STAKEHOLDERS: StakeholderArchetype[] = [
     valueProp: 'Improve delivery readiness and release coordination.',
     icon: 'Radio',
     color: '#52E3A4',
+    whoTheyAre: 'Theatrical sales agents, cinema bookers, independent territorial buyers, and exhibition chains.',
+    whatTheyNeed: 'Firm delivery dates, verified DCI-compliant DCP masters, and pre-release audience density data.',
+    whatTheyProvide: 'Theatrical screen capacity, marketing spend commitments, and territory-wide ticket monetization.',
+    commonFriction: 'Post delays forcing sudden loss of booked theatrical screens to competing studio tentpoles.',
+    rootCauses: 'Decoupling between production milestone reality and theatrical booking lead-times.',
+    digisynqIntervention: 'Real-time delivery readiness telemetry and density-matched regional screening windows.',
+    valueCreated: 'Elimination of dead theatrical windows; optimized screen density and ticket yield.',
+    relatedMechanisms: ['M06 Prioritize', 'M09 Model', 'M16 Measure', 'M22 Forecast'],
+    relatedStages: ['06 Marketing', '07 Distribution', '08 Audience'],
   },
   {
     id: 'platforms',
@@ -315,6 +397,15 @@ export const STAKEHOLDERS: StakeholderArchetype[] = [
     valueProp: 'Reduce downstream delivery friction and eliminate QC rejection cycles.',
     icon: 'MonitorPlay',
     color: '#D4F838',
+    whoTheyAre: 'Global subscription streaming services, transactional VOD operators, and FAST channel syndicators.',
+    whatTheyNeed: 'Flawless IMF masters, timed text subtitle files in 35 languages, Atmos audio, and clean title chain.',
+    whatTheyProvide: 'Global streaming distribution, immediate worldwide viewer reach, and licensing revenue.',
+    commonFriction: 'Automated platform QC rejecting packages 72 hours before launch, threatening global debut campaigns.',
+    rootCauses: 'Disparate post vendors using divergent naming conventions and non-compliant IMF wrapping.',
+    digisynqIntervention: 'Automated pre-flight QC testing against exact streaming platform ingestion profiles.',
+    valueCreated: '100% first-pass platform acceptance; zero delay on global premiere schedules.',
+    relatedMechanisms: ['M14 Verify', 'M17 Stabilize', 'M21 Shield', 'M23 Prevent'],
+    relatedStages: ['07 Distribution', '09 Monetization'],
   },
   {
     id: 'marketing-channels',
@@ -326,6 +417,15 @@ export const STAKEHOLDERS: StakeholderArchetype[] = [
     valueProp: 'Synchronize campaign rollout and creator activation with asset delivery.',
     icon: 'Share2',
     color: '#23B272',
+    whoTheyAre: 'Publicity firms, film marketing strategists, trailer editing houses, and digital creator amplifiers.',
+    whatTheyNeed: 'Approved trailer assets, actor press junket commitments, and localized audience affinity signals.',
+    whatTheyProvide: 'Pre-release audience awareness, digital virality, trailer reach, and premiere ticket hype.',
+    commonFriction: 'Marketing campaigns kicking off without final master trailer cuts due to uncoordinated post teams.',
+    rootCauses: 'Promotional strategy running in parallel silos with zero technical integration into post dailies.',
+    digisynqIntervention: 'Synchronized promotional asset pipeline pulling directly from verified color-graded turnovers.',
+    valueCreated: 'Coordinated trailer launches aligned with talent press windows for maximum cultural impact.',
+    relatedMechanisms: ['M11 Route', 'M12 Structure', 'M16 Measure'],
+    relatedStages: ['06 Marketing', '08 Audience'],
   },
   {
     id: 'students-aspirants',
@@ -337,6 +437,15 @@ export const STAKEHOLDERS: StakeholderArchetype[] = [
     valueProp: 'Connect structured learning with real industry capability and verified opportunities.',
     icon: 'GraduationCap',
     color: '#52E3A4',
+    whoTheyAre: 'Emerging cinematographers, assistant directors, post editors, and independent film school graduates.',
+    whatTheyNeed: 'Verified practical on-set skills, access to modern virtual volume technology, and fair career pathways.',
+    whatTheyProvide: 'Fresh creative energy, deep digital fluency, and next-generation technical labor pool.',
+    commonFriction: 'Spending years in theoretical academia without exposure to real production speed, union rules, or DIT pipelines.',
+    rootCauses: 'Absence of structured apprenticeships bridging academia with active commercial production sets.',
+    digisynqIntervention: 'Deploy 6 Capability Labs tracks and match top performers to active production support roles.',
+    valueCreated: 'Direct pathway from capability certification to verified paid on-set apprentice roles.',
+    relatedMechanisms: ['M19 Learn', 'M20 Codify'],
+    relatedStages: ['03 Pre-Production', '04 Production', '05 Post-Production'],
   },
   {
     id: 'audiences-fans',
@@ -348,6 +457,15 @@ export const STAKEHOLDERS: StakeholderArchetype[] = [
     valueProp: 'Improve the ecosystem that ultimately produces memorable entertainment.',
     icon: 'Heart',
     color: '#D4F838',
+    whoTheyAre: 'Passionate cinephiles, genre fandoms, festival goers, and digital streaming subscribers.',
+    whatTheyNeed: 'Frictionless discovery of original films, direct dialogue with filmmakers, and curated screening events.',
+    whatTheyProvide: 'Box office tickets, streaming watch time, social word-of-mouth, and sustained cultural relevance.',
+    commonFriction: 'Great independent films buried beneath generic platform recommendation algorithms.',
+    rootCauses: 'Mass marketing optimizing for lowest common denominator rather than concentrated fan affinity.',
+    digisynqIntervention: 'Coordinate geographic audience density clusters to guarantee full-room theatrical screenings.',
+    valueCreated: 'Higher organic opening weekend word-of-mouth and long-tail cult IP appreciation.',
+    relatedMechanisms: ['M09 Model', 'M16 Measure', 'M22 Forecast'],
+    relatedStages: ['08 Audience', '09 Monetization'],
   },
 ];
 

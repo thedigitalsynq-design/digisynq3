@@ -1,490 +1,503 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, Check, Users, Film, Radio, Shield, Sparkles } from 'lucide-react';
-import { EcosystemMap } from '../components/EcosystemMap';
+import {
+  ArrowRight,
+  ArrowUpRight,
+  CheckCircle2,
+  AlertTriangle,
+  Layers,
+  Network,
+  GitBranch,
+  ShieldCheck,
+  Zap,
+  Cpu,
+  Sliders,
+  Users,
+} from 'lucide-react';
+import { TopographicBackground } from '../components/TopographicBackground';
 
-interface Stakeholder {
+interface EcosystemNode {
   id: string;
-  category: 'creators' | 'talent' | 'facilities' | 'services' | 'capital' | 'distribution';
-  role: string;
-  scope: string;
-  need: string;
-  offer: string;
-  synqAction: string;
+  name: string;
+  category: 'CREATIVE_HUMAN' | 'PHYSICAL_TECH' | 'POST_FINISHING' | 'COMMERCIAL_AUDIENCE';
+  shortDesc: string;
+  whatItNeeds: string[];
+  whatItProvides: string[];
+  connectedNodeIds: string[];
+  cascadeRisk: string;
+  digisynqIntervention: string;
+  activeMechanism: string;
+  angle: number; // for SVG circular layout
 }
 
-const ALL_STAKEHOLDERS: Stakeholder[] = [
+const ECOSYSTEM_ENTITIES: EcosystemNode[] = [
   {
-    id: 'producers',
-    category: 'creators',
-    role: 'Independent Producers & Banners',
-    scope: 'Features, Series & Documentaries',
-    need: 'Rapid crew assembly, connected stage capacity, transparent budget pacing, and viable distribution pathways.',
-    offer: 'Packaged entertainment IP, talent attachments, production management, and active industry demand.',
-    synqAction: 'Match verified crew availability, route to partner facilities during turnaround windows, and coordinate milestone tranches.',
+    id: 'talent',
+    name: 'Talent',
+    category: 'CREATIVE_HUMAN',
+    shortDesc: 'Lead cast, supporting performers, voice talent, and stunt coordinators.',
+    whatItNeeds: ['Production (shooting schedule)', 'Crew (safety protocols)', 'Stages (soundstage prep)'],
+    whatItProvides: ['On-screen performance', 'Brand awareness', 'Global audience draw'],
+    connectedNodeIds: ['production', 'crew', 'stages', 'virtual-production', 'audience'],
+    cascadeRisk: 'Schedule slip causes actor to hit hard-out date; multi-week shutdown triggers recast crisis.',
+    digisynqIntervention: 'Dynamic scene clustering and 2nd unit coverage to protect immovable talent windows.',
+    activeMechanism: 'M08: Simulate & M11: Route',
+    angle: 0,
   },
   {
-    id: 'directors',
-    category: 'creators',
-    role: 'Directors & Showrunners',
-    scope: 'Narrative & Episodic Leadership',
-    need: 'Creative alignment with technical department heads, reliable volume/stage technology, and uninterrupted production flow.',
-    offer: 'Visual storytelling vision, directing craft, script execution, and cross-department creative leadership.',
-    synqAction: 'Discover specialized department heads, align pre-vis assets with virtual stages, and eliminate coordination drag.',
+    id: 'crew',
+    name: 'Crew',
+    category: 'CREATIVE_HUMAN',
+    shortDesc: 'Department heads, cinematographers, gaffers, grips, sound recordists, and art teams.',
+    whatItNeeds: ['Production (call sheets)', 'Equipment (camera/lighting gear)', 'Stages (floor access)'],
+    whatItProvides: ['Cinematography', 'Lighting', 'Set construction', 'Live audio recording'],
+    connectedNodeIds: ['production', 'talent', 'equipment', 'stages', 'virtual-production', 'post'],
+    cascadeRisk: 'Excessive 16h turns breach union rest covenants; unannounced schedule shifts cause walkouts.',
+    digisynqIntervention: 'Automated turnaround rest covenants and verified guild availability indexing.',
+    activeMechanism: 'M01: Observe & M10: Match',
+    angle: 24,
   },
   {
-    id: 'writers',
-    category: 'creators',
-    role: 'Screenwriters & IP Holders',
-    scope: 'Original Scripts, Books & Formats',
-    need: 'Packaging partners, transparent rights monetization, and realistic technical feasibility modeling.',
-    offer: 'High-value narrative IP, worldbuilding concepts, adaptations, and franchise character universes.',
-    synqAction: 'Connect scripts to active production demand and pre-vetted packaging capacity without predatory terms.',
+    id: 'production',
+    name: 'Production',
+    category: 'CREATIVE_HUMAN',
+    shortDesc: 'Producers, line producers, production managers, and 1st assistant directors.',
+    whatItNeeds: ['Finance (milestone cashflow)', 'Talent (committed dates)', 'Stages (locked bookings)'],
+    whatItProvides: ['Packaged IP', 'Daily call sheets', 'Budget allocation', 'Legal contracts'],
+    connectedNodeIds: ['finance', 'talent', 'crew', 'stages', 'equipment', 'post', 'distributors'],
+    cascadeRisk: 'Managing 20 disconnected phone trees; sudden budget depletion from unhedged department overages.',
+    digisynqIntervention: 'Living dependency graph and single-source milestone governance protocol.',
+    activeMechanism: 'M04: Map & M06: Prioritize',
+    angle: 48,
   },
   {
-    id: 'performers',
-    category: 'talent',
-    role: 'Actors, Performers & Voice Talent',
-    scope: 'Cast & Voice Characterization',
-    need: 'Clear scheduling visibility, verified production covenants, and prompt milestone compensation.',
-    offer: 'On-screen charisma, performance craft, character voiceover, and audience engagement power.',
-    synqAction: 'Coordinate booking schedules with production timetables and ensure milestone-backed compensation security.',
+    id: 'stages',
+    name: 'Stages',
+    category: 'PHYSICAL_TECH',
+    shortDesc: 'Certified soundstages, backlots, acoustic facilities, and dark-floor slots.',
+    whatItNeeds: ['Production (floor lease)', 'Crew (rigging and strike schedule)'],
+    whatItProvides: ['Controlled acoustic shooting space', 'Lighting grids', 'Stage power plants'],
+    connectedNodeIds: ['production', 'crew', 'equipment', 'virtual-production', 'talent'],
+    cascadeRisk: 'Previous tenant overruns lease; incoming production locked out with standby gear fines.',
+    digisynqIntervention: 'Routing overflow scenes to pre-vetted dark days at partner facilities at rate parity.',
+    activeMechanism: 'M10: Match & M15: Intervene',
+    angle: 72,
   },
   {
-    id: 'cinematography',
-    category: 'talent',
-    role: 'Cinematographers & Camera Units',
-    scope: 'DPs, Camera Operators & DITs',
-    need: 'Verified project calendars, rate parity, and access to premium optics and camera packages without delay.',
-    offer: 'Master lighting, framing, lens selection, color science, and camera department execution.',
-    synqAction: 'Index availability across guild rosters, connecting DPs directly to funded productions without agency commission tolls.',
+    id: 'equipment',
+    name: 'Equipment',
+    category: 'PHYSICAL_TECH',
+    shortDesc: 'Camera rental houses, specialized anamorphic glass, lighting packages, and grip trucks.',
+    whatItNeeds: ['Production (rental agreements)', 'Crew (technical checkout)'],
+    whatItProvides: ['Digital cinema cameras', 'Anamorphic optics', 'Mobile power & grip rigs'],
+    connectedNodeIds: ['crew', 'stages', 'production', 'post'],
+    cascadeRisk: 'Camera package locked on location during shoot extension; downstream shoot loses prep window.',
+    digisynqIntervention: 'Fractional equipment matching and multi-house standby equipment parity.',
+    activeMechanism: 'M07: Classify & M12: Structure',
+    angle: 96,
   },
   {
-    id: 'lighting-grip',
-    category: 'talent',
-    role: 'Grip, Electric & Lighting Units',
-    scope: 'Gaffers, Key Grips & Rigging',
-    need: 'Continuous booked shoot dates, verified safety standards, and transparent crew packaging.',
-    offer: 'Complex on-set rigging, power management, lighting control, and technical safety on set.',
-    synqAction: 'Coordinate certified lighting and rigging units to active production schedules, reducing pre-rigging idle days.',
+    id: 'virtual-production',
+    name: 'Virtual Production',
+    category: 'PHYSICAL_TECH',
+    shortDesc: 'In-camera VFX LED volumes, camera tracking systems, and real-time Unreal render nodes.',
+    whatItNeeds: ['VFX (pre-calibrated 3D digital environments)', 'Crew (volume lighting sync)'],
+    whatItProvides: ['In-camera final pixels', 'Realistic interactive reflections', 'Zero location travel'],
+    connectedNodeIds: ['stages', 'crew', 'vfx', 'talent', 'post'],
+    cascadeRisk: 'Latency in LED wall camera tracking causing parallax stutter; unvetted 3D assets crashing render nodes.',
+    digisynqIntervention: 'Pre-flight virtual asset sandbox certification in Synq Labs before shooting.',
+    activeMechanism: 'M14: Verify & M17: Stabilize',
+    angle: 120,
   },
   {
-    id: 'art-department',
-    category: 'talent',
-    role: 'Production Design & Art Direction',
-    scope: 'Set Design, Props & Construction',
-    need: 'Early access to stage floor dimensions, clear build timelines, and integrated pre-visualization.',
-    offer: 'Worldbuilding, practical set construction, prop curation, and visual aesthetic continuity.',
-    synqAction: 'Harmonize practical set building with available partner stage slots and digital volume assets.',
+    id: 'post',
+    name: 'Post-Production',
+    category: 'POST_FINISHING',
+    shortDesc: 'Editorial labs, offline cutting rooms, conform finishing suites, and DI color grading.',
+    whatItNeeds: ['Production (camera-to-cloud dailies)', 'VFX (approved CGI plates)'],
+    whatItProvides: ['Conformed picture cut', 'HDR master color grading', 'IMF master packages'],
+    connectedNodeIds: ['production', 'crew', 'vfx', 'audio', 'streaming', 'distributors'],
+    cascadeRisk: 'Late dailies turnover compresses conform cut from 4 weeks to 6 panic days.',
+    digisynqIntervention: 'Automated ACES/OCIO camera-to-cloud color pipeline validation on day 1.',
+    activeMechanism: 'M03: Decompose & M14: Verify',
+    angle: 144,
   },
   {
-    id: 'soundstages',
-    category: 'facilities',
-    role: 'Soundstages & Studio Lots',
-    scope: 'Acoustic Stages & Backlot Facilities',
-    need: 'Floor monetization during dark turnaround dates between marquee tenant leases.',
-    offer: 'World-class acoustic shooting stages, lighting grids, power plants, and production offices.',
-    synqAction: 'Route production demand to available partner floor dates, creating high-occupancy liquidity.',
+    id: 'vfx',
+    name: 'VFX',
+    category: 'POST_FINISHING',
+    shortDesc: 'Visual effects studios, 3D creature animation, background replacement, and burst CGI houses.',
+    whatItNeeds: ['Crew (clean shoot plates and HDRI metadata)', 'Post (locked conform cuts)'],
+    whatItProvides: ['Photoreal CGI shots', 'Set extensions', 'Complex digital composites'],
+    connectedNodeIds: ['virtual-production', 'post', 'production', 'crew'],
+    cascadeRisk: 'Unlocked edits force 40 completed CGI shots to be re-rendered at $120k rework expense.',
+    digisynqIntervention: 'Strict change-control covenants and secondary burst VFX studio routing.',
+    activeMechanism: 'M10: Match & M18: Stabilize',
+    angle: 168,
   },
   {
-    id: 'virtual-volumes',
-    category: 'facilities',
-    role: 'Virtual Production & LED Volumes',
-    scope: 'In-Camera VFX Stages & Venues',
-    need: 'High volume utilization between major film cycles and standardized pre-shoot asset testing.',
-    offer: 'State-of-the-art LED volumes, camera tracking systems, real-time render nodes, and volume technicians.',
-    synqAction: 'Connect independent productions to fractional LED volume windows with pre-calibrated virtual asset suites.',
+    id: 'audio',
+    name: 'Audio',
+    category: 'POST_FINISHING',
+    shortDesc: 'Film composers, Foley artists, supervising sound editors, and Dolby Atmos mixing stages.',
+    whatItNeeds: ['Post (locked picture turnover)', 'Production (cleared music publishing)'],
+    whatItProvides: ['Dolby Atmos theatrical/streaming bed mix', 'Original orchestral score', 'Dialogue stems'],
+    connectedNodeIds: ['post', 'production', 'streaming', 'distributors'],
+    cascadeRisk: 'Subtle phase cancellation in Atmos bed causing streaming platform QC rejection 48h before release.',
+    digisynqIntervention: 'Platform-certified automated Atmos spec validation and synchronized music clearances.',
+    activeMechanism: 'M14: Verify & M20: Codify',
+    angle: 192,
   },
   {
-    id: 'equipment-houses',
-    category: 'facilities',
-    role: 'Equipment Houses & Rentals',
-    scope: 'Camera Packages, Grip & Mobile Power',
-    need: 'High utilization rates for specialized hardware inventory between major studio bookings.',
-    offer: 'State-of-the-art digital cinema cameras, anamorphic lenses, cranes, dollies, and LED lighting fixtures.',
-    synqAction: 'Match available equipment inventory to production schedules on fractional, flexible terms.',
+    id: 'finance',
+    name: 'Finance',
+    category: 'COMMERCIAL_AUDIENCE',
+    shortDesc: 'Financiers, gap debt lenders, completion bond companies, and tax credit syndicators.',
+    whatItNeeds: ['Production (verified milestone delivery reports)', 'Distributors (pre-sales contracts)'],
+    whatItProvides: ['Production capital cashflow', 'Finishing debt tranches', 'Completion guarantees'],
+    connectedNodeIds: ['production', 'distributors', 'streaming', 'brands'],
+    cascadeRisk: 'Opaque burn-rate reporting hides budget overruns until project hits cash insolvency.',
+    digisynqIntervention: 'Milestone-anchored telemetry releasing capital tranches strictly upon verified scene deliveries.',
+    activeMechanism: 'M13: Structure & M16: Measure',
+    angle: 216,
   },
   {
-    id: 'post-editorial',
-    category: 'services',
-    role: 'Post-Production & Editorial Labs',
-    scope: 'Offline Edit, Conforming & DI Color',
-    need: 'Standardized camera-to-cloud dailies turnovers, scope clarity, and milestone-backed payment escrow.',
-    offer: 'Master editorial suites, color finishing, calibrated HDR grading theaters, and master delivery pipelines.',
-    synqAction: 'Streamline ingest telemetry from set to post and tie milestone releases to approved turnovers.',
+    id: 'brands',
+    name: 'Brands',
+    category: 'COMMERCIAL_AUDIENCE',
+    shortDesc: 'Commercial sponsors, product integration partners, and co-branded promotional advertisers.',
+    whatItNeeds: ['Production (script approval and placement guarantees)', 'Marketing (campaign rollout timing)'],
+    whatItProvides: ['Non-dilutive production capital', 'Co-promotional marketing spend'],
+    connectedNodeIds: ['production', 'finance', 'audience', 'distributors'],
+    cascadeRisk: 'Reshot scene removes featured product; brand pulls $500k co-marketing commitment.',
+    digisynqIntervention: 'Placement continuity covenants synchronized into daily call sheets and script supervisor notes.',
+    activeMechanism: 'M12: Structure & M21: Shield',
+    angle: 240,
   },
   {
-    id: 'vfx-animation',
-    category: 'services',
-    role: 'VFX & Animation Studios',
-    scope: '3D CG, Compositing & Pre-Vis',
-    need: 'Locked plates, clear turnover deadlines, and protection against uncompensated scope shifts.',
-    offer: 'Photoreal CG environments, digital doubles, creature animation, and complex multi-pass compositing.',
-    synqAction: 'Enforce structured turnover covenants and milestone escrow to keep VFX delivery strictly on schedule.',
+    id: 'distributors',
+    name: 'Distributors',
+    category: 'COMMERCIAL_AUDIENCE',
+    shortDesc: 'Theatrical distribution banners, international sales agents, and territory syndicators.',
+    whatItNeeds: ['Post (DCI compliant DCP masters)', 'Production (chain-of-title documentation)'],
+    whatItProvides: ['Worldwide theatrical booking', 'Promotional P&A budgets', 'Territory licensing'],
+    connectedNodeIds: ['production', 'post', 'exhibitors', 'finance', 'streaming', 'audience'],
+    cascadeRisk: 'Missed master delivery deadline forfeits locked theatrical window against competitor tentpole.',
+    digisynqIntervention: 'Delivery readiness telemetry giving 4-week advance warning on delivery window security.',
+    activeMechanism: 'M09: Model & M22: Forecast',
+    angle: 264,
   },
   {
-    id: 'music-audio',
-    category: 'services',
-    role: 'Composers, Sound & Audio Suites',
-    scope: 'Original Score, Foley & Dolby Atmos',
-    need: 'Synchronized picture locks, prompt cue turnovers, and Dolby Atmos mixing theater access.',
-    offer: 'Original orchestral scoring, spatial audio mixing, sound design, Foley, and music licensing.',
-    synqAction: 'Coordinate audio post schedules directly with picture editorial, eliminating late-stage delivery scrambles.',
+    id: 'exhibitors',
+    name: 'Exhibitors',
+    category: 'COMMERCIAL_AUDIENCE',
+    shortDesc: 'Theatrical cinema chains, independent art houses, IMAX/premium venues, and film festivals.',
+    whatItNeeds: ['Distributors (KDM decryption keys and DCP drives)', 'Audience (ticket attendance)'],
+    whatItProvides: ['Cinema screen capacity', 'High-end projection and sound exhibition', 'Box office tickets'],
+    connectedNodeIds: ['distributors', 'audience', 'brands'],
+    cascadeRisk: 'KDM key timing mismatch delays Friday evening premiere; empty screens and customer refund demands.',
+    digisynqIntervention: 'Automated KDM verification and localized audience density screening clustering.',
+    activeMechanism: 'M14: Verify & M16: Measure',
+    angle: 288,
   },
   {
-    id: 'financiers',
-    category: 'capital',
-    role: 'Financiers & Gap Capital',
-    scope: 'Mezzanine Debt, Equity & Bonds',
-    need: 'Burn-rate transparency, verified deliverable verification, and mitigation of completion risk.',
-    offer: 'Production cash flow, finishing debt, bridge financing, tax credit financing, and completion insurance.',
-    synqAction: 'Real-time milestone telemetry that unlocks capital tranches systematically upon verified scene and shot delivery.',
+    id: 'streaming',
+    name: 'Streaming',
+    category: 'COMMERCIAL_AUDIENCE',
+    shortDesc: 'Global OTT platforms, SVOD buyers, AVOD networks, and transactional digital services.',
+    whatItNeeds: ['Post (IMF master packages and 35 language subtitle tracks)', 'Production (clean legal chain)'],
+    whatItProvides: ['Global instantaneous distribution', 'Direct subscriber reach', 'Licensing fees'],
+    connectedNodeIds: ['post', 'audio', 'production', 'finance', 'audience'],
+    cascadeRisk: 'Platform QC rejects package 72h before launch due to subtitle timecode drift, wrecking marketing spend.',
+    digisynqIntervention: 'Pre-flight QC verification against exact platform ingestion profiles.',
+    activeMechanism: 'M14: Verify & M23: Prevent',
+    angle: 312,
   },
   {
-    id: 'brands-sponsors',
-    category: 'capital',
-    role: 'Brands & Commercial Sponsors',
-    scope: 'Product Integration & Co-Marketing',
-    need: 'Brand-safe narrative environments, seamless product integration, and measurable audience reach.',
-    offer: 'Non-dilutive production capital, co-marketing budgets, and promotional distribution reach.',
-    synqAction: 'Match brand partners with verified productions in pre-production, aligning storylines before cameras roll.',
+    id: 'audience',
+    name: 'Audience',
+    category: 'COMMERCIAL_AUDIENCE',
+    shortDesc: 'Viewers, genre fandoms, cinephiles, and cultural amplification communities.',
+    whatItNeeds: ['Exhibitors / Streaming (curated high-fidelity content discovery)', 'Brands (authentic engagement)'],
+    whatItProvides: ['Box office ticket revenue', 'Streaming retention', 'Organic social word-of-mouth'],
+    connectedNodeIds: ['talent', 'exhibitors', 'streaming', 'brands', 'distributors'],
+    cascadeRisk: 'Great original independent film buried under generic mass-market algorithm fatigue.',
+    digisynqIntervention: 'Density-driven community screenings and authentic creator-audience engagement channels.',
+    activeMechanism: 'M09: Model & M19: Learn',
+    angle: 336,
   },
-  {
-    id: 'exhibitors-platforms',
-    category: 'distribution',
-    role: 'Exhibitors, Streamers & Broadcasters',
-    scope: 'Theatrical Circuits, OTT & FAST Channels',
-    need: 'High-quality verified content with targeted pre-demand rather than empty screens or underperforming releases.',
-    offer: 'DCI-compliant cinema screens, premium formats, global OTT subscriber reach, and broadcast syndication.',
-    synqAction: 'Programmatic release windowing and territorial demand density matching to maximize audience return.',
-  },
-];
-
-const FILTER_ROLES = [
-  { id: 'all', label: 'All Stakeholders (16)' },
-  { id: 'creators', label: 'Creators & Producers' },
-  { id: 'talent', label: 'Talent & Crew Guilds' },
-  { id: 'facilities', label: 'Studios, Stages & Venues' },
-  { id: 'services', label: 'Post, VFX & Audio' },
-  { id: 'capital', label: 'Capital & Commercial' },
-  { id: 'distribution', label: 'Exhibition & Platforms' },
 ];
 
 export function EcosystemPage() {
-  const [selectedRole, setSelectedRole] = useState<string>('all');
+  const [selectedEntityId, setSelectedEntityId] = useState<string>('talent');
+  const [filterCategory, setFilterCategory] = useState<string>('ALL');
 
-  const filteredGroups = selectedRole === 'all'
-    ? ALL_STAKEHOLDERS
-    : ALL_STAKEHOLDERS.filter(g => g.category === selectedRole);
+  const activeEntity = ECOSYSTEM_ENTITIES.find((e) => e.id === selectedEntityId) || ECOSYSTEM_ENTITIES[0];
+
+  const filteredEntities = filterCategory === 'ALL'
+    ? ECOSYSTEM_ENTITIES
+    : ECOSYSTEM_ENTITIES.filter((e) => e.category === filterCategory);
+
+  // SVG dimensions for circular network graph
+  const SVG_SIZE = 580;
+  const CENTER = SVG_SIZE / 2;
+  const RADIUS = 210;
+
+  const getCoordinates = (angleDeg: number) => {
+    const rad = (angleDeg - 90) * (Math.PI / 180);
+    return {
+      x: CENTER + RADIUS * Math.cos(rad),
+      y: CENTER + RADIUS * Math.sin(rad),
+    };
+  };
 
   return (
-    <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white min-h-screen">
+    <main className="bg-[#03040A] text-[#ECEEF5] selection:bg-[#23B272] selection:text-[#03040A] min-h-screen pt-36 pb-24 px-6 sm:px-8 max-w-6xl mx-auto relative overflow-hidden">
+      <TopographicBackground className="opacity-20 pointer-events-none -z-10 fixed inset-0" />
 
-      {/* ── 01. Hero Section ── */}
-      <section className="pt-40 sm:pt-48 pb-20 sm:pb-28 px-6 sm:px-8 max-w-6xl mx-auto">
-        <div className="max-w-4xl">
-          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-300 mb-8 tracking-wide">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            <span className="font-mono text-zinc-400">ECOSYSTEM</span>
-            <span className="text-zinc-600">//</span>
-            <span className="text-white font-medium">Multi-Stakeholder Network</span>
-          </div>
-
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-8">
-            The Living Constellation.<br />
-            <span className="text-zinc-400 font-light">Every node. In resonance.</span>
-          </h1>
-
-          <p className="text-lg sm:text-xl text-zinc-300 font-normal leading-relaxed max-w-3xl mb-12">
-            Entertainment thrives on distributed genius: premier studio lots, guild craft leaders, independent producers, and global exhibition platforms. DigiSynq connects them into an asset-light operating fabric — generating incremental yield for facility operators and turnkey agility for creators.
-          </p>
-
-          <div className="flex flex-wrap items-center gap-4">
-            <Link
-              to="/start"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white text-[#06080d] hover:bg-zinc-200 font-medium text-sm tracking-wide transition-all duration-200 active:scale-95 shadow-sm"
-            >
-              <span>Connect Your Node</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <a
-              href="#constellation"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/10 hover:border-white/20 bg-white/[0.02] text-zinc-300 font-medium text-sm transition-all duration-200"
-            >
-              <span>Explore Constellation</span>
-            </a>
-          </div>
+      {/* ── Header ── */}
+      <div className="max-w-4xl mb-12">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-white/10 bg-white/[0.03] text-xs text-zinc-300 font-mono mb-4">
+          <span className="w-2 h-2 rounded-full bg-[#52E3A4]" />
+          <span>NETWORK TOPOLOGY</span>
+          <span className="text-zinc-600">//</span>
+          <span className="text-[#52E3A4] font-semibold">15 CONNECTED ECOSYSTEM NODES</span>
         </div>
-      </section>
 
-      {/* ── 02. Asset Owners vs Network Participants vs DigiSynq ── */}
-      <section className="py-20 border-t border-white/[0.06]">
-        <div className="max-w-6xl mx-auto px-6 sm:px-8">
-          
-          <div className="max-w-3xl mb-12">
-            <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
-              Network Roles
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-3">
-              The Division of Labor.<br />
-              <span className="text-zinc-400 font-light">Assets, craft, orchestration.</span>
-            </h2>
-            <p className="text-sm text-zinc-400 leading-relaxed">
-              DigiSynq creates value by coordinating, discovering, and matching existing capacity rather than competing with asset owners or talent.
-            </p>
-          </div>
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold text-white tracking-tight leading-[1.03] mb-4">
+          The Living Entertainment Network.
+          <span className="text-zinc-400 font-light block text-2xl sm:text-4xl mt-2">
+            Every Node. Every Relationship. In Resonance.
+          </span>
+        </h1>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-8 rounded-3xl bg-[#090b10] border border-white/[0.06] flex flex-col justify-between">
-              <div>
-                <span className="text-xs font-mono text-zinc-500 uppercase block mb-3">01 // ASSET OWNERS</span>
-                <h3 className="text-lg font-semibold text-white mb-2">Own or Operate Facilities</h3>
-                <p className="text-xs text-zinc-400 leading-relaxed mb-6">
-                  Maintain physical infrastructure, equipment packages, and venues across the industry.
-                </p>
-                <ul className="space-y-2 text-xs text-zinc-300">
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-500" /> Soundstages, lots & venues</li>
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-500" /> Virtual production LED volumes</li>
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-500" /> Specialized camera, grip & lighting inventory</li>
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-500" /> Post-production editorial & mixing facilities</li>
-                </ul>
-              </div>
-              <div className="pt-6 border-t border-white/[0.06] text-[11px] text-zinc-500">
-                Provide physical infrastructure
-              </div>
-            </div>
+        <p className="text-base sm:text-xl text-zinc-300 leading-relaxed font-light max-w-3xl mb-8">
+          Entertainment is not a linear assembly line. It is a dense, multi-party network where a failure at any single node echoes across talent, stages, capital, and global release windows.
+        </p>
 
-            <div className="p-8 rounded-3xl bg-[#090b10] border border-white/[0.06] flex flex-col justify-between">
-              <div>
-                <span className="text-xs font-mono text-zinc-500 uppercase block mb-3">02 // NETWORK PARTICIPANTS</span>
-                <h3 className="text-lg font-semibold text-white mb-2">Provide Craft, Capital & Reach</h3>
-                <p className="text-xs text-zinc-400 leading-relaxed mb-6">
-                  Drive the creative execution, funding, and audience distribution of entertainment.
-                </p>
-                <ul className="space-y-2 text-xs text-zinc-300">
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-500" /> Creators, directors, showrunners & producers</li>
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-500" /> Key crew, technicians & creative talent</li>
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-500" /> Finishing funds, debt & commercial partners</li>
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-zinc-500" /> Theatrical, streaming & digital platforms</li>
-                </ul>
-              </div>
-              <div className="pt-6 border-t border-white/[0.06] text-[11px] text-zinc-500">
-                Deliver creative & commercial capacity
-              </div>
-            </div>
-
-            <div className="p-8 rounded-3xl bg-[#090b10] border border-emerald-500/20 flex flex-col justify-between relative">
-              <div className="absolute top-6 right-6">
-                <span className="px-2 py-0.5 rounded text-[10px] font-mono text-emerald-300 bg-emerald-500/10 border border-emerald-500/30">
-                  DigiSynq
-                </span>
-              </div>
-              <div>
-                <span className="text-xs font-mono text-emerald-400 uppercase block mb-3">03 // COORDINATION LAYER</span>
-                <h3 className="text-lg font-semibold text-white mb-2">Orchestrates & Connects</h3>
-                <p className="text-xs text-zinc-400 leading-relaxed mb-6">
-                  Routes project demand to existing capacity with neutral governance.
-                </p>
-                <ul className="space-y-2 text-xs text-zinc-200">
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400" /> Capacity discovery & verification</li>
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400" /> Resource matching & routing</li>
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400" /> Turnaround scheduling & escrow</li>
-                  <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400" /> Cross-network milestone governance</li>
-                </ul>
-              </div>
-              <div className="pt-6 border-t border-white/[0.06] text-[11px] text-emerald-400 font-medium">
-                Orchestration without asset ownership
-              </div>
-            </div>
-          </div>
-
+        {/* Filter Pills */}
+        <div className="flex flex-wrap gap-2 p-2 rounded-2xl bg-[#090B14] border border-white/[0.08]">
+          {[
+            { id: 'ALL', label: 'All 15 Nodes' },
+            { id: 'CREATIVE_HUMAN', label: 'Creative & Talent' },
+            { id: 'PHYSICAL_TECH', label: 'Stages & Technology' },
+            { id: 'POST_FINISHING', label: 'Post & VFX Finishing' },
+            { id: 'COMMERCIAL_AUDIENCE', label: 'Capital & Audience' },
+          ].map((flt) => (
+            <button
+              key={flt.id}
+              onClick={() => setFilterCategory(flt.id)}
+              className={`px-4 py-2 rounded-xl text-xs font-semibold font-mono transition-all cursor-pointer ${
+                filterCategory === flt.id
+                  ? 'bg-[#23B272] text-[#03040A] shadow-md'
+                  : 'text-zinc-400 hover:text-white bg-transparent'
+              }`}
+            >
+              {flt.label}
+            </button>
+          ))}
         </div>
-      </section>
+      </div>
 
-      {/* ── 03. Interactive Topography Map ── */}
-      <section id="constellation" className="py-24 sm:py-32 border-t border-white/[0.06]">
-        <div className="max-w-6xl mx-auto px-6 sm:px-8">
-          
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-            <div>
-              <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
-                Network Topology
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-                The Living Mesh.<br />
-                <span className="text-zinc-400 font-light">Sixteen disciplines in lockstep.</span>
-              </h2>
-            </div>
+      {/* ── Main Connected Graph + Inspector Split ── */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
+        {/* Interactive SVG Network Map (7 cols) */}
+        <div className="lg:col-span-7 p-6 rounded-3xl border border-white/[0.1] bg-[#070912] shadow-2xl relative flex flex-col items-center">
+          <div className="w-full flex items-center justify-between pb-4 mb-2 border-b border-white/[0.06] text-xs font-mono">
+            <span className="text-zinc-400">INTERACTIVE TOPOLOGY // CLICK NODE TO INSPECT</span>
+            <span className="text-[#52E3A4]">{activeEntity.name.toUpperCase()} ACTIVE</span>
+          </div>
 
-            {/* Filter Pills */}
-            <div className="flex items-center flex-wrap gap-2">
-              {FILTER_ROLES.map((r) => (
-                <button
-                  key={r.id}
-                  type="button"
-                  onClick={() => setSelectedRole(r.id)}
-                  className={`px-3.5 py-1.5 rounded-full text-xs transition-all cursor-pointer ${
-                    selectedRole === r.id
-                      ? 'bg-white text-black font-medium'
-                      : 'bg-white/[0.03] border border-white/[0.08] text-zinc-400 hover:text-white'
-                  }`}
+          <svg
+            viewBox={`0 0 ${SVG_SIZE} ${SVG_SIZE}`}
+            className="w-full max-w-[500px] h-auto select-none"
+            role="img"
+            aria-label="Connected Entertainment Ecosystem Network Graph"
+          >
+            {/* Background Glow */}
+            <circle cx={CENTER} cy={CENTER} r={RADIUS} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="1" strokeDasharray="4 6" />
+
+            {/* Central Digisynq Synchronization Hub */}
+            <circle cx={CENTER} cy={CENTER} r={34} fill="#06130E" stroke="#23B272" strokeWidth="2" />
+            <text
+              x={CENTER}
+              y={CENTER + 4}
+              textAnchor="middle"
+              fill="#52E3A4"
+              fontSize="10"
+              fontFamily="JetBrains Mono"
+              fontWeight="bold"
+            >
+              SYNQ HUB
+            </text>
+
+            {/* Render Connection Lines between Active Node and Related Nodes */}
+            {ECOSYSTEM_ENTITIES.map((ent) => {
+              const pos = getCoordinates(ent.angle);
+              const isSelected = ent.id === activeEntity.id;
+              const isRelated = activeEntity.connectedNodeIds.includes(ent.id);
+
+              return (
+                <g key={`lines-${ent.id}`}>
+                  {/* Line to central hub */}
+                  <line
+                    x1={CENTER}
+                    y1={CENTER}
+                    x2={pos.x}
+                    y2={pos.y}
+                    stroke={isSelected ? '#52E3A4' : isRelated ? 'rgba(35,178,114,0.4)' : 'rgba(255,255,255,0.04)'}
+                    strokeWidth={isSelected ? 2 : isRelated ? 1.5 : 0.75}
+                    strokeDasharray={isSelected ? 'none' : '2 4'}
+                  />
+
+                  {/* Direct Relationship Lines if related to active */}
+                  {isRelated && (
+                    <line
+                      x1={getCoordinates(activeEntity.angle).x}
+                      y1={getCoordinates(activeEntity.angle).y}
+                      x2={pos.x}
+                      y2={pos.y}
+                      stroke="#52E3A4"
+                      strokeWidth="1.5"
+                      strokeOpacity="0.75"
+                    />
+                  )}
+                </g>
+              );
+            })}
+
+            {/* Render Entity Nodes */}
+            {ECOSYSTEM_ENTITIES.map((ent) => {
+              const pos = getCoordinates(ent.angle);
+              const isSelected = ent.id === activeEntity.id;
+              const isRelated = activeEntity.connectedNodeIds.includes(ent.id);
+
+              return (
+                <g
+                  key={ent.id}
+                  onClick={() => setSelectedEntityId(ent.id)}
+                  className="cursor-pointer transition-transform duration-200"
+                  style={{ transformOrigin: `${pos.x}px ${pos.y}px` }}
                 >
-                  {r.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Interactive Visualizer Canvas */}
-          <div className="rounded-3xl bg-[#090b10] border border-white/[0.06] p-8 sm:p-12 mb-16">
-            <EcosystemMap size="full" />
-          </div>
-
-          {/* Stakeholder Directory Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {filteredGroups.map((group) => (
-              <div
-                key={group.id}
-                className="p-8 rounded-2xl bg-white/[0.015] border border-white/[0.06] hover:border-white/15 transition-all flex flex-col justify-between space-y-6"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400">
-                      {group.category}
-                    </span>
-                    <span className="text-[10px] font-mono text-zinc-500">
-                      {group.scope}
-                    </span>
-                  </div>
-
-                  <h3 className="text-lg font-bold text-white mb-4">
-                    {group.role}
-                  </h3>
-
-                  <div className="space-y-4 text-xs">
-                    <div>
-                      <span className="text-zinc-500 uppercase tracking-wider font-mono block mb-1">
-                        Core Requirement
-                      </span>
-                      <p className="text-zinc-400 leading-relaxed">
-                        {group.need}
-                      </p>
-                    </div>
-
-                    <div>
-                      <span className="text-zinc-500 uppercase tracking-wider font-mono block mb-1">
-                        Ecosystem Capacity
-                      </span>
-                      <p className="text-zinc-400 leading-relaxed">
-                        {group.offer}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-white/[0.06] flex flex-col justify-between gap-3">
-                  <div>
-                    <span className="text-emerald-400 text-xs font-mono uppercase tracking-wider block mb-1">
-                      DigiSynq Coordination
-                    </span>
-                    <p className="text-xs text-zinc-300 leading-relaxed">
-                      {group.synqAction}
-                    </p>
-                  </div>
-                  <Link
-                    to="/start"
-                    state={{ role: group.role, category: group.category }}
-                    className="inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-white font-medium transition-colors pt-1"
+                  <circle
+                    cx={pos.x}
+                    cy={pos.y}
+                    r={isSelected ? 22 : 16}
+                    fill={isSelected ? '#23B272' : isRelated ? '#16543D' : '#090B14'}
+                    stroke={isSelected ? '#52E3A4' : isRelated ? '#52E3A4' : 'rgba(255,255,255,0.2)'}
+                    strokeWidth={isSelected ? 3 : 1.5}
+                    className="transition-all"
+                  />
+                  <text
+                    x={pos.x}
+                    y={pos.y + 4}
+                    textAnchor="middle"
+                    fill={isSelected ? '#03040A' : '#ffffff'}
+                    fontSize={isSelected ? '10' : '8'}
+                    fontFamily="JetBrains Mono"
+                    fontWeight="bold"
+                    pointerEvents="none"
                   >
-                    <span>Connect as {group.role.split('&')[0].split('/')[0].trim()}</span>
-                    <ArrowUpRight size={13} className="opacity-60" />
-                  </Link>
-                </div>
-              </div>
+                    {ent.name.substring(0, 3).toUpperCase()}
+                  </text>
+                </g>
+              );
+            })}
+          </svg>
+
+          {/* Quick Node Selector Bar */}
+          <div className="flex flex-wrap justify-center gap-1.5 mt-4 pt-4 border-t border-white/[0.06] w-full">
+            {filteredEntities.map((ent) => (
+              <button
+                key={ent.id}
+                onClick={() => setSelectedEntityId(ent.id)}
+                className={`px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all ${
+                  ent.id === activeEntity.id
+                    ? 'bg-[#23B272] text-[#03040A] font-bold'
+                    : 'bg-black/40 text-zinc-400 hover:text-white border border-white/[0.06]'
+                }`}
+              >
+                {ent.name}
+              </button>
             ))}
           </div>
-
         </div>
-      </section>
 
-      {/* ── 04. Three Pillars of Neutrality ── */}
-      <section className="py-24 sm:py-32 border-t border-white/[0.06]">
-        <div className="max-w-6xl mx-auto px-6 sm:px-8">
-          
-          <div className="max-w-2xl mb-14">
-            <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 block">
-              Asset-Light Advantages
+        {/* Node Inspector Dossier (5 cols) */}
+        <div className="lg:col-span-5 p-6 sm:p-8 rounded-3xl border border-white/[0.1] bg-[#090B14] shadow-2xl space-y-6">
+          <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
+            <div>
+              <span className="font-mono text-xs text-[#52E3A4]">{activeEntity.category}</span>
+              <h2 className="text-2xl font-bold text-white mt-1">{activeEntity.name}</h2>
+            </div>
+            <span className="text-[10px] font-mono px-2.5 py-1 rounded bg-[#23B272]/20 text-[#52E3A4] border border-[#23B272]/40 font-bold">
+              NODE ACTIVE
             </span>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-              The Frictionless Plane.<br />
-              <span className="text-zinc-400 font-light">Velocity through uncompromised neutrality.</span>
-            </h2>
-            <p className="text-base text-zinc-400 leading-relaxed">
-              Traditional intermediaries extract rents by monopolizing physical infrastructure. DigiSynq generates value by routing and orchestrating capacity that already exists across the entertainment ecosystem.
-            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-8 rounded-2xl bg-[#090b10] border border-white/[0.06]">
-              <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider block mb-2">
-                01 // Lower Fixed Requirements
-              </span>
-              <h3 className="text-lg font-bold text-white mb-3">
-                Zero infrastructure debt
-              </h3>
-              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
-                DigiSynq does not take out debt to acquire cameras or real estate. Because we have no idle physical assets to amortize, we remain completely objective in recommending the right facility and team for every project.
-              </p>
-            </div>
-
-            <div className="p-8 rounded-2xl bg-[#090b10] border border-white/[0.06]">
-              <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider block mb-2">
-                02 // Distributed Capacity
-              </span>
-              <h3 className="text-lg font-bold text-white mb-3">
-                Access across the network
-              </h3>
-              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
-                Productions access top-tier soundstages, LED volumes, venues, and specialized talent across the entire network, turning unused facility days into active production windows.
-              </p>
-            </div>
-
-            <div className="p-8 rounded-2xl bg-[#090b10] border border-white/[0.06]">
-              <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider block mb-2">
-                03 // Fair Value Attribution
-              </span>
-              <h3 className="text-lg font-bold text-white mb-3">
-                Aligned economic incentives
-              </h3>
-              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
-                Every technician, facility operator, and financier receives transparent terms and milestone verification, ensuring fair compensation and predictable delivery schedules.
-              </p>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* ── 05. Call to Action ── */}
-      <section className="py-24 sm:py-32 border-t border-white/[0.06]">
-        <div className="max-w-4xl mx-auto px-6 sm:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-6">
-            Plug In Your Node.<br />
-            <span className="text-zinc-400 font-light">Enter the asset-light entertainment stream.</span>
-          </h2>
-          <p className="text-base text-zinc-400 leading-relaxed max-w-xl mx-auto mb-10">
-            Whether you operate a studio facility, represent creative talent, manage entertainment capital, or lead production, register your interest to join the synchronized network.
+          <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+            {activeEntity.shortDesc}
           </p>
-          <Link
-            to="/start"
-            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-white text-black font-medium text-sm hover:bg-zinc-200 transition-all shadow-xl hover:scale-[1.02] active:scale-[0.98]"
-          >
-            Register your node
-            <ArrowRight size={16} />
-          </Link>
-        </div>
-      </section>
 
+          {/* Ingests vs Emits */}
+          <div className="space-y-3 font-mono text-xs">
+            <div className="p-3.5 rounded-xl bg-black/40 border border-white/[0.06]">
+              <strong className="text-zinc-400 block mb-1">INGESTS FROM NETWORK:</strong>
+              <ul className="space-y-1 text-zinc-300 text-[11px]">
+                {activeEntity.whatItNeeds.map((item, i) => (
+                  <li key={i} className="flex items-center gap-1.5">
+                    <span className="text-[#52E3A4]">←</span> {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="p-3.5 rounded-xl bg-black/40 border border-white/[0.06]">
+              <strong className="text-zinc-400 block mb-1">EMITS TO NETWORK:</strong>
+              <ul className="space-y-1 text-zinc-300 text-[11px]">
+                {activeEntity.whatItProvides.map((item, i) => (
+                  <li key={i} className="flex items-center gap-1.5">
+                    <span className="text-[#23B272]">→</span> {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Cascade Vulnerability & DIGISYNQ Intervention */}
+          <div className="space-y-3 text-xs">
+            <div className="p-3.5 rounded-xl bg-red-500/10 border border-red-500/20 text-red-200">
+              <strong className="text-red-400 block font-mono text-[11px] mb-1">CASCADE RISK:</strong>
+              {activeEntity.cascadeRisk}
+            </div>
+
+            <div className="p-3.5 rounded-xl bg-[#16543D]/25 border border-[#23B272]/30 text-emerald-100">
+              <strong className="text-[#52E3A4] block font-mono text-[11px] mb-1">
+                DIGISYNQ INTERVENTION ({activeEntity.activeMechanism}):
+              </strong>
+              {activeEntity.digisynqIntervention}
+            </div>
+          </div>
+
+          {/* Action CTAs */}
+          <div className="pt-4 border-t border-white/[0.08] flex flex-col sm:flex-row gap-3">
+            <Link
+              to="/diagnose"
+              className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-[#23B272] text-[#03040A] hover:bg-[#52E3A4] font-bold text-xs tracking-wide transition-all shadow-md"
+            >
+              <span>Diagnose {activeEntity.name} Issue</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+            <Link
+              to={`/start?node=${activeEntity.id}`}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-3 rounded-full border border-white/10 hover:border-white/20 bg-white/[0.03] text-zinc-300 text-xs font-mono transition-all"
+            >
+              <span>Start SYNQ Case</span>
+              <ArrowUpRight className="w-3 h-3" />
+            </Link>
+          </div>
+        </div>
+      </div>
     </main>
   );
 }
