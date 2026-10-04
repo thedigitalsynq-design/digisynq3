@@ -1,511 +1,653 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
-import { ArrowRight, Check, Send, ShieldCheck, ChevronRight } from 'lucide-react';
+import {
+  ArrowRight,
+  Check,
+  Send,
+  ShieldCheck,
+  Clock,
+  Copy,
+  AlertTriangle,
+  Search,
+  Activity,
+  Sparkles,
+  FileText,
+  User,
+  Film,
+  Building,
+  Calendar
+} from 'lucide-react';
+import {
+  intakeService,
+  SynqCase,
+  CaseStatus,
+  generateCaseId
+} from '../services/intakeService';
+import { TopographicBackground } from '../components/TopographicBackground';
 
-interface FormState {
-  who: string;
-  project: string;
-  problem: string;
-  resources: string;
-  stage: string;
-  support_type: string[];
-  name: string;
-  email: string;
-  notes: string;
-}
-
-const EMPTY_FORM: FormState = {
-  who: '',
-  project: '',
-  problem: '',
-  resources: '',
-  stage: '',
-  support_type: [],
-  name: '',
-  email: '',
-  notes: '',
-};
-
-const WHO_OPTIONS = [
-  'Independent Producer / Production Banner',
+const STAKEHOLDER_ROLES = [
+  'Independent Producer / Banner',
+  'Studio Executive / Financier',
   'Director / Showrunner',
-  'Screenwriter / Story Developer / IP Holder',
-  'Actor / Performer / Voice Artist',
-  'Cinematographer / Camera Unit Head',
-  'Gaffer / Grip / Lighting Unit',
-  'Production Designer / Art Director',
-  'Soundstage / Studio Lot Operator',
+  'Screenwriter / IP Rights Holder',
+  'Cinematographer / Dept Head',
+  'Soundstage / Facility Operator',
   'Virtual Production / LED Volume Facility',
   'Equipment Rental House',
-  'Editorial / Color Finishing Suite',
-  'VFX / Animation Studio',
-  'Composer / Music Supervisor / Audio Mixer',
-  'Financier / Gap Debt / Completion Bonder',
-  'Theatrical Exhibitor / Cinema Circuit',
-  'OTT Platform / Broadcaster / Distributor',
-  'Brand Partner / Commercial Sponsor',
-  'Live Event / Festival Organizer',
-  'Other Entertainment Stakeholder',
+  'Post-Production / VFX Facility',
+  'Music / Audio Post Team',
+  'Distributor / Theatrical Exhibitor',
+  'OTT Platform / Broadcaster',
+  'Brand Partner / Sponsor',
+  'Other Industry Participant'
 ];
 
-const STAGE_OPTIONS = [
-  'Packaging & Development',
-  'Pre-Production & Resource Assembly',
-  'Principal Production / Filming',
-  'Post-Finishing, Sound & VFX',
-  'Release, Distribution & Launch',
-  'Catalog & Rights Monetization',
+const CONTINUUM_STAGES = [
+  '01. Idea / Inception',
+  '02. Development & Packaging',
+  '03. Pre-Production & Prep',
+  '04. Production (Principal Photography)',
+  '05. Post-Production & VFX Finishing',
+  '06. Marketing & Asset Creation',
+  '07. Distribution & Platform Ingest',
+  '08. Audience & Exhibition',
+  '09. Monetization & Recoupment'
 ];
 
-const SUPPORT_OPTIONS = [
-  'Connected Stage & Venue Capacity',
-  'Verified Creative & Crew Matching',
-  'Milestone Finishing Capital',
-  'Audience & Release Coordination',
-  'Asset-Light Production Architecture',
-  'Constraint Feasibility Diagnostic',
+const SUPPORT_TYPES = [
+  'Emergency Bottleneck Diagnostic',
+  'Missing Capability & Crew Matching',
+  'Dark-Date Soundstage / Facility Floor Liquidity',
+  'Downstream Cascade Simulation & Audit',
+  'Multi-Party Coordination Covenant',
+  'Pre-Greenlight Schedule Risk Assessment'
 ];
-
-import { intakeService, SynqRequest } from '../services/intakeService';
 
 export function StartSynqPage() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const caseIdParam = searchParams.get('caseId');
-  const trackParam = searchParams.get('track');
-  const modeParam = searchParams.get('mode');
+  const paramCaseId = searchParams.get('caseId');
+  const paramStage = searchParams.get('stage');
+  const paramProblem = searchParams.get('problem');
 
-  const state = location.state as { problem?: string; category?: string; role?: string } | null;
+  // Form State
+  const [stakeholder, setStakeholder] = useState('');
+  const [project, setProject] = useState('');
+  const [stage, setStage] = useState(paramStage || '');
+  const [problem, setProblem] = useState(paramProblem || '');
+  const [impact, setImpact] = useState('');
+  const [resources, setResources] = useState('');
+  const [support, setSupport] = useState<string[]>([]);
+  const [contactName, setContactName] = useState('');
+  const [contactEmail, setContactEmail] = useState('');
+  const [contactPhone, setContactPhone] = useState('');
+  const [contactRole, setContactRole] = useState('');
+  const [notes, setNotes] = useState('');
+  const [honeypot, setHoneypot] = useState(''); // Spam mitigation trap
 
-  const initialWho = () => {
-    if (!state?.role) return '';
-    const clean = state.role.toLowerCase().split(' ')[0];
-    const match = WHO_OPTIONS.find(opt => opt.toLowerCase().includes(clean));
-    return match || state.role;
-  };
+  // Submission State
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [receivedCase, setReceivedCase] = useState<SynqCase | null>(null);
+  const [copiedId, setCopiedId] = useState(false);
 
-  const initialProblem = () => {
-    if (state?.problem) return state.problem;
-    if (caseIdParam) {
-      const stored = intakeService.getCaseById(caseIdParam);
-      if (stored) {
-        return `[Diagnostic Reference: ${stored.caseId}] ${stored.objective}. Obstacle: ${stored.blockage}. Identified Root Cause: ${stored.rootCause}. Recommended Intervention: ${stored.recommendedIntervention}.`;
+  // Status Lookup State
+  const [lookupId, setLookupId] = useState(paramCaseId || '');
+  const [searchedCase, setSearchedCase] = useState<SynqCase | null>(null);
+  const [lookupAttempted, setLookupAttempted] = useState(false);
+
+  // Check URL params on mount
+  useEffect(() => {
+    if (paramCaseId) {
+      const found = intakeService.getCaseById(paramCaseId);
+      if (found) {
+        setSearchedCase(found);
+        setLookupAttempted(true);
       }
-      return `Linked to Diagnostic Case ID: ${caseIdParam}`;
     }
-    if (trackParam) return `Inquiry regarding DigiSynq Lab Track: ${trackParam}`;
-    return '';
-  };
+  }, [paramCaseId]);
 
-  const [form, setForm] = useState<FormState>(() => ({
-    ...EMPTY_FORM,
-    problem: initialProblem(),
-    who: initialWho(),
-  }));
-  const [submittedCase, setSubmittedCase] = useState<SynqRequest | null>(null);
-  const [step, setStep] = useState(caseIdParam ? 2 : 1);
-  const [submitting, setSubmitting] = useState(false);
-
-  const updateField = (key: keyof FormState, value: string) => {
-    setForm(prev => ({ ...prev, [key]: value }));
-  };
-
-  const toggleSupportType = (v: string) => {
-    setForm(prev => ({
-      ...prev,
-      support_type: prev.support_type.includes(v)
-        ? prev.support_type.filter(x => x !== v)
-        : [...prev.support_type, v],
-    }));
-  };
-
-  const canAdvance1 = !!form.who && !!form.stage;
-  const canAdvance2 = !!form.problem.trim();
-  const canSubmit = !!form.name.trim() && !!form.email.trim() && form.email.includes('@');
-
-  const [copied, setCopied] = useState(false);
-
-  const getDossierText = (activeCaseId?: string) => {
-    return `DIGISYNQ INTAKE DOSSIER\n═════════════════════════\nCASE ID: ${activeCaseId || caseIdParam || 'PENDING'}\nSTAKEHOLDER: ${form.who}\nSTAGE: ${form.stage}\nPROJECT: ${form.project || 'Unspecified'}\nREQUIREMENT: ${form.problem}\nSUPPORT NEEDED: ${form.support_type.join(', ')}\nCONTACT NAME: ${form.name}\nEMAIL: ${form.email}\nCONFIDENTIAL NOTES: ${form.notes || 'None'}\nSUBMITTED AT: ${new Date().toISOString()}`;
-  };
-
-  const handleCopyDossier = () => {
-    navigator.clipboard.writeText(getDossierText(submittedCase?.caseId));
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
+  const toggleSupport = (item: string) => {
+    setSupport((prev) =>
+      prev.includes(item) ? prev.filter((s) => s !== item) : [...prev, item]
+    );
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitting(true);
+    setSubmitError(null);
+    setIsSubmitting(true);
 
-    const savedRequest = await intakeService.submitSynqRequest({
-      name: form.name,
-      organization: form.who,
-      email: form.email,
-      projectStage: form.stage,
-      urgency: 'urgent',
-      problemDescription: form.problem,
-      symptoms: form.support_type,
-      diagnosticCaseId: caseIdParam || undefined
-    });
-
-    setSubmittedCase(savedRequest);
-    setSubmitting(false);
-
-    // Optional mailto fallback trigger
-    const subject = encodeURIComponent(`[${savedRequest.caseId}] SYNQ Case — ${form.who}: ${form.project || 'Project'}`);
-    const body = encodeURIComponent(getDossierText(savedRequest.caseId));
     try {
-      window.location.href = `mailto:operations@digisynq.com?subject=${subject}&body=${body}`;
-    } catch (err) {
-      console.warn('Mail client trigger bypassed', err);
+      const res = await intakeService.submitCase({
+        stakeholder,
+        project,
+        stage,
+        problem,
+        impact,
+        resources,
+        support,
+        contact: {
+          name: contactName,
+          email: contactEmail,
+          phone: contactPhone || undefined,
+          role: contactRole || undefined
+        },
+        notes,
+        diagnosticCaseId: paramCaseId || undefined,
+        honeypot
+      });
+
+      if (res.success && res.caseData) {
+        setReceivedCase(res.caseData);
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        setSubmitError(res.error || 'Unable to register case. Please verify all fields and retry.');
+      }
+    } catch (err: any) {
+      setSubmitError(err?.message || 'An unexpected transmission failure occurred.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
-  return (
-    <main className="bg-[#07080b] text-[#ECEEF5] selection:bg-white/20 selection:text-white min-h-screen">
+  const handleLookup = (e: React.FormEvent) => {
+    e.preventDefault();
+    setLookupAttempted(true);
+    if (!lookupId.trim()) {
+      setSearchedCase(null);
+      return;
+    }
+    const found = intakeService.getCaseById(lookupId.trim());
+    setSearchedCase(found || null);
+  };
 
-      {/* ── 01. Hero Section ── */}
-      <section className="pt-40 sm:pt-48 pb-16 sm:pb-20 px-6 sm:px-8 max-w-4xl mx-auto text-center">
-        <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-xs text-zinc-300 mb-8 tracking-wide">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          <span className="font-mono text-zinc-400">INTAKE</span>
+  const copyCaseId = (id: string) => {
+    navigator.clipboard.writeText(id);
+    setCopiedId(true);
+    setTimeout(() => setCopiedId(false), 2000);
+  };
+
+  return (
+    <main className="min-h-screen bg-[#03040A] text-[#ECEEF5] pt-28 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative">
+      <TopographicBackground className="opacity-15 pointer-events-none -z-10 fixed inset-0" />
+
+      {/* Header */}
+      <header className="mb-12 max-w-4xl">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-white/10 bg-white/[0.03] text-xs text-zinc-300 font-mono mb-4">
+          <span className="w-2 h-2 rounded-full bg-[#52E3A4] animate-pulse" />
+          <span>PRODUCTION INTAKE GATEWAY</span>
           <span className="text-zinc-600">//</span>
-          <span className="text-white font-medium">Production &amp; Lab Terminal</span>
+          <span className="text-[#52E3A4]">SYNQ CASE REGISTRATION</span>
         </div>
 
-        <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] [letter-spacing:-0.035em] mb-6">
-          Initiate Flow.<br />
-          <span className="text-zinc-400 font-light">Transmit what needs to move.</span>
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-4">
+          Initiate a SYNQ Intervention.
+          <span className="block text-xl sm:text-2xl lg:text-3xl text-zinc-400 font-normal mt-2">
+            Structured Operational Intake for Compromised Entertainment Pipelines.
+          </span>
         </h1>
 
-        <p className="text-lg sm:text-xl text-zinc-300 font-normal leading-relaxed max-w-2xl mx-auto">
-          Whether you need soundstage turnaround access, guild craft department heads, virtual production sandbox trials, or milestone-backed capital — submit your project constraints for confidential intake (&lt; 48h turnaround).
+        <p className="text-base sm:text-lg text-zinc-400 leading-relaxed font-light">
+          Submit an acute operational breakdown, schedule rupture, or missing capability requirement. DigiSynq generates a cryptographically tracked Case ID, evaluates root-cause dependencies, and coordinates the intervention.
         </p>
-      </section>
+      </header>
 
-      {/* ── 02. Intake Console ── */}
-      <section className="pb-32 px-6 sm:px-8 max-w-3xl mx-auto">
-        <div className="rounded-3xl bg-[#090b10] border border-white/[0.08] p-8 sm:p-12 shadow-2xl">
+      {/* CASE RECEIVED SUCCESS MODAL / BANNER */}
+      {receivedCase && (
+        <section
+          aria-live="polite"
+          className="mb-12 p-8 sm:p-10 rounded-2xl border-2 border-[#52E3A4] bg-[#090B14] shadow-2xl relative overflow-hidden"
+        >
+          <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+            <ShieldCheck className="w-48 h-48 text-[#52E3A4]" />
+          </div>
 
-          {submittedCase ? (
-            <div className="text-center py-10 space-y-6">
-              <div className="w-16 h-16 rounded-full bg-[#23B272]/15 border border-[#23B272]/30 flex items-center justify-center mx-auto text-[#52E3A4]">
-                <Check size={28} className="stroke-[3]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#16543D] text-[#52E3A4] font-mono text-xs font-semibold mb-4">
+            <Check className="w-3.5 h-3.5" />
+            <span>CASE RECEIVED & REGISTERED</span>
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
+            CASE RECEIVED
+          </h2>
+
+          <p className="text-base text-zinc-300 font-light mb-6 max-w-2xl">
+            Your operational synchronization request has been accepted by the DigiSynq intake gateway and assigned to our triage desk.
+          </p>
+
+          {/* Case ID Box */}
+          <div className="p-6 rounded-xl border border-[#52E3A4]/40 bg-[#16543D]/20 mb-8 max-w-xl">
+            <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider block mb-1">
+              Your DigiSynq Case ID is:
+            </span>
+            <div className="flex items-center justify-between gap-4">
+              <span className="font-mono text-2xl sm:text-3xl font-bold text-[#52E3A4] tracking-wider">
+                {receivedCase.caseId}
+              </span>
+              <button
+                onClick={() => copyCaseId(receivedCase.caseId)}
+                className="px-3 py-1.5 rounded-lg border border-[#52E3A4]/40 bg-[#52E3A4]/10 hover:bg-[#52E3A4]/20 text-xs font-mono text-[#52E3A4] flex items-center gap-1.5 transition-colors"
+              >
+                {copiedId ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                <span>{copiedId ? 'Copied' : 'Copy ID'}</span>
+              </button>
+            </div>
+            <div className="mt-3 pt-3 border-t border-[#52E3A4]/20 flex items-center justify-between text-xs font-mono text-zinc-400">
+              <span>INITIAL STATUS: <strong className="text-white">{receivedCase.status}</strong></span>
+              <span>TIMESTAMP: {new Date(receivedCase.createdAt).toLocaleTimeString()}</span>
+            </div>
+          </div>
+
+          {/* Summary Details */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 max-w-3xl">
+            <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02]">
+              <span className="text-[10px] font-mono text-zinc-500 uppercase block mb-1">Project</span>
+              <span className="text-sm font-semibold text-white">{receivedCase.project}</span>
+            </div>
+            <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02]">
+              <span className="text-[10px] font-mono text-zinc-500 uppercase block mb-1">Continuum Stage</span>
+              <span className="text-sm font-semibold text-white">{receivedCase.stage}</span>
+            </div>
+            <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02]">
+              <span className="text-[10px] font-mono text-zinc-500 uppercase block mb-1">Primary Contact</span>
+              <span className="text-sm font-semibold text-white">{receivedCase.contact.email}</span>
+            </div>
+          </div>
+
+          {/* Action Links */}
+          <div className="flex flex-wrap items-center gap-4">
+            <button
+              onClick={() => {
+                setReceivedCase(null);
+                setProject('');
+                setProblem('');
+                setImpact('');
+                setResources('');
+                setNotes('');
+              }}
+              className="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/15 text-xs text-white font-mono transition-colors"
+            >
+              Submit Another Case
+            </button>
+            <Link
+              to={`/engines/cascade?caseId=${receivedCase.caseId}`}
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#52E3A4] text-[#03040A] text-xs font-semibold hover:bg-[#34D399] transition-colors"
+            >
+              <span>Simulate Downstream Blast Radius</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+        </section>
+      )}
+
+      {/* Main Grid: Form + Case Lookup Panel */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {/* Left Column: Intake Submission Form */}
+        <section className="lg:col-span-8 p-6 sm:p-10 rounded-2xl border border-white/10 bg-[#090B14] shadow-xl">
+          <div className="flex items-center justify-between pb-6 mb-8 border-b border-white/10">
+            <div>
+              <h2 className="text-2xl font-bold text-white mb-1">
+                SYNQ Intake Manifest
+              </h2>
+              <p className="text-xs font-mono text-zinc-400">
+                FIELD SPECIFICATIONS // STRICT CONFIDENTIALITY GUARANTEED
+              </p>
+            </div>
+            <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-[#52E3A4] bg-[#16543D]/40 px-3 py-1 rounded-lg border border-[#52E3A4]/30">
+              <ShieldCheck className="w-3.5 h-3.5" />
+              <span>Clean-Room Protocol</span>
+            </div>
+          </div>
+
+          {submitError && (
+            <div className="mb-8 p-4 rounded-xl border border-red-500/30 bg-red-500/10 text-red-300 text-sm flex items-start gap-3">
+              <AlertTriangle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
+              <div>
+                <strong className="block font-semibold">Transmission Warning</strong>
+                <span>{submitError}</span>
+              </div>
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Honeypot field (hidden from real users to catch spambots) */}
+            <input
+              type="text"
+              name="company_tax_id"
+              value={honeypot}
+              onChange={(e) => setHoneypot(e.target.value)}
+              className="hidden"
+              tabIndex={-1}
+              autoComplete="off"
+            />
+
+            {/* Row 1: Stakeholder Role & Project Name */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
+                  Stakeholder Role <span className="text-[#52E3A4]">*</span>
+                </label>
+                <select
+                  required
+                  value={stakeholder}
+                  onChange={(e) => setStakeholder(e.target.value)}
+                  className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white focus:outline-none focus:border-[#52E3A4] transition-colors"
+                >
+                  <option value="" disabled className="bg-[#090B14] text-zinc-500">
+                    Select your primary stakeholder role...
+                  </option>
+                  {STAKEHOLDER_ROLES.map((role) => (
+                    <option key={role} value={role} className="bg-[#090B14] text-white">
+                      {role}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div>
-                <div className="text-xs font-mono text-[#52E3A4] uppercase tracking-wider mb-1">
-                  CASE DOSSIER PREPARED &amp; REGISTERED
-                </div>
-                <h2 className="text-2xl sm:text-3xl font-black text-white mb-2">
-                  Case ID: <span className="font-mono text-[#23B272]">{submittedCase.caseId}</span>
-                </h2>
-                <p className="text-sm text-zinc-300 max-w-md mx-auto leading-relaxed">
-                  Your project dossier has been formatted and stored in browser memory. Transmit directly to our dispatch coordination desk at{' '}
-                  <a href="mailto:operations@digisynq.com" className="text-white underline hover:text-[#52E3A4]">
-                    operations@digisynq.com
-                  </a>.
-                </p>
-              </div>
-
-              {/* Action buttons */}
-              <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-                <button
-                  type="button"
-                  onClick={handleCopyDossier}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black font-medium text-xs hover:bg-zinc-200 transition-all cursor-pointer shadow-sm"
-                >
-                  <Check size={14} className={copied ? 'text-emerald-600' : 'opacity-40'} />
-                  <span>{copied ? 'Dossier Copied to Clipboard!' : 'Copy Dossier to Clipboard'}</span>
-                </button>
-                <a
-                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=hello@digisynq.com&su=${encodeURIComponent(`Start a Synq — ${form.who}: ${form.project || 'Project'}`)}&body=${encodeURIComponent(getDossierText())}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/10 hover:border-white/20 bg-white/[0.02] text-xs text-zinc-300 font-medium transition-all"
-                >
-                  <span>Open in Gmail Web</span>
-                </a>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] text-xs text-zinc-400 max-w-md mx-auto text-left space-y-1.5">
-                <div className="text-white font-medium flex items-center gap-1.5">
-                  <ShieldCheck size={14} className="text-emerald-400" />
-                  <span>Next Step: 48-Hour Constraint Mapping</span>
-                </div>
-                <p>
-                  A DigiSynq project coordinator will review your parameters against active partner stages, guild availability, and milestone covenants within 48 business hours.
-                </p>
-              </div>
-
-              <div className="pt-4">
-                <button
-                  type="button"
-                  onClick={() => { setSubmittedCase(null); setForm(EMPTY_FORM); setStep(1); }}
-                  className="text-xs text-zinc-500 hover:text-white underline transition-all cursor-pointer"
-                >
-                  Intake another project or update parameters
-                </button>
+                <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
+                  Project Title / Working Name <span className="text-[#52E3A4]">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Project Meridian / Untitled Feature"
+                  value={project}
+                  onChange={(e) => setProject(e.target.value)}
+                  className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#52E3A4] transition-colors"
+                />
               </div>
             </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-10">
 
-              {/* Progress Stepper */}
-              <div className="flex items-center justify-between pb-6 border-b border-white/[0.06] text-xs">
-                <div className="flex items-center gap-2">
-                  <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-mono ${step === 1 ? 'bg-white text-black font-bold' : 'bg-white/[0.06] text-zinc-500'}`}>
-                    1
-                  </span>
-                  <span className={step === 1 ? 'text-white font-medium' : 'text-zinc-500'}>
-                    Role & Stage
-                  </span>
-                </div>
-                <div className="h-px w-12 bg-white/[0.06]" />
-                <div className="flex items-center gap-2">
-                  <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-mono ${step === 2 ? 'bg-white text-black font-bold' : 'bg-white/[0.06] text-zinc-500'}`}>
-                    2
-                  </span>
-                  <span className={step === 2 ? 'text-white font-medium' : 'text-zinc-500'}>
-                    Requirement
-                  </span>
-                </div>
-                <div className="h-px w-12 bg-white/[0.06]" />
-                <div className="flex items-center gap-2">
-                  <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-mono ${step === 3 ? 'bg-white text-black font-bold' : 'bg-white/[0.06] text-zinc-500'}`}>
-                    3
-                  </span>
-                  <span className={step === 3 ? 'text-white font-medium' : 'text-zinc-500'}>
-                    Transmit
-                  </span>
-                </div>
+            {/* Row 2: Continuum Stage */}
+            <div>
+              <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
+                Current Continuum Stage <span className="text-[#52E3A4]">*</span>
+              </label>
+              <select
+                required
+                value={stage}
+                onChange={(e) => setStage(e.target.value)}
+                className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white focus:outline-none focus:border-[#52E3A4] transition-colors"
+              >
+                <option value="" disabled className="bg-[#090B14] text-zinc-500">
+                  Select the lifecycle stage where the rupture is occurring...
+                </option>
+                {CONTINUUM_STAGES.map((s) => (
+                  <option key={s} value={s} className="bg-[#090B14] text-white">
+                    {s}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Row 3: Problem Description */}
+            <div>
+              <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
+                Operational Problem / System Rupture <span className="text-[#52E3A4]">*</span>
+              </label>
+              <textarea
+                required
+                rows={4}
+                placeholder="Describe what is breaking: timeline delay, vendor insolvency, stage conflict, missing capability, or coordination breakdown..."
+                value={problem}
+                onChange={(e) => setProblem(e.target.value)}
+                className="w-full px-4 py-3 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#52E3A4] transition-colors leading-relaxed"
+              />
+            </div>
+
+            {/* Row 4: Impact & Financial Velocity */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
+                  Estimated Schedule / Cost Impact
+                </label>
+                <input
+                  type="text"
+                  placeholder="e.g. 5 days behind, $45K/day unit cost burn"
+                  value={impact}
+                  onChange={(e) => setImpact(e.target.value)}
+                  className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#52E3A4] transition-colors"
+                />
               </div>
 
-              {/* STEP 1: Role & Stage */}
-              {step === 1 && (
-                <div className="space-y-8 animate-in fade-in duration-200">
-                  <div>
-                    <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-3">
-                      Your Role in the Entertainment Ecosystem
-                    </label>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                      {WHO_OPTIONS.map((opt) => (
-                        <button
-                          key={opt}
-                          type="button"
-                          onClick={() => updateField('who', opt)}
-                          className={`p-3.5 rounded-xl text-left border text-xs transition-all cursor-pointer ${
-                            form.who === opt
-                              ? 'bg-white text-black font-medium border-white'
-                              : 'bg-white/[0.015] border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/20'
-                          }`}
-                        >
-                          {opt}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
+              <div>
+                <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
+                  Facilities / Resources Involved
+                </label>
+                <input
+                  type="text"
+                  placeholder="e.g. Stage 4 soundstage, ARRI Alexa 35 package"
+                  value={resources}
+                  onChange={(e) => setResources(e.target.value)}
+                  className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#52E3A4] transition-colors"
+                />
+              </div>
+            </div>
 
-                  <div>
-                    <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-3">
-                      Current Production Stage
-                    </label>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                      {STAGE_OPTIONS.map((stg) => (
-                        <button
-                          key={stg}
-                          type="button"
-                          onClick={() => updateField('stage', stg)}
-                          className={`p-3.5 rounded-xl text-left border text-xs transition-all cursor-pointer ${
-                            form.stage === stg
-                              ? 'bg-white text-black font-medium border-white'
-                              : 'bg-white/[0.015] border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/20'
-                          }`}
-                        >
-                          {stg}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="pt-4 flex justify-end">
+            {/* Row 5: Requested Support Modules */}
+            <div>
+              <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
+                Requested DigiSynq Modules (Select all that apply)
+              </label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {SUPPORT_TYPES.map((type) => {
+                  const isChecked = support.includes(type);
+                  return (
                     <button
                       type="button"
-                      disabled={!canAdvance1}
-                      onClick={() => setStep(2)}
-                      className={`inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white text-black font-medium text-xs hover:bg-zinc-200 transition-all cursor-pointer ${
-                        !canAdvance1 ? 'opacity-30 pointer-events-none' : ''
+                      key={type}
+                      onClick={() => toggleSupport(type)}
+                      className={`p-3 rounded-xl border text-left text-xs font-mono transition-all flex items-center justify-between ${
+                        isChecked
+                          ? 'bg-[#16543D]/50 border-[#52E3A4] text-white shadow'
+                          : 'bg-white/[0.01] border-white/10 text-zinc-400 hover:text-white hover:border-white/20'
                       }`}
                     >
-                      Continue
-                      <ArrowRight size={14} />
+                      <span>{type}</span>
+                      <div
+                        className={`w-4 h-4 rounded border flex items-center justify-center ${
+                          isChecked
+                            ? 'bg-[#52E3A4] border-[#52E3A4] text-[#03040A]'
+                            : 'border-white/20'
+                        }`}
+                      >
+                        {isChecked && <Check className="w-3 h-3 stroke-[3]" />}
+                      </div>
                     </button>
-                  </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Row 6: Contact Information */}
+            <div className="pt-4 border-t border-white/10">
+              <span className="text-xs font-mono text-[#52E3A4] uppercase tracking-wider block mb-4">
+                Primary Contact Credentials
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
+                    Contact Name <span className="text-[#52E3A4]">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Full name"
+                    value={contactName}
+                    onChange={(e) => setContactName(e.target.value)}
+                    className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#52E3A4] transition-colors"
+                  />
                 </div>
-              )}
 
-              {/* STEP 2: Project & Requirement */}
-              {step === 2 && (
-                <div className="space-y-8 animate-in fade-in duration-200">
-                  <div>
-                    <label htmlFor="synq-project" className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-2">
-                      Project Title or Working Identifier
-                    </label>
-                    <input
-                      id="synq-project"
-                      type="text"
-                      placeholder="e.g. Untitled Drama Series / Live Tour / Feature"
-                      value={form.project}
-                      onChange={(e) => updateField('project', e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/[0.08] text-sm text-white placeholder-zinc-600 focus:border-[#23B272] outline-none transition-colors"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="synq-problem" className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-2">
-                      Primary Requirement or Constraint (Required)
-                    </label>
-                    <textarea
-                      id="synq-problem"
-                      rows={4}
-                      placeholder="Describe what needs to be connected: e.g. need 6 days of soundstage floor, missing lead technical crew, post-finishing capital, or distribution windowing..."
-                      value={form.problem}
-                      onChange={(e) => updateField('problem', e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/[0.08] text-sm text-white placeholder-zinc-600 focus:border-[#23B272] outline-none transition-colors resize-none"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-3">
-                      Required Support Architecture
-                    </label>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                      {SUPPORT_OPTIONS.map((opt) => (
-                        <button
-                          key={opt}
-                          type="button"
-                          onClick={() => toggleSupportType(opt)}
-                          className={`p-3.5 rounded-xl text-left border text-xs transition-all cursor-pointer ${
-                            form.support_type.includes(opt)
-                              ? 'bg-[#23B272] text-[#03040A] font-bold border-[#23B272]'
-                              : 'bg-white/[0.015] border-white/[0.06] text-zinc-400 hover:text-white hover:border-white/20'
-                          }`}
-                        >
-                          {opt}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="pt-4 flex items-center justify-between">
-                    <button
-                      type="button"
-                      onClick={() => setStep(1)}
-                      className="text-xs text-zinc-400 hover:text-white transition cursor-pointer"
-                    >
-                      ← Back
-                    </button>
-                    <button
-                      type="button"
-                      disabled={!canAdvance2}
-                      onClick={() => setStep(3)}
-                      className={`inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#23B272] text-[#03040A] font-bold text-xs hover:bg-[#52E3A4] transition-all cursor-pointer ${
-                        !canAdvance2 ? 'opacity-30 pointer-events-none' : ''
-                      }`}
-                    >
-                      Continue
-                      <ArrowRight size={14} />
-                    </button>
-                  </div>
+                <div>
+                  <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
+                    Business Email <span className="text-[#52E3A4]">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    placeholder="name@production.com"
+                    value={contactEmail}
+                    onChange={(e) => setContactEmail(e.target.value)}
+                    className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#52E3A4] transition-colors"
+                  />
                 </div>
-              )}
 
-              {/* STEP 3: Contact & Transmit */}
-              {step === 3 && (
-                <div className="space-y-8 animate-in fade-in duration-200">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="synq-name" className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-2">
-                        Your Name / Organization
-                      </label>
-                      <input
-                        id="synq-name"
-                        type="text"
-                        placeholder="e.g. Elena Rostova / Producer"
-                        value={form.name}
-                        onChange={(e) => updateField('name', e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/[0.08] text-sm text-white placeholder-zinc-600 focus:border-[#23B272] outline-none transition-colors"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="synq-email" className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-2">
-                        Direct Email Address
-                      </label>
-                      <input
-                        id="synq-email"
-                        type="email"
-                        placeholder="producer@domain.com"
-                        value={form.email}
-                        onChange={(e) => updateField('email', e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/[0.08] text-sm text-white placeholder-zinc-600 focus:border-[#23B272] outline-none transition-colors"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="synq-notes" className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-2">
-                      Confidential Project Notes
-                    </label>
-                    <textarea
-                      id="synq-notes"
-                      rows={3}
-                      placeholder="Any specific NDAs, calendar deadlines, or territorial restrictions..."
-                      value={form.notes}
-                      onChange={(e) => updateField('notes', e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl bg-white/[0.02] border border-white/[0.08] text-sm text-white placeholder-zinc-600 focus:border-[#23B272] outline-none transition-colors resize-none"
-                    />
-                  </div>
-
-                  <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] text-xs text-zinc-400 leading-relaxed">
-                    <span className="text-white font-medium block mb-1">Confidentiality Guarantee</span>
-                    DigiSynq operates under strict non-disclosure covenants. All project materials and disclosures are used solely to assess operational feasibility and coordinate capacity across our verified network.
-                  </div>
-
-                  <div className="pt-4 flex items-center justify-between">
-                    <button
-                      type="button"
-                      onClick={() => setStep(2)}
-                      className="text-xs text-zinc-400 hover:text-white transition cursor-pointer"
-                    >
-                      ← Back
-                    </button>
-                    <button
-                      type="submit"
-                      disabled={!canSubmit}
-                      className={`inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-white text-black font-medium text-xs hover:bg-zinc-200 transition-all cursor-pointer ${
-                        !canSubmit ? 'opacity-30 pointer-events-none' : ''
-                      }`}
-                    >
-                      <Send size={13} />
-                      Transmit project synq
-                    </button>
-                  </div>
-
-                  <div className="flex items-center justify-center gap-2 text-xs text-zinc-400 pt-2 border-t border-white/[0.04]">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>Non-custodial & confidential. Protected under standard mutual NDA principles.</span>
-                  </div>
+                <div>
+                  <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
+                    Direct Phone (Optional)
+                  </label>
+                  <input
+                    type="tel"
+                    placeholder="+1 (555) 000-0000"
+                    value={contactPhone}
+                    onChange={(e) => setContactPhone(e.target.value)}
+                    className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#52E3A4] transition-colors"
+                  />
                 </div>
-              )}
 
+                <div>
+                  <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
+                    Role / Title
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Line Producer / Post Supervisor"
+                    value={contactRole}
+                    onChange={(e) => setContactRole(e.target.value)}
+                    className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#52E3A4] transition-colors"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Row 7: Additional Notes */}
+            <div>
+              <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
+                Confidential Notes / Sensitive Constraints
+              </label>
+              <textarea
+                rows={2}
+                placeholder="Special NDAs, time-zone constraints, guild requirements..."
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                className="w-full px-4 py-2.5 rounded-xl border border-white/10 bg-white/[0.02] text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#52E3A4] transition-colors"
+              />
+            </div>
+
+            {/* Submit Button */}
+            <div className="pt-4">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#52E3A4] text-[#03040A] font-bold text-sm hover:bg-[#34D399] transition-all flex items-center justify-center gap-2 shadow-lg disabled:opacity-50 disabled:pointer-events-none"
+              >
+                {isSubmitting ? (
+                  <>
+                    <Activity className="w-4 h-4 animate-spin" />
+                    <span>Transmitting Intake Manifest...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Submit & Generate Case ID</span>
+                    <Send className="w-4 h-4" />
+                  </>
+                )}
+              </button>
+            </div>
+          </form>
+        </section>
+
+        {/* Right Column: Case Status Tracker & Telemetry */}
+        <aside className="lg:col-span-4 space-y-6">
+          {/* Tracker Card */}
+          <div className="p-6 rounded-2xl border border-white/10 bg-[#090B14] shadow-lg">
+            <h3 className="text-lg font-bold text-white mb-2 flex items-center gap-2">
+              <Search className="w-4 h-4 text-[#52E3A4]" />
+              <span>Track Existing Case</span>
+            </h3>
+            <p className="text-xs text-zinc-400 mb-4 font-light">
+              Enter your assigned DigiSynq Case ID to review live triage status and intervention milestones.
+            </p>
+
+            <form onSubmit={handleLookup} className="space-y-3">
+              <input
+                type="text"
+                placeholder="e.g. SYNC-2026-AB123"
+                value={lookupId}
+                onChange={(e) => setLookupId(e.target.value)}
+                className="w-full px-3.5 py-2 rounded-xl border border-white/10 bg-white/[0.02] text-xs font-mono text-white placeholder-zinc-500 focus:outline-none focus:border-[#52E3A4]"
+              />
+              <button
+                type="submit"
+                className="w-full px-4 py-2 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-xs font-mono text-white transition-colors flex items-center justify-center gap-2"
+              >
+                <span>Query Gateway</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
             </form>
-          )}
 
-        </div>
-      </section>
+            {/* Lookup Result */}
+            {lookupAttempted && (
+              <div className="mt-6 pt-6 border-t border-white/10">
+                {searchedCase ? (
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono text-xs text-[#52E3A4] font-bold">
+                        {searchedCase.caseId}
+                      </span>
+                      <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-[#16543D] text-[#52E3A4] border border-[#52E3A4]/30">
+                        {searchedCase.status}
+                      </span>
+                    </div>
+                    <div className="text-xs text-zinc-300">
+                      <strong>Project:</strong> {searchedCase.project}
+                    </div>
+                    <div className="text-xs text-zinc-300">
+                      <strong>Stage:</strong> {searchedCase.stage}
+                    </div>
+                    <div className="text-xs text-zinc-400 line-clamp-2">
+                      <strong>Problem:</strong> {searchedCase.problem}
+                    </div>
+                    <div className="text-[10px] font-mono text-zinc-500 pt-2 border-t border-white/5">
+                      Created: {new Date(searchedCase.createdAt).toLocaleString()}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-xs text-zinc-500 text-center py-2">
+                    No registered case found matching "{lookupId}".
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
 
+          {/* SLA & Operating Protocol */}
+          <div className="p-6 rounded-2xl border border-white/10 bg-[#090B14] shadow-lg">
+            <h4 className="text-xs font-mono uppercase tracking-wider text-[#52E3A4] mb-3 font-semibold flex items-center gap-2">
+              <Clock className="w-3.5 h-3.5" />
+              <span>Response Protocol SLA</span>
+            </h4>
+            <ul className="space-y-3 text-xs text-zinc-400 font-light">
+              <li className="flex items-start gap-2">
+                <span className="text-[#52E3A4] font-mono font-bold">•</span>
+                <span><strong>Emergency Sets:</strong> Triage response within 60 minutes for active principal photography freezes.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-[#52E3A4] font-mono font-bold">•</span>
+                <span><strong>Post / VFX Bottlenecks:</strong> Dependency map and candidate matches delivered within 12 hours.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-[#52E3A4] font-mono font-bold">•</span>
+                <span><strong>Neutral Governance:</strong> Standardized clean-room multi-party covenants protect all proprietary IP.</span>
+              </li>
+            </ul>
+          </div>
+        </aside>
+      </div>
     </main>
   );
 }
